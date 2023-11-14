@@ -9,5 +9,11 @@ namespace Cardinals.Enums {
         Attack,
         Defence
     }
-	
+    
+    public enum StageEventType
+    {
+        Ignore,
+        Battle,
+    }
+    
 }

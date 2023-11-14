@@ -1,17 +1,18 @@
 using System;
+using Cardinals.Enums;
 
 namespace Cardinals.Game
 {
     public abstract class BaseEvent : IDisposable
     {
-        protected BaseEvent(EventType type)
+        protected BaseEvent(StageEventType type)
         {
             Type = type;
             IsClear = false;
         }
         
         public UIEvent UIEvent { protected get; set; }
-        public EventType Type { get; }
+        public StageEventType Type { get; }
         
         private bool _isClear;
 

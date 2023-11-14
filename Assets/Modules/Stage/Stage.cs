@@ -9,15 +9,18 @@ namespace Cardinals.Game
         private BaseEvent[] _events;
         public BaseEvent[] Events { get; }
         
-        private int _index;
+        private int Index { get; set; }
+        
+        public string Name { get; }
         
         /// <summary>
         /// 신규 이벤트 등록
         /// </summary>
         /// <param name="events"></param>
-        public Stage(BaseEvent[] events)
+        public Stage(string name, BaseEvent[] events)
         {
             // 데이타 초기화
+            Name = name;
             Events = events;
             
             // 초기 값 등록
@@ -29,26 +32,26 @@ namespace Cardinals.Game
         /// </summary>
         /// <param name="events">이벤트</param>
         /// <param name="index">이전 클리어한 사건의 인덱스</param>
-        public Stage(BaseEvent[] events, int index) : this(events)
+        public Stage(string name, BaseEvent[] events, int index) : this(name, events)
         {
             for (int i = 0; i < index; i++)
             {
                 events[i].IsClear = true;
             }
 
-            _index = index;
+            Index = index;
         }
 
         #region IEnumerator
         public bool MoveNext()
         {
-            _index++;
-            return (_index < _events.Length);
+            Index++;
+            return (Index < _events.Length);
         }
 
         public void Reset()
         {
-            _index = -1;
+            Index = -1;
         }
 
         public object Current
@@ -57,7 +60,7 @@ namespace Cardinals.Game
             {
                 try
                 {
-                    return _events[_index];
+                    return _events[Index];
                 }
                 catch (IndexOutOfRangeException)
                 {

@@ -1,7 +1,8 @@
 namespace Cardinals
 {
-    public abstract class BaseEnemy
+    public abstract class BaseEnemy : BaseEntity
     {
-    
+        protected int Turn { get; set; }
+
     }
 }

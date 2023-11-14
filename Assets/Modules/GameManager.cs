@@ -1,59 +1,49 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enums;
 using UnityEngine;
 using Util;
 using Cardinals.Game;
-using EventType = Cardinals.Game.EventType;
 
 namespace Cardinals
 {
     public class GameManager : Singleton<GameManager>
     {
-        
         private static UIManager _ui;
 
         public UIManager UI
         {
             get
             {
-                if (_ui == null)
-                {
-                    //_ui = I.GetComponent<UIManager>()
-                }
-
+                _ui ??= FindObjectOfType<UIManager>();
                 return _ui;
             }
         }
         
-        private Stage _curStage;
+        public Stage CurStage { get; private set; }
         
-        public Stage CurStage
-        {
-            get => _curStage;
-            set
-            {
-                _curStage = value;
-                // UI Update
-            }
-        }
+        public PlayerData PlayerData { get; set; } // 임시
 
         #region Game
         private IEnumerator GameFlow()
         {
             // 스테이지 로드
-            CurStage = LoadStage();
+            CurStage = LoadStage(); 
+            UI.UIStage.Init(CurStage);
+            UI.UIStage.Visit();
             
             // 다음 사건을 읽음
-            while (CurStage.MoveNext())
+            while (CurStage.MoveNext()) 
             {
                 // 현재 사건에 따른 이벤트 플로우 수행
                 using var evt = CurStage.Current as Game.BaseEvent;
+                
                 evt.On();
                 
                 IEnumerator evtFlow = evt.Type switch
                 {
-                    EventType.Battle => BattleFlow(evt as BattleEvent),
+                    StageEventType.Battle => BattleFlow(evt as BattleEvent),
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 
@@ -61,11 +51,11 @@ namespace Cardinals
 
                 if (!evt.IsClear)
                 {
-                    // 게임 오버
+                    GameOver();
                 }
             }
-            
-            // 게임 클리어
+
+            GameClear();
         }
     
         private Stage LoadStage()
@@ -73,6 +63,7 @@ namespace Cardinals
             Stage stage = null;
             if (true) // 첫 데이타
             {
+                PlayerData.Turn = 0;
                 // stage = new Stage();
             }
             else // 기존 데이타 
@@ -81,6 +72,16 @@ namespace Cardinals
             }
 
             return stage;
+        }
+
+        private void GameClear()
+        {
+            
+        }
+
+        private void GameOver()
+        {
+            
         }
         #endregion
         
@@ -92,23 +93,44 @@ namespace Cardinals
             // 전투 세팅
         
             // 몬스터 설정
-        
+            List<BaseEnemy> enemies = new();
+            var posArr = battleEvt.GetPositions();
+            for (int i = 0, cnt = enemies.Count; i < cnt; i++)
+            {
+                BaseEnemy enemy = null;// [TODO] battleEvt.EnemyType에 따른 인스턴스 생성 필요
+                // [TODO] 화면에 생성
+                
+                enemy.Die += () =>
+                {
+                    // [TODO] 오브젝트 파괴 필요
+                    enemies.Remove(enemy);
+                };
+                
+                enemies.Add(enemy);
+            }
+            
             // 초기화
 
             do // 전투 시작
             {
                 // 전투 업데이트
+                PlayerData.Turn++;
+                enemies.ForEach(enemy => enemy.StartTurn());
 
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
-
-                // 적행동
+                yield return null; // 대기?
+                
+                // 적 행동
+                enemies.ForEach(enemy => enemy.OnTurn());
+                
 
                 // 카운트 처리
-            } while (true);
-        
-            yield return null;
+                // [TODO] player.EndTurn();
+                enemies.ForEach(enemy => enemy.EndTurn());
+                
+            } while (enemies.Count > 0); // [TODO] && Player == Alive
         }
         #endregion
         
