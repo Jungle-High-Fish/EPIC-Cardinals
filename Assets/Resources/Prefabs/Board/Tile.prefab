@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2247706527573100588}
   - component: {fileID: 2247706527573100589}
   - component: {fileID: 1394780720472624375}
+  - component: {fileID: 2356826339074064285}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -427,6 +428,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf08f6156f7543a4abafa1e8eec69edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2356826339074064285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247706527573100576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed01019096e724ba881947b2cc678d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2247706528665511867
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +785,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

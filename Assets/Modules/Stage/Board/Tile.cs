@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
 using UnityEngine;
+using Util;
 
 namespace Cardinals.Board {
 
@@ -31,7 +32,11 @@ namespace Cardinals.Board {
             }
         }
 
+        public TileAnimation Animation => _tileAnimation.Get(gameObject);
+
         private TileData _tileData;
+        private ComponentGetter<TileAnimation> _tileAnimation
+            = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
 
         private Tile _next;
         private Tile _prev;

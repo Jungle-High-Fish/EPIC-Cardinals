@@ -10,6 +10,7 @@ namespace Cardinals.Constants {
 
             public const string Prefabs = "Prefabs/";
             public const string Prefabs_Tile = "Board/Tile";
+            public const string Prefabs_CornerTile = "Board/CornerTile";
 
             public const string Sprites = "Sprites/";
 
@@ -26,6 +27,7 @@ namespace Cardinals.Constants {
         public static class Board {
             public const float TileWidth = 1;
             public const float TileHeight = 1.5f;
+            public const float TileSpace = 0.5f;
             public const float TileInstantiateHeight = 3f;
 
             public static readonly Vector2 BoardCenter = new Vector2(0, 0); 
