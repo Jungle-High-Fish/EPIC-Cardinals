@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enemy;
 using Cardinals.Enums;
 using UnityEngine;
 using Util;
@@ -22,7 +23,8 @@ namespace Cardinals
         }
         
         public Stage CurStage { get; private set; }
-        
+
+        public TempPlayer TempPlayer { get; set; } = new(); // 임시 
         public PlayerData PlayerData { get; set; } // 임시
 
         #region Game
@@ -88,6 +90,12 @@ namespace Cardinals
 
 
         #region Battle
+
+        [Header("임시 몬스터 프리팹")]
+        [SerializeField] private Transform EnemyTr;
+        [SerializeField] private GameObject UIEnemyPrefab;
+        [SerializeField] private Transform EnemyInfoTr;
+        [SerializeField] private GameObject UIEnemyInfoPrefab;
         IEnumerator BattleFlow(BattleEvent battleEvt)
         {
             // 전투 세팅
@@ -98,11 +106,11 @@ namespace Cardinals
             for (int i = 0, cnt = enemies.Count; i < cnt; i++)
             {
                 BaseEnemy enemy = null;// [TODO] battleEvt.EnemyType에 따른 인스턴스 생성 필요
-                // [TODO] 화면에 생성
+                Instantiate(UIEnemyPrefab, EnemyTr).GetComponent<UIEnemy>().Init(enemy); // [TODO] 화면에 생성 (정상 동작 확인 필요)
+                Instantiate(UIEnemyInfoPrefab, EnemyInfoTr).GetComponent<UIEnemyInfo>().Init(enemy);
                 
-                enemy.Die += () =>
+                enemy.DieEvent += () =>
                 {
-                    // [TODO] 오브젝트 파괴 필요
                     enemies.Remove(enemy);
                 };
                 
@@ -110,27 +118,32 @@ namespace Cardinals
             }
             
             // 초기화
-
             do // 전투 시작
             {
                 // 전투 업데이트
                 PlayerData.Turn++;
+                TempPlayer.StartTurn();
                 enemies.ForEach(enemy => enemy.StartTurn());
 
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
+                TempPlayer.OnTurn();
                 yield return null; // 대기?
                 
                 // 적 행동
                 enemies.ForEach(enemy => enemy.OnTurn());
                 
-
                 // 카운트 처리
-                // [TODO] player.EndTurn();
+                TempPlayer.EndTurn();
                 enemies.ForEach(enemy => enemy.EndTurn());
                 
-            } while (enemies.Count > 0); // [TODO] && Player == Alive
+            } while (enemies.Count > 0 && TempPlayer.Hp > 0);
+
+            if (enemies.Count == 0)
+            {
+                battleEvt.IsClear = true;
+            }
         }
         #endregion
         
