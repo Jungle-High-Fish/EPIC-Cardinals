@@ -121,6 +121,11 @@ namespace Cardinals.Enums {
         Wind,
         Light,
         Dark
+    
+    public enum StageEventType
+    {
+        Ignore,
+        Battle,
     }
     
 }
