@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Util {
@@ -7,6 +9,7 @@ namespace Util {
 
 		private static Dictionary<string, GameObject> _prefabList = new Dictionary<string, GameObject>();
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
+		private static HashSet<string> _loadedSpriteDirectory = new HashSet<string>();
 
 		public static GameObject LoadPrefab(string prefabName)
 		{
@@ -31,6 +34,26 @@ namespace Util {
 			}
 			_spriteList.Add(spriteName, Resources.Load<Sprite>(targetPath));
 			return _spriteList[spriteName];
+		}
+
+		public static Dictionary<string, Sprite> LoadSpritesInDirectory(string directoryName) {
+			string targetPath = Cardinals.Constants.FilePath.Resources.Sprites + directoryName;
+
+			if (_loadedSpriteDirectory.Contains(directoryName)) {
+				var targetDict = 
+					_spriteList.Where(x => x.Key.Contains(directoryName)).ToDictionary(x => x.Key, x => x.Value);
+
+				return targetDict;
+			}
+
+			var sprites = Resources.LoadAll<Sprite>(targetPath);
+			var spriteDict = new Dictionary<string, Sprite>();
+			foreach (var sprite in sprites) {
+				string combinedPath = Path.Combine(directoryName, sprite.name);
+				spriteDict.Add(sprite.name, sprite);
+				_spriteList.Add(combinedPath, sprite);
+			}
+			return spriteDict;
 		}
     }
 }
