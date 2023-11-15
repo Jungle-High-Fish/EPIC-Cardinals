@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 using UnityEngine;
@@ -152,7 +153,7 @@ namespace Cardinals
                 // 카운트 처리
                 TempPlayer.EndTurn();
                 enemies.ForEach(enemy => enemy.EndTurn());
-
+                
                 yield return new WaitForSeconds(1f);
             } while (enemies.Count > 0 && TempPlayer.Hp > 0);
 

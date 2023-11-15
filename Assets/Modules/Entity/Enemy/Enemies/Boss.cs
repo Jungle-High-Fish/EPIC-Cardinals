@@ -28,7 +28,7 @@ namespace Modules.Enemy
             }
         }
         
-        public Boss(string name, int hp, int maxHp) : base(name, hp, maxHp)
+        public Boss(string name, int maxHp) : base(name, maxHp)
         {
             Patterns = new[]
             {

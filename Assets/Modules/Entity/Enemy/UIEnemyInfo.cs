@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
+using Cardinals.Constants;
 
 namespace Cardinals.Enemy
 {
@@ -35,6 +38,7 @@ namespace Cardinals.Enemy
             // 정보 설정
             _nameTMP.text = BaseEnemy.Name;
             _hpTMP.text = $"{BaseEnemy.Hp}/{BaseEnemy.MaxHp}";
+            UpdateHp(BaseEnemy.Hp, BaseEnemy.MaxHp);
             
             // [TODO] Pattern Object 위치 설정 필요
             
@@ -49,7 +53,8 @@ namespace Cardinals.Enemy
         /// </summary>
         private void UpdateHp(int hp, int maxHp)
         {
-            // [TODO] Update 체력
+            float percent = (float) hp / maxHp;
+            _curHPRect.localScale = new Vector3(percent, 1, 1);
         }
         
         /// <summary>
@@ -62,10 +67,13 @@ namespace Cardinals.Enemy
         
         private void UpdatePattern(Pattern pattern)
         {
-            var type = pattern.Type;
-            _patternIconImg.sprite = null; //[TODO] Type에 따른 이미지 정보 Resource에서 로드 필요
+            var key = Constants.FilePath.Resources.Enemy_Pattern + pattern.Type.ToString();
+            _patternIconImg.sprite = EnemyPatternIconDict[key];
             _patternCountTMP.text = $"{pattern.Value}";
         }
+
+        private Dictionary<string, Sprite> EnemyPatternIconDict =>
+            ResourceLoader.LoadSpritesInDirectory(Constants.FilePath.Resources.Enemy_Pattern);
         
         private void Destroy()
         {
