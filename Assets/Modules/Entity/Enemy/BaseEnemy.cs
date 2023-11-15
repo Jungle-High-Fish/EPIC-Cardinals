@@ -40,8 +40,18 @@ namespace Cardinals
         }
         
         public Action<Pattern> UpdatePatternEvent { get; set; }
-        
-        protected bool BerserkMode { get; set; }
+
+        private bool _berserkMode;
+        public bool BerserkMode 
+        { 
+            get => _berserkMode;
+            set
+            {
+                _berserkMode = value;
+                if (_berserkMode) BerserkModeEvent?.Invoke();
+            } 
+        }
+        protected Action BerserkModeEvent { get; set; }
         
         private Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
         
@@ -67,7 +77,7 @@ namespace Cardinals
 
         private void ExecutePreActionByPattern(Pattern pattern)
         {
-            switch (pattern.Type)
+            switch (pattern?.Type)
             {
                 case EnemyActionType.AreaAttack :
                     AreaAttackTiles.Clear();
@@ -100,12 +110,12 @@ namespace Cardinals
 
             // 초기화
             if (FixPattern == null)
-            {
+            { 
                 Turn++;
             }
             else
             {
-                FixPattern = null;
+                _fixPattern = null;
             }
         }
     }
