@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
+using Cardinals.Constants;
 
 namespace Cardinals.Enemy
 {
@@ -62,10 +65,13 @@ namespace Cardinals.Enemy
         
         private void UpdatePattern(Pattern pattern)
         {
-            var type = pattern.Type;
-            _patternIconImg.sprite = null; //[TODO] Type에 따른 이미지 정보 Resource에서 로드 필요
+            var key = Constants.FilePath.Resources.Enemy_Pattern + pattern.Type.ToString();
+            _patternIconImg.sprite = EnemyPatternIconDict[key];
             _patternCountTMP.text = $"{pattern.Value}";
         }
+
+        private Dictionary<string, Sprite> EnemyPatternIconDict =>
+            ResourceLoader.LoadSpritesInDirectory(Constants.FilePath.Resources.Enemy_Pattern);
         
         private void Destroy()
         {

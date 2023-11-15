@@ -16,6 +16,10 @@ namespace Cardinals.Constants {
 
             public const string SO = "SO/";
             public const string SO_BoardData = "Stage/BoardData/";
+            
+            
+            public const string Enemy = "Enemy/";
+            public const string Enemy_Pattern = "Enemy/Pattern/";
 
             public static string Get(string path) {
                 return Path + path;

@@ -908,7 +908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyTr: {fileID: 1051530189}
-  UIEnemyPrefab: {fileID: 3025164172761671628, guid: 0e592654d519d66478c2f56fff6701b0,
+  UIEnemyPrefab: {fileID: 3025164172761671628, guid: 2c2f7538b27f5434786899a40fa53e33,
     type: 3}
   EnemyInfoTr: {fileID: 1042949917}
   UIEnemyInfoPrefab: {fileID: 8616925427146866715, guid: ce93e81b2689c91418dd974107c1ff89,
