@@ -37,7 +37,6 @@ namespace Cardinals.Enemy
             
             // 정보 설정
             _nameTMP.text = BaseEnemy.Name;
-            _hpTMP.text = $"{BaseEnemy.Hp}/{BaseEnemy.MaxHp}";
             UpdateHp(BaseEnemy.Hp, BaseEnemy.MaxHp);
             
             // [TODO] Pattern Object 위치 설정 필요
@@ -55,6 +54,8 @@ namespace Cardinals.Enemy
         {
             float percent = (float) hp / maxHp;
             _curHPRect.localScale = new Vector3(percent, 1, 1);
+            
+            _hpTMP.text = $"{hp}/{maxHp}";
         }
         
         /// <summary>

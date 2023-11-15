@@ -135,7 +135,8 @@ namespace Cardinals.Enums {
         Ignore,
         One, 
         Two,
-        Three,
+        Three1,
+        Three2,
         Four,
         Boss
     }
@@ -158,7 +159,8 @@ namespace Cardinals.Enums {
         Weak,
         ElectricShock, // 감전
         Poison,
-        Fracture // 골절
+        Fracture, // 골절
+        Slow,
     }
 
     public enum BuffCountDecreaseType : int

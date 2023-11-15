@@ -2,7 +2,7 @@ using Cardinals;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 
-namespace Modules.Enemy
+namespace Cardinals.Enemy
 {
     public class One : BaseEnemy
     {
