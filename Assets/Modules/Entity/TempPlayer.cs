@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Cardinals
 {
     public class TempPlayer : BaseEntity
@@ -9,7 +11,7 @@ namespace Cardinals
 
         public override void OnTurn()
         {
-            
+            Debug.Log("[임시] 플레이어 턴 수행");
         }
     }
 }

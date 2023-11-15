@@ -32,6 +32,10 @@ namespace Cardinals.Enemy
         {
             BaseEnemy = enemy;
             
+            // 정보 설정
+            _nameTMP.text = BaseEnemy.Name;
+            _hpTMP.text = $"{BaseEnemy.Hp}/{BaseEnemy.MaxHp}";
+            
             // [TODO] Pattern Object 위치 설정 필요
             
             BaseEnemy.DieEvent += Destroy;

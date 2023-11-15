@@ -60,7 +60,7 @@ namespace Cardinals
         public override void OnTurn()
         {
             Pattern curPat = CurPattern;
-            
+            Debug.Log($"적({Name}): {curPat.Type.ToString()} 수행");
             switch (curPat.Type)
             {
                 case EnemyActionType.Attack :
