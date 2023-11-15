@@ -44,8 +44,7 @@ namespace Cardinals
         private Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
         
         protected BaseEnemy(string name,
-                            int hp,
-                            int maxHp   ) : base(hp, maxHp)
+                            int maxHp   ) : base(maxHp)
         {
             Name = name;
         }
@@ -76,7 +75,7 @@ namespace Cardinals
                     curPat.Action();
                     break;
             }
-            
+
             // 초기화
             if (FixPattern == null)
             {
