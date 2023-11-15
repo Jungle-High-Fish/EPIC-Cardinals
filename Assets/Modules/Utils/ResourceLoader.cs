@@ -4,21 +4,13 @@ using UnityEngine;
 
 namespace Util {
     public static class ResourceLoader {
-        public static class Prefabs {
-			public const string PATH = "Prefabs/";
-
-		}
-
-		public static class Sprites {
-			public const string PATH = "Image/";
-		}
 
 		private static Dictionary<string, GameObject> _prefabList = new Dictionary<string, GameObject>();
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
 
 		public static GameObject LoadPrefab(string prefabName)
 		{
-			string targetPath = Prefabs.PATH + prefabName;
+			string targetPath = Cardinals.Constants.FilePath.Resources.Prefabs + prefabName;
 
 			if (_prefabList.ContainsKey(prefabName))
 			{
@@ -30,7 +22,7 @@ namespace Util {
 
 		public static Sprite LoadSprite(string spriteName)
 		{
-			string targetPath = Sprites.PATH + spriteName;
+			string targetPath = Cardinals.Constants.FilePath.Resources.Sprites + spriteName;
 
 			if (_spriteList.ContainsKey(spriteName))
 			{
