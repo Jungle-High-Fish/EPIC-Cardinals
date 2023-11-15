@@ -8,7 +8,7 @@ namespace Cardinals.Game
     {
         public EnemyType[] EnemyType { get; }
         
-        public BattleEvent(StageEventType evtType, params EnemyType[] enemyType) : base(evtType)
+        public BattleEvent(params EnemyType[] enemyType) : base(StageEventType.Battle)
         {
             EnemyType = enemyType;
         }

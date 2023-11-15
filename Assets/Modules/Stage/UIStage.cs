@@ -28,25 +28,22 @@ namespace Cardinals.Game
             }
 
             // 현재 스테이지 정보 설정
-            _stageNameTxtObj.GetComponent<TextMeshProUGUI>()?.SetText(stage.Name);
+            _stageNameTxtObj.GetComponentInChildren<TextMeshProUGUI>()?.SetText(stage.Name);
             
             // 추가
             foreach (var evt in stage.Events)
             {
                 var obj = Instantiate(_evtPrefab, _evtInstTr);
-                obj.GetComponent<UIEvent>().Init(evt.Type);
+                obj.GetComponent<UIEvent>().Init(evt);
             }
         }
 
-        public void Visit()
-        {
-            StartCoroutine(ShowStageName());
-        }
-
-        IEnumerator ShowStageName()
+        public IEnumerator Visit()
         {
             _stageNameTxtObj.SetActive(true);
+            
             yield return new WaitForSeconds(1.5f);
+            
             _stageNameTxtObj.SetActive(false);
         }
     }

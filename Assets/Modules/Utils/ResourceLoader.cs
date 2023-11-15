@@ -23,6 +23,7 @@ namespace Util {
 			return _prefabList[prefabName];
 		}
 
+		
 		public static Sprite LoadSprite(string spriteName)
 		{
 			string targetPath = Cardinals.Constants.FilePath.Resources.Sprites + spriteName;

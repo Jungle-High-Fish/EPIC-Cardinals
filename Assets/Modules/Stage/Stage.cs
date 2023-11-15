@@ -7,7 +7,12 @@ namespace Cardinals.Game
     public class Stage : IEnumerator
     {
         private BaseEvent[] _events;
-        public BaseEvent[] Events { get; }
+
+        public BaseEvent[] Events
+        {
+            get => _events;
+            set => _events = value;
+        }
         
         private int Index { get; set; }
         
@@ -17,7 +22,7 @@ namespace Cardinals.Game
         /// 신규 이벤트 등록
         /// </summary>
         /// <param name="events"></param>
-        public Stage(string name, BaseEvent[] events)
+        public Stage(string name, params BaseEvent[] events)
         {
             // 데이타 초기화
             Name = name;

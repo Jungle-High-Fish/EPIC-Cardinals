@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Modules/Card.meta
 guid: c58d47fb34a6aa240812d3618b3a856f
+========
+guid: e8003be7c89c5d24391318926259e42f
+>>>>>>>> Stashed changes:Assets/Resources/Sprites/EnemyPattern.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
