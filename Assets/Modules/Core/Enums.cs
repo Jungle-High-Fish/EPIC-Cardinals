@@ -1,11 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Cardinals.Board;
 
 namespace Cardinals.Enums {
 
     public static class EnumHelper {
+        public static Type GetTileActionType(TileType tileType) {
+            switch (tileType) {
+                case TileType.Null:
+                    return typeof(TileNullAction);
+                case TileType.Blank:
+                    return typeof(TileEventAction);
+                case TileType.Start:
+                    return typeof(TileNullAction);
+                case TileType.Attack:
+                    return typeof(TileAttack);
+                case TileType.Defence:
+                    return typeof(TileDefence);
+                default:
+                    return typeof(TileNullAction);
+            }
+        }
+
         public static SdfIconType GetTileIcon(TileType tileType) {
             switch (tileType) {
                 case TileType.Null:
