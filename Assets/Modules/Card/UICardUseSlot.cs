@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class UICardUseSlot : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
+{
+    // ³ªÁß¿¡ »©±â
+    [SerializeField] private CardManager _cardManager;
+    [SerializeField] private MouseState _slotState;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _cardManager.MouseState = _slotState;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _cardManager.MouseState = MouseState.Cancel;
+    }
+
+    
+}
