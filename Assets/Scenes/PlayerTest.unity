@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 1769138215}
   - component: {fileID: 1769138214}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1989,11 +1989,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234767d247e648545bb7eda3dd552558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1584855332}
   _hpTMP: {fileID: 5517743334857323265}
   _maxHPRect: {fileID: 7349122650778919228}
   _curHPRect: {fileID: 119907440714065985}
   _buffTr: {fileID: 1201097840}
-  _buffPrefab: {fileID: 0}
+  _buffPrefab: {fileID: 5379653668884289483, guid: 05d2367bf056f27469489d27100cbaa2,
+    type: 3}
 --- !u!114 &5517743335275366450
 MonoBehaviour:
   m_ObjectHideFlags: 0
