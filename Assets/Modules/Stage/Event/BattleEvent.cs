@@ -69,6 +69,9 @@ namespace Cardinals.Game
                 // 카운트 처리
                 GameManager.I.Player.EndTurn();
                 _enemies.ForEach(enemy => enemy.EndTurn());
+
+                // 보드 관련 처리
+                _stageController.Board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1f);
             } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);

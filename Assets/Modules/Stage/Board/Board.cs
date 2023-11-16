@@ -60,6 +60,12 @@ namespace Cardinals.Board {
             }
         }
 
+        public void OnTurnEnd() {
+            for (int i = 0; i < _tileSequence.Count; i++) {
+                _tileSequence[i].OnTurnEnd();
+            }
+        }
+
         private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();
