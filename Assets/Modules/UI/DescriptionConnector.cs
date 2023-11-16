@@ -38,7 +38,12 @@ namespace Cardinals.UI
                 if (_description != null)
                 {
                     var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
-                    _instObject = Instantiate(prefab, _description.InstTr);
+ 
+                    // 생성할 객체 위치 설정
+                    var descIstTrInfo = GetComponentInParent<IDescriptionInstTrInfo>();
+                    Transform instTr = descIstTrInfo != null ? descIstTrInfo.DescriptionInstTr :_description.InstTr;
+             
+                    _instObject = Instantiate(prefab, instTr);
                     _instObject.GetComponent<UIDescription>().Init(_description);
                 }
             }
