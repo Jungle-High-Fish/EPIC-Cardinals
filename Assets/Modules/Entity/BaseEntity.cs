@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Enums;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Cardinals
@@ -41,8 +42,11 @@ namespace Cardinals
 
         private void OnBuffCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            if(args.Action == NotifyCollectionChangedAction.Add)
-                AddBuffEvent?.Invoke(sender as BaseBuff);
+            if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                BaseBuff buff = (sender as ObservableCollection<BaseBuff>).First();
+                AddBuffEvent?.Invoke(buff);
+            }
         }
         #endregion
         
@@ -129,6 +133,7 @@ namespace Cardinals
             target.Hit(calculDamage);
         }
 
+        
         /// <summary>
         /// 버프 추가 시, 호출
         /// 기존 버프가 존재할 경우, Count를 증가시킴
