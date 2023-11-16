@@ -4,7 +4,7 @@ namespace Cardinals
 {
     public class TempPlayer : BaseEntity
     {
-        public TempPlayer() : base(40, 40)
+        public TempPlayer() : base(40)
         {
             
         }

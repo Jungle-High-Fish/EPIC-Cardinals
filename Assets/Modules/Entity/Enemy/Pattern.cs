@@ -9,11 +9,15 @@ namespace Cardinals.Enemy
         public int? Value { get; }
         
         public Action Action { get; }
-        public Pattern(EnemyActionType type, int? value = null, Action action = null)
+        
+        public Action PreAction { get; }
+        
+        public Pattern(EnemyActionType type, int? value = null, Action action = null, Action preAction = null)
         {
             Type = type;
             Value = value;
             Action = action;
+            PreAction = preAction;
         }
     }
 }

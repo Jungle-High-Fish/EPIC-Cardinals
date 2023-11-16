@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 using UnityEngine;
@@ -25,7 +26,11 @@ namespace Cardinals
         }
         
         public Stage CurStage { get; private set; }
-
+        
+        /// <summary>
+        /// 외부에서 참조 가능한 현재 전투 중인 적
+        /// </summary>
+        public IEnumerable<BaseEnemy> CurrentEnemies { get; set; }
         public TempPlayer TempPlayer { get; set; } = new(); // 임시 
         public PlayerData PlayerData { get; set; } = new();// 임시
 
@@ -75,9 +80,12 @@ namespace Cardinals
             {
                 PlayerData.Turn = 0;
                 stage = new Stage
-                ("수상한 초원",
-                 new BattleEvent(EnemyType.One),
-                 new BattleEvent(EnemyType.Boss) );
+                    ("수상한 초원",
+                    new BattleEvent(EnemyType.One),
+                    new BattleEvent(EnemyType.Two),
+                    new BattleEvent(EnemyType.Three1, EnemyType.Three2),
+                    new BattleEvent(EnemyType.Four),
+                    new BattleEvent(EnemyType.Boss) );
                 
                 stage.Reset();
             }
@@ -131,6 +139,8 @@ namespace Cardinals
                 
                 enemies.Add(enemy);
             }
+
+            CurrentEnemies = enemies;
             
             // 초기화
             do // 전투 시작
@@ -152,7 +162,7 @@ namespace Cardinals
                 // 카운트 처리
                 TempPlayer.EndTurn();
                 enemies.ForEach(enemy => enemy.EndTurn());
-
+                
                 yield return new WaitForSeconds(1f);
             } while (enemies.Count > 0 && TempPlayer.Hp > 0);
 

@@ -17,10 +17,16 @@ namespace Cardinals
             get => _hp;
             set
             {
-                _hp = Math.Min(Math.Max(0, value), MaxHp);
-                if (_hp == 0)
+                var calculHp = Math.Min(Math.Max(0, value), MaxHp);
+
+                if (calculHp != _hp)
                 {
-                    DieEvent?.Invoke();
+                    _hp = calculHp;
+                    UpdateHpEvent?.Invoke(_hp, MaxHp);
+                    if (_hp == 0)
+                    {
+                        DieEvent?.Invoke();
+                    }
                 }
             }
         }
@@ -51,13 +57,16 @@ namespace Cardinals
         public int DefenseCount
         {
             get => _defenseCount;
-            set => _defenseCount = value;
+            set
+            {
+                _defenseCount = Math.Max(0, value);   
+            }
         }
         
-        public BaseEntity(int hp, int maxHp)
+        public BaseEntity(int maxHp)
         {
             MaxHp = maxHp;
-            Hp = hp;
+            Hp = MaxHp;
             
             // 초기 세팅
             Buffs.CollectionChanged += OnBuffCollectionChanged;
@@ -94,16 +103,18 @@ namespace Cardinals
         /// <param name="damage">입힐 데미지</param>
         public void Hit(int damage)
         {
-            int calculDamage = DefenseCount - damage;
+            int calculDamage = damage - DefenseCount ;
 
-            if (calculDamage == 0)
+            if (calculDamage > 0)
             {
                 DefenseCount -= damage;
             }
             else
             {
-                Hp -= calculDamage;
+                DefenseCount = 0 ;
             }
+            
+            Hp -= calculDamage;
         }
 
         /// <summary>

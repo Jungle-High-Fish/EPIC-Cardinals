@@ -47,13 +47,15 @@ namespace Util {
 			}
 
 			var sprites = Resources.LoadAll<Sprite>(targetPath);
-			var spriteDict = new Dictionary<string, Sprite>();
+			//var spriteDict = new Dictionary<string, Sprite>();
 			foreach (var sprite in sprites) {
 				string combinedPath = Path.Combine(directoryName, sprite.name);
-				spriteDict.Add(sprite.name, sprite);
+				//spriteDict.Add(sprite.name, sprite);
 				_spriteList.Add(combinedPath, sprite);
 			}
-			return spriteDict;
+
+			_loadedSpriteDirectory.Add(directoryName);
+			return _spriteList;
 		}
     }
 }
