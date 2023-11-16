@@ -28,6 +28,7 @@ namespace Cardinals.Board {
         // Tile 생성 임시 변수
         private Vector3 _tileInstantiateLeftTopPos;
 
+        #region 생성자
         public BoardBuilder(Board boardController) {
             _boardController = boardController;
             _board = new List<List<Tile>>();
@@ -37,15 +38,35 @@ namespace Cardinals.Board {
 
             _startTilePos = new Vector2Int(-1, -1);
         }
+        #endregion
 
+        #region 보드 리소스 로드 관련 함수
+        /// <summary>
+        /// BoardDataSO를 이용하여 보드를 로드합니다.
+        /// </summary>
+        /// <param name="boardDataSO"></param>
         public void Load(BoardDataSO boardDataSO) {
             ImmediateLoadDataSO(boardDataSO);
         }
 
+        /// <summary>
+        /// BoardDataSO를 이용하여 보드를 로드하는 코루틴입니다.
+        /// 애니메이션과 함께 재생되며, 애니메이션이 끝날 때까지 데이터 로드가 보장되지 않습니다.
+        /// </summary>
+        /// <param name="boardDataSO"></param>
+        /// <param name="animationDelay">
+        /// 타일과 타일 로드 간 시간 간격입니다. 
+        /// 애니메이션 재생 시간은 이 값에 타일 갯수를 곱한 것과 같습니다.
+        /// </param>
+        /// <returns></returns>
         public IEnumerator LoadWithAnimation(BoardDataSO boardDataSO, float animationDelay=0.1f) {
             yield return LoadDataSO(boardDataSO, animationDelay);
         }
+        #endregion
 
+        /// <summary>
+        /// 보드 데이터를 삭제합니다.
+        /// </summary>
         public void Clear() {
             if (_board == null) {
                 return;
@@ -60,10 +81,18 @@ namespace Cardinals.Board {
             }
         }
 
+        /// <summary>
+        /// 로드 된 데이터에서 시작 타일의 위치가 유효한지 확인합니다.
+        /// </summary>
         public bool IsStartTileValid() {
             return _startTilePos.x != -1 && _startTilePos.y != -1;
         }
 
+        /// <summary>
+        /// 매개변수로 주어진 좌표가 보드 내에 존재하는지 확인합니다.
+        /// </summary>
+        /// <param name="pos">보드를 N*M 크기의 행렬로 보았을 때, 최좌상단을 (0, 0)으로 간주한 좌표값입니다.</param>
+        /// <returns></returns>
         public bool IsTilePosValid(Vector2Int pos) {
             return pos.x >= 0 && pos.x < _boardWidth && pos.y >= 0 && pos.y < _boardHeight;
         }
