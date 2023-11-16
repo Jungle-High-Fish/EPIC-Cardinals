@@ -1,22 +1,29 @@
 using System;
 using System.Collections;
+using System.Linq;
+using Cardinals.Board;
 using UnityEngine;
 
 namespace Cardinals.Game
 {
-    public class Stage : IEnumerator
+    [CreateAssetMenu(fileName = "Stage", menuName = "Cardinals/Stage", order = 0)]
+    public class Stage: ScriptableObject, IEnumerator
     {
-        private BaseEvent[] _events;
-
         public BaseEvent[] Events
         {
             get => _events;
             set => _events = value;
         }
+
+        public string Name => _name;
+        public BoardDataSO BoardData => _boardDataSO;
+
+        [SerializeField] private string _name;
+
+        [SerializeField] private BaseEvent[] _events;
+        [SerializeField] private BoardDataSO _boardDataSO;
         
         private int Index { get; set; }
-        
-        public string Name { get; }
         
         /// <summary>
         /// 신규 이벤트 등록
@@ -25,7 +32,7 @@ namespace Cardinals.Game
         public Stage(string name, params BaseEvent[] events)
         {
             // 데이타 초기화
-            Name = name;
+            _name = name;
             Events = events;
             
             // 초기 값 등록
@@ -42,6 +49,15 @@ namespace Cardinals.Game
             for (int i = 0; i < index; i++)
             {
                 events[i].IsClear = true;
+            }
+
+            Index = index;
+        }
+
+        public void Init(int index) {
+            for (int i = 0; i < _events.Length; i++)
+            {
+                _events[i].IsClear = i < index;
             }
 
             Index = index;

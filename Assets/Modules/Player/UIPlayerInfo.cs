@@ -30,6 +30,7 @@ namespace Cardinals
         }
         public void Init()
         {
+            _player = GameManager.I.Player;
             _player.UpdateHpEvent += UpdateHp;
             _player.AddBuffEvent += AddBuff;
         }

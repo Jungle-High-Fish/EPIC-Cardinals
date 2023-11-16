@@ -4,12 +4,13 @@ using Cardinals.Board;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Cardinals
 {
     public abstract class BaseEnemy : BaseEntity
     {
-        public string Name { get; }
+        public string Name { get; private set; }
         
         protected int Turn { get; set; }
 
@@ -62,6 +63,17 @@ namespace Cardinals
             UpdatePatternEvent += ExecutePreActionByPattern;
         }
 
+        public virtual void Init(string name, int maxHp) {
+            base.Init(maxHp);
+
+            Name = name;
+            UpdatePatternEvent += ExecutePreActionByPattern;
+        }
+
+        public virtual void Init() {
+            
+        }
+
         /// <summary>
         /// 범위 공격 시, 공격할 타일들을 저장하는 리스트 
         /// </summary>
@@ -96,10 +108,10 @@ namespace Cardinals
             switch (curPat.Type)
             {
                 case EnemyActionType.Attack :
-                    GameManager.I.TempPlayer.Hit(value);
+                    GameManager.I.Player.Hit(value);
                     break;
                 case EnemyActionType.Defense :
-                    GameManager.I.TempPlayer.DefenseCount += value;
+                    GameManager.I.Player.DefenseCount += value;
                     break;
                 case EnemyActionType.AreaAttack :
                 case EnemyActionType.Magic :

@@ -18,7 +18,7 @@ namespace Cardinals.Board {
         private BoardBuilder _boardBuilder;
 
         [Button("테스트", ButtonSizes.Large)]
-        public void SetBoard(BoardDataSO boardDataSO) {
+        public IEnumerator SetBoard(BoardDataSO boardDataSO) {
             if (_boardBuilder != null) {
                 _boardBuilder.Clear();
                 _boardBuilder = null;
@@ -27,12 +27,37 @@ namespace Cardinals.Board {
             _tileSequence = new List<Tile>();
             _boardBuilder = new BoardBuilder(this);
 
-            StartCoroutine(BoardLoadWithAnimation(boardDataSO));
+            yield return BoardLoadWithAnimation(boardDataSO);
         }
 
         [Button("테스트 애니메이션", ButtonSizes.Large)]
         public void PlayTileAnimation(float delay=0.1f) {
             StartCoroutine(TileAnimation(delay));
+        }
+
+        public Tile GetStartTile() {
+            if (_boardBuilder == null) {
+                return null;
+            }
+
+            return _boardBuilder.StartTile;
+        }
+
+        public void PlacePieceToTile(IBoardPiece piece, Tile tile) {
+            if (tile == null) {
+                Debug.LogError("Tile is null");
+                return;
+            }
+
+            // if (tile.Piece != null) {
+            //     return null;
+            // }
+
+            tile.Arrive(piece);
+
+            if (piece is Player) {
+                (piece as Player).SetTile(tile);
+            }
         }
 
         private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {

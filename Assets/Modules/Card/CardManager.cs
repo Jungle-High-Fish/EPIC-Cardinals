@@ -33,7 +33,7 @@ namespace Cardinals
             _handCards = new();
             _handcardsUI = new();
             _discardPile = new();
-            //Å×½ºÆ®¿ë
+            //ï¿½×½ï¿½Æ®ï¿½ï¿½
             Card card1 = new Card(1, false);
             Card card2 = new Card(2, false);
             Card card3 = new Card(3, false);
@@ -201,7 +201,7 @@ namespace Cardinals
         }
         private void CardUseMove(int num)
         {
-            StartCoroutine(_player.MoveTo(num,0.4f));
+            StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
         }
 
         private bool CardUseAction(int num)
@@ -213,9 +213,11 @@ namespace Cardinals
 
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
-                Debug.Log($"Ä«µå ¾×¼Ç¿¡ {_handCards[_selectCardIndex].CardNumber} »ç¿ë");
-                //Å¸ÀÏ¿¡¼­ ¾×¼Ç È£Ãâ
+                Debug.Log($"Ä«ï¿½ï¿½ ï¿½×¼Ç¿ï¿½ {_handCards[_selectCardIndex].CardNumber} ï¿½ï¿½ï¿½");
+                //Å¸ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ È£ï¿½ï¿½
                 _prevCardNumber = num;
+
+                StartCoroutine(GameManager.I.Player.CardAction(num));
                 return true;
             }
 
