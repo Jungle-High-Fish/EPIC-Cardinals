@@ -1,18 +1,16 @@
 using System;
+using System.Collections;
 using Cardinals.Enums;
+using UnityEngine;
 
 namespace Cardinals.Game
 {
-    public abstract class BaseEvent : IDisposable
-    {
-        protected BaseEvent(StageEventType type)
-        {
-            Type = type;
-            IsClear = false;
-        }
-        
+    public abstract class BaseEvent: ScriptableObject, IDisposable
+    {   
         public UIEvent UIEvent { protected get; set; }
-        public StageEventType Type { get; }
+        public StageEventType Type => _type;
+
+        [SerializeField] private StageEventType _type;
         
         private bool _isClear;
 
@@ -35,5 +33,7 @@ namespace Cardinals.Game
         {
             UIEvent = null;
         }
+
+        public abstract IEnumerator Flow(StageController stageController);
     }
 }

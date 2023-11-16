@@ -11,6 +11,8 @@ namespace Cardinals.Constants {
             public const string Prefabs = "Prefabs/";
             public const string Prefabs_Tile = "Board/Tile";
             public const string Prefabs_CornerTile = "Board/CornerTile";
+            public const string Prefabs_UIEnemyInfo = "Enemy/UIEnemyInfo";
+            public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
 
             public const string Sprites = "Sprites/";
 
@@ -24,6 +26,15 @@ namespace Cardinals.Constants {
             public static string Get(string path) {
                 return Path + path;
             }
+        }
+    }
+
+    namespace Common {
+        public static class InstanceName {
+            public const string StageController = "StageContoller";
+            public const string EnemyPlace = "Enemy";
+            public const string EnemyUI = "EnemyUI";
+            public const string Board = "Board";
         }
     }
 

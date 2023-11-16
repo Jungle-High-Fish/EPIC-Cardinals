@@ -31,11 +31,11 @@ namespace Cardinals
             }
         }
 
-        public int MaxHp { get; }
+        public int MaxHp { get; private set; }
         public Action<int, int> UpdateHpEvent { get; set; }
 
         #region Buff Event Related
-        private ObservableCollection<BaseBuff> Buffs { get; set; } = new();
+        private ObservableCollection<BaseBuff> Buffs { get; set; }
 
         public Action<BaseBuff> AddBuffEvent { get; set; }
 
@@ -69,6 +69,17 @@ namespace Cardinals
             Hp = MaxHp;
             
             // 초기 세팅
+            Buffs = new();
+            Buffs.CollectionChanged += OnBuffCollectionChanged;
+            DieEvent += () => { Buffs.CollectionChanged -= OnBuffCollectionChanged; };
+        }
+
+        public void Init(int maxHp) {
+            MaxHp = maxHp;
+            Hp = MaxHp;
+            
+            // 초기 세팅
+            Buffs = new();
             Buffs.CollectionChanged += OnBuffCollectionChanged;
             DieEvent += () => { Buffs.CollectionChanged -= OnBuffCollectionChanged; };
         }

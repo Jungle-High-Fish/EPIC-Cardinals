@@ -3,22 +3,40 @@ using Cardinals;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 
-namespace Modules.Enemy
+namespace Cardinals.Enemy
 {
     public class EnemyFactory
     {
-        public static BaseEnemy GetEnemy(EnemyType type)
+        public static Type GetEnemy(EnemyType type, out (string name, int hp) enemyData)
         {
-            return type switch
-            {
-                EnemyType.One => new One("크롤", 10),
-                EnemyType.Two => new Two("퉤퉤기", 10),
-                EnemyType.Three1 => new Three1("삐삐", 15),
-                EnemyType.Three2 => new Three2("뽀뽀", 15),
-                EnemyType.Four => new Four("삒삒이", 30),
-                EnemyType.Boss => new Boss("파지지지직이", 40),
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-            };
+            switch (type) {
+                case EnemyType.One:
+                    enemyData.name = "크롤";
+                    enemyData.hp = 10;
+                    return typeof(One);
+                case EnemyType.Two:
+                    enemyData.name = "퉤퉤기";
+                    enemyData.hp = 10;
+                    return typeof(Two);
+                case EnemyType.Three1:
+                    enemyData.name = "삐삐";
+                    enemyData.hp = 15;
+                    return typeof(Three1);
+                case EnemyType.Three2:
+                    enemyData.name = "뽀뽀";
+                    enemyData.hp = 15;
+                    return typeof(Three2);
+                case EnemyType.Four:
+                    enemyData.name = "삒삒이";
+                    enemyData.hp = 30;
+                    return typeof(Four);
+                case EnemyType.Boss:
+                    enemyData.name = "파지지지직이";
+                    enemyData.hp = 40;
+                    return typeof(Boss);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
     }
 }

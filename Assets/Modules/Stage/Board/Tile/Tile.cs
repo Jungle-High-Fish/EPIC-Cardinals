@@ -57,17 +57,15 @@ namespace Cardinals.Board {
             }
         }
 
+        public void StepOn(IBoardPiece boardPiece) {
+        }
+
         public void Arrive(IBoardPiece boardPiece) {
             _boardPieces.Add(boardPiece);
-
         }
 
         public void Leave(IBoardPiece boardPiece) {
             _boardPieces.Remove(boardPiece);
-        }
-
-        public void PlayerArriveTileAction() {
-            _tileAction.ArriveAction();
         }
 
         public void CardAction(int value) {

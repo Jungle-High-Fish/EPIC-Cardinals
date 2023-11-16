@@ -19,8 +19,33 @@ namespace Cardinals.Enemy
             }
         }
         
-        public Boss(string name, int maxHp) : base(name, maxHp)
+        public Boss(string name, int maxHp) : base("파지지지직이", 40)
         {
+            Patterns = new[]
+            {
+                new Pattern(EnemyActionType.Magic, action: Electric),
+                new Pattern(EnemyActionType.Attack, 5),
+                new Pattern(EnemyActionType.Defense, 5),
+            };
+
+            BerserkModeEvent += () =>
+            {
+                FixPattern = new(EnemyActionType.Buff, action: ElectricShock);
+                Patterns = new Pattern[]
+                {
+                    new(EnemyActionType.Magic, action: BerserkElectric),
+                    new(EnemyActionType.Attack, 7),
+                    new(EnemyActionType.Attack, 5),
+                };
+                Turn = 0;
+                Sprite = null; // [TODO] 광폭화 이미지로 변경 필요 
+            };
+        }
+
+        public override void Init()
+        {
+            base.Init("파지지지직이", 40);
+            
             Patterns = new[]
             {
                 new Pattern(EnemyActionType.Magic, action: Electric),

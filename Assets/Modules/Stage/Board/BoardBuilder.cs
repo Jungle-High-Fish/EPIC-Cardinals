@@ -257,7 +257,7 @@ namespace Cardinals.Board {
                 boardPos.x == _boardWidth - 1 && boardPos.y == 0 ||
                 boardPos.x == _boardWidth - 1 && boardPos.y == _boardHeight - 1;
 
-            Debug.Log(isCornerTile);
+            //Debug.Log(isCornerTile);
 
             Vector3 targetPos = 
                 _tileInstantiateLeftTopPos + new Vector3(targetX, 0, -targetY);

@@ -4,12 +4,13 @@ using Cardinals.Board;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Cardinals
 {
     public abstract class BaseEnemy : BaseEntity
     {
-        public string Name { get; }
+        public string Name { get; private set; }
         
         protected int Turn { get; set; }
 
@@ -60,6 +61,17 @@ namespace Cardinals
         {
             Name = name;
             UpdatePatternEvent += ExecutePreActionByPattern;
+        }
+
+        public virtual void Init(string name, int maxHp) {
+            base.Init(maxHp);
+
+            Name = name;
+            UpdatePatternEvent += ExecutePreActionByPattern;
+        }
+
+        public virtual void Init() {
+            
         }
 
         /// <summary>

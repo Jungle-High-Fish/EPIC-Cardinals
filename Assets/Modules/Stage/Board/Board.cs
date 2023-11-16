@@ -18,7 +18,7 @@ namespace Cardinals.Board {
         private BoardBuilder _boardBuilder;
 
         [Button("테스트", ButtonSizes.Large)]
-        public void SetBoard(BoardDataSO boardDataSO) {
+        public IEnumerator SetBoard(BoardDataSO boardDataSO) {
             if (_boardBuilder != null) {
                 _boardBuilder.Clear();
                 _boardBuilder = null;
@@ -27,7 +27,7 @@ namespace Cardinals.Board {
             _tileSequence = new List<Tile>();
             _boardBuilder = new BoardBuilder(this);
 
-            StartCoroutine(BoardLoadWithAnimation(boardDataSO));
+            yield return BoardLoadWithAnimation(boardDataSO);
         }
 
         [Button("테스트 애니메이션", ButtonSizes.Large)]
