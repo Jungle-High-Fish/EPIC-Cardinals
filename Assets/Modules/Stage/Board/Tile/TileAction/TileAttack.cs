@@ -16,5 +16,5 @@ namespace Cardinals.Board {
             throw new System.NotImplementedException();
         }
     }
-
+    
 }

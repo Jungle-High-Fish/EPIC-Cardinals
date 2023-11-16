@@ -74,6 +74,7 @@ namespace Cardinals.Game {
             BaseEnemy enemyComp = enemyRenderer.AddComponent(enemy) as BaseEnemy;
             enemyComp.Init();
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
+            enemyRenderer.transform.position = enemyRenderer.transform.position + new Vector3(0, 2, 0);
 
             GameObject UIEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, _enemyUIParentTransform);
             UIEnemyInfo.GetComponent<UIEnemyInfo>().Init(enemyComp);
