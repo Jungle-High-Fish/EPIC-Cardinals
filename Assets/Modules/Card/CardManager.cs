@@ -217,7 +217,7 @@ namespace Cardinals
                 //Ÿ�Ͽ��� �׼� ȣ��
                 _prevCardNumber = num;
 
-                GameManager.I.Player.CardAction(num);
+                StartCoroutine(GameManager.I.Player.CardAction(num));
                 return true;
             }
 

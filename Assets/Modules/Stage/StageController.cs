@@ -40,6 +40,7 @@ namespace Cardinals.Game {
             {
                 // 현재 사건에 따른 이벤트 플로우 수행
                 using var evt = _stage.Current as Game.BaseEvent;
+                _curEvent = evt;
                 
                 evt.On();
                 
