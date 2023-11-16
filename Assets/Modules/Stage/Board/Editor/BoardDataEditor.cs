@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
-using Cardinals.Constants;
 using Sirenix.OdinInspector;
-using Cardinals.Enums;
-using System;
 using Sirenix.Utilities.Editor;
 
 #if UNITY_EDITOR
+using Sirenix.OdinInspector.Editor;
+
 namespace Cardinals.Board {
     public class BoardDataEditor : OdinMenuEditorWindow {
         private CreateNewBoardData _createNewBoardData;

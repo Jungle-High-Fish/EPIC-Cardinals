@@ -53,6 +53,10 @@ namespace Cardinals
             _next = true;
         }
 
+        private void Start() {
+            GameStart();
+        }
+
         private IEnumerator MainGameFlow()
         {
             StageController stageController = LoadStage();

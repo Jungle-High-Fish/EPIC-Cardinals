@@ -6,7 +6,7 @@ namespace Cardinals.Enemy
 {
     public class Two : BaseEnemy
     {
-    public Two(string name, int maxHp) : base("퉤퉤기", 10)
+        public Two(string name, int maxHp) : base("퉤퉤기", 10)
         {
             FixPattern = new Pattern(EnemyActionType.Buff, action: Slow);
             Patterns = new[]
