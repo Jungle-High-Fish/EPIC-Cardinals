@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 namespace Cardinals
 {
@@ -18,6 +19,11 @@ namespace Cardinals
         [SerializeField] private Transform _buffTr;
         [SerializeField] private GameObject _buffPrefab;
 
+        [Header("Panel")]
+        [SerializeField] private GameObject _playerInfoPanel;
+        [SerializeField] private float _panelMoveDistance;
+        private bool _isPanelOpen;
+        
         private void Start()
         {
             Init();
@@ -38,6 +44,20 @@ namespace Cardinals
         private void AddBuff(BaseBuff baseBuff)
         {
             Instantiate(_buffPrefab, _buffTr);
+        }
+
+        public void OpenPanel()
+        {
+            if (_isPanelOpen)
+            {
+                _playerInfoPanel.transform.DOMoveX(-_panelMoveDistance, 0.3f).SetEase(Ease.InOutCubic);
+                _isPanelOpen = false;
+            }
+            else
+            {
+                _playerInfoPanel.transform.DOMoveX(_panelMoveDistance, 0.3f).SetEase(Ease.InOutCubic);
+                _isPanelOpen = true;
+            }
         }
     }
 }
