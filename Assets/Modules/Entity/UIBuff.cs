@@ -1,17 +1,19 @@
+using Cardinals.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Cardinals
 {
-    public class UIBuff : MonoBehaviour
+    public class UIBuff : MonoBehaviour, IDescription
     {
         private BaseBuff BaseBuff { get; set; }
 
         [Header("Component")] 
         [SerializeField] private Image _iconImg;
         [SerializeField] private TextMeshProUGUI _buffCountTMP;
-
+        [SerializeField] private Transform _descriptionTr;
+        
         public void Init(BaseBuff baseBuff)
         {
             BaseBuff = baseBuff;
@@ -33,5 +35,14 @@ namespace Cardinals
             BaseBuff = null;
             Destroy(gameObject);
         }
+
+        #region IDescription
+
+        public string Name => BaseBuff.Type.ToString();
+        public string Description => "테스트입니다.";
+        public Sprite IconSprite => _iconImg.sprite;
+        public Transform InstTr => _descriptionTr;
+
+        #endregion
     }
 }
