@@ -22,6 +22,7 @@ namespace Cardinals
         {
             base.EndTurn();
             GameManager.I.Next();
+            FindAnyObjectByType<CardManager>().EndTurn();
         }
 
         public void SetTile(Board.Tile tile)
