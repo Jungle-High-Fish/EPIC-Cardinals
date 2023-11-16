@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Enums;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Cardinals
 {
@@ -97,6 +98,7 @@ namespace Cardinals
         }
 
         #region 기본 액션 및 버프 관련 함수
+        [Button]
         /// <summary>
         /// 맞을 때 호출
         /// </summary>
@@ -117,6 +119,7 @@ namespace Cardinals
             Hp -= calculDamage;
         }
 
+        
         /// <summary>
         /// 대상을 피격 시, 호출
         /// </summary>

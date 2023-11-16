@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UICardUseSlot : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
+namespace Cardinals
 {
-    // ³ªÁß¿¡ »©±â
-    [SerializeField] private CardManager _cardManager;
-    [SerializeField] private MouseState _slotState;
-    public void OnPointerEnter(PointerEventData eventData)
+    public class UICardUseSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        _cardManager.MouseState = _slotState;
+        // ³ªÁß¿¡ »©±â
+        [SerializeField] private CardManager _cardManager;
+        [SerializeField] private MouseState _slotState;
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _cardManager.MouseState = _slotState;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _cardManager.MouseState = MouseState.Cancel;
+        }
+
+
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        _cardManager.MouseState = MouseState.Cancel;
-    }
-
-    
 }
