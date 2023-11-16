@@ -13,6 +13,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_CornerTile = "Board/CornerTile";
             public const string Prefabs_UIEnemyInfo = "Enemy/UIEnemyInfo";
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
+            public const string Prefabs_Player = "Player/Player";
+            public const string Prefabs_UIPlayerInfo = "Player/UIPlayerInfo";
 
             public const string Sprites = "Sprites/";
 

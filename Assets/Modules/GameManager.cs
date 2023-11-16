@@ -13,6 +13,7 @@ namespace Cardinals
     public class GameManager : Singleton<GameManager>
     {
         private static UIManager _ui;
+        private bool _next = true;
 
         public UIManager UI
         {
@@ -24,14 +25,14 @@ namespace Cardinals
         }
         
         [SerializeField] private Stage _stage1;
-        public Stage CurStage { get; private set; }
+        public StageController CurStage { get; private set; }
         
         /// <summary>
         /// 외부에서 참조 가능한 현재 전투 중인 적
         /// </summary>
         public IEnumerable<BaseEnemy> CurrentEnemies { get; set; }
-        public TempPlayer TempPlayer { get; set; } = new(); // 임시 
-        public PlayerData PlayerData { get; set; } = new();// 임시
+        public Player Player => FindAnyObjectByType<Player>();
+        //public PlayerData PlayerData { get; set; } = new();// 임시
 
         #region Game
 
@@ -41,9 +42,21 @@ namespace Cardinals
             StartCoroutine(MainGameFlow());
         }
 
+        public IEnumerator WaitNext()
+        {
+            _next = false;
+            yield return new WaitUntil(() => _next);
+        }
+
+        public void Next()
+        {
+            _next = true;
+        }
+
         private IEnumerator MainGameFlow()
         {
             StageController stageController = LoadStage();
+            CurStage = stageController;
             yield return stageController.LoadStage(_stage1);
             yield return stageController.StageFlow();
         }

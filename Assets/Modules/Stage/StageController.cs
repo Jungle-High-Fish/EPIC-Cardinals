@@ -9,12 +9,16 @@ using Util;
 namespace Cardinals.Game {
     
     public class StageController : MonoBehaviour {
+        public BaseEvent CurEvent => _curEvent;
+        
         private Stage _stage;
     
         private Transform _enemyParentTransform;
         private Transform _enemyUIParentTransform;
 
         private Board.Board _board;
+
+        private BaseEvent _curEvent;
         
         public IEnumerator LoadStage(Stage stage) {
             _stage = stage;
@@ -23,6 +27,8 @@ namespace Cardinals.Game {
             InstantiateBaseObjs();
 
             yield return _board.SetBoard(stage.BoardData);
+
+            PlacePlayer();
         }
 
         public IEnumerator StageFlow() {
@@ -93,6 +99,17 @@ namespace Cardinals.Game {
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
             BoardObj.transform.position = Vector3.zero;
             _board = BoardObj.AddComponent<Board.Board>();
+        }
+
+        private void PlacePlayer() {
+            GameObject playerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player);
+            GameObject playerObj = GameObject.Instantiate(playerPrefab);
+
+            Transform CanvasTransform = GameObject.Find("PlayerCanvas").transform;
+            GameObject playerUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerInfo);
+            GameObject playerUIObj = GameObject.Instantiate(playerUIPrefab, CanvasTransform);
+
+            _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
         }
     }
 

@@ -108,10 +108,10 @@ namespace Cardinals
             switch (curPat.Type)
             {
                 case EnemyActionType.Attack :
-                    GameManager.I.TempPlayer.Hit(value);
+                    GameManager.I.Player.Hit(value);
                     break;
                 case EnemyActionType.Defense :
-                    GameManager.I.TempPlayer.DefenseCount += value;
+                    GameManager.I.Player.DefenseCount += value;
                     break;
                 case EnemyActionType.AreaAttack :
                 case EnemyActionType.Magic :

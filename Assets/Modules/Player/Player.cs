@@ -15,17 +15,24 @@ namespace Cardinals
         }
         public override void OnTurn()
         {
-            throw new System.NotImplementedException();
+            FindAnyObjectByType<CardManager>().OnTurn();
         }
 
         public override void EndTurn()
         {
             base.EndTurn();
+            GameManager.I.Next();
         }
 
+        public void SetTile(Board.Tile tile)
+        {
+            _onTile = tile;
+            transform.position = tile.transform.position + new Vector3(0, 1.3f, 0);
+        }
       
         public IEnumerator MoveTo(int count,float time)
         {
+            _onTile?.Leave(this);
             for(int i = 0; i < count; i++)
             {
                 Vector3 nextPos = _onTile.Next.transform.position;
@@ -34,9 +41,13 @@ namespace Cardinals
                 yield return new WaitForSeconds(time);
                 _onTile = _onTile.Next;
             }
-            
+            _onTile.Arrive(this);
         }
 
+        public IEnumerator CardAction(int num) {
+            _onTile.CardAction(num);
+            yield return null;
+        }
     }
 }
 

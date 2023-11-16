@@ -35,6 +35,31 @@ namespace Cardinals.Board {
             StartCoroutine(TileAnimation(delay));
         }
 
+        public Tile GetStartTile() {
+            if (_boardBuilder == null) {
+                return null;
+            }
+
+            return _boardBuilder.StartTile;
+        }
+
+        public void PlacePieceToTile(IBoardPiece piece, Tile tile) {
+            if (tile == null) {
+                Debug.LogError("Tile is null");
+                return;
+            }
+
+            // if (tile.Piece != null) {
+            //     return null;
+            // }
+
+            tile.Arrive(piece);
+
+            if (piece is Player) {
+                (piece as Player).SetTile(tile);
+            }
+        }
+
         private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();

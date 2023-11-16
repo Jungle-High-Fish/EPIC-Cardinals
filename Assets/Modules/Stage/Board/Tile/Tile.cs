@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
@@ -58,14 +59,19 @@ namespace Cardinals.Board {
         }
 
         public void StepOn(IBoardPiece boardPiece) {
+            
         }
 
         public void Arrive(IBoardPiece boardPiece) {
             _boardPieces.Add(boardPiece);
+
+            (boardPiece as MonoBehaviour).transform.SetParent(transform);
         }
 
         public void Leave(IBoardPiece boardPiece) {
             _boardPieces.Remove(boardPiece);
+
+            (boardPiece as MonoBehaviour).transform.SetParent(null);
         }
 
         public void CardAction(int value) {

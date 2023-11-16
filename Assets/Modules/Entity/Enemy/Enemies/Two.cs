@@ -18,7 +18,7 @@ namespace Cardinals.Enemy
 
         private void Slow()
         {
-            GameManager.I.TempPlayer.AddBuff(new Slow());
+            GameManager.I.Player.AddBuff(new Slow());
         }
 
         public override void Init()

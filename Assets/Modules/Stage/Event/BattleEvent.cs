@@ -10,6 +10,9 @@ namespace Cardinals.Game
     [CreateAssetMenu(fileName = "BattleEvent", menuName = "Cardinals/Event/Battle")]
     public class BattleEvent: BaseEvent
     {
+        private List<BaseEnemy> _enemies;
+        public List<BaseEnemy> Enemies => _enemies;
+
         [SerializeField] private EnemyType[] _enemyList;
         public EnemyType[] EnemyList => _enemyList;
 
@@ -23,14 +26,13 @@ namespace Cardinals.Game
 
         public override IEnumerator Flow(StageController stageController)
         {
-            Debug.Log("asdf");
             _stageController = stageController;
 
             Debug.Log("전투 시작");
             // 전투 세팅
         
             // 몬스터 설정
-            List<BaseEnemy> enemies = new();
+            _enemies = new();
             var posArr = GetPositions();
             for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
             {
@@ -39,39 +41,39 @@ namespace Cardinals.Game
                 
                 enemy.DieEvent += () =>
                 {
-                    enemies.Remove(enemy);
+                    _enemies.Remove(enemy);
                 };
                 
-                enemies.Add(enemy);
+                _enemies.Add(enemy);
             }
 
-            GameManager.I.CurrentEnemies = enemies;
+            GameManager.I.CurrentEnemies = _enemies;
             
             // 초기화
             do // 전투 시작
             {
                 // 전투 업데이트
-                GameManager.I.PlayerData.Turn++;
-                GameManager.I.TempPlayer.StartTurn();
-                enemies.ForEach(enemy => enemy.StartTurn());
+                //GameManager.I.PlayerData.Turn++;
+                GameManager.I.Player.StartTurn();
+                _enemies.ForEach(enemy => enemy.StartTurn());
 
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
-                GameManager.I.TempPlayer.OnTurn();
-                yield return null; // 대기?
+                GameManager.I.Player.OnTurn();
+                yield return GameManager.I.WaitNext(); // 대기?
                 
                 // 적 행동
-                enemies.ForEach(enemy => enemy.OnTurn());
+                _enemies.ForEach(enemy => enemy.OnTurn());
                 
                 // 카운트 처리
-                GameManager.I.TempPlayer.EndTurn();
-                enemies.ForEach(enemy => enemy.EndTurn());
+                GameManager.I.Player.EndTurn();
+                _enemies.ForEach(enemy => enemy.EndTurn());
                 
                 yield return new WaitForSeconds(1f);
-            } while (enemies.Count > 0 && GameManager.I.TempPlayer.Hp > 0);
+            } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);
 
-            if (enemies.Count == 0)
+            if (_enemies.Count == 0)
             {
                 IsClear = true;
             }
