@@ -13,6 +13,9 @@ using Util;
 namespace Cardinals.Board {
 
     public class Board: MonoBehaviour {
+        public Tile this[int x] => _tileSequence[x];
+        public Tile this[int x, int y] => _boardBuilder[x, y];
+
         [ShowInInspector, ReadOnly]
         private List<Tile> _tileSequence;
         private BoardBuilder _boardBuilder;
