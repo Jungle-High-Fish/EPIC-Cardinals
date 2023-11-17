@@ -10,6 +10,7 @@ namespace Cardinals.Game {
     
     public class StageController : MonoBehaviour {
         public BaseEvent CurEvent => _curEvent;
+        public Board.Board Board => _board;
         
         private Stage _stage;
     

@@ -12,6 +12,7 @@ namespace Cardinals.Board {
     {
         public Tile this[int x, int y] => _board[y][x];
         public Tile this[Vector2Int pos] => _board[pos.y][pos.x];
+        public List<Tile> CornerTiles => _cornerTiles;
         public int TileNumW => _boardWidth;
         public int TileNumH => _boardHeight;
         public Vector2Int StartTilePos => _startTilePos;
@@ -22,6 +23,7 @@ namespace Cardinals.Board {
 
         // Board 데이터
         private List<List<Tile>> _board;
+        private List<Tile> _cornerTiles;
         private int _boardWidth;
         private int _boardHeight;
         private Vector2Int _startTilePos;
@@ -33,6 +35,7 @@ namespace Cardinals.Board {
         public BoardBuilder(Board boardController) {
             _boardController = boardController;
             _board = new List<List<Tile>>();
+            _cornerTiles = new List<Tile>();
 
             _boardWidth = 0;
             _boardHeight = 0;
@@ -80,6 +83,9 @@ namespace Cardinals.Board {
                     }
                 }
             }
+
+            _cornerTiles.Clear();
+            _cornerTiles = null;
         }
 
         /// <summary>
@@ -126,6 +132,10 @@ namespace Cardinals.Board {
 
                     if (tile.Type == TileType.Start) {
                         _startTilePos = new Vector2Int(j, i);
+                    }
+
+                    if (tile.Type == TileType.Blank || tile.Type == TileType.Start) {
+                        _cornerTiles.Add(tile);
                     }
 
                     yield return new WaitForSeconds(delay);
@@ -252,11 +262,12 @@ namespace Cardinals.Board {
                 yDegree = 0;
             }
 
-            bool isCornerTile = 
-                boardPos.x == 0 && boardPos.y == 0 ||
-                boardPos.x == 0 && boardPos.y == _boardHeight - 1 ||
-                boardPos.x == _boardWidth - 1 && boardPos.y == 0 ||
-                boardPos.x == _boardWidth - 1 && boardPos.y == _boardHeight - 1;
+            // bool isCornerTile = 
+            //     boardPos.x == 0 && boardPos.y == 0 ||
+            //     boardPos.x == 0 && boardPos.y == _boardHeight - 1 ||
+            //     boardPos.x == _boardWidth - 1 && boardPos.y == 0 ||
+            //     boardPos.x == _boardWidth - 1 && boardPos.y == _boardHeight - 1;
+            bool isCornerTile = tileData.type == TileType.Blank;
 
             //Debug.Log(isCornerTile);
 

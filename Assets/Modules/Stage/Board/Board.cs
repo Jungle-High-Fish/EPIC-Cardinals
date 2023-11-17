@@ -60,6 +60,56 @@ namespace Cardinals.Board {
             }
         }
 
+        public void OnTurnEnd() {
+            for (int i = 0; i < _tileSequence.Count; i++) {
+                _tileSequence[i].OnTurnEnd();
+            }
+        }
+
+        public List<Tile> GetBoardEdgeTileSequence(int edgeIndex, bool includeCorner=true) {
+            if (edgeIndex >= _boardBuilder.CornerTiles.Count) {
+                return null;
+            }
+
+            List<Tile> tileSequence = new List<Tile>();
+
+            Tile targetTile = _boardBuilder.CornerTiles[edgeIndex];
+
+            if (includeCorner) {
+                tileSequence.Add(targetTile);
+            }
+
+            while (true) {
+                targetTile = targetTile.Next;
+                if (targetTile == null) {
+                    return null;
+                }
+
+                if (targetTile.Type == TileType.Start) {
+                    return tileSequence;
+                }
+
+                if (targetTile.Type == TileType.Blank) {
+                    if (includeCorner == false) {
+                        return tileSequence;
+                    } else {
+                        tileSequence.Add(targetTile);
+                        return tileSequence;
+                    }
+                }
+
+                tileSequence.Add(targetTile);
+            }
+        }
+
+        public Tile GetRandomTile() {
+            return _tileSequence[UnityEngine.Random.Range(0, _tileSequence.Count)];
+        }
+
+        public int GetBoardEdgeNum() {
+            return _boardBuilder.CornerTiles.Count;
+        }
+
         private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();
