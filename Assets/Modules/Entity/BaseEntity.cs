@@ -12,7 +12,7 @@ namespace Cardinals
 {
     public abstract class BaseEntity : MonoBehaviour
     {
-        private int _hp;
+        protected int _hp;
 
         public virtual int Hp
         {
@@ -37,7 +37,7 @@ namespace Cardinals
         public Action<int, int> UpdateHpEvent { get; set; }
 
         #region Buff Event Related
-        private ObservableCollection<BaseBuff> Buffs { get; set; }
+        protected ObservableCollection<BaseBuff> Buffs { get; set; }
 
         public Action<BaseBuff> AddBuffEvent { get; set; }
 
@@ -110,6 +110,9 @@ namespace Cardinals
                 buff.Execute(this);
                 buff.EndTurn();
             }
+
+            // 방어도 초기화
+            DefenseCount = 0;
         }
 
         #region 기본 액션 및 버프 관련 함수

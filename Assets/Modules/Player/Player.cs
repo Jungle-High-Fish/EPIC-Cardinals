@@ -4,25 +4,73 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Cardinals.Board;
+using System;
+
 namespace Cardinals
 {
     public class Player : BaseEntity, IBoardPiece
     {
         [SerializeField] private Board.Tile _onTile;
+        private bool _isDamagedThisTurn;
+        [SerializeField] private PlayerInfo _playerInfo;
 
+        public PlayerInfo PlayerInfo => _playerInfo;
         public Player() : base(12){
 
+        }
+
+        public override int Hp {
+            get => base.Hp;
+            set
+            {
+                var calculHp = Math.Min(Math.Max(0, value), MaxHp);
+
+                if (calculHp != _hp)
+                {
+                    _hp = calculHp;
+                    _isDamagedThisTurn = true;
+                    UpdateHpEvent?.Invoke(_hp, MaxHp);
+                    if (_hp == 0)
+                    {
+                        DieEvent?.Invoke();
+                    }
+
+                    
+                }
+            }
         }
         public override void OnTurn()
         {
             FindAnyObjectByType<CardManager>().OnTurn();
+            _isDamagedThisTurn = false;
         }
 
         public override void EndTurn()
         {
-            base.EndTurn();
+            // 버프/디버프 소모
+            foreach (var buff in Buffs)
+            {
+                buff.Execute(this);
+                buff.EndTurn();
+            }
+
             GameManager.I.Next();
             FindAnyObjectByType<CardManager>().EndTurn();
+            if (!PlayerInfo.IsBless6)
+            {
+                DefenseCount = 0;
+            }
+        }
+
+        public void Bless3()
+        {
+            if (_isDamagedThisTurn)
+            {
+                return;
+            }
+
+            //TODO : 힐 수치 Constants에서 끌어쓰기
+            Heal(3);
         }
 
         public void SetTile(Board.Tile tile)
@@ -48,6 +96,11 @@ namespace Cardinals
         public IEnumerator CardAction(int num) {
             _onTile.CardAction(num);
             yield return null;
+        }
+
+        public void Heal(int value)
+        {
+            Hp += value;
         }
     }
 }
