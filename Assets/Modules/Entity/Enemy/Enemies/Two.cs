@@ -1,6 +1,7 @@
 using Cardinals;
 using Cardinals.Buff;
 using Cardinals.Enums;
+using Cardinals.Game;
 
 namespace Cardinals.Enemy
 {
@@ -30,6 +31,12 @@ namespace Cardinals.Enemy
             {
                 new Pattern(EnemyActionType.Defense, 4),
                 new Pattern(EnemyActionType.Attack, 4),
+            };
+            
+            Rewards = new Reward[]
+            {
+                new(RewardType.Gold, 60),
+                new(RewardType.Potion, 1)
             };
         }
     }

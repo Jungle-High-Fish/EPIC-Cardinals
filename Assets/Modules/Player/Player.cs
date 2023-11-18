@@ -47,7 +47,7 @@ namespace Cardinals
 
         public override void EndTurn()
         {
-            // ¹öÇÁ/µğ¹öÇÁ ¼Ò¸ğ
+            // ë²„í”„/ë””ë²„í”„ ì†Œëª¨
             foreach (var buff in Buffs)
             {
                 buff.Execute(this);
@@ -69,7 +69,7 @@ namespace Cardinals
                 return;
             }
 
-            //TODO : Èú ¼öÄ¡ Constants¿¡¼­ ²ø¾î¾²±â
+            //TODO : í ìˆ˜ì¹˜ Constantsì—ì„œ ëŒì–´ì“°ê¸°
             Heal(3);
         }
 
