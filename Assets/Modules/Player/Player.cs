@@ -89,6 +89,9 @@ namespace Cardinals
                 transform.DOJump(nextPos, 2, 1, time);
                 yield return new WaitForSeconds(time);
                 _onTile = _onTile.Next;
+                if (i != count - 1) {
+                    _onTile.StepOn(this);
+                }
             }
             _onTile.Arrive(this);
         }

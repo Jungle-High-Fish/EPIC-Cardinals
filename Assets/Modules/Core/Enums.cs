@@ -141,6 +141,11 @@ namespace Cardinals.Enums {
         Light,
         Dark
     }
+
+    public enum TileState {
+        Normal,
+        Cursed
+    }
     
     
     public enum StageEventType
