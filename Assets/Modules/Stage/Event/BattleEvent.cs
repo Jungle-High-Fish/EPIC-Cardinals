@@ -50,10 +50,11 @@ namespace Cardinals.Game
             GameManager.I.CurrentEnemies = _enemies;
             
             // 초기화
+            List<Reward> rewards = new();
+            
             do // 전투 시작
             {
                 // 전투 업데이트
-                //GameManager.I.PlayerData.Turn++;
                 GameManager.I.Player.StartTurn();
                 _enemies.ForEach(enemy => enemy.StartTurn());
 

@@ -24,6 +24,9 @@ namespace Cardinals.Game
             }
         }
 
+        /// <summary>
+        /// 이벤트 실행 전 활성화 되는 함수
+        /// </summary>
         public void On()
         {
             UIEvent.On();

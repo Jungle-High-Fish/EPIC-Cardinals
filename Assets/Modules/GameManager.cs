@@ -67,26 +67,6 @@ namespace Cardinals
     
         private StageController LoadStage()
         {
-            // Stage stage = null;
-            // if (true) // 첫 데이타
-            // {
-            //     PlayerData.Turn = 0;
-            //     stage = new Stage
-            //         ("수상한 초원",
-            //         new BattleEvent(EnemyType.One),
-            //         new BattleEvent(EnemyType.Two),
-            //         new BattleEvent(EnemyType.Three1, EnemyType.Three2),
-            //         new BattleEvent(EnemyType.Four),
-            //         new BattleEvent(EnemyType.Boss) );
-                
-            //     stage.Reset();
-            // }
-            // else // 기존 데이타 
-            // {
-                
-            // }
-
-            // return stage;
             GameObject stageControllerObj = new GameObject("@" + Constants.Common.InstanceName.StageController);
             StageController stageController = stageControllerObj.AddComponent<StageController>();
 

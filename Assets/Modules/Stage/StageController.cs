@@ -37,7 +37,7 @@ namespace Cardinals.Game {
             yield return GameManager.I.UI.UIStage.Visit();
             
             // 다음 사건을 읽음
-            while (_stage.MoveNext()) 
+            while (_stage.MoveNext())
             {
                 // 현재 사건에 따른 이벤트 플로우 수행
                 using var evt = _stage.Current as Game.BaseEvent;
@@ -45,12 +45,7 @@ namespace Cardinals.Game {
                 
                 evt.On();
                 
-                // IEnumerator evtFlow = evt.Type switch
-                // {
-                //     StageEventType.Battle => evt.Flow(this),
-                //     _ => throw new ArgumentOutOfRangeException()
-                // };
-                
+                yield return GameManager.I.UI.UIStage.EventIntro();
                 yield return evt.Flow(this);
 
                 if (!evt.IsClear)

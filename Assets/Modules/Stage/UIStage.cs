@@ -16,6 +16,7 @@ namespace Cardinals.Game
         [SerializeField] private GameObject _stageNameTxtObj;
         
         [Header("사건 정보")]
+        [SerializeField] private GameObject _evtListObj;
         [SerializeField] private Transform _evtInstTr;
         [SerializeField] private GameObject _evtPrefab;
 
@@ -45,6 +46,13 @@ namespace Cardinals.Game
             yield return new WaitForSeconds(1.5f);
             
             _stageNameTxtObj.SetActive(false);
+        }
+
+        public IEnumerator EventIntro()
+        {
+            _evtListObj.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            _evtListObj.SetActive(false);
         }
     }
 }
