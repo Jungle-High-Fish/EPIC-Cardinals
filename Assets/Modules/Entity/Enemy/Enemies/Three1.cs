@@ -1,6 +1,7 @@
 using System.Linq;
 using Cardinals;
 using Cardinals.Enums;
+using Cardinals.Game;
 
 namespace Cardinals.Enemy
 {
@@ -62,6 +63,13 @@ namespace Cardinals.Enemy
                 
                 if(pair != null) 
                     pair.BerserkMode = true;
+            };
+            
+            
+            Rewards = new Reward[]
+            {
+                new(RewardType.Gold, 50),
+                new(RewardType.Card, 1),
             };
         }
     }

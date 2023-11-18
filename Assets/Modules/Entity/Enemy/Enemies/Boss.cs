@@ -1,6 +1,7 @@
 using Cardinals;
 using Cardinals.Enemy;
 using Cardinals.Enums;
+using Cardinals.Game;
 
 namespace Cardinals.Enemy
 {
@@ -64,6 +65,13 @@ namespace Cardinals.Enemy
                 };
                 Turn = 0;
                 Sprite = null; // [TODO] 광폭화 이미지로 변경 필요 
+            };
+
+            Rewards = new Reward[]
+            {
+                new(RewardType.Gold, 100),
+                new(RewardType.Artifact, 3),
+                new(RewardType.Card, 1),
             };
         }
             

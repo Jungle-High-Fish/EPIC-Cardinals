@@ -1,5 +1,6 @@
 using Cardinals;
 using Cardinals.Enums;
+using Cardinals.Game;
 
 namespace Cardinals.Enemy
 {
@@ -29,6 +30,13 @@ namespace Cardinals.Enemy
                 new Pattern(EnemyActionType.Magic, action: SpawnFireball),
                 new Pattern(EnemyActionType.Attack, 5),
                 new Pattern(EnemyActionType.Defense, 5),
+            };
+            
+            
+            Rewards = new Reward[]
+            {
+                new(RewardType.Gold, 80),
+                new(RewardType.Potion, 1),
             };
         }
     }
