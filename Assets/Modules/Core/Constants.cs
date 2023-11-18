@@ -8,20 +8,28 @@ namespace Cardinals.Constants {
         public static class Resources {
             public const string Path = "Assets/Resources/";
 
+            // Prefab
             public const string Prefabs = "Prefabs/";
             public const string Prefabs_Tile = "Board/Tile";
             public const string Prefabs_CornerTile = "Board/CornerTile";
+            
+            public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
+            
             public const string Prefabs_UI_Description = "UI/DescriptionPrefab";
+            public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
+            public const string Prefabs_UI_RewardItem = "UI/Reward/UIRewardItem";
+            
             public const string Prefabs_UIEnemyInfo = "Enemy/UIEnemyInfo";
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "Player/UIPlayerInfo";
 
+            // Sprite
             public const string Sprites = "Sprites/";
 
+            // Scriptable Object
             public const string SO = "SO/";
             public const string SO_BoardData = "Stage/BoardData/";
-            
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";

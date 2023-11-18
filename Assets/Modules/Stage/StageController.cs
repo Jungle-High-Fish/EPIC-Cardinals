@@ -20,8 +20,26 @@ namespace Cardinals.Game {
         private Board.Board _board;
 
         private BaseEvent _curEvent;
+
+        private RewardBox _rewardBox;
+
+        public RewardBox RewardBox
+        {
+            get
+            {
+                if (_rewardBox == null)
+                {
+                    GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_RewardBox);
+                    _rewardBox = Instantiate(prefab).GetComponent<RewardBox>();
+                    _rewardBox.Init();
+                }
+                
+                return _rewardBox;
+            }
+        }
         
-        public IEnumerator LoadStage(Stage stage) {
+        public IEnumerator LoadStage(Stage stage) 
+        {
             _stage = stage;
             _stage.Init(-1);
 

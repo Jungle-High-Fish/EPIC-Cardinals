@@ -38,5 +38,7 @@ namespace Cardinals.Game
         }
 
         public abstract IEnumerator Flow(StageController stageController);
+        
+        public bool IsSelect { protected get; set; }
     }
 }

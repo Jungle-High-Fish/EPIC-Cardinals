@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cardinals.Board;
 using Cardinals.Enemy;
 using Cardinals.Enums;
+using Cardinals.Game;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -23,6 +24,13 @@ namespace Cardinals
                 _sprite = value;
                 UpdatedSpriteEvent?.Invoke(_sprite);
             }
+        }
+
+        private Reward[] _rewards;
+        public Reward[] Rewards
+        {
+            get => _rewards;
+            protected set => _rewards = value;
         }
 
         public Action<Sprite> UpdatedSpriteEvent { get; set; }
@@ -55,7 +63,6 @@ namespace Cardinals
         protected Action BerserkModeEvent { get; set; }
         
         private Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
-        
         protected BaseEnemy(string name,
                             int maxHp   ) : base(maxHp)
         {

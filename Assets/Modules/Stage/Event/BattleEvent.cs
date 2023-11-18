@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Enemy;
 using UnityEngine;
@@ -26,10 +27,11 @@ namespace Cardinals.Game
 
         public override IEnumerator Flow(StageController stageController)
         {
-            _stageController = stageController;
-
-            Debug.Log("전투 시작");
+            Debug.Log("전투 플로우 실행");
+            
             // 전투 세팅
+            _stageController = stageController;
+            List<Reward> rewards = new();
         
             // 몬스터 설정
             _enemies = new();
@@ -41,6 +43,7 @@ namespace Cardinals.Game
                 
                 enemy.DieEvent += () =>
                 {
+                    AddReward(rewards, enemy.Rewards);
                     _enemies.Remove(enemy);
                 };
                 
@@ -48,10 +51,7 @@ namespace Cardinals.Game
             }
 
             GameManager.I.CurrentEnemies = _enemies;
-            
-            // 초기화
-            List<Reward> rewards = new();
-            
+
             do // 전투 시작
             {
                 // 전투 업데이트
@@ -80,6 +80,52 @@ namespace Cardinals.Game
             if (_enemies.Count == 0)
             {
                 IsClear = true;
+                yield return WaitReward(rewards);
+            }
+            
+        }
+
+        /// <summary>
+        /// 플레이어 전리품 획득 대기
+        /// </summary>
+        /// <param name="rewards"></param>
+        IEnumerator WaitReward(IEnumerable<Reward> rewards)
+        {
+            // 보상 설정
+            _stageController.RewardBox.Set(rewards); // 해당 위치에서 구체화 됩니다. 
+
+            IsSelect = false;
+            yield return new WaitUntil(() => IsSelect); // 플레이어의 보상 선택 후 [턴 종료] 대기
+            
+            _stageController.RewardBox.Disable();
+        }
+
+        /// <summary>
+        /// 한 전투에서의 보상을 누적하는 함수
+        /// </summary>
+        /// <param name="accrueRewards">누적 보상</param>
+        /// <param name="rewards">처치한 몬스터 보상</param>
+        void AddReward(List<Reward> accrueRewards, Reward[] rewards)
+        {
+            foreach (var reward in rewards)
+            {
+                // 이미 골드 타입이 있는 경우 누적할 것
+                if (reward.Type == RewardType.Gold)
+                {
+                    var r = accrueRewards.FirstOrDefault(x => x.Type == RewardType.Gold);
+                    if (r == null)
+                    {
+                        accrueRewards.Add(reward);   
+                    }
+                    else
+                    {
+                        r.Value += reward.Value;
+                    }
+                }
+                else
+                {
+                    accrueRewards.Add(reward);
+                }
             }
         }
         #endregion
