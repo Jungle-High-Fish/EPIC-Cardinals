@@ -58,6 +58,13 @@ namespace Cardinals.Constants {
 
             public static readonly Vector2 BoardCenter = new Vector2(0, 0); 
         }
+
+        public static class Tile {
+            public const int MaxLevel = 3;
+            public static readonly List<int> LevelUpExp = new List<int> { 
+                3, 7, 15,
+            };
+        }
     }
 }
 
