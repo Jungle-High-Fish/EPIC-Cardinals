@@ -10,7 +10,7 @@ using Sirenix.OdinInspector.Editor;
 
 namespace Cardinals.Board {
 
-    [CreateAssetMenu(fileName = "BoardData", menuName = "Stage/Board Data", order = 0)]
+    [CreateAssetMenu(fileName = "BoardData", menuName = "Cardinals/Board Data", order = 0)]
     public class BoardDataSO: ScriptableObject {
         [System.Serializable]
         public class LineWrapper {

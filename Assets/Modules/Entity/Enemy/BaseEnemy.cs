@@ -63,22 +63,17 @@ namespace Cardinals
         protected Action BerserkModeEvent { get; set; }
         
         private Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
-        protected BaseEnemy(string name,
-                            int maxHp   ) : base(maxHp)
-        {
-            Name = name;
+
+        public virtual void Init(EnemyDataSO enemyData) {
+            Init(enemyData.maxHP);
+    
+            Name = enemyData.enemyName;
+            Sprite = enemyData.sprite;
             UpdatePatternEvent += ExecutePreActionByPattern;
         }
 
-        public virtual void Init(string name, int maxHp) {
+        public override void Init(int maxHp) {
             base.Init(maxHp);
-
-            Name = name;
-            UpdatePatternEvent += ExecutePreActionByPattern;
-        }
-
-        public virtual void Init() {
-            
         }
 
         /// <summary>

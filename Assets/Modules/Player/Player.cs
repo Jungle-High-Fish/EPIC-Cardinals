@@ -15,8 +15,11 @@ namespace Cardinals
         [SerializeField] private PlayerInfo _playerInfo;
 
         public PlayerInfo PlayerInfo => _playerInfo;
-        public Player() : base(12){
 
+        public override void Init(int hp) {
+            base.Init(hp);
+            _playerInfo = new PlayerInfo();
+            Debug.Log("플레이어 초기화 완료");
         }
 
         public override int Hp {

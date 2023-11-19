@@ -7,6 +7,6 @@ public class EndTurnButton : MonoBehaviour
 {
 	public void EndTurn() {
         GameManager.I.Player.EndTurn();
-        GameManager.I.CurStage.CurEvent.IsSelect = true;
+        GameManager.I.Stage.CurEvent.IsSelect = true;
     }
 }

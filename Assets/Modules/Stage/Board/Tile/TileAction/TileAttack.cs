@@ -9,7 +9,7 @@ namespace Cardinals.Board {
         public override void Act(int value) {
             //throw new System.NotImplementedException();
             Debug.Log(value);
-            (GameManager.I.CurStage.CurEvent as BattleEvent).Enemies[0].Hit(value);
+            (GameManager.I.Stage.CurEvent as BattleEvent).Enemies[0].Hit(value);
         }
 
         public override void ArriveAction() {
