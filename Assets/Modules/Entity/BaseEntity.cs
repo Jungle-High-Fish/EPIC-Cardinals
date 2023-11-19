@@ -54,6 +54,7 @@ namespace Cardinals
        
 
         private Action _turnStartedEvent;
+        
         public Action DieEvent { get; set; }
 
 
@@ -156,7 +157,7 @@ namespace Cardinals
         /// 기존 버프가 존재할 경우, Count를 증가시킴
         /// </summary>
         /// <param name="buff">버프</param>
-        public void AddBuff(BaseBuff buff)
+        public virtual void AddBuff(BaseBuff buff)
         {
             var existBuff = Buffs.FirstOrDefault(b => b.Type == buff.Type);
             if (existBuff == null)
