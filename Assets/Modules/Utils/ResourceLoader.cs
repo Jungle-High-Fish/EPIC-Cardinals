@@ -8,6 +8,7 @@ namespace Util {
     public static class ResourceLoader {
 
 		private static Dictionary<string, GameObject> _prefabList = new Dictionary<string, GameObject>();
+		
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
 		private static HashSet<string> _loadedSpriteDirectory = new HashSet<string>();
 

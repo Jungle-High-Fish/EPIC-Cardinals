@@ -5,6 +5,7 @@ using Cardinals.Enums;
 using Cardinals.Enemy;
 using UnityEngine;
 using Util;
+using Sirenix.OdinInspector;
 
 namespace Cardinals.Game
 {
@@ -14,8 +15,8 @@ namespace Cardinals.Game
         private List<BaseEnemy> _enemies;
         public List<BaseEnemy> Enemies => _enemies;
 
-        [SerializeField] private EnemyType[] _enemyList;
-        public EnemyType[] EnemyList => _enemyList;
+        [SerializeField, InlineEditor] private EnemyDataSO[] _enemyList;
+        public EnemyDataSO[] EnemyList => _enemyList;
 
         public Vector3[] GetPositions()
         {
@@ -38,8 +39,8 @@ namespace Cardinals.Game
             var posArr = GetPositions();
             for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
             {
-                var type = _enemyList[i];
-                var enemy = _stageController.InstantiateEnemy(type);
+                var enemyData = _enemyList[i];
+                var enemy = _stageController.InstantiateEnemy(enemyData);
                 
                 enemy.DieEvent += () =>
                 {

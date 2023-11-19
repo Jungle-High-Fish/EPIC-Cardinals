@@ -267,7 +267,7 @@ namespace Cardinals.Board {
             //     boardPos.x == 0 && boardPos.y == _boardHeight - 1 ||
             //     boardPos.x == _boardWidth - 1 && boardPos.y == 0 ||
             //     boardPos.x == _boardWidth - 1 && boardPos.y == _boardHeight - 1;
-            bool isCornerTile = tileData.type == TileType.Blank;
+            bool isCornerTile = tileData.type == TileType.Blank || tileData.type == TileType.Start;
 
             //Debug.Log(isCornerTile);
 

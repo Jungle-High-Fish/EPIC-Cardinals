@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
+using Cardinals.Enemy;
 
 namespace Cardinals.Enums {
 
@@ -89,6 +90,27 @@ namespace Cardinals.Enums {
                     return Vector2Int.up + Vector2Int.right;
                 default:
                     return Vector2Int.zero;
+            }
+        }
+
+        public static Type GetEnemyInstanceType(EnemyType enemyType) {
+            switch (enemyType) {
+                case EnemyType.Ignore:
+                    return null;
+                case EnemyType.One:
+                    return typeof(One);
+                case EnemyType.Two:
+                    return typeof(Two);
+                case EnemyType.Three1:
+                    return typeof(Three1);
+                case EnemyType.Three2:
+                    return typeof(Three2);
+                case EnemyType.Four:
+                    return typeof(Four);
+                case EnemyType.Boss:
+                    return typeof(Boss);
+                default:
+                    return null;
             }
         }
     }

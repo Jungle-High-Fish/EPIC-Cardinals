@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInfo : MonoBehaviour
+public class PlayerInfo
 {
     private bool _isBless1;
     public bool IsBless1

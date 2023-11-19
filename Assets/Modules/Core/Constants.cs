@@ -22,7 +22,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UIEnemyInfo = "Enemy/UIEnemyInfo";
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
             public const string Prefabs_Player = "Player/Player";
-            public const string Prefabs_UIPlayerInfo = "Player/UIPlayerInfo";
+            public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
 
             // Sprite
             public const string Sprites = "Sprites/";
