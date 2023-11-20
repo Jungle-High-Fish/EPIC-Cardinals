@@ -15,4 +15,5 @@ MonoBehaviour:
   _name: "\uC218\uC0C1\uD55C \uCD08\uC6D0"
   _events:
   - {fileID: 11400000, guid: 14fd5f645ed97c44292e21636ed0e397, type: 2}
+  - {fileID: 11400000, guid: 76d6012f20facef4991df0780f23280f, type: 2}
   _boardDataSO: {fileID: 11400000, guid: a5ebb4c580ec1f143b120433cbf72854, type: 2}
