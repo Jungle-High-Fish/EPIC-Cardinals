@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using Util;
+using Sirenix.OdinInspector;
+using Cardinals.Enums;
 
 namespace Cardinals
 {
@@ -22,6 +25,9 @@ namespace Cardinals
         [Header("Panel")]
         [SerializeField] private GameObject _playerInfoPanel;
         [SerializeField] private float _panelMoveDistance;
+
+        [Header("Potion")]
+        [SerializeField] private Transform _potionTr;
         private bool _isPanelOpen;
         
         public void Init()
@@ -29,6 +35,7 @@ namespace Cardinals
             _player = GameManager.I.Player;
             _player.UpdateHpEvent += UpdateHp;
             _player.AddBuffEvent += AddBuff;
+            _player.PlayerInfo.AddPotionEvent += AddPotion;
         }
 
         private void UpdateHp(int hp, int maxHp)
@@ -41,6 +48,13 @@ namespace Cardinals
         private void AddBuff(BaseBuff baseBuff)
         {
             Instantiate(_buffPrefab, _buffTr);
+        }
+        
+        private void AddPotion(int index, Potion potion)
+        {
+            GameObject potionUI =
+                        GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPotion), _potionTr);
+            potionUI.GetComponent<UIPotion>().Init(index, potion.Name, potion);
         }
 
         public void OpenPanel()
@@ -55,6 +69,12 @@ namespace Cardinals
                 _playerInfoPanel.transform.DOMoveX(_panelMoveDistance, 0.3f).SetEase(Ease.InOutCubic);
                 _isPanelOpen = true;
             }
+        }
+
+        [Button]
+        public void TestPotion(PotionType potionType)
+        {
+            _player.PlayerInfo.AddPotion(potionType);
         }
     }
 }

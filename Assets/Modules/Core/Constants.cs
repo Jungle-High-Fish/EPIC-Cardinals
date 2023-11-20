@@ -26,6 +26,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
+            public const string Prefabs_UIPotion = "UI/Player/UIPotion";
 
             public const string Prefabs_UI_StageInfo = "UI/Stage/Stage Info UI";
             public const string Prefabs_UI_EventNode = "UI/Stage/EventNode";
@@ -35,6 +36,7 @@ namespace Cardinals.Constants {
 
             // Sprite
             public const string Sprites = "Sprites/";
+            public const string Sprites_Potion = "Player/Potion/";
 
             // Scriptable Object
             public const string SO = "SO/";
@@ -96,6 +98,12 @@ namespace Cardinals.Constants {
             public static readonly List<int> EarthMagicMainDefense = new List<int> {
                 2, 4, 6,
             };
+        }
+
+        public static class Player
+        {
+            public const int MaxPotionCapacity = 4;
+
         }
     }
 }

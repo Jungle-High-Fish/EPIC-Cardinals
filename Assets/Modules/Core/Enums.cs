@@ -26,6 +26,26 @@ namespace Cardinals.Enums {
             }
         }
 
+        public static Potion GetPotion(PotionType potionType)
+        {
+            switch (potionType)
+            {
+                case PotionType.Empty:
+                    return null;
+                case PotionType.Jump:
+                    return new JumpPotion(30, "JumpPotion");
+                case PotionType.Reverse:
+                    return new ReversePotion(30, "ReversePotion");
+                case PotionType.Quick:
+                    return new QuickPotion(40, "QuickPotion");
+                case PotionType.Heal:
+                    return new HealPotion(30, "HealPotion");
+                default:
+                    return null;
+            }
+        }
+
+
         public static SdfIconType GetTileIcon(TileType tileType) {
             switch (tileType) {
                 case TileType.Null:
@@ -229,6 +249,11 @@ namespace Cardinals.Enums {
 
     public enum PotionType
     {
-        
+        Empty,
+        Jump,
+        Reverse,
+        Quick,
+        Heal
+
     }
 }
