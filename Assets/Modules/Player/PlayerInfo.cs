@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInfo
 {
     private bool _isBlessFire1;
-    public bool IsBlessFire1
+    public bool IsBlessFire1 // 그을린 상처
     {
         get => _isBlessFire1;
         set
@@ -14,7 +14,7 @@ public class PlayerInfo
         }
     }
     private bool _isBlessFire2;
-    public bool IsBlessFire2
+    public bool IsBlessFire2 // 메테오
     {
         get => _isBlessFire2;
         set
@@ -23,7 +23,7 @@ public class PlayerInfo
         }
     }
     private bool _isBlessWater1;
-    public bool IsBlessWater1
+    public bool IsBlessWater1 // 잔잔한 수면
     {
         get => _isBlessWater1;
         set
@@ -32,7 +32,7 @@ public class PlayerInfo
         }
     }
     private bool _isBlessWater2;
-    public bool IsBlessWater2
+    public bool IsBlessWater2 // 범람
     {
         get => _isBlessWater2;
         set
@@ -41,7 +41,7 @@ public class PlayerInfo
         }
     }
     private bool _isBlessEarth1;
-    public bool IsBlessEarth1
+    public bool IsBlessEarth1 // 바위 잔해
     {
         get => _isBlessEarth1;
         set
@@ -50,7 +50,7 @@ public class PlayerInfo
         }
     }
     private bool _isBlessEarth2;
-    public bool IsBlessEarth2
+    public bool IsBlessEarth2 // 깨지지 않는 바위
     {
         get => _isBlessEarth2;
         set
