@@ -4,58 +4,58 @@ using UnityEngine;
 
 public class PlayerInfo
 {
-    private bool _isBless1;
-    public bool IsBless1
+    private bool _isBlessFire1;
+    public bool IsBlessFire1
     {
-        get => _isBless1;
+        get => _isBlessFire1;
         set
         {
-            _isBless1 = value;
+            _isBlessFire1 = value;
         }
     }
-    private bool _isBless2;
-    public bool IsBless2
+    private bool _isBlessFire2;
+    public bool IsBlessFire2
     {
-        get => _isBless2;
+        get => _isBlessFire2;
         set
         {
-            _isBless2 = value;
+            _isBlessFire2 = value;
         }
     }
-    private bool _isBless3;
-    public bool IsBless3
+    private bool _isBlessWater1;
+    public bool IsBlessWater1
     {
-        get => _isBless3;
+        get => _isBlessWater1;
         set
         {
-            _isBless3 = value;
+            _isBlessWater1 = value;
         }
     }
-    private bool _isBless4;
-    public bool IsBless4
+    private bool _isBlessWater2;
+    public bool IsBlessWater2
     {
-        get => _isBless4;
+        get => _isBlessWater2;
         set
         {
-            _isBless4 = value;
+            _isBlessWater2 = value;
         }
     }
-    private bool _isBless5;
-    public bool IsBless5
+    private bool _isBlessEarth1;
+    public bool IsBlessEarth1
     {
-        get => _isBless5;
+        get => _isBlessEarth1;
         set
         {
-            _isBless5 = value;
+            _isBlessEarth1 = value;
         }
     }
-    private bool _isBless6;
-    public bool IsBless6
+    private bool _isBlessEarth2;
+    public bool IsBlessEarth2
     {
-        get => _isBless6;
+        get => _isBlessEarth2;
         set
         {
-            _isBless6 = value;
+            _isBlessEarth2 = value;
         }
     }
 }
