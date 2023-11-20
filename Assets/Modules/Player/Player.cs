@@ -5,6 +5,8 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using Cardinals.Board;
 using System;
+using Cardinals.Enums;
+using Cardinals.Game;
 
 namespace Cardinals
 {
@@ -59,10 +61,18 @@ namespace Cardinals
 
             GameManager.I.Next();
             FindAnyObjectByType<CardManager>().EndTurn();
+            
+            
+            if (PlayerInfo.IsBlessEarth1)
+            {
+                Bless5();
+            }
+            
             if (!PlayerInfo.IsBlessEarth2)
             {
                 DefenseCount = 0;
             }
+
         }
 
         public void Bless3()
@@ -74,6 +84,20 @@ namespace Cardinals
 
             //TODO : 힐 수치 Constants에서 끌어쓰기
             Heal(3);
+        }
+
+        void Bless5()
+        {
+            if (DefenseCount > 0)
+            {
+                foreach (var enemy in (GameManager.I.Stage.CurEvent as BattleEvent).Enemies)
+                {
+                    if (enemy.CurPattern.Type == EnemyActionType.Attack)
+                    {
+                        enemy.Hit(DefenseCount);
+                    }
+                }
+            }
         }
 
         public void SetTile(Board.Tile tile)
