@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: "\uD264\uD264\uAE30"
   enemyType: 2
-  sprite: {fileID: 0}
+  sprite: {fileID: 5524590292671962877, guid: f7043b7291f49844b9671b3d3dedcbb5, type: 3}
   maxHP: 10
