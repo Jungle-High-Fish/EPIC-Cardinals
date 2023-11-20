@@ -10,7 +10,7 @@ namespace Cardinals.Constants {
 
             // Prefab
             public const string Prefabs = "Prefabs/";
-            public const string Prefabs_Tile = "Board/Tile";
+            public const string Prefabs_Tile = "Board/TileUV2";
             public const string Prefabs_CornerTile = "Board/CornerTile";
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
