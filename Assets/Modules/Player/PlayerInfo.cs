@@ -59,7 +59,13 @@ public class PlayerInfo
         }
     }
 
+    public int Gold { get; private set; }
     public void AddGold(int value)
+    {
+        
+    }
+
+    public void UseGold(int value)
     {
         
     }

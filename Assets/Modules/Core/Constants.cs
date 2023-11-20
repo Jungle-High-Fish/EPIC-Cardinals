@@ -15,6 +15,9 @@ namespace Cardinals.Constants {
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
             
+            public const string Prefabs_UI_Shop = "UI/BoardEvent/UIShop";
+            public const string Prefabs_UI_Product = "UI/BoardEvent/UIProduct";
+            
             public const string Prefabs_UI_Description = "UI/DescriptionPrefab";
             public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
             public const string Prefabs_UI_RewardItem = "UI/Reward/UIRewardItem";
