@@ -247,9 +247,9 @@ namespace Cardinals.Enums {
         Artifact,
     }
 
-    public enum PotionType
+    public enum PotionType : int
     {
-        Empty,
+        Empty = 0,
         Jump,
         Reverse,
         Quick,

@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enums;
 using Cardinals.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using Random = UnityEngine.Random;
 
 namespace Cardinals.BoardEvent.Shop
 {
@@ -74,7 +76,8 @@ namespace Cardinals.BoardEvent.Shop
         {
             for (int i = 0; i < count; i++)
             {
-                Potion potion = null; // [TODO] 포션 지정 (랜덤)
+                PotionType potionType =  (PotionType)Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
+                Potion potion = EnumHelper.GetPotion(potionType);
                 
                 var obj = Instantiate(_shopItemPrefab, _artifactParentTr);
                 obj.GetComponent<UIProduct>().Init(potion, () => BuyPotion(potion));
@@ -139,11 +142,4 @@ namespace Cardinals.BoardEvent.Shop
         public int Price { get; }
     }
 
-    public class Potion  : IProduct
-    {
-        public string Name { get; }
-        public Sprite Sprite { get; }
-        public string Description { get; }
-        public int Price { get; }
-    }
 }
