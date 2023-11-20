@@ -12,6 +12,14 @@ namespace Cardinals.Game {
         public Board.Board Board => _board;
         public Player Player => _player;
         public BaseEvent CurEvent => _curEvent;
+        public List<BaseEnemy> Enemies {
+            get {
+                if (_curEvent == null) return null;
+                if (_curEvent is not BattleEvent) return null;
+                
+                return (_curEvent as BattleEvent).Enemies;
+            }
+        }
         
         private Stage _stage;
     
