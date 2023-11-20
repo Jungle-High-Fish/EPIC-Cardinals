@@ -134,9 +134,29 @@ namespace Cardinals
         /// <param name="damage">데미지</param>
         public void Attack(BaseEntity target, int damage)
         {
-            int calculDamage = Buffs.Any(x => x.Type == BuffType.Weak) ? damage / 2 : damage;
-            
-            target.Hit(calculDamage);
+            target.Hit(CalculDamage(damage));
+        }
+
+        /// <summary>
+        /// 현재 버프 혹은 값에 맞게 데미지를 계산 계산
+        /// </summary>
+        /// <param name="originDamage"></param>
+        /// <returns></returns>
+        int CalculDamage(int originDamage)
+        {
+            float damage = originDamage;
+
+            if (Buffs.Any(x => x.Type == BuffType.Weak))
+            {
+                damage *= .5f;
+            }
+
+            if (Buffs.Any(x => x.Type == BuffType.Wet))
+            {
+                damage *= 0.5f;
+            }
+
+            return (int) Math.Ceiling(damage);
         }
 
         

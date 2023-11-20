@@ -43,6 +43,10 @@ namespace Cardinals
 
         public Action RemoveEvent { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
         public virtual void Execute(BaseEntity entity)
         {
             
