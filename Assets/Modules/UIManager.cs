@@ -21,6 +21,7 @@ namespace Cardinals
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
         private UIPlayerInfo _uiPlayerInfo;
+        private UICardSystem _uiCardSystem;
 
         public void Init() {
             InstantiateCanvas(Constants.Common.InstanceName.MainUICanvas, out _mainUICanvas);
@@ -44,6 +45,11 @@ namespace Cardinals
             
             GameObject uiEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, _enemyUICanvas.transform);
             uiEnemyInfo.GetComponent<UIEnemyInfo>().Init(enemyComp);
+        }
+
+        public void SetCardSystemUI() {
+            InstantiateCardSystemUI();
+            _uiCardSystem.Init();
         }
 
         private void InstantiateCanvas(string name, out Canvas canvas) {
@@ -77,6 +83,12 @@ namespace Cardinals
 
             _uiPlayerInfo = playerUIObj.GetComponent<UIPlayerInfo>();
             playerUIObj.SetActive(false);
+        }
+
+        private void InstantiateCardSystemUI() {
+            GameObject cardSystemUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_CardSystem);
+            GameObject cardSystemUIObj = Instantiate(cardSystemUIPrefab, _cardUICanvas.transform);
+            _uiCardSystem = cardSystemUIObj.GetComponent<UICardSystem>();
         }
     }
 }

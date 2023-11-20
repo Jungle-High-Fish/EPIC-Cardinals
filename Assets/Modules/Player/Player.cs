@@ -46,7 +46,7 @@ namespace Cardinals
         }
         public override void OnTurn()
         {
-            FindAnyObjectByType<CardManager>().OnTurn();
+            GameManager.I.Stage.CardManager.OnTurn();
             _isDamagedThisTurn = false;
         }
 
@@ -60,7 +60,7 @@ namespace Cardinals
             }
 
             GameManager.I.Next();
-            FindAnyObjectByType<CardManager>().EndTurn();
+            GameManager.I.Stage.CardManager.EndTurn();
             
             
             if (PlayerInfo.IsBlessEarth1)

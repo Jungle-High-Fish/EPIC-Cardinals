@@ -11,6 +11,7 @@ namespace Cardinals.Game {
     public class StageController : MonoBehaviour {
         public Board.Board Board => _board;
         public Player Player => _player;
+        public CardManager CardManager => _cardManager;
         public BaseEvent CurEvent => _curEvent;
         public List<BaseEnemy> Enemies {
             get {
@@ -24,10 +25,11 @@ namespace Cardinals.Game {
         private Stage _stage;
     
         private Transform _enemyParentTransform;
-        private Transform _enemyUIParentTransform;
+        private Transform _coreTransform;
 
         private Board.Board _board;
         private Player _player;
+        private CardManager _cardManager;
         private BaseEvent _curEvent;
 
         private RewardBox _rewardBox;
@@ -57,6 +59,8 @@ namespace Cardinals.Game {
             InstantiateGround();
 
             yield return _board.SetBoard(stage.BoardData);
+
+            SetCardSystem();
 
             PlacePlayer();
         }
@@ -116,6 +120,10 @@ namespace Cardinals.Game {
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
             BoardObj.transform.position = Vector3.zero;
             _board = BoardObj.AddComponent<Board.Board>();
+
+            GameObject coreObj = new GameObject($"@{Constants.Common.InstanceName.Core}");
+            _coreTransform = coreObj.transform;
+            _coreTransform.position = Vector3.zero;
         }
 
         private void PlacePlayer() {
@@ -127,6 +135,16 @@ namespace Cardinals.Game {
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
             
             GameManager.I.UI.InitPlayerUI();
+        }
+
+        private void SetCardSystem() {
+            GameObject cardManagerObj = new GameObject($"@{Constants.Common.InstanceName.CardManager}");
+            cardManagerObj.transform.position = Vector3.zero;
+            _cardManager = cardManagerObj.AddComponent<CardManager>();
+            _cardManager.transform.SetParent(_coreTransform);
+            _cardManager.Init();
+
+            GameManager.I.UI.SetCardSystemUI();
         }
     }
 

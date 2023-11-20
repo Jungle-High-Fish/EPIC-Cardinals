@@ -30,6 +30,9 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_StageInfo = "UI/Stage/Stage Info UI";
             public const string Prefabs_UI_EventNode = "UI/Stage/EventNode";
 
+            public const string Prefabs_UI_CardSystem = "UI/Card/CardSystemUI";
+            public const string Prefabs_UI_Card = "UI/Card/CardUI";
+
             // Sprite
             public const string Sprites = "Sprites/";
 
@@ -60,6 +63,9 @@ namespace Cardinals.Constants {
             public const string EnemyPlace = "Enemy";
             public const string EnemyUI = "EnemyUI";
             public const string Board = "Board";
+
+            public const string Core = "Core";
+            public const string CardManager = "CardManager";
         }
     }
 
