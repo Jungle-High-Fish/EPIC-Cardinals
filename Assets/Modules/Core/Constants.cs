@@ -103,7 +103,7 @@ namespace Cardinals.Constants {
         public static class Player
         {
             public const int MaxPotionCapacity = 4;
-
+            public const int CardDrawCount = 5;
         }
     }
 }

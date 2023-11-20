@@ -74,7 +74,7 @@ namespace Cardinals
         [Button]
         public void OnTurn()
         {
-            Draw(5);
+            Draw(Constants.GameSetting.Player.CardDrawCount);
             _canActionUse = false;
         }
 
