@@ -64,22 +64,17 @@ namespace Cardinals
         protected Action BerserkModeEvent { get; set; }
         
         public Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
-        protected BaseEnemy(string name,
-                            int maxHp   ) : base(maxHp)
-        {
-            Name = name;
+
+        public virtual void Init(EnemyDataSO enemyData) {
+            Init(enemyData.maxHP);
+    
+            Name = enemyData.enemyName;
+            Sprite = enemyData.sprite;
             UpdatePatternEvent += ExecutePreActionByPattern;
         }
 
-        public virtual void Init(string name, int maxHp) {
+        public override void Init(int maxHp) {
             base.Init(maxHp);
-
-            Name = name;
-            UpdatePatternEvent += ExecutePreActionByPattern;
-        }
-
-        public virtual void Init() {
-            
         }
 
         /// <summary>
@@ -142,7 +137,7 @@ namespace Cardinals
         public override void AddBuff(BaseBuff buff)
         {
             // [축복] 그을린 상처: 적을 공격 할 때, 화상이 걸린 상태라면 1의 데미지를 추가로 입힘
-            if (GameManager.I.Player.PlayerInfo.IsBless1)
+            if (GameManager.I.Player.PlayerInfo.IsBlessFire1)
             {
                 if (buff.Type == BuffType.Burn)
                 {
@@ -156,7 +151,7 @@ namespace Cardinals
             base.AddBuff(buff);
             
             // [축복] 메테오: 적의 화상 중첩이 10이 되면, 중첩을 0으로 만들고 강력한 메테오를 소환합니다. (20 데미지)
-            if (GameManager.I.Player.PlayerInfo.IsBless2)
+            if (GameManager.I.Player.PlayerInfo.IsBlessFire2)
             {
                 if (buff.Type == BuffType.Burn)
                 {
@@ -166,7 +161,7 @@ namespace Cardinals
                         if (burnBuff.Count >= 10)
                         {
                             burnBuff.Count -= 10;
-                            (GameManager.I.CurStage.CurEvent as BattleEvent)?.Meteor();
+                            (GameManager.I.Stage.CurEvent as BattleEvent)?.Meteor();
                         }
                     }
                 }

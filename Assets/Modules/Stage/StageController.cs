@@ -9,8 +9,9 @@ using Util;
 namespace Cardinals.Game {
     
     public class StageController : MonoBehaviour {
-        public BaseEvent CurEvent => _curEvent;
         public Board.Board Board => _board;
+        public Player Player => _player;
+        public BaseEvent CurEvent => _curEvent;
         
         private Stage _stage;
     
@@ -18,7 +19,7 @@ namespace Cardinals.Game {
         private Transform _enemyUIParentTransform;
 
         private Board.Board _board;
-
+        private Player _player;
         private BaseEvent _curEvent;
 
         private RewardBox _rewardBox;
@@ -38,7 +39,7 @@ namespace Cardinals.Game {
             }
         }
         
-        public IEnumerator LoadStage(Stage stage) 
+        public IEnumerator Load(Stage stage) 
         {
             _stage = stage;
             _stage.Init(-1);
@@ -50,7 +51,7 @@ namespace Cardinals.Game {
             PlacePlayer();
         }
 
-        public IEnumerator StageFlow() {
+        public IEnumerator Flow() {
             GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
             
@@ -75,9 +76,8 @@ namespace Cardinals.Game {
             GameManager.I.GameClear();
         }
 
-        public BaseEnemy InstantiateEnemy(EnemyType type) {
-            (string name, int hp) enemyData;
-            var enemy = EnemyFactory.GetEnemy(type, out enemyData);
+        public BaseEnemy InstantiateEnemy(EnemyDataSO enemyData) {
+            var enemyType = EnumHelper.GetEnemyInstanceType(enemyData.enemyType);
 
             GameObject UIEnemyInfoPrefab 
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIEnemyInfo);
@@ -85,8 +85,8 @@ namespace Cardinals.Game {
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_EnemyRenderer);
 
             GameObject enemyRenderer = GameObject.Instantiate(enemyRendererPrefab, _enemyParentTransform);
-            BaseEnemy enemyComp = enemyRenderer.AddComponent(enemy) as BaseEnemy;
-            enemyComp.Init();
+            BaseEnemy enemyComp = enemyRenderer.AddComponent(enemyType) as BaseEnemy;
+            enemyComp.Init(enemyData);
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
             enemyRenderer.transform.position = enemyRenderer.transform.position + new Vector3(0, 2, 0);
 
@@ -102,14 +102,11 @@ namespace Cardinals.Game {
             
             // 임시로 Enemy UI 캔버스에 생성
             Transform CanvasTransform = GameObject.Find("Canvas").transform;
-            GameObject EnemyUIParentTransformObj = new GameObject($"@{Constants.Common.InstanceName.EnemyUI}", typeof(RectTransform));
-            EnemyUIParentTransformObj.transform.SetParent(CanvasTransform);
-            RectTransform rectTransform = EnemyUIParentTransformObj.GetComponent<RectTransform>();
-            rectTransform.anchorMin = Vector2.zero;
-            rectTransform.anchorMax = Vector2.one;
-            rectTransform.offsetMin = Vector2.zero;
-            rectTransform.offsetMax = Vector2.zero;
-
+            GameObject EnemyUIParentTransformObj = new GameObject(
+                    $"@{Constants.Common.InstanceName.EnemyUI}", 
+                    typeof(RectTransform)
+            );
+            EnemyUIParentTransformObj.GetComponent<RectTransform>().MatchParent(CanvasTransform as RectTransform);
             _enemyUIParentTransform = EnemyUIParentTransformObj.transform;
 
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
@@ -120,6 +117,8 @@ namespace Cardinals.Game {
         private void PlacePlayer() {
             GameObject playerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player);
             GameObject playerObj = GameObject.Instantiate(playerPrefab);
+            _player = playerObj.GetComponent<Player>();
+            _player.Init(15);
 
             Transform CanvasTransform = GameObject.Find("PlayerCanvas").transform;
             GameObject playerUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerInfo);

@@ -2,60 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInfo : MonoBehaviour
+public class PlayerInfo
 {
-    private bool _isBless1;
-    public bool IsBless1 // 그을린 상처
+    private bool _isBlessFire1;
+    public bool IsBlessFire1 // 그을린 상처
     {
-        get => _isBless1;
+        get => _isBlessFire1;
         set
         {
-            _isBless1 = value;
+            _isBlessFire1 = value;
         }
     }
-    private bool _isBless2;
-    public bool IsBless2 // 메테오
+    private bool _isBlessFire2;
+    public bool IsBlessFire2 // 메테오
     {
-        get => _isBless2;
+        get => _isBlessFire2;
         set
         {
-            _isBless2 = value;
+            _isBlessFire2 = value;
         }
     }
-    private bool _isBless3;
-    public bool IsBless3 // 잔잔한 수면
+    private bool _isBlessWater1;
+    public bool IsBlessWater1 // 잔잔한 수면
     {
-        get => _isBless3;
+        get => _isBlessWater1;
         set
         {
-            _isBless3 = value;
+            _isBlessWater1 = value;
         }
     }
-    private bool _isBless4;
-    public bool IsBless4 // 범람
+    private bool _isBlessWater2;
+    public bool IsBlessWater2 // 범람
     {
-        get => _isBless4;
+        get => _isBlessWater2;
         set
         {
-            _isBless4 = value;
+            _isBlessWater2 = value;
         }
     }
-    private bool _isBless5;
-    public bool IsBless5    // 바위 잔해
+    private bool _isBlessEarth1;
+    public bool IsBlessEarth1 // 바위 잔해
     {
-        get => _isBless5;
+        get => _isBlessEarth1;
         set
         {
-            _isBless5 = value;
+            _isBlessEarth1 = value;
         }
     }
-    private bool _isBless6;
-    public bool IsBless6 // 깨지지 않는 바위
+    private bool _isBlessEarth2;
+    public bool IsBlessEarth2 // 깨지지 않는 바위
     {
-        get => _isBless6;
+        get => _isBlessEarth2;
         set
         {
-            _isBless6 = value;
+            _isBlessEarth2 = value;
         }
     }
 }

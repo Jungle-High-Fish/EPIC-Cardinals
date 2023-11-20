@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Cardinals.Board;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Cardinals.Game
@@ -20,6 +21,7 @@ namespace Cardinals.Game
 
         [SerializeField] private string _name;
 
+        [InlineEditor]
         [SerializeField] private BaseEvent[] _events;
         [SerializeField] private BoardDataSO _boardDataSO;
         

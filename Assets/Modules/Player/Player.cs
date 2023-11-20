@@ -17,8 +17,11 @@ namespace Cardinals
         [SerializeField] private PlayerInfo _playerInfo;
 
         public PlayerInfo PlayerInfo => _playerInfo;
-        public Player() : base(12){
 
+        public override void Init(int hp) {
+            base.Init(hp);
+            _playerInfo = new PlayerInfo();
+            Debug.Log("플레이어 초기화 완료");
         }
 
         public override int Hp {
@@ -59,12 +62,13 @@ namespace Cardinals
             GameManager.I.Next();
             FindAnyObjectByType<CardManager>().EndTurn();
             
-            if (PlayerInfo.IsBless5)
+            
+            if (PlayerInfo.IsBlessEarth1)
             {
                 Bless5();
             }
             
-            if (!PlayerInfo.IsBless6)
+            if (!PlayerInfo.IsBlessEarth2)
             {
                 DefenseCount = 0;
             }
@@ -86,7 +90,7 @@ namespace Cardinals
         {
             if (DefenseCount > 0)
             {
-                foreach (var enemy in (GameManager.I.CurStage.CurEvent as BattleEvent).Enemies)
+                foreach (var enemy in (GameManager.I.Stage.CurEvent as BattleEvent).Enemies)
                 {
                     if (enemy.CurPattern.Type == EnemyActionType.Attack)
                     {

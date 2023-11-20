@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 898ae7808d6e4ba2b97bf6a5c86b4536, type: 3}
-  m_Name: BattleEvent
+  m_Name: BattleEvent 2
   m_EditorClassIdentifier: 
-  _type: 1
-  _enemyList:
-  - {fileID: 11400000, guid: 3c45a79026deca3489e2ff9b9d9b5354, type: 2}
+  _type: 0
+  _enemyList: []

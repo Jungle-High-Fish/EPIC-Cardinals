@@ -6,7 +6,6 @@ using System.Linq;
 using Cardinals.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 namespace Cardinals
 {
@@ -68,19 +67,8 @@ namespace Cardinals
                 _defenseCount = Math.Max(0, value);   
             }
         }
-        
-        public BaseEntity(int maxHp)
-        {
-            MaxHp = maxHp;
-            Hp = MaxHp;
-            
-            // 초기 세팅
-            Buffs = new();
-            Buffs.CollectionChanged += OnBuffCollectionChanged;
-            DieEvent += () => { Buffs.CollectionChanged -= OnBuffCollectionChanged; };
-        }
 
-        public void Init(int maxHp) {
+        public virtual void Init(int maxHp) {
             MaxHp = maxHp;
             Hp = MaxHp;
             
