@@ -30,10 +30,6 @@ namespace Cardinals
         [SerializeField] private Transform _potionTr;
         private bool _isPanelOpen;
         
-        private void Start()
-        {
-            Init();
-        }
         public void Init()
         {
             _player = GameManager.I.Player;

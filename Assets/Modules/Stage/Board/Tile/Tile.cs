@@ -49,6 +49,9 @@ namespace Cardinals.Board {
         // 타일의 액션 관련 변수
         private TileAction _tileAction;
 
+        // 타일의 마법 관련 변수
+        private TileMagic _tileMagic;
+
         // 타일의 이펙트 관련 변수
         private TileEffect _tileEffect;
 
@@ -78,6 +81,16 @@ namespace Cardinals.Board {
                 _tileCurse = gameObject.AddComponent<TileCurse>();
             }
             _tileCurse.Init();
+
+            if (_tileAction is TileEventAction or TileNullAction) {
+                _tileMagic = GetComponent<TileMagic>();
+                if (_tileMagic == null) {
+                    _tileMagic = gameObject.AddComponent<TileMagic>();
+                }
+                _tileMagic.Init();
+            } else {
+                _tileMagic = null;
+            }
         }
 
         public void OnTurnEnd() {
@@ -120,8 +133,12 @@ namespace Cardinals.Board {
             (boardPiece as MonoBehaviour).transform.SetParent(null);
         }
 
-        public void CardAction(int value) {
-            _tileAction.Act(value);
+        public void CardAction(int value, BaseEntity target) {
+            _tileAction.Act(value, target);
+
+            if (_tileMagic != null) {
+                _tileMagic.OnAction(value, target);
+            }
         }
 
         public void SetCurse(TileCurseData data) {

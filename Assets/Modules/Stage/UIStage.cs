@@ -4,6 +4,7 @@ using Cardinals.Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Util;
 
 namespace Cardinals.Game
 {
@@ -12,47 +13,30 @@ namespace Cardinals.Game
     /// </summary>
     public class UIStage : MonoBehaviour
     {
-        [Header("스테이지 정보")]
-        [SerializeField] private GameObject _stageNameTxtObj;
+        private ComponentGetter<UIStageEnterAlert> _stageEnterAlert
+            = new ComponentGetter<UIStageEnterAlert>(TypeOfGetter.ChildByName, "Stage Enter Alert");
         
-        [Header("사건 정보")]
-        [SerializeField] private GameObject _evtListObj;
-        [SerializeField] private Transform _evtInstTr;
-        [SerializeField] private GameObject _evtPrefab;
+        private ComponentGetter<UIStageMap> _stageMap
+            = new ComponentGetter<UIStageMap>(TypeOfGetter.ChildByName, "Stage Map");
 
         public void Init(Stage stage)
         {
-            // 기존 항목 제거
-            for (int i = _evtInstTr.childCount - 1; i >= 0; i--)
-            {
-                Destroy(_evtInstTr.GetChild(i).gameObject);
-            }
-
-            // 현재 스테이지 정보 설정
-            _stageNameTxtObj.GetComponentInChildren<TextMeshProUGUI>()?.SetText(stage.Name);
-            
-            // 추가
-            foreach (var evt in stage.Events)
-            {
-                var obj = Instantiate(_evtPrefab, _evtInstTr);
-                obj.GetComponent<UIEvent>().Init(evt);
-            }
+            _stageEnterAlert.Get(gameObject).Init(stage);
+            _stageMap.Get(gameObject).Init(stage);
         }
 
         public IEnumerator Visit()
         {
-            _stageNameTxtObj.SetActive(true);
-            
+            _stageEnterAlert.Get(gameObject).gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            
-            _stageNameTxtObj.SetActive(false);
+            _stageEnterAlert.Get(gameObject).gameObject.SetActive(false);
         }
 
         public IEnumerator EventIntro()
         {
-            _evtListObj.SetActive(true);
+            _stageMap.Get(gameObject).gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            _evtListObj.SetActive(false);
+            _stageMap.Get(gameObject).gameObject.SetActive(false);
         }
     }
 }

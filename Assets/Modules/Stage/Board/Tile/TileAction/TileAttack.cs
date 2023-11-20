@@ -6,10 +6,11 @@ using UnityEngine;
 namespace Cardinals.Board {
     
     public class TileAttack: TileAction {
-        public override void Act(int value) {
-            //throw new System.NotImplementedException();
-            Debug.Log(value);
-            (GameManager.I.Stage.CurEvent as BattleEvent).Enemies[0].Hit(value);
+        public override void Act(int value, BaseEntity target) {
+            if (target == null) {
+                Debug.LogError("공격  타겟이 없습니다.");
+            }
+            target.Hit(value);
         }
 
         public override void ArriveAction() {
