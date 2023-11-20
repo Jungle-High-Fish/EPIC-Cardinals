@@ -126,6 +126,28 @@ namespace Cardinals.Game {
 
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
         }
+
+        #region Quick-Acess Method
+
+        public void DrawCard(int count) => FindAnyObjectByType<CardManager>().Draw(count);
+        public void HitPlayer(int damage) => Player.Hit(damage);
+        public void AddGold(int value) => Player.PlayerInfo.AddGold(value);
+        
+        public void GetArtifact(int grade, int choiceCnt, int selectCnt) // grade는 임시임
+        {
+            
+        }
+
+        public void GetCardRange(int minValue, int maxValue, int count = 1)
+        {
+            
+        }
+
+        public void GetCardArr(int[] values, int count = 1)
+        {
+            
+        }
+        #endregion
     }
 
 }

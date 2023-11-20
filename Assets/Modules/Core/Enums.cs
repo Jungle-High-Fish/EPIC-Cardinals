@@ -231,4 +231,15 @@ namespace Cardinals.Enums {
     {
         
     }
+
+    public enum BoardEventRoulette
+    {
+        Empty,
+        DrawCard,
+        GetGold,
+        RandomArtifact,
+        RandomCard,
+        RandomTileGradeUp,
+        ReducedHp,
+    }
 }

@@ -58,4 +58,9 @@ public class PlayerInfo
             _isBlessEarth2 = value;
         }
     }
+
+    public void AddGold(int value)
+    {
+        
+    }
 }
