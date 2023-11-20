@@ -59,7 +59,7 @@ namespace Cardinals
 
             GameManager.I.Next();
             FindAnyObjectByType<CardManager>().EndTurn();
-            if (!PlayerInfo.IsBless6)
+            if (!PlayerInfo.IsBlessEarth2)
             {
                 DefenseCount = 0;
             }
