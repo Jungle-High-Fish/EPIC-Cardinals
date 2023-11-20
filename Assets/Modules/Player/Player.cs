@@ -123,8 +123,8 @@ namespace Cardinals
             _onTile.Arrive(this);
         }
 
-        public IEnumerator CardAction(int num) {
-            _onTile.CardAction(num);
+        public IEnumerator CardAction(int num, BaseEntity target) {
+            _onTile.CardAction(num, target);
             yield return null;
         }
 

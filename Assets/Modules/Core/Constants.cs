@@ -64,6 +64,18 @@ namespace Cardinals.Constants {
             public static readonly List<int> LevelUpExp = new List<int> { 
                 3, 7, 15,
             };
+
+            public static readonly List<int> FireMagicMainDamage = new List<int> {
+                2, 4, 6,
+            };
+
+            public static readonly List<int> WaterMagicMainCure = new List<int> {
+                1, 2, 3,
+            };
+
+            public static readonly List<int> EarthMagicMainDefense = new List<int> {
+                2, 4, 6,
+            };
         }
     }
 }

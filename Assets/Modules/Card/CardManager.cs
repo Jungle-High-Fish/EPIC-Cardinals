@@ -204,7 +204,7 @@ namespace Cardinals
             StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
         }
 
-        private bool CardUseAction(int num)
+        private bool CardUseAction(int num, BaseEntity target=null)
         {
             if (!_canActionUse)
             {
@@ -217,7 +217,7 @@ namespace Cardinals
                 //Ÿ�Ͽ��� �׼� ȣ��
                 _prevCardNumber = num;
 
-                StartCoroutine(GameManager.I.Player.CardAction(num));
+                StartCoroutine(GameManager.I.Player.CardAction(num, target));
                 return true;
             }
 

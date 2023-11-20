@@ -82,11 +82,15 @@ namespace Cardinals.Board {
             }
             _tileCurse.Init();
 
-            _tileMagic = GetComponent<TileMagic>();
-            if (_tileMagic == null) {
-                _tileMagic = gameObject.AddComponent<TileMagic>();
+            if (_tileAction is TileEventAction or TileNullAction) {
+                _tileMagic = GetComponent<TileMagic>();
+                if (_tileMagic == null) {
+                    _tileMagic = gameObject.AddComponent<TileMagic>();
+                }
+                _tileMagic.Init();
+            } else {
+                _tileMagic = null;
             }
-            _tileMagic.Init();
         }
 
         public void OnTurnEnd() {
@@ -129,9 +133,12 @@ namespace Cardinals.Board {
             (boardPiece as MonoBehaviour).transform.SetParent(null);
         }
 
-        public void CardAction(int value) {
-            _tileAction.Act(value);
-            _tileMagic.OnAction(value);
+        public void CardAction(int value, BaseEntity target) {
+            _tileAction.Act(value, target);
+
+            if (_tileMagic != null) {
+                _tileMagic.OnAction(value, target);
+            }
         }
 
         public void SetCurse(TileCurseData data) {
