@@ -24,10 +24,6 @@ namespace Cardinals
         [SerializeField] private float _panelMoveDistance;
         private bool _isPanelOpen;
         
-        private void Start()
-        {
-            Init();
-        }
         public void Init()
         {
             _player = GameManager.I.Player;

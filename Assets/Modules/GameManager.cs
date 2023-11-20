@@ -12,24 +12,18 @@ namespace Cardinals
 {
     public class GameManager : Singleton<GameManager>
     {
-        private static UIManager _ui;
-        public UIManager UI
-        {
-            get
-            {
-                _ui ??= FindObjectOfType<UIManager>();
-                return _ui;
-            }
-        }
+        public UIManager UI => _ui;
+        public StageController Stage => _stage;
         
+        private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
-        public StageController Stage { get; private set; }
+        private static StageController _stage;
         
         /// <summary>
         /// 외부에서 참조 가능한 현재 전투 중인 적
+        /// TODO: StageController에서 접근하도록 수정
         /// </summary>
         public IEnumerable<BaseEnemy> CurrentEnemies { get; set; }
-
         public Player Player => Stage?.Player ?? null;
 
         #region Game
@@ -54,10 +48,11 @@ namespace Cardinals
 
         private IEnumerator StageFlow(Stage stage)
         {
-            StageController stageController = LoadStage();
-            Stage = stageController;
-            yield return stageController.Load(stage);
-            yield return stageController.Flow();
+            _ui = InitUI();
+            _stage = LoadStage();
+
+            yield return _stage.Load(stage);
+            yield return _stage.Flow();
         }
     
         private StageController LoadStage()
@@ -66,6 +61,14 @@ namespace Cardinals
             StageController stageController = stageControllerObj.AddComponent<StageController>();
 
             return stageController;
+        }
+
+        private UIManager InitUI() {
+            GameObject stageUIObj = new GameObject("@" + Constants.Common.InstanceName.UI, typeof(RectTransform));
+            _ui = stageUIObj.AddComponent<UIManager>();
+
+            _ui.Init();
+            return _ui;
         }
 
         public void GameClear()

@@ -54,6 +54,8 @@ namespace Cardinals.Game {
 
             InstantiateBaseObjs();
 
+            InstantiateGround();
+
             yield return _board.SetBoard(stage.BoardData);
 
             PlacePlayer();
@@ -86,9 +88,7 @@ namespace Cardinals.Game {
 
         public BaseEnemy InstantiateEnemy(EnemyDataSO enemyData) {
             var enemyType = EnumHelper.GetEnemyInstanceType(enemyData.enemyType);
-
-            GameObject UIEnemyInfoPrefab 
-                = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIEnemyInfo);
+            
             GameObject enemyRendererPrefab 
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_EnemyRenderer);
 
@@ -98,24 +98,20 @@ namespace Cardinals.Game {
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
             enemyRenderer.transform.position = enemyRenderer.transform.position + new Vector3(0, 2, 0);
 
-            GameObject UIEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, _enemyUIParentTransform);
-            UIEnemyInfo.GetComponent<UIEnemyInfo>().Init(enemyComp);
+            GameManager.I.UI.SetEnemyUI(enemyComp);
 
             return enemyComp;
+        }
+
+        private void InstantiateGround() {
+            GameObject groundPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_StageGround);
+            GameObject groundObj = GameObject.Instantiate(groundPrefab, transform);
+            groundObj.transform.position = Vector3.zero;
         }
 
         private void InstantiateBaseObjs() {
             GameObject EnemyParentTransformObj = new GameObject($"@{Constants.Common.InstanceName.EnemyPlace}");
             _enemyParentTransform = EnemyParentTransformObj.transform;
-            
-            // 임시로 Enemy UI 캔버스에 생성
-            Transform CanvasTransform = GameObject.Find("Canvas").transform;
-            GameObject EnemyUIParentTransformObj = new GameObject(
-                    $"@{Constants.Common.InstanceName.EnemyUI}", 
-                    typeof(RectTransform)
-            );
-            EnemyUIParentTransformObj.GetComponent<RectTransform>().MatchParent(CanvasTransform as RectTransform);
-            _enemyUIParentTransform = EnemyUIParentTransformObj.transform;
 
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
             BoardObj.transform.position = Vector3.zero;
@@ -128,11 +124,9 @@ namespace Cardinals.Game {
             _player = playerObj.GetComponent<Player>();
             _player.Init(15);
 
-            Transform CanvasTransform = GameObject.Find("PlayerCanvas").transform;
-            GameObject playerUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerInfo);
-            GameObject playerUIObj = GameObject.Instantiate(playerUIPrefab, CanvasTransform);
-
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
+            
+            GameManager.I.UI.InitPlayerUI();
         }
     }
 

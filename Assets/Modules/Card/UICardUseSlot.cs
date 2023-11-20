@@ -7,7 +7,7 @@ namespace Cardinals
 {
     public class UICardUseSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        // ³ªÁß¿¡ »©±â
+        // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         [SerializeField] private CardManager _cardManager;
         [SerializeField] private MouseState _slotState;
         public void OnPointerEnter(PointerEventData eventData)

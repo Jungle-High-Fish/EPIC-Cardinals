@@ -10,11 +10,14 @@ namespace Cardinals.Constants {
 
             // Prefab
             public const string Prefabs = "Prefabs/";
+            public const string Prefabs_StageGround = "Stage/Ground";
+
             public const string Prefabs_Tile = "Board/TileUV2";
             public const string Prefabs_CornerTile = "Board/CornerTile";
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
             
+            public const string Prefabs_UI_Canvas = "UI/Canvas";
             public const string Prefabs_UI_Description = "UI/DescriptionPrefab";
             public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
             public const string Prefabs_UI_RewardItem = "UI/Reward/UIRewardItem";
@@ -23,6 +26,9 @@ namespace Cardinals.Constants {
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
+
+            public const string Prefabs_UI_StageInfo = "UI/Stage/Stage Info UI";
+            public const string Prefabs_UI_EventNode = "UI/Stage/EventNode";
 
             // Sprite
             public const string Sprites = "Sprites/";
@@ -43,6 +49,14 @@ namespace Cardinals.Constants {
     namespace Common {
         public static class InstanceName {
             public const string StageController = "StageContoller";
+            
+            public const string UI = "UI";
+            public const string MainUICanvas = "Main UI Canvas";
+            public const string PlayerUICanvas = "Player UI Canvas";
+            public const string CardUICanvas = "Card UI Canvas";
+            public const string EnemyUICanvas = "Enemy UI Canvas";
+
+
             public const string EnemyPlace = "Enemy";
             public const string EnemyUI = "EnemyUI";
             public const string Board = "Board";
