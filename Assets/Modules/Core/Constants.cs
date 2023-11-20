@@ -26,9 +26,11 @@ namespace Cardinals.Constants {
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
+            public const string Prefabs_UIPotion = "UI/Player/UIPotion";
 
             // Sprite
             public const string Sprites = "Sprites/";
+            public const string Sprites_Potion = "Player/Potion/";
 
             // Scriptable Object
             public const string SO = "SO/";
@@ -60,6 +62,12 @@ namespace Cardinals.Constants {
             public const float TileInstantiateHeight = 3f;
 
             public static readonly Vector2 BoardCenter = new Vector2(0, 0); 
+        }
+
+        public static class Player
+        {
+            public const int MaxPotionCapacity = 4;
+
         }
     }
 }

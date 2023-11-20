@@ -123,6 +123,24 @@ namespace Cardinals
             _onTile.Arrive(this);
         }
 
+        public IEnumerator PrevMoveTo(int count, float time)
+        {
+            _onTile?.Leave(this);
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 prevPos = _onTile.Prev.transform.position;
+                prevPos.y += 1.3f;
+                transform.DOJump(prevPos, 2, 1, time);
+                yield return new WaitForSeconds(time);
+                _onTile = _onTile.Prev;
+                if (i != count - 1)
+                {
+                    _onTile.StepOn(this);
+                }
+            }
+            _onTile.Arrive(this);
+        }
+
         public IEnumerator CardAction(int num) {
             _onTile.CardAction(num);
             yield return null;
@@ -132,6 +150,8 @@ namespace Cardinals
         {
             Hp += value;
         }
+
+        
     }
 }
 
