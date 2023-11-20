@@ -207,6 +207,7 @@ namespace Cardinals.Enums {
         Poison,
         Fracture, // 골절
         Slow,
+        Wet, // 젖음
     }
 
     public enum BuffCountDecreaseType : int
