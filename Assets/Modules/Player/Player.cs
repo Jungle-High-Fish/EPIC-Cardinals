@@ -146,10 +146,7 @@ namespace Cardinals
             yield return null;
         }
 
-        public void Heal(int value)
-        {
-            Hp += value;
-        }
+      
 
         
     }
