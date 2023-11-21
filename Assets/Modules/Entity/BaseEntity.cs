@@ -159,7 +159,10 @@ namespace Cardinals
             return (int) Math.Ceiling(damage);
         }
 
-        
+        public void Heal(int value)
+        {
+            Hp += value;
+        }
         /// <summary>
         /// 버프 추가 시, 호출
         /// 기존 버프가 존재할 경우, Count를 증가시킴

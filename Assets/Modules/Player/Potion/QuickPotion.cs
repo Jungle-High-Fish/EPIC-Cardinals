@@ -15,7 +15,7 @@ namespace Cardinals
 
         public override void UsePotion()
         {
-
+            GameManager.I.Stage.CardManager.Draw(2);
         }
     }
 }
