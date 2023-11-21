@@ -11,14 +11,23 @@ namespace Cardinals
     {
         public int Gold { get; private set; }
         
-        private List<Potion> potions;
-        public Action<int, Potion> AddPotionEvent;
+        private List<Potion> _potions;
+        public Action<int, Potion> AddPotionEvent { get; set; }
+
+        private List<Artifact> _artifacts;
+        public Action<Artifact> AddArtifactEvent { get; set; }
         public PlayerInfo()
         {
-            potions = new();
+            _potions = new();
             for(int i=0; i < Constants.GameSetting.Player.MaxPotionCapacity; i++)
             {
-                potions.Add(null);
+                _potions.Add(null);
+            }
+
+            _artifacts = new();
+            for(int i=0; i < Constants.GameSetting.Player.MaxArtifactCapacity; i++)
+            {
+                _artifacts.Add(null);
             }
         }
         private bool _isBlessFire1;
@@ -81,27 +90,69 @@ namespace Cardinals
         {
             for (int i = 0; i < Constants.GameSetting.Player.MaxPotionCapacity; i++)
             {
-                if(potions[i] == null)
+                if(_potions[i] == null)
                 {
                     Potion potion = EnumHelper.GetPotion(potionType);
-                    potions[i] = potion;
+                    _potions[i] = potion;
                     AddPotionEvent?.Invoke(i, potion);
                     break;
                 }
             }
         }
 
+
         public void DeletePotion(int index)
         {
-            potions[index].DeletePotionEvent?.Invoke(potions[index]);
-            potions[index] = null;
+            _potions[index].DeletePotionEvent?.Invoke(_potions[index]);
+            _potions[index] = null;
         }
 
         public void UsePotion(int index)
         {
-            potions[index].UsePotion();
+            _potions[index].UsePotion();
             DeletePotion(index);
         }
+
+        public void AddArtifact(ArtifactType artifactType)
+        {
+            for (int i = 0; i < Constants.GameSetting.Player.MaxArtifactCapacity; i++)
+            {
+                if (_artifacts[i] == null&&!CheckArtifactExist(artifactType))
+                {
+                    Artifact artifact = EnumHelper.GetArtifact(artifactType);
+                    _artifacts[i] = artifact;
+                    AddArtifactEvent?.Invoke(artifact);
+                    break;
+                }
+            }
+        }
+
+        public bool CheckArtifactExist(ArtifactType artifactType)
+        {
+            foreach(Artifact artifact in _artifacts)
+            {
+                if (artifact == null)
+                {
+                    continue;
+                }
+                if(artifact.Type == artifactType)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void DebugArtifactList()
+        {
+            foreach(Artifact artifact in _artifacts)
+            {
+                if (artifact == null)
+                    continue;
+                Debug.Log(artifact.Name);
+            }
+        }
+    
 
         public void AddGold(int value)
         {

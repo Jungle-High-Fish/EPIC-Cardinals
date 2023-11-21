@@ -100,6 +100,11 @@ namespace Cardinals
             }
         }
 
+        public void SetMaxHP(int value)
+        {
+            MaxHp = value;
+        }
+
         public void SetTile(Board.Tile tile)
         {
             _onTile = tile;
@@ -145,6 +150,7 @@ namespace Cardinals
             _onTile.CardAction(num, target);
             yield return null;
         }
+
 
       
 

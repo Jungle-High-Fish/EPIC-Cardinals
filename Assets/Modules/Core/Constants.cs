@@ -33,6 +33,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
             public const string Prefabs_UIPotion = "UI/Player/UIPotion";
+            public const string Prefabs_UIArtifact = "UI/Player/UIArtifact";
 
             public const string Prefabs_UI_StageInfo = "UI/Stage/Stage Info UI";
             public const string Prefabs_UI_EventNode = "UI/Stage/EventNode";
@@ -44,6 +45,7 @@ namespace Cardinals.Constants {
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
             public const string Sprites_BoardEvent = "BoardEvent/";
+            public const string Sprites_Artifact = "Player/Artifact/";
 
             // Scriptable Object
             public const string SO = "SO/";
@@ -110,6 +112,7 @@ namespace Cardinals.Constants {
         public static class Player
         {
             public const int MaxPotionCapacity = 4;
+            public const int MaxArtifactCapacity = 12;
             public const int CardDrawCount = 5;
         }
     }

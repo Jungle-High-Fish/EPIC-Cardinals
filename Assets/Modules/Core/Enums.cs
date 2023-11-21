@@ -44,6 +44,24 @@ namespace Cardinals.Enums {
             }
         }
 
+        public static Artifact GetArtifact(ArtifactType artifactType)
+        {
+            switch (artifactType)
+            {
+                case ArtifactType.Empty:
+                    return null;
+                case ArtifactType.Verdant:
+                    return new VerdantBlossom(200, "VerdantBlossom", artifactType);
+                case ArtifactType.Grimoire:
+                    return new GrimoireSatchel(250, "GrimoireSatchel", artifactType);
+                case ArtifactType.Rigloo:
+                    return new RiglooShoes(180, "RiglooShoes", artifactType);
+                case ArtifactType.Warp:
+                    return new WarpAmulet(230, "WarpAmulet", artifactType);
+                default:
+                    return null;
+            }
+        }
 
         public static SdfIconType GetTileIcon(TileType tileType) {
             switch (tileType) {
@@ -288,4 +306,12 @@ namespace Cardinals.Enums {
     }
     #endregion
 
+    public enum ArtifactType
+    {
+        Empty,
+        Verdant,
+        Grimoire,
+        Rigloo,
+        Warp
+    }
 }
