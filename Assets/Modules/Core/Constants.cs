@@ -34,6 +34,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_CardSystem = "UI/Card/CardSystemUI";
             public const string Prefabs_UI_Card = "UI/Card/CardUI";
 
+            public const string Prefabs_UI_TileSelection = "UI/Stage/Tile Selection UI";
+
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";

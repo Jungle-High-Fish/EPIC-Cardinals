@@ -12,6 +12,8 @@ namespace Cardinals
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
         public UIPlayerInfo UIPlayerInfo => _uiPlayerInfo;
+        public UICardSystem UICardSystem => _uiCardSystem;
+        public UITileSelection UITileSelection => _uiTileSelection;
 
         private Canvas _mainUICanvas;
         private Canvas _playerUICanvas;
@@ -22,6 +24,7 @@ namespace Cardinals
         private UIRewardPanel _uiRewardPanel;
         private UIPlayerInfo _uiPlayerInfo;
         private UICardSystem _uiCardSystem;
+        private UITileSelection _uiTileSelection;
 
         public void Init() {
             InstantiateCanvas(Constants.Common.InstanceName.MainUICanvas, out _mainUICanvas);
@@ -89,6 +92,12 @@ namespace Cardinals
             GameObject cardSystemUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_CardSystem);
             GameObject cardSystemUIObj = Instantiate(cardSystemUIPrefab, _cardUICanvas.transform);
             _uiCardSystem = cardSystemUIObj.GetComponent<UICardSystem>();
+        }
+
+        private void InstantiateTileSelectionUI() {
+            GameObject tileSelectionUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TileSelection);
+            GameObject tileSelectionUIObj = Instantiate(tileSelectionUIPrefab, _mainUICanvas.transform);
+            _uiTileSelection = tileSelectionUIObj.GetComponent<UITileSelection>();
         }
     }
 }

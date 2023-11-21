@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Util;
 
 namespace Cardinals.Board {
 
-    public class Tile : MonoBehaviour {
+    public class Tile: MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
         public TileType Type => _tileData.type;
         public TileDirection Direction => _tileData.direction;
 
@@ -35,6 +36,18 @@ namespace Cardinals.Board {
 
         public TileAnimation Animation => _tileAnimation.Get(gameObject);
 
+        public bool IsSelectable => _isSelectable;
+        public bool IsSelected {
+            get {
+                if (_isSelectable == false) {
+                    return false;
+                }
+
+                return _isSelected;
+            }
+        }
+        public bool IsMouseHovered => _isMouseHovered;
+
         private TileData _tileData;
         private ComponentGetter<TileAnimation> _tileAnimation
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
@@ -43,8 +56,14 @@ namespace Cardinals.Board {
         private Tile _next;
         private Tile _prev;
 
+        // 타일 선택 이벤트 관련 변수
+        private Action<Tile> _onClicked;
+
         // 타일 상태 관련 변수
         private TileState _tileState;
+        private bool _isSelectable;
+        private bool _isSelected;
+        private bool _isMouseHovered;
 
         // 타일의 액션 관련 변수
         private TileAction _tileAction;
@@ -61,7 +80,7 @@ namespace Cardinals.Board {
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
         
-        public void Init(TileData tileData, TileState tileState=TileState.Normal) {
+        public void Init(TileData tileData, Action<Tile> onClicked, TileState tileState=TileState.Normal) {
             _tileData = tileData;
             _tileState = tileState;
 
@@ -148,6 +167,53 @@ namespace Cardinals.Board {
 
         public void SetEffect(TileEffectData data) {
             _tileEffect.SetEffect(data);
+        }
+
+        public void Select() {
+            if (_isSelectable == false) {
+                _isSelected = false;
+                return;
+            }
+
+            _isSelected = true;
+
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Shake, true);
+        }
+
+        public void Unselect() {
+            if (_isSelectable == false) {
+                _isSelected = false;
+                return;
+            }
+
+            _isSelected = false;
+
+            _tileAnimation.Get(gameObject).StopAll();
+        }
+
+        public void SetSelectable(bool isSelectable) {
+            _isSelectable = isSelectable;
+
+            _tileAnimation.Get(gameObject).StopAll();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (_isSelectable == false) {
+                _isSelected = false;
+                return;
+            }
+            _onClicked?.Invoke(this);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _isMouseHovered = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _isMouseHovered = false;
         }
 
         // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생

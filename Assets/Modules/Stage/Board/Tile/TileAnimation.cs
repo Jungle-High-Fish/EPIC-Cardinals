@@ -4,6 +4,8 @@ using MoreMountains.Feedbacks;
 using UnityEngine;
 using DG.Tweening;
 using Util;
+using Cardinals.Enums;
+using System;
 
 namespace Cardinals.Board {
 
@@ -17,25 +19,92 @@ namespace Cardinals.Board {
 		private ComponentGetter<Rigidbody> _rigidbody
 			= new ComponentGetter<Rigidbody>(TypeOfGetter.This);
 
-		private Sequence _shakeSequence;
+		private Dictionary<TileAnimationType, (Sequence anim, int playNum)> _animationDict
+			= new Dictionary<TileAnimationType, (Sequence, int)>();
 
 		public void Awake() {
-			_shakeSequence = DOTween.Sequence();
-			_shakeSequence.Append(
-				_rigidbody.Get(gameObject).DOJump(_transform.Get(gameObject).position, 0.3f, 1, 0.5f)
-				//_transform.Get(gameObject).DOShakeRotation(0.5f, 10f, 10, 90f, false)
-			).Insert(0.1f,
-				_transform.Get(gameObject).DOShakeRotation(0.3f, 10f, 10, 90f, false)
-			).SetAutoKill(false).Pause();
+			InitAnimations();
 		}
 
-		public void Shake() {
+		public void StopAll() {
+			foreach (var animationType in _animationDict.Keys) {
+				_animationDict[animationType] = (_animationDict[animationType].anim, 0);
+				_animationDict[animationType].anim.Complete(false);
+			}
+		}
+
+		public void Play(TileAnimationType animationType, bool isLoop = false) {
+			if (_animationDict[animationType].anim.IsPlaying()) {
+				_animationDict[animationType] = (
+					_animationDict[animationType].anim, 
+					_animationDict[animationType].playNum + 1
+				);
+
+				return;
+			}
+
+			_animationDict[animationType] = (
+				_animationDict[animationType].anim, 
+				isLoop ? -1 : 1
+			);
+			
+			ResetTile();
+			_animationDict[animationType].anim.Restart();
+		}
+
+		private void ResetTile() {
 			_rigidbody.Get(gameObject).velocity = Vector3.zero;
 			_rigidbody.Get(gameObject).angularVelocity = Vector3.zero;
-			//_MMFPlayer.Get(gameObject).PlayFeedbacks();
-			//_transform.Get(gameObject).DOShakeRotation(0.5f, 10f, 10, 90f, false);
+		}
 
-			_shakeSequence.Restart();
+		private void InitAnimations() {
+			InitShakeAnimation();
+			InitJumpAnimation();
+		}
+
+		private Sequence InitShakeAnimation() {
+			Sequence shakeAnimation = DOTween.Sequence();
+			shakeAnimation.Append(
+				_rigidbody.Get(gameObject).DOJump(_transform.Get(gameObject).position, 0.3f, 1, 0.5f)
+			).Insert(0.1f,
+				_transform.Get(gameObject).DOShakeRotation(0.3f, 20f, 10, 90f, false)
+			).OnComplete(AnimationComplete(TileAnimationType.Shake))
+			.SetAutoKill(false).Pause();
+
+			_animationDict.Add(TileAnimationType.Shake, (shakeAnimation, 0));
+			return shakeAnimation;
+		}
+
+		private Sequence InitJumpAnimation() {
+			Sequence jumpAnimation = DOTween.Sequence();
+			jumpAnimation.Append(
+				_rigidbody.Get(gameObject).DOJump(_transform.Get(gameObject).position, 0.3f, 1, 0.7f)
+			).OnComplete(AnimationComplete(TileAnimationType.Jump))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(TileAnimationType.Shake, (jumpAnimation, 0));
+			return jumpAnimation;
+		}
+
+		private TweenCallback AnimationComplete(TileAnimationType animationType) {
+			return () => {
+				if (_animationDict[animationType].playNum == 0) return;
+				if (_animationDict[animationType].playNum == -1) {
+					_animationDict[animationType].anim.Restart();
+					return;
+				}
+
+				_animationDict[animationType] = (
+					_animationDict[animationType].anim, 
+					_animationDict[animationType].playNum - 1
+				);
+
+				if (_animationDict[animationType].playNum == 0) {
+					_animationDict[animationType].anim.Pause();
+				} else {
+					_animationDict[animationType].anim.Restart();
+				}
+			};
 		}
 	}
 
