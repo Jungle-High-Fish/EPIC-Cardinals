@@ -11,6 +11,7 @@ namespace Cardinals.Board {
     public class Tile: MonoBehaviour {
         public TileType Type => _tileData.type;
         public TileDirection Direction => _tileData.direction;
+        public Vector3 TilePositionOnGround => _tilePositionOnGround;
 
         public Tile Next {
             get => _next;
@@ -65,6 +66,9 @@ namespace Cardinals.Board {
         private bool _isSelected;
         private bool _isMouseHovered;
 
+        // 타일 위치 관련 변수
+        private Vector3 _tilePositionOnGround;
+
         // 타일의 액션 관련 변수
         private TileAction _tileAction;
 
@@ -80,9 +84,13 @@ namespace Cardinals.Board {
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
         
-        public void Init(TileData tileData, Action<Tile> onClicked, TileState tileState=TileState.Normal) {
+        public void Init(TileData tileData, Action<Tile> onClicked, Vector3 tilePositionOnGround, TileState tileState=TileState.Normal) {
             _tileData = tileData;
+            _onClicked = onClicked;
+            _tilePositionOnGround = tilePositionOnGround;
             _tileState = tileState;
+
+            _tileAnimation.Get(gameObject).Init();
 
             _tileAction = GetComponent(EnumHelper.GetTileActionType(_tileData.type)) as TileAction;
             if (_tileAction == null) {
@@ -177,7 +185,7 @@ namespace Cardinals.Board {
 
             _isSelected = true;
 
-            _tileAnimation.Get(gameObject).Play(TileAnimationType.Shake, true);
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
         }
 
         public void Unselect() {
@@ -197,6 +205,16 @@ namespace Cardinals.Board {
             _tileAnimation.Get(gameObject).StopAll();
         }
 
+        // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
+        private void ApplyState() {
+            
+        }
+
+        private void ChangeState(TileState state) {
+            _tileState = state;
+            ApplyState();
+        }
+
         private void OnMouseDown() {
             if (_isSelectable == false) {
                 _isSelected = false;
@@ -211,34 +229,6 @@ namespace Cardinals.Board {
 
         private void OnMouseExit() {
             _isMouseHovered = false;
-        }
-        // public void OnPointerClick(PointerEventData eventData)
-        // {
-        //     if (_isSelectable == false) {
-        //         _isSelected = false;
-        //         return;
-        //     }
-        //     _onClicked?.Invoke(this);
-        // }
-
-        // public void OnPointerEnter(PointerEventData eventData)
-        // {
-        //     _isMouseHovered = true;
-        // }
-
-        // public void OnPointerExit(PointerEventData eventData)
-        // {
-        //     _isMouseHovered = false;
-        // }
-
-        // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
-        private void ApplyState() {
-            
-        }
-
-        private void ChangeState(TileState state) {
-            _tileState = state;
-            ApplyState();
         }
     }
 

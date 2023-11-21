@@ -133,10 +133,10 @@ namespace Cardinals.Board {
             _selectionType = selectionType;
 
             bool hasRequestHandled = false;
-            List<Tile> result = null;
+            List<Tile> result = new List<Tile>();
 
             void OnConfirmSelect() {
-                result = _selectedTiles;
+                result.AddRange(_selectedTiles);
                 hasRequestHandled = true;
             }
 
@@ -222,6 +222,7 @@ namespace Cardinals.Board {
         private void SingleTileSelect(Tile target) {
             UnselectAll();
             _selectedTiles.Add(target);
+            target.Select();
         }
 
         private void MultipleTileSelect(Tile target) {
@@ -229,8 +230,11 @@ namespace Cardinals.Board {
                 _selectedTiles.Remove(target);
                 target.Unselect();
             } else {
+                UnselectAll();
                 _selectedTiles.Add(target);
-                target.Select();
+                foreach (Tile tile in _selectedTiles) {
+                    tile.Select();
+                }
             }
         }
 

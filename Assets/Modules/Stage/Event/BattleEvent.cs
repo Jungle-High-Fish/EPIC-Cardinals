@@ -66,13 +66,6 @@ namespace Cardinals.Game
 
                 // 플레이어 행동
                 GameManager.I.Player.OnTurn();
-                var tileSelection = GameManager.I.Stage.Board.RequestTileSelect(TileSelectionType.Single);
-                yield return tileSelection.tileRequester();
-                foreach (var tile in tileSelection.selectedTiles)
-                {
-                    Debug.Log("선택된 타일: " + tile);
-                }
-                
                 yield return GameManager.I.WaitNext(); // 대기?
                 
                 // 적 행동

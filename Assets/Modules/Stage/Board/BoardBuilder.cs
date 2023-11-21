@@ -291,7 +291,16 @@ namespace Cardinals.Board {
             );
 
             Tile tile = tileObj.GetComponent<Tile>();
-            tile.Init(tileData, _onTileClicked);
+            Vector3 tilePos = targetPos;
+            tilePos.y = 
+                Constants.GameSetting.Board.TileDepth / 2 + 
+                Constants.GameSetting.Board.GroundDepth / 2 + 
+                0.05f;
+            tile.Init(
+                tileData, 
+                _onTileClicked,
+                tilePos
+            );
 
             return tile;
         }

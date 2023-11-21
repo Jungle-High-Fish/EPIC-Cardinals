@@ -19,10 +19,13 @@ namespace Cardinals.Board {
 		private ComponentGetter<Rigidbody> _rigidbody
 			= new ComponentGetter<Rigidbody>(TypeOfGetter.This);
 
+		private ComponentGetter<Tile> _tile
+			= new ComponentGetter<Tile>(TypeOfGetter.This);
+
 		private Dictionary<TileAnimationType, (Sequence anim, int playNum)> _animationDict
 			= new Dictionary<TileAnimationType, (Sequence, int)>();
 
-		public void Awake() {
+		public void Init() {
 			InitAnimations();
 		}
 
@@ -68,10 +71,11 @@ namespace Cardinals.Board {
 		private Sequence InitShakeAnimation() {
 			Sequence shakeAnimation = DOTween.Sequence();
 			shakeAnimation.Append(
-				_rigidbody.Get(gameObject).DOJump(_transform.Get(gameObject).position, 0.3f, 1, 0.5f)
+				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
 			).Insert(0.1f,
 				_transform.Get(gameObject).DOShakeRotation(0.3f, 20f, 10, 90f, false)
-			).OnComplete(AnimationComplete(TileAnimationType.Shake))
+			).AppendInterval(0.5f)
+			.OnComplete(AnimationComplete(TileAnimationType.Shake))
 			.SetAutoKill(false).Pause();
 
 			_animationDict.Add(TileAnimationType.Shake, (shakeAnimation, 0));
@@ -81,8 +85,9 @@ namespace Cardinals.Board {
 		private Sequence InitJumpAnimation() {
 			Sequence jumpAnimation = DOTween.Sequence();
 			jumpAnimation.Append(
-				_rigidbody.Get(gameObject).DOJump(_transform.Get(gameObject).position, 0.3f, 1, 0.7f)
-			).OnComplete(AnimationComplete(TileAnimationType.Jump))
+				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 0.5f, 1, 0.5f)
+			).AppendInterval(0.5f)
+			.OnComplete(AnimationComplete(TileAnimationType.Jump))
 			.SetAutoKill(false).Pause();
 			
 			_animationDict.Add(TileAnimationType.Jump, (jumpAnimation, 0));
