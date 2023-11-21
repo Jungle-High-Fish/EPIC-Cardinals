@@ -21,7 +21,7 @@ namespace Cardinals.BoardEvent.Shop
         {
             get
             {
-                _shopItemPrefab ??= ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Product);
+                _shopItemPrefab ??= ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Product);
                 return _shopItemPrefab;
             }
         }
@@ -65,7 +65,7 @@ namespace Cardinals.BoardEvent.Shop
                 Artifact artifact = null; // [TODO] 아티펙트 지정 (현재 소지하지않은 아티팩트에서..)
                 
                 var obj = Instantiate(ShopItemPrefab, _artifactParentTr);
-                obj.GetComponent<UIProduct>().Init(artifact, () => BuyArtifact(artifact));
+                // obj.GetComponent<UIProduct>().Init(artifact, () => BuyArtifact(artifact));
             }
         }
         
@@ -79,7 +79,7 @@ namespace Cardinals.BoardEvent.Shop
                 PotionType potionType =  (PotionType)Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
                 Potion potion = EnumHelper.GetPotion(potionType);
                 
-                var obj = Instantiate(_shopItemPrefab, _artifactParentTr);
+                var obj = Instantiate(_shopItemPrefab, _potionParentTr);
                 obj.GetComponent<UIProduct>().Init(potion, () => BuyPotion(potion));
             }
         }

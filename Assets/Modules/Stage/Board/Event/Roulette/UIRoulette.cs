@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,9 @@ namespace Cardinals.BoardEvent.Roulette
     {
         private Roulette _roulette;
         [SerializeField] private Button _spinBTN;
-        
+        [SerializeField] private GameObject _resultObj;
+        [SerializeField] private TextMeshProUGUI _resultTMP;
+
         Roulette Roulette
         {
             get
@@ -26,6 +29,12 @@ namespace Cardinals.BoardEvent.Roulette
             _spinBTN.onClick.AddListener(B_Spin);
         }
 
+        public void Init()
+        {
+            gameObject.SetActive(true);
+            _resultObj.SetActive(false);
+        }
+
         private void B_Spin()
         {
             Roulette.Spin(Get);
@@ -33,6 +42,7 @@ namespace Cardinals.BoardEvent.Roulette
 
         private void Get(RoulettePieceDataSO data)
         {
+            Debug.Log(data.type);
             switch (data.type)
             {
                 case BoardEventRoulette.DrawCard:
@@ -48,6 +58,7 @@ namespace Cardinals.BoardEvent.Roulette
                     GameManager.I.Stage.GetCardRange(1, 4);
                     break;
                 case BoardEventRoulette.RandomTileGradeUp:
+                    Debug.Log("랜덤 타일을 강화합니다. (동작 X)");
                     // [TODO] 타일과 기능 연결 필요
                     break;
                 case BoardEventRoulette.ReducedHp:
@@ -56,6 +67,15 @@ namespace Cardinals.BoardEvent.Roulette
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            _resultObj.SetActive(true);
+            _resultTMP.text = data.description;
+            StartCoroutine(Close());
+        }
+
+        IEnumerator Close()
+        {
+            yield return new WaitForSeconds(1f);
+            gameObject.SetActive(false);
         }
     }
 }

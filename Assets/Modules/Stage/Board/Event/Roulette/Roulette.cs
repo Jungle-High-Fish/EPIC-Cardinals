@@ -70,8 +70,8 @@ namespace Cardinals.BoardEvent.Roulette
 				_accumulatedWeight += _roulettePieceDatas[i].chance;
 				_roulettePieceDatas[i].weight = _accumulatedWeight;
 
-				Debug.Log(
-					$"({_roulettePieceDatas[i].index}){_roulettePieceDatas[i].description}:{_roulettePieceDatas[i].weight}");
+				// Debug.Log(
+				// 	$"({_roulettePieceDatas[i].index}){_roulettePieceDatas[i].description}:{_roulettePieceDatas[i].weight}");
 			}
 		}
 
@@ -107,9 +107,9 @@ namespace Cardinals.BoardEvent.Roulette
 			int rotateSpeed = 2;
 			float targetAngle = (randomAngle + 360 * _spinDuration * rotateSpeed);
 
-			Debug.Log($"SelectedIndex:{_selectedIndex}, Angle:{angle}");
-			Debug.Log($"left/right/random:{leftOffset}/{rightOffset}/{randomAngle}");
-			Debug.Log($"targetAngle:{targetAngle}");
+			// Debug.Log($"SelectedIndex:{_selectedIndex}, Angle:{angle}");
+			// Debug.Log($"left/right/random:{leftOffset}/{rightOffset}/{randomAngle}");
+			// Debug.Log($"targetAngle:{targetAngle}");
 
 			_isSpinning = true;
 			StartCoroutine(OnSpin(targetAngle, action));

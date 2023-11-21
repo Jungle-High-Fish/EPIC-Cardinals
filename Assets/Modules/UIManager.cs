@@ -1,5 +1,7 @@
 using System;
 using Cardinals.BoardEvent.Card;
+using Cardinals.BoardEvent.Roulette;
+using Cardinals.BoardEvent.Shop;
 using Cardinals.Enemy;
 using Cardinals.Game;
 using Cardinals.UI;
@@ -13,7 +15,6 @@ namespace Cardinals
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
         public UIPlayerInfo UIPlayerInfo => _uiPlayerInfo;
-        public UICardEvent UICardEvent => _uiCardEvent;
 
         private Canvas _mainUICanvas;
         private Canvas _playerUICanvas;
@@ -24,7 +25,15 @@ namespace Cardinals
         private UIRewardPanel _uiRewardPanel;
         private UIPlayerInfo _uiPlayerInfo;
         private UICardSystem _uiCardSystem;
+
+        #region Board-Event 
         private UICardEvent _uiCardEvent;
+        private UIShop _uiShop;
+        private UIRoulette _uiRoulette;
+        public UICardEvent UICardEvent => _uiCardEvent;
+        public UIShop UIShop => _uiShop;
+        public UIRoulette UIRoulette => _uiRoulette;
+        #endregion
         
         public void Init() {
             InstantiateCanvas(Constants.Common.InstanceName.MainUICanvas, out _mainUICanvas);
@@ -35,7 +44,11 @@ namespace Cardinals
             InstantiateStageInfoUI();
             InstantiateRewardUI();
             InstantiatePlayerUI();
-            InstantiateCardEventUI();
+            
+            // Board Event
+            InstantiateBoardEventCardUI();
+            InstantiateBoardEventRouletteUI();
+            InstantiateBoardEventShopUI();
         }
 
         public void InitPlayerUI() {
@@ -95,11 +108,22 @@ namespace Cardinals
             _uiCardSystem = cardSystemUIObj.GetComponent<UICardSystem>();
         }
 
-        private void InstantiateCardEventUI() {
-            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_CardEvent);
+        private void InstantiateBoardEventCardUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Card);
             GameObject obj = Instantiate(prefab, _cardUICanvas.transform);
             _uiCardEvent = obj.GetComponent<UICardEvent>();
-            obj.transform.SetSiblingIndex(10);
+            obj.SetActive(false); 
+        }
+        private void InstantiateBoardEventRouletteUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Roulette);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+            _uiRoulette = obj.GetComponent<UIRoulette>();
+            obj.SetActive(false); 
+        }
+        private void InstantiateBoardEventShopUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Shop);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+            _uiShop = obj.GetComponent<UIShop>();
             obj.SetActive(false); 
         }
     }

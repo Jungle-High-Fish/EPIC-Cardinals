@@ -14,9 +14,8 @@ namespace Cardinals.Enums {
                 case TileType.Null:
                     return typeof(TileNullAction);
                 case TileType.Blank:
-                    return typeof(TileEventAction);
                 case TileType.Start:
-                    return typeof(TileNullAction);
+                    return typeof(TileEventAction);
                 case TileType.Attack:
                     return typeof(TileAttack);
                 case TileType.Defence:
@@ -258,6 +257,16 @@ namespace Cardinals.Enums {
 
     }
 
+    #region Board Event
+    public enum BoardEventType : int
+    {
+        Empty,
+        // Tile
+        Roulette,
+        Number,
+        Shop,
+    }
+
     public enum BoardEventRoulette
     {
         Empty,
@@ -277,4 +286,6 @@ namespace Cardinals.Enums {
         Heal,
         Money
     }
+    #endregion
+
 }

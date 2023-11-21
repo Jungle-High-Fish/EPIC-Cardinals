@@ -14,7 +14,7 @@ namespace Cardinals.Board {
         }
 
         public override void ArriveAction() {
-            throw new System.NotImplementedException();
+            
         }
     }
     

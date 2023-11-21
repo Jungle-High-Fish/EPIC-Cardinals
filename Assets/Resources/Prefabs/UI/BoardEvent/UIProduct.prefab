@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 6658819530140431828}
   - component: {fileID: 6658819530140431829}
   m_Layer: 5
-  m_Name: Product
+  m_Name: UIProduct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   _iconImg: {fileID: 6658819531299741787}
   _priceTMP: {fileID: 6658819530692466045}
   _buyBTN: {fileID: 6658819531299741785}
-  _boughtObj: {fileID: 0}
+  _boughtObj: {fileID: 6658819530909551598}
 --- !u!114 &6658819530140431829
 MonoBehaviour:
   m_ObjectHideFlags: 0
