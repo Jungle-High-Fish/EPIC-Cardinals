@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7784267496320153977}
   - component: {fileID: 6948335740938878371}
   - component: {fileID: 6017673556749536969}
+  - component: {fileID: 231025369502875569}
   m_Layer: 0
   m_Name: TileUV2
   m_TagString: Untagged
@@ -440,6 +441,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed01019096e724ba881947b2cc678d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &231025369502875569
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784267496320153972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7784267497581401839
 GameObject:
   m_ObjectHideFlags: 0

@@ -125,7 +125,7 @@ namespace Cardinals.Board {
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public (List<Tile>, Func<IEnumerator>) RequestTileSelect(
+        public (List<Tile> selectedTiles, Func<IEnumerator> tileRequester) RequestTileSelect(
             TileSelectionType selectionType,
             string title="",
             string description=""
@@ -155,9 +155,7 @@ namespace Cardinals.Board {
                 );
 
                 SetTileSelectable();
-                while (_selectedTiles == null) {
-                    yield return new WaitUntil(() => hasRequestHandled);
-                }
+                yield return new WaitUntil(() => hasRequestHandled);
                 SetTileUnSelectable();
             }
 

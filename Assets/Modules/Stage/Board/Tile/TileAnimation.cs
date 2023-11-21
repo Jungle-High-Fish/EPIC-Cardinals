@@ -27,9 +27,12 @@ namespace Cardinals.Board {
 		}
 
 		public void StopAll() {
-			foreach (var animationType in _animationDict.Keys) {
+			List<TileAnimationType> animationTypes = new List<TileAnimationType>(_animationDict.Keys);
+			foreach (var animationType in animationTypes) {
 				_animationDict[animationType] = (_animationDict[animationType].anim, 0);
-				_animationDict[animationType].anim.Complete(false);
+				if (_animationDict[animationType].anim.IsPlaying()) {
+					_animationDict[animationType].anim.Complete(false);
+				}
 			}
 		}
 
@@ -82,7 +85,7 @@ namespace Cardinals.Board {
 			).OnComplete(AnimationComplete(TileAnimationType.Jump))
 			.SetAutoKill(false).Pause();
 			
-			_animationDict.Add(TileAnimationType.Shake, (jumpAnimation, 0));
+			_animationDict.Add(TileAnimationType.Jump, (jumpAnimation, 0));
 			return jumpAnimation;
 		}
 

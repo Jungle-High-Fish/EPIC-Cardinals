@@ -11,14 +11,14 @@ using Util;
 namespace Cardinals.UI {
     public class UITileSelection: MonoBehaviour {
         private ComponentGetter<TextMeshProUGUI> _titleText
-            = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.Child, "Title");
+            = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Title");
         private ComponentGetter<TextMeshProUGUI> _descriptionText
-            = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.Child, "Description");
+            = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Description");
         
         private ComponentGetter<Button> _confirmButton
-            = new ComponentGetter<Button>(TypeOfGetter.Child, "Button Area/Confirm Button");
+            = new ComponentGetter<Button>(TypeOfGetter.ChildByName, "Button Area/Confirm Button");
         private ComponentGetter<Button> _cancelButton
-            = new ComponentGetter<Button>(TypeOfGetter.Child, "Button Area/Cancel Button");
+            = new ComponentGetter<Button>(TypeOfGetter.ChildByName, "Button Area/Cancel Button");
 
         private bool _hasInitialized = false;
         private Func<List<Tile>> _selectedTilesFunc; 
@@ -37,6 +37,9 @@ namespace Cardinals.UI {
             
             _titleText.Get(gameObject).text = title;
             _descriptionText.Get(gameObject).text = description;
+
+            _confirmButton.Get(gameObject).onClick.RemoveAllListeners();
+            _cancelButton.Get(gameObject).onClick.RemoveAllListeners();
 
             _confirmButton.Get(gameObject).onClick.AddListener(() => {
                 Close();

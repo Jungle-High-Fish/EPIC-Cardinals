@@ -35,6 +35,7 @@ namespace Cardinals
             InstantiateStageInfoUI();
             InstantiateRewardUI();
             InstantiatePlayerUI();
+            InstantiateTileSelectionUI();
         }
 
         public void InitPlayerUI() {
@@ -98,6 +99,8 @@ namespace Cardinals
             GameObject tileSelectionUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TileSelection);
             GameObject tileSelectionUIObj = Instantiate(tileSelectionUIPrefab, _mainUICanvas.transform);
             _uiTileSelection = tileSelectionUIObj.GetComponent<UITileSelection>();
+
+            tileSelectionUIObj.SetActive(false);
         }
     }
 }
