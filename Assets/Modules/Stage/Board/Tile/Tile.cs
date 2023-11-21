@@ -71,6 +71,7 @@ namespace Cardinals.Board {
 
         // 타일의 액션 관련 변수
         private TileAction _tileAction;
+        public TileAction TileAction=> _tileAction;
 
         // 타일의 마법 관련 변수
         private TileMagic _tileMagic;
@@ -96,6 +97,8 @@ namespace Cardinals.Board {
             if (_tileAction == null) {
                 _tileAction = gameObject.AddComponent(EnumHelper.GetTileActionType(_tileData.type)) as TileAction;
             }
+            
+            _tileAction.Init(this);
 
             _tileEffect = GetComponent<TileEffect>();
             if (_tileEffect == null) {
@@ -142,9 +145,11 @@ namespace Cardinals.Board {
 
             switch (_tileState) {
                 case TileState.Normal:
+                    _tileAction.ArriveAction();
                     _tileEffect.ArriveAction(boardPiece);
                     break;
                 case TileState.Cursed:
+                    _tileAction.ArriveAction();
                     _tileEffect.ArriveAction(boardPiece);
                     _tileCurse.ClearCurse();
                     ChangeState(TileState.Normal);

@@ -14,6 +14,15 @@ namespace Util {
             rectTransform.offsetMin = Vector2.zero;
             rectTransform.offsetMax = Vector2.zero;
         }
+        
+        public static void DestroyChildren(this Transform parent)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
+            {
+                MonoBehaviour.Destroy(parent.GetChild(i).gameObject);
+                
+            }
+        }
     }
 }
 

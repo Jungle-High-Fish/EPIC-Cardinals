@@ -18,6 +18,12 @@ namespace Cardinals.Constants {
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
             
             public const string Prefabs_UI_Canvas = "UI/Canvas";
+            
+            public const string Prefabs_UI_BoardEvent_Shop = "UI/BoardEvent/UIShopPanel";
+            public const string Prefabs_UI_BoardEvent_Product = "UI/BoardEvent/UIProduct";
+            public const string Prefabs_UI_BoardEvent_Card = "UI/BoardEvent/UICardEvent";
+            public const string Prefabs_UI_BoardEvent_Roulette = "UI/BoardEvent/UIRoulette";
+            
             public const string Prefabs_UI_Description = "UI/DescriptionPrefab";
             public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
             public const string Prefabs_UI_RewardItem = "UI/Reward/UIRewardItem";
@@ -27,6 +33,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
             public const string Prefabs_UIPotion = "UI/Player/UIPotion";
+            public const string Prefabs_UIArtifact = "UI/Player/UIArtifact";
 
             public const string Prefabs_UI_StageInfo = "UI/Stage/Stage Info UI";
             public const string Prefabs_UI_EventNode = "UI/Stage/EventNode";
@@ -39,6 +46,8 @@ namespace Cardinals.Constants {
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
+            public const string Sprites_BoardEvent = "BoardEvent/";
+            public const string Sprites_Artifact = "Player/Artifact/";
 
             // Scriptable Object
             public const string SO = "SO/";
@@ -107,6 +116,7 @@ namespace Cardinals.Constants {
         public static class Player
         {
             public const int MaxPotionCapacity = 4;
+            public const int MaxArtifactCapacity = 12;
             public const int CardDrawCount = 5;
         }
     }

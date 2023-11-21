@@ -997,7 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardManager: {fileID: 437358051}
   _slotState: 1
 --- !u!114 &408597044
 MonoBehaviour:
@@ -1053,7 +1052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &437358051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,12 +1065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622fb43d643c196499df5d18e380434c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _drawCardCount: 5
   _mouseState: 2
   _cardDeckUIParent: {fileID: 263857831}
-  _cardUIPrefab: {fileID: 5325587684102739020, guid: c11787424fdb33f4eab644c830852d1b,
-    type: 3}
 --- !u!4 &437358052
 Transform:
   m_ObjectHideFlags: 0
@@ -1450,7 +1445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &602288395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2084,7 +2079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7799b2af7dd4925b02957d3daa110e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiStage: {fileID: 1994608614}
 --- !u!1 &1139324695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,7 +2353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1309590763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2611,7 +2605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1386539175
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2884,7 +2878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardManager: {fileID: 437358051}
   _slotState: 0
 --- !u!114 &1533068398
 MonoBehaviour:
@@ -3368,18 +3361,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca09f957f57e4144a12004c7c5d89a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stageNameTxtObj: {fileID: 204913831}
-  _evtListObj: {fileID: 695467997}
-  _evtInstTr: {fileID: 1179094281}
-  _evtPrefab: {fileID: 5965099894995906288, guid: 95d167b7ecd633742b11850bcf0b90cd,
-    type: 3}
 --- !u!43 &2043951570
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38608
+  m_Name: pb_Mesh32068
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3713,6 +3701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817994883095184909, guid: 59b20e44f400c114d9d2cc3a0009c06f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2817994883140502330, guid: 59b20e44f400c114d9d2cc3a0009c06f,
         type: 3}
