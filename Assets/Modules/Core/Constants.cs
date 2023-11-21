@@ -41,6 +41,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_CardSystem = "UI/Card/CardSystemUI";
             public const string Prefabs_UI_Card = "UI/Card/CardUI";
 
+            public const string Prefabs_UI_TileSelection = "UI/Stage/Tile Selection UI";
+
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
@@ -84,6 +86,8 @@ namespace Cardinals.Constants {
         public static class Board {
             public const float TileWidth = 1;
             public const float TileHeight = 1.5f;
+            public const float TileDepth = 0.2f;
+            public const float GroundDepth = 0f;
             public const float TileSpace = 0.5f;
             public const float TileInstantiateHeight = 3f;
 

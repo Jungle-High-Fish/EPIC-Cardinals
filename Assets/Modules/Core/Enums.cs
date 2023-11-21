@@ -206,6 +206,18 @@ namespace Cardinals.Enums {
         Cursed
     }
     
+    public enum TileSelectionType {
+        Single,
+        Multiple,
+        Sequence,
+        Edge
+    }
+
+    public enum TileAnimationType {
+        None,
+        Shake,
+        Jump
+    }
     
     public enum StageEventType
     {

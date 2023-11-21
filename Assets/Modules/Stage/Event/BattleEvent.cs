@@ -7,6 +7,8 @@ using Sirenix.Utilities;
 using UnityEngine;
 using Util;
 using Sirenix.OdinInspector;
+using Cardinals.Board;
+using System;
 
 namespace Cardinals.Game
 {
