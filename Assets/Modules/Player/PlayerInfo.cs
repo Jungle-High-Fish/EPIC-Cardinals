@@ -9,6 +9,8 @@ namespace Cardinals
 {
     public class PlayerInfo 
     {
+        public int Gold { get; private set; }
+        
         private List<Potion> potions;
         public Action<int, Potion> AddPotionEvent;
         public PlayerInfo()
@@ -87,7 +89,7 @@ namespace Cardinals
                     break;
                 }
             }
-    }
+        }
 
         public void DeletePotion(int index)
         {
@@ -100,6 +102,15 @@ namespace Cardinals
             potions[index].UsePotion();
             DeletePotion(index);
         }
-    }
 
+        public void AddGold(int value)
+        {
+            Gold += value;
+        }
+
+        public void UseGold(int value)
+        {
+            Gold -= value;
+        }
+    }
 }

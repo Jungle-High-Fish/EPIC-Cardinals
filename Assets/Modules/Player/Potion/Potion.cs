@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Cardinals
 {
-    public abstract class Potion
+    public abstract class Potion : IProduct
     {
         private int _money;
         public virtual int Money { get; set; }
@@ -17,5 +17,11 @@ namespace Cardinals
         {
 
         }
+
+        #region IProduct
+        public Sprite Sprite { get; }
+        public string Description { get; }
+        public int Price => Money;
+        #endregion
     }
 }

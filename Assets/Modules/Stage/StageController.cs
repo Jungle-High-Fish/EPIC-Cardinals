@@ -4,6 +4,7 @@ using UnityEngine;
 using Cardinals.Enums;
 using System;
 using Cardinals.Enemy;
+using Sirenix.OdinInspector;
 using Util;
 
 namespace Cardinals.Game {
@@ -145,6 +146,56 @@ namespace Cardinals.Game {
             _cardManager.Init();
 
             GameManager.I.UI.SetCardSystemUI();
+        }
+
+        #region Quick-Acess Method
+
+        public void DrawCard(int count) => FindAnyObjectByType<CardManager>().Draw(count);
+        public void HitPlayer(int damage) => Player.Hit(damage);
+        
+        public void AddGold(int value) => Player.PlayerInfo.AddGold(value);
+        public void UseGold(int value) => Player.PlayerInfo.UseGold(value);
+        
+        public void GetArtifact(int grade, int choiceCnt, int selectCnt) // grade는 임시임
+        {
+            
+        }
+
+        public void GetCardRange(int minValue, int maxValue, int count = 1)
+        {
+            
+        }
+
+        public void GetCardArr(int[] values, int count = 1)
+        {
+            
+        }
+
+        public void AddArtifact()
+        {
+        }
+
+        public void AddPotion()
+        {
+            
+        }
+        #endregion
+
+        private int _boardEventIdx;
+        [Button]
+        public void GenerateBoardEvent()
+        {
+            var tileAction = Board.GetCanSetEventTileEventAction();
+            if (tileAction != null)
+            {
+                // 이벤트 설정                
+                int enumLength = Enum.GetNames(typeof(BoardEventType)).Length;
+                _boardEventIdx = Math.Max(1, ++_boardEventIdx) % enumLength;
+                var type = (BoardEventType)_boardEventIdx;
+                
+                tileAction.Set(type);
+            }
+            else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }
     }
 

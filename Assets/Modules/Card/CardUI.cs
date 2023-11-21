@@ -93,5 +93,6 @@ public enum MouseState
 {
     Action,
     Move,
-    Cancel
+    Cancel,
+    CardEvent,
 }

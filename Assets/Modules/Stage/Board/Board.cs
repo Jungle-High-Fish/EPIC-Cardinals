@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cardinals.Enums;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
@@ -9,6 +10,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Util;
+using Random = UnityEngine.Random;
 
 namespace Cardinals.Board {
 
@@ -160,6 +162,37 @@ namespace Cardinals.Board {
                 
                 targetDirection = nextTile.Direction;
             }
+        }
+
+
+        /// <summary>
+        /// 이벤트 발생 가능한 타일을 반환하는 함수
+        /// </summary>
+        /// <returns>발생 가능한 타일이 없는 경우, null 반환 </returns>
+        public TileEventAction GetCanSetEventTileEventAction()
+        {
+            TileEventAction returnEvtAction = null;
+
+            List<TileEventAction> list = new();
+            foreach (var tile in _tileSequence.Where(x=> x.Type == TileType.Start || x.Type == TileType.Blank)) // 코너 타일만
+            {
+                var eventAction = tile.TileAction as TileEventAction;
+                if(eventAction != null) // 혹시 형변환 몰라 체크
+                { 
+                    if (eventAction.EventType == default) // 현재 이벤트 지정이 되있지 않은 경우
+                    {
+                        list.Add(eventAction);
+                    }
+                }
+            }
+
+            if (list.Count > 0)
+            {
+                var idx = Random.Range(0, list.Count());
+                returnEvtAction = list[idx];
+            }
+            
+            return returnEvtAction;
         }
     }
 
