@@ -267,4 +267,13 @@ namespace Cardinals.Enums {
         RandomTileGradeUp,
         ReducedHp,
     }
+
+    public enum BoardEventCardType
+    {
+        Empty,
+        Draw,
+        CopyOneTimeCard,
+        Heal,
+        Money
+    }
 }

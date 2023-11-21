@@ -151,8 +151,8 @@ namespace Cardinals.Game {
 
         public void DrawCard(int count) => FindAnyObjectByType<CardManager>().Draw(count);
         public void HitPlayer(int damage) => Player.Hit(damage);
+        
         public void AddGold(int value) => Player.PlayerInfo.AddGold(value);
-
         public void UseGold(int value) => Player.PlayerInfo.UseGold(value);
         
         public void GetArtifact(int grade, int choiceCnt, int selectCnt) // grade는 임시임

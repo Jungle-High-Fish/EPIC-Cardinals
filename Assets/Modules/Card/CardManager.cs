@@ -19,6 +19,8 @@ namespace Cardinals
         [ShowInInspector] private List<Card> _discardPile;
         private List<CardUI> _handcardsUI;
 
+        public IEnumerable<Card> HandCards => _handCards;
+
         [SerializeField] private Transform _cardDeckUIParent;
 
         public void Init()
@@ -187,6 +189,12 @@ namespace Cardinals
                             _state = CardState.Idle;
                             _prevCardNumber = -1;
                             _canActionUse = true;
+                            yield break;
+                        
+                        case MouseState.CardEvent:
+                            GameManager.I.UI.UICardEvent.SelectedCard(_handCards[_selectCardIndex].CardNumber);
+                            Discard(_selectCardIndex);
+                            _state = CardState.Idle;
                             yield break;
                     }
 
