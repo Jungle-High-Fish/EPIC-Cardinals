@@ -47,7 +47,7 @@ namespace Cardinals
 
         private void AddBuff(BaseBuff baseBuff)
         {
-            Instantiate(_buffPrefab, _buffTr);
+            Instantiate(_buffPrefab, _buffTr).GetComponent<UIBuff>().Init(baseBuff);
         }
         
         private void AddPotion(int index, Potion potion)

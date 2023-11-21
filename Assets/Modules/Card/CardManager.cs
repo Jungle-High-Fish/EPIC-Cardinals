@@ -98,6 +98,11 @@ namespace Cardinals
                 if (_drawPile.Count == 0)
                 {
                     Shuffle();
+                    if (_drawPile.Count == 0)
+                    {
+                        Debug.Log("드로우 실패");
+                        return;
+                    }
                 }
 
                 int randIndex = Random.Range(0, _drawPile.Count);

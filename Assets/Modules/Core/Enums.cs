@@ -228,6 +228,7 @@ namespace Cardinals.Enums {
         Fracture, // 골절
         Slow,
         Wet, // 젖음
+        Heal,
     }
 
     public enum BuffCountDecreaseType : int
