@@ -46,7 +46,7 @@ namespace Cardinals
         }
         public override void OnTurn()
         {
-            FindAnyObjectByType<CardManager>().OnTurn();
+            GameManager.I.Stage.CardManager.OnTurn();
             _isDamagedThisTurn = false;
         }
 
@@ -60,7 +60,7 @@ namespace Cardinals
             }
 
             GameManager.I.Next();
-            FindAnyObjectByType<CardManager>().EndTurn();
+            GameManager.I.Stage.CardManager.EndTurn();
             
             
             if (PlayerInfo.IsBlessEarth1)
@@ -122,7 +122,7 @@ namespace Cardinals
             }
             _onTile.Arrive(this);
         }
-
+        
         public IEnumerator PrevMoveTo(int count, float time)
         {
             _onTile?.Leave(this);
@@ -141,8 +141,8 @@ namespace Cardinals
             _onTile.Arrive(this);
         }
 
-        public IEnumerator CardAction(int num) {
-            _onTile.CardAction(num);
+        public IEnumerator CardAction(int num, BaseEntity target) {
+            _onTile.CardAction(num, target);
             yield return null;
         }
 

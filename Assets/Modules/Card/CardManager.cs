@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Util;
 
 namespace Cardinals
 {
     public class CardManager : MonoBehaviour
     {
-        [SerializeField] private Player _player;
         private int _prevCardNumber=-1;
         private int _selectCardIndex;
-        [SerializeField] private int _drawCardCount;
         private bool _canActionUse;
         private CardState _state;
         [SerializeField] private MouseState _mouseState = MouseState.Cancel;
@@ -21,13 +20,8 @@ namespace Cardinals
         private List<CardUI> _handcardsUI;
 
         [SerializeField] private Transform _cardDeckUIParent;
-        [SerializeField] private GameObject _cardUIPrefab;
 
-        private void Start()
-        {
-            Init();
-        }
-        private void Init()
+        public void Init()
         {
             _drawPile = new();
             _handCards = new();
@@ -46,6 +40,11 @@ namespace Cardinals
             _drawPile.Add(card4);
             _drawPile.Add(card5);
             _drawPile.Add(card6);
+        }
+
+        public void SetCardDeckUIParent(Transform parent)
+        {
+            _cardDeckUIParent = parent;
         }
 
         public int SelectCardIndex
@@ -75,7 +74,7 @@ namespace Cardinals
         [Button]
         public void OnTurn()
         {
-            Draw(_drawCardCount);
+            Draw(Constants.GameSetting.Player.CardDrawCount);
             _canActionUse = false;
         }
 
@@ -157,7 +156,8 @@ namespace Cardinals
         }
         private void UpdateCardUI(Card card, int index)
         {
-            GameObject cardUI = Instantiate(_cardUIPrefab, _cardDeckUIParent);
+            GameObject cardUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Card);
+            GameObject cardUI = Instantiate(cardUIPrefab, _cardDeckUIParent);
             cardUI.GetComponent<CardUI>().Init(card, index, this);
             cardUI.transform.SetSiblingIndex(index);
             _handcardsUI.Insert(index, cardUI.GetComponent<CardUI>());
@@ -204,7 +204,7 @@ namespace Cardinals
             StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
         }
 
-        private bool CardUseAction(int num)
+        private bool CardUseAction(int num, BaseEntity target=null)
         {
             if (!_canActionUse)
             {
@@ -217,7 +217,7 @@ namespace Cardinals
                 //Ÿ�Ͽ��� �׼� ȣ��
                 _prevCardNumber = num;
 
-                StartCoroutine(GameManager.I.Player.CardAction(num));
+                StartCoroutine(GameManager.I.Player.CardAction(num, target));
                 return true;
             }
 

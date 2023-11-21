@@ -11,7 +11,7 @@ namespace Cardinals.Board {
             _tile = tile;
         }
         
-        public abstract void Act(int value);
+        public abstract void Act(int value, BaseEntity target);
         public abstract void ArriveAction();
     }
 

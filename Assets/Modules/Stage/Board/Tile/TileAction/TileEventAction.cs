@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Cardinals.Board {
     
     public class TileEventAction: TileAction {
-        public override void Act(int value) {
+        public override void Act(int value, BaseEntity target) {
             throw new System.NotImplementedException();
         }
 

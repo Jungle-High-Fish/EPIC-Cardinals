@@ -11,15 +11,25 @@ namespace Cardinals.Game {
     public class StageController : MonoBehaviour {
         public Board.Board Board => _board;
         public Player Player => _player;
+        public CardManager CardManager => _cardManager;
         public BaseEvent CurEvent => _curEvent;
+        public List<BaseEnemy> Enemies {
+            get {
+                if (_curEvent == null) return null;
+                if (_curEvent is not BattleEvent) return null;
+                
+                return (_curEvent as BattleEvent).Enemies;
+            }
+        }
         
         private Stage _stage;
     
         private Transform _enemyParentTransform;
-        private Transform _enemyUIParentTransform;
+        private Transform _coreTransform;
 
         private Board.Board _board;
         private Player _player;
+        private CardManager _cardManager;
         private BaseEvent _curEvent;
 
         private RewardBox _rewardBox;
@@ -46,7 +56,11 @@ namespace Cardinals.Game {
 
             InstantiateBaseObjs();
 
+            InstantiateGround();
+
             yield return _board.SetBoard(stage.BoardData);
+
+            SetCardSystem();
 
             PlacePlayer();
         }
@@ -78,9 +92,7 @@ namespace Cardinals.Game {
 
         public BaseEnemy InstantiateEnemy(EnemyDataSO enemyData) {
             var enemyType = EnumHelper.GetEnemyInstanceType(enemyData.enemyType);
-
-            GameObject UIEnemyInfoPrefab 
-                = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIEnemyInfo);
+            
             GameObject enemyRendererPrefab 
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_EnemyRenderer);
 
@@ -90,28 +102,28 @@ namespace Cardinals.Game {
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
             enemyRenderer.transform.position = enemyRenderer.transform.position + new Vector3(0, 2, 0);
 
-            GameObject UIEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, _enemyUIParentTransform);
-            UIEnemyInfo.GetComponent<UIEnemyInfo>().Init(enemyComp);
+            GameManager.I.UI.SetEnemyUI(enemyComp);
 
             return enemyComp;
+        }
+
+        private void InstantiateGround() {
+            GameObject groundPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_StageGround);
+            GameObject groundObj = GameObject.Instantiate(groundPrefab, transform);
+            groundObj.transform.position = Vector3.zero;
         }
 
         private void InstantiateBaseObjs() {
             GameObject EnemyParentTransformObj = new GameObject($"@{Constants.Common.InstanceName.EnemyPlace}");
             _enemyParentTransform = EnemyParentTransformObj.transform;
-            
-            // 임시로 Enemy UI 캔버스에 생성
-            Transform CanvasTransform = GameObject.Find("Canvas").transform;
-            GameObject EnemyUIParentTransformObj = new GameObject(
-                    $"@{Constants.Common.InstanceName.EnemyUI}", 
-                    typeof(RectTransform)
-            );
-            EnemyUIParentTransformObj.GetComponent<RectTransform>().MatchParent(CanvasTransform as RectTransform);
-            _enemyUIParentTransform = EnemyUIParentTransformObj.transform;
 
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
             BoardObj.transform.position = Vector3.zero;
             _board = BoardObj.AddComponent<Board.Board>();
+
+            GameObject coreObj = new GameObject($"@{Constants.Common.InstanceName.Core}");
+            _coreTransform = coreObj.transform;
+            _coreTransform.position = Vector3.zero;
         }
 
         private void PlacePlayer() {
@@ -120,11 +132,19 @@ namespace Cardinals.Game {
             _player = playerObj.GetComponent<Player>();
             _player.Init(15);
 
-            Transform CanvasTransform = GameObject.Find("PlayerCanvas").transform;
-            GameObject playerUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerInfo);
-            GameObject playerUIObj = GameObject.Instantiate(playerUIPrefab, CanvasTransform);
-
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
+            
+            GameManager.I.UI.InitPlayerUI();
+        }
+
+        private void SetCardSystem() {
+            GameObject cardManagerObj = new GameObject($"@{Constants.Common.InstanceName.CardManager}");
+            cardManagerObj.transform.position = Vector3.zero;
+            _cardManager = cardManagerObj.AddComponent<CardManager>();
+            _cardManager.transform.SetParent(_coreTransform);
+            _cardManager.Init();
+
+            GameManager.I.UI.SetCardSystemUI();
         }
 
         #region Quick-Acess Method
