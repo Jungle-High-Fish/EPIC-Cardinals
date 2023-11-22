@@ -16,6 +16,7 @@ namespace Cardinals
         
         private List<Potion> _potions;
         public Action<int, Potion> AddPotionEvent { get; set; }
+        public Action<int, Potion> DeletePotionEvent { get; set; }
         public List<BlessType> BlessList => _blessList;
         public List<Artifact> ArtifactList => _artifacts;
         public List<Potion> PotionList => _potions;
@@ -69,8 +70,9 @@ namespace Cardinals
 
         public void DeletePotion(int index)
         {
-            _potions[index].DeletePotionEvent?.Invoke(_potions[index]);
+            Potion potion = _potions[index];
             _potions[index] = null;
+            DeletePotionEvent?.Invoke(index, potion);
         }
 
         public void UsePotion(int index)

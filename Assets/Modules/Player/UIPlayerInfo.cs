@@ -68,7 +68,7 @@ namespace Cardinals
         {
             GameObject potionUI =
                         GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPotion), _potionTr);
-            potionUI.GetComponent<UIPotion>().Init(index, potion.Name, potion);
+            potionUI.GetComponent<UIPotion>().Init(index, potion.PotionType);
         }
 
         private void AddArtifact(Artifact artifact)

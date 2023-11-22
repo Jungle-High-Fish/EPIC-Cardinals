@@ -33,13 +33,16 @@ namespace Cardinals.Enums {
                 case PotionType.Empty:
                     return null;
                 case PotionType.Jump:
-                    return new JumpPotion(30, "JumpPotion");
+                    return new JumpPotion();
                 case PotionType.Reverse:
-                    return new ReversePotion(30, "ReversePotion");
+                    return new ReversePotion();
+                    //return new ReversePotion(30, "ReversePotion");
                 case PotionType.Quick:
-                    return new QuickPotion(40, "QuickPotion");
+                    return new QuickPotion();
+                    //return new QuickPotion(40, "QuickPotion");
                 case PotionType.Heal:
-                    return new HealPotion(30, "HealPotion");
+                    return new HealPotion();
+                    //return new HealPotion(30, "HealPotion");
                 default:
                     return null;
             }
