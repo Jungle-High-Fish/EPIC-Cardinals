@@ -289,6 +289,17 @@ namespace Cardinals.Enums {
 
     }
 
+    public enum BlessType : int
+    {
+        Empty,
+        BlessFire1,
+        BlessFire2,
+        BlessWater1,
+        BlessWater2,
+        BlessEarth1,
+        BlessEarth2,
+    }
+
     #region Board Event
     public enum BoardEventType : int
     {
@@ -328,4 +339,31 @@ namespace Cardinals.Enums {
         Rigloo,
         Warp
     }
+    public enum CardType
+    {
+        Normal,
+        Gold
+    }
+
+    public enum CardState
+    {
+        Idle,
+        Select
+    }
+
+    public enum MouseState
+    {
+        Action,
+        Move,
+        Cancel,
+        CardEvent,
+    }
+    public enum CardPileType 
+    {
+        Empty,
+        DrawPile, // 뽑을 수 있는 카드를 가진 파일
+        Hand, // 손에 들고있는 카드
+        DiscardPile // 카드무덤
+    }
+
 }

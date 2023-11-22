@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Util;
 using Cardinals.Enums;
+using Sirenix.OdinInspector;
 
 namespace Cardinals
 {
@@ -16,6 +18,7 @@ namespace Cardinals
 
         private List<Artifact> _artifacts;
         public Action<Artifact> AddArtifactEvent { get; set; }
+        public Action<BlessType> AddBlessEvent { get; set; }
         public PlayerInfo()
         {
             _potions = new();
@@ -30,61 +33,21 @@ namespace Cardinals
                 _artifacts.Add(null);
             }
         }
-        private bool _isBlessFire1;
-        public bool IsBlessFire1 // 그을린 상처
-        {
-            get => _isBlessFire1;
-            set
-            {
-                _isBlessFire1 = value;
-            }
-        }
-        private bool _isBlessFire2;
-        public bool IsBlessFire2 // 메테오
-        {
-            get => _isBlessFire2;
-            set
-            {
-                _isBlessFire2 = value;
-            }
-        }
-        private bool _isBlessWater1;
-        public bool IsBlessWater1 // 잔잔한 수면
-        {
-            get => _isBlessWater1;
-            set
-            {
-                _isBlessWater1 = value;
-            }
-        }
-        private bool _isBlessWater2;
-        public bool IsBlessWater2 // 범람
-        {
-            get => _isBlessWater2;
-            set
-            {
-                _isBlessWater2 = value;
-            }
-        }
-        private bool _isBlessEarth1;
-        public bool IsBlessEarth1 // 바위 잔해
-        {
-            get => _isBlessEarth1;
-            set
-            {
-                _isBlessEarth1 = value;
-            }
-        }
-        private bool _isBlessEarth2;
-        public bool IsBlessEarth2 // 깨지지 않는 바위
-        {
-            get => _isBlessEarth2;
-            set
-            {
-                _isBlessEarth2 = value;
-            }
-        }
 
+        private List<BlessType> _blessList = new();
+        
+        public bool CheckBlessExist(BlessType blessType)
+        {
+            return _blessList.Any(bless => bless == blessType);
+        }
+        
+        [Button]
+        public void GetBless(BlessType blessType)
+        {
+            _blessList.Add(blessType);
+            AddBlessEvent?.Invoke(blessType);
+            Debug.Log($"{blessType}을 획득했습니다");
+        }
        
         public void AddPotion(PotionType potionType)
         {
@@ -99,7 +62,6 @@ namespace Cardinals
                 }
             }
         }
-
 
         public void DeletePotion(int index)
         {

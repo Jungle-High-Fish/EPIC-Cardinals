@@ -14,10 +14,6 @@ public class Card
 
     public bool IsVolatile => _isVolatile;
     public int CardNumber => _cardNumber;
-    public enum CardType
-    {
-        Normal,
-        Gold
-    }
+    
 
 }

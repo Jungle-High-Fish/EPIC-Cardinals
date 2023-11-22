@@ -39,8 +39,6 @@ namespace Cardinals
                     {
                         DieEvent?.Invoke();
                     }
-
-                    
                 }
             }
         }
@@ -63,19 +61,19 @@ namespace Cardinals
             GameManager.I.Stage.CardManager.EndTurn();
             
             
-            if (PlayerInfo.IsBlessEarth1)
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth1))
             {
-                Bless5();
+                BlessEarth1();
             }
             
-            if (!PlayerInfo.IsBlessEarth2)
+            if (!PlayerInfo.CheckBlessExist(BlessType.BlessEarth2))
             {
                 DefenseCount = 0;
             }
 
         }
 
-        public void Bless3()
+        public void BlessWater1()
         {
             if (_isDamagedThisTurn)
             {
@@ -86,7 +84,7 @@ namespace Cardinals
             Heal(3);
         }
 
-        void Bless5()
+        void BlessEarth1()
         {
             if (DefenseCount > 0)
             {

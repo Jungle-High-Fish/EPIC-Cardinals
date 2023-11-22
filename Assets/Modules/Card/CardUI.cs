@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Cardinals.Enums;
 using TMPro;
 
 namespace Cardinals
@@ -11,6 +12,7 @@ namespace Cardinals
     {
         private int _cardIndex;
         [SerializeField] private TextMeshProUGUI _numberText;
+        [SerializeField] private GameObject _volatileText;
         [SerializeField] private bool _isSelect;
         private Card _card;
         private CardManager _cardManager;
@@ -37,6 +39,7 @@ namespace Cardinals
             _cardManager = cardManager;
             Image image = GetComponent<Image>();
             _numberText.text = card.CardNumber.ToString();
+            _volatileText.SetActive(card.IsVolatile);
 
             switch (card.CardNumber)
             {
@@ -83,16 +86,3 @@ namespace Cardinals
     }
 }
 
-public enum CardState
-{
-    Idle,
-    Select
-}
-
-public enum MouseState
-{
-    Cancel,
-    Action,
-    Move,
-    CardEvent,
-}

@@ -147,11 +147,11 @@ GameObject:
   - component: {fileID: 9089165450445652087}
   - component: {fileID: 9089165450445652081}
   - component: {fileID: 9089165450445652086}
-  - component: {fileID: 9089165450445652080}
   - component: {fileID: 9089165450445652083}
   - component: {fileID: 9089165450445652082}
+  - component: {fileID: 5478010468686651689}
   m_Layer: 5
-  m_Name: BlessItemPrefab
+  m_Name: UIBless
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,21 +217,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9089165450445652080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089165450445652084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d386ebbec2d742d2a7a59189b709e464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _iconImg: {fileID: 9089165451404037292}
-  _nameTMP: {fileID: 9089165450057765404}
-  _descriptionTMP: {fileID: 9089165450745035029}
 --- !u!114 &9089165450445652083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +257,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &5478010468686651689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089165450445652084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a0a8dc8ab5bd54dbb93463dfc76fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImg: {fileID: 9089165451404037292}
+  _nameTMP: {fileID: 9089165450057765404}
+  _descipritonTMP: {fileID: 9089165450745035029}
 --- !u!1 &9089165450745035243
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 101.50914, y: 0}
+  m_AnchoredPosition: {x: 101.509155, y: 0}
   m_SizeDelta: {x: 113.0183, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9089165451032110846

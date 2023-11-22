@@ -6,10 +6,11 @@ using DG.Tweening;
 using Util;
 using Sirenix.OdinInspector;
 using Cardinals.Enums;
+using Cardinals.UI;
 
 namespace Cardinals
 {
-    public class UIPlayerInfo : MonoBehaviour
+    public class UIPlayerInfo : MonoBehaviour, IDescriptionInstTrInfo
     {
         [SerializeField] private Player _player;
 
@@ -26,12 +27,19 @@ namespace Cardinals
         [SerializeField] private GameObject _playerInfoPanel;
         [SerializeField] private float _panelMoveDistance;
 
+        [Header("Bless")]
+        [SerializeField] private Transform _blessTr;
+        
         [Header("Potion")]
         [SerializeField] private Transform _potionTr;
 
         [Header("Artifact")]
         [SerializeField] private Transform _artifactTr;
         private bool _isPanelOpen;
+
+        [Header("Description")]
+        [SerializeField] private Transform _descriptionInstTr;
+        public Transform DescriptionInstTr => _descriptionInstTr;
         
         public void Init()
         {
@@ -40,6 +48,7 @@ namespace Cardinals
             _player.AddBuffEvent += AddBuff;
             _player.PlayerInfo.AddPotionEvent += AddPotion;
             _player.PlayerInfo.AddArtifactEvent += AddArtifact;
+            _player.PlayerInfo.AddBlessEvent += AddBless;
         }
 
         private void UpdateHp(int hp, int maxHp)
@@ -68,6 +77,12 @@ namespace Cardinals
             artifactUI.GetComponent<UIArtifact>().Init(artifact.Name);
         }
 
+        private void AddBless(BlessType blessType)
+        {
+            GameObject artifactUI = GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIBless), _blessTr);
+            artifactUI.GetComponent<UIBless>().Init(blessType);
+        }
+        
         public void OpenPanel()
         {
             if (_isPanelOpen)
