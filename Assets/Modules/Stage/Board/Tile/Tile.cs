@@ -50,6 +50,7 @@ namespace Cardinals.Board {
         public bool IsMouseHovered => _isMouseHovered;
 
         private TileData _tileData;
+        
         private ComponentGetter<TileAnimation> _tileAnimation
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
 
@@ -74,7 +75,8 @@ namespace Cardinals.Board {
         public TileAction TileAction=> _tileAction;
 
         // 타일의 마법 관련 변수
-        private TileMagic _tileMagic;
+        private TileMagic _tileMagic; 
+        public TileMagic TileMagic => _tileMagic;
 
         // 타일의 이펙트 관련 변수
         private TileEffect _tileEffect;

@@ -302,7 +302,7 @@ namespace Cardinals.Enums {
     public enum BoardEventType : int
     {
         Empty,
-        // Tile
+        Tile,
         Roulette,
         Number,
         Shop,

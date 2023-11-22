@@ -2,6 +2,7 @@ using System;
 using Cardinals.BoardEvent.Card;
 using Cardinals.BoardEvent.Roulette;
 using Cardinals.BoardEvent.Shop;
+using Cardinals.BoardEvent.Tile;
 using Cardinals.Enemy;
 using Cardinals.Game;
 using Cardinals.UI;
@@ -33,9 +34,11 @@ namespace Cardinals
         private UICardEvent _uiCardEvent;
         private UIShop _uiShop;
         private UIRoulette _uiRoulette;
+        private UITileEvent _uiTileEvent;
         public UICardEvent UICardEvent => _uiCardEvent;
         public UIShop UIShop => _uiShop;
         public UIRoulette UIRoulette => _uiRoulette;
+        public UITileEvent UITileEvent => _uiTileEvent;
         #endregion
         
         public void Init() {
@@ -53,6 +56,7 @@ namespace Cardinals
             InstantiateBoardEventCardUI();
             InstantiateBoardEventRouletteUI();
             InstantiateBoardEventShopUI();
+            InstantiateBoardEventTileUI();
         }
 
         public void InitPlayerUI() {
@@ -136,6 +140,14 @@ namespace Cardinals
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Shop);
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
             _uiShop = obj.GetComponent<UIShop>();
+            obj.SetActive(false); 
+        }
+
+        private void InstantiateBoardEventTileUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Tile);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+            _uiTileEvent = obj.GetComponent<UITileEvent>();
             obj.SetActive(false); 
         }
     }
