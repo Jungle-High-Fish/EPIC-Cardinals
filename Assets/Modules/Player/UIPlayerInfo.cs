@@ -10,7 +10,7 @@ using Cardinals.UI;
 
 namespace Cardinals
 {
-    public class UIPlayerInfo : MonoBehaviour, IDescriptionInstTrInfo
+    public class UIPlayerInfo : MonoBehaviour
     {
         [SerializeField] private Player _player;
 
@@ -36,10 +36,6 @@ namespace Cardinals
         [Header("Artifact")]
         [SerializeField] private Transform _artifactTr;
         private bool _isPanelOpen;
-
-        [Header("Description")]
-        [SerializeField] private Transform _descriptionInstTr;
-        public Transform DescriptionInstTr => _descriptionInstTr;
         
         public void Init()
         {

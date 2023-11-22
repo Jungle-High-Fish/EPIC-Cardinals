@@ -5,6 +5,7 @@ using Cardinals.Enums;
 using System;
 using System.Linq;
 using Cardinals.Board;
+using Cardinals.Buff;
 using Cardinals.Enemy;
 using Sirenix.OdinInspector;
 using Util;
@@ -227,6 +228,17 @@ namespace Cardinals.Game {
         public void AddPotion()
         {
             
+        }
+
+        [Button]
+        public void AddBuff()
+        {
+            Enemies.FirstOrDefault().AddBuff(new Burn(1));
+            Enemies.FirstOrDefault().AddBuff(new Fracture(1));
+            Enemies.FirstOrDefault().AddBuff(new Slow());
+            Player.AddBuff(new Burn(1));
+            Player.AddBuff(new Fracture(1));
+            Player.AddBuff(new Slow());
         }
         #endregion
 

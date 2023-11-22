@@ -44,7 +44,7 @@ namespace Cardinals
         {
             if (args.Action == NotifyCollectionChangedAction.Add)
             {
-                BaseBuff buff = (sender as ObservableCollection<BaseBuff>).First();
+                BaseBuff buff = (sender as ObservableCollection<BaseBuff>).Last();
                 AddBuffEvent?.Invoke(buff);
             }
         }
