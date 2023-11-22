@@ -287,6 +287,17 @@ namespace Cardinals.Enums {
 
     }
 
+    public enum BlessType : int
+    {
+        Empty,
+        BlessFire1,
+        BlessFire2,
+        BlessWater1,
+        BlessWater2,
+        BlessEarth1,
+        BlessEarth2,
+    }
+
     #region Board Event
     public enum BoardEventType : int
     {

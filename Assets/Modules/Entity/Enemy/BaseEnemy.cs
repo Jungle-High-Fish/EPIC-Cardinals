@@ -137,7 +137,7 @@ namespace Cardinals
         public override void AddBuff(BaseBuff buff)
         {
             // [축복] 그을린 상처: 적을 공격 할 때, 화상이 걸린 상태라면 1의 데미지를 추가로 입힘
-            if (GameManager.I.Player.PlayerInfo.IsBlessFire1)
+            if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire1))
             {
                 if (buff.Type == BuffType.Burn)
                 {
@@ -151,7 +151,7 @@ namespace Cardinals
             base.AddBuff(buff);
             
             // [축복] 메테오: 적의 화상 중첩이 10이 되면, 중첩을 0으로 만들고 강력한 메테오를 소환합니다. (20 데미지)
-            if (GameManager.I.Player.PlayerInfo.IsBlessFire2)
+            if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire2))
             {
                 if (buff.Type == BuffType.Burn)
                 {

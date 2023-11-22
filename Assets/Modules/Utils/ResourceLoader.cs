@@ -10,6 +10,7 @@ namespace Util {
 		private static Dictionary<string, GameObject> _prefabList = new Dictionary<string, GameObject>();
 		
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
+		private static Dictionary<string, ScriptableObject> _SOList = new ();
 		private static HashSet<string> _loadedSpriteDirectory = new HashSet<string>();
 
 		public static GameObject LoadPrefab(string prefabName)
@@ -35,6 +36,17 @@ namespace Util {
 			}
 			_spriteList.Add(spriteName, Resources.Load<Sprite>(targetPath));
 			return _spriteList[spriteName];
+		}
+
+		public static T LoadSO<T>(string soName) where T : ScriptableObject
+		{
+			string targetPath = Cardinals.Constants.FilePath.Resources.SO + soName;
+
+			if (!_SOList.ContainsKey(soName))
+			{
+				_SOList.Add(soName, Resources.Load<T>(targetPath));
+			}
+			return _SOList[soName] as T;
 		}
 
 		public static Dictionary<string, Sprite> LoadSpritesInDirectory(string directoryName) {
