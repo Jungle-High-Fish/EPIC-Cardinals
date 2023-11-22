@@ -21,6 +21,10 @@ namespace Cardinals
                 potions.Add(null);
             }
         }
+
+        private List<BlessType> _blessList = new();
+        public IEnumerable<BlessType> BlessList => _blessList;
+        
         private bool _isBlessFire1;
         public bool IsBlessFire1 // 그을린 상처
         {
@@ -76,6 +80,34 @@ namespace Cardinals
             }
         }
 
+        public void GetBless(BlessType blessType)
+        {
+            switch (blessType)
+            {
+                case BlessType.BlessFire1 :
+                    _isBlessFire1 = true;
+                    break;
+                case BlessType.BlessFire2 :
+                    _isBlessFire2 = true;
+                    break;
+                case BlessType.BlessWater1 :
+                    _isBlessWater1 = true;
+                    break;
+                case BlessType.BlessWater2 :
+                    _isBlessWater2 = true;
+                    break;
+                case BlessType.BlessEarth1 :
+                    _isBlessEarth1 = true;
+                    break;
+                case BlessType.BlessEarth2 :
+                    _isBlessEarth2 = true;
+                    break;
+            }
+
+            _blessList.Add(blessType);
+            Debug.Log($"{blessType}을 획득했습니다");
+            // [TODO] Player Info UI에 추가 필요 (프리팹 생성)
+        }
        
         public void AddPotion(PotionType potionType)
         {

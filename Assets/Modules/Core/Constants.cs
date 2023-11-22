@@ -16,6 +16,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_CornerTile = "Board/CornerTile";
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
+            public const string Prefabs_Stage_Totem = "Stage/Totem";
             
             public const string Prefabs_UI_Canvas = "UI/Canvas";
             
@@ -48,6 +49,7 @@ namespace Cardinals.Constants {
             // Scriptable Object
             public const string SO = "SO/";
             public const string SO_BoardData = "Stage/BoardData/";
+            public const string SO_BlessData = "Bless/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";
