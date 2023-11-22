@@ -132,8 +132,6 @@ namespace Cardinals.Board {
             string title="",
             string description=""
         ) {
-            _selectionType = selectionType;
-
             bool hasRequestHandled = false;
             List<Tile> result = new List<Tile>();
 
@@ -143,7 +141,7 @@ namespace Cardinals.Board {
             }
 
             void OnCancelSelect() {
-                result = null;
+                result.Clear();
                 hasRequestHandled = true;
             }
 
@@ -156,6 +154,7 @@ namespace Cardinals.Board {
                     description
                 );
 
+                _selectionType = selectionType;
                 SetTileSelectable();
                 yield return new WaitUntil(() => hasRequestHandled);
                 SetTileUnSelectable();
@@ -232,8 +231,10 @@ namespace Cardinals.Board {
                 _selectedTiles.Remove(target);
                 target.Unselect();
             } else {
+                List<Tile> temp = new List<Tile>(_selectedTiles);
                 UnselectAll();
                 _selectedTiles.Add(target);
+                _selectedTiles.AddRange(temp);
                 foreach (Tile tile in _selectedTiles) {
                     tile.Select();
                 }
