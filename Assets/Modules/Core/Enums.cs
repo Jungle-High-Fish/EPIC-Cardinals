@@ -356,4 +356,12 @@ namespace Cardinals.Enums {
         Cancel,
         CardEvent,
     }
+    public enum CardPileType 
+    {
+        Empty,
+        DrawPile, // 뽑을 수 있는 카드를 가진 파일
+        Hand, // 손에 들고있는 카드
+        DiscardPile // 카드무덤
+    }
+
 }

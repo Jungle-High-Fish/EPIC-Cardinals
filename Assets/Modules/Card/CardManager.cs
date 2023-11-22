@@ -30,19 +30,13 @@ namespace Cardinals
             _handCards = new();
             _handcardsUI = new();
             _discardPile = new();
-            //�׽�Ʈ��
-            Card card1 = new Card(1, false);
-            Card card2 = new Card(2, false);
-            Card card3 = new Card(3, false);
-            Card card4 = new Card(1, false);
-            Card card5 = new Card(4, false);
-            Card card6 = new Card(5, false);
-            _drawPile.Add(card1);
-            _drawPile.Add(card2);
-            _drawPile.Add(card3);
-            _drawPile.Add(card4);
-            _drawPile.Add(card5);
-            _drawPile.Add(card6);
+
+            AddCard(1, false, CardPileType.DrawPile);
+            AddCard(1, false, CardPileType.DrawPile);
+            AddCard(2, false, CardPileType.DrawPile);
+            AddCard(3, false, CardPileType.DrawPile);
+            AddCard(4, false, CardPileType.DrawPile);
+            AddCard(5, false, CardPileType.DrawPile);
         }
 
         public void SetCardDeckUIParent(Transform parent)
@@ -96,9 +90,44 @@ namespace Cardinals
             }
         }
 
-        public void AddCard(int num, bool isVolatile)
+        [Button]
+        public void AddCard(int num, bool isVolatile, CardPileType cardPileType)
         {
+            Card card = new Card(num, isVolatile);
+            switch (cardPileType)
+            {
+                case CardPileType.DrawPile:
+                    _drawPile.Add(card);
+                    break;
 
+                case CardPileType.Hand:
+                    for (int j = 0; j < _handCards.Count; j++)
+                    {
+                        if (_handCards[j].CardNumber >= card.CardNumber)
+                        {
+                            _handCards.Insert(j, card);
+                            UpdateCardUI(card, j);
+                            break;
+                        }
+
+                        if (j == _handCards.Count - 1)
+                        {
+                            _handCards.Add(card);
+                            UpdateCardUI(card, j + 1);
+                            break;
+                        }
+                    }
+                    UpdateCardIndex();
+                    break;
+
+                case CardPileType.DiscardPile:
+                    _discardPile.Add(card);
+                    break;
+
+                default:
+                    Debug.Log("카드 추가 실패");
+                    break;
+            }
         }
         [Button]
         public void Draw(int count)
@@ -155,7 +184,10 @@ namespace Cardinals
             _handcardsUI.RemoveAt(index);
 
             Card card = _handCards[index];
-            _discardPile.Add(card);
+            if (!card.IsVolatile)
+            {
+                _discardPile.Add(card);
+            }
             _handCards.Remove(card);
             UpdateCardIndex();
         }
