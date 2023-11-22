@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
 using Cardinals.Enemy;
+using Cardinals.Game;
 
 namespace Cardinals.Enums {
 
@@ -51,13 +52,13 @@ namespace Cardinals.Enums {
                 case ArtifactType.Empty:
                     return null;
                 case ArtifactType.Verdant:
-                    return new VerdantBlossom(200, "VerdantBlossom", artifactType);
+                    return new VerdantBlossom(artifactType);
                 case ArtifactType.Grimoire:
-                    return new GrimoireSatchel(250, "GrimoireSatchel", artifactType);
+                    return new GrimoireSatchel(artifactType);
                 case ArtifactType.Rigloo:
-                    return new RiglooShoes(180, "RiglooShoes", artifactType);
+                    return new RiglooShoes(artifactType);
                 case ArtifactType.Warp:
-                    return new WarpAmulet(230, "WarpAmulet", artifactType);
+                    return new WarpAmulet(artifactType);
                 default:
                     return null;
             }

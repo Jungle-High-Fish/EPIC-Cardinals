@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using Cardinals.Game;
 using UnityEngine;
 using Util;
 
@@ -36,24 +37,28 @@ namespace Cardinals.UI {
         private void OnEnable() {
             GameManager.I.Player.PlayerInfo.AddBlessEvent -= UpdateBlessUI;
             GameManager.I.Player.PlayerInfo.AddBlessEvent += UpdateBlessUI;
+
+            GameManager.I.Player.PlayerInfo.AddArtifactEvent -= UpdateArtifactUI;
+            GameManager.I.Player.PlayerInfo.AddArtifactEvent += UpdateArtifactUI;
         }
 
         private void OnDisable() {
             GameManager.I.Player.PlayerInfo.AddBlessEvent -= UpdateBlessUI;
+            GameManager.I.Player.PlayerInfo.AddArtifactEvent -= UpdateArtifactUI;
         }
 
-        private void ResetBlessUI() {
-            foreach(var bless in _blessList) {
-                Destroy(bless.gameObject);
+        private void ResetUIData(IList dataList) {
+            foreach(var d in dataList) {
+                Destroy((d as MonoBehaviour).gameObject);
             }
 
-            _blessList.Clear();
+            dataList.Clear();
         }
 
         private void UpdateBlessUI(BlessType _) {
             if (!_isPanelOpen) return;
 
-            ResetBlessUI();
+            ResetUIData(_blessList);
 
             var blessList = GameManager.I.Player.PlayerInfo.BlessList;
             foreach (var b in blessList) {
@@ -62,6 +67,21 @@ namespace Cardinals.UI {
                 var blessUI = blessUIObj.GetComponent<UIBless>();
                 blessUI.Init(b);
                 _blessList.Add(blessUI);
+            }
+        }
+
+        private void UpdateArtifactUI(Artifact _) {
+            if (!_isPanelOpen) return;
+
+            ResetUIData(_artifactList);
+
+            var artifactList = GameManager.I.Player.PlayerInfo.ArtifactList;
+            foreach (var a in artifactList) {
+                var artifactUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_PlayerDetail_Artifact);
+                var artifactUIObj = Instantiate(artifactUIPrefab, _artifactListArea.Get(gameObject));
+                var artifactUI = artifactUIObj.GetComponent<UIArtifact>();
+                artifactUI.Init(a.Type);
+                _artifactList.Add(artifactUI);
             }
         }
     }

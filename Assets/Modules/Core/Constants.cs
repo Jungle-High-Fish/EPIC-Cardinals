@@ -61,6 +61,8 @@ namespace Cardinals.Constants {
             public const string SO = "SO/";
             public const string SO_BoardData = "Stage/BoardData/";
             public const string SO_BlessData = "Bless/";
+            public const string SO_ArtifactData = "Artifacts/";
+            public const string SO_PotionData = "Potions/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";
