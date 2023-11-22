@@ -7,7 +7,7 @@ using Cardinals.UI;
 namespace Cardinals
 {
 
-    public class UIArtifact : MonoBehaviour, IDescription
+    public class UIArtifact: MonoBehaviour, IDescription
     {
         [SerializeField] private Image _artifactIcon;
         private Sprite _artifactSprite;
@@ -15,7 +15,7 @@ namespace Cardinals
 
         public string Name => _name;
 
-        public string Description => "Å×½ºÆ®¶ó±¼~";
+        public string Description => "";
 
         public Sprite IconSprite => _artifactSprite;
 

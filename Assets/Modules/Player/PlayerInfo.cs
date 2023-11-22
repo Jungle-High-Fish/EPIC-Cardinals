@@ -15,6 +15,7 @@ namespace Cardinals
         
         private List<Potion> _potions;
         public Action<int, Potion> AddPotionEvent { get; set; }
+        public List<BlessType> BlessList => _blessList;
 
         private List<Artifact> _artifacts;
         public Action<Artifact> AddArtifactEvent { get; set; }

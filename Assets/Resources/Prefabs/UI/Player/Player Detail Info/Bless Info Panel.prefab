@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 6469423067833747305}
   - component: {fileID: 9117441323207272822}
   - component: {fileID: 8511739025034080075}
+  - component: {fileID: 1276537091964593990}
   m_Layer: 5
   m_Name: Bless Info Panel
   m_TagString: Untagged
@@ -214,6 +215,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1.2
+--- !u!114 &1276537091964593990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077987952842324136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a0a8dc8ab5bd54dbb93463dfc76fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4491114678495751617
 GameObject:
   m_ObjectHideFlags: 0
