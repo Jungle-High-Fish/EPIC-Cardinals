@@ -216,7 +216,9 @@ namespace Cardinals.Enums {
     public enum TileAnimationType {
         None,
         Shake,
-        Jump
+        Jump,
+        Flip,
+        FlipBack,
     }
     
     public enum StageEventType
