@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Util;
 using Cardinals.Enums;
+using Sirenix.OdinInspector;
 
 namespace Cardinals
 {
@@ -39,13 +40,13 @@ namespace Cardinals
         {
             return _blessList.Any(bless => bless == blessType);
         }
-
+        
+        [Button]
         public void GetBless(BlessType blessType)
         {
             _blessList.Add(blessType);
-            Debug.Log($"{blessType}을 획득했습니다");
-            // [TODO] Player Info UI에 추가 필요 (프리팹 생성)
             AddBlessEvent?.Invoke(blessType);
+            Debug.Log($"{blessType}을 획득했습니다");
         }
        
         public void AddPotion(PotionType potionType)
