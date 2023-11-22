@@ -7,6 +7,7 @@ using Util;
 using Sirenix.OdinInspector;
 using Cardinals.Enums;
 using Cardinals.UI;
+using Cardinals.Game;
 
 namespace Cardinals
 {
@@ -67,14 +68,14 @@ namespace Cardinals
         {
             GameObject potionUI =
                         GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPotion), _potionTr);
-            potionUI.GetComponent<UIPotion>().Init(index, potion.Name, potion);
+            potionUI.GetComponent<UIPotion>().Init(index, potion.PotionType);
         }
 
         private void AddArtifact(Artifact artifact)
         {
             GameObject artifactUI =
                         GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIArtifact), _artifactTr);
-            artifactUI.GetComponent<UIArtifact>().Init(artifact.Name);
+            artifactUI.GetComponent<UIArtifact>().Init(artifact.Type);
         }
 
         private void AddBless(BlessType blessType)

@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
-using Cardinals.UI;
-namespace Cardinals
+
+using Cardinals.Game;
+using Cardinals.Enums;
+
+namespace Cardinals.UI
 {
-
-    public class UIArtifact : MonoBehaviour, IDescription
+    public class UIArtifact: MonoBehaviour, IDescription
     {
-        [SerializeField] private Image _artifactIcon;
-        private Sprite _artifactSprite;
-        private string _name;
-
-        public string Name => _name;
-
-        public string Description => "Å×½ºÆ®¶ó±¼~";
-
-        public Sprite IconSprite => _artifactSprite;
-
+        public string Name => _artifactDataSO.artifactName;
+        public string Description => _artifactDataSO.description;
+        public Sprite IconSprite => _artifactDataSO.sprite;
         public Transform InstTr => transform;
 
-        public void Init(string name)
+        private ArtifactDataSO _artifactDataSO;
+
+        private ComponentGetter<Image> _icon = new ComponentGetter<Image>(
+            TypeOfGetter.ChildByName,
+            "Icon"
+        );
+
+        public void Init(ArtifactType artifactType)
         {
-            _name = name;
-            _artifactSprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Artifact + name);
-            _artifactIcon.sprite = _artifactSprite;
+            _artifactDataSO = ResourceLoader.LoadSO<ArtifactDataSO>(
+                Constants.FilePath.Resources.SO_ArtifactData + artifactType
+            );
+
+            _icon.Get(gameObject).sprite = _artifactDataSO.sprite;
         }
     }
 }

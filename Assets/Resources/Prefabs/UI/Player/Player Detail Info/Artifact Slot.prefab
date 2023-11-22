@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6078022261207054582}
   - component: {fileID: 4236722201488686750}
   - component: {fileID: 1700813914846830139}
+  - component: {fileID: 5696455055924741857}
   m_Layer: 5
   m_Name: Artifact Slot
   m_TagString: Untagged
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.3
+--- !u!114 &5696455055924741857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335917999729974932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e4600d21a47e74a9badc98e8105f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6399927756225917558
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +102,7 @@ GameObject:
   - component: {fileID: 1915081884153169789}
   - component: {fileID: 4741048765324826860}
   m_Layer: 5
-  m_Name: Artifact Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

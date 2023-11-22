@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cardinals.Enums;
 
-namespace Cardinals
+namespace Cardinals.Game
 {
-
     public class GrimoireSatchel : Artifact
     {
-        public GrimoireSatchel(int money, string name, ArtifactType type)
+        public GrimoireSatchel(ArtifactType type)
         {
-            Money = money;
-            Name = name;
             Type = type;
             OnEffect();
         }
@@ -21,5 +18,4 @@ namespace Cardinals
             GameManager.I.Player.SetMaxHP(GameManager.I.Player.MaxHp-10);
         }
     }
-
 }

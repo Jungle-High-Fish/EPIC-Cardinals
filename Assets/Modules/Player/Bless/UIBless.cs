@@ -11,22 +11,32 @@ namespace Cardinals
 {
     public class UIBless : MonoBehaviour
     {
-        private BlessType _baseBless;
+        private ComponentGetter<Image> _image = new ComponentGetter<Image>(
+            TypeOfGetter.ChildByName, 
+            "Image"
+        );
 
-        [Header("Component")]
-        [SerializeField] private Image _iconImg;
-        [SerializeField] private TextMeshProUGUI _nameTMP;
-        [SerializeField] private TextMeshProUGUI _descipritonTMP;
+        private ComponentGetter<Text> _titleText = new ComponentGetter<Text>(
+            TypeOfGetter.ChildByName, 
+            "Details/Title Text"
+        ); 
+
+        private ComponentGetter<Text> _descriptionText = new ComponentGetter<Text>(
+            TypeOfGetter.ChildByName, 
+            "Details/Description Text"
+        );
+
+        public void Activate() {
+            gameObject.SetActive(true);
+        }
         
         public void Init(BlessType bless)
         {
-            _baseBless = bless;
-
             var data = ResourceLoader.LoadSO<BlessDataSO>(Constants.FilePath.Resources.SO_BlessData + bless);
 
-            _iconImg.sprite = data.patternSprite;
-            _nameTMP.text = data.name;
-            _descipritonTMP.text = data.description;
+            _image.Get(gameObject).sprite = data.patternSprite;
+            _titleText.Get(gameObject).text = data.name;
+            _descriptionText.Get(gameObject).text = data.description;
         }
     }
 }
