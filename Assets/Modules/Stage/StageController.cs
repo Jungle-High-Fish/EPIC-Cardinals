@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cardinals.Enums;
 using System;
+using System.Linq;
+using Cardinals.Board;
 using Cardinals.Enemy;
 using Sirenix.OdinInspector;
 using Util;
+using Random = UnityEngine.Random;
 
 namespace Cardinals.Game {
     
@@ -70,6 +73,9 @@ namespace Cardinals.Game {
             GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
             
+            // 축복 선택
+            yield return SelectBlessFlow();
+            
             // 다음 사건을 읽음
             while (_stage.MoveNext())
             {
@@ -89,6 +95,49 @@ namespace Cardinals.Game {
             }
 
             GameManager.I.GameClear();
+        }
+
+        public BlessType SelectedBless { private get; set; }
+        /// <summary>
+        /// 랜덤한 축복을 제공하는 플로우 입니다.
+        /// </summary>
+        IEnumerator SelectBlessFlow()
+        {
+            // 현재 가지고 있지 않은 축복 2개 선택    
+            List<BlessType> canGetBlesses = new();
+
+            for (int i = 1, cnt = Enum.GetNames(typeof(BlessType)).Length; i < cnt; i++)
+            {
+                BlessType type = (BlessType)i;
+                if (!Player.PlayerInfo.CheckBlessExist(type)) // 배우지 않은 축복들을 선택지로 추가
+                {
+                    canGetBlesses.Add(type);
+                }
+            }
+
+            BlessType bless1 = canGetBlesses[Random.Range(0, canGetBlesses.Count)];
+            canGetBlesses.Remove(bless1);
+            BlessType bless2 = canGetBlesses[Random.Range(0, canGetBlesses.Count)];
+            
+            // 화면에 표시
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
+            Instantiate(prefab, new Vector3(-1, 0.6f, -1), Quaternion.identity).GetComponent<BlessTotem>().Init(bless1);
+            prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
+            Instantiate(prefab, new Vector3(1, 0.6f, 1), Quaternion.identity).GetComponent<BlessTotem>().Init(bless2);
+            
+            // 사용자 선택 대기
+            SelectedBless = default;
+            yield return new WaitUntil(() => SelectedBless != default);
+
+            var objs = FindObjectsOfType<BlessTotem>();
+            for (int i = objs.Length - 1; i >= 0; i--)
+            {
+                Destroy(objs[i].gameObject);
+            }
+            
+            Player.PlayerInfo.GetBless(SelectedBless);
+
+            yield return new WaitForSeconds(1f);
         }
 
         public BaseEnemy InstantiateEnemy(EnemyDataSO enemyData) {
