@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Util;
 
 namespace Cardinals.Board {
 
-    public class Tile : MonoBehaviour {
+    public class Tile: MonoBehaviour {
         public TileType Type => _tileData.type;
         public TileDirection Direction => _tileData.direction;
+        public Vector3 TilePositionOnGround => _tilePositionOnGround;
 
         public Tile Next {
             get => _next;
@@ -35,6 +37,18 @@ namespace Cardinals.Board {
 
         public TileAnimation Animation => _tileAnimation.Get(gameObject);
 
+        public bool IsSelectable => _isSelectable;
+        public bool IsSelected {
+            get {
+                if (_isSelectable == false) {
+                    return false;
+                }
+
+                return _isSelected;
+            }
+        }
+        public bool IsMouseHovered => _isMouseHovered;
+
         private TileData _tileData;
         private ComponentGetter<TileAnimation> _tileAnimation
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
@@ -43,8 +57,17 @@ namespace Cardinals.Board {
         private Tile _next;
         private Tile _prev;
 
+        // 타일 선택 이벤트 관련 변수
+        private Action<Tile> _onClicked;
+
         // 타일 상태 관련 변수
         private TileState _tileState;
+        private bool _isSelectable;
+        private bool _isSelected;
+        private bool _isMouseHovered;
+
+        // 타일 위치 관련 변수
+        private Vector3 _tilePositionOnGround;
 
         // 타일의 액션 관련 변수
         private TileAction _tileAction;
@@ -62,9 +85,13 @@ namespace Cardinals.Board {
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
         
-        public void Init(TileData tileData, TileState tileState=TileState.Normal) {
+        public void Init(TileData tileData, Action<Tile> onClicked, Vector3 tilePositionOnGround, TileState tileState=TileState.Normal) {
             _tileData = tileData;
+            _onClicked = onClicked;
+            _tilePositionOnGround = tilePositionOnGround;
             _tileState = tileState;
+
+            _tileAnimation.Get(gameObject).Init();
 
             _tileAction = GetComponent(EnumHelper.GetTileActionType(_tileData.type)) as TileAction;
             if (_tileAction == null) {
@@ -155,6 +182,34 @@ namespace Cardinals.Board {
             _tileEffect.SetEffect(data);
         }
 
+        public void Select() {
+            if (_isSelectable == false) {
+                _isSelected = false;
+                return;
+            }
+
+            _isSelected = true;
+
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
+        }
+
+        public void Unselect() {
+            if (_isSelectable == false) {
+                _isSelected = false;
+                return;
+            }
+
+            _isSelected = false;
+
+            _tileAnimation.Get(gameObject).StopAll();
+        }
+
+        public void SetSelectable(bool isSelectable) {
+            _isSelectable = isSelectable;
+
+            _tileAnimation.Get(gameObject).StopAll();
+        }
+
         // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
         private void ApplyState() {
             
@@ -163,6 +218,22 @@ namespace Cardinals.Board {
         private void ChangeState(TileState state) {
             _tileState = state;
             ApplyState();
+        }
+
+        private void OnMouseDown() {
+            if (_isSelectable == false) {
+                _isSelected = false;
+                return;
+            }
+            _onClicked?.Invoke(this);
+        }
+
+        private void OnMouseEnter() {
+            _isMouseHovered = true;
+        }
+
+        private void OnMouseExit() {
+            _isMouseHovered = false;
         }
     }
 

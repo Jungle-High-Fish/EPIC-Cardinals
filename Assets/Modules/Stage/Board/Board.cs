@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cardinals.Enums;
 using DG.Tweening;
+using JetBrains.Annotations;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -22,6 +23,10 @@ namespace Cardinals.Board {
         [ShowInInspector, ReadOnly]
         private List<Tile> _tileSequence;
         private BoardBuilder _boardBuilder;
+        
+        private bool _isTileSelectable;
+        private TileSelectionType _selectionType;
+        private List<Tile> _selectedTiles;
 
         [Button("테스트", ButtonSizes.Large)]
         public IEnumerator SetBoard(BoardDataSO boardDataSO) {
@@ -31,7 +36,7 @@ namespace Cardinals.Board {
             }
 
             _tileSequence = new List<Tile>();
-            _boardBuilder = new BoardBuilder(this);
+            _boardBuilder = new BoardBuilder(this, OnTileClicked);
 
             yield return BoardLoadWithAnimation(boardDataSO);
         }
@@ -116,6 +121,50 @@ namespace Cardinals.Board {
             return _boardBuilder.CornerTiles.Count;
         }
 
+        /// <summary>
+        /// 타일 선택 요청을 합니다.
+        /// </summary>
+        /// <param name="selectionType"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public (List<Tile> selectedTiles, Func<IEnumerator> tileRequester) RequestTileSelect(
+            TileSelectionType selectionType,
+            string title="",
+            string description=""
+        ) {
+            _selectionType = selectionType;
+
+            bool hasRequestHandled = false;
+            List<Tile> result = new List<Tile>();
+
+            void OnConfirmSelect() {
+                result.AddRange(_selectedTiles);
+                hasRequestHandled = true;
+            }
+
+            void OnCancelSelect() {
+                result = null;
+                hasRequestHandled = true;
+            }
+
+            IEnumerator TileRequestCoroutine() {
+                GameManager.I.UI.UITileSelection.Init(
+                    () => _selectedTiles,
+                    OnConfirmSelect,
+                    OnCancelSelect,
+                    title,
+                    description
+                );
+
+                SetTileSelectable();
+                yield return new WaitUntil(() => hasRequestHandled);
+                SetTileUnSelectable();
+            }
+
+            return (result, TileRequestCoroutine);
+        }
+
         private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();
@@ -123,9 +172,145 @@ namespace Cardinals.Board {
 
         private IEnumerator TileAnimation(float delay=0f) {
             for (int i = 0; i < _tileSequence.Count; i++) {
-                _tileSequence[i].Animation.Shake();
+                _tileSequence[i].Animation.Play(TileAnimationType.Shake);
                 yield return new WaitForSeconds(delay);
             }
+        }
+
+        private void SetTileSelectable() {
+            _isTileSelectable = true;
+            _selectedTiles = new List<Tile>();
+
+            foreach (Tile tile in _tileSequence) {
+                tile.SetSelectable(true);
+            }
+        }
+
+
+        private void SetTileUnSelectable() {
+            _isTileSelectable = false;
+            _selectedTiles = null;
+
+            foreach (Tile tile in _tileSequence) {
+                tile.SetSelectable(false);
+            }
+        }
+
+        private void OnTileClicked(Tile target) {
+            if (_isTileSelectable == false) {
+                return;
+            }
+
+            if (_selectionType == TileSelectionType.Single) {
+                SingleTileSelect(target);
+                return;
+            }
+
+            if (_selectionType == TileSelectionType.Multiple) {
+                MultipleTileSelect(target);
+                return;
+            }
+
+            if (_selectionType == TileSelectionType.Sequence) {
+                SequenceTileSelect(target);
+                return;
+            }
+
+            if (_selectionType == TileSelectionType.Edge) {
+                EdgeTileSelect(target);
+                return;
+            }
+        }
+
+        private void SingleTileSelect(Tile target) {
+            UnselectAll();
+            _selectedTiles.Add(target);
+            target.Select();
+        }
+
+        private void MultipleTileSelect(Tile target) {
+            if (_selectedTiles.Contains(target)) {
+                _selectedTiles.Remove(target);
+                target.Unselect();
+            } else {
+                UnselectAll();
+                _selectedTiles.Add(target);
+                foreach (Tile tile in _selectedTiles) {
+                    tile.Select();
+                }
+            }
+        }
+
+        private void SequenceTileSelect(Tile target) {
+            if (_selectedTiles.Count == 0) {
+                _selectedTiles.Add(target);
+                target.Select();
+                return;
+            }
+
+            if (_selectedTiles.Contains(target)) {
+                int index = _selectedTiles.IndexOf(target);
+                for (int i = _selectedTiles.Count - 1; i > index; i--) {
+                    _selectedTiles[i].Unselect();
+                    _selectedTiles.RemoveAt(i);
+                }
+                return;
+            }
+
+            if (_selectedTiles[_selectedTiles.Count - 1].Next == target) {
+                _selectedTiles.Add(target);
+                target.Select();
+            } else if (_selectedTiles[0].Prev == target) {
+                _selectedTiles.Insert(0, target);
+                target.Select();
+            } else {
+                foreach (Tile tile in _selectedTiles) {
+                    tile.Unselect();
+                }
+                _selectedTiles.Clear();
+                _selectedTiles.Add(target);
+                target.Select();
+            }
+        }
+
+        private void EdgeTileSelect(Tile target) {
+            if (_selectedTiles.Contains(target)) {
+                UnselectAll();
+                return;
+            }
+
+            UnselectAll();
+            _selectedTiles.AddRange(GetEdgeContains(target));
+                
+            foreach(Tile tile in _selectedTiles) {
+                tile.Select();
+            }
+        }
+
+        private void UnselectAll() {
+            foreach (Tile tile in _selectedTiles) {
+                tile.Unselect();
+            }
+            _selectedTiles.Clear();
+        }
+
+        private List<Tile> GetEdgeContains(Tile target) {
+            List<Tile> result = new List<Tile>();
+            
+            List<Tile> prevs = new List<Tile>();
+            for (Tile t = target.Prev; _boardBuilder.CornerTiles.Contains(t) == false; t = t.Prev) {
+                prevs.Add(t);
+            }
+            prevs.Reverse();
+
+            result.AddRange(prevs);
+            result.Add(target);
+
+            for (Tile t = target.Next; _boardBuilder.CornerTiles.Contains(t) == false; t = t.Next) {
+                result.Add(t);
+            }
+
+            return result;
         }
 
         /// <summary>

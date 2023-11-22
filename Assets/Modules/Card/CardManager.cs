@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Util;
+using Cardinals.Enums;
 
 namespace Cardinals
 {
@@ -76,7 +77,12 @@ namespace Cardinals
         [Button]
         public void OnTurn()
         {
-            Draw(Constants.GameSetting.Player.CardDrawCount);
+            int drawCardOffset = 0;
+            if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Grimoire))
+            {
+                drawCardOffset = 1;
+            }
+            Draw(Constants.GameSetting.Player.CardDrawCount+drawCardOffset);
             _canActionUse = false;
         }
 
@@ -90,6 +96,10 @@ namespace Cardinals
             }
         }
 
+        public void AddCard(int num, bool isVolatile)
+        {
+
+        }
         [Button]
         public void Draw(int count)
         {
@@ -217,6 +227,11 @@ namespace Cardinals
             StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
         }
 
+        private IEnumerator WarpArtifact()
+        {
+            yield return new WaitForSeconds(2f);
+            CardUseMove(1);
+        }
         private bool CardUseAction(int num, BaseEntity target=null)
         {
             if (!_canActionUse)
@@ -226,6 +241,13 @@ namespace Cardinals
 
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
+                // [유물] 워프 부적
+                if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
+                    && num==4)
+                {
+                    Debug.Log("워프 부적 실행");
+                    StartCoroutine(WarpArtifact());
+                }
                 Debug.Log($"ī�� �׼ǿ� {_handCards[_selectCardIndex].CardNumber} ���");
                 //Ÿ�Ͽ��� �׼� ȣ��
                 _prevCardNumber = num;

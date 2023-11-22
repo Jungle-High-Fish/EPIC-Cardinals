@@ -28,6 +28,9 @@ namespace Cardinals
 
         [Header("Potion")]
         [SerializeField] private Transform _potionTr;
+
+        [Header("Artifact")]
+        [SerializeField] private Transform _artifactTr;
         private bool _isPanelOpen;
         
         public void Init()
@@ -36,6 +39,7 @@ namespace Cardinals
             _player.UpdateHpEvent += UpdateHp;
             _player.AddBuffEvent += AddBuff;
             _player.PlayerInfo.AddPotionEvent += AddPotion;
+            _player.PlayerInfo.AddArtifactEvent += AddArtifact;
         }
 
         private void UpdateHp(int hp, int maxHp)
@@ -57,6 +61,13 @@ namespace Cardinals
             potionUI.GetComponent<UIPotion>().Init(index, potion.Name, potion);
         }
 
+        private void AddArtifact(Artifact artifact)
+        {
+            GameObject artifactUI =
+                        GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIArtifact), _artifactTr);
+            artifactUI.GetComponent<UIArtifact>().Init(artifact.Name);
+        }
+
         public void OpenPanel()
         {
             if (_isPanelOpen)
@@ -75,6 +86,18 @@ namespace Cardinals
         public void TestPotion(PotionType potionType)
         {
             _player.PlayerInfo.AddPotion(potionType);
+        }
+
+        [Button]
+        public void TestArtifact(ArtifactType artifactType)
+        {
+            _player.PlayerInfo.AddArtifact(artifactType);
+        }
+
+        [Button]
+        public void DebugArtifactList()
+        {
+            _player.PlayerInfo.DebugArtifactList();
         }
     }
 }

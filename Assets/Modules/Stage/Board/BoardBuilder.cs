@@ -6,6 +6,7 @@ using Cardinals.Enums;
 using Cardinals.Constants;
 using Util;
 using System.Runtime.InteropServices;
+using System;
 
 namespace Cardinals.Board {
     public class BoardBuilder
@@ -31,9 +32,13 @@ namespace Cardinals.Board {
         // Tile 생성 임시 변수
         private Vector3 _tileInstantiateLeftTopPos;
 
+        private Action<Tile> _onTileClicked;
+
         #region 생성자
-        public BoardBuilder(Board boardController) {
+        public BoardBuilder(Board boardController, Action<Tile> onTileClicked) {
             _boardController = boardController;
+            _onTileClicked = onTileClicked;
+
             _board = new List<List<Tile>>();
             _cornerTiles = new List<Tile>();
 
@@ -284,8 +289,18 @@ namespace Cardinals.Board {
                 Quaternion.Euler(0, yDegree, 0),
                 boardObjTransform
             );
+
             Tile tile = tileObj.GetComponent<Tile>();
-            tile.Init(tileData);
+            Vector3 tilePos = targetPos;
+            tilePos.y = 
+                Constants.GameSetting.Board.TileDepth / 2 + 
+                Constants.GameSetting.Board.GroundDepth / 2 + 
+                0.05f;
+            tile.Init(
+                tileData, 
+                _onTileClicked,
+                tilePos
+            );
 
             return tile;
         }

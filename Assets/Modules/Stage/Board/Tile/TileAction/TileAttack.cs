@@ -9,6 +9,7 @@ namespace Cardinals.Board {
         public override void Act(int value, BaseEntity target) {
             if (target == null) {
                 Debug.LogError("공격  타겟이 없습니다.");
+                return;
             }
             target.Hit(value);
         }

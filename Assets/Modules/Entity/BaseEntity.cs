@@ -32,7 +32,7 @@ namespace Cardinals
             }
         }
 
-        public int MaxHp { get; private set; }
+        public int MaxHp { get; protected set; }
         public Action<int, int> UpdateHpEvent { get; set; }
 
         #region Buff Event Related
