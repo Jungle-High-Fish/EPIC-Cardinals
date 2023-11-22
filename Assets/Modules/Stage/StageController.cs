@@ -109,7 +109,7 @@ namespace Cardinals.Game {
             for (int i = 1, cnt = Enum.GetNames(typeof(BlessType)).Length; i < cnt; i++)
             {
                 BlessType type = (BlessType)i;
-                if (!Player.PlayerInfo.BlessList.Contains(type)) // 배우지 않은 축복들을 선택지로 추가
+                if (!Player.PlayerInfo.CheckBlessExist(type)) // 배우지 않은 축복들을 선택지로 추가
                 {
                     canGetBlesses.Add(type);
                 }
