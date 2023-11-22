@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Util;
+using Cardinals.Enums;
 
 namespace Cardinals
 {
@@ -95,6 +96,10 @@ namespace Cardinals
             }
         }
 
+        public void AddCard(int num, bool isVolatile)
+        {
+
+        }
         [Button]
         public void Draw(int count)
         {

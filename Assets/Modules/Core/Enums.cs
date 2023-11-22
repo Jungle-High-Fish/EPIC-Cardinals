@@ -326,4 +326,23 @@ namespace Cardinals.Enums {
         Rigloo,
         Warp
     }
+    public enum CardType
+    {
+        Normal,
+        Gold
+    }
+
+    public enum CardState
+    {
+        Idle,
+        Select
+    }
+
+    public enum MouseState
+    {
+        Action,
+        Move,
+        Cancel,
+        CardEvent,
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Cardinals.Enums;
 using TMPro;
 
 namespace Cardinals
@@ -83,16 +84,3 @@ namespace Cardinals
     }
 }
 
-public enum CardState
-{
-    Idle,
-    Select
-}
-
-public enum MouseState
-{
-    Action,
-    Move,
-    Cancel,
-    CardEvent,
-}
