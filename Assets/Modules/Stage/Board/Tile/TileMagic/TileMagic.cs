@@ -5,6 +5,8 @@ using Cardinals.Constants.GameSetting;
 using UnityEngine;
 using Cardinals.Buff;
 using UnityEngine.UI;
+using Cardinals.Game;
+using Util;
 
 namespace Cardinals.Board {
 
@@ -21,6 +23,12 @@ namespace Cardinals.Board {
 			get => _exp;
 			set => _exp = value;
 		}
+
+		public static TileMagicDataSO Data(TileMagicType tileMagicType) {
+            return ResourceLoader.LoadSO<TileMagicDataSO>(
+                Constants.FilePath.Resources.SO_MagicData + tileMagicType
+            );
+        }
 
 		public void Init() {
 			_type = TileMagicType.None;

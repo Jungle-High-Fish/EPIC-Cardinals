@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Board;
 using Cardinals.Enums;
 using JetBrains.Annotations;
 using TMPro;
@@ -44,8 +45,6 @@ namespace Cardinals.UI {
 
         public void Init() {
             gameObject.SetActive(false);
-
-            
         }
 
         public void Set(
@@ -69,9 +68,11 @@ namespace Cardinals.UI {
 
             _originalMagicType = originalMagicType;
 
-            _levelUpMagicTargetLevelText.Get(gameObject).text = (originalLevel + 1).ToString();
-            
-            _originalLevelText.Get(gameObject).text = originalLevel.ToString();
+            _levelUpMagicImage.Get(gameObject).sprite = TileMagic.Data(originalMagicType).sprite;
+            _originalMagicImage.Get(gameObject).sprite = TileMagic.Data(originalMagicType).sprite;
+
+            _levelUpMagicTargetLevelText.Get(gameObject).text = $"Lv.{originalLevel + 1}";
+            _originalLevelText.Get(gameObject).text = $"Lv.{originalLevel}";
         }
     }
 }

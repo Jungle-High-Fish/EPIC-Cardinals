@@ -24,6 +24,11 @@ namespace Cardinals.UI {
                 "Post Magic Select Panel"
             );
 
+        private ComponentGetter<TextMeshProUGUI> _titleText = new ComponentGetter<TextMeshProUGUI>(
+            TypeOfGetter.ChildByName,
+            "Title Panel/Title Text"
+        );
+
         public void Init() {
             gameObject.SetActive(false);
 
@@ -64,6 +69,7 @@ namespace Cardinals.UI {
             }
 
             IEnumerator Requester() {
+                _titleText.Get(gameObject).text = "마법 부여!";
                 gameObject.SetActive(true);
                 _initialMagicSelectPanel.Get(gameObject).Set(targetMagicTypes, OnClickMagicSlot);
                 yield return new WaitUntil(() => requestHandled);
@@ -96,6 +102,7 @@ namespace Cardinals.UI {
             }
 
             IEnumerator Requester() {
+                _titleText.Get(gameObject).text = "마법 진화!";
                 gameObject.SetActive(true);
                 _postMagicSelectPanel.Get(gameObject).Set(
                     originalLevel,
