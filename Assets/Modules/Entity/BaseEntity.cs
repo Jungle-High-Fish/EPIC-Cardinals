@@ -154,12 +154,7 @@ namespace Cardinals
             {
                 damage *= .5f;
             }
-
-            if (CheckBuffExist(BuffType.Wet))
-            {
-                damage *= 0.5f;
-            }
-
+            
             return (int) Math.Ceiling(damage);
         }
 

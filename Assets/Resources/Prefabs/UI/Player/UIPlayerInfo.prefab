@@ -537,8 +537,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 222, y: -79}
-  m_SizeDelta: {x: 100, y: 0}
+  m_AnchoredPosition: {x: 222, y: -73}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &4232073176130073532
 MonoBehaviour:
@@ -561,8 +561,8 @@ MonoBehaviour:
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 2
 --- !u!1 &5712632923422508556
 GameObject:
@@ -3277,6 +3277,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 810498501587249552, guid: bf65158fac0fc1e44a7f9da57b5a829e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1030471810196021552, guid: bf65158fac0fc1e44a7f9da57b5a829e,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -3316,6 +3321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Detail Info Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655932601297688874, guid: bf65158fac0fc1e44a7f9da57b5a829e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7022153633261474389, guid: bf65158fac0fc1e44a7f9da57b5a829e,
         type: 3}

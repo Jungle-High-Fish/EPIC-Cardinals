@@ -234,11 +234,17 @@ namespace Cardinals.Game {
         public void AddBuff()
         {
             Enemies.FirstOrDefault().AddBuff(new Burn(1));
-            Enemies.FirstOrDefault().AddBuff(new Fracture(1));
             Enemies.FirstOrDefault().AddBuff(new Slow());
+            Enemies.FirstOrDefault().AddBuff(new Weak(1));
+            Enemies.FirstOrDefault().AddBuff(new ElectricShock());
+            Enemies.FirstOrDefault().AddBuff(new HealBuff(5));
+            Enemies.FirstOrDefault().AddBuff(new Poison(5));
             Player.AddBuff(new Burn(1));
-            Player.AddBuff(new Fracture(1));
             Player.AddBuff(new Slow());
+            Player.AddBuff(new Weak(1));
+            Player.AddBuff(new ElectricShock());
+            Player.AddBuff(new HealBuff(5));
+            Player.AddBuff(new Poison(5));
         }
         #endregion
 
