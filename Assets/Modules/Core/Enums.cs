@@ -202,6 +202,12 @@ namespace Cardinals.Enums {
         Earth
     }
 
+    public enum TileCurseType {
+        None,
+        Fireball,
+        ElectricShock
+    }
+
     public enum TileState {
         Normal,
         Cursed
