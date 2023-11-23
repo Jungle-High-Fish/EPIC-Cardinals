@@ -87,7 +87,12 @@ namespace Cardinals.Board {
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
         
-        public void Init(TileData tileData, Action<Tile> onClicked, Vector3 tilePositionOnGround, TileState tileState=TileState.Normal) {
+        public void Init(
+            TileData tileData, 
+            Action<Tile> onClicked, 
+            Vector3 tilePositionOnGround, 
+            TileState tileState=TileState.Normal
+        ) {
             _tileData = tileData;
             _onClicked = onClicked;
             _tilePositionOnGround = tilePositionOnGround;
@@ -192,7 +197,7 @@ namespace Cardinals.Board {
 
             _isSelected = true;
 
-            _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip, true);
         }
 
         public void Unselect() {

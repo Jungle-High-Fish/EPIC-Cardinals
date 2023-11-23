@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Cardinals.Enums;
+
 namespace Cardinals
 {
 
     public class QuickPotion : Potion
     {
-        public QuickPotion(int money, string name)
+        public QuickPotion()
         {
-            Money = money;
-            Name = name;
+            _potionType = PotionType.Quick;
         }
 
         public override void UsePotion()

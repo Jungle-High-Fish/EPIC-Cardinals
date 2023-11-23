@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cardinals.Buff;
+using Cardinals.Enums;
+
 namespace Cardinals
 {
 
     public class HealPotion : Potion
     {
-        public HealPotion(int money, string name)
+        public HealPotion()
         {
-            Money = money;
-            Name = name;
+            _potionType = PotionType.Heal;
         }
 
         public override void UsePotion()

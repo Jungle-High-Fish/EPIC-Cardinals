@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarpAmulet : Artifact
+namespace Cardinals.Game 
 {
-    public WarpAmulet(int money, string name, ArtifactType type)
+    public class WarpAmulet : Artifact
     {
-        Money = money;
-        Name = name;
-        Type = type;
+        public WarpAmulet(ArtifactType type)
+        {
+            Type = type;
+        }
     }
 }
+

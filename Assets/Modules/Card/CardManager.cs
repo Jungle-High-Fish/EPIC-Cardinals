@@ -12,6 +12,7 @@ namespace Cardinals
         private int _prevCardNumber=-1;
         private int _selectCardIndex;
         private bool _canActionUse;
+        private int _continuousUseCount;
         private CardState _state;
         [SerializeField] private MouseState _mouseState = MouseState.Cancel;
 
@@ -68,6 +69,8 @@ namespace Cardinals
             }
         }
 
+        public bool IsElectricShock { get; set; }
+
         [Button]
         public void OnTurn()
         {
@@ -78,6 +81,7 @@ namespace Cardinals
             }
             Draw(Constants.GameSetting.Player.CardDrawCount+drawCardOffset);
             _canActionUse = false;
+            _continuousUseCount = 0;
         }
 
         [Button]
@@ -271,20 +275,24 @@ namespace Cardinals
                 return false;
             }
 
+            if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
+            {
+                Debug.Log("뭐지 감전당했나?");
+                return false;
+            }
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
                 // [유물] 워프 부적
                 if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
                     && num==4)
                 {
-                    Debug.Log("워프 부적 실행");
                     StartCoroutine(WarpArtifact());
                 }
-                Debug.Log($"ī�� �׼ǿ� {_handCards[_selectCardIndex].CardNumber} ���");
-                //Ÿ�Ͽ��� �׼� ȣ��
                 _prevCardNumber = num;
 
                 StartCoroutine(GameManager.I.Player.CardAction(num, target));
+                _continuousUseCount++;
+                Debug.Log(_continuousUseCount);
                 return true;
             }
 

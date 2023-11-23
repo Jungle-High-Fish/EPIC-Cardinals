@@ -125,17 +125,15 @@ namespace Cardinals.Board {
         /// <summary>
         /// 타일 선택 요청을 합니다.
         /// </summary>
-        /// <param name="selectionType"></param>
-        /// <param name="title"></param>
-        /// <param name="description"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// 선택된 타일 리스트와 코루틴 함수를 반환합니다. 
+        /// 해당 코루틴 함수가 실행 완료되어야 리스트에 제대로 된 값이 들어있음이 보장됩니다.
+        /// </returns>
         public (List<Tile> selectedTiles, Func<IEnumerator> tileRequester) RequestTileSelect(
             TileSelectionType selectionType,
             string title="",
             string description=""
         ) {
-            _selectionType = selectionType;
-
             bool hasRequestHandled = false;
             List<Tile> result = new List<Tile>();
 
@@ -145,7 +143,7 @@ namespace Cardinals.Board {
             }
 
             void OnCancelSelect() {
-                result = null;
+                result.Clear();
                 hasRequestHandled = true;
             }
 
@@ -158,6 +156,7 @@ namespace Cardinals.Board {
                     description
                 );
 
+                _selectionType = selectionType;
                 SetTileSelectable();
                 yield return new WaitUntil(() => hasRequestHandled);
                 SetTileUnSelectable();
@@ -234,8 +233,10 @@ namespace Cardinals.Board {
                 _selectedTiles.Remove(target);
                 target.Unselect();
             } else {
+                List<Tile> temp = new List<Tile>(_selectedTiles);
                 UnselectAll();
                 _selectedTiles.Add(target);
+                _selectedTiles.AddRange(temp);
                 foreach (Tile tile in _selectedTiles) {
                     tile.Select();
                 }

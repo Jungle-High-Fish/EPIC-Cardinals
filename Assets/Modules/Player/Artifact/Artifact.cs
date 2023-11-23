@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cardinals.Enums;
+using Util;
 
-public class Artifact
-{
-    private int _money;
-    private string _name;
-    private ArtifactType _type;
-
-    public int Money { get; set; }
-    public string Name { get; set; }
-    public ArtifactType Type
+namespace Cardinals.Game {
+    public class Artifact
     {
-        get => _type;
-        set
+        private int _money;
+        private string _name;
+        private ArtifactType _type;
+
+        public ArtifactType Type
         {
-            _type = value;
+            get => _type;
+            set
+            {
+                _type = value;
+            }
+        }
+
+        public ArtifactDataSO Data()
+        {
+            return ResourceLoader.LoadSO<ArtifactDataSO>(
+                Constants.FilePath.Resources.SO_ArtifactData + Type
+            );
         }
     }
 }
