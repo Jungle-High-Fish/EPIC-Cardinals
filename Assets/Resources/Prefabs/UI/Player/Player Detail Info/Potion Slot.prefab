@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4605165651545908555}
   - component: {fileID: 3894496917424203114}
   - component: {fileID: 6802272890764988362}
+  - component: {fileID: 9080949095564890751}
   m_Layer: 5
   m_Name: Potion Slot
   m_TagString: Untagged
@@ -122,6 +123,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9080949095564890751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329104738680992674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060d437d120082d498ec5d428f15f1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3747498062207094498
 GameObject:
   m_ObjectHideFlags: 0

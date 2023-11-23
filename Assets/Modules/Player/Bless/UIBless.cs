@@ -16,12 +16,12 @@ namespace Cardinals
             "Image"
         );
 
-        private ComponentGetter<Text> _titleText = new ComponentGetter<Text>(
+        private ComponentGetter<TextMeshProUGUI> _titleText = new ComponentGetter<TextMeshProUGUI>(
             TypeOfGetter.ChildByName, 
             "Details/Title Text"
         ); 
 
-        private ComponentGetter<Text> _descriptionText = new ComponentGetter<Text>(
+        private ComponentGetter<TextMeshProUGUI> _descriptionText = new ComponentGetter<TextMeshProUGUI>(
             TypeOfGetter.ChildByName, 
             "Details/Description Text"
         );
@@ -35,7 +35,7 @@ namespace Cardinals
             var data = ResourceLoader.LoadSO<BlessDataSO>(Constants.FilePath.Resources.SO_BlessData + bless);
 
             _image.Get(gameObject).sprite = data.patternSprite;
-            _titleText.Get(gameObject).text = data.name;
+            _titleText.Get(gameObject).text = data.blessName;
             _descriptionText.Get(gameObject).text = data.description;
         }
     }
