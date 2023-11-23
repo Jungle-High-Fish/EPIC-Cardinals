@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using Cardinals.Enums;
 using Cardinals.UI;
 using Cardinals.Game;
+using UnityEngine.UI;
 
 namespace Cardinals
 {
@@ -21,80 +22,74 @@ namespace Cardinals
         [SerializeField] private RectTransform _curHPRect;
 
         [Header("Buff")]
-        [SerializeField] private Transform _buffTr;
         [SerializeField] private GameObject _buffPrefab;
-
-        [Header("Panel")]
-        [SerializeField] private GameObject _playerInfoPanel;
-        [SerializeField] private float _panelMoveDistance;
-
-        [Header("Bless")]
-        [SerializeField] private Transform _blessTr;
-        
-        [Header("Potion")]
-        [SerializeField] private Transform _potionTr;
-
-        [Header("Artifact")]
-        [SerializeField] private Transform _artifactTr;
-        private bool _isPanelOpen;
 
         [Header("Description")]
         [SerializeField] private Transform _descriptionInstTr;
         public Transform DescriptionInstTr => _descriptionInstTr;
+
+        private ComponentGetter<Button> _detailInfoOpenButton = new ComponentGetter<Button>(
+            TypeOfGetter.ChildByName,
+            "Player Status/Detail Info Open Button"
+        );
+
+        private ComponentGetter<Transform> _buffListArea = new ComponentGetter<Transform>(
+            TypeOfGetter.ChildByName,
+            "Player Status/Buff List Area/"
+        );
+
+        private ComponentGetter<UIPlayerDetailInfo> _detailInfoPanel = new ComponentGetter<UIPlayerDetailInfo>(
+            TypeOfGetter.ChildByName,
+            "Player Status/Detail Info Panel"
+        );
+
+        private bool _isPanelOpen;
         
         public void Init()
         {
             _player = GameManager.I.Player;
             _player.UpdateHpEvent += UpdateHp;
             _player.AddBuffEvent += AddBuff;
-            _player.PlayerInfo.AddPotionEvent += AddPotion;
-            _player.PlayerInfo.AddArtifactEvent += AddArtifact;
-            _player.PlayerInfo.AddBlessEvent += AddBless;
+
+            _detailInfoOpenButton.Get(gameObject).onClick.AddListener(OpenPanel);
+            _detailInfoPanel.Get(gameObject).Init();
+            _detailInfoPanel.Get(gameObject).gameObject.SetActive(false);
         }
 
         private void UpdateHp(int hp, int maxHp)
         {
-            float percent = (float)hp / maxHp;
-            _curHPRect.localScale = new Vector3(percent, 1, 1);
-            _hpTMP.text= $"{hp}/{maxHp}";
+            // float percent = (float)hp / maxHp;
+            // _curHPRect.localScale = new Vector3(percent, 1, 1);
+            // _hpTMP.text= $"{hp}/{maxHp}";
         }
 
         private void AddBuff(BaseBuff baseBuff)
         {
-            Instantiate(_buffPrefab, _buffTr).GetComponent<UIBuff>().Init(baseBuff);
-        }
-        
-        private void AddPotion(int index, Potion potion)
-        {
-            GameObject potionUI =
-                        GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPotion), _potionTr);
-            potionUI.GetComponent<UIPotion>().Init(index, potion.PotionType);
-        }
-
-        private void AddArtifact(Artifact artifact)
-        {
-            GameObject artifactUI =
-                        GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIArtifact), _artifactTr);
-            artifactUI.GetComponent<UIArtifact>().Init(artifact.Type);
-        }
-
-        private void AddBless(BlessType blessType)
-        {
-            GameObject artifactUI = GameObject.Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIBless), _blessTr);
-            artifactUI.GetComponent<UIBless>().Init(blessType);
+            Instantiate(_buffPrefab, _buffListArea.Get(gameObject)).GetComponent<UIBuff>().Init(baseBuff);
         }
         
         public void OpenPanel()
         {
             if (_isPanelOpen)
             {
-                _playerInfoPanel.transform.DOMoveX(-_panelMoveDistance, 0.3f).SetEase(Ease.InOutCubic);
+                _detailInfoPanel.Get(gameObject).transform.localScale = Vector3.one;
+                _detailInfoPanel.Get(gameObject).transform
+                    .DOScale(Vector3.zero, 0.3f).SetEase(Ease.InOutCubic).OnComplete(() =>
+                    {
+                        _detailInfoPanel.Get(gameObject).Deactivate();
+                    });
+
                 _isPanelOpen = false;
+                Debug.Log("close");
             }
             else
             {
-                _playerInfoPanel.transform.DOMoveX(_panelMoveDistance, 0.3f).SetEase(Ease.InOutCubic);
+                _detailInfoPanel.Get(gameObject).transform.localScale = Vector3.zero;
+                _detailInfoPanel.Get(gameObject).Activate();
+                _detailInfoPanel.Get(gameObject).transform
+                    .DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
                 _isPanelOpen = true;
+                Debug.Log("open");
             }
         }
 
