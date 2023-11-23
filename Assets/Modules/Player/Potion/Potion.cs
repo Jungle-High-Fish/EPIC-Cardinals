@@ -1,27 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enums;
+using Cardinals.Game;
 using UnityEngine;
+using Util;
 
 namespace Cardinals
 {
-    public abstract class Potion : IProduct
+    public abstract class Potion: IProduct
     {
-        private int _money;
-        public virtual int Money { get; set; }
-        private string _name;
-        public virtual string Name { get; set; }
+        public PotionType PotionType => _potionType;
+        protected PotionType _potionType;
 
-        public Action<Potion> DeletePotionEvent { get; set; }
         public virtual void UsePotion()
         {
 
         }
 
         #region IProduct
-        public Sprite Sprite { get; }
-        public string Description { get; }
-        public int Price => Money;
+        public Sprite Sprite => Data().sprite;
+        public string Description => Data().description;
+        public int Price => Data().price;
+        public string Name => Data().potionName;
         #endregion
+
+        private PotionDataSO Data() {
+            return ResourceLoader.LoadSO<PotionDataSO>(
+                Constants.FilePath.Resources.SO_PotionData + _potionType
+            );
+        }
     }
 }

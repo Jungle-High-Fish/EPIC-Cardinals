@@ -4,6 +4,7 @@ using Cardinals.Enums;
 using Cardinals.Constants.GameSetting;
 using UnityEngine;
 using Cardinals.Buff;
+using UnityEngine.UI;
 
 namespace Cardinals.Board {
 
@@ -12,10 +13,24 @@ namespace Cardinals.Board {
 		private int _level;
 		private int _exp;
 
+		public TileMagicType Type 
+		{ get => _type; private set => _type = value; } 
+		public int Level => _level;
+		public int Exp
+		{
+			get => _exp;
+			set => _exp = value;
+		}
+
 		public void Init() {
 			_type = TileMagicType.None;
 			_level = 0;
 			_exp = 0;
+		}
+
+		public void SetType(TileMagicType type)
+		{
+			Type = type;
 		}
 
 		public void OnAction(int value, BaseEntity target) {
@@ -29,7 +44,7 @@ namespace Cardinals.Board {
 			// TODO: 마법 선택 창 구현
 		}
 
-		private void GainExp(int exp) {
+		public void GainExp(int exp) {
 			_exp += exp;
 			while (
 				_level < Constants.GameSetting.Tile.MaxLevel && 

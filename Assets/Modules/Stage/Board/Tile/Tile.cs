@@ -50,6 +50,7 @@ namespace Cardinals.Board {
         public bool IsMouseHovered => _isMouseHovered;
 
         private TileData _tileData;
+        
         private ComponentGetter<TileAnimation> _tileAnimation
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
 
@@ -74,7 +75,8 @@ namespace Cardinals.Board {
         public TileAction TileAction=> _tileAction;
 
         // 타일의 마법 관련 변수
-        private TileMagic _tileMagic;
+        private TileMagic _tileMagic; 
+        public TileMagic TileMagic => _tileMagic;
 
         // 타일의 이펙트 관련 변수
         private TileEffect _tileEffect;
@@ -85,7 +87,12 @@ namespace Cardinals.Board {
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
         
-        public void Init(TileData tileData, Action<Tile> onClicked, Vector3 tilePositionOnGround, TileState tileState=TileState.Normal) {
+        public void Init(
+            TileData tileData, 
+            Action<Tile> onClicked, 
+            Vector3 tilePositionOnGround, 
+            TileState tileState=TileState.Normal
+        ) {
             _tileData = tileData;
             _onClicked = onClicked;
             _tilePositionOnGround = tilePositionOnGround;
@@ -112,7 +119,7 @@ namespace Cardinals.Board {
             }
             _tileCurse.Init();
 
-            if (_tileAction is TileEventAction or TileNullAction) {
+            if (_tileAction is not (TileEventAction or TileNullAction) ) {
                 _tileMagic = GetComponent<TileMagic>();
                 if (_tileMagic == null) {
                     _tileMagic = gameObject.AddComponent<TileMagic>();
@@ -190,7 +197,7 @@ namespace Cardinals.Board {
 
             _isSelected = true;
 
-            _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip, true);
         }
 
         public void Unselect() {

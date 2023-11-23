@@ -104,6 +104,10 @@ namespace Cardinals
             DefenseCount = 0;
         }
 
+        public bool CheckBuffExist(BuffType buffType)
+        {
+            return (Buffs.Any(x => x.Type == buffType));
+        }
         #region 기본 액션 및 버프 관련 함수
         [Button]
         /// <summary>
@@ -146,12 +150,12 @@ namespace Cardinals
         {
             float damage = originDamage;
 
-            if (Buffs.Any(x => x.Type == BuffType.Weak))
+            if (CheckBuffExist(BuffType.Weak))
             {
                 damage *= .5f;
             }
 
-            if (Buffs.Any(x => x.Type == BuffType.Wet))
+            if (CheckBuffExist(BuffType.Wet))
             {
                 damage *= 0.5f;
             }

@@ -65,7 +65,6 @@ namespace Cardinals.Game
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
-                GameManager.I.Player.OnTurn();
                 yield return GameManager.I.WaitNext(); // 대기?
                 
                 // 적 행동

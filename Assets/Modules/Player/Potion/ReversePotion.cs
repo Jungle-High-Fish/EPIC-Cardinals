@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Cardinals.Enums;
+
 namespace Cardinals
 {
     public class ReversePotion : Potion
     {
-        public ReversePotion(int money, string name)
+        public ReversePotion()
         {
-            Money = money;
-            Name = name;
+            _potionType = PotionType.Reverse;
         }
 
         public override void UsePotion()

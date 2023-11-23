@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Cardinals.Enums;
+
 namespace Cardinals
 {
     public class JumpPotion : Potion
     {
-        public JumpPotion(int money, string name)
+        public JumpPotion()
         {
-            Money = money;
-            Name = name;
+            _potionType = PotionType.Jump;
         }
 
         public override void UsePotion()
         {
-            Debug.Log("¹°¾à »ç¿ë");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
             GameManager.I.StartCoroutine(GameManager.I.Player.MoveTo(3, 0.5f));
         }
     }

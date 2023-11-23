@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RiglooShoes : Artifact
+namespace Cardinals.Game
 {
-    public RiglooShoes(int money, string name, ArtifactType type)
+    public class RiglooShoes: Artifact 
     {
-        Money = money;
-        Name = name;
-        Type = type;
+        public RiglooShoes(ArtifactType type)
+        {
+            Type = type;
+        }
     }
 }
