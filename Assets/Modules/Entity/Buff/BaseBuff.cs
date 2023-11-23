@@ -1,10 +1,12 @@
 using System;
 using Cardinals.Enums;
+using Util;
 
 namespace Cardinals
 {
     public abstract class BaseBuff
     {
+        public BuffDataSO Data { get; private set; }
         protected BaseBuff(BuffType type,
                            BuffCountDecreaseType countDecreaseType = BuffCountDecreaseType.Turn,
                            int count = 0)
@@ -12,10 +14,9 @@ namespace Cardinals
             Type = type;
             CountDecreaseType = countDecreaseType;
             Count = count;
+
+            Data = ResourceLoader.LoadSO<BuffDataSO>(Constants.FilePath.Resources.SO_BuffData + Type);
         }
-        
-        public string Name { get; }
-        public string Description { get; }
         
         public BuffType Type { get; }
         public BuffCountDecreaseType CountDecreaseType { get; }

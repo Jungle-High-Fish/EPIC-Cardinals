@@ -44,7 +44,7 @@ namespace Cardinals
         {
             if (args.Action == NotifyCollectionChangedAction.Add)
             {
-                BaseBuff buff = (sender as ObservableCollection<BaseBuff>).First();
+                BaseBuff buff = (sender as ObservableCollection<BaseBuff>).Last();
                 AddBuffEvent?.Invoke(buff);
             }
         }
@@ -154,12 +154,7 @@ namespace Cardinals
             {
                 damage *= .5f;
             }
-
-            if (CheckBuffExist(BuffType.Wet))
-            {
-                damage *= 0.5f;
-            }
-
+            
             return (int) Math.Ceiling(damage);
         }
 

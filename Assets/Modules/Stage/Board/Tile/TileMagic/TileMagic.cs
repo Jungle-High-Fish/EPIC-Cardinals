@@ -110,7 +110,7 @@ namespace Cardinals.Board {
 		// 3 이상의 행동에서 적에게 젖음 효과를 부여합니다.
 		private void MagicActionWaterSub(int value, BaseEntity target) {
 			if (value >= 3) {
-				target.AddBuff(new Wet(1));
+				target.AddBuff(new Weak(1));
 			}
 		}
 

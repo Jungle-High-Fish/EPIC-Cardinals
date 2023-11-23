@@ -13,10 +13,10 @@ namespace Cardinals
             _potionType = PotionType.Jump;
         }
 
-        public override void UsePotion()
+        public override bool UsePotion()
         {
-            Debug.Log("���� ���");
             GameManager.I.StartCoroutine(GameManager.I.Player.MoveTo(3, 0.5f));
+            return true;
         }
     }
 }

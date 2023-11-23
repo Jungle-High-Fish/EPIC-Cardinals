@@ -18,6 +18,7 @@ namespace Cardinals
         [SerializeField] private PlayerInfo _playerInfo;
 
         public PlayerInfo PlayerInfo => _playerInfo;
+        public Tile OnTile => _onTile;
 
         public override void Init(int hp) {
             base.Init(hp);

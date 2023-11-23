@@ -6,6 +6,9 @@ namespace Cardinals.UI
 {
     public class UIDescription : MonoBehaviour
     {
+        private IDescription _baseDescription;
+        public IDescription BaseDesc => _baseDescription;
+        
         [Header("Component")]
         [SerializeField] private Image _iconImg;
         [SerializeField] private TextMeshProUGUI _nameTMP;
@@ -13,6 +16,8 @@ namespace Cardinals.UI
         
         public void Init(IDescription description)
         {
+            _baseDescription = description; 
+            
             _nameTMP.text = description.Name;
             _descriptionTMP.text = description.Description;
             
