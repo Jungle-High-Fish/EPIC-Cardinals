@@ -66,12 +66,6 @@ namespace Cardinals.Game
 
                 // 플레이어 행동
                 GameManager.I.Player.OnTurn();
-
-                var levelUpRequester = GameManager.I.UI.UIMagicLevelUpPanel.RequestTileLevelUp(TileMagicType.Fire, 1);
-                yield return levelUpRequester.Requester();
-                var result = levelUpRequester.Result();
-                Debug.Log($"레벨업 타입: {result.newMagic}, 레벨: {result.newLevel}");
-
                 yield return GameManager.I.WaitNext(); // 대기?
                 
                 // 적 행동

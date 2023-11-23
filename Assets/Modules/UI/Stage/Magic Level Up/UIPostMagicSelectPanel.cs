@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Board;
 using Cardinals.Enums;
+using DG.Tweening;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
@@ -41,6 +42,16 @@ namespace Cardinals.UI {
             "Button Panel/Change Button"
         );
 
+        private ComponentGetter<RectTransform> _levelUpSlot = new ComponentGetter<RectTransform>(
+            TypeOfGetter.ChildByName,
+            "Magic Slot List/Level Up Slot"
+        );
+
+        private ComponentGetter<RectTransform> _changeSlot = new ComponentGetter<RectTransform>(
+            TypeOfGetter.ChildByName,
+            "Magic Slot List/Change Slot"
+        );
+
         private TileMagicType _originalMagicType;
 
         public void Init() {
@@ -53,6 +64,8 @@ namespace Cardinals.UI {
             Action<TileMagicType> onLevelUp,
             Action onChange
         ) {
+            TransitionAnimation();
+            
             _levelUpButton.Get(gameObject).onClick.RemoveAllListeners();
             _changeButton.Get(gameObject).onClick.RemoveAllListeners();
             
@@ -73,6 +86,19 @@ namespace Cardinals.UI {
 
             _levelUpMagicTargetLevelText.Get(gameObject).text = $"Lv.{originalLevel + 1}";
             _originalLevelText.Get(gameObject).text = $"Lv.{originalLevel}";
+        }
+
+        public void TransitionAnimation() {
+            _levelUpSlot.Get(gameObject).localScale = Vector3.zero;
+            _changeSlot.Get(gameObject).localScale = Vector3.zero;
+            _levelUpButton.Get(gameObject).transform.localScale = Vector3.zero;
+            _changeButton.Get(gameObject).transform.localScale = Vector3.zero;
+            gameObject.SetActive(true);
+
+            _levelUpSlot.Get(gameObject).DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
+            _changeSlot.Get(gameObject).DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic).SetDelay(0.2f);
+            _levelUpButton.Get(gameObject).transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
+            _changeButton.Get(gameObject).transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic).SetDelay(0.2f);
         }
     }
 }

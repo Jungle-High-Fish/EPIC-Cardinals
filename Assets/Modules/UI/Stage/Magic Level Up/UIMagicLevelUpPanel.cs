@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cardinals.Board;
 using Cardinals.Enums;
+using DG.Tweening;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
@@ -70,6 +71,7 @@ namespace Cardinals.UI {
 
             IEnumerator Requester() {
                 _titleText.Get(gameObject).text = "마법 부여!";
+                TextAnimation(_titleText.Get(gameObject));
                 gameObject.SetActive(true);
                 _initialMagicSelectPanel.Get(gameObject).Set(targetMagicTypes, OnClickMagicSlot);
                 yield return new WaitUntil(() => requestHandled);
@@ -103,6 +105,7 @@ namespace Cardinals.UI {
 
             IEnumerator Requester() {
                 _titleText.Get(gameObject).text = "마법 진화!";
+                TextAnimation(_titleText.Get(gameObject));
                 gameObject.SetActive(true);
                 _postMagicSelectPanel.Get(gameObject).Set(
                     originalLevel,
@@ -151,6 +154,19 @@ namespace Cardinals.UI {
             }
 
             return result;
+        }
+
+        private void TextAnimation(TextMeshProUGUI text) {
+            float yPos = text.rectTransform.anchoredPosition.y;
+            text.rectTransform.anchoredPosition = 
+                new Vector2(
+                    text.rectTransform.anchoredPosition.x,
+                    yPos + 100
+                );
+            text.rectTransform.DOAnchorPosY(
+                yPos,
+                0.5f
+            ).SetEase(Ease.OutBack);
         }
     }
 }
