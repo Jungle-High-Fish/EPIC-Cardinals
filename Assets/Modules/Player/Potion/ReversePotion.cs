@@ -13,9 +13,10 @@ namespace Cardinals
             _potionType = PotionType.Reverse;
         }
 
-        public override void UsePotion()
+        public override bool UsePotion()
         {
             GameManager.I.StartCoroutine(GameManager.I.Player.PrevMoveTo(3, 0.5f));
+            return true;
         }
     }
 }

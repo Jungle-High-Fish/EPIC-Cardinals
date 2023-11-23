@@ -13,9 +13,9 @@ namespace Cardinals
         public PotionType PotionType => _potionType;
         protected PotionType _potionType;
 
-        public virtual void UsePotion()
+        public virtual bool UsePotion()
         {
-
+            return true;
         }
 
         #region IProduct

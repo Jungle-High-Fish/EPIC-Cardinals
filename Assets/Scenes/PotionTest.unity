@@ -997,7 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardManager: {fileID: 0}
   _slotState: 1
 --- !u!114 &408597044
 MonoBehaviour:
@@ -1068,7 +1067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mouseState: 2
   _cardDeckUIParent: {fileID: 263857831}
-  _cardUIPrefab: {fileID: 0}
 --- !u!4 &437358052
 Transform:
   m_ObjectHideFlags: 0
@@ -1267,7 +1265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageList:
   - {fileID: 11400000, guid: 196f26ab163ef51448c32bac3bc3d5f5, type: 2}
-  _next: 1
 --- !u!4 &546446608
 Transform:
   m_ObjectHideFlags: 0
@@ -2082,18 +2079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7799b2af7dd4925b02957d3daa110e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainUICanvas: {fileID: 0}
-  _playerUICanvas: {fileID: 0}
-  _cardUICanvas: {fileID: 0}
-  _enemyUICanvas: {fileID: 0}
-  _uiStage: {fileID: 0}
-  _uiRewardPanel: {fileID: 0}
-  _uiPlayerInfo: {fileID: 0}
-  _uiCardSystem: {fileID: 0}
-  _uiTileSelection: {fileID: 0}
-  _uiCardEvent: {fileID: 0}
-  _uiShop: {fileID: 0}
-  _uiRoulette: {fileID: 0}
 --- !u!1 &1139324695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,7 +2878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardManager: {fileID: 0}
   _slotState: 0
 --- !u!114 &1533068398
 MonoBehaviour:
@@ -3383,7 +3367,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32068
+  m_Name: pb_Mesh37272
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3754,23 +3738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf08f6156f7543a4abafa1e8eec69edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileData:
-    type: 0
-    magicType: 0
-    direction: 0
-    level: 0
-    guage: 0
-  _next: {fileID: 0}
-  _prev: {fileID: 0}
-  _tileState: 0
-  _isSelectable: 0
-  _isSelected: 0
-  _isMouseHovered: 0
-  _tilePositionOnGround: {x: 0, y: 0, z: 0}
-  _tileAction: {fileID: 0}
-  _tileMagic: {fileID: 0}
-  _tileEffect: {fileID: 0}
-  _tileCurse: {fileID: 0}
 --- !u!4 &7849475635920186546
 Transform:
   m_ObjectHideFlags: 0
