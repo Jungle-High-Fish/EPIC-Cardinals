@@ -38,7 +38,7 @@ namespace Cardinals.Board {
 			MagicAction(value, target);
 		}
 
-		private void MagicLevelUp() {
+		public void MagicLevelUp() {
 			_level += 1;
 			
 			// TODO: 마법 선택 창 구현

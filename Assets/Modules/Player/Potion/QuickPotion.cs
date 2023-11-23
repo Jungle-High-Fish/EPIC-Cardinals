@@ -14,9 +14,10 @@ namespace Cardinals
             _potionType = PotionType.Quick;
         }
 
-        public override void UsePotion()
+        public override bool UsePotion()
         {
             GameManager.I.Stage.CardManager.Draw(2);
+            return true;
         }
     }
 }

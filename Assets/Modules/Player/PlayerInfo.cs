@@ -75,10 +75,15 @@ namespace Cardinals
             DeletePotionEvent?.Invoke(index, potion);
         }
 
-        public void UsePotion(int index)
+        public bool UsePotion(int index)
         {
-            _potions[index].UsePotion();
-            DeletePotion(index);
+            if (_potions[index].UsePotion())
+            {
+                DeletePotion(index);
+                return true;
+            }
+
+            return false;
         }
 
         public void AddArtifact(ArtifactType artifactType)

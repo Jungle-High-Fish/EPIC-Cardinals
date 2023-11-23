@@ -14,9 +14,10 @@ namespace Cardinals
             _potionType = PotionType.Heal;
         }
 
-        public override void UsePotion()
+        public override bool UsePotion()
         {
             GameManager.I.Player.AddBuff(new HealBuff(3));
+            return true;
         }
     }
 }
