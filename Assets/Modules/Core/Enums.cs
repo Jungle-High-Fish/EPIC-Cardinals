@@ -206,10 +206,13 @@ namespace Cardinals.Enums {
         None,
         Fire,
         Water,
-        Earth,
-        Wind,
-        Light,
-        Dark
+        Earth
+    }
+
+    public enum TileCurseType {
+        None,
+        Fireball,
+        ElectricShock
     }
 
     public enum TileState {

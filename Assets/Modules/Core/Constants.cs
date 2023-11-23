@@ -53,6 +53,9 @@ namespace Cardinals.Constants {
 
             public const string Prefabs_UI_TileSelection = "UI/Stage/Tile Selection UI";
 
+            public const string Prefabs_UI_MagicLevelUpPanel = "UI/Stage/Magic Level Up/Magic Level Up Panel";
+            public const string Prefabs_UI_MagicSlot = "UI/Stage/Magic Level Up/Magic Slot";
+
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
@@ -66,6 +69,7 @@ namespace Cardinals.Constants {
             public const string SO_ArtifactData = "Artifacts/";
             public const string SO_PotionData = "Potions/";
             public const string SO_BuffData = "Buffs/";
+            public const string SO_MagicData = "Magic/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";
@@ -132,6 +136,8 @@ namespace Cardinals.Constants {
             public const int MaxPotionCapacity = 3;
             public const int MaxArtifactCapacity = 12;
             public const int CardDrawCount = 5;
+
+            public const int InitialMagicPickNum = 2;
         }
     }
 }

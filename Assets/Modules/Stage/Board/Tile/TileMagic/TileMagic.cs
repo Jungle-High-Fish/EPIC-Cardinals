@@ -5,6 +5,8 @@ using Cardinals.Constants.GameSetting;
 using UnityEngine;
 using Cardinals.Buff;
 using UnityEngine.UI;
+using Cardinals.Game;
+using Util;
 
 namespace Cardinals.Board {
 
@@ -22,6 +24,12 @@ namespace Cardinals.Board {
 			set => _exp = value;
 		}
 
+		public static TileMagicDataSO Data(TileMagicType tileMagicType) {
+            return ResourceLoader.LoadSO<TileMagicDataSO>(
+                Constants.FilePath.Resources.SO_MagicData + tileMagicType
+            );
+        }
+
 		public void Init() {
 			_type = TileMagicType.None;
 			_level = 0;
@@ -38,12 +46,6 @@ namespace Cardinals.Board {
 			MagicAction(value, target);
 		}
 
-		public void MagicLevelUp() {
-			_level += 1;
-			
-			// TODO: 마법 선택 창 구현
-		}
-
 		public void GainExp(int exp) {
 			_exp += exp;
 			while (
@@ -51,8 +53,20 @@ namespace Cardinals.Board {
 				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]
 			) {
 				_exp -= Constants.GameSetting.Tile.LevelUpExp[_level];
-				MagicLevelUp();
+				
+				// TODO: 밟았을 때만 실행되도록 변경 필요
+				StartCoroutine(MagicLevelUp());
 			}
+		}
+
+		private IEnumerator MagicLevelUp() {
+			var levelUpRequest = GameManager.I.Stage.Board.RequestTileLevelUp(_type, _level);
+			yield return levelUpRequest.Requester();
+			var (newMagic, newLevel) = levelUpRequest.Result();
+
+			// TODO: 마법 적용 애니메이션 구현 필요
+			_type = newMagic;
+			_level = newLevel;
 		}
 
 		private void MagicAction(int value, BaseEntity target) {

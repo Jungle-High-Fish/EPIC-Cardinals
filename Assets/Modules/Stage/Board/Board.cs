@@ -165,6 +165,20 @@ namespace Cardinals.Board {
             return (result, TileRequestCoroutine);
         }
 
+        /// <summary>
+        /// 타일이 레벨업하는 이벤트를 발생시키는 함수입니다.
+        /// </summary>
+        /// <returns>
+        /// Requester 코루틴과 Result 함수를 반환합니다. 
+        /// Requester가 먼저 실행완료 되어야 Result가 올바른 값을 반환하는 것이 보장됩니다.
+        /// </returns>
+        public (Func<IEnumerator> Requester, Func<(TileMagicType newMagic, int newLevel)> Result) RequestTileLevelUp(
+            TileMagicType originalMagicType,
+            int originalLevel
+        ) {
+            return GameManager.I.UI.UIMagicLevelUpPanel.RequestTileLevelUp(originalMagicType, originalLevel);
+        }
+
         private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();

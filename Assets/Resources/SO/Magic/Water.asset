@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a4a147837f24e8ca3d8887fa4b1ce2, type: 3}
+  m_Name: Water
+  m_EditorClassIdentifier: 
+  magicType: 2
+  elementName: "\uBB3C"
+  elementColor: {r: 0.2216981, g: 0.32621366, b: 1, a: 0}
+  sprite: {fileID: 21300000, guid: 245c79d7836974092904eb9e4d6d6788, type: 3}
+  mainMagicName: "\uB9D1\uC740 \uBB3C"
+  mainMagicDescription: "\uD589\uB3D9 \uB9C8\uB2E4, 1/2/3\uC758 \uCCB4\uB825\uC744
+    \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  hasSubMagic: 1
+  subMagicName: "\uC816\uC74C"
+  subMagicDescription: "3 \uC774\uC0C1\uC758 \uD589\uB3D9 \uB9C8\uB2E4, \uD574\uB2F9
+    \uC801\uC5D0\uAC8C \uC57D\uD654\uB97C \uBD80\uC5EC\uD569\uB2C8\uB2E4.\n\uC57D\uD654\uAC00
+    \uC788\uB294 \uCE90\uB9AD\uD130\uB294, \uB370\uBBF8\uC9C0\uC758 50%\uAC00 \uAC10\uC18C\uD569\uB2C8\uB2E4."
