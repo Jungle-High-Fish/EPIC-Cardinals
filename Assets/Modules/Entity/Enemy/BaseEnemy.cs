@@ -38,7 +38,7 @@ namespace Cardinals
         
         protected Pattern[] Patterns { get; set; }
 
-        private Pattern _fixPattern;
+        private Pattern  _fixPattern;
         protected Pattern FixPattern
         {
             get => _fixPattern;
@@ -141,7 +141,7 @@ namespace Cardinals
             {
                 if (buff.Type == BuffType.Burn)
                 {
-                    if (Buffs.Any(x=> x.Type == BuffType.Burn))
+                    if (CheckBuffExist(BuffType.Burn))
                     {
                         Hit(1);
                     }
