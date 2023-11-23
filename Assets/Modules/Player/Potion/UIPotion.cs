@@ -30,6 +30,9 @@ namespace Cardinals
         public void Init(int index, PotionType potionType=PotionType.Empty)
         {
             _index = index;
+            _potionButton.Get(gameObject).onClick.AddListener(() => {
+                UsePotionUI();
+            });
 
             if (potionType == PotionType.Empty) return;
             
@@ -37,8 +40,6 @@ namespace Cardinals
                 Constants.FilePath.Resources.SO_PotionData + potionType
             );
             _potionIcon.Get(gameObject).sprite = _potionDataSO.sprite;
-
-            _potionButton.Get(gameObject).onClick.AddListener(UsePotionUI);
         }
 
         public void Set(Potion potion)
@@ -47,6 +48,8 @@ namespace Cardinals
                 _potionDataSO = null;
                 _potionIcon.Get(gameObject).sprite = null;
                 _potionIcon.Get(gameObject).color = Color.clear;
+
+                _potionButton.Get(gameObject).interactable = false;
                 return;
             }
 
@@ -55,6 +58,8 @@ namespace Cardinals
             );
             _potionIcon.Get(gameObject).sprite = _potionDataSO.sprite;
             _potionIcon.Get(gameObject).color = Color.white;
+
+            _potionButton.Get(gameObject).interactable = true;
         }
 
         public void DeletePotionUI(Potion potion)
