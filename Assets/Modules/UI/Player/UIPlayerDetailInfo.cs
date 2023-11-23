@@ -134,9 +134,7 @@ namespace Cardinals.UI {
             if (!_isPanelOpen) return;
 
             for (int i = 0; i < Constants.GameSetting.Player.MaxPotionCapacity; i++) {
-                if (i == index) {
-                    _potionList[i].Set(potion);
-                }
+                _potionList[i].Set(GameManager.I.Stage.Player.PlayerInfo.PotionList[i]);
             }
         }
     }

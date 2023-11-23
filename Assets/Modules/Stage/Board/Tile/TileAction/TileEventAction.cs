@@ -36,6 +36,9 @@ namespace Cardinals.Board {
             {
                 switch (_eventType)
                 {
+                    case BoardEventType.Tile :
+                        GameManager.I.UI.UITileEvent.Init();
+                        break;
                     case BoardEventType.Shop :
                         GameManager.I.UI.UIShop.Init();
                         break;
