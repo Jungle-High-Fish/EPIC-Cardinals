@@ -260,9 +260,7 @@ namespace Cardinals.Enums {
         Weak,
         ElectricShock, // 감전
         Poison,
-        Fracture, // 골절
         Slow,
-        Wet, // 젖음
         Heal,
     }
 

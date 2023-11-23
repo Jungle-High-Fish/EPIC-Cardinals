@@ -18,7 +18,7 @@ namespace Cardinals
         {
             BaseBuff = baseBuff;
 
-            _iconImg.sprite = null; // [TODO] 버프 아이콘 업데이트 필요
+            _iconImg.sprite = baseBuff.Data.sprite;
             UpdateBuffCount(baseBuff.Count);
             
             BaseBuff.RemoveEvent += Destroy;
@@ -27,7 +27,7 @@ namespace Cardinals
 
         private void UpdateBuffCount(int buffCount)
         {
-            _buffCountTMP.text = $"{buffCount}";
+            _buffCountTMP.text = buffCount == 0 ? string.Empty : buffCount.ToString();
         }
 
         private void Destroy()
@@ -38,9 +38,9 @@ namespace Cardinals
 
         #region IDescription
 
-        public string Name => BaseBuff.Type.ToString();
-        public string Description => "테스트입니다.";
-        public Sprite IconSprite => _iconImg.sprite;
+        public string Name => BaseBuff.Data.buffName;
+        public string Description => BaseBuff.Data.description;
+        public Sprite IconSprite => BaseBuff.Data.sprite;
         public Transform InstTr => _descriptionTr;
 
         #endregion

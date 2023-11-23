@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace Cardinals
 {
-    public class UIPlayerInfo : MonoBehaviour, IDescriptionInstTrInfo
+    public class UIPlayerInfo : MonoBehaviour
     {
         [SerializeField] private Player _player;
 
@@ -43,6 +43,18 @@ namespace Cardinals
             "Player Status/Detail Info Panel"
         );
 
+        [Header("Panel")]
+        [SerializeField] private GameObject _playerInfoPanel;
+        [SerializeField] private float _panelMoveDistance;
+
+        [Header("Bless")]
+        [SerializeField] private Transform _blessTr;
+        
+        [Header("Potion")]
+        [SerializeField] private Transform _potionTr;
+
+        [Header("Artifact")]
+        [SerializeField] private Transform _artifactTr;
         private bool _isPanelOpen;
         
         public void Init()
