@@ -7,6 +7,7 @@ using Cardinals.Board;
 using System;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Cardinals.Buff;
 
 namespace Cardinals
 {
@@ -150,6 +151,11 @@ namespace Cardinals
         }
 
 
+        [Button]
+        public void TestAddBuff(BuffType buffType)
+        {
+            AddBuff(new ElectricShock());
+        }
       
 
         
