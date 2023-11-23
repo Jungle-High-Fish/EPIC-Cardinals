@@ -199,10 +199,7 @@ namespace Cardinals.Enums {
         None,
         Fire,
         Water,
-        Earth,
-        Wind,
-        Light,
-        Dark
+        Earth
     }
 
     public enum TileState {
