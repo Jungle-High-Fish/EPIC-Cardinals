@@ -4,6 +4,7 @@ using Cardinals.Enums;
 using Cardinals.Constants.GameSetting;
 using UnityEngine;
 using Cardinals.Buff;
+using UnityEngine.UI;
 
 namespace Cardinals.Board {
 
@@ -12,7 +13,8 @@ namespace Cardinals.Board {
 		private int _level;
 		private int _exp;
 
-		public TileMagicType Type { get; private set; }
+		public TileMagicType Type 
+		{ get => _type; private set => _type = value; } 
 		public int Level => _level;
 		public int Exp
 		{

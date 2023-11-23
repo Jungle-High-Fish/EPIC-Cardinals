@@ -114,7 +114,7 @@ namespace Cardinals.Board {
             }
             _tileCurse.Init();
 
-            if (_tileAction is TileEventAction or TileNullAction) {
+            if (_tileAction is not (TileEventAction or TileNullAction) ) {
                 _tileMagic = GetComponent<TileMagic>();
                 if (_tileMagic == null) {
                     _tileMagic = gameObject.AddComponent<TileMagic>();

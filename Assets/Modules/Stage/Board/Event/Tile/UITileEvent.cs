@@ -16,36 +16,58 @@ namespace Cardinals.BoardEvent.Tile
     {
         [Header("Component")]
         [SerializeField] private Button _closeBTN;
+        [SerializeField] private GameObject _explainObj;
         [SerializeField] private TextMeshProUGUI _explainTMP;
-        [SerializeField] private TextMeshProUGUI _addTextTMP;
         
         [Header("Event-Related")]
         [SerializeField] private Transform _typeParentTr;
         public TileMagicType SelectedMagicType { set; private get; }
+        private IEnumerator _eventSeq;
+        private IEnumerator _selectedSeq;
+        
 
         [Header("Data")]
         private List<Board.Tile> _selectedTiles;
         public void Awake()
         {
-            _closeBTN.onClick.AddListener(() => gameObject.SetActive(false));
+            _closeBTN.onClick.AddListener(End);
         }
 
         public void Init()
         {
             _explainTMP.text = string.Empty;
-            _addTextTMP.text = string.Empty;
+
+            _closeBTN.gameObject.SetActive(false);
+            _explainObj.SetActive(false);
             _typeParentTr.gameObject.SetActive(false);
-         
+            
             gameObject.SetActive(true);
             
             // 플로우 시작
             StartCoroutine(EventFlow());
         }
+
+        private void End()
+        {
+            gameObject.SetActive(false);
+                    
+            if (_selectedSeq != null)
+            {
+                StopCoroutine(_selectedSeq);
+                _selectedSeq = null;
+            }
+            
+            if (_eventSeq != null)
+            {
+                StopCoroutine(_eventSeq);
+                _eventSeq = null;
+            }
+        }
         
         IEnumerator EventFlow()
         {
             int idx = Random.Range(0, 5);
-            IEnumerator nextSeq = idx switch
+            _eventSeq = idx switch
             {
                 0 => MoveExp(),
                 1 => AddExpToLine(2),
@@ -54,12 +76,12 @@ namespace Cardinals.BoardEvent.Tile
                 4 => AddExpByType(2),
             };
 
-            yield return nextSeq; // 각 이벤트 수행
+            yield return _eventSeq; // 각 이벤트 수행
             
+            SetMessage("성공적으로 이벤트가 완료되었다.");
             yield return new WaitForSeconds(1.5f); // 이벤트 완료 후, 잠깐 대기
+            End();
         }
-        
-        
 
         /// <summary>
         /// 오류 출력 함수
@@ -69,21 +91,40 @@ namespace Cardinals.BoardEvent.Tile
         {
             Debug.Log(text);
         }
+
+        void SetMessage(string msg)
+        {
+            _explainObj.SetActive(true);
+            _explainTMP.text = msg;
+        }
         
         /// <summary>
         /// 공용 타일 선택 함수
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        IEnumerator SelectTile(TileSelectionType type)
+        IEnumerator SelectTile(TileSelectionType type,
+                               string title = "타일을 선택하세요.",
+                               string description = "")
         {
-            var tileSelection = GameManager.I.Stage.Board.RequestTileSelect(
-                type,
-                "타일을 선택하세요",
-                ""
-            );
-            yield return tileSelection.tileRequester();
-            _selectedTiles = tileSelection.selectedTiles;
+            var tileSelection = GameManager.I.Stage.Board.RequestTileSelect(type, title, description);
+            
+            _selectedSeq = tileSelection.tileRequester(); 
+            yield return _selectedSeq;
+
+            if (tileSelection.selectedTiles.Any())
+            {
+                _selectedTiles = tileSelection.selectedTiles;
+            }
+            else // 선택 취소함
+            {
+                SetMessage("선택을 취소했습니다.\n이벤트가 종료됩니다.");
+                yield return new WaitForSeconds(1f);
+                End();
+            }
+            
+            _selectedSeq = null;
+            
         }
 
         /// <summary>
@@ -92,15 +133,18 @@ namespace Cardinals.BoardEvent.Tile
         /// <returns></returns>
         IEnumerator MoveExp()
         {
-            _explainTMP.text = "한 타일의 경험치를 0으로 만들고, 그 경험치 만큼 다른 타일에 적용";
-            
             Board.Tile senderTile = null;
             Board.Tile receiverTile = null;
 
+            // [TODO] 이동할 경험치 타일이 존재하지 않는 경우, 이벤트 종료?
+            
             // sender 타일 선택
             do
             {
-                yield return SelectTile(TileSelectionType.Single);
+                yield return SelectTile(TileSelectionType.Single,
+                                        title: "경험치를 옮기려는 타일을 선택해주세요.", 
+                                        description: "한 타일의 경험치를 0으로 만들고, 그 경험치 만큼 다른 타일에 적용");
+                
                 var tile = _selectedTiles.First();
                 if (tile.TileMagic.Exp == 0) // 이동할 경험치가 있는지 체크
                 {
@@ -115,7 +159,9 @@ namespace Cardinals.BoardEvent.Tile
             // receiver 타일 선택
             do
             {
-                yield return SelectTile(TileSelectionType.Single);
+                yield return SelectTile(TileSelectionType.Single,
+                                        title: "경험치를 적용할 타일을 선택해주세요.", 
+                                        description: "한 타일의 경험치를 0으로 만들고, 그 경험치 만큼 다른 타일에 적용");
                 var tile = _selectedTiles.First();
                 
                 if (tile.TileMagic.Level == Constants.GameSetting.Tile.MaxLevel)
@@ -140,9 +186,9 @@ namespace Cardinals.BoardEvent.Tile
         /// <returns></returns>
         IEnumerator AddExpToLine(int value)
         {
-            _explainTMP.text = $"라인 하나에 경험치를 {value}씩 제공";
-            
-            yield return SelectTile(TileSelectionType.Edge);
+            yield return SelectTile(TileSelectionType.Edge,
+                                    "라인을 선택해주세요.",
+                                    $"라인 하나에 경험치를 {value}씩 제공");
 
             foreach (var tile in _selectedTiles)
             {
@@ -157,15 +203,13 @@ namespace Cardinals.BoardEvent.Tile
         /// <returns></returns>
         IEnumerator AddExpToNTile(int totalExp)
         {
-            _explainTMP.text = $"아래 횟수만큼 원하는 타일에 경험치를 적용";
-            
             int cnt = 0;
             do
             {
-                _addTextTMP.text = $"{cnt}/{totalExp}";
-                    
                 // 타일 지정
-                yield return SelectTile(TileSelectionType.Single);
+                yield return SelectTile(TileSelectionType.Single,
+                                    "아래 횟수만큼 원하는 타일에 경험치를 적용",
+                                    $"{cnt}/{totalExp}");
                 Board.Tile tile = _selectedTiles.First();
                 
                 if (tile.TileMagic.Level == Constants.GameSetting.Tile.MaxLevel)
@@ -178,8 +222,6 @@ namespace Cardinals.BoardEvent.Tile
                     cnt++;
                 }
             } while (cnt < totalExp);
-            
-            yield return new WaitForSeconds(1f);
         }
 
         /// <summary>
@@ -188,12 +230,12 @@ namespace Cardinals.BoardEvent.Tile
         /// <returns></returns>
         IEnumerator ChangeTileType()
         {
-            _explainTMP.text = $"원하는 타일의 속성을 변경";
-
+            // [TODO] 레벨 1이상의 타일만 지정 필요
             Board.Tile tile;
             do
             {
-                yield return SelectTile(TileSelectionType.Single);
+                yield return SelectTile(TileSelectionType.Single,
+                                         description: "원하는 타일의 속성을 변경");
                 tile = _selectedTiles.First();
 
                 if (tile.TileMagic.Type == TileMagicType.None)
@@ -224,26 +266,39 @@ namespace Cardinals.BoardEvent.Tile
         /// <param name="value"></param>
         IEnumerator AddExpByType(int value)
         {
+            _explainTMP.gameObject.SetActive(true);
             _explainTMP.text = $"원하는 속성 타일들에 경험치 {value}씩 제공";
             
             // _typeSelectObj 에 현재 플레이어가 보유한 타입만 설정 필요
-            var typeList = 
+            var typeList =
                 GameManager.I.Stage.Board.TileSequence
-                    .Select(t => t.TileMagic.Type)
-                    .Where(type => type != TileMagicType.None );
-            InstTypeItems(typeList);
-            
-            // 타입을 지정할 때까지 대기
-            SelectedMagicType = TileMagicType.None;
-            yield return new WaitUntil(() => SelectedMagicType != TileMagicType.None); 
+                    .Where(t => t.TileMagic != null && t.TileMagic.Type != TileMagicType.None)
+                    .Select(t => t.TileMagic.Type);
 
-            // 지정한 타입들만 경험치 부여
-            var tiles = GameManager.I.Stage.Board.TileSequence.Select(x => x.TileMagic)
-                .Where(x => x.Type == SelectedMagicType);
-            foreach (var tile in tiles)
+            if (typeList?.Count() > 0)
             {
-                tile.GainExp(value);
+                _closeBTN.gameObject.SetActive(true);
+                
+                InstTypeItems(typeList);
+            
+                // 타입을 지정할 때까지 대기
+                SelectedMagicType = TileMagicType.None;
+                yield return new WaitUntil(() => SelectedMagicType != TileMagicType.None); 
+
+                // 지정한 타입들만 경험치 부여
+                var tiles = GameManager.I.Stage.Board.TileSequence.Select(x => x.TileMagic)
+                    .Where(x => x.Type == SelectedMagicType);
+                foreach (var tile in tiles)
+                {
+                    tile.GainExp(value);
+                }
             }
+            else
+            {
+                SetMessage("지정 가능한 타입이 존재하지 않아 이벤트 생략댐");
+                yield return new WaitForSeconds(1.5f);
+            }
+            
         }
 
         /// <summary>
