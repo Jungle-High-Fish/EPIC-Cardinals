@@ -19,6 +19,7 @@ namespace Cardinals.Board {
     public class Board: MonoBehaviour {
         public Tile this[int x] => _tileSequence[x];
         public Tile this[int x, int y] => _boardBuilder[x, y];
+        public IEnumerable<Tile> TileSequence => _tileSequence;
 
         [ShowInInspector, ReadOnly]
         private List<Tile> _tileSequence;
