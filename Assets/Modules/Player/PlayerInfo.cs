@@ -6,6 +6,7 @@ using UnityEngine;
 using Util;
 using Cardinals.Enums;
 using Sirenix.OdinInspector;
+using Cardinals.Game;
 
 namespace Cardinals
 {
@@ -15,6 +16,10 @@ namespace Cardinals
         
         private List<Potion> _potions;
         public Action<int, Potion> AddPotionEvent { get; set; }
+        public Action<int, Potion> DeletePotionEvent { get; set; }
+        public List<BlessType> BlessList => _blessList;
+        public List<Artifact> ArtifactList => _artifacts;
+        public List<Potion> PotionList => _potions;
 
         private List<Artifact> _artifacts;
         public Action<Artifact> AddArtifactEvent { get; set; }
@@ -65,8 +70,9 @@ namespace Cardinals
 
         public void DeletePotion(int index)
         {
-            _potions[index].DeletePotionEvent?.Invoke(_potions[index]);
+            Potion potion = _potions[index];
             _potions[index] = null;
+            DeletePotionEvent?.Invoke(index, potion);
         }
 
         public void UsePotion(int index)
@@ -111,7 +117,7 @@ namespace Cardinals
             {
                 if (artifact == null)
                     continue;
-                Debug.Log(artifact.Name);
+                Debug.Log(artifact.Data().artifactName);
             }
         }
     

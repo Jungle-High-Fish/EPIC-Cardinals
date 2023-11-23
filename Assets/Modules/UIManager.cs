@@ -126,6 +126,7 @@ namespace Cardinals
             _uiCardEvent = obj.GetComponent<UICardEvent>();
             obj.SetActive(false); 
         }
+        
         private void InstantiateBoardEventRouletteUI() {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Roulette);
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);

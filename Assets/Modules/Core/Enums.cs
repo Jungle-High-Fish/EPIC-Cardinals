@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
 using Cardinals.Enemy;
+using Cardinals.Game;
 
 namespace Cardinals.Enums {
 
@@ -32,13 +33,16 @@ namespace Cardinals.Enums {
                 case PotionType.Empty:
                     return null;
                 case PotionType.Jump:
-                    return new JumpPotion(30, "JumpPotion");
+                    return new JumpPotion();
                 case PotionType.Reverse:
-                    return new ReversePotion(30, "ReversePotion");
+                    return new ReversePotion();
+                    //return new ReversePotion(30, "ReversePotion");
                 case PotionType.Quick:
-                    return new QuickPotion(40, "QuickPotion");
+                    return new QuickPotion();
+                    //return new QuickPotion(40, "QuickPotion");
                 case PotionType.Heal:
-                    return new HealPotion(30, "HealPotion");
+                    return new HealPotion();
+                    //return new HealPotion(30, "HealPotion");
                 default:
                     return null;
             }
@@ -51,13 +55,13 @@ namespace Cardinals.Enums {
                 case ArtifactType.Empty:
                     return null;
                 case ArtifactType.Verdant:
-                    return new VerdantBlossom(200, "VerdantBlossom", artifactType);
+                    return new VerdantBlossom(artifactType);
                 case ArtifactType.Grimoire:
-                    return new GrimoireSatchel(250, "GrimoireSatchel", artifactType);
+                    return new GrimoireSatchel(artifactType);
                 case ArtifactType.Rigloo:
-                    return new RiglooShoes(180, "RiglooShoes", artifactType);
+                    return new RiglooShoes(artifactType);
                 case ArtifactType.Warp:
-                    return new WarpAmulet(230, "WarpAmulet", artifactType);
+                    return new WarpAmulet(artifactType);
                 default:
                     return null;
             }
@@ -216,7 +220,9 @@ namespace Cardinals.Enums {
     public enum TileAnimationType {
         None,
         Shake,
-        Jump
+        Jump,
+        Flip,
+        FlipBack,
     }
     
     public enum StageEventType

@@ -16,6 +16,9 @@ namespace Cardinals.Board {
 		private ComponentGetter<Transform> _transform
 			= new ComponentGetter<Transform>(TypeOfGetter.This);
 
+		private ComponentGetter<Transform> _rendererTransform
+			= new ComponentGetter<Transform>(TypeOfGetter.ChildByName, "Renderer");
+
 		private ComponentGetter<Rigidbody> _rigidbody
 			= new ComponentGetter<Rigidbody>(TypeOfGetter.This);
 
@@ -66,14 +69,16 @@ namespace Cardinals.Board {
 		private void InitAnimations() {
 			InitShakeAnimation();
 			InitJumpAnimation();
+			InitFlipAnimation(true);
+			InitFlipAnimation(false);
 		}
 
 		private Sequence InitShakeAnimation() {
 			Sequence shakeAnimation = DOTween.Sequence();
 			shakeAnimation.Append(
 				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
-			).Insert(0.1f,
-				_transform.Get(gameObject).DOShakeRotation(0.3f, 20f, 10, 90f, false)
+			).Insert(
+				0.1f, _transform.Get(gameObject).DOShakeRotation(0.3f, 20f, 10, 90f, false)
 			).AppendInterval(0.5f)
 			.OnComplete(AnimationComplete(TileAnimationType.Shake))
 			.SetAutoKill(false).Pause();
@@ -92,6 +97,20 @@ namespace Cardinals.Board {
 			
 			_animationDict.Add(TileAnimationType.Jump, (jumpAnimation, 0));
 			return jumpAnimation;
+		}
+
+		private Sequence InitFlipAnimation(bool isBackWard=false) {
+			Sequence flipAnimation = DOTween.Sequence();
+			flipAnimation.Append(
+				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
+			).Insert(
+				0.1f, _rendererTransform.Get(gameObject).DOLocalRotate(new Vector3(0, 0, isBackWard ? 180 : 0), 0.5f)
+			).AppendInterval(0.5f)
+			.OnComplete(AnimationComplete(TileAnimationType.Flip))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(isBackWard ? TileAnimationType.Flip : TileAnimationType.FlipBack, (flipAnimation, 0));
+			return flipAnimation;
 		}
 
 		private TweenCallback AnimationComplete(TileAnimationType animationType) {
