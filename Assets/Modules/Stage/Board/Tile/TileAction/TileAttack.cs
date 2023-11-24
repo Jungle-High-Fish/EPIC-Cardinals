@@ -11,7 +11,8 @@ namespace Cardinals.Board {
                 Debug.LogError("공격  타겟이 없습니다.");
                 return;
             }
-            target.Hit(value);
+            
+            GameManager.I.Player.Attack(target, value);
         }
 
         public override void ArriveAction() {

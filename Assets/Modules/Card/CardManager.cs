@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Util;
@@ -226,7 +227,8 @@ namespace Cardinals
                     switch (_mouseState)
                     {
                         case MouseState.Action:
-                            if (!CardUseAction(_handCards[_selectCardIndex].CardNumber))
+                            var target = GameManager.I.Stage.Enemies.FirstOrDefault();
+                            if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
                             {
                                 break;
                             }
