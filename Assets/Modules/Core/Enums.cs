@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
+using Cardinals.Board.Curse;
 using Cardinals.Enemy;
 using Cardinals.Game;
 
@@ -161,6 +162,17 @@ namespace Cardinals.Enums {
                     return null;
             }
         }
+
+        public static TileCurseData GetTileCurseInstanceType(TileCurseType type)
+        {
+            return type switch
+            {
+                TileCurseType.Fireball => new Fireball(),
+                TileCurseType.ThunderBolt => new ThunderBolt(),
+                _ => null
+            };
+
+        }
     }
 
     public enum TileType {
@@ -212,7 +224,7 @@ namespace Cardinals.Enums {
     public enum TileCurseType {
         None,
         Fireball,
-        ElectricShock
+        ThunderBolt
     }
 
     public enum TileState {

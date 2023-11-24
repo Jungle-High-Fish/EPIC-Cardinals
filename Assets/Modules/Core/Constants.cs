@@ -56,6 +56,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_MagicLevelUpPanel = "UI/Stage/Magic Level Up/Magic Level Up Panel";
             public const string Prefabs_UI_MagicSlot = "UI/Stage/Magic Level Up/Magic Slot";
 
+            public const string Prefabs_Enemy_Spawn_Fireball = "Enemy/Spawn/Fireball";
+            public const string Prefabs_Enemy_Spawn_ThunderBolt= "Enemy/Spawn/ThunderBolt";
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
