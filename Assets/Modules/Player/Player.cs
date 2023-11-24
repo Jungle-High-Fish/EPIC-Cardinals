@@ -17,6 +17,9 @@ namespace Cardinals
         private bool _isDamagedThisTurn;
         [SerializeField] private PlayerInfo _playerInfo;
 
+        
+        private Animator _animator;
+        protected override Animator Animator => (_animator ??= GetComponentInChildren<Animator>());
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
@@ -37,6 +40,7 @@ namespace Cardinals
                     _hp = calculHp;
                     _isDamagedThisTurn = true;
                     UpdateHpEvent?.Invoke(_hp, MaxHp);
+                    
                     if (_hp == 0)
                     {
                         DieEvent?.Invoke();
@@ -119,6 +123,7 @@ namespace Cardinals
                 Vector3 nextPos = _onTile.Next.transform.position;
                 nextPos.y += 1.3f;
                 transform.DOJump(nextPos, 2, 1, time);
+                Animator.Play("Jump");
                 yield return new WaitForSeconds(time);
                 _onTile = _onTile.Next;
                 if (i != count - 1) {
@@ -136,6 +141,7 @@ namespace Cardinals
                 Vector3 prevPos = _onTile.Prev.transform.position;
                 prevPos.y += 1.3f;
                 transform.DOJump(prevPos, 2, 1, time);
+                Animator.Play("Jump");
                 yield return new WaitForSeconds(time);
                 _onTile = _onTile.Prev;
                 if (i != count - 1)
@@ -150,15 +156,19 @@ namespace Cardinals
             _onTile.CardAction(num, target);
             yield return null;
         }
-
-
+        
         [Button]
         public void TestAddBuff(BuffType buffType)
         {
             AddBuff(new ElectricShock());
         }
-      
 
+
+        public void Defense(int value)
+        {
+            DefenseCount += value;
+            Animator.Play("Shield");
+        }
         
     }
 }

@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotState: 2
+  _slotState: 1
 --- !u!1 &679581792719135460
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,4 +610,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotState: 1
+  _slotState: 0

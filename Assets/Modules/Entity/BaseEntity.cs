@@ -68,6 +68,8 @@ namespace Cardinals
             }
         }
 
+        protected virtual Animator Animator { get; } // 추후 Abstract로..
+        
         public virtual void Init(int maxHp) {
             MaxHp = maxHp;
             Hp = MaxHp;
@@ -76,6 +78,8 @@ namespace Cardinals
             Buffs = new();
             Buffs.CollectionChanged += OnBuffCollectionChanged;
             DieEvent += () => { Buffs.CollectionChanged -= OnBuffCollectionChanged; };
+            
+            
         }
 
         /// <summary>
@@ -114,15 +118,16 @@ namespace Cardinals
         /// 맞을 때 호출
         /// </summary>
         /// <param name="damage">입힐 데미지</param>
-        public void Hit(int damage)
+        public virtual void Hit(int damage)
         {
-            int calculDamage = damage - DefenseCount ;
+            int calculDamage = Math.Max(0, damage - DefenseCount);
 
             if (calculDamage > 0)
             {
                 DefenseCount -= damage;
+                Animator?.Play("Hit");
             }
-            else
+            else // 막아졌다.
             {
                 DefenseCount = 0 ;
             }
@@ -136,9 +141,10 @@ namespace Cardinals
         /// </summary>
         /// <param name="target">피격 대상</param>
         /// <param name="damage">데미지</param>
-        public void Attack(BaseEntity target, int damage)
+        public virtual void Attack(BaseEntity target, int damage)
         {
             target.Hit(CalculDamage(damage));
+            Animator?.Play("Attack");
         }
 
         /// <summary>
