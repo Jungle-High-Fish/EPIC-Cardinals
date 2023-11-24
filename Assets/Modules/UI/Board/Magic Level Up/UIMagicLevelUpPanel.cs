@@ -72,7 +72,11 @@ namespace Cardinals.UI {
             IEnumerator Requester() {
                 _titleText.Get(gameObject).text = "마법 부여!";
                 TextAnimation(_titleText.Get(gameObject));
+
                 gameObject.SetActive(true);
+                _initialMagicSelectPanel.Get(gameObject).gameObject.SetActive(true);
+                _postMagicSelectPanel.Get(gameObject).gameObject.SetActive(false);
+
                 _initialMagicSelectPanel.Get(gameObject).Set(targetMagicTypes, OnClickMagicSlot);
                 yield return new WaitUntil(() => requestHandled);
                 gameObject.SetActive(false);
@@ -106,7 +110,11 @@ namespace Cardinals.UI {
             IEnumerator Requester() {
                 _titleText.Get(gameObject).text = "마법 진화!";
                 TextAnimation(_titleText.Get(gameObject));
+                
                 gameObject.SetActive(true);
+                _initialMagicSelectPanel.Get(gameObject).gameObject.SetActive(false);
+                _postMagicSelectPanel.Get(gameObject).gameObject.SetActive(true);
+
                 _postMagicSelectPanel.Get(gameObject).Set(
                     originalLevel,
                     originalMagicType,

@@ -76,9 +76,9 @@ namespace Cardinals.Board {
 		private Sequence InitShakeAnimation() {
 			Sequence shakeAnimation = DOTween.Sequence();
 			shakeAnimation.Append(
-				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
+				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1f, 1, 1f)
 			).Insert(
-				0.1f, _transform.Get(gameObject).DOShakeRotation(0.3f, 20f, 10, 90f, false)
+				0.1f, _transform.Get(gameObject).DOShakeRotation(0.3f, 10f, 10, 90f, false)
 			).AppendInterval(0.5f)
 			.OnComplete(AnimationComplete(TileAnimationType.Shake))
 			.SetAutoKill(false).Pause();

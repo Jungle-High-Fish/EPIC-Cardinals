@@ -97,6 +97,8 @@ namespace Cardinals.Board {
 			// TODO: 마법 적용 애니메이션 구현 필요
 			_type = newMagic;
 			_level = newLevel;
+
+			_tile.Get(gameObject).UITile.SetMaterial();
 		}
 
 		private void MagicAction(int value, BaseEntity target) {
