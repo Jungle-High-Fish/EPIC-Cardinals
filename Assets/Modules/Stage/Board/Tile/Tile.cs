@@ -180,7 +180,7 @@ namespace Cardinals.Board {
             }
         }
 
-        public void SetCurse(TileCurseType curseType) {
+        public void SetCurse(TileCurseType curseType, int turn) {
             //_tileCurse.SetCurse(data);
             ChangeState(TileState.Cursed);
         }

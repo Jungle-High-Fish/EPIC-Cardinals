@@ -14,6 +14,7 @@ namespace Cardinals.Board {
 		private TileMagicType _type;
 		private int _level;
 		private int _exp;
+		private bool _isLevelUp;
 
 		public TileMagicType Type 
 		{ get => _type; private set => _type = value; } 
@@ -48,6 +49,12 @@ namespace Cardinals.Board {
 
 		public void GainExp(int exp) {
 			_exp += exp;
+
+			if (_level < Constants.GameSetting.Tile.MaxLevel && 
+				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]) {
+				_isLevelUp = true;
+			}
+
 			while (
 				_level < Constants.GameSetting.Tile.MaxLevel && 
 				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]
@@ -59,7 +66,31 @@ namespace Cardinals.Board {
 			}
 		}
 
+		public void GainExpToNextLevel() {
+			GainExp(Constants.GameSetting.Tile.LevelUpExp[_level]);
+		}
+
+		public void ApplyLevelUp() {
+			if (_isLevelUp == false) {
+				return;
+			}
+
+			StartCoroutine(MagicLevelUp());
+		}
+
 		private IEnumerator MagicLevelUp() {
+			while (
+				_level < Constants.GameSetting.Tile.MaxLevel && 
+				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]
+			) {
+				_exp -= Constants.GameSetting.Tile.LevelUpExp[_level];
+				
+				// TODO: 밟았을 때만 실행되도록 변경 필요
+				yield return MagicLevelUp();
+			}
+		}
+
+		private IEnumerator LevelUpUI() {
 			var levelUpRequest = GameManager.I.Stage.Board.RequestTileLevelUp(_type, _level);
 			yield return levelUpRequest.Requester();
 			var (newMagic, newLevel) = levelUpRequest.Result();

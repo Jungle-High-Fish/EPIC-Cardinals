@@ -13,7 +13,7 @@ namespace Cardinals
 
         public override bool UsePotion()
         {
-            GameManager.I.Player.OnTile.TileMagic.MagicLevelUp();
+            GameManager.I.Player.OnTile.TileMagic.GainExpToNextLevel();
             return true;
         }
     }
