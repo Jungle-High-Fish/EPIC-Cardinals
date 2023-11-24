@@ -16,6 +16,9 @@ namespace Cardinals.Board {
 		private int _exp;
 		private bool _isLevelUp;
 
+		private ComponentGetter<Tile> _tile
+			= new ComponentGetter<Tile>(TypeOfGetter.This);
+
 		public TileMagicType Type 
 		{ get => _type; private set => _type = value; } 
 		public int Level => _level;
@@ -53,16 +56,10 @@ namespace Cardinals.Board {
 			if (_level < Constants.GameSetting.Tile.MaxLevel && 
 				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]) {
 				_isLevelUp = true;
-			}
 
-			while (
-				_level < Constants.GameSetting.Tile.MaxLevel && 
-				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]
-			) {
-				_exp -= Constants.GameSetting.Tile.LevelUpExp[_level];
-				
-				// TODO: 밟았을 때만 실행되도록 변경 필요
-				StartCoroutine(MagicLevelUp());
+				if (GameManager.I.Stage.Player.OnTile == _tile.Get(gameObject)) {
+					ApplyLevelUp();
+				}
 			}
 		}
 
@@ -86,8 +83,10 @@ namespace Cardinals.Board {
 				_exp -= Constants.GameSetting.Tile.LevelUpExp[_level];
 				
 				// TODO: 밟았을 때만 실행되도록 변경 필요
-				yield return MagicLevelUp();
+				yield return LevelUpUI();
 			}
+
+			_isLevelUp = false;
 		}
 
 		private IEnumerator LevelUpUI() {

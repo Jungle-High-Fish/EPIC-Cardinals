@@ -12,6 +12,7 @@ namespace Cardinals.Board {
         public TileType Type => _tileData.type;
         public TileDirection Direction => _tileData.direction;
         public Vector3 TilePositionOnGround => _tilePositionOnGround;
+        public Vector3 TileRotation => _tileRotation;
 
         public Tile Next {
             get => _next;
@@ -69,6 +70,7 @@ namespace Cardinals.Board {
 
         // 타일 위치 관련 변수
         private Vector3 _tilePositionOnGround;
+        private Vector3 _tileRotation;
 
         // 타일의 액션 관련 변수
         private TileAction _tileAction;
@@ -90,12 +92,14 @@ namespace Cardinals.Board {
         public void Init(
             TileData tileData, 
             Action<Tile> onClicked, 
-            Vector3 tilePositionOnGround, 
+            Vector3 tilePositionOnGround,
+            Vector3 tileRotation,
             TileState tileState=TileState.Normal
         ) {
             _tileData = tileData;
             _onClicked = onClicked;
             _tilePositionOnGround = tilePositionOnGround;
+            _tileRotation = tileRotation;
             _tileState = tileState;
 
             _tileAnimation.Get(gameObject).Init();

@@ -299,7 +299,8 @@ namespace Cardinals.Board {
             tile.Init(
                 tileData, 
                 _onTileClicked,
-                tilePos
+                tilePos,
+                new Vector3(0, yDegree, 0)
             );
 
             return tile;

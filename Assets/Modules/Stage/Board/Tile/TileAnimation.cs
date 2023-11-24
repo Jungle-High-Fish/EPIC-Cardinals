@@ -104,7 +104,10 @@ namespace Cardinals.Board {
 			flipAnimation.Append(
 				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
 			).Insert(
-				0.1f, _rendererTransform.Get(gameObject).DOLocalRotate(new Vector3(0, 0, isBackWard ? 180 : 0), 0.5f)
+				0.1f, _rendererTransform.Get(gameObject).DORotate(
+					new Vector3(0, _tile.Get(gameObject).TileRotation.y, isBackWard ? 180 : 0), 
+					0.5f
+				)
 			).AppendInterval(0.5f)
 			.OnComplete(AnimationComplete(TileAnimationType.Flip))
 			.SetAutoKill(false).Pause();
