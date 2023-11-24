@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Cardinals.Enums;
 using TMPro;
+using Util;
 
 namespace Cardinals
 {
@@ -44,19 +45,19 @@ namespace Cardinals
             switch (card.CardNumber)
             {
                 case 1:
-                    image.color = Color.red;
+                    image.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Basic1);
                     break;
                 case 2:
-                    image.color = Color.yellow;
+                    image.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Basic2);
                     break;
                 case 3:
-                    image.color = Color.green;
+                    image.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Basic3);
                     break;
                 case 4:
-                    image.color = Color.blue;
+                    image.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Basic4);
                     break;
                 case 5:
-                    image.color = Color.black;
+                    image.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Basic5);
                     break;
             }
         }
