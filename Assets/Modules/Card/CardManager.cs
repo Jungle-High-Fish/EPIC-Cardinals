@@ -95,6 +95,14 @@ namespace Cardinals
             }
         }
 
+        public void SetCardSelectable(bool isSelectable)
+        {
+            foreach(CardUI c in _handcardsUI)
+            {
+                c.IsSelectable = isSelectable;
+            }
+        }
+
         [Button]
         public void AddCard(int num, bool isVolatile, CardPileType cardPileType)
         {

@@ -20,6 +20,7 @@ namespace Cardinals
         [SerializeField] private TextMeshProUGUI _hpTMP;
         [SerializeField] private RectTransform _maxHPRect;
         [SerializeField] private RectTransform _curHPRect;
+        [SerializeField] private float _curHPEndPosX;
 
         [Header("Buff")]
         [SerializeField] private GameObject _buffPrefab;
@@ -70,9 +71,9 @@ namespace Cardinals
 
         private void UpdateHp(int hp, int maxHp)
         {
-            // float percent = (float)hp / maxHp;
-            // _curHPRect.localScale = new Vector3(percent, 1, 1);
-            // _hpTMP.text= $"{hp}/{maxHp}";
+            float curHPPosX = Mathf.Lerp(_curHPEndPosX, 0, (float)hp / maxHp);
+            _curHPRect.localPosition = new Vector3(curHPPosX, 0, 0);
+            _hpTMP.text = $"{hp}/{maxHp}";
         }
 
         private void AddBuff(BaseBuff baseBuff)
