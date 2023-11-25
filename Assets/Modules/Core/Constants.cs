@@ -61,6 +61,11 @@ namespace Cardinals.Constants {
             public const string Sprites_Potion = "Player/Potion/";
             public const string Sprites_BoardEvent = "BoardEvent/";
             public const string Sprites_Artifact = "Player/Artifact/";
+            public const string Sprites_Card_Basic1 = "Card/CardBasic1";
+            public const string Sprites_Card_Basic2 = "Card/CardBasic2";
+            public const string Sprites_Card_Basic3 = "Card/CardBasic3";
+            public const string Sprites_Card_Basic4 = "Card/CardBasic4";
+            public const string Sprites_Card_Basic5 = "Card/CardBasic5";
 
             // Scriptable Object
             public const string SO = "SO/";
