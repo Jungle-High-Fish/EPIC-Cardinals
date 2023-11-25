@@ -191,6 +191,24 @@ namespace Cardinals
             }
 
         }
+
+        private void OnEnable() {
+            GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
+            GameManager.I.Stage.Board.OnMouseHover += OnMouseHoverBoard;
+        }
+
+        private void OnDisable() {
+            GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
+        }
+
+        private void OnMouseHoverBoard(bool isBoard) {
+            if (isBoard) {
+                _mouseState = MouseState.Action;
+            } else {
+                _mouseState = MouseState.Move;
+            }
+        }
+
         private void Discard(int index)
         {
             Destroy(_handcardsUI[index].gameObject);

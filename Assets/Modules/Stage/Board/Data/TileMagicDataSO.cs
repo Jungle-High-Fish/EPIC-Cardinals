@@ -13,7 +13,10 @@ namespace Cardinals.Game
         public TileMagicType magicType;
         public string elementName;
 		public Color elementColor;
-		[AssetSelector(Paths = "Assets/Resources/Sprites/UI/Icons/Elements")]
+		[AssetSelector(Paths = "Assets/Resources/Materials/Board/Tiles")]
+        [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
+        public Material tileMaterial;
+        [AssetSelector(Paths = "Assets/Resources/Sprites/UI/Icons/Elements")]
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
         public Sprite sprite;
 		public string mainMagicName;

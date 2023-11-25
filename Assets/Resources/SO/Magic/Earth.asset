@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicType: 3
   elementName: "\uBC14\uC704"
-  elementColor: {r: 0.5764706, g: 0.39607847, b: 0.39607847, a: 0}
+  elementColor: {r: 0.5764706, g: 0.39607847, b: 0.39607847, a: 1}
+  tileMaterial: {fileID: 2100000, guid: 951ef317f94bdce419a89c95d306f5a6, type: 2}
   sprite: {fileID: 21300000, guid: a8eb10b321a914614b57d6c69e76513d, type: 3}
   mainMagicName: "\uBC14\uC704 \uAC11\uC637"
   mainMagicDescription: "\uD589\uB3D9 \uB9C8\uB2E4,  2/4/6\uC758 \uBC29\uC5B4\uB97C
