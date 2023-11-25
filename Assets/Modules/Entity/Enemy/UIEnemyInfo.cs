@@ -21,7 +21,8 @@ namespace Cardinals.Enemy
         [SerializeField] private TextMeshProUGUI _hpTMP;
         [SerializeField] private RectTransform _maxHPRect;
         [SerializeField] private RectTransform _curHPRect;
-        
+        [SerializeField] private float _curHPEndPosX;
+
         [Header("Buff")]
         [SerializeField] private Transform _buffTr;
         [SerializeField] private GameObject _buffPrefab;
@@ -30,6 +31,7 @@ namespace Cardinals.Enemy
         [SerializeField] private GameObject _patternObj;
         [SerializeField] private Image _patternIconImg;
         [SerializeField] private TextMeshProUGUI _patternCountTMP;
+        
 
         public void Init(BaseEnemy enemy)
         {
@@ -52,9 +54,8 @@ namespace Cardinals.Enemy
         /// </summary>
         private void UpdateHp(int hp, int maxHp)
         {
-            float percent = (float) hp / maxHp;
-            _curHPRect.localScale = new Vector3(percent, 1, 1);
-            
+            float curHPPosX = Mathf.Lerp(_curHPEndPosX, 0, (float)hp / maxHp);
+            _curHPRect.localPosition = new Vector3(curHPPosX, 0, 0);
             _hpTMP.text = $"{hp}/{maxHp}";
         }
         
