@@ -18,6 +18,7 @@ namespace Cardinals.Board {
         public int TileNumH => _boardHeight;
         public Vector2Int StartTilePos => _startTilePos;
         public Tile StartTile => _board[_startTilePos.y][_startTilePos.x];
+        public Vector3 TileInstantiateLeftTopPos => _tileInstantiateLeftTopPos;
 
         // Board 전체 관리 컨트롤러
         private Board _boardController;

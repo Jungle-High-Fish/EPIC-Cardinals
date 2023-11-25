@@ -11,12 +11,12 @@ namespace Cardinals
         [SerializeField] private MouseState _slotState;
         public void OnPointerEnter(PointerEventData eventData)
         {
-            GameManager.I.Stage.CardManager.MouseState = _slotState;
+            //GameManager.I.Stage.CardManager.MouseState = _slotState;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            GameManager.I.Stage.CardManager.MouseState = MouseState.Cancel;
+            //GameManager.I.Stage.CardManager.MouseState = MouseState.Cancel;
         }
     }
 
