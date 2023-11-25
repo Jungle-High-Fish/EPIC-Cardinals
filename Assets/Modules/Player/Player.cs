@@ -117,7 +117,9 @@ namespace Cardinals
       
         public IEnumerator MoveTo(int count,float time)
         {
+            GameManager.I.Stage.CardManager.SetCardSelectable(false);
             _onTile?.Leave(this);
+
             for(int i = 0; i < count; i++)
             {
                 Vector3 nextPos = _onTile.Next.transform.position;
@@ -130,7 +132,9 @@ namespace Cardinals
                     _onTile.StepOn(this);
                 }
             }
+
             _onTile.Arrive(this);
+            GameManager.I.Stage.CardManager.SetCardSelectable(true);
         }
         
         public IEnumerator PrevMoveTo(int count, float time)

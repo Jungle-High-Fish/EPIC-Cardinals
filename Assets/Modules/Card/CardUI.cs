@@ -15,29 +15,33 @@ namespace Cardinals
         [SerializeField] private TextMeshProUGUI _numberText;
         [SerializeField] private GameObject _volatileText;
         [SerializeField] private bool _isSelect;
+        private bool _isSelectable;
         private Card _card;
         private CardManager _cardManager;
         public bool IsSelect
         {
-            set
-            {
-                _isSelect = value;
-            }
+            set => _isSelect = value;
+           
+        }
+
+        public bool IsSelectable
+        {
+            get => _isSelectable;
+            set => _isSelectable = value;
         }
         public Card Card => _card;
         public int CardIndex
         {
             get => _cardIndex;
-            set
-            {
-                _cardIndex = value;
-            }
+            set => _cardIndex = value;
+            
         }
         public void Init(Card card, int index, CardManager cardManager)
         {
             _card = card;
             _cardIndex = index;
             _cardManager = cardManager;
+            _isSelectable = true;
             Image image = GetComponent<Image>();
             _numberText.text = card.CardNumber.ToString();
             _volatileText.SetActive(card.IsVolatile);
@@ -66,6 +70,9 @@ namespace Cardinals
         {
             if (_cardManager.State != CardState.Idle)
                 return;
+            if (!_isSelectable)
+                return;
+            
             _cardManager.SelectCardIndex = _cardIndex;
             _isSelect = true;
             _cardManager.State = CardState.Select;
