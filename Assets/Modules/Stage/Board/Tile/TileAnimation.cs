@@ -76,9 +76,9 @@ namespace Cardinals.Board {
 		private Sequence InitShakeAnimation() {
 			Sequence shakeAnimation = DOTween.Sequence();
 			shakeAnimation.Append(
-				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
+				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1f, 1, 1f)
 			).Insert(
-				0.1f, _transform.Get(gameObject).DOShakeRotation(0.3f, 20f, 10, 90f, false)
+				0.1f, _transform.Get(gameObject).DOShakeRotation(0.3f, 10f, 10, 90f, false)
 			).AppendInterval(0.5f)
 			.OnComplete(AnimationComplete(TileAnimationType.Shake))
 			.SetAutoKill(false).Pause();
@@ -104,7 +104,10 @@ namespace Cardinals.Board {
 			flipAnimation.Append(
 				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
 			).Insert(
-				0.1f, _rendererTransform.Get(gameObject).DOLocalRotate(new Vector3(0, 0, isBackWard ? 180 : 0), 0.5f)
+				0.1f, _rendererTransform.Get(gameObject).DORotate(
+					new Vector3(0, _tile.Get(gameObject).TileRotation.y, isBackWard ? 180 : 0), 
+					0.5f
+				)
 			).AppendInterval(0.5f)
 			.OnComplete(AnimationComplete(TileAnimationType.Flip))
 			.SetAutoKill(false).Pause();

@@ -12,8 +12,9 @@ namespace Cardinals.Constants {
             public const string Prefabs = "Prefabs/";
             public const string Prefabs_StageGround = "Stage/Ground";
 
-            public const string Prefabs_Tile = "Board/TileUV2";
-            public const string Prefabs_CornerTile = "Board/CornerTile";
+            public const string Prefabs_Tile = "Board/Tiles/TileUV2";
+            public const string Prefabs_CornerTile = "Board/Tiles/CornerTile";
+            public const string Prefabs_MouseDetector = "Board/MouseDetector";
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
             public const string Prefabs_Stage_Totem = "Stage/Totem";
@@ -63,6 +64,11 @@ namespace Cardinals.Constants {
             public const string Sprites_Potion = "Player/Potion/";
             public const string Sprites_BoardEvent = "BoardEvent/";
             public const string Sprites_Artifact = "Player/Artifact/";
+            public const string Sprites_Card_Basic1 = "Card/CardBasic1";
+            public const string Sprites_Card_Basic2 = "Card/CardBasic2";
+            public const string Sprites_Card_Basic3 = "Card/CardBasic3";
+            public const string Sprites_Card_Basic4 = "Card/CardBasic4";
+            public const string Sprites_Card_Basic5 = "Card/CardBasic5";
 
             // Scriptable Object
             public const string SO = "SO/";

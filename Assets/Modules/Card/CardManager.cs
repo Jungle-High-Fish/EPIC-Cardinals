@@ -95,6 +95,14 @@ namespace Cardinals
             }
         }
 
+        public void SetCardSelectable(bool isSelectable)
+        {
+            foreach(CardUI c in _handcardsUI)
+            {
+                c.IsSelectable = isSelectable;
+            }
+        }
+
         [Button]
         public void AddCard(int num, bool isVolatile, CardPileType cardPileType)
         {
@@ -183,6 +191,24 @@ namespace Cardinals
             }
 
         }
+
+        private void OnEnable() {
+            GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
+            GameManager.I.Stage.Board.OnMouseHover += OnMouseHoverBoard;
+        }
+
+        private void OnDisable() {
+            GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
+        }
+
+        private void OnMouseHoverBoard(bool isBoard) {
+            if (isBoard) {
+                _mouseState = MouseState.Action;
+            } else {
+                _mouseState = MouseState.Move;
+            }
+        }
+
         private void Discard(int index)
         {
             Destroy(_handcardsUI[index].gameObject);
