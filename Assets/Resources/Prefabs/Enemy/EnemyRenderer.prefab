@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3025164172761671619}
   - component: {fileID: 3025164172761671618}
+  - component: {fileID: 7964934636610971557}
   m_Layer: 0
   m_Name: EnemyRenderer
   m_TagString: Untagged
@@ -46,6 +47,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 3025164174083890220}
+--- !u!114 &7964934636610971557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025164172761671628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de12621f78788f4cb13c443229cdc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3025164174083890222
 GameObject:
   m_ObjectHideFlags: 0
