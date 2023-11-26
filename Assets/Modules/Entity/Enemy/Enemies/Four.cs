@@ -1,6 +1,9 @@
+using System.Linq;
 using Cardinals;
 using Cardinals.Enums;
 using Cardinals.Game;
+using UnityEngine;
+using UnityEngine.ProBuilder;
 
 namespace Cardinals.Enemy
 {
@@ -27,7 +30,15 @@ namespace Cardinals.Enemy
 
         void SpawnFireball()
         {
+            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
             
+            if (list != null)
+            {
+                var index = Random.Range(0, list.Count);
+                var tile = list[index];
+                
+                tile.SetCurse(TileCurseType.Fireball, 2);
+            }
         }
     }
 }

@@ -7,17 +7,35 @@ using Cardinals.Enums;
 
 namespace Cardinals.Board {
 
-	public class TileCurseData {
-		public int TargetTurn => _targetTurn;
-		public Action Action => _curseAction;
+	public abstract class TileCurseData
+	{
+		private Tile _baseTile;
+		protected Tile BaseTile => _baseTile;
+		public int TargetTurn
+		{
+			get => _targetTurn;
+			protected set => _targetTurn = value;
+		}
+
+		public Action Action
+		{
+			get => _curseAction;
+			protected set => _curseAction = value;
+		}
 
 		private TileCurseType _curseType;
 		private int _targetTurn;
 		private Action _curseAction;
-
-		public TileCurseData(TileCurseType _curseType, int targetTurn, Action curseAction) {
+		
+		protected TileCurseData(TileCurseType _curseType, int targetTurn = 0, Action curseAction = null) {
 			_targetTurn = targetTurn;
 			_curseAction = curseAction;
+		}
+
+		public void Init(Tile tile, int turn)
+		{
+			_baseTile = tile;
+			TargetTurn = turn;
 		}
 	}
 

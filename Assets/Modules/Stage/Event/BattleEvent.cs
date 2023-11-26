@@ -75,8 +75,10 @@ namespace Cardinals.Game
                 // 카운트 처리
                 GameManager.I.Player.EndTurn();
                 _enemies.ForEach(enemy => enemy.EndTurn());
-
+                
+                
                 // 보드 관련 처리
+                yield return SummonsAction();
                 _stageController.Board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1f);
@@ -88,6 +90,17 @@ namespace Cardinals.Game
                 yield return WaitReward(rewards);
             }
             
+        }
+
+        private IEnumerator SummonsAction()
+        {
+            var summons = GameManager.I.Stage.Summons;
+            for (int i = summons.Count - 1; i >= 0; i--)
+            {
+                yield return summons[i].OnTurn();
+            }
+
+            yield return null;
         }
 
         /// <summary>

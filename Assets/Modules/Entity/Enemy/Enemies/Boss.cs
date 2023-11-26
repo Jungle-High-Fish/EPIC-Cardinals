@@ -1,7 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using Cardinals;
+using Cardinals.Board;
+using Cardinals.Buff;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 using Cardinals.Game;
+using UnityEngine;
 
 namespace Cardinals.Enemy
 {
@@ -26,7 +31,7 @@ namespace Cardinals.Enemy
             
             Patterns = new[]
             {
-                new Pattern(EnemyActionType.Magic, action: Electric),
+                new Pattern(EnemyActionType.Magic, action: ThunderBolt),
                 new Pattern(EnemyActionType.Attack, 5),
                 new Pattern(EnemyActionType.Defense, 5),
             };
@@ -36,7 +41,7 @@ namespace Cardinals.Enemy
                 FixPattern = new(EnemyActionType.Buff, action: ElectricShock);
                 Patterns = new Pattern[]
                 {
-                    new(EnemyActionType.Magic, action: BerserkElectric),
+                    new(EnemyActionType.Magic, action: BerserkThunderBolt),
                     new(EnemyActionType.Attack, 7),
                     new(EnemyActionType.Attack, 5),
                 };
@@ -48,24 +53,57 @@ namespace Cardinals.Enemy
             {
                 new(RewardType.Gold, 100),
                 new(RewardType.Artifact, 3),
-                new(RewardType.Card, 1),
             };
         }
+
+
+        void ThunderBolt()
+        {
+            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            if (list != null)
+            {
+                var index = Random.Range(0, list.Count);
+                var tile = list[index];
+
+                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+            }
+        }
+
+        void BerserkThunderBolt()
+        {
+            List<Tile> tiles = new();
             
+            // 각 라인에서 타일 지정
+            for (int i = 0; i < 4; i++)
+            {
+                var list = GameManager.I.Stage.Board.GetBoardEdgeTileSequence(i, false)
+                    .Where(t => t.TileState == TileState.Normal).ToList();
 
-        void Electric()
-        {
-            // 전류 x1
+                if (list.Count > 0)
+                {
+                    var idx = Random.Range(0, list.Count);
+                    tiles.Add(list[idx]);
+                }
+            }
+            
+            // 3개 이하로 줄이기
+            for (int i = tiles.Count; i >= 3; i--)
+            {
+                int idx = Random.Range(0, tiles.Count());
+                tiles.RemoveAt(idx);
+            }
+            
+            // 저주 적용
+            foreach (var tile in tiles)
+            {
+                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+            }
         }
-
-        void BerserkElectric()
-        {
-            // 전류 x3
-        }
-
+        
         void ElectricShock()
         {
-            // 감전
+            GameManager.I.Player.AddBuff(new ElectricShock());
         }
+        
     }
 }

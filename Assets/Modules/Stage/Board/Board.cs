@@ -134,6 +134,23 @@ namespace Cardinals.Board {
         public int GetBoardEdgeNum() {
             return _boardBuilder.CornerTiles.Count;
         }
+        
+        
+
+        public IEnumerable<Tile> GetCursedTilesList()
+        {
+            var list = TileSequence
+                .Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence)
+                .Where(t => t.TileState == TileState.Normal);
+
+            if (!list.Any())
+            {   
+                Debug.Log("저주를 걸 수 있는 타일이 존재하지 않습니다.");
+                list = null;
+            }
+            
+            return list;
+        }
 
         public void SetEnemyNumber(int enemyNumber) {
             _enemyPlaceHandler.CreateMouseDetectors(enemyNumber);

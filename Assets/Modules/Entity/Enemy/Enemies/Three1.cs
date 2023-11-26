@@ -40,7 +40,6 @@ namespace Cardinals.Enemy
             Rewards = new Reward[]
             {
                 new(RewardType.Gold, 50),
-                new(RewardType.Card, 1),
             };
         }
     }

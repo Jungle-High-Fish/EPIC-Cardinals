@@ -57,6 +57,9 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_MagicLevelUpPanel = "UI/Stage/Magic Level Up/Magic Level Up Panel";
             public const string Prefabs_UI_MagicSlot = "UI/Stage/Magic Level Up/Magic Slot";
 
+            public const string Prefabs_Enemy_Spawn_Summon = "Enemy/Spawn/Summon";
+            public const string Prefabs_Enemy_Spawn_Fireball = "Enemy/Spawn/Fireball";
+            public const string Prefabs_Enemy_Spawn_ThunderBolt= "Enemy/Spawn/ThunderBolt";
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
@@ -67,6 +70,8 @@ namespace Cardinals.Constants {
             public const string Sprites_Card_Basic3 = "Card/CardBasic3";
             public const string Sprites_Card_Basic4 = "Card/CardBasic4";
             public const string Sprites_Card_Basic5 = "Card/CardBasic5";
+            public const string Sprites_Enemy_Skill_Fireball = "Sprites/Enemy/Skill/Fireball";
+            public const string Sprites_Enemy_Skill_ThunderBolt = "Sprites/Enemy/Skill/ThunderBolt";
 
             // Scriptable Object
             public const string SO = "SO/";
