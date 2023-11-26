@@ -123,6 +123,9 @@ namespace Cardinals.Game {
             // 화면에 표시
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
             Instantiate(prefab, new Vector3(-1, 0.6f, -1), Quaternion.identity).GetComponent<BlessTotem>().Init(bless1);
+
+            yield return new WaitForSeconds(0.3f);
+
             prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
             Instantiate(prefab, new Vector3(1, 0.6f, 1), Quaternion.identity).GetComponent<BlessTotem>().Init(bless2);
             
@@ -131,6 +134,16 @@ namespace Cardinals.Game {
             yield return new WaitUntil(() => SelectedBless != default);
 
             var objs = FindObjectsOfType<BlessTotem>();
+
+            List<bool> hasDismiss = new List<bool>(objs.Length) {false, false};
+            void setDismiss(int idx) => hasDismiss[idx] = true;
+
+            for (int i = objs.Length - 1; i >= 0; i--)
+            {
+                Debug.Log($"Dismiss {i}");
+                StartCoroutine(objs[i].Dismiss(SelectedBless, i, setDismiss));
+            }
+            yield return new WaitUntil(() => hasDismiss.All(x => x));
             for (int i = objs.Length - 1; i >= 0; i--)
             {
                 Destroy(objs[i].gameObject);
