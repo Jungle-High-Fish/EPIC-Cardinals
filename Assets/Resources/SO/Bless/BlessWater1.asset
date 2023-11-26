@@ -15,6 +15,6 @@ MonoBehaviour:
   blessName: "\uC794\uC794\uD55C \uC218\uBA74"
   description: "\uC801 \uD134 \uADF8\uB9AC\uACE0 \uC624\uBE0C\uC81D\uD2B8 \uD134\uC5D0
     Hp\uB97C \uC18C\uBAA8\uD558\uC9C0 \uC54A\uC558\uB2E4\uBA74, Hp\uB97C 3\uD68C\uBCF5\uD569\uB2C8\uB2E4."
-  totemSprite: {fileID: 21300000, guid: 1c1d29f153f98364ca23263a0c96c8a9, type: 3}
+  totemSprite: {fileID: 21300000, guid: 94a3f0e1c2c14bb4bbaef0b4353a6d63, type: 3}
   patternSprite: {fileID: 21300000, guid: f52042d83276b4cceb1773beec68936e, type: 3}
   blessType: 0

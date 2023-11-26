@@ -16,6 +16,6 @@ MonoBehaviour:
   description: "\uC801\uC744 \uACF5\uACA9 \uD560 \uB54C, \uD654\uC0C1\uC774 \uAC78\uB9B0
     \uC0C1\uD0DC\uB77C\uBA74 1\uC758 \uB370\uBBF8\uC9C0\uB97C \uCD94\uAC00\uB85C
     \uC785\uD799\uB2C8\uB2E4."
-  totemSprite: {fileID: 21300000, guid: 1c1d29f153f98364ca23263a0c96c8a9, type: 3}
-  patternSprite: {fileID: 21300000, guid: 2bba422d966824439946624316579467, type: 3}
+  totemSprite: {fileID: 21300000, guid: c82f8d4b14bf35646bb2eebac7ffc719, type: 3}
+  patternSprite: {fileID: 21300000, guid: 549f6b45a8ebd456a819fd7e4f7fb8b2, type: 3}
   blessType: 0

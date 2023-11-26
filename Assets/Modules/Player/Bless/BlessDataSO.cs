@@ -12,6 +12,7 @@ namespace Cardinals
         public string blessName;
         public string description;
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
+        [AssetSelector(Paths = "Assets/Resources/Sprites/Bless/Totem")]
         public Sprite totemSprite;
         [AssetSelector(Paths = "Assets/Resources/Sprites/UI/Icons/Bless")]
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]

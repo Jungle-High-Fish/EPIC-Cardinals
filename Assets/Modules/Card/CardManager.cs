@@ -275,7 +275,7 @@ namespace Cardinals
                     if (_isMouseOnCardDeck) {
                         _mouseState = MouseState.Cancel;
                     }
-                    
+
                     switch (_mouseState)
                     {
                         case MouseState.Action:
