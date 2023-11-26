@@ -51,6 +51,7 @@ namespace Cardinals.Constants {
 
             public const string Prefabs_UI_CardSystem = "UI/Card/CardSystemUI";
             public const string Prefabs_UI_Card = "UI/Card/CardUI";
+            
 
             public const string Prefabs_UI_TileSelection = "UI/Stage/Tile Selection UI";
 
@@ -70,6 +71,9 @@ namespace Cardinals.Constants {
             public const string Sprites_Card_Basic3 = "Card/CardBasic3";
             public const string Sprites_Card_Basic4 = "Card/CardBasic4";
             public const string Sprites_Card_Basic5 = "Card/CardBasic5";
+            
+            public const string Sprites_UI_Coin = "UI/Icons/UI_Coin";
+            
             public const string Sprites_Enemy_Skill_Fireball = "Sprites/Enemy/Skill/Fireball";
             public const string Sprites_Enemy_Skill_ThunderBolt = "Sprites/Enemy/Skill/ThunderBolt";
 
