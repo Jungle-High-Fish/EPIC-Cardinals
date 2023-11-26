@@ -21,15 +21,15 @@ namespace Cardinals.Board {
         public Tile this[int x, int y] => _boardBuilder[x, y];
         public IEnumerable<Tile> TileSequence => _tileSequence;
 
-        public event Action<bool> OnMouseHover {
-            add => _mouseDetector.OnMouseHover += value;
-            remove => _mouseDetector.OnMouseHover -= value;
+        public event Action<int> OnMouseHover {
+            add => _enemyPlaceHandler.OnMouseHover += value;
+            remove => _enemyPlaceHandler.OnMouseHover -= value;
         }
 
         [ShowInInspector, ReadOnly]
         private List<Tile> _tileSequence;
         private BoardBuilder _boardBuilder;
-        private MouseDetector _mouseDetector;
+        private EnemyPlaceHandler _enemyPlaceHandler;
         
         private bool _isTileSelectable;
         private TileSelectionType _selectionType;
@@ -45,14 +45,14 @@ namespace Cardinals.Board {
             _tileSequence = new List<Tile>();
             _boardBuilder = new BoardBuilder(this, OnTileClicked);
 
-            var mouseDetectorObj = Instantiate(
+            var enemyPlaceHandlerObj = Instantiate(
                 ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_MouseDetector),
                 transform
             );
-            _mouseDetector = mouseDetectorObj.GetComponent<MouseDetector>();
+            _enemyPlaceHandler = enemyPlaceHandlerObj.GetComponent<EnemyPlaceHandler>();
 
             yield return BoardLoadWithAnimation(boardDataSO);
-            _mouseDetector.Init(_boardBuilder);
+            _enemyPlaceHandler.Init(_boardBuilder);
         }
 
         [Button("테스트 애니메이션", ButtonSizes.Large)]
@@ -150,6 +150,10 @@ namespace Cardinals.Board {
             }
             
             return list;
+        }
+
+        public void SetEnemyNumber(int enemyNumber) {
+            _enemyPlaceHandler.CreateMouseDetectors(enemyNumber);
         }
 
         /// <summary>

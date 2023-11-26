@@ -15,6 +15,10 @@ namespace Cardinals
         [SerializeField] private TextMeshProUGUI _numberText;
         [SerializeField] private GameObject _volatileText;
         [SerializeField] private bool _isSelect;
+        
+        ComponentGetter<Image> _image 
+            = new ComponentGetter<Image>(TypeOfGetter.This);
+
         private bool _isSelectable;
         private Card _card;
         private CardManager _cardManager;
@@ -76,8 +80,16 @@ namespace Cardinals
             _cardManager.SelectCardIndex = _cardIndex;
             _isSelect = true;
             _cardManager.State = CardState.Select;
-            StartCoroutine(_cardManager.Dragging());
 
+            StartCoroutine(_cardManager.Dragging());
+        }
+
+        public void StartDraggingState() {
+            _image.Get(gameObject).raycastTarget = false;
+        }
+
+        public void ClickDismiss() {
+            _image.Get(gameObject).raycastTarget = true;
         }
 
         private void MoveCardUI()
