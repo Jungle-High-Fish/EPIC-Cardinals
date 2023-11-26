@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Game;
 using Cardinals.UI;
+using DG.Tweening;
 using UnityEngine;
 using Util;
 
@@ -40,6 +41,8 @@ namespace Cardinals.UI
      public void On()
      {
          gameObject.SetActive(true);
+         transform.localScale = Vector3.zero;
+         transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
      }
  
      

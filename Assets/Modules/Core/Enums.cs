@@ -360,9 +360,9 @@ namespace Cardinals.Enums {
     }
     #endregion
 
-    public enum ArtifactType
+    public enum ArtifactType : int
     {
-        Empty,
+        Empty = 0,
         Verdant,
         Grimoire,
         Rigloo,
