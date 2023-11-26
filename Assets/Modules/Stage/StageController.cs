@@ -7,6 +7,7 @@ using System.Linq;
 using Cardinals.Board;
 using Cardinals.Buff;
 using Cardinals.Enemy;
+using Cardinals.Enemy.Summon;
 using Sirenix.OdinInspector;
 using Util;
 using Random = UnityEngine.Random;
@@ -53,6 +54,8 @@ namespace Cardinals.Game {
                 return _rewardBox;
             }
         }
+
+        public List<BaseEnemySummon> Summons { get; set; } = new();
         
         public IEnumerator Load(Stage stage) 
         {
@@ -264,6 +267,36 @@ namespace Cardinals.Game {
             }
             else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }
+
+        [Button]
+        public void GenEnemySkill_TB()
+        {
+            // 썬더 볼트
+            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            if (list != null)
+            {
+                var index = Random.Range(0, list.Count);
+                var tile = list[index];
+
+                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+            }
+        }
+
+        [Button]
+        public void TestEnemySkill_Fireball()
+        {
+            
+            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            
+            if (list != null)
+            {
+                var index = Random.Range(0, list.Count);
+                var tile = list[index];
+                
+                tile.SetCurse(TileCurseType.Fireball, 2);
+            }
+        }
+        
     }
 
 }

@@ -16,9 +16,8 @@ namespace Cardinals.Board.Curse
         void SpawnFireball()
         {
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Enemy_Spawn_Fireball);
-            GameObject.Instantiate(prefab, BaseTile.transform);
-            
-            // [TODO] Board Manager ? Stage Manager에 소환수 관리 리스트 만들어서, 소환물 공용 생성 처리하도록 구현 필요
+            var fireball = GameObject.Instantiate(prefab).GetComponent<Enemy.Summon.Fireball>();
+            fireball.Init(BaseTile);
         }
     }
 }

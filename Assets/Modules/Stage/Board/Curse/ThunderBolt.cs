@@ -14,7 +14,8 @@ namespace Cardinals.Board.Curse
         void SpawnThunderBolt()
         {
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Enemy_Spawn_ThunderBolt);
-            GameObject.Instantiate(prefab, BaseTile.transform);
+            var tb = GameObject.Instantiate(prefab).GetComponent<Enemy.Summon.ThunderBolt>();
+            tb.Init();
         }
     }
 }
