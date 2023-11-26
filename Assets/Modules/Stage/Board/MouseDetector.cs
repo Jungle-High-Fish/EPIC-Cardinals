@@ -1,99 +1,67 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using System;
 using Util;
 
 namespace Cardinals.Board {
 
 	public class MouseDetector: MonoBehaviour {
-		public event Action<bool> OnMouseHover;
 		public bool IsMouseHover => _isMouseHover;
 
-		private ComponentGetter<MeshFilter> _meshFilter
-			= new ComponentGetter<MeshFilter>(TypeOfGetter.This);
-		private MeshCollider _meshCollider;
+		private MeshFilter _meshFilter;
 		private Mesh _mesh;
-		private BoardBuilder _builder;
+		private MeshCollider _meshCollider;
 
 		private Vector3[] _vertices;
 		private int[] _triangles;
 
+		private int _idx;
 		private bool _isMouseHover = false;
+		private Action<int> _onMouseHover;
 
-		public void Init(BoardBuilder builder) {
-			_mesh = _meshFilter.Get(gameObject).mesh;
-			_builder = builder;
+		public void Init(int idx, Vector3[] vertices, int[] triangles, Action<int> onMouseHover, float convexOffset = 0f) {
+			_meshFilter = gameObject.AddComponent<MeshFilter>();
+			_mesh = _meshFilter.mesh;
+			
+			_vertices = vertices;
+			_triangles = triangles;
 
-			SetMeshData();
-			CreateMesh();
+			_idx = idx;
+			_onMouseHover = onMouseHover;
+
+			InitMesh();
+
+			transform.localPosition = new Vector3(0, convexOffset, 0);
+		}
+
+		private void InitMesh() {
+			_mesh.Clear();
+
+			_mesh.vertices = _vertices;
+			_mesh.triangles = _triangles;
+			_mesh.RecalculateNormals();
+
+			_meshCollider = gameObject.AddComponent<MeshCollider>();
+			_meshCollider.sharedMesh = _mesh;
+
+			// if (_triangles.Length > 3) {
+			// 	_meshCollider.convex = true;
+			// 	_meshCollider.isTrigger = true;
+			// }
 		}
 
 		private void OnMouseEnter() {
+			Debug.Log($"Mouse Enter{_idx}");
 			_isMouseHover = true;
-			OnMouseHover?.Invoke(true);
+			_onMouseHover?.Invoke(_idx);
 		}
 
 		private void OnMouseExit() {
+			//Debug.Log("Mouse Exit");
 			_isMouseHover = false;
-			OnMouseHover?.Invoke(false);
-		}
-
-		private void SetMeshData() {
-			float yOffset = 0.01f;
-			float offset = Constants.GameSetting.Board.TileHeight / 2;
-
-			transform.position = new Vector3(0, yOffset, 0);
-
-			Vector3 topLeftPos = new Vector3(
-				_builder.TileInstantiateLeftTopPos.x + offset,
-				-yOffset,
-				_builder.TileInstantiateLeftTopPos.z - offset
-			);
-
-			Vector3 topRightPos = new Vector3(
-				-_builder.TileInstantiateLeftTopPos.x - offset,
-				0,
-				_builder.TileInstantiateLeftTopPos.z - offset
-			);
-
-			Vector3 bottomLeftPos = new Vector3(
-				_builder.TileInstantiateLeftTopPos.x + offset,
-				0,
-				- _builder.TileInstantiateLeftTopPos.z + offset
-			);
-
-			Vector3 bottomRightPos = new Vector3(
-				- _builder.TileInstantiateLeftTopPos.x - offset,
-				-yOffset,
-				- _builder.TileInstantiateLeftTopPos.z + offset
-			);
-
-			_vertices = new Vector3[] {
-				topLeftPos,
-				topRightPos,
-				bottomLeftPos,
-				bottomRightPos
-			};
-
-			_triangles = new int[] {
-				0, 1, 2,
-				1, 3, 2
-			};
-		}
-
-		private void CreateMesh() {
-			_mesh.Clear();
-			_mesh.vertices = _vertices;
-			_mesh.triangles = _triangles;
-
-			_mesh.RecalculateNormals();
-			_meshCollider = gameObject.AddComponent<MeshCollider>();
-			
-			_meshCollider.sharedMesh = null;
-			_meshCollider.sharedMesh = _mesh;
-			_meshCollider.convex = true;
-			_meshCollider.isTrigger = true;
+			//_onMouseHover?.Invoke(-1);
 		}
 	}
 

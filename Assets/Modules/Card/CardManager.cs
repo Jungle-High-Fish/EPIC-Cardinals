@@ -5,6 +5,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Util;
 using Cardinals.Enums;
+using Unity.VisualScripting;
 
 namespace Cardinals
 {
@@ -13,6 +14,7 @@ namespace Cardinals
         private int _prevCardNumber=-1;
         private int _selectCardIndex;
         private bool _canActionUse;
+        private bool _isMouseOnCardDeck;
         private int _continuousUseCount;
         private CardState _state;
         [SerializeField] private MouseState _mouseState = MouseState.Cancel;
@@ -25,6 +27,7 @@ namespace Cardinals
         public IEnumerable<Card> HandCards => _handCards;
 
         [SerializeField] private Transform _cardDeckUIParent;
+
 
         public void Init()
         {
@@ -101,6 +104,10 @@ namespace Cardinals
             {
                 c.IsSelectable = isSelectable;
             }
+        }
+
+        public void SetCardMouseState(bool isOnCardDeck) {
+            _isMouseOnCardDeck = isOnCardDeck;
         }
 
         [Button]
@@ -198,11 +205,18 @@ namespace Cardinals
         }
 
         private void OnDisable() {
-            GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
+            if (GameManager.I.Stage != null && GameManager.I.Stage.Board != null) {
+                GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
+            }
         }
 
-        private void OnMouseHoverBoard(bool isBoard) {
-            if (isBoard) {
+        private void OnMouseHoverBoard(int target) {
+            if (_isMouseOnCardDeck) {
+                _mouseState = MouseState.Cancel;
+                return;
+            }
+
+            if (target >= 0) {
                 _mouseState = MouseState.Action;
             } else {
                 _mouseState = MouseState.Move;
@@ -234,6 +248,7 @@ namespace Cardinals
                 _discardPile.Remove(card);
             }
         }
+
         private void UpdateCardUI(Card card, int index)
         {
             GameObject cardUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Card);
@@ -246,10 +261,21 @@ namespace Cardinals
 
         public IEnumerator Dragging()
         {
+            foreach (CardUI c in _handcardsUI)
+            {
+                if (c == null)
+                    continue;
+                c.StartDraggingState();
+            }
+
             while (_state == CardState.Select)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
+                    if (_isMouseOnCardDeck) {
+                        _mouseState = MouseState.Cancel;
+                    }
+                    
                     switch (_mouseState)
                     {
                         case MouseState.Action:
@@ -260,6 +286,8 @@ namespace Cardinals
                             }
                             Discard(_selectCardIndex);
                             _state = CardState.Idle;
+
+                            DismissAllCards();
                             yield break;
 
                         case MouseState.Move:
@@ -268,24 +296,41 @@ namespace Cardinals
                             _state = CardState.Idle;
                             _prevCardNumber = -1;
                             _canActionUse = true;
+
+                            DismissAllCards();
                             yield break;
                         
                         case MouseState.CardEvent:
                             GameManager.I.UI.UICardEvent.SelectedCard(_handCards[_selectCardIndex].CardNumber);
                             Discard(_selectCardIndex);
                             _state = CardState.Idle;
+
+                            DismissAllCards();
                             yield break;
                     }
 
                     _handcardsUI[_selectCardIndex].IsSelect = false;
                     _handcardsUI[_selectCardIndex].gameObject.SetActive(false);
                     _handcardsUI[_selectCardIndex].gameObject.SetActive(true);
+
+                    DismissAllCards();
+
                     _state = CardState.Idle;
                     yield break;
                 }
                 yield return null;
             }
         }
+
+        private void DismissAllCards() {
+            foreach (CardUI c in _handcardsUI)
+            {
+                if (c == null)
+                    continue;
+                c.ClickDismiss();
+            }
+        }
+
         private void CardUseMove(int num)
         {
             StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));

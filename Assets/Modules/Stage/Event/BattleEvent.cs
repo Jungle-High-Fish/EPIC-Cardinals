@@ -55,6 +55,7 @@ namespace Cardinals.Game
             }
 
             GameManager.I.CurrentEnemies = _enemies;
+            _stageController.Board.SetEnemyNumber(_enemies.Count);
 
             do // 전투 시작
             {
