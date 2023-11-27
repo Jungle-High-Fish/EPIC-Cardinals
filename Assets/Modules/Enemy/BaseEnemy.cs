@@ -104,6 +104,8 @@ namespace Cardinals
         
         public override void OnTurn()
         {
+            DefenseCount = 0;
+
             Pattern curPat = CurPattern;
             int value = curPat.Value ?? 0;
             
@@ -114,7 +116,7 @@ namespace Cardinals
                     GameManager.I.Player.Hit(value);
                     break;
                 case EnemyActionType.Defense :
-                    GameManager.I.Player.DefenseCount += value;
+                    DefenseCount += value;
                     break;
                 case EnemyActionType.AreaAttack :
                 case EnemyActionType.Magic :
@@ -132,6 +134,7 @@ namespace Cardinals
             {
                 _fixPattern = null;
             }
+            
         }
 
         public override void AddBuff(BaseBuff buff)

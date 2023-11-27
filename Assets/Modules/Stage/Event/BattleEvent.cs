@@ -77,6 +77,7 @@ namespace Cardinals.Game
                 
                 // 적 행동
                 _enemies.ForEach(enemy => enemy.OnTurn());
+                yield return new WaitForSeconds(1f);
                 
                 // 카운트 처리
                 GameManager.I.Player.EndTurn();
