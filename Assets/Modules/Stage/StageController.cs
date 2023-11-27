@@ -31,8 +31,10 @@ namespace Cardinals.Game {
         private Stage _stage;
     
         private Transform _enemyParentTransform;
+        
         private Transform _coreTransform;
-
+        private EnemyInfoController _enemyInfoController;
+        public EnemyInfoController EnemyInfoController => _enemyInfoController;
         private Board.Board _board;
         private Player _player;
         private CardManager _cardManager;
@@ -172,8 +174,9 @@ namespace Cardinals.Game {
             
             GameObject enemyRendererPrefab 
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_EnemyRenderer);
-
-            GameObject enemyRenderer = GameObject.Instantiate(enemyRendererPrefab, _enemyParentTransform);
+            
+            GameObject enemyRenderer = Instantiate(enemyRendererPrefab,_enemyParentTransform);
+            
             BaseEnemy enemyComp = enemyRenderer.AddComponent(enemyType) as BaseEnemy;
             enemyComp.Init(enemyData);
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
@@ -193,7 +196,8 @@ namespace Cardinals.Game {
         private void InstantiateBaseObjs() {
             GameObject EnemyParentTransformObj = new GameObject($"@{Constants.Common.InstanceName.EnemyPlace}");
             _enemyParentTransform = EnemyParentTransformObj.transform;
-
+            _enemyInfoController = FindObjectOfType<EnemyInfoController>();
+            
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
             BoardObj.transform.position = Vector3.zero;
             _board = BoardObj.AddComponent<Board.Board>();

@@ -32,13 +32,20 @@ namespace Cardinals.Enemy
 
         [Header("Pattern")]
         [SerializeField] private GameObject _patternObj;
-        [SerializeField] private Image _patternIconImg;
-        [SerializeField] private TextMeshProUGUI _patternCountTMP;
+        private Image _patternIconImg;
+        private TextMeshProUGUI _patternCountTMP;
+        private Image _bubbleImg;
         
 
         public void Init(BaseEnemy enemy)
         {
             BaseEnemy = enemy;
+
+            // 액션 정보 표시를 위해 EnemyRenderer에 있는 컴포넌트 연결 
+            var renderer = enemy.GetComponentInChildren<EnemyRenderer>();
+            _patternIconImg = renderer.PatternIconImg;
+            _patternCountTMP = renderer.PatternCountTMP;
+            _bubbleImg = renderer.BubbleImg;
             
             // 정보 설정
             _nameTMP.text = BaseEnemy.Name;
@@ -85,7 +92,20 @@ namespace Cardinals.Enemy
 
         private Dictionary<string, Sprite> EnemyPatternIconDict =>
             ResourceLoader.LoadSpritesInDirectory(Constants.FilePath.Resources.Enemy_Pattern);
-        
+
+        public void SetBubbleDirection(bool isRightTail = false)
+        {
+            if (isRightTail)
+            {
+                Sprite sprite =
+                    ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Enemy_Ballon_RightTail);
+                _bubbleImg.sprite = sprite;
+                
+                // 말풍선 위치 수정
+                var pos = _bubbleImg.rectTransform.anchoredPosition;
+                _bubbleImg.rectTransform.anchoredPosition = new Vector2(-pos.x, pos.y);
+            }
+        }
         private void Destroy()
         {
             BaseEnemy = null;

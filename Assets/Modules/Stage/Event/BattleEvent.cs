@@ -21,11 +21,6 @@ namespace Cardinals.Game
         [SerializeField, InlineEditor] private EnemyDataSO[] _enemyList;
         public EnemyDataSO[] EnemyList => _enemyList;
 
-        public Vector3[] GetPositions()
-        {
-            return new[] { new Vector3()};
-        }
-
         #region Battle
         private StageController _stageController;
 
@@ -41,7 +36,6 @@ namespace Cardinals.Game
             Vector3[] enemyPositions = _stageController.Board.SetEnemyNumber(_enemyList.Length);
 
             _enemies = new();
-            var posArr = GetPositions();
             for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
             {
                 var enemyData = _enemyList[i];
@@ -57,6 +51,7 @@ namespace Cardinals.Game
             }
 
             GameManager.I.CurrentEnemies = _enemies;
+            _stageController.EnemyInfoController.Init(_enemyList.Length);
 
             do // 전투 시작
             {
