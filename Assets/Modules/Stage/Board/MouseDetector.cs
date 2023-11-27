@@ -20,9 +20,8 @@ namespace Cardinals.Board {
 
 		private int _idx;
 		private bool _isMouseHover = false;
-		private Action<int> _onMouseHover;
 
-		public void Init(int idx, Vector3[] vertices, int[] triangles, Action<int> onMouseHover, float convexOffset = 0f) {
+		public void Init(int idx, Vector3[] vertices, int[] triangles, float convexOffset = 0f) {
 			_meshFilter = gameObject.AddComponent<MeshFilter>();
 			_mesh = _meshFilter.mesh;
 			
@@ -30,7 +29,6 @@ namespace Cardinals.Board {
 			_triangles = triangles;
 
 			_idx = idx;
-			_onMouseHover = onMouseHover;
 
 			InitMesh();
 
@@ -51,18 +49,6 @@ namespace Cardinals.Board {
 			// 	_meshCollider.convex = true;
 			// 	_meshCollider.isTrigger = true;
 			// }
-		}
-
-		private void OnMouseEnter() {
-			//Debug.Log($"Mouse Enter{_idx}");
-			_isMouseHover = true;
-			//_onMouseHover?.Invoke(_idx);
-		}
-
-		private void OnMouseExit() {
-			//Debug.Log("Mouse Exit");
-			_isMouseHover = false;
-			//_onMouseHover?.Invoke(-1);
 		}
 	}
 

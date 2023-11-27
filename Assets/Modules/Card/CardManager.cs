@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using Util;
 using Cardinals.Enums;
 using Unity.VisualScripting;
+using Cardinals.Board;
 
 namespace Cardinals
 {
@@ -199,30 +200,6 @@ namespace Cardinals
 
         }
 
-        private void OnEnable() {
-            GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
-            GameManager.I.Stage.Board.OnMouseHover += OnMouseHoverBoard;
-        }
-
-        private void OnDisable() {
-            if (GameManager.I.Stage != null && GameManager.I.Stage.Board != null) {
-                GameManager.I.Stage.Board.OnMouseHover -= OnMouseHoverBoard;
-            }
-        }
-
-        private void OnMouseHoverBoard(int target) {
-            if (_isMouseOnCardDeck) {
-                _mouseState = MouseState.Cancel;
-                return;
-            }
-
-            if (target >= 0) {
-                _mouseState = MouseState.Action;
-            } else {
-                _mouseState = MouseState.Move;
-            }
-        }
-
         private void Discard(int index)
         {
             Destroy(_handcardsUI[index].gameObject);
@@ -272,14 +249,29 @@ namespace Cardinals
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (_isMouseOnCardDeck) {
-                        _mouseState = MouseState.Cancel;
+                    BoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
+                    if (boardInputHandler.IsMouseHoverUI) {
+                        if (boardInputHandler.HoveredMouseDetectorType == MouseDetectorType.CardPile) {
+                            _mouseState = MouseState.Cancel;
+                        } else {
+                            _mouseState = MouseState.CardEvent;
+                        }
+                    } else {
+                        if (boardInputHandler.IsMouseHover) {
+                            if (boardInputHandler.HoveredIdx >= 0) {
+                                _mouseState = MouseState.Action;
+                            } else {
+                                _mouseState = MouseState.Move;
+                            }
+                        } else {
+                            _mouseState = MouseState.Cancel;
+                        }
                     }
 
                     switch (_mouseState)
                     {
                         case MouseState.Action:
-                            var target = GameManager.I.Stage.Enemies.FirstOrDefault();
+                            var target = GameManager.I.Stage.Enemies[boardInputHandler.HoveredIdx];
                             if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
                             if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
                             {
