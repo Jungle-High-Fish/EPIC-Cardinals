@@ -67,7 +67,13 @@ namespace Cardinals.Game
 
                 // 플레이어 행동
                 GameManager.I.Player.OnTurn();
+
+                // 턴 종료 버튼 활성화
+                GameManager.I.UI.UIEndTurnButton.Activate();
+
                 yield return GameManager.I.WaitNext(); // 대기?
+
+                GameManager.I.UI.UIEndTurnButton.Deactivate();
                 
                 // 적 행동
                 _enemies.ForEach(enemy => enemy.OnTurn());

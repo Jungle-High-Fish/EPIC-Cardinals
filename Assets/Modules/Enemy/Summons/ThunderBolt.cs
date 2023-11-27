@@ -14,8 +14,8 @@ namespace Cardinals.Enemy.Summon
             // Player 위치에 벼락이 소환됨
             var pos = GameManager.I.Player.transform.position + new Vector3(0, 10, 0);
             
-            _renderer.transform.position = pos;
-            _renderer.transform.DOMoveY(0, .5f)
+            transform.position = pos;
+            transform.DOMoveY(0, .5f)
                                .SetEase(Ease.InOutElastic)
                                .OnComplete(Execute);
         }
