@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Cardinals.Enemy
 {
@@ -11,6 +13,15 @@ namespace Cardinals.Enemy
         
         [Header("Sprite")]
         [SerializeField] private SpriteRenderer _renderer;
+        
+        
+        [SerializeField] private Image _patternIconImg;
+        [SerializeField] private TextMeshProUGUI _patternCountTMP;
+        [SerializeField] private Image _bubbleImg;
+        public Image PatternIconImg => _patternIconImg;
+        public TextMeshProUGUI PatternCountTMP => _patternCountTMP;
+        public Image BubbleImg => _bubbleImg;
+        
         
         public void Init(BaseEnemy enemy)
         {

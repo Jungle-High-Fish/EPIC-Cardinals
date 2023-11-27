@@ -35,7 +35,6 @@ namespace Cardinals
         private UIPlayerInfo _uiPlayerInfo;
         private UICardSystem _uiCardSystem;
         private UITileSelection _uiTileSelection;
-
         private UIMagicLevelUpPanel _uiMagicLevelUpPanel;
 
         #region Board-Event 
@@ -65,6 +64,8 @@ namespace Cardinals
             InstantiateRewardUI();
             InstantiatePlayerUI();
             InstantiateTileSelectionUI();
+
+            InstantiateEnemyUIParent();
             
             // TEMP
             TEMP_InstantiateUIMap();
@@ -88,7 +89,7 @@ namespace Cardinals
             GameObject UIEnemyInfoPrefab 
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIEnemyInfo);
             
-            GameObject uiEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, _enemyUICanvas.transform);
+            GameObject uiEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, GameManager.I.Stage.EnemyInfoController.transform);
             uiEnemyInfo.GetComponent<UIEnemyInfo>().Init(enemyComp);
         }
 
@@ -203,6 +204,15 @@ namespace Cardinals
             GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
             TEMP_UIStageMap = obj.GetComponent<TEMP_UIStageMap>();
             obj.SetActive(false); 
+        }
+
+        private void InstantiateEnemyUIParent()
+        {
+            var obj = new GameObject();
+            obj.transform.SetParent(_enemyUICanvas.transform);
+
+            obj.name = "@EnemyInfoController";
+            obj.AddComponent<EnemyInfoController>();
         }
     }
 }
