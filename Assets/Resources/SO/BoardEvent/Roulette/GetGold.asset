@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GetGold
   m_EditorClassIdentifier: 
   type: 2
-  icon: {fileID: 21300000, guid: bdd6c77f3b6358b4797992581e75bd64, type: 3}
+  icon: {fileID: 21300000, guid: 636f223e93b364b4c9cdbe763dcc2546, type: 3}
   description: "\uACE8\uB4DC\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
   chance: 100
   index: 1
