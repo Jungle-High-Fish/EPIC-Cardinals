@@ -57,6 +57,7 @@ namespace Cardinals
             InstantiateCanvas(Constants.Common.InstanceName.CardUICanvas, out _cardUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.EnemyUICanvas, out _enemyUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.SystemUICanvas, out _systemUICanvas);
+            _systemUICanvas.GetComponent<Canvas>().sortingOrder = 1;
 
             InstantiateStageInfoUI();
             InstantiateTurnEndButtonUI();
