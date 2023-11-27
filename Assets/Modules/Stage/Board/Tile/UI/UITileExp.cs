@@ -13,9 +13,14 @@ namespace Cardinals.UI {
             "Bar"
         );
 
+        private ComponentGetter<Image> _actionEmblem = new ComponentGetter<Image>(
+            TypeOfGetter.ChildByName, 
+            "Action Emblem"
+        );
+
         private Tile _tile;
 
-        private IEnumerator _updateExpBar;
+        private IEnumerator _updateLevelUI;
         private bool _hasInit = false;
         
         public void Init(Tile tile) {
@@ -24,13 +29,13 @@ namespace Cardinals.UI {
             _tile = tile;
             _expBar.Get(gameObject).transform.localScale = new Vector3(0, 1, 1);
 
-            if (_updateExpBar == null) {
-                _updateExpBar = UpdateExpBar();
-                StartCoroutine(_updateExpBar);
+            if (_updateLevelUI == null) {
+                _updateLevelUI = UpdateLevelUI();
+                StartCoroutine(_updateLevelUI);
             }
         }
 
-        public IEnumerator UpdateExpBar() {
+        public IEnumerator UpdateLevelUI() {
             while (!_hasInit) {
                 yield return null;
             }
@@ -39,22 +44,25 @@ namespace Cardinals.UI {
                 float expRatio = _tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level];
                 _expBar.Get(gameObject).transform.localScale = new Vector3(expRatio, 1, 1);
                 _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
+
+                _actionEmblem.Get(gameObject).sprite 
+                    = ResourceLoader.LoadSO<TileSymbolsSO>(Constants.FilePath.Resources.SO_TileSymbolsData)[_tile.Type, _tile.Level];
                 yield return null;
             }
         }
 
         private void OnEnable() {
-            if (_updateExpBar != null) {
-                StartCoroutine(_updateExpBar);
+            if (_updateLevelUI != null) {
+                StartCoroutine(_updateLevelUI);
             } else {
-                _updateExpBar = UpdateExpBar();
-                StartCoroutine(_updateExpBar);
+                _updateLevelUI = UpdateLevelUI();
+                StartCoroutine(_updateLevelUI);
             }
         }
 
         private void OnDisable() {
-            if (_updateExpBar != null) {
-                StopCoroutine(_updateExpBar);
+            if (_updateLevelUI != null) {
+                StopCoroutine(_updateLevelUI);
             }
         }
     }

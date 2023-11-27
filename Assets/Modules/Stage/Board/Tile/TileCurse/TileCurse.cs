@@ -7,6 +7,7 @@ namespace Cardinals.Board {
 	public class TileCurse: MonoBehaviour {
 		public TileCurseData Data => _data;
 		public bool IsActive => _data != null;
+		public int PassedTurn => _passedTurn;
 		
 		private TileCurseData _data;
 

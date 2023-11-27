@@ -20,6 +20,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_Stage_Totem = "Stage/Totem";
             
             public const string Prefabs_UI_Canvas = "UI/Canvas";
+
+            public const string Prefabs_UI_TurnEndButton = "UI/TurnEndButton";
             
             public const string Prefabs_UI_BoardEvent_Shop = "UI/BoardEvent/UIShopPanel";
             public const string Prefabs_UI_BoardEvent_Product = "UI/BoardEvent/UIProduct";
@@ -85,6 +87,8 @@ namespace Cardinals.Constants {
             public const string SO_PotionData = "Potions/";
             public const string SO_BuffData = "Buffs/";
             public const string SO_MagicData = "Magic/";
+            public const string SO_TileSymbolsData = "TileSymbols/TileSymbols";
+            public const string SO_TileCurseUIData = "TileCurses/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";

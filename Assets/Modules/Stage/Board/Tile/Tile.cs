@@ -17,6 +17,8 @@ namespace Cardinals.Board {
         public int Exp => _tileMagic.Exp;
         public UITile UITile => _uiTile.Get(gameObject);
 
+        public TileCurse TileCurse => _tileCurse;
+
         public Tile Next {
             get => _next;
             set {
@@ -148,7 +150,13 @@ namespace Cardinals.Board {
 
         public void OnTurnEnd() {
             _tileEffect.OnTurnEnd();
-            _tileCurse.OnTurnEnd();
+
+            bool _hasCurseTerminated = _tileCurse.OnTurnEnd();
+            if (_hasCurseTerminated) {
+                if (_tileState == TileState.Cursed) {
+                    ChangeState(TileState.Normal);
+                }
+            }
         }
 
         public void Place(IBoardPiece boardPiece) {
@@ -238,13 +246,24 @@ namespace Cardinals.Board {
         }
 
         // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
-        private void ApplyState() {
-            
+        private void ApplyState(TileState originalState) {
+            if (originalState == TileState.Normal) {
+                if (_tileState == TileState.Cursed) {
+                    _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
+                }
+            }
+
+            if (originalState == TileState.Cursed) {
+                if (_tileState == TileState.Normal) {
+                    _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
+                }
+            }
         }
 
         private void ChangeState(TileState state) {
+            TileState originalState = _tileState;
             _tileState = state;
-            ApplyState();
+            ApplyState(originalState);
         }
 
         private void OnMouseDown() {

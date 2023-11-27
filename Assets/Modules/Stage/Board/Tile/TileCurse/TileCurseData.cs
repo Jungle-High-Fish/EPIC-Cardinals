@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Cardinals.Enums;
+using Util;
 
 namespace Cardinals.Board {
 
@@ -23,11 +24,15 @@ namespace Cardinals.Board {
 			protected set => _curseAction = value;
 		}
 
+		public TileCurseType CurseType => _curseType;
+
 		private TileCurseType _curseType;
 		private int _targetTurn;
 		private Action _curseAction;
 		
-		protected TileCurseData(TileCurseType _curseType, int targetTurn = 0, Action curseAction = null) {
+		protected TileCurseData(TileCurseType curseType, int targetTurn = 0, Action curseAction = null) {
+			_curseType = curseType;
+
 			_targetTurn = targetTurn;
 			_curseAction = curseAction;
 		}
@@ -36,6 +41,12 @@ namespace Cardinals.Board {
 		{
 			_baseTile = tile;
 			TargetTurn = turn;
+		}
+
+		public static TileCurseUIDataSO Data(TileCurseType curseType) {
+			return ResourceLoader.LoadSO<TileCurseUIDataSO>(
+                Constants.FilePath.Resources.SO_TileCurseUIData + curseType
+            );
 		}
 	}
 
