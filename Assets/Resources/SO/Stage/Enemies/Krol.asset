@@ -15,4 +15,4 @@ MonoBehaviour:
   enemyName: "\uD06C\uB864"
   enemyType: 1
   sprite: {fileID: 0}
-  maxHP: 10
+  maxHP: 20
