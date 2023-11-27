@@ -42,7 +42,7 @@ namespace Cardinals.Board {
 			}
 		}
 
-		public void Play(TileAnimationType animationType, bool isLoop = false) {
+		public float Play(TileAnimationType animationType, bool isLoop = false) {
 			if (_animationDict[animationType].anim.IsPlaying()) {
 				_animationDict[animationType] = (
 					_animationDict[animationType].anim,
@@ -50,7 +50,7 @@ namespace Cardinals.Board {
 					_animationDict[animationType].playNum + 1
 				);
 
-				return;
+				return _animationDict[animationType].time * _animationDict[animationType].playNum;
 			}
 
 			_animationDict[animationType] = (
@@ -61,6 +61,8 @@ namespace Cardinals.Board {
 			
 			ResetTile();
 			_animationDict[animationType].anim.Restart();
+
+			return _animationDict[animationType].time;
 		}
 
 		private void ResetTile() {
