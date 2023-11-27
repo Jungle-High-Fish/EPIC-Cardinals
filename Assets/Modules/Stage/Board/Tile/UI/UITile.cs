@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enums;
 using Cardinals.UI;
 using UnityEngine;
 using Util;
@@ -9,6 +10,11 @@ namespace Cardinals.Board {
         ComponentGetter<UITileExp> _levelUI = new ComponentGetter<UITileExp>(
             TypeOfGetter.ChildByName, 
             "Normal Tile UI/Level Guage"
+        );
+
+        ComponentGetter<UITileCurse> _curseUI = new ComponentGetter<UITileCurse>(
+            TypeOfGetter.ChildByName, 
+            "Tile Curse UI/"
         );
 
         ComponentGetter<UITileMaterial> _materialUI = new ComponentGetter<UITileMaterial>(
@@ -27,6 +33,10 @@ namespace Cardinals.Board {
 
         public void SetMaterial() {
             _materialUI.Get(gameObject).Set(_tile);
+        }
+
+        public void SetCurse(TileCurseType type) {
+            _curseUI.Get(gameObject).Set(type);
         }
     }
 }

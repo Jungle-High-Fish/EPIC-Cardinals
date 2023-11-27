@@ -218,7 +218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 70a88d42c8da1460ba50ca46d3b02d9a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ed6d49ef1230dd41a2d706ef6fcda29, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1034,7 +1034,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 0.6, y: 0.6}
+  m_SizeDelta: {x: 0.37, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1572431745017615003
 CanvasRenderer:
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b9de157f0073a164c9f833d60772e511, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 518a7017742c8a844896524b9b41d55e, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1086,6 +1086,7 @@ GameObject:
   - component: {fileID: 1289839047809785249}
   - component: {fileID: 3866882206907537802}
   - component: {fileID: 660412279910222249}
+  - component: {fileID: 7407726883297292663}
   m_Layer: 5
   m_Name: Tile Curse UI
   m_TagString: Untagged
@@ -1176,6 +1177,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &7407726883297292663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042034429603087000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902c923279d2fa6468781e60cb4a7ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3888995273658418564
 PrefabInstance:
   m_ObjectHideFlags: 0

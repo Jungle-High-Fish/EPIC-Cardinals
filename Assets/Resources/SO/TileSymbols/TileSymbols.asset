@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackSymbols:
   - {fileID: 21300000, guid: b9de157f0073a164c9f833d60772e511, type: 3}
+  - {fileID: 21300000, guid: b9de157f0073a164c9f833d60772e511, type: 3}
   - {fileID: 21300000, guid: 5f475a30116207648b8763c4b895c6f4, type: 3}
   - {fileID: 21300000, guid: b720243cdad6f67478491c77c8a85526, type: 3}
   _defenseSymbols:
+  - {fileID: 21300000, guid: 518a7017742c8a844896524b9b41d55e, type: 3}
   - {fileID: 21300000, guid: 518a7017742c8a844896524b9b41d55e, type: 3}
   - {fileID: 21300000, guid: 67c74607233498146964a1de545e09d5, type: 3}
   - {fileID: 21300000, guid: f4f43031240d9414ea905296602d4cd7, type: 3}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Cardinals.Enums;
+using Util;
 
 namespace Cardinals.Board {
 
@@ -36,6 +37,12 @@ namespace Cardinals.Board {
 		{
 			_baseTile = tile;
 			TargetTurn = turn;
+		}
+
+		public static TileCurseUIDataSO Data(TileCurseType curseType) {
+			return ResourceLoader.LoadSO<TileCurseUIDataSO>(
+                Constants.FilePath.Resources.SO_TileCurseUIData + curseType
+            );
 		}
 	}
 
