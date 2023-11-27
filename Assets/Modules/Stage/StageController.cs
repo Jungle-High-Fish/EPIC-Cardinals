@@ -167,7 +167,7 @@ namespace Cardinals.Game {
             yield return new WaitForSeconds(1f);
         }
 
-        public BaseEnemy InstantiateEnemy(EnemyDataSO enemyData) {
+        public BaseEnemy InstantiateEnemy(EnemyDataSO enemyData, Vector3 position) {
             var enemyType = EnumHelper.GetEnemyInstanceType(enemyData.enemyType);
             
             GameObject enemyRendererPrefab 
@@ -177,7 +177,7 @@ namespace Cardinals.Game {
             BaseEnemy enemyComp = enemyRenderer.AddComponent(enemyType) as BaseEnemy;
             enemyComp.Init(enemyData);
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
-            enemyRenderer.transform.position = enemyRenderer.transform.position + new Vector3(0, 2, 0);
+            enemyRenderer.transform.position = position + new Vector3(0, 2, 0);
 
             GameManager.I.UI.SetEnemyUI(enemyComp);
 
