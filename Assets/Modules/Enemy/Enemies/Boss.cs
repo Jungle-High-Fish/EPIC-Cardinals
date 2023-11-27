@@ -31,17 +31,17 @@ namespace Cardinals.Enemy
             
             Patterns = new[]
             {
-                new Pattern(EnemyActionType.Magic, action: ThunderBolt),
+                new Pattern(EnemyActionType.TileCurse, action: ThunderBolt),
                 new Pattern(EnemyActionType.Attack, 5),
                 new Pattern(EnemyActionType.Defense, 5),
             };
 
             BerserkModeEvent += () =>
             {
-                FixPattern = new(EnemyActionType.Buff, action: ElectricShock);
+                FixPattern = new(EnemyActionType.UserDebuff, action: ElectricShock);
                 Patterns = new Pattern[]
                 {
-                    new(EnemyActionType.Magic, action: BerserkThunderBolt),
+                    new(EnemyActionType.TileCurse, action: BerserkThunderBolt),
                     new(EnemyActionType.Attack, 7),
                     new(EnemyActionType.Attack, 5),
                 };

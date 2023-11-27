@@ -10,7 +10,7 @@ namespace Cardinals.Enemy
         {
             base.Init(enemyData);
 
-            FixPattern = new Pattern(EnemyActionType.Buff, action: Slow);
+            FixPattern = new Pattern(EnemyActionType.UserDebuff, action: Slow);
             Patterns = new[]
             {
                 new Pattern(EnemyActionType.Defense, 4),

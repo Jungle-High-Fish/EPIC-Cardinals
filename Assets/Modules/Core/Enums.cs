@@ -270,8 +270,9 @@ namespace Cardinals.Enums {
         Attack,
         Defense,
         AreaAttack,
-        Buff, // 버프 / 디버프
-        Magic, // 마법 ?
+        TileCurse,
+        TileDebuff,
+        UserDebuff,
         Unknown, // 알 수 없음 ?
     }
 
