@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ReducedHp
   m_EditorClassIdentifier: 
   type: 6
-  icon: {fileID: 21300000, guid: bdd6c77f3b6358b4797992581e75bd64, type: 3}
+  icon: {fileID: 21300000, guid: 2a2396b45a3b8ab4b96f4bc2ffe1bead, type: 3}
   description: "\uCCB4\uB825\uC774 \uAE4E\uC785\uB2C8\uB2E4."
   chance: 100
   index: 5

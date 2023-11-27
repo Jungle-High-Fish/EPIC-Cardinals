@@ -345,7 +345,8 @@ namespace Cardinals.Enums {
         DrawCard,
         GetGold,
         RandomArtifact,
-        RandomCard,
+        //RandomCard,
+        RandomPotion,
         RandomTileGradeUp,
         ReducedHp,
     }

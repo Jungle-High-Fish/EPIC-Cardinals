@@ -93,7 +93,7 @@ namespace Cardinals.BoardEvent.Shop
         {
             if (CheckPrice(artifact))
             {
-                GameManager.I.Stage.AddArtifact();
+                GameManager.I.Stage.AddRandomArtifact();
                 GameManager.I.Stage.UseGold(artifact.Price);
             }
 
@@ -106,7 +106,7 @@ namespace Cardinals.BoardEvent.Shop
             {
                 if (true)// [TODO] 가방이 차 있는지 추가로 체크 필요
                 {
-                    GameManager.I.Stage.AddPotion();
+                    GameManager.I.Stage.AddRandomPotion();
                     GameManager.I.Stage.UseGold(potion.Price);
                 }
             }

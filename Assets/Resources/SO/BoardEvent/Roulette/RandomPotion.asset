@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3bc35585747a4344821d62f476d08a0, type: 3}
-  m_Name: RandomTileGradeUp
+  m_Name: RandomPotion
   m_EditorClassIdentifier: 
-  type: 5
-  icon: {fileID: 21300000, guid: a119757fcfb51414591c4c4f97a416d4, type: 3}
-  description: "\uB79C\uB364\uD55C \uD0C0\uC77C\uC744 \uAC15\uD654\uD569\uB2C8\uB2E4."
+  type: 4
+  icon: {fileID: 21300000, guid: 43d28d3c6e6c57c45b6b6c51a61eaeee, type: 3}
+  description: "\uB79C\uB364\uD55C \uD3EC\uC158\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
   chance: 100
-  index: 4
-  weight: 500
+  index: 3
+  weight: 400
