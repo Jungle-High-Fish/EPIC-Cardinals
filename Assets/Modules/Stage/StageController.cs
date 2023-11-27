@@ -73,16 +73,24 @@ namespace Cardinals.Game {
             PlacePlayer();
         }
 
+        [Header("임시 맵(하드코딩됨)")]
+        private int temp_event_index = 0;
+        
         public IEnumerator Flow() {
             GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
             
             // 축복 선택
             yield return SelectBlessFlow();
-            
+
+
+            GameManager.I.UI.UIMapButton.On();
+            GameManager.I.UI.TEMP_UIStageMap.Init(); // temp map
             // 다음 사건을 읽음
             while (_stage.MoveNext())
             {
+                GameManager.I.UI.TEMP_UIStageMap.StartEvent(temp_event_index); // temp map
+                
                 // 현재 사건에 따른 이벤트 플로우 수행
                 using var evt = _stage.Current as Game.BaseEvent;
                 _curEvent = evt;
@@ -96,6 +104,8 @@ namespace Cardinals.Game {
                 {
                     GameManager.I.GameOver();
                 }
+
+                GameManager.I.UI.TEMP_UIStageMap.ClearEvent(temp_event_index++); // temp map
             }
 
             GameManager.I.GameClear();
