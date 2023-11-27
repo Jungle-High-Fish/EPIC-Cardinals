@@ -25,8 +25,8 @@ namespace Cardinals.Board {
 		private ComponentGetter<Tile> _tile
 			= new ComponentGetter<Tile>(TypeOfGetter.This);
 
-		private Dictionary<TileAnimationType, (Sequence anim, int playNum)> _animationDict
-			= new Dictionary<TileAnimationType, (Sequence, int)>();
+		private Dictionary<TileAnimationType, (Sequence anim, float time, int playNum)> _animationDict
+			= new Dictionary<TileAnimationType, (Sequence, float, int)>();
 
 		public void Init() {
 			InitAnimations();
@@ -35,30 +35,34 @@ namespace Cardinals.Board {
 		public void StopAll() {
 			List<TileAnimationType> animationTypes = new List<TileAnimationType>(_animationDict.Keys);
 			foreach (var animationType in animationTypes) {
-				_animationDict[animationType] = (_animationDict[animationType].anim, 0);
+				_animationDict[animationType] = (_animationDict[animationType].anim, _animationDict[animationType].time, 0);
 				if (_animationDict[animationType].anim.IsPlaying()) {
 					_animationDict[animationType].anim.Complete(false);
 				}
 			}
 		}
 
-		public void Play(TileAnimationType animationType, bool isLoop = false) {
+		public float Play(TileAnimationType animationType, bool isLoop = false) {
 			if (_animationDict[animationType].anim.IsPlaying()) {
 				_animationDict[animationType] = (
-					_animationDict[animationType].anim, 
+					_animationDict[animationType].anim,
+					_animationDict[animationType].time,
 					_animationDict[animationType].playNum + 1
 				);
 
-				return;
+				return _animationDict[animationType].time * _animationDict[animationType].playNum;
 			}
 
 			_animationDict[animationType] = (
-				_animationDict[animationType].anim, 
+				_animationDict[animationType].anim,
+				_animationDict[animationType].time,
 				isLoop ? -1 : 1
 			);
 			
 			ResetTile();
 			_animationDict[animationType].anim.Restart();
+
+			return _animationDict[animationType].time;
 		}
 
 		private void ResetTile() {
@@ -83,7 +87,7 @@ namespace Cardinals.Board {
 			.OnComplete(AnimationComplete(TileAnimationType.Shake))
 			.SetAutoKill(false).Pause();
 
-			_animationDict.Add(TileAnimationType.Shake, (shakeAnimation, 0));
+			_animationDict.Add(TileAnimationType.Shake, (shakeAnimation, 1f, 0));
 			return shakeAnimation;
 		}
 
@@ -95,7 +99,7 @@ namespace Cardinals.Board {
 			.OnComplete(AnimationComplete(TileAnimationType.Jump))
 			.SetAutoKill(false).Pause();
 			
-			_animationDict.Add(TileAnimationType.Jump, (jumpAnimation, 0));
+			_animationDict.Add(TileAnimationType.Jump, (jumpAnimation, 1f, 0));
 			return jumpAnimation;
 		}
 
@@ -112,7 +116,7 @@ namespace Cardinals.Board {
 			.OnComplete(AnimationComplete(TileAnimationType.Flip))
 			.SetAutoKill(false).Pause();
 			
-			_animationDict.Add(isBackWard ? TileAnimationType.Flip : TileAnimationType.FlipBack, (flipAnimation, 0));
+			_animationDict.Add(isBackWard ? TileAnimationType.Flip : TileAnimationType.FlipBack, (flipAnimation, 1.5f, 0));
 			return flipAnimation;
 		}
 
@@ -126,6 +130,7 @@ namespace Cardinals.Board {
 
 				_animationDict[animationType] = (
 					_animationDict[animationType].anim, 
+					_animationDict[animationType].time,
 					_animationDict[animationType].playNum - 1
 				);
 

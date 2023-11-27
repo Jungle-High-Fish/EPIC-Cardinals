@@ -31,7 +31,17 @@ namespace Cardinals
         public bool IsSelectable
         {
             get => _isSelectable;
-            set => _isSelectable = value;
+            set {
+                _isSelectable = value;
+                if (_isSelectable)
+                {
+                    _image.Get(gameObject).color = Color.white;
+                }
+                else
+                {
+                    _image.Get(gameObject).color = Color.gray;
+                }
+            }
         }
         public Card Card => _card;
         public int CardIndex

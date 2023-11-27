@@ -196,14 +196,16 @@ namespace Cardinals.Board {
             (boardPiece as MonoBehaviour).transform.SetParent(null);
         }
 
-        public void CardAction(int value, BaseEntity target) {
-            _tileAnimation.Get(gameObject).Play(TileAnimationType.Shake);
+        public IEnumerator CardAction(int value, BaseEntity target) {
+            float animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Shake);
             
             _tileAction.Act(value, target);
 
             if (_tileMagic != null) {
                 _tileMagic.OnAction(value, target);
             }
+
+            yield return new WaitForSeconds(animTime);
         }
 
         public void SetCurse(TileCurseType curseType, int turn) {
