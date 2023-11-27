@@ -47,6 +47,11 @@ namespace Cardinals
             "Player Status/Detail Info Panel"
         );
 
+        private ComponentGetter<Transform> _alertTr = new ComponentGetter<Transform>(
+            TypeOfGetter.ChildByName,
+            "Player Status/Alert Image"
+        );
+
         [Header("Panel")]
         [SerializeField] private GameObject _playerInfoPanel;
         [SerializeField] private float _panelMoveDistance;
@@ -68,9 +73,42 @@ namespace Cardinals
             _player.AddBuffEvent += AddBuff;
             _player.UpdateDefenseEvent += UpdateDefense;
 
+            _player.PlayerInfo.AddPotionEvent += (_, __) => { ShowAlertImage(); };
+            _player.PlayerInfo.AddArtifactEvent += (_) => { ShowAlertImage(); };
+            _player.PlayerInfo.AddBlessEvent += (_) => { ShowAlertImage(); };
+
             _detailInfoOpenButton.Get(gameObject).onClick.AddListener(OpenPanel);
             _detailInfoPanel.Get(gameObject).Init();
             _detailInfoPanel.Get(gameObject).gameObject.SetActive(false);
+
+            _alertTr.Get(gameObject).gameObject.SetActive(false);
+        }
+
+        private void ShowAlertImage() {
+            if (_isPanelOpen) {
+                return;
+            }
+
+            if (_alertTr.Get(gameObject).gameObject.activeSelf) {
+                return;
+            }
+
+            _alertTr.Get(gameObject).gameObject.SetActive(true);
+            _alertTr.Get(gameObject).transform.localScale = Vector3.one * 1.5f;
+            _alertTr.Get(gameObject).transform
+                .DOScale(Vector3.one, 1f).SetEase(Ease.OutBounce);
+        }
+
+        private void HideAlertImage() {
+            if (_alertTr.Get(gameObject).gameObject.activeSelf == false) {
+                return;
+            }
+
+            _alertTr.Get(gameObject).transform.localScale = Vector3.one;
+            _alertTr.Get(gameObject).transform
+                .DOScale(Vector3.zero, 0.3f).SetEase(Ease.InOutCubic).OnComplete(() => {
+                    _alertTr.Get(gameObject).gameObject.SetActive(false);
+                });
         }
 
         private void UpdateHp(int hp, int maxHp)
@@ -110,6 +148,8 @@ namespace Cardinals
                 _detailInfoPanel.Get(gameObject).transform
                     .DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
                 _isPanelOpen = true;
+
+                HideAlertImage();
                 Debug.Log("open");
             }
         }
