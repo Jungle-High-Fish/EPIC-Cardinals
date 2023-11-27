@@ -124,6 +124,10 @@ namespace Cardinals
 
             for(int i = 0; i < count; i++)
             {
+                if (_onTile.Next == GameManager.I.Stage.Board.GetStartTile()) {
+                    GameManager.I.Stage.GenerateBoardEvent();
+                }
+
                 Vector3 nextPos = _onTile.Next.transform.position;
                 nextPos.y += 1.3f;
                 transform.DOJump(nextPos, 2, 1, time);

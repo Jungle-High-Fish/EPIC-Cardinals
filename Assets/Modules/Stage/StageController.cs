@@ -221,11 +221,6 @@ namespace Cardinals.Game {
         
         public void AddGold(int value) => Player.PlayerInfo.AddGold(value);
         public void UseGold(int value) => Player.PlayerInfo.UseGold(value);
-        
-        public void GetArtifact(int grade, int choiceCnt, int selectCnt) // grade는 임시임
-        {
-            
-        }
 
         public void GetCardRange(int minValue, int maxValue, int count = 1)
         {
@@ -237,13 +232,16 @@ namespace Cardinals.Game {
             
         }
 
-        public void AddArtifact()
+        public void AddRandomArtifact()
         {
+            var artifact = Utils.Util.GetRandomEnum<ArtifactType>(1);
+            Player.PlayerInfo.AddArtifact(artifact);
         }
 
-        public void AddPotion()
+        public void AddRandomPotion()
         {
-            
+            var potion = Utils.Util.GetRandomEnum<PotionType>(1);
+            Player.PlayerInfo.AddPotion(potion);
         }
 
         [Button]

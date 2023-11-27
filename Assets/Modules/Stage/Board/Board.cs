@@ -127,14 +127,23 @@ namespace Cardinals.Board {
             }
         }
 
-        public Tile GetRandomTile() {
-            return _tileSequence[UnityEngine.Random.Range(0, _tileSequence.Count)];
+        public Tile GetRandomTile(bool includeCorner = true)
+        {
+            if (includeCorner)
+            {
+                return _tileSequence[UnityEngine.Random.Range(0, _tileSequence.Count)];
+            }
+            else
+            {
+                var list = _tileSequence.Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence).ToList();
+                var idx = Random.Range(0, list.Count());
+                return list[idx];
+            }
         }
 
         public int GetBoardEdgeNum() {
             return _boardBuilder.CornerTiles.Count;
         }
-        
         
 
         public IEnumerable<Tile> GetCursedTilesList()

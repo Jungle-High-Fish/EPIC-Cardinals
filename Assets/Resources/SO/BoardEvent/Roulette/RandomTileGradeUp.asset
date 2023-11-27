@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RandomTileGradeUp
   m_EditorClassIdentifier: 
   type: 5
-  icon: {fileID: 21300000, guid: bdd6c77f3b6358b4797992581e75bd64, type: 3}
+  icon: {fileID: 21300000, guid: a119757fcfb51414591c4c4f97a416d4, type: 3}
   description: "\uB79C\uB364\uD55C \uD0C0\uC77C\uC744 \uAC15\uD654\uD569\uB2C8\uB2E4."
   chance: 100
   index: 4

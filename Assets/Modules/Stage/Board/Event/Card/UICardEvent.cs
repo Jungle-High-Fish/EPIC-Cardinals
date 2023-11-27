@@ -38,6 +38,8 @@ namespace Cardinals.BoardEvent.Card
         [Button]
         public void Init()
         {
+            transform.SetSiblingIndex(5);
+            
             gameObject.SetActive(true);
             _eventObj.SetActive(true);
             _endObj.SetActive(false);
@@ -58,11 +60,10 @@ namespace Cardinals.BoardEvent.Card
             switch (_curEvent.type)
             {
                 case BoardEventCardType.Draw:
-                    GameManager.I.Stage.DrawCard(value);
+                    GameManager.I.Stage.CardManager.Draw(value);
                     break;
                 case BoardEventCardType.CopyOneTimeCard:
-                    // [TODO] 일회성 카드 복제 기능 구현된 후, 연결 필요
-                    Debug.Log($"카드가 {value}만큼 복제됨. (사실은 안됨)");
+                    GameManager.I.Stage.CardManager.AddCard(value, true, CardPileType.Hand);
                     break;
                 case BoardEventCardType.Heal:
                     GameManager.I.Stage.Player.Heal( value * 2);

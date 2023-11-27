@@ -20,12 +20,13 @@ namespace Cardinals.Board {
 		private Vector3 _groundLeftBottomPos;
 		private Vector3 _groundRightBottomPos;
 
-		private float _convexOffset = 0.01f;
+		private float _convexOffset = 0f;
 		private float _tileVerticePosOffset = Constants.GameSetting.Board.TileHeight / 2;
 
 		private BoardBuilder _builder;
 
 		private bool _isMouseHover = false;
+		private int _hoveredIdx = int.MaxValue;
 		private List<MouseDetector> _mouseDetectors = new List<MouseDetector>();
 
 		public void Init(BoardBuilder builder) {
@@ -46,6 +47,7 @@ namespace Cardinals.Board {
 			if (count == 1) {
 				GameObject mouseDetectorObj = new GameObject("MouseDetector");
 				mouseDetectorObj.transform.SetParent(transform);
+				mouseDetectorObj.layer = LayerMask.NameToLayer("MouseDetector");
 
 				MouseDetector mouseDetector = mouseDetectorObj.AddComponent<MouseDetector>();
 				mouseDetector.Init(0, new[] {
@@ -57,12 +59,16 @@ namespace Cardinals.Board {
 					0, 1, 2,
 					1, 3, 2
 				}, OnMouseHoverCallback);
+
+				_mouseDetectors.Add(mouseDetector);
 			} else if (count == 2) {
 				MouseDetector[] mouseDetectors = new MouseDetector[2];
 
 				for (int i = 0; i < 2; i++) {
 					GameObject mouseDetectorObj = new GameObject("$MouseDetector_{i}");
 					mouseDetectorObj.transform.SetParent(transform);
+					mouseDetectorObj.layer = LayerMask.NameToLayer("MouseDetector");
+
 					mouseDetectors[i] = mouseDetectorObj.AddComponent<MouseDetector>();
 				}
 				
@@ -88,12 +94,34 @@ namespace Cardinals.Board {
 
 				mouseDetectors[0].Init(0, _vertices0, _triangles0, OnMouseHoverCallback);
 				mouseDetectors[1].Init(1, _vertices1, _triangles1, OnMouseHoverCallback);
+
+				_mouseDetectors.AddRange(mouseDetectors);
+			}
+		}
+
+		private void Update() {
+			if (_mouseDetectors.Count == 0) return;
+
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			int layerMask = 1 << LayerMask.NameToLayer("MouseDetector");
+			if (Physics.Raycast(ray, out hit, 200f, layerMask)) {
+				_isMouseHover = true;
+				int newIdx = hit.collider.GetComponent<MouseDetector>().Idx;
+				if (_hoveredIdx != newIdx) {
+					_hoveredIdx = newIdx;
+					OnMouseHover?.Invoke(_hoveredIdx);
+					//Debug.Log($"Mouse Hover {_hoveredIdx}");
+				}
+			} else {
+				_isMouseHover = false;
 			}
 		}
 
 		private void CreateGroundDetector() {
 			GameObject mouseDetectorObj = new GameObject("GroundMouseDetector");
 			mouseDetectorObj.transform.SetParent(transform);
+			mouseDetectorObj.layer = LayerMask.NameToLayer("MouseDetector");
 
 			MouseDetector mouseDetector = mouseDetectorObj.AddComponent<MouseDetector>();
 			mouseDetector.Init(-1, new[] {
@@ -115,6 +143,8 @@ namespace Cardinals.Board {
 				0, 1, 4,
 				4, 1, 5
 			}, OnMouseHoverCallback);
+
+			_mouseDetectors.Add(mouseDetector);
 		}
 
 		private void OnMouseHoverCallback(int idx) {
