@@ -57,14 +57,15 @@ namespace Cardinals
         public Action DieEvent { get; set; }
 
 
-        private int _defenseCount;
-
+        [ShowInInspector] private int _defenseCount;
+        public Action<int> UpdateDefenseEvent { get; set; }
         public int DefenseCount
         {
             get => _defenseCount;
             set
             {
-                _defenseCount = Math.Max(0, value);   
+                _defenseCount = Math.Max(0, value);
+                UpdateDefenseEvent?.Invoke(_defenseCount);
             }
         }
 
@@ -105,7 +106,7 @@ namespace Cardinals
             }
 
             // 방어도 초기화
-            DefenseCount = 0;
+            
         }
 
         public bool CheckBuffExist(BuffType buffType)
