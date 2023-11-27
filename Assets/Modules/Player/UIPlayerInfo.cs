@@ -22,6 +22,9 @@ namespace Cardinals
         [SerializeField] private RectTransform _curHPRect;
         [SerializeField] private float _curHPEndPosX;
 
+        [Header("Defense")]
+        [SerializeField] private TextMeshProUGUI _defenseTMP;
+
         [Header("Buff")]
         [SerializeField] private GameObject _buffPrefab;
 
@@ -63,6 +66,7 @@ namespace Cardinals
             _player = GameManager.I.Player;
             _player.UpdateHpEvent += UpdateHp;
             _player.AddBuffEvent += AddBuff;
+            _player.UpdateDefenseEvent += UpdateDefense;
 
             _detailInfoOpenButton.Get(gameObject).onClick.AddListener(OpenPanel);
             _detailInfoPanel.Get(gameObject).Init();
@@ -76,6 +80,10 @@ namespace Cardinals
             _hpTMP.text = $"{hp}/{maxHp}";
         }
 
+        private void UpdateDefense(int defense)
+        {
+            _defenseTMP.text = defense.ToString();
+        }
         private void AddBuff(BaseBuff baseBuff)
         {
             Instantiate(_buffPrefab, _buffListArea.Get(gameObject)).GetComponent<UIBuff>().Init(baseBuff);

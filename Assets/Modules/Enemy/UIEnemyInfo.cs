@@ -23,6 +23,9 @@ namespace Cardinals.Enemy
         [SerializeField] private RectTransform _curHPRect;
         [SerializeField] private float _curHPEndPosX;
 
+        [Header("Defense")]
+        [SerializeField] private TextMeshProUGUI _defenseTMP;
+
         [Header("Buff")]
         [SerializeField] private Transform _buffTr;
         [SerializeField] private GameObject _buffPrefab;
@@ -47,6 +50,12 @@ namespace Cardinals.Enemy
             BaseEnemy.AddBuffEvent += AddBuff;
             BaseEnemy.UpdatePatternEvent += UpdatePattern;
             BaseEnemy.UpdateHpEvent += UpdateHp;
+            BaseEnemy.UpdateDefenseEvent += UpdateDefense;
+        }
+
+        private void UpdateDefense(int defense)
+        {
+            _defenseTMP.text = defense.ToString();
         }
 
         /// <summary>
