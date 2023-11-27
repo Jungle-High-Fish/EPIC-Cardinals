@@ -148,8 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rewardsTr: {fileID: 801323771230038313}
-  _reawrdPrefab: {fileID: 178020510479118042, guid: bcf0d0e81a3c32d438698ce8b927e4ec,
-    type: 3}
 --- !u!1 &801323771230038314
 GameObject:
   m_ObjectHideFlags: 0

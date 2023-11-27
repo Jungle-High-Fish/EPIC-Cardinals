@@ -71,6 +71,7 @@ namespace Cardinals.Board {
 
         // 타일 상태 관련 변수
         private TileState _tileState;
+        public TileState TileState=> _tileState;
         private bool _isSelectable;
         private bool _isSelected;
         private bool _isMouseHovered;
@@ -198,7 +199,9 @@ namespace Cardinals.Board {
         }
 
         public void SetCurse(TileCurseType curseType, int turn) {
-            //_tileCurse.SetCurse(data);
+            var data = EnumHelper.GetTileCurseInstanceType(curseType);
+            data.Init(this, turn);
+            _tileCurse.SetCurse(data);
             ChangeState(TileState.Cursed);
         }
 

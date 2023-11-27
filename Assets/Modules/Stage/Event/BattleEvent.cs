@@ -67,7 +67,13 @@ namespace Cardinals.Game
 
                 // 플레이어 행동
                 GameManager.I.Player.OnTurn();
+
+                // 턴 종료 버튼 활성화
+                GameManager.I.UI.UIEndTurnButton.Activate();
+
                 yield return GameManager.I.WaitNext(); // 대기?
+
+                GameManager.I.UI.UIEndTurnButton.Deactivate();
                 
                 // 적 행동
                 _enemies.ForEach(enemy => enemy.OnTurn());
@@ -75,8 +81,10 @@ namespace Cardinals.Game
                 // 카운트 처리
                 GameManager.I.Player.EndTurn();
                 _enemies.ForEach(enemy => enemy.EndTurn());
-
+                
+                
                 // 보드 관련 처리
+                yield return SummonsAction();
                 _stageController.Board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1f);
@@ -88,6 +96,17 @@ namespace Cardinals.Game
                 yield return WaitReward(rewards);
             }
             
+        }
+
+        private IEnumerator SummonsAction()
+        {
+            var summons = GameManager.I.Stage.Summons;
+            for (int i = summons.Count - 1; i >= 0; i--)
+            {
+                yield return summons[i].OnTurn();
+            }
+
+            yield return null;
         }
 
         /// <summary>

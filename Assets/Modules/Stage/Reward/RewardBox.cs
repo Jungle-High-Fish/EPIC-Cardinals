@@ -5,8 +5,10 @@ using System.Linq;
 using Cardinals;
 using Cardinals.Enums;
 using Cardinals.Game;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RewardBox : MonoBehaviour
 {
@@ -31,9 +33,8 @@ public class RewardBox : MonoBehaviour
         {
             r.Value = r.Type switch
             {
-                RewardType.Card => 0,
-                RewardType.Potion => 0,
-                RewardType.Artifact => 0,
+                RewardType.Potion => GetRandomPotion(),
+                RewardType.Artifact => GetRandomArtifact(),
                 _ => r.Value
             };
             
@@ -47,6 +48,10 @@ public class RewardBox : MonoBehaviour
         }
         
         GameManager.I.UI.UIRewardPanel.Set(_rewards);
+
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one, 1)
+            .SetEase(Ease.OutElastic);
     }
 
     /// <summary>
@@ -58,17 +63,22 @@ public class RewardBox : MonoBehaviour
     }
 
     int GetRandomPotion()
-    {
-        return 0;
+    { 
+        return Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
     }
     int GetRandomCard()
     {
         return 0;
     }
     
-    int[] GetRandomArtifact(int count)
+    // int[] GetRandomArtifact(int count)
+    // {
+    //     return new[]{0};
+    // }
+    
+    int GetRandomArtifact()
     {
-        return new[]{0};
+        return Random.Range(1, Enum.GetNames(typeof(ArtifactType)).Length);
     }
 
     /// <summary>
