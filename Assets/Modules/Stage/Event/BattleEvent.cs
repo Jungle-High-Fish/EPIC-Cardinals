@@ -82,7 +82,6 @@ namespace Cardinals.Game
                 GameManager.I.Player.EndTurn();
                 _enemies.ForEach(enemy => enemy.EndTurn());
                 
-                
                 // 보드 관련 처리
                 yield return SummonsAction();
                 _stageController.Board.OnTurnEnd();
@@ -115,6 +114,8 @@ namespace Cardinals.Game
         /// <param name="rewards"></param>
         IEnumerator WaitReward(IEnumerable<Reward> rewards)
         {
+            GameManager.I.UI.UIEndTurnButton.Activate();
+            
             // 보상 설정
             _stageController.RewardBox.Set(rewards); // 해당 위치에서 구체화 됩니다. 
 

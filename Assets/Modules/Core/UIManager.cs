@@ -20,15 +20,18 @@ namespace Cardinals
         public UICardSystem UICardSystem => _uiCardSystem;
         public UITileSelection UITileSelection => _uiTileSelection;
         public UIMagicLevelUpPanel UIMagicLevelUpPanel => _uiMagicLevelUpPanel;
+        public UIMapButton UIMapButton => _uiMapButton;
 
         private Canvas _mainUICanvas;
         private Canvas _playerUICanvas;
         private Canvas _cardUICanvas;
         private Canvas _enemyUICanvas;
+        private Canvas _systemUICanvas;
 
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
         private UIEndTurnButton _uiEndTurnButton;
+        private UIMapButton _uiMapButton;
         private UIPlayerInfo _uiPlayerInfo;
         private UICardSystem _uiCardSystem;
         private UITileSelection _uiTileSelection;
@@ -46,17 +49,24 @@ namespace Cardinals
         public UITileEvent UITileEvent => _uiTileEvent;
         #endregion
         
+        public TEMP_UIStageMap TEMP_UIStageMap { get; private set; }
+        
         public void Init() {
             InstantiateCanvas(Constants.Common.InstanceName.MainUICanvas, out _mainUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.PlayerUICanvas, out _playerUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.CardUICanvas, out _cardUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.EnemyUICanvas, out _enemyUICanvas);
+            InstantiateCanvas(Constants.Common.InstanceName.SystemUICanvas, out _systemUICanvas);
 
             InstantiateStageInfoUI();
             InstantiateTurnEndButtonUI();
+            InstantiateMapButtonUI();
             InstantiateRewardUI();
             InstantiatePlayerUI();
             InstantiateTileSelectionUI();
+            
+            // TEMP
+            TEMP_InstantiateUIMap();
             
             // Board Event
             InstantiateBoardEventCardUI();
@@ -112,6 +122,15 @@ namespace Cardinals
             turnEndButtonUIObj.SetActive(false);
         }
 
+        private void InstantiateMapButtonUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_MapButton);
+            GameObject turnEndButtonUIObj = Instantiate(prefab, _mainUICanvas.transform);
+
+            _uiMapButton = turnEndButtonUIObj.GetComponent<UIMapButton>();
+            _uiMapButton.Init();
+            _uiMapButton.gameObject.SetActive(false);
+        }
+        
         private void InstantiateRewardUI() {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_RewardPanel);
             GameObject rewardUIObj = Instantiate(prefab, _mainUICanvas.transform);
@@ -175,6 +194,14 @@ namespace Cardinals
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
             _uiMagicLevelUpPanel = obj.GetComponent<UIMagicLevelUpPanel>();
             obj.SetActive(false);
+        }
+        
+        
+        private void TEMP_InstantiateUIMap() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Stage_Map);
+            GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
+            TEMP_UIStageMap = obj.GetComponent<TEMP_UIStageMap>();
+            obj.SetActive(false); 
         }
     }
 }

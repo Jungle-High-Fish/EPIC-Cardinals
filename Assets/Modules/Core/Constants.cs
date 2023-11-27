@@ -22,6 +22,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_Canvas = "UI/Canvas";
 
             public const string Prefabs_UI_TurnEndButton = "UI/TurnEndButton";
+            public const string Prefabs_UI_MapButton = "UI/MapButton";
             
             public const string Prefabs_UI_BoardEvent_Shop = "UI/BoardEvent/UIShopPanel";
             public const string Prefabs_UI_BoardEvent_Product = "UI/BoardEvent/UIProduct";
@@ -41,6 +42,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UIPotion = "UI/Player/UIPotion";
             public const string Prefabs_UIArtifact = "UI/Player/UIArtifact";
             public const string Prefabs_UIBless = "UI/Player/UIBless";
+            
+            public const string Prefabs_UI_Stage_Map = "UI/Stage/TEMP_StageMap";
             
 
             public const string Prefabs_UI_PlayerDetail = "UI/Player/Player Detail Info/Detail Info Panel";
@@ -108,6 +111,7 @@ namespace Cardinals.Constants {
             public const string PlayerUICanvas = "Player UI Canvas";
             public const string CardUICanvas = "Card UI Canvas";
             public const string EnemyUICanvas = "Enemy UI Canvas";
+            public const string SystemUICanvas = "System UI Canvas";
 
 
             public const string EnemyPlace = "Enemy";
