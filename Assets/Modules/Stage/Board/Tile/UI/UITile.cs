@@ -28,15 +28,12 @@ namespace Cardinals.Board {
             _tile = tile;
 
             _levelUI.Get(gameObject).Init(tile);
+            _curseUI.Get(gameObject).Init(tile);
             _materialUI.Get(gameObject).Set(tile);
         }
 
         public void SetMaterial() {
             _materialUI.Get(gameObject).Set(_tile);
-        }
-
-        public void SetCurse(TileCurseType type) {
-            _curseUI.Get(gameObject).Set(type);
         }
     }
 }
