@@ -9,6 +9,7 @@ namespace Cardinals.Board {
 
 	public class MouseDetector: MonoBehaviour {
 		public bool IsMouseHover => _isMouseHover;
+		public int Idx => _idx;
 
 		private MeshFilter _meshFilter;
 		private Mesh _mesh;
@@ -53,9 +54,9 @@ namespace Cardinals.Board {
 		}
 
 		private void OnMouseEnter() {
-			Debug.Log($"Mouse Enter{_idx}");
+			//Debug.Log($"Mouse Enter{_idx}");
 			_isMouseHover = true;
-			_onMouseHover?.Invoke(_idx);
+			//_onMouseHover?.Invoke(_idx);
 		}
 
 		private void OnMouseExit() {

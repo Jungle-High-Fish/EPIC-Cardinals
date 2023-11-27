@@ -225,7 +225,7 @@ namespace Cardinals.Board {
 
             _isSelected = true;
 
-            _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip, true);
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
         }
 
         public void Unselect() {
