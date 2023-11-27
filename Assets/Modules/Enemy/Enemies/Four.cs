@@ -15,7 +15,7 @@ namespace Cardinals.Enemy
             
             Patterns = new[]
             {
-                new Pattern(EnemyActionType.Magic, action: SpawnFireball),
+                new Pattern(EnemyActionType.TileCurse, action: SpawnFireball),
                 new Pattern(EnemyActionType.Attack, 5),
                 new Pattern(EnemyActionType.Defense, 5),
             };
