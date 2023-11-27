@@ -113,7 +113,7 @@ namespace Cardinals
             switch (curPat.Type)
             {
                 case EnemyActionType.Attack :
-                    Hit(value);
+                    GameManager.I.Player.Hit(value);
                     break;
                 case EnemyActionType.Defense :
                     DefenseCount += value;

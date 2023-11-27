@@ -123,14 +123,14 @@ namespace Cardinals
         {
             int calculDamage = Math.Max(0, damage - DefenseCount);
 
-            if (calculDamage > 0)
+            if (calculDamage >= 0)
             {
                 DefenseCount -= damage;
                 Animator?.Play("Hit");
             }
             else // 막아졌다.
             {
-                DefenseCount = 0 ;
+                DefenseCount = DefenseCount-damage;
             }
             
             Hp -= calculDamage;
