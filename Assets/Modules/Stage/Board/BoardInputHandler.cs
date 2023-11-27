@@ -42,7 +42,7 @@ namespace Cardinals.Board {
 			SetMeshData();
 		}
 
-		public void CreateMouseDetectors(int count) {
+		public Vector3[] CreateMouseDetectors(int count) {
 			foreach (var mouseDetector in _mouseDetectors) {
 				Destroy(mouseDetector.gameObject);
 			}
@@ -50,24 +50,40 @@ namespace Cardinals.Board {
 
 			CreateGroundDetector();
 
-			if (count == 0) return;
+			if (count == 0) return null;
 			if (count == 1) {
 				GameObject mouseDetectorObj = new GameObject("MouseDetector");
 				mouseDetectorObj.transform.SetParent(transform);
 				mouseDetectorObj.layer = LayerMask.NameToLayer("MouseDetector");
 
 				MouseDetector mouseDetector = mouseDetectorObj.AddComponent<MouseDetector>();
-				mouseDetector.Init(0, new[] {
+
+				Vector3[] vertices = new[] {
 					_leftTopPos + new Vector3(0, -_convexOffset, 0),
 					_rightTopPos,
 					_leftBottomPos,
 					_rightBottomPos + new Vector3(0, -_convexOffset, 0)
-				}, new[] {
+				};
+
+				int[] triangles = new[] {
 					0, 1, 2,
 					1, 3, 2
-				});
+				};
+
+				mouseDetector.Init(0, vertices, triangles);
 
 				_mouseDetectors.Add(mouseDetector);
+
+				// calculate center of mass
+				Vector3 center = Vector3.zero;
+				foreach (var vertice in vertices) {
+					center += vertice;
+				}
+				center /= vertices.Length;
+
+				return new[] {
+					center
+				};
 			} else if (count == 2) {
 				MouseDetector[] mouseDetectors = new MouseDetector[2];
 
@@ -89,6 +105,12 @@ namespace Cardinals.Board {
 					0, 1, 2
 				};
 
+				Vector3 center0 = Vector3.zero;
+				foreach (var vertice in _vertices0) {
+					center0 += vertice;
+				}
+				center0 /= _vertices0.Length;
+
 				Vector3[] _vertices1 = new [] {
 					_leftTopPos,
 					_rightTopPos,
@@ -99,11 +121,24 @@ namespace Cardinals.Board {
 					0, 1, 2
 				};
 
+				Vector3 center1 = Vector3.zero;
+				foreach (var vertice in _vertices1) {
+					center1 += vertice;
+				}
+				center1 /= _vertices1.Length;
+
 				mouseDetectors[0].Init(0, _vertices0, _triangles0);
 				mouseDetectors[1].Init(1, _vertices1, _triangles1);
 
 				_mouseDetectors.AddRange(mouseDetectors);
+
+				return new[] {
+					center0,
+					center1
+				};
 			}
+
+			return null;
 		}
 
 		private void Update() {

@@ -158,8 +158,8 @@ namespace Cardinals.Board {
             return list;
         }
 
-        public void SetEnemyNumber(int enemyNumber) {
-            _boardInputHandler.CreateMouseDetectors(enemyNumber);
+        public Vector3[] SetEnemyNumber(int enemyNumber) {
+            return _boardInputHandler.CreateMouseDetectors(enemyNumber);
         }
 
         /// <summary>

@@ -38,12 +38,14 @@ namespace Cardinals.Game
             List<Reward> rewards = new();
         
             // 몬스터 설정
+            Vector3[] enemyPositions = _stageController.Board.SetEnemyNumber(_enemyList.Length);
+
             _enemies = new();
             var posArr = GetPositions();
             for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
             {
                 var enemyData = _enemyList[i];
-                var enemy = _stageController.InstantiateEnemy(enemyData);
+                var enemy = _stageController.InstantiateEnemy(enemyData, enemyPositions[i]);
                 
                 enemy.DieEvent += () =>
                 {
@@ -55,7 +57,6 @@ namespace Cardinals.Game
             }
 
             GameManager.I.CurrentEnemies = _enemies;
-            _stageController.Board.SetEnemyNumber(_enemies.Count);
 
             do // 전투 시작
             {
