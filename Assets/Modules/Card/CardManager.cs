@@ -281,6 +281,7 @@ namespace Cardinals
                         case MouseState.Action:
                             var target = GameManager.I.Stage.Enemies.FirstOrDefault();
                             if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
+                            if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
                             {
                                 break;
                             }

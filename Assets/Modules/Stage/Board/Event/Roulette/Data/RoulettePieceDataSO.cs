@@ -7,14 +7,14 @@ namespace Cardinals.BoardEvent.Roulette
 	public class RoulettePieceDataSO : ScriptableObject
 	{
 		public BoardEventRoulette type;
-		public Sprite icon; // ¾ÆÀÌÄÜ ÀÌ¹ÌÁö ÆÄÀÏ
-		public string description; // ÀÌ¸§, ¼Ó¼º, ´É·ÂÄ¡ µîÀÇ Á¤º¸
+		public Sprite icon; // ì•„ì´ì½˜ ì´ë¯¸ì§€ íŒŒì¼
+		public string description; // ì´ë¦„, ì†ì„±, ëŠ¥ë ¥ì¹˜ ë“±ì˜ ì •ë³´
 
-		// 3°³ÀÇ ¾ÆÀÌÅÛ µîÀåÈ®·ü(chance)ÀÌ 100, 60, 40ÀÌ¸é
-		// µîÀåÈ®·üÀÇ ÇÕÀº 200. 100/200 = 50%, 60/200 = 30%, 40/200 = 20%
-		[Range(1, 100)] public int chance = 100; // µîÀåÈ®·ü
+		// 3ê°œì˜ ì•„ì´í…œ ë“±ì¥í™•ë¥ (chance)ì´ 100, 60, 40ì´ë©´
+		// ë“±ì¥í™•ë¥ ì˜ í•©ì€ 200. 100/200 = 50%, 60/200 = 30%, 40/200 = 20%
+		[Range(1, 100)] public int chance = 100; // ë“±ì¥í™•ë¥ 
 
-		[HideInInspector] public int index; // ¾ÆÀÌÅÛ ¼ø¹ø
-		[HideInInspector] public int weight; // °¡ÁßÄ¡
+		[HideInInspector] public int index; // ì•„ì´í…œ ìˆœë²ˆ
+		[HideInInspector] public int weight; // ê°€ì¤‘ì¹˜
 	}
 }

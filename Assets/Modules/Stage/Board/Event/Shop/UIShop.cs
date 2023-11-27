@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cardinals.Enums;
+using Cardinals.Game;
 using Cardinals.UI;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -17,6 +20,10 @@ namespace Cardinals.BoardEvent.Shop
         [SerializeField] private Transform _artifactParentTr;
         [SerializeField] private Transform _potionParentTr;
         private GameObject _shopItemPrefab;
+        
+        [Header("MessageBox")] 
+        [SerializeField] private GameObject _msgBoxObj;
+        [SerializeField] private TextMeshProUGUI _msgTMP;
         GameObject ShopItemPrefab
         {
             get
@@ -39,6 +46,7 @@ namespace Cardinals.BoardEvent.Shop
         [Button]
         public void Init(int artifactCnt = 2, int potionCnt = 3)
         {
+            _msgBoxObj.SetActive(false);
             Clear();
             SetArtifact(artifactCnt);
             SetPotion(potionCnt);
@@ -60,12 +68,24 @@ namespace Cardinals.BoardEvent.Shop
         /// </summary>
         void SetArtifact(int count)
         {
-            for (int i = 0; i < count; i++)
+            List<ArtifactType> list = new();
+            for (int idx = 1, cnt = Enum.GetNames(typeof(ArtifactType)).Length; idx < cnt; idx++)
             {
-                Artifact artifact = null; // [TODO] 아티펙트 지정 (현재 소지하지않은 아티팩트에서..)
+                ArtifactType artifact = (ArtifactType)idx;
+                if (!GameManager.I.Player.PlayerInfo.CheckArtifactExist((ArtifactType)idx))
+                {
+                    list.Add(artifact);
+                }
+            }
+            
+            for (int i = 0; i < count && i < list.Count(); i++)
+            {
+                var idx = Random.Range(0, list.Count());
+                var artifact = EnumHelper.GetArtifact(list[idx]);
+                list.RemoveAt(idx);
                 
                 var obj = Instantiate(ShopItemPrefab, _artifactParentTr);
-                // obj.GetComponent<UIProduct>().Init(artifact, () => BuyArtifact(artifact));
+                 obj.GetComponent<UIProduct>().Init(artifact, () => BuyArtifact(artifact));
             }
         }
         
@@ -93,8 +113,9 @@ namespace Cardinals.BoardEvent.Shop
         {
             if (CheckPrice(artifact))
             {
-                GameManager.I.Stage.AddArtifact();
-                GameManager.I.Stage.UseGold(artifact.Price);
+                StartCoroutine(NotiMessage($"{artifact.Name} 구매 완료"));
+                GameManager.I.Player.PlayerInfo.AddArtifact(artifact.Type);
+                GameManager.I.Player.PlayerInfo.UseGold(artifact.Price);
             }
 
             return false;
@@ -104,10 +125,17 @@ namespace Cardinals.BoardEvent.Shop
         {
             if (CheckPrice(potion))
             {
-                if (true)// [TODO] 가방이 차 있는지 추가로 체크 필요
+                bool checkBag = GameManager.I.Player.PlayerInfo.PotionList.Count() <
+                                Constants.GameSetting.Player.MaxPotionCapacity;
+                if (checkBag)
                 {
-                    GameManager.I.Stage.AddPotion();
-                    GameManager.I.Stage.UseGold(potion.Price);
+                    StartCoroutine(NotiMessage($"{potion.Name} 구매 완료"));
+                    GameManager.I.Player.PlayerInfo.AddPotion(potion.PotionType);
+                    GameManager.I.Player.PlayerInfo.UseGold(potion.Price);
+                }
+                else
+                {
+                    StartCoroutine(NotiMessage("가방이 가득차 구매할 수 없습니다."));
                 }
             }
             
@@ -125,21 +153,19 @@ namespace Cardinals.BoardEvent.Shop
             
             if (GameManager.I.Stage.Player.PlayerInfo.Gold < item.Price)
             {
-                Debug.Log("돈이 부족하여 구매할 수 없음");
+                StartCoroutine(NotiMessage("돈이 부족하여 구매할 수 없음"));
                 result = false;
             }
 
             return result;
         }
-    }
-    
-    // TEMP
-    public class Artifact : IProduct
-    {
-        public string Name { get; }
-        public Sprite Sprite { get; }
-        public string Description { get; }
-        public int Price { get; }
-    }
 
+        IEnumerator NotiMessage(string text, float showTime = 1.5f)
+        {
+            _msgTMP.text = text;
+            _msgBoxObj.SetActive(true);
+            yield return new WaitForSeconds(showTime);
+            _msgBoxObj.SetActive(false);
+        }
+    }
 }

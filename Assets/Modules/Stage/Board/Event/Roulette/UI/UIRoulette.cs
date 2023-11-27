@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Cardinals.Utils;
 using Cardinals.Enums;
 using TMPro;
 using UnityEngine;
@@ -52,14 +52,17 @@ namespace Cardinals.BoardEvent.Roulette
                     GameManager.I.Stage.AddGold(2);
                     break;
                 case BoardEventRoulette.RandomArtifact:
-                    GameManager.I.Stage.GetArtifact(0, 1,1);
+                    GameManager.I.Stage.AddRandomArtifact();
                     break;
-                case BoardEventRoulette.RandomCard:
-                    GameManager.I.Stage.GetCardRange(1, 4);
+                // case BoardEventRoulette.RandomCard:
+                //     GameManager.I.Stage.GetCardRange(1, 4);
+                //     break;
+                case BoardEventRoulette.RandomPotion:
+                    GameManager.I.Stage.AddRandomPotion();
                     break;
                 case BoardEventRoulette.RandomTileGradeUp:
-                    Debug.Log("랜덤 타일을 강화합니다. (동작 X)");
-                    // [TODO] 타일과 기능 연결 필요
+                    var tile = GameManager.I.Stage.Board.GetRandomTile(false);
+                    tile.TileMagic.GainExpToNextLevel();
                     break;
                 case BoardEventRoulette.ReducedHp:
                     GameManager.I.Stage.HitPlayer(5);
@@ -74,7 +77,7 @@ namespace Cardinals.BoardEvent.Roulette
 
         IEnumerator Close()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             gameObject.SetActive(false);
         }
     }
