@@ -388,6 +388,13 @@ namespace Cardinals.Enums {
         Cancel,
         CardEvent,
     }
+
+    public enum MouseDetectorType
+    {
+        CardPile,
+        CardEvent,
+    }
+
     public enum CardPileType 
     {
         Empty,

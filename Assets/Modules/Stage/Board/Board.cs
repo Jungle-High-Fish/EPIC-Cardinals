@@ -21,15 +21,12 @@ namespace Cardinals.Board {
         public Tile this[int x, int y] => _boardBuilder[x, y];
         public IEnumerable<Tile> TileSequence => _tileSequence;
 
-        public event Action<int> OnMouseHover {
-            add => _enemyPlaceHandler.OnMouseHover += value;
-            remove => _enemyPlaceHandler.OnMouseHover -= value;
-        }
+        public BoardInputHandler BoardInputHandler => _boardInputHandler;
 
         [ShowInInspector, ReadOnly]
         private List<Tile> _tileSequence;
         private BoardBuilder _boardBuilder;
-        private EnemyPlaceHandler _enemyPlaceHandler;
+        private BoardInputHandler _boardInputHandler;
         
         private bool _isTileSelectable;
         private TileSelectionType _selectionType;
@@ -49,10 +46,10 @@ namespace Cardinals.Board {
                 ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_MouseDetector),
                 transform
             );
-            _enemyPlaceHandler = enemyPlaceHandlerObj.GetComponent<EnemyPlaceHandler>();
+            _boardInputHandler = enemyPlaceHandlerObj.GetComponent<BoardInputHandler>();
 
             yield return BoardLoadWithAnimation(boardDataSO);
-            _enemyPlaceHandler.Init(_boardBuilder);
+            _boardInputHandler.Init(_boardBuilder);
         }
 
         [Button("테스트 애니메이션", ButtonSizes.Large)]
@@ -162,7 +159,7 @@ namespace Cardinals.Board {
         }
 
         public void SetEnemyNumber(int enemyNumber) {
-            _enemyPlaceHandler.CreateMouseDetectors(enemyNumber);
+            _boardInputHandler.CreateMouseDetectors(enemyNumber);
         }
 
         /// <summary>

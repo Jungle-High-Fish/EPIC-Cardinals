@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 679581792735364309}
   - component: {fileID: 679581792735364308}
   - component: {fileID: 3014487153726496669}
+  - component: {fileID: 3754681687331001498}
   m_Layer: 5
   m_Name: CardDeck
   m_TagString: Untagged
@@ -433,8 +434,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -481,6 +482,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154cbbd823828114d8c4553a99eb104f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3754681687331001498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679581792735364314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60cfdfdafea33574f9664c8d8dd32771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mouseDetectorType: 0
 --- !u!1 &679581792836717611
 GameObject:
   m_ObjectHideFlags: 0
