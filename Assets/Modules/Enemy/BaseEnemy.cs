@@ -119,8 +119,9 @@ namespace Cardinals
                     DefenseCount += value;
                     break;
                 case EnemyActionType.AreaAttack :
-                case EnemyActionType.Magic :
-                case EnemyActionType.Buff :
+                case EnemyActionType.TileDebuff :
+                case EnemyActionType.UserDebuff :
+                case EnemyActionType.TileCurse :
                     curPat.Action();
                     break;
             }
