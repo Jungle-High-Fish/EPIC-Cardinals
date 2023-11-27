@@ -70,7 +70,14 @@ namespace Cardinals.Board {
 					1, 3, 2
 				};
 
-				mouseDetector.Init(0, vertices, triangles);
+				Vector2[] uvs = new[] {
+					new Vector2(0, 0),
+					new Vector2(1, 0),
+					new Vector2(0, 1),
+					new Vector2(1, 1)
+				};
+
+				mouseDetector.Init(0, vertices, triangles, uvs);
 
 				_mouseDetectors.Add(mouseDetector);
 
@@ -95,40 +102,52 @@ namespace Cardinals.Board {
 					mouseDetectors[i] = mouseDetectorObj.AddComponent<MouseDetector>();
 				}
 				
-				Vector3[] _vertices0 = new [] {
+				Vector3[] vertices0 = new [] {
 					_leftTopPos,
 					_rightBottomPos,
 					_leftBottomPos
 				};
 
-				int[] _triangles0 = new [] {
+				int[] triangles0 = new [] {
 					0, 1, 2
 				};
 
+				Vector2[] uvs0 = new[] {
+					new Vector2(0, 0),
+					new Vector2(1, 0),
+					new Vector2(0, 1)
+				};
+
 				Vector3 center0 = Vector3.zero;
-				foreach (var vertice in _vertices0) {
+				foreach (var vertice in vertices0) {
 					center0 += vertice;
 				}
-				center0 /= _vertices0.Length;
+				center0 /= vertices0.Length;
 
-				Vector3[] _vertices1 = new [] {
+				Vector3[] vertices1 = new [] {
 					_leftTopPos,
 					_rightTopPos,
 					_rightBottomPos
 				};
 
-				int[] _triangles1 = new [] {
+				int[] triangles1 = new [] {
 					0, 1, 2
 				};
 
+				Vector2[] uvs1 = new[] {
+					new Vector2(0, 0),
+					new Vector2(1, 0),
+					new Vector2(0, 1)
+				};
+
 				Vector3 center1 = Vector3.zero;
-				foreach (var vertice in _vertices1) {
+				foreach (var vertice in vertices1) {
 					center1 += vertice;
 				}
-				center1 /= _vertices1.Length;
+				center1 /= vertices1.Length;
 
-				mouseDetectors[0].Init(0, _vertices0, _triangles0);
-				mouseDetectors[1].Init(1, _vertices1, _triangles1);
+				mouseDetectors[0].Init(0, vertices0, triangles0, uvs0);
+				mouseDetectors[1].Init(1, vertices1, triangles1, uvs1);
 
 				_mouseDetectors.AddRange(mouseDetectors);
 
@@ -184,7 +203,8 @@ namespace Cardinals.Board {
 			mouseDetectorObj.layer = LayerMask.NameToLayer("MouseDetector");
 
 			MouseDetector mouseDetector = mouseDetectorObj.AddComponent<MouseDetector>();
-			mouseDetector.Init(-1, new[] {
+
+			Vector3[] vertices = new[] {
 				_groundLeftTopPos + new Vector3(0, -_convexOffset, 0),
 				_groundRightTopPos,
 				_groundLeftBottomPos,
@@ -193,7 +213,9 @@ namespace Cardinals.Board {
 				_rightTopPos,
 				_leftBottomPos,
 				_rightBottomPos + new Vector3(0, -_convexOffset / 2, 0)
-			}, new[] {
+			};
+
+			int[] triangles = new[] {
 				0, 4, 2,
 				4, 6, 2,
 				6, 7, 2,
@@ -202,7 +224,20 @@ namespace Cardinals.Board {
 				5, 1, 7,
 				0, 1, 4,
 				4, 1, 5
-			});
+			};
+
+			Vector2[] uvs = new[] {
+				new Vector2(0.5f, 0.5f),
+				new Vector2(0.5f, 0.5f),
+				new Vector2(0.5f, 0.5f),
+				new Vector2(0.5f, 0.5f),
+				new Vector2(0, 0),
+				new Vector2(1, 0),
+				new Vector2(0, 1),
+				new Vector2(1, 1)
+			};
+
+			mouseDetector.Init(-1, vertices, triangles, uvs);
 
 			_mouseDetectors.Add(mouseDetector);
 		}

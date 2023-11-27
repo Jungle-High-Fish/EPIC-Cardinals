@@ -17,16 +17,18 @@ namespace Cardinals.Board {
 
 		private Vector3[] _vertices;
 		private int[] _triangles;
+		private Vector2[] _uvs;
 
 		private int _idx;
 		private bool _isMouseHover = false;
 
-		public void Init(int idx, Vector3[] vertices, int[] triangles, float convexOffset = 0f) {
+		public void Init(int idx, Vector3[] vertices, int[] triangles, Vector2[] uvs, float convexOffset = 0f) {
 			_meshFilter = gameObject.AddComponent<MeshFilter>();
 			_mesh = _meshFilter.mesh;
 			
 			_vertices = vertices;
 			_triangles = triangles;
+			_uvs = uvs;
 
 			_idx = idx;
 
@@ -40,6 +42,7 @@ namespace Cardinals.Board {
 
 			_mesh.vertices = _vertices;
 			_mesh.triangles = _triangles;
+			_mesh.uv = _uvs;
 			_mesh.RecalculateNormals();
 
 			_meshCollider = gameObject.AddComponent<MeshCollider>();
