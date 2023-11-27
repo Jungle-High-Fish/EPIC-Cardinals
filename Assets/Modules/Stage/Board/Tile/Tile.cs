@@ -17,6 +17,8 @@ namespace Cardinals.Board {
         public int Exp => _tileMagic.Exp;
         public UITile UITile => _uiTile.Get(gameObject);
 
+        public TileCurse TileCurse => _tileCurse;
+
         public Tile Next {
             get => _next;
             set {
@@ -208,7 +210,6 @@ namespace Cardinals.Board {
             var data = EnumHelper.GetTileCurseInstanceType(curseType);
             data.Init(this, turn);
             _tileCurse.SetCurse(data);
-            _uiTile.Get(gameObject).SetCurse(curseType);
             ChangeState(TileState.Cursed);
         }
 

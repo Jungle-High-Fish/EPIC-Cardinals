@@ -24,11 +24,15 @@ namespace Cardinals.Board {
 			protected set => _curseAction = value;
 		}
 
+		public TileCurseType CurseType => _curseType;
+
 		private TileCurseType _curseType;
 		private int _targetTurn;
 		private Action _curseAction;
 		
-		protected TileCurseData(TileCurseType _curseType, int targetTurn = 0, Action curseAction = null) {
+		protected TileCurseData(TileCurseType curseType, int targetTurn = 0, Action curseAction = null) {
+			_curseType = curseType;
+
 			_targetTurn = targetTurn;
 			_curseAction = curseAction;
 		}
