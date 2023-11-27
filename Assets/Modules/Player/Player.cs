@@ -77,6 +77,8 @@ namespace Cardinals
                 DefenseCount = 0;
             }
 
+
+
         }
 
         public void BlessWater1()
