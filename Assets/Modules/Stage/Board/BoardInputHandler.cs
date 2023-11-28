@@ -71,10 +71,10 @@ namespace Cardinals.Board {
 				};
 
 				Vector2[] uvs = new[] {
-					new Vector2(0, 0),
-					new Vector2(1, 0),
 					new Vector2(0, 1),
-					new Vector2(1, 1)
+					new Vector2(1, 1),
+					new Vector2(0, 0),
+					new Vector2(1, 0)
 				};
 
 				mouseDetector.Init(0, vertices, triangles, uvs);
@@ -113,9 +113,9 @@ namespace Cardinals.Board {
 				};
 
 				Vector2[] uvs0 = new[] {
-					new Vector2(0, 0),
+					new Vector2(0, 1),
 					new Vector2(1, 0),
-					new Vector2(0, 1)
+					new Vector2(0, 0)
 				};
 
 				Vector3 center0 = Vector3.zero;
@@ -135,9 +135,9 @@ namespace Cardinals.Board {
 				};
 
 				Vector2[] uvs1 = new[] {
-					new Vector2(0, 0),
-					new Vector2(1, 0),
-					new Vector2(0, 1)
+					new Vector2(0, 1),
+					new Vector2(1, 1),
+					new Vector2(1, 0)
 				};
 
 				Vector3 center1 = Vector3.zero;
@@ -163,18 +163,37 @@ namespace Cardinals.Board {
 		private void Update() {
 			if (_mouseDetectors.Count == 0) return;
 
+			if (GameManager.I.Stage.CardManager.State != CardState.Select) {
+				foreach(var m in _mouseDetectors) {
+					m.RendererEnable(false);
+				}
+			}
+
 			// 보드 레이캐스트
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			int layerMask = 1 << LayerMask.NameToLayer("MouseDetector");
 			if (Physics.Raycast(ray, out hit, 200f, layerMask)) {
 				_isMouseHover = true;
-				int newIdx = hit.collider.GetComponent<MouseDetector>().Idx;
+				MouseDetector mouseDetector = hit.collider.gameObject.GetComponent<MouseDetector>();
+				int newIdx = mouseDetector.Idx;
 				if (_hoveredIdx != newIdx) {
+					foreach(var m in _mouseDetectors) {
+						m.RendererEnable(false);
+					}
+
+					if (newIdx >= 0 && GameManager.I.Stage.CardManager.State == CardState.Select) {
+						mouseDetector.RendererEnable(true);
+					}
+
 					_hoveredIdx = newIdx;
 				}
 			} else {
 				_isMouseHover = false;
+
+				foreach(var m in _mouseDetectors) {
+					m.RendererEnable(false);
+				}
 			}
 
 			// UI 레이캐스트

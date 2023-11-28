@@ -8,6 +8,8 @@ namespace Util {
     public static class ResourceLoader {
 
 		private static Dictionary<string, GameObject> _prefabList = new Dictionary<string, GameObject>();
+
+		private static Dictionary<string, Material> _materialList = new Dictionary<string, Material>();
 		
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
 		private static Dictionary<string, ScriptableObject> _SOList = new ();
@@ -36,6 +38,18 @@ namespace Util {
 			}
 			_spriteList.Add(spriteName, Resources.Load<Sprite>(targetPath));
 			return _spriteList[spriteName];
+		}
+
+		public static Material LoadMaterial(string materialName)
+		{
+			string targetPath = Cardinals.Constants.FilePath.Resources.Materials + materialName;
+
+			if (_materialList.ContainsKey(materialName))
+			{
+				return _materialList[materialName];
+			}
+			_materialList.Add(materialName, Resources.Load<Material>(targetPath));
+			return _materialList[materialName];
 		}
 
 		public static T LoadSO<T>(string soName) where T : ScriptableObject
