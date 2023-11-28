@@ -266,7 +266,7 @@ namespace Cardinals.Board {
             }
         }
 
-        private void ChangeState(TileState state) {
+        public void ChangeState(TileState state) {
             TileState originalState = _tileState;
             _tileState = state;
             ApplyState(originalState);

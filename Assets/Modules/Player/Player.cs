@@ -8,11 +8,16 @@ using System;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Cardinals.Buff;
+using Sirenix.Utilities;
 
 namespace Cardinals
 {
     public class Player : BaseEntity, IBoardPiece
     {
+        [Header("초기 값")] [SerializeField] private int _initHp; 
+        
+        [Header("Other")]
+        
         [SerializeField] private Board.Tile _onTile;
         private bool _isDamagedThisTurn;
         [SerializeField] private PlayerInfo _playerInfo;
@@ -23,8 +28,8 @@ namespace Cardinals
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
-        public override void Init(int hp) {
-            base.Init(hp);
+        public override void Init(int _ = default) {
+            base.Init(_initHp);
             _playerInfo = new PlayerInfo();
             Debug.Log("플레이어 초기화 완료");
         }
@@ -43,7 +48,7 @@ namespace Cardinals
                     
                     if (_hp == 0)
                     {
-                        Animator.Play("Die");
+                        Animator.SetTrigger("Die");
                         DieEvent?.Invoke();
                     }
                 }
@@ -182,6 +187,7 @@ namespace Cardinals
         
         public IEnumerator CardAction(int num, BaseEntity target) {
             GameManager.I.Stage.CardManager.SetCardSelectable(false);
+            
             yield return _onTile.CardAction(num, target);
             yield return null;
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
@@ -203,6 +209,7 @@ namespace Cardinals
         public void Win()
         {   
             Animator.Play("Win");
+            Buffs.ForEach(b => b.EndEvent());
         }
     }
 }

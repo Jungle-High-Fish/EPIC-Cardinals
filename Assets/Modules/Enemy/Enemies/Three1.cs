@@ -25,7 +25,7 @@ namespace Cardinals.Enemy
                 };
                 
                 Turn = 0;
-                // Sprite = null; // [TODO] 광폭화 이미지로 변경 필요 
+                Sprite = enemyData.berserkSprite;
             };
             
             DieEvent += () =>

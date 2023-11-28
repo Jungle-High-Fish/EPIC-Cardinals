@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: "\uC092\uC092\uC774"
   enemyType: 5
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d967307def690144c8c662d547395f86, type: 3}
+  berserkSprite: {fileID: 0}
   maxHP: 30

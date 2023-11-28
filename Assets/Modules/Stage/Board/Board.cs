@@ -158,6 +158,18 @@ namespace Cardinals.Board {
             return list;
         }
 
+        /// <summary>
+        /// 보드 내 모든 안좋은 요소를 
+        /// </summary>
+        public void ClearBoardAfterBattleEvent()
+        {
+            foreach (var tile in  _tileSequence)
+            {
+                tile.TileCurse.ClearCurse();
+                tile.ChangeState(TileState.Normal);
+            } 
+        }
+
         public Vector3[] SetEnemyNumber(int enemyNumber) {
             return _boardInputHandler.CreateMouseDetectors(enemyNumber);
         }
