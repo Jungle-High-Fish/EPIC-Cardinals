@@ -87,7 +87,7 @@ namespace Cardinals.Enemy
             }
             
             // 3개 이하로 줄이기
-            for (int i = tiles.Count; i >= 3; i--)
+            for (int i = tiles.Count; i > 3; i--)
             {
                 int idx = Random.Range(0, tiles.Count());
                 tiles.RemoveAt(idx);
