@@ -5,6 +5,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using Cardinals.Board;
 using System;
+using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Cardinals.Buff;
@@ -209,7 +210,10 @@ namespace Cardinals
         public void Win()
         {   
             Animator.Play("Win");
-            Buffs.ForEach(b => b.EndEvent());
+            for (int i = Buffs.Count - 1; i >= 0; i--)
+            {
+                Buffs[i].EndEvent();
+            }
         }
     }
 }
