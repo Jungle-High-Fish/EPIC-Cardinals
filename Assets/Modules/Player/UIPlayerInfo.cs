@@ -82,6 +82,9 @@ namespace Cardinals
             _detailInfoPanel.Get(gameObject).gameObject.SetActive(false);
 
             _alertTr.Get(gameObject).gameObject.SetActive(false);
+            
+            // init
+            UpdateHp(_player.Hp, _player.MaxHp);
         }
 
         private void ShowAlertImage() {

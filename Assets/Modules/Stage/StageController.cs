@@ -214,11 +214,11 @@ namespace Cardinals.Game {
             GameObject playerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player);
             GameObject playerObj = GameObject.Instantiate(playerPrefab);
             _player = playerObj.GetComponent<Player>();
-            _player.Init(15);
+            _player.Init();
+            GameManager.I.UI.InitPlayerUI();
 
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
             
-            GameManager.I.UI.InitPlayerUI();
         }
 
         private void SetCardSystem() {
