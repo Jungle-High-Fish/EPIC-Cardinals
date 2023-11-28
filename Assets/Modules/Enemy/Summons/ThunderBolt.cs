@@ -12,7 +12,7 @@ namespace Cardinals.Enemy.Summon
             base.Init();
             
             // Player 위치에 벼락이 소환됨
-            var pos = GameManager.I.Player.transform.position + new Vector3(Random.Range(-.5f, .5f), 10, 0);
+            var pos = GameManager.I.Player.transform.position + new Vector3(Random.Range(-1f, 1f), 10, 0);
             
             transform.position = pos;
             transform.DOMoveY(0, Random.Range(0.3f, 0.6f))
