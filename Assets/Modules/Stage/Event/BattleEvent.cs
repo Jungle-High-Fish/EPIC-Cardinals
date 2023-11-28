@@ -130,24 +130,27 @@ namespace Cardinals.Game
         /// <param name="rewards">처치한 몬스터 보상</param>
         void AddReward(List<Reward> accrueRewards, Reward[] rewards)
         {
-            foreach (var reward in rewards)
+            if (rewards != null) // 보상이 존재하지 않는 경우, 패스
             {
-                // 이미 골드 타입이 있는 경우 누적할 것
-                if (reward.Type == RewardType.Gold)
+                foreach (var reward in rewards)
                 {
-                    var r = accrueRewards.FirstOrDefault(x => x.Type == RewardType.Gold);
-                    if (r == null)
+                    // 이미 골드 타입이 있는 경우 누적할 것
+                    if (reward.Type == RewardType.Gold)
                     {
-                        accrueRewards.Add(reward);   
+                        var r = accrueRewards.FirstOrDefault(x => x.Type == RewardType.Gold);
+                        if (r == null)
+                        {
+                            accrueRewards.Add(reward);   
+                        }
+                        else
+                        {
+                            r.Value += reward.Value;
+                        }
                     }
                     else
                     {
-                        r.Value += reward.Value;
+                        accrueRewards.Add(reward);
                     }
-                }
-                else
-                {
-                    accrueRewards.Add(reward);
                 }
             }
         }
