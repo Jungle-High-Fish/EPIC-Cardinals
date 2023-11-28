@@ -73,7 +73,7 @@ namespace Cardinals
         protected Action BerserkModeEvent { get; set; }
         
         public Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
-        public Pattern PrevPattern => FixPattern ?? Patterns[(Turn - 1) % Patterns.Length];
+        public Pattern PrevPattern;
 
         public virtual void Init(EnemyDataSO enemyData) {
             Init(enemyData.maxHP);
@@ -116,6 +116,7 @@ namespace Cardinals
         {
             DefenseCount = 0;
 
+            PrevPattern = CurPattern;
             Pattern curPat = CurPattern;
             int value = curPat.Value ?? 0;
             
