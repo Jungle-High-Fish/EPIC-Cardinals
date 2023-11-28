@@ -17,6 +17,7 @@ namespace Cardinals
         private List<Potion> _potions;
         public Action<int, Potion> AddPotionEvent { get; set; }
         public Action<int, Potion> DeletePotionEvent { get; set; }
+        public Action<int> UpdateGoldEvent { get; set; }
         public List<BlessType> BlessList => _blessList;
         public List<Artifact> ArtifactList => _artifacts;
         public List<Potion> PotionList => _potions;
@@ -130,11 +131,13 @@ namespace Cardinals
         public void AddGold(int value)
         {
             Gold += value;
+            UpdateGoldEvent?.Invoke(Gold);
         }
 
         public void UseGold(int value)
         {
             Gold -= value;
+            UpdateGoldEvent?.Invoke(Gold);
         }
     }
 }
