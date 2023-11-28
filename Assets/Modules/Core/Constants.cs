@@ -84,6 +84,8 @@ namespace Cardinals.Constants {
             public const string Sprites_UI_Enemy_Ballon_LeftTail = "UI/Enemy/UI_Ballon_LeftTail";
             public const string Sprites_UI_Enemy_Ballon_RightTail = "UI/Enemy/UI_Ballon_RightTail";
             
+            public const string Sprites_Enemy_Sprite = "Sprites/Enemy/Image";
+
             public const string Sprites_Enemy_Skill_Fireball = "Sprites/Enemy/Skill/Fireball";
             public const string Sprites_Enemy_Skill_ThunderBolt = "Sprites/Enemy/Skill/ThunderBolt";
 
