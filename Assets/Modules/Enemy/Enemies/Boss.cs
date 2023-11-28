@@ -65,7 +65,7 @@ namespace Cardinals.Enemy
                 var index = Random.Range(0, list.Count);
                 var tile = list[index];
 
-                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+                tile.SetCurse(TileCurseType.ThunderBolt, 3);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Cardinals.Enemy
             // 저주 적용
             foreach (var tile in tiles)
             {
-                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+                tile.SetCurse(TileCurseType.ThunderBolt, 3);
             }
         }
         
