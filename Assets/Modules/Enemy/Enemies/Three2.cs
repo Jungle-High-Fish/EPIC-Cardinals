@@ -20,12 +20,12 @@ namespace Cardinals.Enemy
             {
                 Patterns = new[]
                 {
-                    new Pattern(EnemyActionType.Attack, 10),
-                    new Pattern(EnemyActionType.Defense, 5),
+                    new Pattern(EnemyActionType.Defense, 10),
+                    new Pattern(EnemyActionType.Attack, 5),
                 };
                 
                 Turn = 0;
-                // Sprite = null; // [TODO] 광폭화 이미지로 변경 필요 
+                Sprite = enemyData.berserkSprite;
             };
 
             DieEvent += () =>
