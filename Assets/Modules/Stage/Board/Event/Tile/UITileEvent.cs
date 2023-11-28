@@ -66,7 +66,7 @@ namespace Cardinals.BoardEvent.Tile
         
         IEnumerator EventFlow()
         {
-            int idx = Random.Range(0, 5);
+            int idx = Random.Range(0, 3);
             _eventSeq = idx switch
             {
                 0 => MoveExp(),
