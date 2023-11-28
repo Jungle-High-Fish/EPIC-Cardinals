@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 898ae7808d6e4ba2b97bf6a5c86b4536, type: 3}
-  m_Name: BattleEvent 2
+  m_Name: BattleEvent_PiPi_PoPo
   m_EditorClassIdentifier: 
   _type: 1
   _enemyList:
-  - {fileID: 11400000, guid: 89e949861f17db247a2e64f3142454c3, type: 2}
+  - {fileID: 11400000, guid: 0612d038730cf2f4db48034d030c4a3a, type: 2}
+  - {fileID: 11400000, guid: 45858199f2d5cc94bbde99492a8b18d7, type: 2}
