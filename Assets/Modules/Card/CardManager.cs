@@ -336,6 +336,11 @@ namespace Cardinals
         }
         private bool CardUseAction(int num, BaseEntity target=null)
         {
+            if(GameManager.I.Player.OnTile.Type==TileType.Start||
+                GameManager.I.Player.OnTile.Type == TileType.Blank)
+            {
+                return false;
+            }
             if (!_canActionUse)
             {
                 return false;

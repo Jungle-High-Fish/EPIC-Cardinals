@@ -13,8 +13,14 @@ namespace Cardinals
 
         public override bool UsePotion()
         {
-            GameManager.I.Player.OnTile.TileMagic.GainExpToNextLevel();
-            return true;
+            if (GameManager.I.Player.OnTile.Type == Enums.TileType.Attack ||
+                GameManager.I.Player.OnTile.Type == Enums.TileType.Defence)
+            {
+                GameManager.I.Player.OnTile.TileMagic.GainExpToNextLevel();
+                return true;
+            }
+                
+            return false;
         }
     }
 }

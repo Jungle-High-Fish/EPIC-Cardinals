@@ -16,4 +16,4 @@ MonoBehaviour:
   enemyType: 2
   sprite: {fileID: 21300000, guid: 35346c8332fc814429f80ab779dd5d9e, type: 3}
   berserkSprite: {fileID: 0}
-  maxHP: 10
+  maxHP: 25
