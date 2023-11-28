@@ -230,6 +230,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Win
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 933
+        width: 389
+        height: 382
+      alignment: 9
+      pivot: {x: 0.5283821, y: 0.026733877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9735801eba7d0db479b505dedbfcafe0
+      internalID: -1991593072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Die
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 449
+        width: 338
+        height: 350
+      alignment: 9
+      pivot: {x: 0.57680064, y: 0.03075919}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c553fea9a80c1344abccf2240bf61b8
+      internalID: -1333314605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -242,11 +284,13 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Attack: -1150754479
+      Die: -1333314605
       Hit: 1346663748
       Idle: 302120646
       Jump: -1974737844
       Landing: -1919292323
       Shield: -877197263
+      Win: -1991593072
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
