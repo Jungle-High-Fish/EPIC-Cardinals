@@ -115,25 +115,24 @@ namespace Cardinals
         }
         #region 기본 액션 및 버프 관련 함수
         [Button]
-        /// <summary>
+        /// <summary> 
         /// 맞을 때 호출
         /// </summary>
         /// <param name="damage">입힐 데미지</param>
-        public virtual void Hit(int damage)
+        public virtual void Hit(int damage) 
         {
-            int calculDamage = Math.Max(0, damage - DefenseCount);
-
-            if (calculDamage >= 0)
+            if (DefenseCount > 0)
             {
+                var calculDamage = Math.Max(0, damage - DefenseCount);
                 DefenseCount -= damage;
-                Animator?.Play("Hit");
-            }
-            else // 막아졌다.
-            {
-                DefenseCount = DefenseCount-damage;
+                damage = calculDamage; 
             }
             
-            Hp -= calculDamage;
+            if (damage > 0)
+            {
+                Hp -= damage;
+                Animator?.Play("Hit");
+            } 
         }
 
         
