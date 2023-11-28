@@ -103,11 +103,12 @@ namespace Cardinals
         {
             if (DefenseCount > 0)
             {
-                foreach (var enemy in (GameManager.I.Stage.CurEvent as BattleEvent).Enemies)
+                var enemies = (GameManager.I.Stage.CurEvent as BattleEvent).Enemies;
+                for (int i = enemies.Count - 1; i >= 0; i--)
                 {
-                    if (enemy.CurPattern.Type == EnemyActionType.Attack)
+                    if (enemies[i].PrevPattern.Type == EnemyActionType.Attack)
                     {
-                        enemy.Hit(DefenseCount);
+                        enemies[i].Hit(DefenseCount);
                     }
                 }
             }
