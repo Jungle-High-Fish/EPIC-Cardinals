@@ -170,15 +170,5 @@ namespace Cardinals.Game
             }
         }
         #endregion
-
-        /// <summary>
-        /// [축복] 메테오 소환
-        /// [TODO] 메테오 소환. 해당 로직 위치 고민 필요
-        /// </summary>
-        public void Meteor()
-        {
-            Debug.Log("메테오가 소환됩니다.");
-            Enemies.ForEach(e => e.Hit(20));
-        }
     }
 }

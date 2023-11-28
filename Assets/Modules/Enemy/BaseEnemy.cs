@@ -172,9 +172,8 @@ namespace Cardinals
                         if (burnBuff.Count >= 10)
                         {
                             burnBuff.Count -= 10;
-                            (GameManager.I.Stage.CurEvent as BattleEvent)?.Meteor();
+                            GameManager.I.Stage.Meteor();
                         }
-
                     }
                 }
             }
