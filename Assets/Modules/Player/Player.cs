@@ -43,6 +43,7 @@ namespace Cardinals
                     
                     if (_hp == 0)
                     {
+                        Animator.Play("Die");
                         DieEvent?.Invoke();
                     }
                 }
@@ -196,7 +197,11 @@ namespace Cardinals
             DefenseCount += value;
             Animator.Play("Shield");
         }
-        
+
+        public void Win()
+        {   
+            Animator.Play("Win");
+        }
     }
 }
 

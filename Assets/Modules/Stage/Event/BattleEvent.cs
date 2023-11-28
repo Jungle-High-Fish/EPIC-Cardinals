@@ -88,6 +88,7 @@ namespace Cardinals.Game
 
             if (_enemies.Count == 0)
             {
+                GameManager.I.Player.Win();
                 IsClear = true;
                 yield return WaitReward(rewards);
             }
