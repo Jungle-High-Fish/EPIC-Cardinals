@@ -188,6 +188,10 @@ namespace Cardinals.Board {
                 default:
                     break;
             }
+
+            if (_tileMagic != null) {
+                _tileMagic.ApplyLevelUp();
+            }
         }
 
         public void Leave(IBoardPiece boardPiece) {
