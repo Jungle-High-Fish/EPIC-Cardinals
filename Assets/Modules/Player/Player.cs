@@ -121,6 +121,7 @@ namespace Cardinals
         {
             GameManager.I.Stage.CardManager.SetCardSelectable(false);
             _onTile?.Leave(this);
+            GameManager.I.UI.UITileInfo.Hide();
 
             for(int i = 0; i < count; i++)
             {
@@ -141,6 +142,7 @@ namespace Cardinals
             }
 
             _onTile.Arrive(this);
+            GameManager.I.UI.UITileInfo.Show(_onTile);
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
         }
         
