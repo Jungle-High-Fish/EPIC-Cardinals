@@ -74,12 +74,12 @@ namespace Cardinals.Game
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
                 
                 // 적 행동
-                _enemies.ForEach(enemy => enemy.OnTurn());
+                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnTurn();
                 yield return new WaitForSeconds(1f);
                 
                 // 카운트 처리
                 GameManager.I.Player.EndTurn();
-                _enemies.ForEach(enemy => enemy.EndTurn());
+                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].EndTurn();
                 
                 // 보드 관련 처리
                 yield return SummonsAction();
@@ -95,7 +95,7 @@ namespace Cardinals.Game
                 // 전투 종료 초기화
                 GameManager.I.Player.Win();
                 GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
-                
+                RemoveSummons();
                 
                 yield return WaitReward(rewards);
             }
@@ -110,6 +110,15 @@ namespace Cardinals.Game
             }
 
             yield return null;
+        }
+
+        private void RemoveSummons()
+        {
+            var summons = GameManager.I.Stage.Summons;
+            for (int i = summons.Count - 1; i >= 0; i--)
+            {
+                summons[i].Delete();
+            }
         }
 
         /// <summary>
@@ -161,15 +170,5 @@ namespace Cardinals.Game
             }
         }
         #endregion
-
-        /// <summary>
-        /// [축복] 메테오 소환
-        /// [TODO] 메테오 소환. 해당 로직 위치 고민 필요
-        /// </summary>
-        public void Meteor()
-        {
-            Debug.Log("메테오가 소환됩니다.");
-            Enemies.ForEach(e => e.Hit(20));
-        }
     }
 }
