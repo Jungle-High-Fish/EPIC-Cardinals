@@ -90,8 +90,13 @@ namespace Cardinals.Game
 
             if (_enemies.Count == 0)
             {
-                GameManager.I.Player.Win();
                 IsClear = true;
+                
+                // 전투 종료 초기화
+                GameManager.I.Player.Win();
+                GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
+                
+                
                 yield return WaitReward(rewards);
             }
         }
