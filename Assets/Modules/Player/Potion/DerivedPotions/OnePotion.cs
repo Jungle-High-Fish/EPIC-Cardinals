@@ -16,7 +16,8 @@ namespace Cardinals
             if (GameManager.I.Player.OnTile.Type == Enums.TileType.Attack ||
                 GameManager.I.Player.OnTile.Type == Enums.TileType.Defence)
             {
-                GameManager.I.Player.CardAction(1, null);
+                BaseEnemy baseEnemy = GameManager.I.Stage.Enemies[Random.Range(0, GameManager.I.Stage.Enemies.Count)];
+                GameManager.I.StartCoroutine(GameManager.I.Player.CardAction(1, baseEnemy));
                 return true;
             }
             return false;

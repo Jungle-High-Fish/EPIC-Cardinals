@@ -187,6 +187,7 @@ namespace Cardinals
         
         public IEnumerator CardAction(int num, BaseEntity target) {
             GameManager.I.Stage.CardManager.SetCardSelectable(false);
+            
             yield return _onTile.CardAction(num, target);
             yield return null;
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
