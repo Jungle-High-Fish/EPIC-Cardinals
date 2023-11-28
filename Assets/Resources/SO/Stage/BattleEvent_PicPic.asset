@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
-  m_Name: Krol
+  m_Script: {fileID: 11500000, guid: 898ae7808d6e4ba2b97bf6a5c86b4536, type: 3}
+  m_Name: BattleEvent_PicPic
   m_EditorClassIdentifier: 
-  enemyName: "\uD06C\uB864"
-  enemyType: 1
-  sprite: {fileID: 21300000, guid: 4d4a3def7129dda4cb9b264b3c450813, type: 3}
-  berserkSprite: {fileID: 0}
-  maxHP: 20
+  _type: 1
+  _enemyList:
+  - {fileID: 11400000, guid: 7fc23b889728bee4ea55400eb6a1ab20, type: 2}

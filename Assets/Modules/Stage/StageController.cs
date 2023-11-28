@@ -176,11 +176,13 @@ namespace Cardinals.Game {
             GameObject enemyRendererPrefab 
                 = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_EnemyRenderer);
             
-            GameObject enemyRenderer = Instantiate(enemyRendererPrefab,_enemyParentTransform);
+            GameObject enemyRenderer = Instantiate(enemyRendererPrefab, _enemyParentTransform);
             
             BaseEnemy enemyComp = enemyRenderer.AddComponent(enemyType) as BaseEnemy;
-            enemyComp.Init(enemyData);
+            
             enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
+            enemyComp.Init(enemyData);
+            
             enemyRenderer.transform.position = position + new Vector3(0, 2, 0);
 
             GameManager.I.UI.SetEnemyUI(enemyComp);
@@ -212,11 +214,11 @@ namespace Cardinals.Game {
             GameObject playerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player);
             GameObject playerObj = GameObject.Instantiate(playerPrefab);
             _player = playerObj.GetComponent<Player>();
-            _player.Init(15);
+            _player.Init();
+            GameManager.I.UI.InitPlayerUI();
 
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
             
-            GameManager.I.UI.InitPlayerUI();
         }
 
         private void SetCardSystem() {

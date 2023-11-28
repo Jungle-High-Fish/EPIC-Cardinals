@@ -11,6 +11,7 @@ namespace Cardinals.Game {
         public string enemyName;
         public EnemyType enemyType;
         [InlineEditor(InlineEditorModes.LargePreview)] public Sprite sprite;
+        [InlineEditor(InlineEditorModes.LargePreview)] public Sprite berserkSprite;
         public int maxHP;
     }
 

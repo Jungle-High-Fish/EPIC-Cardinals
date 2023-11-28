@@ -62,6 +62,7 @@ namespace Cardinals.Board
         private void LookAtCamera(Vector3 target)
         {
             transform.LookAt(target, Vector3.up);
+            transform.Rotate(0, 180, 0);
         }
     }
 }
