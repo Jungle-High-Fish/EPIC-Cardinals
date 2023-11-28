@@ -94,7 +94,6 @@ namespace Cardinals.Game
                 IsClear = true;
                 yield return WaitReward(rewards);
             }
-            
         }
 
         private IEnumerator SummonsAction()

@@ -43,7 +43,7 @@ namespace Cardinals
                     
                     if (_hp == 0)
                     {
-                        Animator.Play("Die");
+                        Animator.SetTrigger("Die");
                         DieEvent?.Invoke();
                     }
                 }

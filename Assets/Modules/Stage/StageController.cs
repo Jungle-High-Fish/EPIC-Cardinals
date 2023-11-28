@@ -105,6 +105,7 @@ namespace Cardinals.Game {
                 if (!evt.IsClear)
                 {
                     GameManager.I.GameOver();
+                    yield break;
                 }
 
                 GameManager.I.UI.TEMP_UIStageMap.ClearEvent(temp_event_index++); // temp map
