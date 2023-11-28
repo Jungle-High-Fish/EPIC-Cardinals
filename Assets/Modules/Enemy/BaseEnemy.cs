@@ -35,8 +35,17 @@ namespace Cardinals
         }
 
         public Action<Sprite> UpdatedSpriteEvent { get; set; }
-        
-        protected Pattern[] Patterns { get; set; }
+
+        private Pattern[] _patterns; 
+        protected Pattern[] Patterns 
+        { 
+            get => _patterns;
+            set
+            {
+                _patterns = value;
+                UpdatePatternEvent(_patterns.First());
+            }
+        }
 
         private Pattern  _fixPattern;
         protected Pattern FixPattern

@@ -51,8 +51,6 @@ namespace Cardinals.Enemy
             _nameTMP.text = BaseEnemy.Name;
             UpdateHp(BaseEnemy.Hp, BaseEnemy.MaxHp);
             
-            // [TODO] Pattern Object 위치 설정 필요
-            
             BaseEnemy.DieEvent += Destroy;
             BaseEnemy.AddBuffEvent += AddBuff;
             BaseEnemy.UpdatePatternEvent += UpdatePattern;

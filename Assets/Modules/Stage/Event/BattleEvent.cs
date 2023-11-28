@@ -45,6 +45,8 @@ namespace Cardinals.Game
                 {
                     AddReward(rewards, enemy.Rewards);
                     _enemies.Remove(enemy);
+                    
+                    if (_enemies.Count> 0) GameManager.I.Stage.Board.SetEnemyNumber(_enemies.Count); // 1마리가 되었을 때, 카드 드래그 영역 수정
                 };
                 
                 _enemies.Add(enemy);
