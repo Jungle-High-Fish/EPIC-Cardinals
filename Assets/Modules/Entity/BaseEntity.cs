@@ -99,10 +99,10 @@ namespace Cardinals
         public virtual void EndTurn()
         {
             // 버프/디버프 소모
-            foreach (var buff in Buffs)
+            for (int i = Buffs.Count - 1; i >= 0; i--)
             {
-                buff.Execute(this);
-                buff.EndTurn();
+                Buffs[i].Execute(this);
+                Buffs[i].EndTurn();
             }
 
             // 방어도 초기화
@@ -178,6 +178,7 @@ namespace Cardinals
             var existBuff = Buffs.FirstOrDefault(b => b.Type == buff.Type);
             if (existBuff == null)
             {
+                buff.RemoveEvent += () => { Buffs.Remove(buff); };
                 Buffs.Add(buff);
             }
             else
