@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
 using Cardinals.Game;
+using TMPro;
 using UnityEngine;
 using Util;
 
@@ -21,6 +22,11 @@ namespace Cardinals.UI {
         private ComponentGetter<Transform> _potionListArea = new ComponentGetter<Transform>(
             TypeOfGetter.ChildByName, 
             "Potion List Panel/Potion Slot Area"
+        );
+
+        private ComponentGetter<TextMeshProUGUI> _moneyText = new ComponentGetter<TextMeshProUGUI>(
+            TypeOfGetter.ChildByName, 
+            "Money Panel/Money Text"
         );
 
         private bool _isPanelOpen;
@@ -43,6 +49,7 @@ namespace Cardinals.UI {
             UpdateBlessUI(BlessType.Empty);
             UpdateArtifactUI(null);
             UpdatePotionUI(0, null);
+            UpdateMoneyUI(0);
         }
 
         public void Deactivate() {
@@ -64,6 +71,9 @@ namespace Cardinals.UI {
             GameManager.I.Player.PlayerInfo.AddPotionEvent += UpdatePotionUI;
             GameManager.I.Player.PlayerInfo.DeletePotionEvent -= UpdatePotionUI;
             GameManager.I.Player.PlayerInfo.DeletePotionEvent += UpdatePotionUI;
+
+            GameManager.I.Player.PlayerInfo.UpdateGoldEvent -= UpdateMoneyUI;
+            GameManager.I.Player.PlayerInfo.UpdateGoldEvent += UpdateMoneyUI;
         }
 
         private void OnDisable() {
@@ -74,6 +84,7 @@ namespace Cardinals.UI {
             GameManager.I.Player.PlayerInfo.AddArtifactEvent -= UpdateArtifactUI;
             GameManager.I.Player.PlayerInfo.AddPotionEvent -= UpdatePotionUI;
             GameManager.I.Player.PlayerInfo.DeletePotionEvent -= UpdatePotionUI;
+            GameManager.I.Player.PlayerInfo.UpdateGoldEvent -= UpdateMoneyUI;
         }
 
         private void ResetUIData(IList dataList) {
@@ -136,6 +147,12 @@ namespace Cardinals.UI {
             for (int i = 0; i < Constants.GameSetting.Player.MaxPotionCapacity; i++) {
                 _potionList[i].Set(GameManager.I.Stage.Player.PlayerInfo.PotionList[i]);
             }
+        }
+
+        private void UpdateMoneyUI(int money) {
+            if (!_isPanelOpen) return;
+
+            _moneyText.Get(gameObject).text = GameManager.I.Player.PlayerInfo.Gold.ToString();
         }
     }
 

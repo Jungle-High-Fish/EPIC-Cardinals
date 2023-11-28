@@ -46,7 +46,7 @@ namespace Cardinals.Board {
                         GameManager.I.UI.UIRoulette.Init();
                         break;
                     case BoardEventType.Number:
-                        GameManager.I.UI.UICardEvent.Init();;
+                        GameManager.I.UI.UICardEvent.Init();
                         break;
                     default: break;
                 }
