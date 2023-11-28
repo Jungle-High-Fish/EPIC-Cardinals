@@ -8,6 +8,7 @@ using System;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Cardinals.Buff;
+using Sirenix.Utilities;
 
 namespace Cardinals
 {
@@ -208,6 +209,7 @@ namespace Cardinals
         public void Win()
         {   
             Animator.Play("Win");
+            Buffs.ForEach(b => b.EndEvent());
         }
     }
 }
