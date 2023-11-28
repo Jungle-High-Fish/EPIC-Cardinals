@@ -64,7 +64,7 @@ namespace Cardinals
                 buff.EndTurn();
             }
 
-            GameManager.I.Next();
+            //GameManager.I.Next();
             GameManager.I.Stage.CardManager.EndTurn();
             
             

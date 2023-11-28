@@ -15,7 +15,7 @@ public class UIEndTurnButton : MonoBehaviour
     }
 
 	public void EndTurn() {
-        GameManager.I.Player.EndTurn();
+        GameManager.I.Next();
         GameManager.I.Stage.CurEvent.IsSelect = true;
     }
 
