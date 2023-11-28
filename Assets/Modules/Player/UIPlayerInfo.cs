@@ -88,6 +88,10 @@ namespace Cardinals
         }
 
         private void ShowAlertImage() {
+            if (_isPanelOpen) {
+                return;
+            }
+
             _alertTr.Get(gameObject).gameObject.SetActive(true);
             _alertTr.Get(gameObject).transform.localScale = Vector3.one * 1.5f;
             _alertTr.Get(gameObject).transform
