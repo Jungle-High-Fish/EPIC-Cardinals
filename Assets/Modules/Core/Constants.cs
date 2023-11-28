@@ -66,6 +66,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Enemy_Spawn_Summon = "Enemy/Spawn/Summon";
             public const string Prefabs_Enemy_Spawn_Fireball = "Enemy/Spawn/Fireball";
             public const string Prefabs_Enemy_Spawn_ThunderBolt= "Enemy/Spawn/ThunderBolt";
+
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
@@ -84,6 +85,13 @@ namespace Cardinals.Constants {
             
             public const string Sprites_Enemy_Skill_Fireball = "Sprites/Enemy/Skill/Fireball";
             public const string Sprites_Enemy_Skill_ThunderBolt = "Sprites/Enemy/Skill/ThunderBolt";
+
+            public const string Sprites_BoardInput_Square = "BoardInputHandler/selectSquare";
+            public const string Sprites_BoardInput_Triangle = "BoardInputHandler/selectTriangle";
+
+            // Material
+            public const string Materials = "Materials/";
+            public const string Materials_BoardInputHandler = "Board/BoardInputHandler/BoardInputHandlerTexture";
 
             // Scriptable Object
             public const string SO = "SO/";
