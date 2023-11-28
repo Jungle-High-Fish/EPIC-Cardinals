@@ -95,7 +95,7 @@ namespace Cardinals.Game
                 // 전투 종료 초기화
                 GameManager.I.Player.Win();
                 GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
-                
+                RemoveSummons();
                 
                 yield return WaitReward(rewards);
             }
@@ -110,6 +110,15 @@ namespace Cardinals.Game
             }
 
             yield return null;
+        }
+
+        private void RemoveSummons()
+        {
+            var summons = GameManager.I.Stage.Summons;
+            for (int i = summons.Count - 1; i >= 0; i--)
+            {
+                summons[i].Delete();
+            }
         }
 
         /// <summary>
