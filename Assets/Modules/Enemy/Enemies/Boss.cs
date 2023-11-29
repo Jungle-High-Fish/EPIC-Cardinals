@@ -38,13 +38,13 @@ namespace Cardinals.Enemy
 
             BerserkModeEvent += () =>
             {
-                FixPattern = new(EnemyActionType.UserDebuff, action: ElectricShock);
                 Patterns = new Pattern[]
                 {
                     new(EnemyActionType.TileCurse, action: BerserkThunderBolt),
                     new(EnemyActionType.Attack, 15),
                     new(EnemyActionType.Attack, 10),
                 };
+                FixPattern = new(EnemyActionType.UserDebuff, action: ElectricShock);
                 Turn = 0;
                 Sprite = enemyData.berserkSprite;
             };

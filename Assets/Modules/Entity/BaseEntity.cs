@@ -141,7 +141,7 @@ namespace Cardinals
         /// </summary>
         /// <param name="target">피격 대상</param>
         /// <param name="damage">데미지</param>
-        public virtual void Attack(BaseEntity target, int damage)
+        public void Attack(BaseEntity target, int damage)
         {
             target.Hit(CalculDamage(damage));
             Animator?.Play("Attack");
@@ -161,7 +161,7 @@ namespace Cardinals
                 damage *= .5f;
             }
             
-            return (int) Math.Ceiling(damage);
+            return (int) Math.Floor(damage);
         }
 
         public void Heal(int value)

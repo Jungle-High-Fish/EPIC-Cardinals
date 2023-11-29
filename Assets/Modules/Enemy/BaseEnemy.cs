@@ -124,7 +124,7 @@ namespace Cardinals
             switch (curPat.Type)
             {
                 case EnemyActionType.Attack :
-                    GameManager.I.Player.Hit(value);
+                    Attack(GameManager.I.Player, value);
                     break;
                 case EnemyActionType.Defense :
                     DefenseCount += value;
@@ -177,6 +177,10 @@ namespace Cardinals
                         }
                     }
                 }
+            }
+            else if (buff.Type == BuffType.Weak)
+            {
+                UpdatePatternEvent?.Invoke(CurPattern);
             }
         }
     }
