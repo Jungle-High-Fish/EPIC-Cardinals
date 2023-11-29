@@ -94,6 +94,9 @@ MonoBehaviour:
   _spinBTN: {fileID: 702016978038016818}
   _resultObj: {fileID: 8617882913004479832}
   _resultTMP: {fileID: 3594960158945034632}
+  _reducedHpValue: 5
+  _drawCardCount: 2
+  _getGoldValue: 100
 --- !u!114 &702016976853158267
 MonoBehaviour:
   m_ObjectHideFlags: 0
