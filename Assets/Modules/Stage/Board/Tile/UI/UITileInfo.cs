@@ -160,7 +160,7 @@ namespace Cardinals.UI {
             _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
             _expBar.Get(gameObject).transform.localScale = new Vector3(
-                _tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 
+                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1), 
                 1, 
                 1
             );

@@ -73,6 +73,9 @@ namespace Cardinals.UI {
             if (isWhite) {
                 _panelColor = Constants.Common.Colors.CardinalsWhite;
                 _textColor = Constants.Common.Colors.CardinalsBlack;
+            } else {
+                _panelColor = Constants.Common.Colors.CardinalsBlack;
+                _textColor = Constants.Common.Colors.CardinalsWhite;
             }
 
             if (outlineColor == null) {
@@ -89,7 +92,7 @@ namespace Cardinals.UI {
             _panel.Get(gameObject).color = _panelColor;
             _outline.Get(gameObject).color = _outlineColor;
             _titleText.Get(gameObject).color = _textColor;
-            _descriptionText.Get(gameObject).color = Color.black;
+            _descriptionText.Get(gameObject).color = isWhite ? Color.black : Color.white;
         }
 
         private void SetDescription(string title, string description, Sprite icon=null) {
