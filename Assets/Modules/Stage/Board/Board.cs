@@ -167,7 +167,7 @@ namespace Cardinals.Board {
             {
                 tile.TileCurse.ClearCurse();
                 tile.ChangeState(TileState.Normal);
-            } 
+            }
         }
 
         public Vector3[] SetEnemyNumber(int enemyNumber) {

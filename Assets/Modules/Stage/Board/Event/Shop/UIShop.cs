@@ -106,32 +106,39 @@ namespace Cardinals.BoardEvent.Shop
 
         public void On()
         {
+            GameManager.I.UI.UIPlayerInfo.OpenPanel(); // 플레이어 창도 같이 띄워준다.
             gameObject.SetActive(true);   
         }
 
         bool BuyArtifact(Artifact artifact)
         {
+            bool result = false;
+            
             if (CheckPrice(artifact))
             {
                 StartCoroutine(NotiMessage($"{artifact.Name} 구매 완료"));
                 GameManager.I.Player.PlayerInfo.AddArtifact(artifact.Type);
                 GameManager.I.Player.PlayerInfo.UseGold(artifact.Price);
+                result = true;
             }
 
-            return false;
+            return result;
         }
 
         bool BuyPotion(Potion potion)
         {
+            bool result = false;
+            
             if (CheckPrice(potion))
             {
-                bool checkBag = GameManager.I.Player.PlayerInfo.PotionList.Count() <
-                                Constants.GameSetting.Player.MaxPotionCapacity;
-                if (checkBag)
+                bool checkNullSlot = GameManager.I.Player.PlayerInfo.PotionList.Any(p => p == null);
+                
+                if (checkNullSlot)
                 {
                     StartCoroutine(NotiMessage($"{potion.Name} 구매 완료"));
                     GameManager.I.Player.PlayerInfo.AddPotion(potion.PotionType);
                     GameManager.I.Player.PlayerInfo.UseGold(potion.Price);
+                    result = true;
                 }
                 else
                 {
@@ -139,7 +146,7 @@ namespace Cardinals.BoardEvent.Shop
                 }
             }
             
-            return false;
+            return result;
         }
 
         /// <summary>
