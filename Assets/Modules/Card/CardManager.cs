@@ -41,8 +41,15 @@ namespace Cardinals
             _newCardUseMod = true;
             AddCard(1, false, CardPileType.DrawPile);
             AddCard(1, false, CardPileType.DrawPile);
+            AddCard(1, false, CardPileType.DrawPile);
+            AddCard(1, false, CardPileType.DrawPile);
+            AddCard(2, false, CardPileType.DrawPile);
+            AddCard(2, false, CardPileType.DrawPile);
             AddCard(2, false, CardPileType.DrawPile);
             AddCard(3, false, CardPileType.DrawPile);
+            AddCard(3, false, CardPileType.DrawPile);
+            AddCard(3, false, CardPileType.DrawPile);
+            AddCard(4, false, CardPileType.DrawPile);
             AddCard(4, false, CardPileType.DrawPile);
             AddCard(5, false, CardPileType.DrawPile);
         }
