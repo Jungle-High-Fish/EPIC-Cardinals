@@ -95,6 +95,7 @@ namespace Cardinals
             }
             
             _continuousUseCount = 0;
+            UpdateCardState(-1, true);
         }
 
         [Button]
@@ -276,36 +277,41 @@ namespace Cardinals
                         }
                     }
 
+                    int useNumber;
                     switch (_mouseState)
                     {
                         case MouseState.Action:
                             var target = GameManager.I.Stage.Enemies[boardInputHandler.HoveredIdx];
-                            if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
-                            if (!CardUseAction(_handCards[_selectCardIndex].CardNumber, target))
+                            useNumber = _handCards[_selectCardIndex].CardNumber;
+                            if (!CardUseAction(useNumber, target))
                             {
                                 break;
                             }
                             Discard(_selectCardIndex);
                             _state = CardState.Idle;
                             _lastCardUsedForAction = true;
+                            UpdateCardState(useNumber, false);
                             DismissAllCards();
                             yield break;
 
                         case MouseState.Move:
-                            CardUseMove(_handCards[_selectCardIndex].CardNumber);
+                            useNumber = _handCards[_selectCardIndex].CardNumber;
+                            CardUseMove(useNumber);
                             Discard(_selectCardIndex);
                             _state = CardState.Idle;
                             _prevCardNumber = -1;
                             _canActionUse = true;
                             _lastCardUsedForAction = false;
+                            //UpdateCardState(useNumber, true);
                             DismissAllCards();
                             yield break;
                         
                         case MouseState.CardEvent:
-                            GameManager.I.UI.UICardEvent.SelectedCard(_handCards[_selectCardIndex].CardNumber);
+                            useNumber = _handCards[_selectCardIndex].CardNumber;
+                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             Discard(_selectCardIndex);
                             _state = CardState.Idle;
-
+                            UpdateCardState(useNumber, false);
                             DismissAllCards();
                             yield break;
                     }
@@ -386,6 +392,53 @@ namespace Cardinals
             {
                 _handcardsUI[i].CardIndex = i;
             }
+        }
+
+        public void UpdateCardState(int usedCardNumber, bool isMove)
+        {
+            if (!_canActionUse)
+            {
+                foreach(CardUI card in _handcardsUI)
+                {
+                    card.CanMove = true;
+                    card.CanAction = false;
+                    
+                }
+                return;
+            }
+
+            if (isMove)
+            {
+                for (int i = 0; i < _handcardsUI.Count; i++)
+                {
+                    _handcardsUI[i].CanMove = true;
+                    _handcardsUI[i].CanAction = true;
+                }
+                return;
+            }
+
+            foreach (CardUI card in _handcardsUI)
+            {
+                card.CanAction = false;
+                card.CanMove = true;
+            }
+
+            int prevNum = usedCardNumber+1;
+            for(int i = 0; i < _handcardsUI.Count; i++)
+            {
+                // [디버프] 감전
+                if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
+                {
+                    return;
+                }
+
+                if (_handcardsUI[i].Card.CardNumber == prevNum)
+                {
+                    _handcardsUI[i].CanAction = true;
+                }
+            }
+
+            
         }
     }
 

@@ -151,6 +151,7 @@ namespace Cardinals
 
             _onTile.Arrive(this);
             GameManager.I.UI.UITileInfo.Show(_onTile);
+            GameManager.I.Stage.CardManager.UpdateCardState(count, true);
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
         }
         
