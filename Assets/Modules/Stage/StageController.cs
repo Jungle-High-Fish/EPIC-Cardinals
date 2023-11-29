@@ -231,6 +231,16 @@ namespace Cardinals.Game {
             GameManager.I.UI.SetCardSystemUI();
         }
 
+        /// <summary>
+        /// [축복] 메테오 소환
+        /// </summary>
+        [Button]
+        public void Meteor()
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player_Skill_Meteor);
+            Instantiate(prefab);
+        }
+        
         #region Quick-Acess Method
 
         public void DrawCard(int count) => FindAnyObjectByType<CardManager>().Draw(count);
@@ -251,13 +261,15 @@ namespace Cardinals.Game {
 
         public void AddRandomArtifact()
         {
-            var artifact = Utils.Util.GetRandomEnum<ArtifactType>(1);
+            int idx = Random.Range(1, Enum.GetNames(typeof(ArtifactType)).Length);
+            var artifact = (ArtifactType)idx;
             Player.PlayerInfo.AddArtifact(artifact);
         }
 
         public void AddRandomPotion()
         {
-            var potion = Utils.Util.GetRandomEnum<PotionType>(1);
+            int idx = Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
+            var potion = (PotionType)idx;
             Player.PlayerInfo.AddPotion(potion);
         }
 
@@ -296,6 +308,7 @@ namespace Cardinals.Game {
             else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }
 
+        #region TestCode
         [Button]
         public void GenEnemySkill_TB()
         {
@@ -311,9 +324,40 @@ namespace Cardinals.Game {
         }
 
         [Button]
+        public void GetBerserkTB()
+        {
+            List<Tile> tiles = new();
+            
+            // 각 라인에서 타일 지정
+            for (int i = 0; i < 4; i++)
+            {
+                var list = GameManager.I.Stage.Board.GetBoardEdgeTileSequence(i, false)
+                    .Where(t => t.TileState == TileState.Normal).ToList();
+
+                if (list.Count > 0)
+                {
+                    var idx = Random.Range(0, list.Count);
+                    tiles.Add(list[idx]);
+                }
+            }
+            
+            // 3개 이하로 줄이기
+            for (int i = tiles.Count; i > 3; i--)
+            {
+                int idx = Random.Range(0, tiles.Count());
+                tiles.RemoveAt(idx);
+            }
+            
+            // 저주 적용
+            foreach (var tile in tiles)
+            {
+                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+            }
+        }
+
+        [Button]
         public void TestEnemySkill_Fireball()
         {
-            
             var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
             
             if (list != null)
@@ -325,6 +369,31 @@ namespace Cardinals.Game {
             }
         }
         
+
+        [Button]
+        public void Test_SetEvent(BoardEventType eventType)
+        {
+            if (eventType != default)
+            {
+                switch (eventType)
+                {
+                    case BoardEventType.Tile :
+                        GameManager.I.UI.UITileEvent.Init();
+                        break;
+                    case BoardEventType.Shop :
+                        GameManager.I.UI.UIShop.Init();
+                        break;
+                    case BoardEventType.Roulette:
+                        GameManager.I.UI.UIRoulette.Init();
+                        break;
+                    case BoardEventType.Number:
+                        GameManager.I.UI.UICardEvent.Init();
+                        break;
+                    default: break;
+                }
+            }
+        }
+        #endregion
     }
 
 }

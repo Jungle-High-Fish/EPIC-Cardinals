@@ -58,11 +58,12 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_CardSystem = "UI/Card/CardSystemUI";
             public const string Prefabs_UI_Card = "UI/Card/CardUI";
             
-
             public const string Prefabs_UI_TileSelection = "UI/Stage/Tile Selection UI";
 
             public const string Prefabs_UI_MagicLevelUpPanel = "UI/Stage/Magic Level Up/Magic Level Up Panel";
             public const string Prefabs_UI_MagicSlot = "UI/Stage/Magic Level Up/Magic Slot";
+
+            public const string Prefabs_Player_Skill_Meteor = "Player/Skill/Player_Skill_Meteor";
 
             public const string Prefabs_Enemy_Spawn_Summon = "Enemy/Spawn/Summon";
             public const string Prefabs_Enemy_Spawn_Fireball = "Enemy/Spawn/Fireball";

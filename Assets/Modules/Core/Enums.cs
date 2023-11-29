@@ -214,8 +214,8 @@ namespace Cardinals.Enums {
         DownRight
     }
 	
-    public enum TileMagicType {
-        None,
+    public enum TileMagicType : int {
+        None = 0,
         Fire,
         Water,
         Earth

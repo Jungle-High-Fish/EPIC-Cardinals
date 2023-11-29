@@ -31,5 +31,10 @@ namespace Cardinals.Enemy.Summon
         {
         
         }
+
+        public void Delete()
+        {
+            Destroy(gameObject);
+        }
     }
 }

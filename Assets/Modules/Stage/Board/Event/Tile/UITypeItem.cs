@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using Cardinals.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 namespace Cardinals.BoardEvent.Tile
 {
@@ -12,22 +14,23 @@ namespace Cardinals.BoardEvent.Tile
     {
         [Header("Data")]
         [SerializeField][ReadOnly] private TileMagicType _type;
+        private TileMagicDataSO _data;
         
         [Header("Component")]
         private Image _typeIconImg;
         private Button _selectBTN;
 
-        private void Awake()
+        public void Init(TileMagicType type)
         {
+            // 컴포넌트 설정
             _typeIconImg = GetComponentInChildren<Image>();
             _selectBTN = GetComponentInChildren<Button>();
             _selectBTN.onClick.AddListener(SelectType);
-        }
-
-        public void Init(TileMagicType type)
-        {
+            
+            // 데이타 설정
             _type = type;
-            _typeIconImg.sprite = null; // [TODO] 설정 필요
+            _data = ResourceLoader.LoadSO<TileMagicDataSO>(Constants.FilePath.Resources.SO_MagicData + _type);
+            _typeIconImg.sprite = _data.sprite;
         }
 
         private void SelectType()

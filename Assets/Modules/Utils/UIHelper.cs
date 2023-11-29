@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Util {
@@ -34,6 +35,14 @@ namespace Util {
             material.DisableKeyword("_ALPHABLEND_ON");
             material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
             material.renderQueue = 3000;
+        }
+
+        public static float GetStringHeight(this TextMeshProUGUI tmp, string text) {
+            TMP_TextInfo textInfo = tmp.GetTextInfo(text);
+            float textHeight = textInfo.lineInfo[0].lineHeight * textInfo.lineCount;
+            float lineSpacing = tmp.lineSpacing * (textInfo.lineCount - 1) * 0.01f * tmp.fontSize;
+
+            return textHeight + lineSpacing + tmp.margin.y + tmp.margin.w;
         }
     }
 }

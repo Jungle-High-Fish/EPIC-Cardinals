@@ -84,7 +84,7 @@ namespace Cardinals.Enemy.Summon
                 .DOShakePosition(.5f, .5f)
                 .OnComplete(() =>
                 {
-                    Destroy(gameObject);
+                    Delete();
                 });
         }
 
