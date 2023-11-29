@@ -13,7 +13,10 @@ namespace Cardinals.Constants {
             public const string Prefabs_StageGround = "Stage/Ground";
 
             public const string Prefabs_Tile = "Board/Tiles/TileUV2";
+            public const string Prefabs_UI_HoveredTileInfo = "UI/TileInfo/HoveredTileInfoUI";
             public const string Prefabs_UI_TileInfo = "UI/TileInfo/TileInfoUI";
+            public const string Prefabs_UI_TileDescription = "UI/TileInfo/TileDescriptionUI";
+
             public const string Prefabs_CornerTile = "Board/Tiles/CornerTile";
             public const string Prefabs_MouseDetector = "Board/MouseDetector";
             
@@ -109,6 +112,7 @@ namespace Cardinals.Constants {
             public const string SO_MagicData = "Magic/";
             public const string SO_TileSymbolsData = "TileSymbols/TileSymbols";
             public const string SO_TileCurseUIData = "TileCurses/";
+            public const string SO_BoardEventData = "BoardEvent/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";
@@ -137,6 +141,11 @@ namespace Cardinals.Constants {
 
             public const string Core = "Core";
             public const string CardManager = "CardManager";
+        }
+
+        public static class Colors {
+            public static readonly Color CardinalsWhite = new Color(0.976f, 0.968f, 0.949f);
+            public static readonly Color CardinalsBlack = new Color(0.282f, 0.270f, 0.243f);
         }
     }
 

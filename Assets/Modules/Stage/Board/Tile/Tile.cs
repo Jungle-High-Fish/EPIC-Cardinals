@@ -282,10 +282,13 @@ namespace Cardinals.Board {
 
         private void OnMouseEnter() {
             _isMouseHovered = true;
+
+            GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
         }
 
         private void OnMouseExit() {
             _isMouseHovered = false;
+            //GameManager.I.UI.UIHoveredTileInfo.Hide(false);
         }
     }
 

@@ -7,9 +7,12 @@ using UnityEngine.UI;
 using Util;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+using UnityEngine.AI;
 
 namespace Cardinals.UI {
-    public class UITileInfo: MonoBehaviour {
+    public class UITileInfo: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
         ComponentGetter<Image> _header = new ComponentGetter<Image>(
             TypeOfGetter.ChildByName, 
             "Header"
@@ -45,15 +48,26 @@ namespace Cardinals.UI {
             "Body/EventEmblem"
         );
 
+        ComponentGetter<UITileDescriptionHandler> _descriptionArea = new ComponentGetter<UITileDescriptionHandler>(
+            TypeOfGetter.ChildByName, 
+            "DescriptionArea"
+        );
+
         private Tile _tile;
+
+        private bool _canHover = true;
+        private bool _isHovering = false;
+
+        private BoardEventType _prevEventType = BoardEventType.Empty;
+        private TileMagicType _prevMagicType = TileMagicType.None;
         
-        public void Show(Tile tile, bool isAnimation = true) {
+        public void Show(Tile tile, bool isAnimation = true, bool canHover = true) {
             gameObject.SetActive(true);
             
             if (isAnimation) {
                 ShowAnimation();
             } else {
-                transform.localScale = Vector3.one;
+                //transform.localScale = Vector3.one;
             }
 
             _tile = tile;
@@ -66,6 +80,14 @@ namespace Cardinals.UI {
                 _eventEmblem.Get(gameObject).gameObject.SetActive(false);
                 _actionEmblem.Get(gameObject).gameObject.SetActive(true);
                 _levelGuage.Get(gameObject).gameObject.SetActive(true);
+            }
+
+            _descriptionArea.Get(gameObject).Init(_tile);
+            _canHover = canHover;
+
+            if (!_canHover) {
+                Canvas.ForceUpdateCanvases();
+                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
             }
         }
 
@@ -89,7 +111,27 @@ namespace Cardinals.UI {
             }
         }
 
+        public void OnPointerEnter(PointerEventData eventData) {
+            _isHovering = true;
+
+            if (_tile == null) return;
+            if (_canHover == false) return;
+
+            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+        }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            _isHovering = false;
+            _descriptionArea.Get(gameObject).HidePanels();
+        }
+
         private void ShowEventTileInfo() {
+            bool needUpdateDescription = false;
+            if (_prevEventType != (_tile.TileAction as TileEventAction).EventType) {
+                needUpdateDescription = true;
+            }
+            _prevEventType = (_tile.TileAction as TileEventAction).EventType;
+
             _header.Get(gameObject).color = TileMagic.Data(TileMagicType.None).elementColor;
 
             _eventEmblem.Get(gameObject).sprite = 
@@ -101,9 +143,19 @@ namespace Cardinals.UI {
             } else {
                 _eventEmblem.Get(gameObject).color = Color.white;
             }
+
+            if (needUpdateDescription) {
+                RefreshDescription();
+            }
         }
 
         private void ShowNormalTileInfo() {
+            bool needUpdateDescription = false;
+            if (_prevMagicType != _tile.TileMagic.Type) {
+                needUpdateDescription = true;
+            }
+            _prevMagicType = _tile.TileMagic.Type;
+
             _header.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
             _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
@@ -119,6 +171,22 @@ namespace Cardinals.UI {
             _actionEmblem.Get(gameObject).sprite = ResourceLoader.LoadSO<TileSymbolsSO>(
                 Constants.FilePath.Resources.SO_TileSymbolsData
             )[_tile.Type, _tile.Level];
+
+            if (needUpdateDescription) {
+                RefreshDescription();
+            }
+        }
+
+        private void RefreshDescription() {
+            _descriptionArea.Get(gameObject).Init(_tile);
+
+            if (_canHover && _isHovering) {
+                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+            }
+
+            if (!_canHover) {
+                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+            }
         }
 
         private void ShowAnimation() {
