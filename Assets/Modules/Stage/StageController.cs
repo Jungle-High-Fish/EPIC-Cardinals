@@ -231,6 +231,16 @@ namespace Cardinals.Game {
             GameManager.I.UI.SetCardSystemUI();
         }
 
+        /// <summary>
+        /// [축복] 메테오 소환
+        /// </summary>
+        [Button]
+        public void Meteor()
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player_Skill_Meteor);
+            Instantiate(prefab);
+        }
+        
         #region Quick-Acess Method
 
         public void DrawCard(int count) => FindAnyObjectByType<CardManager>().Draw(count);
@@ -296,6 +306,7 @@ namespace Cardinals.Game {
             else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }
 
+        #region TestCode
         [Button]
         public void GenEnemySkill_TB()
         {
@@ -356,15 +367,31 @@ namespace Cardinals.Game {
             }
         }
         
-        /// <summary>
-        /// [축복] 메테오 소환
-        /// </summary>
+
         [Button]
-        public void Meteor()
+        public void Test_SetEvent(BoardEventType eventType)
         {
-            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player_Skill_Meteor);
-            Instantiate(prefab);
+            if (eventType != default)
+            {
+                switch (eventType)
+                {
+                    case BoardEventType.Tile :
+                        GameManager.I.UI.UITileEvent.Init();
+                        break;
+                    case BoardEventType.Shop :
+                        GameManager.I.UI.UIShop.Init();
+                        break;
+                    case BoardEventType.Roulette:
+                        GameManager.I.UI.UIRoulette.Init();
+                        break;
+                    case BoardEventType.Number:
+                        GameManager.I.UI.UICardEvent.Init();
+                        break;
+                    default: break;
+                }
+            }
         }
+        #endregion
     }
 
 }

@@ -12,6 +12,10 @@ namespace Cardinals
     public class CardUI : MonoBehaviour, IPointerDownHandler
     {
         private int _cardIndex;
+        private bool _canAction;
+        private bool _canMove;
+        [SerializeField] private GameObject _actionMark;
+        [SerializeField] private GameObject _moveMark;
         [SerializeField] private TextMeshProUGUI _numberText;
         [SerializeField] private GameObject _volatileText;
         [SerializeField] private bool _isSelect;
@@ -41,6 +45,42 @@ namespace Cardinals
                 {
                     _image.Get(gameObject).color = Color.gray;
                 }
+            }
+        }
+
+        public bool CanAction
+        {
+            get => _canAction;
+            set
+            {
+                _canAction = value;
+                if (GameManager.I.Player.OnTile.Type == TileType.Start || GameManager.I.Player.OnTile.Type == TileType.Blank)
+                {
+                    _canAction = false;
+                }
+                _actionMark.SetActive(_canAction);
+                
+                if (GameManager.I.Player.OnTile.Type == TileType.Attack)
+                {
+                    _actionMark.GetComponent<Image>().sprite=
+                        ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Attack_Mark);
+                }
+
+                if (GameManager.I.Player.OnTile.Type == TileType.Defence)
+                {
+                    _actionMark.GetComponent<Image>().sprite =
+                        ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Defense_Mark);
+                }
+            }
+        }
+
+        public bool CanMove
+        {
+            get => _canMove;
+            set
+            {
+                _canMove = value;
+                _moveMark.SetActive(_canMove);
             }
         }
         public Card Card => _card;
@@ -113,6 +153,8 @@ namespace Cardinals
         {
             MoveCardUI();
         }
+
+        
     }
 }
 
