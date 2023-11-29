@@ -32,8 +32,8 @@ namespace Cardinals.Enemy
             Patterns = new[]
             {
                 new Pattern(EnemyActionType.TileCurse, action: ThunderBolt),
-                new Pattern(EnemyActionType.Attack, 5),
-                new Pattern(EnemyActionType.Defense, 5),
+                new Pattern(EnemyActionType.Attack, 10),
+                new Pattern(EnemyActionType.Defense, 10),
             };
 
             BerserkModeEvent += () =>
@@ -42,8 +42,8 @@ namespace Cardinals.Enemy
                 Patterns = new Pattern[]
                 {
                     new(EnemyActionType.TileCurse, action: BerserkThunderBolt),
-                    new(EnemyActionType.Attack, 7),
-                    new(EnemyActionType.Attack, 5),
+                    new(EnemyActionType.Attack, 15),
+                    new(EnemyActionType.Attack, 10),
                 };
                 Turn = 0;
                 Sprite = enemyData.berserkSprite;
