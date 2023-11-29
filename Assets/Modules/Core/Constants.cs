@@ -79,7 +79,9 @@ namespace Cardinals.Constants {
             public const string Sprites_Card_Basic3 = "Card/CardBasic3";
             public const string Sprites_Card_Basic4 = "Card/CardBasic4";
             public const string Sprites_Card_Basic5 = "Card/CardBasic5";
-            
+            public const string Sprites_Card_Attack_Mark = "Card/Card_State_Attack";
+            public const string Sprites_Card_Defense_Mark = "Card/Card_State_Defense";
+
             public const string Sprites_UI_Coin = "UI/Icons/UI_Coin";
             
             public const string Sprites_UI_Enemy_Ballon_LeftTail = "UI/Enemy/UI_Ballon_LeftTail";
