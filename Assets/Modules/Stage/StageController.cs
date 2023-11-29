@@ -261,13 +261,15 @@ namespace Cardinals.Game {
 
         public void AddRandomArtifact()
         {
-            var artifact = Utils.Util.GetRandomEnum<ArtifactType>(1);
+            int idx = Random.Range(1, Enum.GetNames(typeof(ArtifactType)).Length);
+            var artifact = (ArtifactType)idx;
             Player.PlayerInfo.AddArtifact(artifact);
         }
 
         public void AddRandomPotion()
         {
-            var potion = Utils.Util.GetRandomEnum<PotionType>(1);
+            int idx = Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
+            var potion = (PotionType)idx;
             Player.PlayerInfo.AddPotion(potion);
         }
 
