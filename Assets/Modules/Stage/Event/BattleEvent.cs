@@ -45,7 +45,6 @@ namespace Cardinals.Game
                 {
                     AddReward(rewards, enemy.Rewards);
                     _enemies.Remove(enemy);
-                    
                     if (_enemies.Count> 0) GameManager.I.Stage.Board.SetEnemyNumber(_enemies.Count); // 1마리가 되었을 때, 카드 드래그 영역 수정
                 };
                 
@@ -59,6 +58,7 @@ namespace Cardinals.Game
             {
                 // 전투 업데이트
                 GameManager.I.Player.StartTurn();
+                GameManager.I.Stage.CardManager.OnBattle();
                 _enemies.ForEach(enemy => enemy.StartTurn());
 
                 // 플레이어 행동 초기화
@@ -95,8 +95,8 @@ namespace Cardinals.Game
                 // 전투 종료 초기화
                 GameManager.I.Player.Win();
                 GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
-                
-                
+                GameManager.I.Stage.CardManager.EndBattle();
+
                 yield return WaitReward(rewards);
             }
         }
