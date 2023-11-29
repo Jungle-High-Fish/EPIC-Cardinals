@@ -13,8 +13,8 @@ namespace Cardinals.Enemy
             FixPattern = new Pattern(EnemyActionType.UserDebuff, action: Slow);
             Patterns = new[]
             {
-                new Pattern(EnemyActionType.Defense, 4),
-                new Pattern(EnemyActionType.Attack, 4),
+                new Pattern(EnemyActionType.Defense, 5),
+                new Pattern(EnemyActionType.Attack, 5),
             };
             
             Rewards = new Reward[]

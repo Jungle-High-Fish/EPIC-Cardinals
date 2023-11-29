@@ -22,7 +22,7 @@ namespace Cardinals.Enemy.Summon
 
         void Execute()
         {
-            GameManager.I.Player.Hit(10);
+            GameManager.I.Player.Hit(7);
             Delete();
         }
     }

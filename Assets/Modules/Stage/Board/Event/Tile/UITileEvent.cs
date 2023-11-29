@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cardinals.Board;
 using Cardinals.Enums;
+using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,6 +23,7 @@ namespace Cardinals.BoardEvent.Tile
         
         [Header("Event-Related")]
         [SerializeField] private Transform _typeParentTr;
+        
         public TileMagicType SelectedMagicType { set; private get; }
         private IEnumerator _eventSeq;
         private IEnumerator _selectedSeq;
@@ -30,7 +33,7 @@ namespace Cardinals.BoardEvent.Tile
         private List<Board.Tile> _selectedTiles;
         public void Awake()
         {
-            _closeBTN.onClick.AddListener(End);
+            _closeBTN.onClick.AddListener(Cancel);
         }
 
         public void Init()
@@ -47,7 +50,10 @@ namespace Cardinals.BoardEvent.Tile
             StartCoroutine(EventFlow());
         }
 
-        private void End()
+        /// <summary>
+        /// 이벤트 취소
+        /// </summary>
+        private void Cancel()
         {
             gameObject.SetActive(false);
                     
@@ -63,11 +69,43 @@ namespace Cardinals.BoardEvent.Tile
                 _eventSeq = null;
             }
         }
+
+        private void ClearPanel()
+        {
+            // 기존 타입 아이콘이 존재하는 경우, 제거
+            if (_typeParentTr.childCount > 0)
+            {
+                for (int i = _typeParentTr.childCount - 1; i >= 0; i--)
+                {
+                    Destroy(_typeParentTr.GetChild(i).gameObject);    
+                }
+            }
+            
+            _closeBTN.gameObject.SetActive(false);
+            _typeParentTr.gameObject.SetActive(false);
+        }
         
         IEnumerator EventFlow()
         {
-            int idx = Random.Range(0, 3);
-            _eventSeq = idx switch
+            yield return new WaitForSeconds(.05f);
+
+            List<int> eventList = new() { 1, 2 };
+            
+            // 경치 옮기기 이벤트 추가
+            bool checkExpExistTile = GetExpExistTile().Any();
+            if(checkExpExistTile) eventList.Add(0);
+            
+            // 타입 이벤트 추가
+            var typeList = GetCurrentHasTypeSequence();
+            if (typeList.Any())
+            {
+                eventList.Add(3);
+                eventList.Add(4);
+            }
+            
+            int idx = Random.Range(0, eventList.Count());
+            
+            _eventSeq = eventList[idx] switch
             {
                 0 => MoveExp(),
                 1 => AddExpToLine(2),
@@ -78,9 +116,11 @@ namespace Cardinals.BoardEvent.Tile
 
             yield return _eventSeq; // 각 이벤트 수행
             
+            ClearPanel();
             SetMessage("성공적으로 이벤트가 완료되었다.");
             yield return new WaitForSeconds(1.5f); // 이벤트 완료 후, 잠깐 대기
-            End();
+            
+            Cancel();
         }
 
         /// <summary>
@@ -89,11 +129,12 @@ namespace Cardinals.BoardEvent.Tile
         /// <param name="text"></param>
         void PrintFailMessage(string text)
         {
-            Debug.Log(text);
+            SetMessage(text);
         }
 
         void SetMessage(string msg)
         {
+            _explainObj.SetActive(false);
             _explainObj.SetActive(true);
             _explainTMP.text = msg;
         }
@@ -120,11 +161,25 @@ namespace Cardinals.BoardEvent.Tile
             {
                 SetMessage("선택을 취소했습니다.\n이벤트가 종료됩니다.");
                 yield return new WaitForSeconds(1f);
-                End();
+                Cancel();
             }
             
             _selectedSeq = null;
-            
+        }
+
+        private IEnumerable<TileMagicType> GetCurrentHasTypeSequence()
+        {
+            return GameManager.I.Stage.Board.TileSequence
+                .Where(t => t.TileMagic != null && t.TileMagic.Type != TileMagicType.None)
+                .Select(t => t.TileMagic.Type)
+                .Distinct();
+        }
+
+        private IEnumerable<TileMagic> GetExpExistTile()
+        {
+            return GameManager.I.Stage.Board.TileSequence
+                .Where(t => t.TileMagic != null && t.TileMagic.Exp > 0)
+                .Select(t => t.TileMagic);
         }
 
         /// <summary>
@@ -230,12 +285,13 @@ namespace Cardinals.BoardEvent.Tile
         /// <returns></returns>
         IEnumerator ChangeTileType()
         {
+            
             // [TODO] 레벨 1이상의 타일만 지정 필요
             Board.Tile tile;
             do
             {
                 yield return SelectTile(TileSelectionType.Single,
-                                         description: "원하는 타일의 속성을 변경");
+                                         description: "원하는 타일의 속성을 변경합니다.");
                 tile = _selectedTiles.First();
 
                 if (tile.TileMagic.Type == TileMagicType.None)
@@ -244,20 +300,17 @@ namespace Cardinals.BoardEvent.Tile
                     tile = null;
                 }
             } while (tile == null);
-            
-            
-            // 변경할 타입을 지정
-            var typeList =
-                GameManager.I.Stage.Board.TileSequence
-                    .Select(t => t.TileMagic.Type)
-                    .Where(type => type != TileMagicType.None && type != tile.TileMagic.Type ); // 기본과 기존 타입과 다르게 설정하기
+
+            var typeList = GetTypeList(tile.TileMagic.Type);
             InstTypeItems(typeList);
 
             // 타입을 지정할 때까지 대기
+            SetMessage("변경할 타일의 속성을 선택해주세요");
             SelectedMagicType = TileMagicType.None;
             yield return new WaitUntil(() => SelectedMagicType != TileMagicType.None);
             
             tile.TileMagic.SetType(SelectedMagicType);
+            
         }
 
         /// <summary>
@@ -266,16 +319,13 @@ namespace Cardinals.BoardEvent.Tile
         /// <param name="value"></param>
         IEnumerator AddExpByType(int value)
         {
+            _explainObj.SetActive(true);
             _explainTMP.gameObject.SetActive(true);
             _explainTMP.text = $"원하는 속성 타일들에 경험치 {value}씩 제공";
             
-            // _typeSelectObj 에 현재 플레이어가 보유한 타입만 설정 필요
-            var typeList =
-                GameManager.I.Stage.Board.TileSequence
-                    .Where(t => t.TileMagic != null && t.TileMagic.Type != TileMagicType.None)
-                    .Select(t => t.TileMagic.Type);
+            var typeList = GetCurrentHasTypeSequence().ToList();
 
-            if (typeList?.Count() > 0)
+            if (typeList.Count > 0)
             {
                 _closeBTN.gameObject.SetActive(true);
                 
@@ -286,19 +336,14 @@ namespace Cardinals.BoardEvent.Tile
                 yield return new WaitUntil(() => SelectedMagicType != TileMagicType.None); 
 
                 // 지정한 타입들만 경험치 부여
-                var tiles = GameManager.I.Stage.Board.TileSequence.Select(x => x.TileMagic)
-                    .Where(x => x.Type == SelectedMagicType);
-                foreach (var tile in tiles)
+                var tiles = GameManager.I.Stage.Board.TileSequence
+                    .Where(x => x.TileMagic != null && x.TileMagic.Type == SelectedMagicType);
+                
+                foreach (var tile in tiles.Select(t=> t.TileMagic))
                 {
                     tile.GainExp(value);
                 }
             }
-            else
-            {
-                SetMessage("지정 가능한 타입이 존재하지 않아 이벤트 생략댐");
-                yield return new WaitForSeconds(1.5f);
-            }
-            
         }
 
         /// <summary>
@@ -306,15 +351,6 @@ namespace Cardinals.BoardEvent.Tile
         /// </summary>
         private void InstTypeItems(IEnumerable<TileMagicType> typeList)
         {
-            // 기존 타입 아이콘이 존재하는 경우, 제거
-            if (_typeParentTr.childCount > 0)
-            {
-                for (int i = _typeParentTr.childCount; i >= 0; i--)
-                {
-                    Destroy(_typeParentTr.GetChild(i).gameObject);    
-                }
-            }
-            
             // 아이템 생성
             foreach (var type in typeList)
             {
@@ -325,6 +361,21 @@ namespace Cardinals.BoardEvent.Tile
             
             // 오브젝트 활성화
             _typeParentTr.gameObject.SetActive(true);
+        }
+
+        private List<TileMagicType> GetTypeList(params TileMagicType[] ignoreType)
+        {
+            var types = Enum.GetValues(typeof(TileMagicType)).Cast<TileMagicType>().ToList();
+            
+            // [TODO] 해금되지 않은 속성의 경우, ignoreType에 넣기
+
+            types.Remove(TileMagicType.None);
+            if (ignoreType != null)
+            {
+                ignoreType.ForEach(t => types.Remove(t));
+            }
+
+            return types;
         }
     }
 }

@@ -64,8 +64,9 @@ namespace Cardinals
         public override void EndTurn()
         {
             // 버프/디버프 소모
-            foreach (var buff in Buffs)
+            for(int i = Buffs.Count -1; i >= 0 ; i--)
             {
+                var buff = Buffs[i];
                 buff.Execute(this);
                 buff.EndTurn();
             }
@@ -83,9 +84,6 @@ namespace Cardinals
             {
                 DefenseCount = 0;
             }
-
-
-
         }
 
         public void BlessWater1()

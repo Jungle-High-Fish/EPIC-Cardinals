@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Cardinals.Utils;
 using Cardinals.Enums;
 using TMPro;
 using UnityEngine;
@@ -11,10 +10,16 @@ namespace Cardinals.BoardEvent.Roulette
     public class UIRoulette : MonoBehaviour
     {
         private Roulette _roulette;
+        [Header("Component")]
         [SerializeField] private Button _spinBTN;
         [SerializeField] private GameObject _resultObj;
         [SerializeField] private TextMeshProUGUI _resultTMP;
 
+        [Header("Roulette Reward Value")]
+        [SerializeField] private int _reducedHpValue;
+        [SerializeField] private int _drawCardCount;
+        [SerializeField] private int _getGoldValue;
+        
         Roulette Roulette
         {
             get
@@ -33,6 +38,7 @@ namespace Cardinals.BoardEvent.Roulette
         {
             gameObject.SetActive(true);
             _resultObj.SetActive(false);
+            Roulette.Init();
         }
 
         private void B_Spin()
@@ -46,10 +52,10 @@ namespace Cardinals.BoardEvent.Roulette
             switch (data.type)
             {
                 case BoardEventRoulette.DrawCard:
-                    GameManager.I.Stage.DrawCard(2);
+                    GameManager.I.Stage.DrawCard(_drawCardCount);
                     break;
                 case BoardEventRoulette.GetGold:
-                    GameManager.I.Stage.AddGold(2);
+                    GameManager.I.Stage.AddGold(_getGoldValue);
                     break;
                 case BoardEventRoulette.RandomArtifact:
                     GameManager.I.Stage.AddRandomArtifact();
@@ -65,7 +71,7 @@ namespace Cardinals.BoardEvent.Roulette
                     tile.TileMagic.GainExpToNextLevel();
                     break;
                 case BoardEventRoulette.ReducedHp:
-                    GameManager.I.Stage.HitPlayer(5);
+                    GameManager.I.Stage.HitPlayer(_reducedHpValue);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

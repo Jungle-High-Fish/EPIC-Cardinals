@@ -1,8 +1,10 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Util;
+using Random = UnityEngine.Random;
 
 namespace Cardinals.BoardEvent.Roulette
 {
@@ -37,6 +39,12 @@ namespace Cardinals.BoardEvent.Roulette
 
 			// Debug..
 			//Debug.Log($"Index : {GetRandomIndex()}");
+		}
+
+		public void Init()
+		{
+			_isSpinning = false;
+			_spinningRoulette.rotation = quaternion.identity;
 		}
 		
 		private void SpawnPiecesAndLines()
@@ -131,7 +139,7 @@ namespace Cardinals.BoardEvent.Roulette
 				yield return null;
 			}
 
-			_isSpinning = false;
+			// _isSpinning = false; // Init()에서 초기화 해줄 것
 
 			if (action != null) action.Invoke(_roulettePieceDatas[_selectedIndex]);
 		}

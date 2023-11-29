@@ -43,6 +43,7 @@ namespace Cardinals.Board {
 		public void SetType(TileMagicType type)
 		{
 			Type = type;
+			_tile.Get(gameObject).UITile.SetMaterial();
 		}
 
 		public void OnAction(int value, BaseEntity target) {
@@ -95,7 +96,7 @@ namespace Cardinals.Board {
 			var (newMagic, newLevel) = levelUpRequest.Result();
 
 			// TODO: 마법 적용 애니메이션 구현 필요
-			_type = newMagic;
+			Type = newMagic;
 			_level = newLevel;
 
 			_tile.Get(gameObject).UITile.SetMaterial();
@@ -142,7 +143,7 @@ namespace Cardinals.Board {
 		// 3 이상의 행동에서 적에게 젖음 효과를 부여합니다.
 		private void MagicActionWaterSub(int value, BaseEntity target) {
 			if (value >= 3) {
-				target.AddBuff(new Weak(2));
+				target.AddBuff(new Weak(1));
 			}
 		}
 

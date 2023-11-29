@@ -41,8 +41,15 @@ namespace Cardinals
             _newCardUseMod = true;
             AddCard(1, false, CardPileType.DrawPile);
             AddCard(1, false, CardPileType.DrawPile);
+            AddCard(1, false, CardPileType.DrawPile);
+            AddCard(1, false, CardPileType.DrawPile);
+            AddCard(2, false, CardPileType.DrawPile);
+            AddCard(2, false, CardPileType.DrawPile);
             AddCard(2, false, CardPileType.DrawPile);
             AddCard(3, false, CardPileType.DrawPile);
+            AddCard(3, false, CardPileType.DrawPile);
+            AddCard(3, false, CardPileType.DrawPile);
+            AddCard(4, false, CardPileType.DrawPile);
             AddCard(4, false, CardPileType.DrawPile);
             AddCard(5, false, CardPileType.DrawPile);
         }
@@ -108,6 +115,18 @@ namespace Cardinals
             }
         }
 
+        public void OnBattle()
+        {
+            _lastCardUsedForAction = false;
+            _prevCardNumber = -1;
+            Debug.Log("배틀 시작");
+        }
+
+        public void EndBattle()
+        {
+            EndTurn();
+            Debug.Log("배틀 끝");
+        }
         public void SetCardSelectable(bool isSelectable)
         {
             foreach(CardUI c in _handcardsUI)
@@ -292,6 +311,11 @@ namespace Cardinals
                             _lastCardUsedForAction = true;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();
+                            if (GameManager.I.Stage.Enemies.Count == 0)
+                            {
+                                EndBattle();
+                            }
+                            
                             yield break;
 
                         case MouseState.Move:

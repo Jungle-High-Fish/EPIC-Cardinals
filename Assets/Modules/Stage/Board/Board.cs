@@ -147,7 +147,8 @@ namespace Cardinals.Board {
         {
             var list = TileSequence
                 .Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence)
-                .Where(t => t.TileState == TileState.Normal);
+                .Where(t => t.TileState == TileState.Normal)
+                .Where(t => t != GameManager.I.Player.OnTile);
 
             if (!list.Any())
             {   
