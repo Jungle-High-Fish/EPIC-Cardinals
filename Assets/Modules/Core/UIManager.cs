@@ -102,6 +102,10 @@ namespace Cardinals
             _uiCardSystem.Init();
         }
 
+        public void ForceUpdatUI() {
+            Canvas.ForceUpdateCanvases();
+        }
+
         private void InstantiateCanvas(string name, out Canvas canvas) {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Canvas);
             canvas = Instantiate(prefab).GetComponent<Canvas>();
