@@ -15,11 +15,13 @@ namespace Cardinals
         private int _prevCardNumber=-1;
         private int _selectCardIndex;
         private bool _canActionUse;
+        private bool _lastCardUsedForAction;
         private bool _isMouseOnCardDeck;
         private int _continuousUseCount;
         private CardState _state;
-        [SerializeField] private MouseState _mouseState = MouseState.Cancel;
+        private MouseState _mouseState = MouseState.Cancel;
 
+        [SerializeField] private bool _newCardUseMod;
         [ShowInInspector] private List<Card> _drawPile;
         [ShowInInspector] private List<Card> _handCards;
         [ShowInInspector] private List<Card> _discardPile;
@@ -36,7 +38,7 @@ namespace Cardinals
             _handCards = new();
             _handcardsUI = new();
             _discardPile = new();
-
+            _newCardUseMod = true;
             AddCard(1, false, CardPileType.DrawPile);
             AddCard(1, false, CardPileType.DrawPile);
             AddCard(2, false, CardPileType.DrawPile);
@@ -85,7 +87,13 @@ namespace Cardinals
                 drawCardOffset = 1;
             }
             Draw(Constants.GameSetting.Player.CardDrawCount+drawCardOffset);
+
             _canActionUse = false;
+            if (!_lastCardUsedForAction&&_newCardUseMod)
+            {
+                _canActionUse = true;
+            }
+            
             _continuousUseCount = 0;
         }
 
@@ -279,7 +287,7 @@ namespace Cardinals
                             }
                             Discard(_selectCardIndex);
                             _state = CardState.Idle;
-
+                            _lastCardUsedForAction = true;
                             DismissAllCards();
                             yield break;
 
@@ -289,7 +297,7 @@ namespace Cardinals
                             _state = CardState.Idle;
                             _prevCardNumber = -1;
                             _canActionUse = true;
-
+                            _lastCardUsedForAction = false;
                             DismissAllCards();
                             yield break;
                         
@@ -346,6 +354,7 @@ namespace Cardinals
                 return false;
             }
 
+            // [디버프] 감전
             if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
                 Debug.Log("뭐지 감전당했나?");
