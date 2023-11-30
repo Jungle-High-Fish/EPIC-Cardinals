@@ -13,6 +13,8 @@ namespace Cardinals.Game
         public TileMagicType magicType;
         public string elementName;
 		public Color elementColor;
+        public Color particleColor1;
+        public Color particleColor2;
 		[AssetSelector(Paths = "Assets/Resources/Materials/Board/Tiles")]
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
         public Material tileMaterial;
