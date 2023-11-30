@@ -40,6 +40,9 @@ namespace Cardinals.BoardEvent.Shop
         public string Description => _item?.Description;
         public Sprite IconSprite => null;
         public Transform InstTr => null;
+        public Color Color { get; }
+        public string Key { get; }
+
         #endregion
 
         private void Awake()

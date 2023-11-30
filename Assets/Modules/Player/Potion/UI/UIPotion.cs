@@ -15,6 +15,8 @@ namespace Cardinals
         public string Description => _potionDataSO.description;
         public Sprite IconSprite => _potionDataSO.sprite;
         public Transform InstTr => transform;
+        public Color Color { get; }
+        public string Key { get; }
 
         private PotionDataSO _potionDataSO;
         private int _index;

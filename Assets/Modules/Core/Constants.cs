@@ -133,6 +133,7 @@ namespace Cardinals.Constants {
             public const string CardUICanvas = "Card UI Canvas";
             public const string EnemyUICanvas = "Enemy UI Canvas";
             public const string SystemUICanvas = "System UI Canvas";
+            public const string DescriptionUICanvas = "Description UI Canvas";
 
 
             public const string EnemyPlace = "Enemy";

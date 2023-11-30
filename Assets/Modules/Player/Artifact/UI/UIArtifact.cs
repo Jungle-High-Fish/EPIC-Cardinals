@@ -15,6 +15,8 @@ namespace Cardinals.UI
         public string Description => _artifactDataSO.description;
         public Sprite IconSprite => _artifactDataSO.sprite;
         public Transform InstTr => transform;
+        public Color Color { get; }
+        public string Key { get; }
 
         private ArtifactDataSO _artifactDataSO;
 

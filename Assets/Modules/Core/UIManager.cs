@@ -6,6 +6,7 @@ using Cardinals.BoardEvent.Tile;
 using Cardinals.Enemy;
 using Cardinals.Game;
 using Cardinals.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using Util;
 
@@ -25,12 +26,14 @@ namespace Cardinals
         public UITileInfo UITileInfo => _uiTileInfo;
 
         public Canvas MainUICanvas => _mainUICanvas;
+        public DescriptionArea DescCanvasDescArea { get; private set; }
 
         private Canvas _mainUICanvas;
         private Canvas _playerUICanvas;
         private Canvas _cardUICanvas;
         private Canvas _enemyUICanvas;
         private Canvas _systemUICanvas;
+        private Canvas _descriptionUICanvas;
 
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
@@ -63,7 +66,11 @@ namespace Cardinals
             InstantiateCanvas(Constants.Common.InstanceName.EnemyUICanvas, out _enemyUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.SystemUICanvas, out _systemUICanvas);
             _systemUICanvas.GetComponent<Canvas>().sortingOrder = 1;
-
+            
+            // 설명 창 캔버스
+            DescCanvasDescArea = FindObjectOfType<DescriptionArea>();
+            
+            
             InstantiateStageInfoUI();
             InstantiateTurnEndButtonUI();
             InstantiateMapButtonUI();

@@ -47,17 +47,17 @@ namespace Cardinals.UI
             var descs = GetComponentsInChildren<IDescription>();
                 
             // 생성할 객체 위치 설정
-            var descIstTrInfo = GetComponentInParent<IDescriptionInstTrInfo>();
-            _instTr = descIstTrInfo != null ? descIstTrInfo.DescriptionInstTr : descs.FirstOrDefault().InstTr;
-            
-            foreach (var desc in descs)
-            {
-                var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
- 
-             
-                var obj = Instantiate(prefab, _instTr.transform);
-                obj.GetComponent<UIDescription>().Init(desc);
-            }
+            // var descIstTrInfo = GetComponentInParent<IDescriptionInstTrInfo>();
+            // _instTr = descIstTrInfo != null ? descIstTrInfo.DescriptionInstTr : descs.FirstOrDefault().InstTr;
+            //
+            // foreach (var desc in descs)
+            // {
+            //     var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
+            //
+            //  
+            //     var obj = Instantiate(prefab, _instTr.transform);
+            //     obj.GetComponent<UIDescription>().Init(desc);
+            // }
             
             _instTr.gameObject.SetActive(true);
         }
