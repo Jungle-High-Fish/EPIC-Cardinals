@@ -19,13 +19,14 @@ namespace Cardinals.Game
         [AssetSelector(Paths = "Assets/Resources/Sprites/UI/Icons/Elements")]
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
         public Sprite sprite;
+        [AssetSelector(Paths = "Assets/Resources/Sprites/UI/Icons/Elements")]
+        [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
+        public Sprite uiSprite;
 		public string mainMagicName;
         [Multiline]
         public string mainMagicDescription;
-		public bool hasSubMagic;
-		[ShowIf("hasSubMagic")]
-		public string subMagicName;
-		[Multiline, ShowIf("hasSubMagic")]
-		public string subMagicDescription;
+		public bool hasBuffEffect;
+		[ShowIf("hasBuffEffect")]
+		public BuffType buffType;
     }
 }

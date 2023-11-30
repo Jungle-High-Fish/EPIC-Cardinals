@@ -21,7 +21,10 @@ namespace Cardinals
         public UITileSelection UITileSelection => _uiTileSelection;
         public UIMagicLevelUpPanel UIMagicLevelUpPanel => _uiMagicLevelUpPanel;
         public UIMapButton UIMapButton => _uiMapButton;
+        public UITileInfo UIHoveredTileInfo => _uiHoveredTileInfo;
         public UITileInfo UITileInfo => _uiTileInfo;
+
+        public Canvas MainUICanvas => _mainUICanvas;
 
         private Canvas _mainUICanvas;
         private Canvas _playerUICanvas;
@@ -37,6 +40,7 @@ namespace Cardinals
         private UICardSystem _uiCardSystem;
         private UITileSelection _uiTileSelection;
         private UIMagicLevelUpPanel _uiMagicLevelUpPanel;
+        private UITileInfo _uiHoveredTileInfo;
         private UITileInfo _uiTileInfo;
 
         #region Board-Event 
@@ -81,6 +85,7 @@ namespace Cardinals
             // Tile Level Up
             InstantiateMagicLevelUpUI();
             
+            InstantiateHoveredTileInfoUI();
             InstantiateTileInfoUI();
         }
 
@@ -221,6 +226,14 @@ namespace Cardinals
 
             obj.name = "@EnemyInfoController";
             obj.AddComponent<EnemyInfoController>();
+        }
+
+        private void InstantiateHoveredTileInfoUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_HoveredTileInfo);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+
+            _uiHoveredTileInfo = obj.GetComponent<UITileInfo>();
+            obj.SetActive(false);
         }
 
         private void InstantiateTileInfoUI() {

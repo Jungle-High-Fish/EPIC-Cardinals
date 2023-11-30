@@ -3,47 +3,103 @@ using System.Collections.Generic;
 using System.Globalization;
 using Sirenix.OdinInspector;
 using TMPro;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
 
 namespace Cardinals.UI {
-    public class UITileDescription: MonoBehaviour, ILayoutSelfController {
-        public ComponentGetter<Image> _outline
+    public class UITileDescription: MonoBehaviour{
+        public float Height => _height;
+
+        private ComponentGetter<Image> _panel
+            = new ComponentGetter<Image>(TypeOfGetter.This);
+
+        private ComponentGetter<Image> _outline
             = new ComponentGetter<Image>(TypeOfGetter.ChildByName, "Outline");
 
-        public ComponentGetter<RectTransform> _contentsTransform
+        private ComponentGetter<RectTransform> _contentsTransform
             = new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "Contents");
 
-        public ComponentGetter<RectTransform> _titleHeaderTransform
+        private ComponentGetter<RectTransform> _titleHeaderTransform
             = new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "Contents/TitleHeader");
 
-        public ComponentGetter<Image> _icon
+        private ComponentGetter<Image> _icon
             = new ComponentGetter<Image>(TypeOfGetter.ChildByName, "Contents/TitleHeader/Icon");
 
-        public ComponentGetter<TextMeshProUGUI> _titleText
+        private ComponentGetter<TextMeshProUGUI> _titleText
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Contents/TitleHeader/Title");
 
-        public ComponentGetter<TextMeshProUGUI> _descriptionText
+        private ComponentGetter<TextMeshProUGUI> _descriptionText
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Contents/Description");
+        
+        private Color _panelColor;
+        private Color _textColor;
+        private Color _outlineColor;
+
+        private float _height;
 
         [Button]
-        public void ShowDescription(string title, string description, Sprite icon=null, Color? color=null) {
-            _contentsTransform.Get(gameObject).gameObject.SetActive(false);
+        public void SetDescription(string title, string description, Sprite icon=null, bool isWhite=true, Color? outlineColor=null) {
+            SetPanelColor(isWhite, outlineColor);
+            SetDescription(title, description, icon);
 
-            if (color != null) {
-                _outline.Get(gameObject).gameObject.SetActive(true);
-                _outline.Get(gameObject).color = (Color)color;
+            gameObject.SetActive(false);
+        }
+
+        public void Show(float posY) {
+            gameObject.SetActive(true);
+            Canvas.ForceUpdateCanvases();
+            CalculateAndSetHeight();
+            (transform as RectTransform).anchoredPosition = new Vector2(
+                (transform as RectTransform).anchoredPosition.x,
+                posY
+            );
+        }
+
+        public void Show(float startPosY, float gap, float duration) {
+            gameObject.SetActive(true);
+            Canvas.ForceUpdateCanvases();
+            CalculateAndSetHeight();
+            (transform as RectTransform).anchoredPosition = new Vector2(
+                (transform as RectTransform).anchoredPosition.x,
+                startPosY
+            );
+            (transform as RectTransform).DOAnchorPosY(startPosY - gap, duration).SetEase(Ease.OutCubic);
+        }
+
+        private void SetPanelColor(bool isWhite, Color? outlineColor) {
+            if (isWhite) {
+                _panelColor = Constants.Common.Colors.CardinalsWhite;
+                _textColor = Constants.Common.Colors.CardinalsBlack;
             } else {
-                _outline.Get(gameObject).gameObject.SetActive(false);
+                _panelColor = Constants.Common.Colors.CardinalsBlack;
+                _textColor = Constants.Common.Colors.CardinalsWhite;
             }
 
+            if (outlineColor == null) {
+                if (isWhite) {
+                    _outlineColor = Constants.Common.Colors.CardinalsBlack;
+                } else {
+                    _outlineColor = Constants.Common.Colors.CardinalsWhite;
+                }
+            } else {
+                _outlineColor = (Color)outlineColor;
+                _textColor = (Color)outlineColor;
+            }
+
+            _panel.Get(gameObject).color = _panelColor;
+            _outline.Get(gameObject).color = _outlineColor;
+            _titleText.Get(gameObject).color = _textColor;
+            _descriptionText.Get(gameObject).color = isWhite ? Color.black : Color.white;
+        }
+
+        private void SetDescription(string title, string description, Sprite icon=null) {
             _titleText.Get(gameObject).text = title;
 
             TextMeshProUGUI tmp = _descriptionText.Get(gameObject);
             tmp.text = description;
-            float descriptionHeight = tmp.GetStringHeight(description);
 
             if (icon != null) {
                 _icon.Get(gameObject).gameObject.SetActive(true);
@@ -51,41 +107,21 @@ namespace Cardinals.UI {
             } else {
                 _icon.Get(gameObject).gameObject.SetActive(false);
             }
+        }
 
+        public float CalculateAndSetHeight() {
+            float descriptionHeight 
+                = _descriptionText.Get(gameObject).GetStringHeight(_descriptionText.Get(gameObject).text);
+            
             float contentsHeight = 
                 _titleHeaderTransform.Get(gameObject).sizeDelta.y +
                 descriptionHeight;
 
-            (transform as RectTransform).sizeDelta = new Vector2(
-                (transform as RectTransform).sizeDelta.x,
-                contentsHeight
-            );
+            (transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, contentsHeight);
 
-            _contentsTransform.Get(gameObject).gameObject.SetActive(true);
-        }
+            _height = contentsHeight;
 
-        public void SetLayoutHorizontal()
-        {
-            
-        }
-
-        public void SetLayoutVertical()
-        {
-            
-        }
-
-        public void Update() {
-            if (Input.GetKeyDown(KeyCode.Q)) {
-                Debug.Log(_descriptionText.Get(gameObject).textInfo.lineInfo[0].lineHeight);
-            }
- 
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                ShowDescription("가나다", "aasdfasdfass");
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                ShowDescription("가나다", "asdfasdfasdfasdfasdfdasfaasdfasdfasdfasdfasdfasdfsadfasdfasdfasdfasdfasdfasdf");
-            }
+            return contentsHeight;
         }
     }
 }

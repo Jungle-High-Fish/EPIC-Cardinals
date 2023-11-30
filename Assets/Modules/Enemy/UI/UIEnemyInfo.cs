@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
 using Cardinals.Constants;
+using Cardinals.Enums;
 
 namespace Cardinals.Enemy
 {
@@ -85,7 +87,26 @@ namespace Cardinals.Enemy
         {
             var key = Constants.FilePath.Resources.Enemy_Pattern + pattern.Type.ToString();
             _patternIconImg.sprite = EnemyPatternIconDict[key];
-            _patternCountTMP.text = $"{pattern.Value}";
+
+            if (CheckSetWeakDamage(pattern.Type)) // 약화 시, 데미지 반절 적용
+            {
+                if (pattern.Value != null && pattern.Value != 0)
+                {
+                    float dam = (float) pattern.Value / 2;
+                    _patternCountTMP.text = $"{(int) Math.Floor(dam)}";
+                }
+            }
+            else
+            {
+                _patternCountTMP.text = $"{pattern.Value}";
+            }
+        }
+
+        private bool CheckSetWeakDamage(EnemyActionType type)
+        {
+            return BaseEnemy.CheckBuffExist(BuffType.Weak) &&
+                   (type == EnemyActionType.Attack ||
+                    type == EnemyActionType.AreaAttack);
         }
 
         private Dictionary<string, Sprite> EnemyPatternIconDict =>

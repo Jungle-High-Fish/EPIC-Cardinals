@@ -42,7 +42,7 @@ namespace Cardinals.UI {
 
             while (true) {
                 float expRatio = _tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level];
-                _expBar.Get(gameObject).transform.localScale = new Vector3(expRatio, 1, 1);
+                _expBar.Get(gameObject).transform.localScale = new Vector3(Mathf.Clamp(expRatio, 0, 1), 1, 1);
                 _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
                 _actionEmblem.Get(gameObject).sprite 
