@@ -370,11 +370,11 @@ namespace Cardinals
             DismissAllCards();
         }
 
-        private IEnumerator WarpArtifact()
+        public void WarpArtifact()
         {
-            yield return new WaitForSeconds(2f);
             CardUseMove(1);
         }
+
         private bool CardUseAction(int num, BaseEntity target=null)
         {
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
@@ -395,12 +395,7 @@ namespace Cardinals
             }
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
-                // [유물] 워프 부적
-                if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
-                    && num==4)
-                {
-                    StartCoroutine(WarpArtifact());
-                }
+               
                 _prevCardNumber = num;
 
                 StartCoroutine(GameManager.I.Player.CardAction(num, target));
