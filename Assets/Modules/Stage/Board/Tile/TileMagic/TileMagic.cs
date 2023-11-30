@@ -7,6 +7,7 @@ using Cardinals.Buff;
 using UnityEngine.UI;
 using Cardinals.Game;
 using Util;
+using System.Linq;
 
 namespace Cardinals.Board {
 
@@ -96,10 +97,27 @@ namespace Cardinals.Board {
 			var (newMagic, newLevel) = levelUpRequest.Result();
 
 			// TODO: 마법 적용 애니메이션 구현 필요
+			float animTime = _tile.Get(gameObject).Animation.Play(TileAnimationType.Rotate360);
+
+			ParticleSystem.MainModule mainP = _tile.Get(gameObject).ParticleSystem.main;
+            ParticleSystem.MinMaxGradient startColor = new ParticleSystem.MinMaxGradient(
+                Data(newMagic).particleColor1,
+                Data(newMagic).particleColor2
+            )
+            {
+                mode = ParticleSystemGradientMode.TwoColors
+            };
+            mainP.startColor = startColor;
+			yield return new WaitForSeconds(0.3f);
+			_tile.Get(gameObject).ParticleSystem.Play();
+			
+			yield return new WaitForSeconds(0.1f);
+
 			Type = newMagic;
 			_level = newLevel;
-
 			_tile.Get(gameObject).UITile.SetMaterial();
+
+			yield return new WaitForSeconds(animTime - 0.4f);
 		}
 
 		private void MagicAction(int value, BaseEntity target) {
@@ -135,9 +153,15 @@ namespace Cardinals.Board {
 
 		// 행동마다 플레이어의 체력을 1/2/3만큼 회복합니다.
 		private void MagicActionWaterMain() {
-			GameManager.I.Stage.Player.Heal(
+			int left = GameManager.I.Stage.Player.Heal(
 				Constants.GameSetting.Tile.WaterMagicMainCure[_level - 1]
 			);
+
+			if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWater2) && left > 0) {
+				GameManager.I.Stage.Enemies.Reverse<BaseEnemy>().ToList().ForEach(enemy => {
+					enemy.Hit(left * 2);
+				});
+			}
 		}
 
 		// 3 이상의 행동에서 적에게 젖음 효과를 부여합니다.

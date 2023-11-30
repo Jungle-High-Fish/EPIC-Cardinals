@@ -50,7 +50,7 @@ namespace Cardinals.Board {
 					_animationDict[animationType].playNum + 1
 				);
 
-				return _animationDict[animationType].time * _animationDict[animationType].playNum;
+				return _animationDict[animationType].time * (_animationDict[animationType].playNum - 1);
 			}
 
 			_animationDict[animationType] = (
@@ -75,6 +75,7 @@ namespace Cardinals.Board {
 			InitJumpAnimation();
 			InitFlipAnimation(true);
 			InitFlipAnimation(false);
+			InitRotate360Animation();
 		}
 
 		private Sequence InitShakeAnimation() {
@@ -118,6 +119,24 @@ namespace Cardinals.Board {
 			
 			_animationDict.Add(isBackWard ? TileAnimationType.Flip : TileAnimationType.FlipBack, (flipAnimation, 1.5f, 0));
 			return flipAnimation;
+		}
+
+		private Sequence InitRotate360Animation() {
+			Sequence rotate360Animation = DOTween.Sequence();
+			rotate360Animation.Append(
+				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
+			).Insert(
+				0.2f, _rendererTransform.Get(gameObject).DORotate(
+					new Vector3(0, _tile.Get(gameObject).TileRotation.y, 360), 
+					0.5f,
+					RotateMode.FastBeyond360
+				)
+			).AppendInterval(0.5f)
+			.OnComplete(AnimationComplete(TileAnimationType.Rotate360))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(TileAnimationType.Rotate360, (rotate360Animation, 1.5f, 0));
+			return rotate360Animation;
 		}
 
 		private TweenCallback AnimationComplete(TileAnimationType animationType) {

@@ -132,7 +132,11 @@ namespace Cardinals
             {
                 Hp -= damage;
                 Animator?.Play("Hit");
-            } 
+
+                if (this is Player) {
+                    GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
+                }
+            }
         }
 
         
@@ -164,9 +168,12 @@ namespace Cardinals
             return (int) Math.Floor(damage);
         }
 
-        public void Heal(int value)
+        public int Heal(int value)
         {
+            int _mathHeal = _hp + value;
             Hp += value;
+
+            return _mathHeal - _hp;
         }
         /// <summary>
         /// 버프 추가 시, 호출
