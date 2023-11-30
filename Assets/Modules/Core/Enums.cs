@@ -245,6 +245,7 @@ namespace Cardinals.Enums {
         Jump,
         Flip,
         FlipBack,
+        Rotate360
     }
     
     public enum StageEventType
