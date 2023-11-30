@@ -50,7 +50,7 @@ namespace Cardinals.Board {
 					_animationDict[animationType].playNum + 1
 				);
 
-				return _animationDict[animationType].time * _animationDict[animationType].playNum;
+				return _animationDict[animationType].time * (_animationDict[animationType].playNum - 1);
 			}
 
 			_animationDict[animationType] = (

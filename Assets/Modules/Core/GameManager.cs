@@ -7,6 +7,7 @@ using Cardinals.Game;
 using Cardinals.Constants;
 using Sirenix.OdinInspector;
 using Unity.Burst.Intrinsics;
+using Cardinals.Util;
 
 namespace Cardinals
 {
@@ -26,6 +27,9 @@ namespace Cardinals
         public IEnumerable<BaseEnemy> CurrentEnemies { get; set; }
         public Player Player => Stage?.Player ?? null;
 
+        private ComponentGetter<CameraController> _cameraController
+            = new ComponentGetter<CameraController>(TypeOfGetter.Global);
+        public CameraController CameraController => _cameraController.Get();
         #region Game
 
         [Button]

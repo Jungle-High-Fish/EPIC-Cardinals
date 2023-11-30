@@ -132,7 +132,11 @@ namespace Cardinals
             {
                 Hp -= damage;
                 Animator?.Play("Hit");
-            } 
+
+                if (this is Player) {
+                    GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
+                }
+            }
         }
 
         
