@@ -258,8 +258,10 @@ namespace Cardinals
         {
             GameObject cardUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Card);
             GameObject cardUI = Instantiate(cardUIPrefab, _cardDeckUIParent);
-            cardUI.GetComponent<CardUI>().Init(card, index, this);
             cardUI.transform.SetSiblingIndex(index);
+            Canvas.ForceUpdateCanvases();
+            cardUI.GetComponent<CardUI>().Init(card, index, this);
+            
             _handcardsUI.Insert(index, cardUI.GetComponent<CardUI>());
 
         }

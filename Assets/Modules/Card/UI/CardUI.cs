@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Cardinals.Enums;
+using DG.Tweening;
 using TMPro;
 using Util;
 
 namespace Cardinals
 {
-    public class CardUI : MonoBehaviour, IPointerDownHandler
+    public class CardUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private int _cardIndex;
         private bool _canAction;
         private bool _canMove;
+        private Vector2 _CardUIPos;
         [SerializeField] private GameObject _actionMark;
         [SerializeField] private GameObject _moveMark;
         [SerializeField] private TextMeshProUGUI _numberText;
@@ -26,6 +28,7 @@ namespace Cardinals
         private bool _isSelectable;
         private Card _card;
         private CardManager _cardManager;
+
         public bool IsSelect
         {
             set => _isSelect = value;
@@ -73,7 +76,10 @@ namespace Cardinals
                 }
             }
         }
-
+        public void OnMouseEnter()
+        {
+            Debug.Log("마우스 들어옴");
+        }
         public bool CanMove
         {
             get => _canMove;
@@ -90,6 +96,10 @@ namespace Cardinals
             set => _cardIndex = value;
             
         }
+
+        void Start()
+        {
+        }
         public void Init(Card card, int index, CardManager cardManager)
         {
             _card = card;
@@ -99,6 +109,7 @@ namespace Cardinals
             Image image = GetComponent<Image>();
             _numberText.text = card.CardNumber.ToString();
             _volatileText.SetActive(card.IsVolatile);
+            _CardUIPos = (transform as RectTransform).anchoredPosition;
 
             switch (card.CardNumber)
             {
@@ -133,6 +144,15 @@ namespace Cardinals
 
             StartCoroutine(_cardManager.Dragging());
         }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            SetCardUIHovered();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            SetCardUIRestore();
+        }
 
         public void StartDraggingState() {
             _image.Get(gameObject).raycastTarget = false;
@@ -149,12 +169,23 @@ namespace Cardinals
                 transform.position = Input.mousePosition;
             }
         }
+
+        private void SetCardUIHovered()
+        {
+            (transform as RectTransform).DOAnchorPosY(_CardUIPos.y+30, 0.1f);
+            
+        }
+
+        private void SetCardUIRestore()
+        {
+            (transform as RectTransform).DOAnchorPosY(_CardUIPos.y, 0.1f);
+        }
+
         private void Update()
         {
             MoveCardUI();
         }
 
-        
     }
 }
 
