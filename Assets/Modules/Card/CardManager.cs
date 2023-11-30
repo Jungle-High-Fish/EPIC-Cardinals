@@ -316,8 +316,8 @@ namespace Cardinals
                         
                         case MouseState.CardEvent:
                             useNumber = _handCards[_selectCardIndex].CardNumber;
-                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             Discard(_selectCardIndex);
+                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();

@@ -64,6 +64,7 @@ namespace Cardinals.BoardEvent.Card
                     break;
                 case BoardEventCardType.CopyOneTimeCard:
                     GameManager.I.Stage.CardManager.AddCard(value, true, CardPileType.Hand);
+                    GameManager.I.Stage.CardManager.AddCard(value, true, CardPileType.Hand);
                     break;
                 case BoardEventCardType.Heal:
                     GameManager.I.Stage.Player.Heal( value * 2);
