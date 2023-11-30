@@ -306,28 +306,12 @@ namespace Cardinals
                             {
                                 break;
                             }
-                            Discard(_selectCardIndex);
-                            _state = CardState.Idle;
-                            _lastCardUsedForAction = true;
-                            UpdateCardState(useNumber, false);
-                            DismissAllCards();
-                            if (GameManager.I.Stage.Enemies.Count == 0)
-                            {
-                                EndBattle();
-                            }
                             
                             yield break;
 
                         case MouseState.Move:
                             useNumber = _handCards[_selectCardIndex].CardNumber;
                             CardUseMove(useNumber);
-                            Discard(_selectCardIndex);
-                            _state = CardState.Idle;
-                            _prevCardNumber = -1;
-                            _canActionUse = true;
-                            _lastCardUsedForAction = false;
-                            //UpdateCardState(useNumber, true);
-                            DismissAllCards();
                             yield break;
                         
                         case MouseState.CardEvent:
@@ -362,9 +346,28 @@ namespace Cardinals
             }
         }
 
-        private void CardUseMove(int num)
+        public void CardUseMove(int num)
         {
             StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
+
+            Discard(_selectCardIndex);
+            _state = CardState.Idle;
+            _prevCardNumber = -1;
+            _canActionUse = true;
+            _lastCardUsedForAction = false;
+            DismissAllCards();
+        }
+
+        public void CardUsePrevMove(int num)
+        {
+            StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f));
+
+            Discard(_selectCardIndex);
+            _state = CardState.Idle;
+            _prevCardNumber = -1;
+            _canActionUse = true;
+            _lastCardUsedForAction = false;
+            DismissAllCards();
         }
 
         private IEnumerator WarpArtifact()
@@ -402,7 +405,16 @@ namespace Cardinals
 
                 StartCoroutine(GameManager.I.Player.CardAction(num, target));
                 _continuousUseCount++;
-                Debug.Log(_continuousUseCount);
+
+                Discard(_selectCardIndex);
+                _state = CardState.Idle;
+                _lastCardUsedForAction = true;
+                UpdateCardState(num, false);
+                DismissAllCards();
+                if (GameManager.I.Stage.Enemies.Count == 0)
+                {
+                    EndBattle();
+                }
                 return true;
             }
 

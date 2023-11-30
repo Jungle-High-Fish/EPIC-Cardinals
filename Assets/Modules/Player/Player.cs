@@ -157,7 +157,10 @@ namespace Cardinals
         
         public IEnumerator PrevMoveTo(int count, float time)
         {
+            GameManager.I.Stage.CardManager.SetCardSelectable(false);
             _onTile?.Leave(this);
+            GameManager.I.UI.UITileInfo.Hide();
+
             for (int i = 0; i < count; i++)
             {
                 Vector3 prevPos = _onTile.Prev.transform.position;
@@ -173,6 +176,9 @@ namespace Cardinals
                 }
             }
             _onTile.Arrive(this);
+            GameManager.I.UI.UITileInfo.Show(_onTile);
+            GameManager.I.Stage.CardManager.UpdateCardState(count, true);
+            GameManager.I.Stage.CardManager.SetCardSelectable(true);
         }
 
         private void CheckSummonOnTile()
