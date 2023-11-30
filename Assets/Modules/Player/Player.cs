@@ -197,12 +197,21 @@ namespace Cardinals
             
             yield return _onTile.CardAction(num, target);
             yield return null;
+
+            // [유물] 워프 부적
+            if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
+                && num == 4)
+            {
+                GameManager.I.Stage.CardManager.WarpArtifact();
+            }
+
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
         }
         
         [Button]
         public void TestAddBuff(BuffType buffType)
         {
+           // AddBuff(new Slow());
             AddBuff(new ElectricShock());
         }
 

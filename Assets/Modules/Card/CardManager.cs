@@ -316,8 +316,8 @@ namespace Cardinals
                         
                         case MouseState.CardEvent:
                             useNumber = _handCards[_selectCardIndex].CardNumber;
-                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             Discard(_selectCardIndex);
+                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();
@@ -353,6 +353,7 @@ namespace Cardinals
             Discard(_selectCardIndex);
             _state = CardState.Idle;
             _prevCardNumber = -1;
+            _continuousUseCount = 0;
             _canActionUse = true;
             _lastCardUsedForAction = false;
             DismissAllCards();
@@ -370,11 +371,11 @@ namespace Cardinals
             DismissAllCards();
         }
 
-        private IEnumerator WarpArtifact()
+        public void WarpArtifact()
         {
-            yield return new WaitForSeconds(2f);
             CardUseMove(1);
         }
+
         private bool CardUseAction(int num, BaseEntity target=null)
         {
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
@@ -395,17 +396,19 @@ namespace Cardinals
             }
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
-                // [유물] 워프 부적
-                if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
-                    && num==4)
-                {
-                    StartCoroutine(WarpArtifact());
-                }
+               
                 _prevCardNumber = num;
+                // [디버프] 슬로우
+                if(GameManager.I.Player.CheckBuffExist(BuffType.Slow)&& _continuousUseCount == 0)
+                {
+                    Debug.Log("슬로우 때문에 행동 무시");
+                }
+                else
+                {
+                    StartCoroutine(GameManager.I.Player.CardAction(num, target));
+                }
 
-                StartCoroutine(GameManager.I.Player.CardAction(num, target));
                 _continuousUseCount++;
-
                 Discard(_selectCardIndex);
                 _state = CardState.Idle;
                 _lastCardUsedForAction = true;
