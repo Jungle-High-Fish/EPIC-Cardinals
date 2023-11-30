@@ -353,6 +353,7 @@ namespace Cardinals
             Discard(_selectCardIndex);
             _state = CardState.Idle;
             _prevCardNumber = -1;
+            _continuousUseCount = 0;
             _canActionUse = true;
             _lastCardUsedForAction = false;
             DismissAllCards();
@@ -397,10 +398,17 @@ namespace Cardinals
             {
                
                 _prevCardNumber = num;
+                // [디버프] 슬로우
+                if(GameManager.I.Player.CheckBuffExist(BuffType.Slow)&& _continuousUseCount == 0)
+                {
+                    Debug.Log("슬로우 때문에 행동 무시");
+                }
+                else
+                {
+                    StartCoroutine(GameManager.I.Player.CardAction(num, target));
+                }
 
-                StartCoroutine(GameManager.I.Player.CardAction(num, target));
                 _continuousUseCount++;
-
                 Discard(_selectCardIndex);
                 _state = CardState.Idle;
                 _lastCardUsedForAction = true;

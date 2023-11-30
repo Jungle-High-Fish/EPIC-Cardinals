@@ -211,6 +211,7 @@ namespace Cardinals
         [Button]
         public void TestAddBuff(BuffType buffType)
         {
+           // AddBuff(new Slow());
             AddBuff(new ElectricShock());
         }
 
