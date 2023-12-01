@@ -20,6 +20,9 @@ namespace Cardinals.Board {
 		private ComponentGetter<Tile> _tile
 			= new ComponentGetter<Tile>(TypeOfGetter.This);
 
+		private ComponentGetter<Rigidbody> _rigidbody
+			= new ComponentGetter<Rigidbody>(TypeOfGetter.This);
+
 		public TileMagicType Type 
 		{ get => _type; private set => _type = value; } 
 		public int Level => _level;
@@ -97,6 +100,7 @@ namespace Cardinals.Board {
 			var (newMagic, newLevel) = levelUpRequest.Result();
 
 			// TODO: 마법 적용 애니메이션 구현 필요
+			//_rigidbody.Get(gameObject).isKinematic = false;
 			float animTime = _tile.Get(gameObject).Animation.Play(TileAnimationType.Rotate360);
 
 			ParticleSystem.MainModule mainP = _tile.Get(gameObject).ParticleSystem.main;
@@ -118,6 +122,8 @@ namespace Cardinals.Board {
 			_tile.Get(gameObject).UITile.SetMaterial();
 
 			yield return new WaitForSeconds(animTime - 0.4f);
+			//_rigidbody.Get(gameObject).isKinematic = true;
+			//_tile.Get(gameObject).Animation.Play(TileAnimationType.Float);
 		}
 
 		private void MagicAction(int value, BaseEntity target) {

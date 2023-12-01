@@ -58,6 +58,9 @@ namespace Cardinals.Board {
 
         private TileData _tileData;
         
+        private ComponentGetter<Rigidbody> _rigidBody
+            = new ComponentGetter<Rigidbody>(TypeOfGetter.This);
+
         private ComponentGetter<TileAnimation> _tileAnimation
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
 
@@ -196,21 +199,36 @@ namespace Cardinals.Board {
             if (_tileMagic != null) {
                 _tileMagic.ApplyLevelUp();
             }
+
+            if (boardPiece is Player) {
+                transform.position = _tilePositionOnGround;
+                _tileAnimation.Get(gameObject).Play(TileAnimationType.Float, false);
+                _rigidBody.Get(gameObject).isKinematic = true;
+            }
         }
 
         public void Leave(IBoardPiece boardPiece) {
             _boardPieces.Remove(boardPiece);
 
             (boardPiece as MonoBehaviour).transform.SetParent(null);
+
+            if (boardPiece is Player) {
+                _rigidBody.Get(gameObject).isKinematic = false;
+            }
         }
 
-        public IEnumerator CardAction(int value, BaseEntity target) {
-            float animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Shake);
-            
+        public IEnumerator CardAction(int value, BaseEntity target) {            
             _tileAction.Act(value, target);
 
             if (_tileMagic != null) {
                 _tileMagic.OnAction(value, target);
+            }
+
+            float animTime = 0f;
+            if (_tileAction is TileAttack) {
+                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Attack);
+            } else if (_tileAction is TileDefence) {
+                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Defence);
             }
 
             yield return new WaitForSeconds(animTime);
