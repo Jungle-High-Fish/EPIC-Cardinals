@@ -2078,7 +2078,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8590548790565173764}
-  - component: {fileID: 8794942209949151003}
   m_Layer: 5
   m_Name: UIPlayerInfo
   m_TagString: Untagged
@@ -2108,19 +2107,6 @@ RectTransform:
   m_AnchoredPosition: {x: -263, y: 366}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8794942209949151003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590548790565173765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1cbf43c5c6d0046962fbb9add284ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _descriptionInstTr: {fileID: 8590548791431185332}
 --- !u!1 &8590548790568328879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3474,7 +3460,6 @@ GameObject:
   - component: {fileID: 720064845109419846}
   - component: {fileID: 4644285923793551459}
   - component: {fileID: 824227230679651339}
-  - component: {fileID: 4515417323870666946}
   m_Layer: 5
   m_Name: Player Status
   m_TagString: Untagged
@@ -3545,19 +3530,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4515417323870666946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9046820544937823947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1cbf43c5c6d0046962fbb9add284ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _descriptionInstTr: {fileID: 1524200872679368722}
 --- !u!1 &9171983184666995851
 GameObject:
   m_ObjectHideFlags: 0

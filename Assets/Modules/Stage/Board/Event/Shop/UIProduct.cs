@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Cardinals.BoardEvent.Shop
 {
-    public class UIProduct : MonoBehaviour, IDescription
+    public class UIProduct : MonoBehaviour
     {
         private IProduct _item;
         
@@ -34,17 +34,6 @@ namespace Cardinals.BoardEvent.Shop
 
         private Func<bool> _buyFunc;
         
-        #region IDescription
-
-        public string Name => _item?.Name;
-        public string Description => _item?.Description;
-        public Sprite IconSprite => null;
-        public Transform InstTr => null;
-        public Color Color { get; }
-        public string Key { get; }
-
-        #endregion
-
         private void Awake()
         {
             _buyBTN.onClick.AddListener(Buy);
@@ -58,6 +47,8 @@ namespace Cardinals.BoardEvent.Shop
             _iconImg.sprite = _item.Sprite;
             _priceTMP.text = $"{_item.Price}";
             _boughtObj.SetActive(false);
+            
+            GetComponentInChildren<DescriptionConnector>()?.Init();
         }
         
         private void Buy()

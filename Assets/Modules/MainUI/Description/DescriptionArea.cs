@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Modules.Utils;
 using Sirenix.Utilities;
@@ -14,7 +15,17 @@ namespace Cardinals.UI
         
         [Header("Mode")]
         [SerializeField] private bool _canvasMode;
-        
+
+        private bool _isActive;
+
+        public void Update()
+        {
+            if (_canvasMode && _isActive)
+            {
+                transform.position = Input.mousePosition;
+            }
+        }
+
         public void UpdatePanel(params IDescription[] descriptions)
         {
             if (descriptions != null)
@@ -65,7 +76,8 @@ namespace Cardinals.UI
                     UIDescriptionsDict[desc.Key].gameObject.SetActive(true);
                 }
             }
-            
+
+            _isActive = true;
             gameObject.SetActive(true);
             
             // 업데이트
@@ -76,6 +88,7 @@ namespace Cardinals.UI
 
         public void OffPanel()
         {
+            _isActive = false;
             UIDescriptionsDict.Values.ForEach(desc => desc.gameObject.SetActive(false));
             // foreach (var desc in _descriptions)
             // {
