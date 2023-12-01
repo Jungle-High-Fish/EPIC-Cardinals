@@ -66,9 +66,7 @@ namespace Cardinals
             InstantiateCanvas(Constants.Common.InstanceName.EnemyUICanvas, out _enemyUICanvas);
             InstantiateCanvas(Constants.Common.InstanceName.SystemUICanvas, out _systemUICanvas);
             _systemUICanvas.GetComponent<Canvas>().sortingOrder = 1;
-            
-            // 설명 창 캔버스
-            DescCanvasDescArea = FindObjectOfType<DescriptionArea>();
+            InitDescriptionCanvas();
             
             
             InstantiateStageInfoUI();
@@ -94,6 +92,18 @@ namespace Cardinals
             
             InstantiateHoveredTileInfoUI();
             InstantiateTileInfoUI();
+        }
+
+        void InitDescriptionCanvas()
+        {
+            InstantiateCanvas(Constants.Common.InstanceName.DescriptionUICanvas, out _descriptionUICanvas);
+            _descriptionUICanvas.sortingOrder = 1;
+            
+            var obj = new GameObject();
+            obj.transform.SetParent(_descriptionUICanvas.transform);
+            
+            DescCanvasDescArea = obj.AddComponent<DescriptionArea>();
+            DescCanvasDescArea.InitCanvas();
         }
 
         public void InitPlayerUI() {

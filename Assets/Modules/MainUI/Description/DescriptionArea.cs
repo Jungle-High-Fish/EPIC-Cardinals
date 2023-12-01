@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Modules.Utils;
 using Sirenix.Utilities;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -17,6 +18,29 @@ namespace Cardinals.UI
         [SerializeField] private bool _canvasMode;
 
         private bool _isActive;
+
+
+        public void InitCanvas()
+        {
+            gameObject.name = "Global Description Area";
+            _canvasMode = true;
+            
+            var group = transform.AddComponent<VerticalLayoutGroup>();
+            group.padding = new RectOffset(5, 5, 5, 5);
+            group.childAlignment = TextAnchor.UpperLeft;
+            group.childControlWidth = true;
+            group.childForceExpandWidth = true;
+            group.childForceExpandHeight = true;
+            
+            var fitter = transform.AddComponent<ContentSizeFitter>();
+            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            var rect = GetComponent<RectTransform>();
+            rect.localScale = Vector3.one;
+            rect.pivot = new Vector2(0, 1);
+            rect.anchorMin = new Vector2(0, 1);
+            rect.anchorMax = new Vector2(0, 1);
+        }
 
         public void Update()
         {
@@ -90,10 +114,6 @@ namespace Cardinals.UI
         {
             _isActive = false;
             UIDescriptionsDict.Values.ForEach(desc => desc.gameObject.SetActive(false));
-            // foreach (var desc in _descriptions)
-            // {
-            //     UIDescriptionsDict[desc.Key].gameObject.SetActive(false);
-            // }
         }
     }
 }
