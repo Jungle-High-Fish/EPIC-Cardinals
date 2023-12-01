@@ -53,12 +53,12 @@ namespace Cardinals.Game
 
             GameManager.I.CurrentEnemies = _enemies;
             _stageController.EnemyInfoController.Init(_enemyList.Length);
+            GameManager.I.Stage.CardManager.OnBattle();
 
             do // 전투 시작
             {
                 // 전투 업데이트
                 GameManager.I.Player.StartTurn();
-                GameManager.I.Stage.CardManager.OnBattle();
                 _enemies.ForEach(enemy => enemy.StartTurn());
 
                 // 플레이어 행동 초기화
