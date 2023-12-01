@@ -300,7 +300,7 @@ namespace Cardinals.Game {
             {
                 // 이벤트 설정                
                 int enumLength = Enum.GetNames(typeof(BoardEventType)).Length;
-                _boardEventIdx = Math.Max(1, ++_boardEventIdx) % enumLength;
+                _boardEventIdx = Math.Max(1, (++_boardEventIdx % enumLength));
                 var type = (BoardEventType)_boardEventIdx;
                 
                 tileAction.Set(type);

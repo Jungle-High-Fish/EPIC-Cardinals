@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 6658819530140431831}
   - component: {fileID: 6658819530140431828}
   - component: {fileID: 6658819530140431829}
+  - component: {fileID: 6670743947378884822}
   m_Layer: 5
   m_Name: UIProduct
   m_TagString: Untagged
@@ -353,6 +354,14 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 1
+--- !u!222 &6670743947378884822
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658819530140431830}
+  m_CullTransparentMesh: 1
 --- !u!1 &6658819530692466047
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,3 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2e8e6dc60bf042bf84a7a16ec9468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemAreaTr: {fileID: 6658819530140431831}
+  _descriptionArea: {fileID: 0}
+  _hoverRenderType: 2
+  _countType: 1

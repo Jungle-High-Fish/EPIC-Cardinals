@@ -5,6 +5,7 @@ using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Cardinals.UI;
+using Cardinals.UI.Description;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ using Random = UnityEngine.Random;
 
 namespace Cardinals.BoardEvent.Shop
 {
-    public class UIShop : MonoBehaviour, IDescriptionInstTrInfo
+    public class UIShop : MonoBehaviour
     {
         [Header("Component")] 
         [SerializeField] private Transform _artifactParentTr;
@@ -86,6 +87,7 @@ namespace Cardinals.BoardEvent.Shop
                 
                 var obj = Instantiate(ShopItemPrefab, _artifactParentTr);
                  obj.GetComponent<UIProduct>().Init(artifact, () => BuyArtifact(artifact));
+                 obj.AddComponent<ArtifactDescription>().Init(artifact.Type);
             }
         }
         
@@ -101,6 +103,7 @@ namespace Cardinals.BoardEvent.Shop
                 
                 var obj = Instantiate(_shopItemPrefab, _potionParentTr);
                 obj.GetComponent<UIProduct>().Init(potion, () => BuyPotion(potion));
+                obj.AddComponent<PotionDescription>().Init(potionType);
             }
         }
 

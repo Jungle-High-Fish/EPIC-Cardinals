@@ -24,5 +24,7 @@ namespace Cardinals.UI
         public string Description => "[임시]Description";
         public Sprite IconSprite => null; //_baseInfo.IconSprite;
         public Transform InstTr => null;//_baseInfo.InstTr;
+        public Color Color { get; }
+        public string Key { get; }
     }
 }
