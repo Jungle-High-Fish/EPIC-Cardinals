@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Util;
 
 namespace Cardinals.UI
@@ -27,10 +28,20 @@ namespace Cardinals.UI
             Multi,  // 여러 오브젝트 정보를 한번에 띄우려 할 때 사용
         }
 
-        [SerializeField] private Transform _itemAreaTr;
+        public enum Pivot
+        {
+            None,
+            LeftUp,
+            RightUp,
+            LeftDown,
+            RightDown,
+        }
+
+        [SerializeField] private Transform _itemAreaTr => transform;
         [SerializeField] private DescriptionArea _descriptionArea;
         [SerializeField] private HoverRenderType _hoverRenderType;
         [SerializeField] private CountType _countType;
+        [SerializeField] private TextAnchor _anchor;
         private GameObject UIDescriptionPrefab => ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
 
         public void Start()
@@ -40,8 +51,8 @@ namespace Cardinals.UI
 
         public void Init()
         {
-            _itemAreaTr ??= this.transform;
-            _itemAreaTr ??= GetComponent<RectTransform>();
+            // _itemAreaTr ??= this.transform;
+            // _itemAreaTr ??= GetComponent<RectTransform>();
             
             _descriptionArea ??= GameManager.I.UI.DescCanvasDescArea;
             

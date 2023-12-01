@@ -6,25 +6,13 @@ using UnityEngine.UI;
 
 namespace Cardinals.UI
 {
-    /// <summary>
-    /// 변경이 될 수 잇음
-    /// </summary>
-    public class UIIcon : MonoBehaviour, IDescription
+    public class UIIcon : MonoBehaviour
     {
-        private IDescription _baseInfo;
-        
         [SerializeField] public Image _iconImg;
 
-        public void Init(IDescription info)
+        public void Init(Sprite sprite)
         {
-            _baseInfo = info;
+            _iconImg.sprite = sprite;
         }
-        
-        public string Name => "[임시]UIIcon";
-        public string Description => "[임시]Description";
-        public Sprite IconSprite => null; //_baseInfo.IconSprite;
-        public Transform InstTr => null;//_baseInfo.InstTr;
-        public Color Color { get; }
-        public string Key { get; }
     }
 }
