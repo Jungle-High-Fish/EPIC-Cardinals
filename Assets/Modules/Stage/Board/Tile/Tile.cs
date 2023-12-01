@@ -42,6 +42,7 @@ namespace Cardinals.Board {
         }
 
         public TileAnimation Animation => _tileAnimation.Get(gameObject);
+        public ParticleSystem ParticleSystem => _particleSystem.Get(gameObject);
 
         public bool IsSelectable => _isSelectable;
         public bool IsSelected {
@@ -59,6 +60,9 @@ namespace Cardinals.Board {
         
         private ComponentGetter<TileAnimation> _tileAnimation
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
+
+        private ComponentGetter<ParticleSystem> _particleSystem
+            = new ComponentGetter<ParticleSystem>(TypeOfGetter.ChildByName, "Effect Particle");
         
         // 타일 UI 관련 변수
         private ComponentGetter<UITile> _uiTile

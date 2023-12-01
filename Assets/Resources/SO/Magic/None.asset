@@ -15,10 +15,12 @@ MonoBehaviour:
   magicType: 0
   elementName: "\uAE30\uBCF8"
   elementColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+  particleColor1: {r: 0, g: 0, b: 1, a: 1}
+  particleColor2: {r: 0, g: 0, b: 0, a: 1}
   tileMaterial: {fileID: 2100000, guid: 199832096c117e346b790bfffbbcef81, type: 2}
   sprite: {fileID: 0}
+  uiSprite: {fileID: 0}
   mainMagicName: 
   mainMagicDescription: 
-  hasSubMagic: 0
-  subMagicName: 
-  subMagicDescription: 
+  hasBuffEffect: 0
+  buffType: 0

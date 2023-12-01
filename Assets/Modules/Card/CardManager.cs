@@ -258,8 +258,10 @@ namespace Cardinals
         {
             GameObject cardUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Card);
             GameObject cardUI = Instantiate(cardUIPrefab, _cardDeckUIParent);
-            cardUI.GetComponent<CardUI>().Init(card, index, this);
             cardUI.transform.SetSiblingIndex(index);
+            Canvas.ForceUpdateCanvases();
+            cardUI.GetComponent<CardUI>().Init(card, index, this);
+            
             _handcardsUI.Insert(index, cardUI.GetComponent<CardUI>());
 
         }
@@ -316,8 +318,8 @@ namespace Cardinals
                         
                         case MouseState.CardEvent:
                             useNumber = _handCards[_selectCardIndex].CardNumber;
-                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             Discard(_selectCardIndex);
+                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();
@@ -353,6 +355,7 @@ namespace Cardinals
             Discard(_selectCardIndex);
             _state = CardState.Idle;
             _prevCardNumber = -1;
+            _continuousUseCount = 0;
             _canActionUse = true;
             _lastCardUsedForAction = false;
             DismissAllCards();
@@ -397,10 +400,17 @@ namespace Cardinals
             {
                
                 _prevCardNumber = num;
+                // [디버프] 슬로우
+                if(GameManager.I.Player.CheckBuffExist(BuffType.Slow)&& _continuousUseCount == 0)
+                {
+                    Debug.Log("슬로우 때문에 행동 무시");
+                }
+                else
+                {
+                    StartCoroutine(GameManager.I.Player.CardAction(num, target));
+                }
 
-                StartCoroutine(GameManager.I.Player.CardAction(num, target));
                 _continuousUseCount++;
-
                 Discard(_selectCardIndex);
                 _state = CardState.Idle;
                 _lastCardUsedForAction = true;
