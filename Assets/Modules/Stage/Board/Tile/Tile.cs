@@ -227,6 +227,7 @@ namespace Cardinals.Board {
             float animTime = 0f;
             if (_tileAction is TileAttack) {
                 animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Attack);
+                GameManager.I.CameraController.ShakeCamera(0.1f, 0.7f, 0.1f);
             } else if (_tileAction is TileDefence) {
                 animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Defence);
             }

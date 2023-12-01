@@ -25,7 +25,7 @@ namespace Cardinals.Enemy
                 };
                 
                 Turn = 0;
-                Sprite = enemyData.berserkSprite;
+                SetRenderPrefab(true);
             };
             
             DieEvent += () =>

@@ -30,6 +30,10 @@ namespace Cardinals
         private ComponentGetter<CameraController> _cameraController
             = new ComponentGetter<CameraController>(TypeOfGetter.Global);
         public CameraController CameraController => _cameraController.Get();
+
+        private ComponentGetter<LightController> _lightController
+            = new ComponentGetter<LightController>(TypeOfGetter.Global);
+        public LightController LightController => _lightController.Get();
         #region Game
 
         [Button]
