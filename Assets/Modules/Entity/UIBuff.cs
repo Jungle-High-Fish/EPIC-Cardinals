@@ -1,11 +1,13 @@
 using Cardinals.UI;
+using Cardinals.UI.Description;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Cardinals
 {
-    public class UIBuff : MonoBehaviour, IDescription
+    public class UIBuff : MonoBehaviour
     {
         private BaseBuff BaseBuff { get; set; }
 
@@ -23,6 +25,8 @@ namespace Cardinals
             
             BaseBuff.RemoveEvent += Destroy;
             BaseBuff.UpdateBuffCountEvent += UpdateBuffCount;
+            
+            transform.AddComponent<BuffDescription>().Init(BaseBuff.Type);
         }
 
         private void UpdateBuffCount(int buffCount)
@@ -35,14 +39,5 @@ namespace Cardinals
             BaseBuff = null;
             Destroy(gameObject);
         }
-
-        #region IDescription
-
-        public string Name => BaseBuff.Data.buffName;
-        public string Description => BaseBuff.Data.description;
-        public Sprite IconSprite => BaseBuff.Data.sprite;
-        public Transform InstTr => _descriptionTr;
-
-        #endregion
     }
 }

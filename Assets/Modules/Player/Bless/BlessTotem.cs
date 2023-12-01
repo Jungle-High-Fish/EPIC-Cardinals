@@ -2,18 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using Cardinals.UI;
+using Cardinals.UI.Description;
 using UnityEngine;
 using Util;
 using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
 namespace Cardinals.Board
 {
     public class BlessTotem : MonoBehaviour
     {
         private BlessType _baseBless;
+        
         [Header("Component")]
         private SpriteRenderer _totemRenderer;
-
+        
         public void Awake()
         {
             _totemRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -33,6 +38,9 @@ namespace Cardinals.Board
 
             var data = ResourceLoader.LoadSO<BlessDataSO>(Constants.FilePath.Resources.SO_BlessData + bless);
             _totemRenderer.sprite = data.totemSprite;
+
+            transform.AddComponent<BlessDescription>().Init(bless);
+            GetComponent<DescriptionConnector>().Init();
         }
 
         public IEnumerator Dismiss(BlessType bless, int idx, Action<int> onDismissed) {

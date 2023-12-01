@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6351590376974442047}
   - component: {fileID: 6351590376974442032}
-  - component: {fileID: 6351590376974442033}
-  - component: {fileID: 6982573612855980371}
+  - component: {fileID: 692850431490201134}
+  - component: {fileID: 8847027940003893958}
+  - component: {fileID: 2292323681074864603}
   m_Layer: 0
   m_Name: Totem
   m_TagString: Untagged
@@ -26,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6351590376974442046}
-  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6351590376974442032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,7 +47,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79cc4c9fe4e5cd45b1f2682021ad0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &6351590376974442033
+--- !u!114 &692850431490201134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351590376974442046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c2e8e6dc60bf042bf84a7a16ec9468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemAreaTr: {fileID: 6351590376974442047}
+  _descriptionArea: {fileID: 0}
+  _hoverRenderType: 1
+  _countType: 1
+--- !u!212 &8847027940003893958
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,7 +115,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &6982573612855980371
+--- !u!136 &2292323681074864603
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
