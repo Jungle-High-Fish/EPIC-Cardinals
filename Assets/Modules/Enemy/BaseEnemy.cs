@@ -16,25 +16,12 @@ namespace Cardinals
         
         protected int Turn { get; set; }
 
-        private Sprite _sprite; 
-        public Sprite Sprite
-        {
-            get => _sprite;
-            set
-            {
-                _sprite = value;
-                UpdatedSpriteEvent?.Invoke(_sprite);
-            }
-        }
-
         private Reward[] _rewards;
         public Reward[] Rewards
         {
             get => _rewards;
             protected set => _rewards = value;
         }
-
-        public Action<Sprite> UpdatedSpriteEvent { get; set; }
 
         private Pattern[] _patterns; 
         protected Pattern[] Patterns 
@@ -75,12 +62,18 @@ namespace Cardinals
         public Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
         public Pattern PrevPattern;
 
+        private EnemyDataSO _enemyData;
+        public EnemyDataSO EnemyData => _enemyData;
+
+        public event Action<bool> ChangeRenderPrefabEvent;
+
         public virtual void Init(EnemyDataSO enemyData) {
             Init(enemyData.maxHP);
     
             Name = enemyData.enemyName;
-            Sprite = enemyData.sprite;
             UpdatePatternEvent += ExecutePreActionByPattern;
+
+            _enemyData = enemyData;
         }
 
         public override void Init(int maxHp) {
@@ -147,6 +140,10 @@ namespace Cardinals
                 _fixPattern = null;
             }
             
+        }
+
+        public void SetRenderPrefab(bool isBerserk) {
+            ChangeRenderPrefabEvent?.Invoke(isBerserk);
         }
 
         public override void AddBuff(BaseBuff buff)
