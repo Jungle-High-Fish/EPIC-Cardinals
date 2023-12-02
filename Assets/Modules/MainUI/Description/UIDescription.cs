@@ -44,8 +44,26 @@ namespace Cardinals.UI
             Color color = description.Color == default ? Constants.Common.Colors.CardinalsBlack : description.Color;
             _nameTMP.color = color;
             _borderObjImg.color = color;
-            
-            transform.AddComponent<LayoutInitializer>().Clear();
+
+            UIClear();
+        }
+
+        private void UIClear()
+        {
+            var fitters = GetComponentsInChildren<ContentSizeFitter>();
+            var horizontalLayout = GetComponentsInChildren<HorizontalLayoutGroup>();
+            var verticalLayout = GetComponentsInChildren<VerticalLayoutGroup>();
+
+            horizontalLayout.Reverse().ForEach(g => g.Update());
+            verticalLayout.Reverse().ForEach(g => g.Update());
+            foreach (var _fitter in fitters.Reverse())
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_fitter.transform);
+            }
+
+            horizontalLayout.ForEach(g => g.enabled = false);
+            verticalLayout.ForEach(g => g.enabled = false);
+            fitters.ForEach(f => f.enabled = false);
         }
     }
 }

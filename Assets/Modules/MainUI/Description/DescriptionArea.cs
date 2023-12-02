@@ -34,7 +34,7 @@ namespace Cardinals.UI
             var group = transform.AddComponent<VerticalLayoutGroup>();
             group.padding = new RectOffset(5, 5, 5, 5);
             group.childAlignment = TextAnchor.UpperLeft;
-            group.childControlWidth = true;
+            group.childControlWidth = false;
             group.childControlHeight = false;
             group.childForceExpandWidth = true;
             group.childForceExpandHeight = true;
@@ -42,6 +42,7 @@ namespace Cardinals.UI
             
             var fitter = transform.AddComponent<ContentSizeFitter>();
             fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
 
             var rect = GetComponent<RectTransform>();
             rect.localScale = Vector3.one;
@@ -60,7 +61,7 @@ namespace Cardinals.UI
         #endregion
         
 
-        public void UpdatePanel(params IDescription[] descriptions)
+        public void UpdatePanel(Anchor anchor, params IDescription[] descriptions)
         {
             if (descriptions != null)
             {
@@ -86,7 +87,7 @@ namespace Cardinals.UI
             UIDescriptionsDict.Add(description.Key, uiDescription);
         }
         
-        public void OnPanel(params IDescription[] descriptions )
+        public void OnPanel(Anchor anchor = Anchor.Right, params IDescription[] descriptions)
         {
             if (_canvasMode)
             {   
@@ -113,15 +114,26 @@ namespace Cardinals.UI
 
             _isActive = true;
             gameObject.SetActive(true);
+
+            UIUpdate(anchor);
+        }
+
+        void UIUpdate(Anchor anchor)
+        {
+            var rect = GetComponent<RectTransform>();
+
+            rect.pivot = anchor switch
+            {
+                Anchor.Left => new Vector2(1, 1),
+                Anchor.Right => new Vector2(0, 1),
+                _ => Vector2.right
+            };
             
             // 업데이트
-            GetComponent<VerticalLayoutGroup>().Update();
-            GetComponent<HorizontalLayoutGroup>().Update();
+            GetComponent<VerticalLayoutGroup>().Update();;
+            // GetComponent<HorizontalLayoutGroup>().Update();
             GetComponent<GridLayoutGroup>().Update();
             GetComponent<ContentSizeFitter>().Update();
-            
-            // gameObject.SetActive(false);
-            // gameObject.SetActive(true);
         }
 
         public void OffPanel()

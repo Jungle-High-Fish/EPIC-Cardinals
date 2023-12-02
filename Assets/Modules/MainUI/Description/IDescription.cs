@@ -17,4 +17,11 @@ namespace Cardinals.UI
         
         string Key { get; }
     }
+
+    public enum Anchor
+    {
+        None,
+        Right,
+        Left
+    }
 }

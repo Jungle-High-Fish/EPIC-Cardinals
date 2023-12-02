@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2056,17 +2056,22 @@ PrefabInstance:
     - target: {fileID: 3036883002466850286, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 330
-      objectReference: {fileID: 0}
-    - target: {fileID: 3036883002466850286, guid: 3ec6d60d874f733408ffecafc090d875,
-        type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3036883002466850286, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036883002466850286, guid: 3ec6d60d874f733408ffecafc090d875,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 185
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036883002466850286, guid: 3ec6d60d874f733408ffecafc090d875,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3411112402556173884, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
@@ -2386,7 +2391,7 @@ PrefabInstance:
     - target: {fileID: 5773465427279585160, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773465427279585160, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
@@ -2523,6 +2528,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7274367098524841571, guid: 3ec6d60d874f733408ffecafc090d875,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7973055869764222890, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2566,17 +2576,22 @@ PrefabInstance:
     - target: {fileID: 8019951776963366540, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 330
-      objectReference: {fileID: 0}
-    - target: {fileID: 8019951776963366540, guid: 3ec6d60d874f733408ffecafc090d875,
-        type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8019951776963366540, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019951776963366540, guid: 3ec6d60d874f733408ffecafc090d875,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 185
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019951776963366540, guid: 3ec6d60d874f733408ffecafc090d875,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8040735013844975304, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
@@ -2671,7 +2686,7 @@ PrefabInstance:
     - target: {fileID: 9180850635919573367, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 335
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9180850635919573367, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
@@ -2681,7 +2696,7 @@ PrefabInstance:
     - target: {fileID: 9180850635919573367, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 187.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9180850635919573367, guid: 3ec6d60d874f733408ffecafc090d875,
         type: 3}

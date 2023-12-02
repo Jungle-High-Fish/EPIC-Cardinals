@@ -10,9 +10,15 @@ namespace Cardinals.UI
     {
         [SerializeField] public Image _iconImg;
 
+        public void Init()
+        {
+            
+        }
+
         public void Init(Sprite sprite)
         {
             _iconImg.sprite = sprite;
+            GetComponent<DescriptionConnector>().Init();
         }
     }
 }

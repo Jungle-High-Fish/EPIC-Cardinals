@@ -6,6 +6,7 @@ using Cardinals.BoardEvent.Tile;
 using Cardinals.Enemy;
 using Cardinals.Game;
 using Cardinals.UI;
+using Cardinals.UI.Description;
 using Unity.VisualScripting;
 using UnityEngine;
 using Util;
@@ -24,6 +25,7 @@ namespace Cardinals
         public UIMapButton UIMapButton => _uiMapButton;
         public UITileInfo UIHoveredTileInfo => _uiHoveredTileInfo;
         public UITileInfo UITileInfo => _uiTileInfo;
+        public UINewPlayerInfo UINewPlayerInfo => _uiNewPlayerInfo;
 
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -45,6 +47,7 @@ namespace Cardinals
         private UIMagicLevelUpPanel _uiMagicLevelUpPanel;
         private UITileInfo _uiHoveredTileInfo;
         private UITileInfo _uiTileInfo;
+        private UINewPlayerInfo _uiNewPlayerInfo;
 
         #region Board-Event 
         private UICardEvent _uiCardEvent;
@@ -74,6 +77,7 @@ namespace Cardinals
             InstantiateMapButtonUI();
             InstantiateRewardUI();
             InstantiatePlayerUI();
+            InstantiateNewPlayerUI();
             InstantiateTileSelectionUI();
 
             InstantiateEnemyUIParent();
@@ -177,6 +181,12 @@ namespace Cardinals
 
             _uiPlayerInfo = playerUIObj.GetComponent<UIPlayerInfo>();
             playerUIObj.SetActive(false);
+        }
+        private void InstantiateNewPlayerUI() {
+            GameObject playerUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UINewPlayerInfo);
+            GameObject playerUIObj = Instantiate(playerUIPrefab, _playerUICanvas.transform);
+
+            _uiNewPlayerInfo = playerUIObj.GetComponent<UINewPlayerInfo>();
         }
 
         private void InstantiateCardSystemUI() {
