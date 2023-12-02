@@ -245,6 +245,10 @@ namespace Cardinals.Enums {
         Jump,
         Flip,
         FlipBack,
+        Float,
+        FloatDown,
+        Attack,
+        Defence,
         Rotate360
     }
     

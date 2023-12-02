@@ -72,9 +72,18 @@ namespace Cardinals.Board {
 
 		private void InitAnimations() {
 			InitShakeAnimation();
+			
 			InitJumpAnimation();
+			
 			InitFlipAnimation(true);
 			InitFlipAnimation(false);
+			
+			InitFloatAnimation(true);
+			InitFloatAnimation(false);
+
+			InitAttackAnimation();
+			InitDefenceAnimation();
+
 			InitRotate360Animation();
 		}
 
@@ -121,10 +130,60 @@ namespace Cardinals.Board {
 			return flipAnimation;
 		}
 
+		private Sequence InitFloatAnimation(bool isUp = false) {
+			Sequence floatAnimation = DOTween.Sequence();
+			floatAnimation.Append(
+				transform.DOMoveY(
+					_tile.Get(gameObject).TilePositionOnGround.y + (isUp ? 0.5f : 0), 
+					0.5f
+				).SetEase(Ease.InOutSine)
+			).OnComplete(AnimationComplete(isUp ? TileAnimationType.Float : TileAnimationType.FloatDown))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(isUp ? TileAnimationType.Float : TileAnimationType.FloatDown, (floatAnimation, 1f, 0));
+			return floatAnimation;
+		}
+
+		private Sequence InitAttackAnimation() {
+			Sequence attackAnimation = DOTween.Sequence();
+			attackAnimation.Append(
+				transform.DOPunchPosition((transform.rotation * Vector3.forward).normalized * 0.5f, 0.3f, 1, 0.1f).SetEase(Ease.InOutSine)
+			)
+			.OnComplete(AnimationComplete(TileAnimationType.Attack))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(TileAnimationType.Attack, (attackAnimation, 0.4f, 0));
+			return attackAnimation;
+		}
+		
+		private Sequence InitDefenceAnimation() {
+			Sequence defenceAnimation = DOTween.Sequence();
+			defenceAnimation.Append(
+				_rendererTransform.Get(gameObject)
+				.DODynamicLookAt(_tile.Get(gameObject).TilePositionOnGround + Vector3.up, 0.7f)
+				.SetEase(Ease.InOutSine)
+			).Join(
+				_rendererTransform.Get(gameObject)
+					.DOPunchRotation(new Vector3(-80, 0, 0), 0.7f, 1, 0)
+					.SetEase(Ease.InOutSine)
+			).Join(
+				_rendererTransform.Get(gameObject)
+					.DOPunchPosition(Vector3.forward * 0.7f, 0.7f, 1, 0.1f)
+					.SetEase(Ease.InOutSine)
+			)
+			.AppendInterval(0.5f)
+			.OnComplete(AnimationComplete(TileAnimationType.Defence))
+			.SetAutoKill(false).Pause();
+
+			_animationDict.Add(TileAnimationType.Defence, (defenceAnimation, 0.7f, 0));
+			return defenceAnimation;
+		}
+
 		private Sequence InitRotate360Animation() {
 			Sequence rotate360Animation = DOTween.Sequence();
 			rotate360Animation.Append(
-				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
+				transform.DOPunchPosition(Vector3.up, 1.5f, 1, 0f)
+				//_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
 			).Insert(
 				0.2f, _rendererTransform.Get(gameObject).DORotate(
 					new Vector3(0, _tile.Get(gameObject).TileRotation.y, 360), 

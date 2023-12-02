@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Board;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,12 +23,16 @@ namespace Cardinals.UI {
 
         private IEnumerator _updateLevelUI;
         private bool _hasInit = false;
+
+        private int _prevExp = 0;
         
         public void Init(Tile tile) {
             _hasInit = true;
 
             _tile = tile;
             _expBar.Get(gameObject).transform.localScale = new Vector3(0, 1, 1);
+
+            _prevExp = _tile.Exp;
 
             if (_updateLevelUI == null) {
                 _updateLevelUI = UpdateLevelUI();
@@ -41,8 +46,11 @@ namespace Cardinals.UI {
             }
 
             while (true) {
-                float expRatio = _tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level];
-                _expBar.Get(gameObject).transform.localScale = new Vector3(Mathf.Clamp(expRatio, 0, 1), 1, 1);
+                if (_prevExp != _tile.Exp) {
+                    ShowExpChangeAnimation();
+                }
+                _prevExp = _tile.Exp;
+
                 _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
                 _actionEmblem.Get(gameObject).sprite 
@@ -64,6 +72,14 @@ namespace Cardinals.UI {
             if (_updateLevelUI != null) {
                 StopCoroutine(_updateLevelUI);
             }
+        }
+
+        private void ShowExpChangeAnimation() {
+            float expRatio = _tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level];
+            float newScaleX = Mathf.Clamp(expRatio, 0, 1);
+
+            (_expBar.Get(gameObject).transform as RectTransform).DOScaleX(newScaleX, 0.3f).SetEase(Ease.OutBack);
+            //(transform as RectTransform).DOPunchScale(new Vector3(1.03f, 1.03f, 0), 0.3f, 1, 0f);
         }
     }
 }

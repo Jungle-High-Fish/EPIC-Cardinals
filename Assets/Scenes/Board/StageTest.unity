@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 48474482}
   - component: {fileID: 48474481}
   - component: {fileID: 48474483}
+  - component: {fileID: 48474484}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -388,6 +389,18 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!114 &48474484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48474480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d631eedd4d2626b4abf7a14df06b5a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &48766544
 PrefabInstance:
   m_ObjectHideFlags: 0

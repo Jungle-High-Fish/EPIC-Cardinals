@@ -1,5 +1,8 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using Util;
 
 namespace Cardinals.UI
@@ -10,7 +13,96 @@ namespace Cardinals.UI
         private IDescription _description;
         private GameObject _instObject;
         
-        public void Awake()
+        enum HoverRenderType
+        {
+            None,
+            Sprite,
+            Image,
+        }
+        
+        enum CountType
+        {
+            None,
+            Single, //  
+            Multi,  // 여러 오브젝트 정보를 한번에 띄우려 할 때 사용
+        }
+
+        [SerializeField] private Transform _itemAreaTr;
+        [SerializeField] private DescriptionArea _descriptionArea;
+        [SerializeField] private HoverRenderType _hoverRenderType;
+        [SerializeField] private CountType _countType;
+        private GameObject UIDescriptionPrefab => ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
+
+        public void Start()
+        {
+            if(_countType == CountType.Multi) Init();
+        }
+
+        public void Init()
+        {
+            _itemAreaTr ??= this.transform;
+            _itemAreaTr ??= GetComponent<RectTransform>();
+            
+            _descriptionArea ??= GameManager.I.UI.DescCanvasDescArea;
+            
+            if (_hoverRenderType == HoverRenderType.Sprite)
+            {
+                InitSpriteSetting();
+            }
+            else
+            {
+                InitImageSetting();
+            }
+        }
+
+        #region Sprite Setting
+
+        private Action<IDescription[]> _mouseEnterAction;
+        private Action _mouseExitAction;
+
+        private void InitSpriteSetting()
+        {
+            var items = _itemAreaTr.GetComponents<IDescription>();
+            
+            _mouseEnterAction += _descriptionArea.OnPanel;
+            _mouseExitAction += _descriptionArea.OffPanel;
+        }
+
+        IDescription[] GetIDescription()
+        {
+            return _countType switch
+            {
+                CountType.Single => _itemAreaTr.GetComponents<IDescription>(),
+                CountType.Multi => _itemAreaTr.GetComponentsInChildren<IDescription>(),
+                _ => null
+            };
+        }
+
+        // public void OnPointerEnter(PointerEventData eventData)
+        // {
+        //     _mouseEnterAction?.Invoke(GetIDescription());
+        // }
+        //
+        // public void OnPointerExit(PointerEventData eventData)
+        // {
+        //     _mouseExitAction?.Invoke();
+        // }
+        private void OnMouseEnter()
+        {
+            _mouseEnterAction?.Invoke(GetIDescription());
+        }
+        
+        private void OnMouseExit()
+        {
+            _mouseExitAction?.Invoke();
+        }
+        #endregion
+
+        #region Image Setting
+        /// <summary>
+        /// 이미지 타입 호버 시, 생성되는 설명창의 경우 사용
+        /// </summary>
+        private void InitImageSetting()
         {
             var trigger = GetComponent<EventTrigger>();
 
@@ -32,28 +124,27 @@ namespace Cardinals.UI
 
         void OnPointEnterCallback()
         {
-            if (_instObject == null)
-            {
-                _description ??= GetComponent<IDescription>();
-                if (_description != null)
-                {
-                    var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
- 
-                    // 생성할 객체 위치 설정
-                    var descIstTrInfo = GetComponentInParent<IDescriptionInstTrInfo>();
-                    Transform instTr = descIstTrInfo != null ? descIstTrInfo.DescriptionInstTr :_description.InstTr;
-             
-                    _instObject = Instantiate(prefab, instTr);
-                    _instObject.GetComponent<UIDescription>().Init(_description);
-                }
-            }
-            
-            _instObject?.SetActive(true);
+            _descriptionArea.OnPanel(GetIDescription());
         }
 
         void OnTriggerExitCallback()
         {
-            _instObject?.SetActive(false);
+            _descriptionArea.OffPanel();
+        }
+        #endregion
+
+        public void RequestOnDescription(IDescription description)
+        {
+            _descriptionArea.UpdatePanel(description);
+            _descriptionArea.OnPanel();
+        }
+
+        public void OnTransformChildrenChanged()
+        {
+            if (_countType == CountType.Multi)
+            {
+                _descriptionArea.UpdatePanel(GetIDescription());
+            }
         }
     }
 }
