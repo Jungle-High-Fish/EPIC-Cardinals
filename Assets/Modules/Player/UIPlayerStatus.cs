@@ -59,7 +59,8 @@ namespace Cardinals.UI
             _curHPRect.localScale = vector3;
             
             _hpTMP.text = $"{hp}/{maxHp}";
-            _maxHPRect.DOPunchScale(new Vector3(.5f, .5f, 1), .1f, 1);
+            _maxHPRect.DOPunchScale(new Vector3(.5f, .5f, 1), .1f, 1)
+                      .OnComplete(() => {_maxHPRect.localScale = Vector3.one; });
         }
 
         private void UpdateDefense(int defense)
@@ -67,7 +68,8 @@ namespace Cardinals.UI
             if (defense != 0)
             {
                 _defenseObj.SetActive(true);
-                _defenseObj.transform.DOPunchScale(new Vector3(.5f, .5f, 1), .3f, 2);
+                _defenseObj.transform.DOPunchScale(new Vector3(.5f, .5f, 1), .3f, 2)
+                                     .OnComplete(() => {_defenseObj.transform.localScale = Vector3.one; });
                 _defenseTMP.text = defense.ToString();
             }
         }
