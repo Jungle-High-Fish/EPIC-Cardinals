@@ -10,8 +10,12 @@ namespace Cardinals.Game {
     public class EnemyDataSO: ScriptableObject {
         public string enemyName;
         public EnemyType enemyType;
-        [InlineEditor(InlineEditorModes.LargePreview)] public Sprite sprite;
-        [InlineEditor(InlineEditorModes.LargePreview)] public Sprite berserkSprite;
+        [AssetSelector(Paths = "Assets/Resources/Prefabs/Enemy/EnemyAnimation")]
+        [InlineEditor(InlineEditorModes.LargePreview)] 
+        public GameObject prefab;
+        [AssetSelector(Paths = "Assets/Resources/Prefabs/Enemy/EnemyAnimation")]
+        [InlineEditor(InlineEditorModes.LargePreview)] 
+        public GameObject berserkPrefab;
         public int maxHP;
     }
 

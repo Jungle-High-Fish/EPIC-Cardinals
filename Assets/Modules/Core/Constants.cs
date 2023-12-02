@@ -116,6 +116,7 @@ namespace Cardinals.Constants {
             public const string SO_TileSymbolsData = "TileSymbols/TileSymbols";
             public const string SO_TileCurseUIData = "TileCurses/";
             public const string SO_BoardEventData = "BoardEvent/";
+            public const string SO_EnemyData = "Stage/Enemies/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";

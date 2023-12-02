@@ -180,8 +180,8 @@ namespace Cardinals.Game {
             
             BaseEnemy enemyComp = enemyRenderer.AddComponent(enemyType) as BaseEnemy;
             
-            enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
             enemyComp.Init(enemyData);
+            enemyRenderer.GetComponent<EnemyRenderer>().Init(enemyComp);
             
             enemyRenderer.transform.position = position + new Vector3(0, 2, 0);
 
