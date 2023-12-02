@@ -5,6 +5,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Util;
 using Cardinals.Enums;
+using UnityEngine.UI;
 using Unity.VisualScripting;
 using Cardinals.Board;
 
@@ -108,11 +109,7 @@ namespace Cardinals
         [Button]
         public void EndTurn()
         {
-            int count = _handCards.Count;
-            for(int i = 0; i < count; i++)
-            {
-                Discard(0);
-            }
+            StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
         }
 
         public void OnBattle()
@@ -228,8 +225,37 @@ namespace Cardinals
 
         }
 
-        private void Discard(int index)
+        private IEnumerator DiscardAll(int index, CardAnimationType animationType)
         {
+            yield return new WaitForSeconds(0.6f);
+            for (int i = 0; i < _handCards.Count; i++)
+            {
+                StartCoroutine(_handcardsUI[i].CardAnim.Play(animationType));
+            }
+                
+            yield return new WaitForSeconds(0.4f);
+            int count = _handCards.Count;
+            for (int i=0;i< count; i++)
+            {
+                Destroy(_handcardsUI[0].gameObject);
+                _handcardsUI.RemoveAt(0);
+
+                Card card = _handCards[0];
+                if (!card.IsVolatile)
+                {
+                    _discardPile.Add(card);
+                }
+                _handCards.Remove(card);
+                UpdateCardIndex();
+            }
+           
+        }
+
+        private IEnumerator Discard(int index, CardAnimationType animationType)
+        {
+            _handcardsUI[index].IsDiscard = true;
+            _handcardsUI[index].IsSelect = false;
+            yield return _handcardsUI[index].CardAnim.Play(animationType);
             Destroy(_handcardsUI[index].gameObject);
             _handcardsUI.RemoveAt(index);
 
@@ -304,6 +330,7 @@ namespace Cardinals
                         case MouseState.Action:
                             var target = GameManager.I.Stage.Enemies[boardInputHandler.HoveredIdx];
                             useNumber = _handCards[_selectCardIndex].CardNumber;
+
                             if (!CardUseAction(useNumber, target))
                             {
                                 break;
@@ -318,18 +345,18 @@ namespace Cardinals
                         
                         case MouseState.CardEvent:
                             useNumber = _handCards[_selectCardIndex].CardNumber;
-                            Discard(_selectCardIndex);
                             GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();
+                            yield return Discard(_selectCardIndex, CardAnimationType.TurnEnd);
                             yield break;
                     }
 
                     _handcardsUI[_selectCardIndex].IsSelect = false;
-                    _handcardsUI[_selectCardIndex].gameObject.SetActive(false);
-                    _handcardsUI[_selectCardIndex].gameObject.SetActive(true);
-
+                    _handcardsUI[_selectCardIndex].transform.localScale=new Vector3(1, 1, 1);
+                    _cardDeckUIParent.GetComponent<HorizontalLayoutGroup>().SetLayoutHorizontal();
+                    _cardDeckUIParent.GetComponent<HorizontalLayoutGroup>().SetLayoutVertical();
                     DismissAllCards();
 
                     _state = CardState.Idle;
@@ -352,7 +379,7 @@ namespace Cardinals
         {
             StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
 
-            Discard(_selectCardIndex);
+            StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove));
             _state = CardState.Idle;
             _prevCardNumber = -1;
             _continuousUseCount = 0;
@@ -364,12 +391,11 @@ namespace Cardinals
         public void CardUsePrevMove(int num)
         {
             StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f));
-
-            Discard(_selectCardIndex);
             _state = CardState.Idle;
             _prevCardNumber = -1;
             _canActionUse = true;
             _lastCardUsedForAction = false;
+            StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove));
             DismissAllCards();
         }
 
@@ -400,8 +426,21 @@ namespace Cardinals
             {
                
                 _prevCardNumber = num;
+                switch (GameManager.I.Player.OnTile.Type)
+                {
+                    case TileType.Attack:
+                        StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseAttack));
+                        break;
+                    case TileType.Defence:
+                        StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseDefense));
+                        break;
+                    default:
+                        StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove));
+                        break;
+                }
+
                 // [디버프] 슬로우
-                if(GameManager.I.Player.CheckBuffExist(BuffType.Slow)&& _continuousUseCount == 0)
+                if (GameManager.I.Player.CheckBuffExist(BuffType.Slow)&& _continuousUseCount == 0)
                 {
                     Debug.Log("슬로우 때문에 행동 무시");
                 }
@@ -411,7 +450,6 @@ namespace Cardinals
                 }
 
                 _continuousUseCount++;
-                Discard(_selectCardIndex);
                 _state = CardState.Idle;
                 _lastCardUsedForAction = true;
                 UpdateCardState(num, false);

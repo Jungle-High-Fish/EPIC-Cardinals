@@ -96,9 +96,6 @@ namespace Cardinals.Game
                 GameManager.I.Player.Win();
                 GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
                 RemoveSummons();
-                
-                GameManager.I.Stage.CardManager.EndBattle();
-
                 yield return WaitReward(rewards);
             }
         }
