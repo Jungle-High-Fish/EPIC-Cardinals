@@ -215,7 +215,10 @@ namespace Cardinals.Game {
             GameObject playerObj = GameObject.Instantiate(playerPrefab);
             _player = playerObj.GetComponent<Player>();
             _player.Init();
-            GameManager.I.UI.InitPlayerUI();
+            
+            // UI 추가
+            GameManager.I.UI.UINewPlayerInfo.Init(); // 창에 이벤트 연결
+            GameManager.I.UI.InstantiatePlayerStatusUI(); // Status 창 연결
 
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
             

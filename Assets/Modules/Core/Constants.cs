@@ -44,6 +44,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
             public const string Prefabs_UINewPlayerInfo = "UI/Player/UINewPlayerInfo";
+            public const string Prefabs_UIPlayerStatus = "UI/Player/UIPlayerStatus";
             public const string Prefabs_UIPotion = "UI/Player/UIPotion";
             public const string Prefabs_UIArtifact = "UI/Player/UIArtifact";
             public const string Prefabs_UIBless = "UI/Player/UIBless";

@@ -33,8 +33,6 @@ namespace Cardinals
             base.Init(_initHp);
             _playerInfo = new PlayerInfo();
             
-            GameManager.I.UI.UINewPlayerInfo.Init(); // 창에 이벤트 연결
-            
             Debug.Log("플레이어 초기화 완료");
         }
 

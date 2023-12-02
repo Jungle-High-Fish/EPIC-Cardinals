@@ -76,7 +76,7 @@ namespace Cardinals
             InstantiateTurnEndButtonUI();
             InstantiateMapButtonUI();
             InstantiateRewardUI();
-            InstantiatePlayerUI();
+            //InstantiatePlayerUI();
             InstantiateNewPlayerUI();
             InstantiateTileSelectionUI();
 
@@ -189,6 +189,13 @@ namespace Cardinals
             _uiNewPlayerInfo = playerUIObj.GetComponent<UINewPlayerInfo>();
         }
 
+        public void InstantiatePlayerStatusUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerStatus);
+            GameObject obj = Instantiate(prefab, _playerUICanvas.transform);
+            obj.GetComponent<UIPlayerStatus>().Init();
+        }
+
         private void InstantiateCardSystemUI() {
             GameObject cardSystemUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_CardSystem);
             GameObject cardSystemUIObj = Instantiate(cardSystemUIPrefab, _cardUICanvas.transform);
@@ -270,5 +277,6 @@ namespace Cardinals
             _uiTileInfo = obj.GetComponent<UITileInfo>();
             obj.SetActive(false);
         }
+        
     }
 }
