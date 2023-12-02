@@ -15,6 +15,7 @@ namespace Cardinals
         private int _cardIndex;
         private bool _canAction;
         private bool _canMove;
+        private bool _isDiscard=false; // discard될 카드라면 true
         private Vector2 _CardUIPos;
         [SerializeField] private GameObject _actionMark;
         [SerializeField] private GameObject _moveMark;
@@ -28,13 +29,19 @@ namespace Cardinals
         private bool _isSelectable;
         private Card _card;
         private CardManager _cardManager;
+        private CardAnimation _cardAnimation;
 
+        public CardAnimation CardAnim => _cardAnimation;
         public bool IsSelect
         {
             set => _isSelect = value;
            
         }
 
+        public bool IsDiscard
+        {
+            set => _isDiscard = value;
+        }
         public bool IsSelectable
         {
             get => _isSelectable;
@@ -110,6 +117,7 @@ namespace Cardinals
             _numberText.text = card.CardNumber.ToString();
             _volatileText.SetActive(card.IsVolatile);
             _CardUIPos = (transform as RectTransform).anchoredPosition;
+            _cardAnimation = GetComponent<CardAnimation>();
 
             switch (card.CardNumber)
             {
@@ -137,7 +145,8 @@ namespace Cardinals
                 return;
             if (!_isSelectable)
                 return;
-            
+
+            transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
             _cardManager.SelectCardIndex = _cardIndex;
             _isSelect = true;
             _cardManager.State = CardState.Select;
@@ -172,13 +181,20 @@ namespace Cardinals
 
         private void SetCardUIHovered()
         {
-            (transform as RectTransform).DOAnchorPosY(_CardUIPos.y+30, 0.1f);
+            if (!_isDiscard)
+            {
+                (transform as RectTransform).DOAnchorPosY(_CardUIPos.y + 30, 0.1f);
+            }
             
         }
 
         private void SetCardUIRestore()
         {
-            (transform as RectTransform).DOAnchorPosY(_CardUIPos.y, 0.1f);
+            if (!_isDiscard)
+            {
+                (transform as RectTransform).DOAnchorPosY(_CardUIPos.y, 0.1f);
+            }
+                
         }
 
         private void Update()
