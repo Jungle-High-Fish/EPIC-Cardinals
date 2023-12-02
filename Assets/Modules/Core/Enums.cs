@@ -382,7 +382,14 @@ namespace Cardinals.Enums {
         Idle,
         Select
     }
-
+    public enum CardAnimationType
+    {
+        Empty,
+        UseAttack,
+        UseDefense,
+        UseMove,
+        TurnEnd
+    }
     public enum MouseState
     {
         Action,
