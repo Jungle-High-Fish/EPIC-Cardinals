@@ -1,5 +1,6 @@
 using Cardinals.UI;
 using Cardinals.UI.Description;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -32,6 +33,8 @@ namespace Cardinals
         private void UpdateBuffCount(int buffCount)
         {
             _buffCountTMP.text = buffCount == 0 ? string.Empty : buffCount.ToString();
+            transform.DOPunchScale(Vector3.one, 0.3f, 1)
+                .OnComplete(() => { transform.localScale = Vector3.one; });
         }
 
         private void Destroy()
