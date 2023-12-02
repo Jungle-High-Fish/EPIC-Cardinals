@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +38,13 @@ namespace Modules.Utils
                 layoutGroup.SetLayoutVertical();
             }
         }
-        
+
+        public static void Update(this ContentSizeFitter fitter)
+        {
+            if (fitter != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)fitter.transform);
+            }
+        }
     }
 }

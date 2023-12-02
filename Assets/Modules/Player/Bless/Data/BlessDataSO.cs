@@ -18,5 +18,6 @@ namespace Cardinals
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
         public Sprite patternSprite;
         public BlessType blessType;
+        public TileMagicType relatedMagicType;
     }
 }

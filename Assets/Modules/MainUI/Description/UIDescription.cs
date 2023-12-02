@@ -41,14 +41,9 @@ namespace Cardinals.UI
             _iconImg.gameObject.SetActive(icon != null);
 
             // 테두리 색상 설정
-            if (description.Color == default)
-            {
-                _borderObjImg.color = Constants.Common.Colors.CardinalsBlack;
-            }
-            else
-            {
-                _borderObjImg.color = description.Color;
-            }
+            Color color = description.Color == default ? Constants.Common.Colors.CardinalsBlack : description.Color;
+            _nameTMP.color = color;
+            _borderObjImg.color = color;
             
             transform.AddComponent<LayoutInitializer>().Clear();
         }

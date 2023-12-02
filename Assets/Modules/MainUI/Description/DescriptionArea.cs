@@ -20,6 +20,12 @@ namespace Cardinals.UI
         private bool _isActive;
 
 
+        public void Update()
+        {
+            TraceCursor();
+        }
+        
+        #region Canvas Setting
         public void InitCanvas()
         {
             gameObject.name = "Global Description Area";
@@ -29,8 +35,10 @@ namespace Cardinals.UI
             group.padding = new RectOffset(5, 5, 5, 5);
             group.childAlignment = TextAnchor.UpperLeft;
             group.childControlWidth = true;
+            group.childControlHeight = false;
             group.childForceExpandWidth = true;
             group.childForceExpandHeight = true;
+            group.spacing = 10;
             
             var fitter = transform.AddComponent<ContentSizeFitter>();
             fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
@@ -42,13 +50,15 @@ namespace Cardinals.UI
             rect.anchorMax = new Vector2(0, 1);
         }
 
-        public void Update()
+        void TraceCursor()
         {
             if (_canvasMode && _isActive)
             {
                 transform.position = Input.mousePosition;
             }
         }
+        #endregion
+        
 
         public void UpdatePanel(params IDescription[] descriptions)
         {
@@ -108,6 +118,10 @@ namespace Cardinals.UI
             GetComponent<VerticalLayoutGroup>().Update();
             GetComponent<HorizontalLayoutGroup>().Update();
             GetComponent<GridLayoutGroup>().Update();
+            GetComponent<ContentSizeFitter>().Update();
+            
+            // gameObject.SetActive(false);
+            // gameObject.SetActive(true);
         }
 
         public void OffPanel()
