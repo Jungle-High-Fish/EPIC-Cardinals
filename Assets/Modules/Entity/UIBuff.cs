@@ -33,7 +33,7 @@ namespace Cardinals
         private void UpdateBuffCount(int buffCount)
         {
             _buffCountTMP.text = buffCount == 0 ? string.Empty : buffCount.ToString();
-            transform.DOPunchScale(Vector3.one, 0.3f, 1)
+            transform.DOPunchScale(Vector3.one, 0.4f, 1)
                 .OnComplete(() => { transform.localScale = Vector3.one; });
         }
 
