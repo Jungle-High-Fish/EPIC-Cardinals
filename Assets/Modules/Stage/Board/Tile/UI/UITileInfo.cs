@@ -160,9 +160,9 @@ namespace Cardinals.UI {
             _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
             _expBar.Get(gameObject).transform.localScale = new Vector3(
-                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1), 
-                1, 
-                1
+                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 0.8f), 
+                0.8f, 
+                0.8f
             );
 
             _levelText.Get(gameObject).text = $"Lv. {_tile.Level}";
@@ -191,7 +191,7 @@ namespace Cardinals.UI {
 
         private void ShowAnimation() {
             transform.localScale = Vector3.zero;
-            transform.DOScale(1, 0.4f).SetEase(Ease.OutBack);
+            transform.DOScale(.8f, 0.4f).SetEase(Ease.OutBack);
         }
 
         private void HideAnimation() {

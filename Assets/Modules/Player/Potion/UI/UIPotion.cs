@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Cardinals.UI;
+using Cardinals.UI.Description;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
 
 namespace Cardinals
 {
+    /// <summary>
+    /// NewPlayerInfo에서는 사용하지 않습니다!!!!
+    /// </summary>
     public class UIPotion: MonoBehaviour, IDescription
     {
         public string Name => _potionDataSO.potionName;
         public string Description => _potionDataSO.description;
         public Sprite IconSprite => _potionDataSO.sprite;
-        public Transform InstTr => transform;
         public Color Color { get; }
-        public string Key { get; }
+        public string Key => _potionDataSO.potionType.ToString();
 
         private PotionDataSO _potionDataSO;
         private int _index;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals;
 using Cardinals.Enums;
+using Cardinals.Game;
 using Cardinals.UI;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,13 +16,16 @@ namespace Cardinals.UI.Description
         public string Name => _data.blessName;
         public string Description => _data.description;
         public Sprite IconSprite => null;
-        public Color Color { get; }
-        
+        public Color Color { get; set; }
+
         public string Key => _data.blessType.ToString();
 
         public void Init(BlessType blessType)
         {
             _data = ResourceLoader.LoadSO<BlessDataSO>(Constants.FilePath.Resources.SO_BlessData + blessType);
+            Color = ResourceLoader
+                .LoadSO<TileMagicDataSO>(Constants.FilePath.Resources.SO_MagicData + _data.relatedMagicType)
+                .elementColor;
 
             switch (blessType)
             {

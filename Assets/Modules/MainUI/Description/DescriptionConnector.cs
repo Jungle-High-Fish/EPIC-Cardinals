@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Util;
 
 namespace Cardinals.UI
@@ -27,21 +28,23 @@ namespace Cardinals.UI
             Multi,  // 여러 오브젝트 정보를 한번에 띄우려 할 때 사용
         }
 
-        [SerializeField] private Transform _itemAreaTr;
+        [SerializeField] private Transform _itemAreaTr => transform;
         [SerializeField] private DescriptionArea _descriptionArea;
         [SerializeField] private HoverRenderType _hoverRenderType;
         [SerializeField] private CountType _countType;
+        [SerializeField] private Anchor _anchor;
         private GameObject UIDescriptionPrefab => ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
 
         public void Start()
         {
             if(_countType == CountType.Multi) Init();
+            if (_anchor == default) _anchor = Anchor.Right;
         }
 
         public void Init()
         {
-            _itemAreaTr ??= this.transform;
-            _itemAreaTr ??= GetComponent<RectTransform>();
+            // _itemAreaTr ??= this.transform;
+            // _itemAreaTr ??= GetComponent<RectTransform>();
             
             _descriptionArea ??= GameManager.I.UI.DescCanvasDescArea;
             
@@ -57,7 +60,7 @@ namespace Cardinals.UI
 
         #region Sprite Setting
 
-        private Action<IDescription[]> _mouseEnterAction;
+        private Action<Anchor, IDescription[]> _mouseEnterAction;
         private Action _mouseExitAction;
 
         private void InitSpriteSetting()
@@ -78,18 +81,9 @@ namespace Cardinals.UI
             };
         }
 
-        // public void OnPointerEnter(PointerEventData eventData)
-        // {
-        //     _mouseEnterAction?.Invoke(GetIDescription());
-        // }
-        //
-        // public void OnPointerExit(PointerEventData eventData)
-        // {
-        //     _mouseExitAction?.Invoke();
-        // }
         private void OnMouseEnter()
         {
-            _mouseEnterAction?.Invoke(GetIDescription());
+            _mouseEnterAction?.Invoke(_anchor, GetIDescription());
         }
         
         private void OnMouseExit()
@@ -112,22 +106,22 @@ namespace Cardinals.UI
             
                 var entry = new EventTrigger.Entry();
                 entry.eventID = EventTriggerType.PointerEnter;
-                entry.callback.AddListener( (eventData) => { OnPointEnterCallback(); } );
+                entry.callback.AddListener( (eventData) => { OnPanel(); } );
                 trigger.triggers.Add(entry);
                 
                 entry = new EventTrigger.Entry();
                 entry.eventID = EventTriggerType.PointerExit;
-                entry.callback.AddListener( (eventData) => { OnTriggerExitCallback(); } );
+                entry.callback.AddListener( (eventData) => { OffPanel(); } );
                 trigger.triggers.Add(entry);
             }
         }
 
-        void OnPointEnterCallback()
+        public void OnPanel()
         {
-            _descriptionArea.OnPanel(GetIDescription());
+            _descriptionArea.OnPanel(_anchor, GetIDescription());
         }
 
-        void OnTriggerExitCallback()
+        public void OffPanel()
         {
             _descriptionArea.OffPanel();
         }
@@ -135,7 +129,7 @@ namespace Cardinals.UI
 
         public void RequestOnDescription(IDescription description)
         {
-            _descriptionArea.UpdatePanel(description);
+            _descriptionArea.UpdatePanel(_anchor, description);
             _descriptionArea.OnPanel();
         }
 
@@ -143,7 +137,7 @@ namespace Cardinals.UI
         {
             if (_countType == CountType.Multi)
             {
-                _descriptionArea.UpdatePanel(GetIDescription());
+                _descriptionArea.UpdatePanel(_anchor, GetIDescription());
             }
         }
     }

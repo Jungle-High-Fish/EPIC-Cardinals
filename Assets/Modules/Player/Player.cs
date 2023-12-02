@@ -29,9 +29,13 @@ namespace Cardinals
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
+        public Action<PlayerActionType> UpdateActionEvent { get; set; }
+        public PlayerActionType CurActionType { get; private set; }
+
         public override void Init(int _ = default) {
             base.Init(_initHp);
             _playerInfo = new PlayerInfo();
+            
             Debug.Log("플레이어 초기화 완료");
         }
 
@@ -73,6 +77,7 @@ namespace Cardinals
 
             //GameManager.I.Next();
             GameManager.I.Stage.CardManager.EndTurn();
+            GameManager.I.Player.UpdateAction(PlayerActionType.None);
             
             
             if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth1))
@@ -228,6 +233,15 @@ namespace Cardinals
             for (int i = Buffs.Count - 1; i >= 0; i--)
             {
                 Buffs[i].EndEvent();
+            }
+        }
+
+        public void UpdateAction(PlayerActionType type)
+        {
+            if (type != CurActionType)
+            {
+                CurActionType = type;
+                UpdateActionEvent?.Invoke(type);
             }
         }
     }

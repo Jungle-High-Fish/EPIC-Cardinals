@@ -18,3 +18,4 @@ MonoBehaviour:
   totemSprite: {fileID: 21300000, guid: 94a3f0e1c2c14bb4bbaef0b4353a6d63, type: 3}
   patternSprite: {fileID: 21300000, guid: f52042d83276b4cceb1773beec68936e, type: 3}
   blessType: 3
+  relatedMagicType: 2

@@ -43,6 +43,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_EnemyRenderer = "Enemy/EnemyRenderer";
             public const string Prefabs_Player = "Player/Player";
             public const string Prefabs_UIPlayerInfo = "UI/Player/UIPlayerInfo";
+            public const string Prefabs_UINewPlayerInfo = "UI/Player/UINewPlayerInfo";
+            public const string Prefabs_UIPlayerStatus = "UI/Player/UIPlayerStatus";
             public const string Prefabs_UIPotion = "UI/Player/UIPotion";
             public const string Prefabs_UIArtifact = "UI/Player/UIArtifact";
             public const string Prefabs_UIBless = "UI/Player/UIBless";
@@ -85,7 +87,10 @@ namespace Cardinals.Constants {
             public const string Sprites_Card_Attack_Mark = "Card/Card_State_Attack";
             public const string Sprites_Card_Defense_Mark = "Card/Card_State_Defense";
 
+            public const string Sprites_Player_Action = "Player/Action/";
+            
             public const string Sprites_UI_Coin = "UI/Icons/UI_Coin";
+            public const string Sprites_UI_IconPrefab = "UI/IconPrefab";
             
             public const string Sprites_UI_Enemy_Ballon_LeftTail = "UI/Enemy/UI_Ballon_LeftTail";
             public const string Sprites_UI_Enemy_Ballon_RightTail = "UI/Enemy/UI_Ballon_RightTail";

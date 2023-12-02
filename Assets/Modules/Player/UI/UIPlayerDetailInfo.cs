@@ -60,18 +60,18 @@ namespace Cardinals.UI {
         private void OnEnable() {
             if (GameManager.I.Stage == null) return;
             if (GameManager.I.Stage.Player == null) return;
-
+            
             GameManager.I.Player.PlayerInfo.AddBlessEvent -= UpdateBlessUI;
             GameManager.I.Player.PlayerInfo.AddBlessEvent += UpdateBlessUI;
-
+            
             GameManager.I.Player.PlayerInfo.AddArtifactEvent -= UpdateArtifactUI;
             GameManager.I.Player.PlayerInfo.AddArtifactEvent += UpdateArtifactUI;
-
+            
             GameManager.I.Player.PlayerInfo.AddPotionEvent -= UpdatePotionUI;
             GameManager.I.Player.PlayerInfo.AddPotionEvent += UpdatePotionUI;
             GameManager.I.Player.PlayerInfo.DeletePotionEvent -= UpdatePotionUI;
             GameManager.I.Player.PlayerInfo.DeletePotionEvent += UpdatePotionUI;
-
+            
             GameManager.I.Player.PlayerInfo.UpdateGoldEvent -= UpdateMoneyUI;
             GameManager.I.Player.PlayerInfo.UpdateGoldEvent += UpdateMoneyUI;
         }
@@ -79,7 +79,7 @@ namespace Cardinals.UI {
         private void OnDisable() {
             if (GameManager.I.Stage == null) return;
             if (GameManager.I.Stage.Player == null) return;
-
+            
             GameManager.I.Player.PlayerInfo.AddBlessEvent -= UpdateBlessUI;
             GameManager.I.Player.PlayerInfo.AddArtifactEvent -= UpdateArtifactUI;
             GameManager.I.Player.PlayerInfo.AddPotionEvent -= UpdatePotionUI;

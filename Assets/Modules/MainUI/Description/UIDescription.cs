@@ -41,16 +41,29 @@ namespace Cardinals.UI
             _iconImg.gameObject.SetActive(icon != null);
 
             // 테두리 색상 설정
-            if (description.Color == default)
+            Color color = description.Color == default ? Constants.Common.Colors.CardinalsBlack : description.Color;
+            _nameTMP.color = color;
+            _borderObjImg.color = color;
+
+            UIClear();
+        }
+
+        private void UIClear()
+        {
+            var fitters = GetComponentsInChildren<ContentSizeFitter>();
+            var horizontalLayout = GetComponentsInChildren<HorizontalLayoutGroup>();
+            var verticalLayout = GetComponentsInChildren<VerticalLayoutGroup>();
+
+            horizontalLayout.Reverse().ForEach(g => g.Update());
+            verticalLayout.Reverse().ForEach(g => g.Update());
+            foreach (var _fitter in fitters.Reverse())
             {
-                _borderObjImg.color = Constants.Common.Colors.CardinalsBlack;
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_fitter.transform);
             }
-            else
-            {
-                _borderObjImg.color = description.Color;
-            }
-            
-            transform.AddComponent<LayoutInitializer>().Clear();
+
+            horizontalLayout.ForEach(g => g.enabled = false);
+            verticalLayout.ForEach(g => g.enabled = false);
+            fitters.ForEach(f => f.enabled = false);
         }
     }
 }

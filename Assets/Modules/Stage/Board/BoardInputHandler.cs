@@ -167,8 +167,10 @@ namespace Cardinals.Board {
 				foreach(var m in _mouseDetectors) {
 					m.RendererEnable(false);
 				}
+				
+				GameManager.I.Player.UpdateAction(PlayerActionType.None); // 플레이어 행동 설정
 			}
-
+					
 			// 보드 레이캐스트
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -177,23 +179,57 @@ namespace Cardinals.Board {
 				_isMouseHover = true;
 				MouseDetector mouseDetector = hit.collider.gameObject.GetComponent<MouseDetector>();
 				int newIdx = mouseDetector.Idx;
-				if (_hoveredIdx != newIdx) {
-					foreach(var m in _mouseDetectors) {
+
+				PlayerActionType playerActionType = default;
+				if (_hoveredIdx != newIdx)
+				{
+					foreach (var m in _mouseDetectors)
+					{
 						m.RendererEnable(false);
 					}
 
-					if (newIdx >= 0 && GameManager.I.Stage.CardManager.State == CardState.Select) {
+					if (newIdx >= 0 && GameManager.I.Stage.CardManager.State == CardState.Select)
+					{
 						mouseDetector.RendererEnable(true);
+
+						// 플레이어 행동 설정
+						if (GameManager.I.Stage.CardManager.CheckUseCardOnAction())
+						{
+							if (GameManager.I.Player.OnTile.Type == TileType.Attack)
+							{
+								playerActionType = PlayerActionType.Attack;
+							}
+							else if (GameManager.I.Player.OnTile.Type == TileType.Defence)
+							{
+								playerActionType = PlayerActionType.Defense;
+							}
+						}
+						else
+						{
+							playerActionType = PlayerActionType.CantUsed;
+						}
 					}
 
 					_hoveredIdx = newIdx;
 				}
+				else playerActionType = GameManager.I.Player.CurActionType;
+
+				if (IsSelectState() && 
+				    !(playerActionType == PlayerActionType.Attack || 
+				      playerActionType == PlayerActionType.Defense ||
+				      playerActionType == PlayerActionType.CantUsed)) 
+				{
+					playerActionType = PlayerActionType.Move;
+				}
+				
+				GameManager.I.Player.UpdateAction(playerActionType);
 			} else {
 				_isMouseHover = false;
 
 				foreach(var m in _mouseDetectors) {
 					m.RendererEnable(false);
 				}
+				
 			}
 
 			// UI 레이캐스트
@@ -211,9 +247,16 @@ namespace Cardinals.Board {
 				} else {
 					_hoveredMouseDetectorType = mouseDetector.MouseDetectorType;
 					isMouseHoverUI = true;
+					if(IsSelectState())
+						 GameManager.I.Player.UpdateAction(PlayerActionType.Cancel);
 				}
 			}
 			_isMouseHoverUI = isMouseHoverUI;
+		}
+
+		private bool IsSelectState()
+		{
+			return GameManager.I.Stage.CardManager.State == CardState.Select;
 		}
 
 		private void CreateGroundDetector() {
