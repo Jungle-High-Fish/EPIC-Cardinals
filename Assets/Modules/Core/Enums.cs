@@ -408,5 +408,15 @@ namespace Cardinals.Enums {
         Hand, // 손에 들고있는 카드
         DiscardPile // 카드무덤
     }
+    
+    public enum PlayerActionType 
+    {
+        None,
+        Cancel,
+        CantUsed,
+        Move,
+        Attack,
+        Defense,
+    }
 
 }

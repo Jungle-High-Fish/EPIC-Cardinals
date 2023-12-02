@@ -276,7 +276,7 @@ namespace Cardinals
             }
 
             while (_state == CardState.Select)
-            {
+            { 
                 if (Input.GetMouseButtonUp(0))
                 {
                     BoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
@@ -378,24 +378,48 @@ namespace Cardinals
             CardUseMove(1);
         }
 
-        private bool CardUseAction(int num, BaseEntity target=null)
+        public bool CheckUseCardOnAction()
         {
+            bool result = true;
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
-                GameManager.I.Player.OnTile.Type == TileType.Blank)
+               GameManager.I.Player.OnTile.Type == TileType.Blank)
             {
-                return false;
+                result = false;
             }
+            
             if (!_canActionUse)
             {
-                return false;
+                result = false;
             }
-
+            
             // [디버프] 감전
             if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
                 Debug.Log("뭐지 감전당했나?");
-                return false;
+                result = false;
             }
+            
+            return result;
+        }
+        private bool CardUseAction(int num, BaseEntity target=null)
+        {
+            if (!CheckUseCardOnAction()) return false;
+            // if(GameManager.I.Player.OnTile.Type==TileType.Start||
+            //     GameManager.I.Player.OnTile.Type == TileType.Blank)
+            // {
+            //     return false;
+            // }
+            // if (!_canActionUse)
+            // {
+            //     return false;
+            // }
+            //
+            // // [디버프] 감전
+            // if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
+            // {
+            //     Debug.Log("뭐지 감전당했나?");
+            //     return false;
+            // }
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
                
