@@ -90,6 +90,16 @@ namespace Cardinals.UI
         {
             _mouseExitAction?.Invoke();
         }
+
+        private void OnDisable() {
+            if (_hoverRenderType == HoverRenderType.Sprite) {
+                _mouseExitAction?.Invoke();
+            } else {
+                if (_descriptionArea != null) {
+                    _descriptionArea.OffPanel();
+                }
+            }
+        }
         #endregion
 
         #region Image Setting
