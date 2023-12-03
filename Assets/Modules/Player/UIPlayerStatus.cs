@@ -72,6 +72,19 @@ namespace Cardinals.UI
                                      .OnComplete(() => {_defenseObj.transform.localScale = Vector3.one; });
                 _defenseTMP.text = defense.ToString();
             }
+            else
+            {
+                if (_defenseObj.activeSelf)
+                {
+                    _defenseObj.transform.DOScale(0, .5f)
+                        .SetEase(Ease.InOutElastic)
+                        .OnComplete(() =>
+                        {
+                            _defenseObj.transform.localScale = Vector3.one;
+                            _defenseObj.SetActive(false);
+                        });
+                }
+            }
         }
         
         private void AddBuff(BaseBuff baseBuff)
