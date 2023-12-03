@@ -68,25 +68,11 @@ namespace Cardinals
                 {
                     _canAction = false;
                 }
-                _actionMark.SetActive(_canAction);
-                
-                if (GameManager.I.Player.OnTile.Type == TileType.Attack)
-                {
-                    _actionMark.GetComponent<Image>().sprite=
-                        ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Attack_Mark);
-                }
 
-                if (GameManager.I.Player.OnTile.Type == TileType.Defence)
-                {
-                    _actionMark.GetComponent<Image>().sprite =
-                        ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Defense_Mark);
-                }
+                SetActionMark(_canAction);
             }
         }
-        public void OnMouseEnter()
-        {
-            Debug.Log("마우스 들어옴");
-        }
+      
         public bool CanMove
         {
             get => _canMove;
@@ -104,9 +90,6 @@ namespace Cardinals
             
         }
 
-        void Start()
-        {
-        }
         public void Init(Card card, int index, CardManager cardManager)
         {
             _card = card;
@@ -195,6 +178,26 @@ namespace Cardinals
                 (transform as RectTransform).DOAnchorPosY(_CardUIPos.y, 0.1f);
             }
                 
+        }
+
+        private void SetActionMark(bool isActive)
+        {
+            //_actionMark.SetActive(isActive);
+
+            if (GameManager.I.Player.OnTile.Type == TileType.Attack)
+            {
+                _actionMark.GetComponent<Image>().sprite =
+                    ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Attack_Mark);
+            }
+
+            if (GameManager.I.Player.OnTile.Type == TileType.Defence)
+            {
+                _actionMark.GetComponent<Image>().sprite =
+                    ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_Card_Defense_Mark);
+            }
+
+            float targetPosY = isActive ? -17f : -44f;
+            _actionMark.GetComponent<RectTransform>().DOAnchorPosY(targetPosY, 0.3f).SetEase(Ease.InOutBack);
         }
 
         private void Update()
