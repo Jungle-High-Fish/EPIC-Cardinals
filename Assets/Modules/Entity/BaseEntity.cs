@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -61,6 +62,15 @@ namespace Cardinals
         public BubbleText BubbleText => _bubbleText;
         public Bubble Bubble { protected get; set; }
 
+        [Header("Render")]
+        [SerializeField] private SpriteRenderer[] _renderers;
+
+        public SpriteRenderer[] Renderers
+        {
+            get => _renderers;
+            set => _renderers = value;
+        }
+        
         [ShowInInspector] private int _defenseCount;
         public Action<int> UpdateDefenseEvent { get; set; }
         public int DefenseCount
@@ -136,7 +146,8 @@ namespace Cardinals
                 Hp -= damage;
                 Animator?.Play("Hit");
                 Bubble?.SetBubble(BubbleText.hit);
-
+                transform.DOShakeScale(0.5f, .1f, 2, 45f);
+                
                 if (this is Player) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
                 }

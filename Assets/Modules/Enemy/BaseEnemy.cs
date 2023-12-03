@@ -67,6 +67,14 @@ namespace Cardinals
 
         public event Action<bool> ChangeRenderPrefabEvent;
 
+        private EnemyRenderer _renderer;
+
+        public EnemyRenderer Renderer
+        {
+            get => _renderer;
+            set => _renderer = value;
+        }
+        
         public virtual void Init(EnemyDataSO enemyData) {
             Init(enemyData.maxHP);
     
@@ -74,6 +82,7 @@ namespace Cardinals
             UpdatePatternEvent += ExecutePreActionByPattern;
 
             _enemyData = enemyData;
+            Renderer = GetComponent<EnemyRenderer>();
         }
 
         public override void Init(int maxHp) {

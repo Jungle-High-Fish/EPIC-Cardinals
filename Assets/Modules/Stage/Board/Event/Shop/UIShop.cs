@@ -109,7 +109,7 @@ namespace Cardinals.BoardEvent.Shop
 
         public void On()
         {
-            GameManager.I.UI.UIPlayerInfo.OpenPanel(); // 플레이어 창도 같이 띄워준다.
+            //GameManager.I.UI.UIPlayerInfo.OpenPanel(); // 플레이어 창도 같이 띄워준다.
             gameObject.SetActive(true);   
         }
 
@@ -161,11 +161,11 @@ namespace Cardinals.BoardEvent.Shop
         {
             bool result = true;
             
-            // if (GameManager.I.Stage.Player.PlayerInfo.Gold < item.Price)
-            // {
-            //     StartCoroutine(NotiMessage("돈이 부족하여 구매할 수 없음"));
-            //     result = false;
-            // }
+            if (GameManager.I.Stage.Player.PlayerInfo.Gold < item.Price)
+            {
+                StartCoroutine(NotiMessage("돈이 부족하여 구매할 수 없음"));
+                result = false;
+            }
 
             return result;
         }

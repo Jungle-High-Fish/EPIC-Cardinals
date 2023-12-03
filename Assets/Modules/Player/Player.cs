@@ -146,6 +146,8 @@ namespace Cardinals
                     GameManager.I.Stage.GenerateBoardEvent();
                 }
 
+                SetFlipOnMoveByPosition(_onTile.Next);
+
                 Vector3 nextPos = _onTile.Next.transform.position;
                 nextPos.y += 1.3f;
                 transform.DOJump(nextPos, 2, 1, time);
@@ -162,6 +164,8 @@ namespace Cardinals
             GameManager.I.UI.UITileInfo.Show(_onTile);
             GameManager.I.Stage.CardManager.UpdateCardState(count, true);
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
+
+            SetFlipTowardEnemy();
         }
         
         public IEnumerator PrevMoveTo(int count, float time)
@@ -172,6 +176,7 @@ namespace Cardinals
 
             for (int i = 0; i < count; i++)
             {
+                SetFlipOnMoveByPosition(_onTile.Prev);
                 Vector3 prevPos = _onTile.Prev.transform.position;
                 prevPos.y += 1.3f;
                 transform.DOJump(prevPos, 2, 1, time);
@@ -188,6 +193,8 @@ namespace Cardinals
             GameManager.I.UI.UITileInfo.Show(_onTile);
             GameManager.I.Stage.CardManager.UpdateCardState(count, true);
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
+            
+            SetFlipTowardEnemy();
         }
 
         private void CheckSummonOnTile()
@@ -250,6 +257,45 @@ namespace Cardinals
                 CurActionType = type;
                 UpdateActionEvent?.Invoke(type);
             }
+        }
+
+
+        void SetFlipOnMoveByPosition(Tile moveTile)
+        {
+            bool filpX = true; // false일 때, 좌측을 바라봄
+
+            var list = GameManager.I.Stage.Board.TileSequence;
+            var curIdx = list.IndexOf(_onTile);
+            var nextIdx = list.IndexOf(moveTile);
+
+            var value = list.Count / 4;
+            if (nextIdx <= value || nextIdx > value * 3)
+            {
+                filpX = false; 
+            }
+            
+            if (nextIdx != 0 && curIdx > nextIdx)
+            {
+                filpX = !filpX;
+            }
+            
+            Renderers.ForEach(r => r.flipX = filpX);
+            bool enemyFlipX = nextIdx > list.Count / 2;
+            GameManager.I.Stage.Enemies.ForEach(e => e.Renderer.FlipX(enemyFlipX));
+        }
+
+        void SetFlipTowardEnemy()
+        {
+            bool filpX = true;  // false일 때, 좌측을 바라봄
+            
+            var list = GameManager.I.Stage.Board.TileSequence;
+            var curIdx = (list.IndexOf(_onTile)) % list.Count;
+            if (curIdx > list.Count / 2)
+            {
+                filpX = false;
+            }
+            
+            Renderers.ForEach(r => r.flipX = filpX);
         }
     }
 }
