@@ -36,6 +36,16 @@ namespace Cardinals.Enemy
 
             InstantiateRenderPrefabs(enemy.EnemyData);
             ChangePrefab(false);
+
+            enemy.Renderers = GetComponentsInChildren<SpriteRenderer>();
+        }
+
+        public void FlipX(bool flipX)
+        {
+            foreach (var render in BaseEnemy.Renderers)
+            {
+                render.flipX = flipX;
+            }
         }
 
         private void ChangePrefab(bool isBerserk)

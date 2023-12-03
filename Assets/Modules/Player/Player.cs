@@ -280,6 +280,8 @@ namespace Cardinals
             }
             
             Renderers.ForEach(r => r.flipX = filpX);
+            bool enemyFlipX = nextIdx > list.Count / 2;
+            GameManager.I.Stage.Enemies.ForEach(e => e.Renderer.FlipX(enemyFlipX));
         }
 
         void SetFlipTowardEnemy()
@@ -287,7 +289,7 @@ namespace Cardinals
             bool filpX = true;  // false일 때, 좌측을 바라봄
             
             var list = GameManager.I.Stage.Board.TileSequence;
-            var curIdx = (list.IndexOf(_onTile) + 0) % list.Count;
+            var curIdx = (list.IndexOf(_onTile)) % list.Count;
             if (curIdx > list.Count / 2)
             {
                 filpX = false;

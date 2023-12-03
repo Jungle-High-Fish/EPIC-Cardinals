@@ -64,7 +64,12 @@ namespace Cardinals
 
         [Header("Render")]
         [SerializeField] private SpriteRenderer[] _renderers;
-        protected SpriteRenderer[] Renderers => _renderers;
+
+        public SpriteRenderer[] Renderers
+        {
+            get => _renderers;
+            set => _renderers = value;
+        }
         
         [ShowInInspector] private int _defenseCount;
         public Action<int> UpdateDefenseEvent { get; set; }
