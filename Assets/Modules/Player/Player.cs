@@ -54,6 +54,7 @@ namespace Cardinals
                     if (_hp == 0)
                     {
                         Animator.SetTrigger("Die");
+                        Bubble.SetBubble(BubbleText.die);
                         DieEvent?.Invoke();
                     }
                 }
@@ -230,6 +231,7 @@ namespace Cardinals
         public void Win()
         {   
             Animator.Play("Win");
+            Bubble.SetBubble(BubbleText.win);
             for (int i = Buffs.Count - 1; i >= 0; i--)
             {
                 Buffs[i].EndEvent();

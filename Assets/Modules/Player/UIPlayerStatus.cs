@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Entity.UI;
 using Cardinals.Enums;
 using DG.Tweening;
 using TMPro;
@@ -31,6 +32,9 @@ namespace Cardinals.UI
         [Header("Action")]
         [SerializeField] private Transform _actionTr;
         [SerializeField] private Image _actionIconImg;
+        
+        [Header("Bubble")]
+        [SerializeField] private Bubble _bubble;
         public void Init()
         {
             _player = GameManager.I.Player;
@@ -39,6 +43,9 @@ namespace Cardinals.UI
             _player.UpdateDefenseEvent += UpdateDefense;
             _player.UpdateActionEvent += UpdateAction;
 
+            _player.Bubble = _bubble;
+            _bubble.SetBubble(_player.BubbleText.start);
+            
             UpdateHp(_player.Hp, _player.MaxHp);
             UpdateAction();
         }
