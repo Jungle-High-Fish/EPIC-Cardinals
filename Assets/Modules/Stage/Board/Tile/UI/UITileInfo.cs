@@ -55,13 +55,17 @@ namespace Cardinals.UI {
 
         private Tile _tile;
 
-        private bool _canHover = true;
+        private bool _isOnTile = true;
         private bool _isHovering = false;
 
         private BoardEventType _prevEventType = BoardEventType.Empty;
         private TileMagicType _prevMagicType = TileMagicType.None;
         
-        public void Show(Tile tile, bool isAnimation = true, bool canHover = true) {
+        public void InitOnTile() {
+            Show(GameManager.I.Stage.Board[0]);
+        }
+
+        public void Show(Tile tile, bool isAnimation = true, bool isOnTile = true) {
             gameObject.SetActive(true);
             
             if (isAnimation) {
@@ -82,13 +86,11 @@ namespace Cardinals.UI {
                 _levelGuage.Get(gameObject).gameObject.SetActive(true);
             }
 
-            _descriptionArea.Get(gameObject).Init(_tile);
-            _canHover = canHover;
+            _descriptionArea.Get(gameObject).Init(_tile, isOnTile);
+            _isOnTile = isOnTile;
 
-            if (!_canHover) {
-                Canvas.ForceUpdateCanvases();
-                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-            }
+            Canvas.ForceUpdateCanvases();
+            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
         }
 
         public void Hide(bool isAnimation = true) {
@@ -114,15 +116,15 @@ namespace Cardinals.UI {
         public void OnPointerEnter(PointerEventData eventData) {
             _isHovering = true;
 
-            if (_tile == null) return;
-            if (_canHover == false) return;
+            // if (_tile == null) return;
+            // if (_canHover == false) return;
 
-            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+            // StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
         }
 
         public void OnPointerExit(PointerEventData eventData) {
             _isHovering = false;
-            _descriptionArea.Get(gameObject).HidePanels();
+            // _descriptionArea.Get(gameObject).HidePanels();
         }
 
         private void ShowEventTileInfo() {
@@ -178,15 +180,16 @@ namespace Cardinals.UI {
         }
 
         private void RefreshDescription() {
-            _descriptionArea.Get(gameObject).Init(_tile);
+            _descriptionArea.Get(gameObject).Init(_tile, _isOnTile);
 
-            if (_canHover && _isHovering) {
-                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-            }
+            // if (_canHover && _isHovering) {
+            //     StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+            // }
 
-            if (!_canHover) {
-                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-            }
+            // if (!_canHover) {
+            //     StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+            // }
+            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
         }
 
         private void ShowAnimation() {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Board;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Modules.Utils;
@@ -13,6 +14,9 @@ namespace Cardinals.UI.Description
 {
     public class UINewPlayerInfo : MonoBehaviour
     {
+        public UIEndTurnButton EndTurnButton => _endTurnButton.Get(gameObject);
+        public UITileInfo TileInfo => _tileInfo.Get(gameObject);
+
         [Header("Component")]
         [SerializeField] private TextMeshProUGUI _moneyTMP;
         [SerializeField] private Transform _artifactParentTr;
@@ -21,8 +25,22 @@ namespace Cardinals.UI.Description
 
         private GameObject IconPrefab => ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Sprites_UI_IconPrefab);
         
+        private ComponentGetter<UIEndTurnButton> _endTurnButton 
+            = new ComponentGetter<UIEndTurnButton>(TypeOfGetter.Child);
+        private ComponentGetter<UITileInfo> _tileInfo 
+            = new ComponentGetter<UITileInfo>(TypeOfGetter.Child);
 
-        public void Init()
+        private ComponentGetter<UIMapButton> _mapButton 
+            = new ComponentGetter<UIMapButton>(TypeOfGetter.Child);
+        
+        public void Init() {
+            _tileInfo.Get(gameObject).gameObject.SetActive(false);
+            _endTurnButton.Get(gameObject).Deactivate();
+            _mapButton.Get(gameObject).Init();
+            _mapButton.Get(gameObject).Deactivate();
+        }
+
+        public void Set()
         {
             if (GameManager.I.Stage == null) return;
             if (GameManager.I.Stage.Player == null) return;
@@ -45,6 +63,11 @@ namespace Cardinals.UI.Description
             
             GetComponent<ContentSizeFitter>().Update();
             InstantiatePotionUI();
+
+            _endTurnButton.Get(gameObject).Init();
+            _tileInfo.Get(gameObject).InitOnTile();
+
+            _mapButton.Get(gameObject).Activate();
         }
 
         void UpdateMoneyUI(int value)
@@ -54,8 +77,9 @@ namespace Cardinals.UI.Description
         
         void UpdateBlessUI(BlessType type)
         {
-            var sprite = ResourceLoader.LoadSO<BlessDataSO>(Constants.FilePath.Resources.SO_BlessData + type).patternSprite;
-            var obj = InstantiateIcon(sprite, _blessParentTr);
+            var data = ResourceLoader.LoadSO<BlessDataSO>(Constants.FilePath.Resources.SO_BlessData + type);
+            var sprite = data.patternSprite;
+            var obj = InstantiateIcon(sprite, _blessParentTr, TileMagic.Data(data.relatedMagicType).elementColor);
             obj.AddComponent<BlessDescription>().Init(type); // 설명창 추가
         }
 
@@ -81,7 +105,7 @@ namespace Cardinals.UI.Description
             obj.AddComponent<ArtifactDescription>().Init(artifact.Type); // 설명창 추가
         }
 
-        private GameObject InstantiateIcon(Sprite sprite, Transform parent)
+        private GameObject InstantiateIcon(Sprite sprite, Transform parent, Color? innerColor = null)
         {
             var obj = Instantiate(IconPrefab, parent);
 
@@ -89,7 +113,7 @@ namespace Cardinals.UI.Description
             {
                 obj.GetComponent<UIIcon>().Init();
             }
-            else obj.GetComponent<UIIcon>().Init(sprite);
+            else obj.GetComponent<UIIcon>().Init(sprite, innerColor);
 
             return obj;
         }

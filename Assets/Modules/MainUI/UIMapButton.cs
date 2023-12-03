@@ -22,5 +22,13 @@ namespace Cardinals
         {
             gameObject.SetActive(true);
         }
+
+        public void Activate() {
+            GetComponentInChildren<Button>().interactable = true;
+        }
+
+        public void Deactivate() {
+            GetComponentInChildren<Button>().interactable = false;
+        }
     }
 }
