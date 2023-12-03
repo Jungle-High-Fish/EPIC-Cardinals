@@ -75,7 +75,8 @@ namespace Cardinals
 
         private void EndTurnAnimation()
         {
-            transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutCubic);
+            transform.DOMoveY(-120f, 0.3f).SetEase(Ease.OutBack);
+            //transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutCubic);
             
         }
     }
