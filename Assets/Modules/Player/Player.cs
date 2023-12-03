@@ -91,6 +91,11 @@ namespace Cardinals
             }
         }
 
+        public void EndBattle()
+        {
+            DefenseCount = 0;
+        }
+
         public void BlessWater1()
         {
             if (_isDamagedThisTurn)

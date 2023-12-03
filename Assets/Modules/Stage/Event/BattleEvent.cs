@@ -94,6 +94,7 @@ namespace Cardinals.Game
                 
                 // 전투 종료 초기화
                 GameManager.I.Player.Win();
+                GameManager.I.Player.EndBattle();
                 GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
                 RemoveSummons();
                 yield return WaitReward(rewards);
