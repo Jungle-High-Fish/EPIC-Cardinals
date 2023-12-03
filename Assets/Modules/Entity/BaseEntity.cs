@@ -62,6 +62,10 @@ namespace Cardinals
         public BubbleText BubbleText => _bubbleText;
         public Bubble Bubble { protected get; set; }
 
+        [Header("Render")]
+        [SerializeField] private SpriteRenderer[] _renderers;
+        protected SpriteRenderer[] Renderers => _renderers;
+        
         [ShowInInspector] private int _defenseCount;
         public Action<int> UpdateDefenseEvent { get; set; }
         public int DefenseCount
