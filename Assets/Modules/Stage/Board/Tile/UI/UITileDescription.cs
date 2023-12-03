@@ -8,47 +8,51 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using UnityEngine.EventSystems;
 
 namespace Cardinals.UI {
-    public class UITileDescription: MonoBehaviour{
+    public class UITileDescription: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
         public float Height => _height;
 
-        private ComponentGetter<Image> _panel
+        protected ComponentGetter<Image> _panel
             = new ComponentGetter<Image>(TypeOfGetter.This);
 
-        private ComponentGetter<Image> _outline
+        protected ComponentGetter<Image> _outline
             = new ComponentGetter<Image>(TypeOfGetter.ChildByName, "Outline");
 
-        private ComponentGetter<RectTransform> _contentsTransform
-            = new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "Contents");
-
-        private ComponentGetter<RectTransform> _titleHeaderTransform
+        protected ComponentGetter<RectTransform> _titleHeaderTransform
             = new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "Contents/TitleHeader");
 
-        private ComponentGetter<Image> _icon
+        protected ComponentGetter<Image> _icon
             = new ComponentGetter<Image>(TypeOfGetter.ChildByName, "Contents/TitleHeader/Icon");
 
-        private ComponentGetter<TextMeshProUGUI> _titleText
+        protected ComponentGetter<TextMeshProUGUI> _titleText
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Contents/TitleHeader/Title");
 
-        private ComponentGetter<TextMeshProUGUI> _descriptionText
+        protected ComponentGetter<TextMeshProUGUI> _descriptionText
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Contents/Description");
         
-        private Color _panelColor;
-        private Color _textColor;
-        private Color _outlineColor;
+        protected Color _panelColor;
+        protected Color _textColor;
+        protected Color _outlineColor;
 
-        private float _height;
+        protected float _height;
+
+        public virtual void OnPointerEnter(PointerEventData eventData) {
+        }
+
+        public virtual void OnPointerExit(PointerEventData eventData) {
+        }
 
         [Button]
-        public void SetDescription(string title, string description, Sprite icon=null, bool isWhite=true, Color? outlineColor=null) {
+        public virtual void SetDescription(string title, string description, Sprite icon=null, bool isWhite=true, Color? outlineColor=null) {
             SetPanelColor(isWhite, outlineColor);
-            SetDescription(title, description, icon);
+            SetDescriptionText(title, description, icon);
 
             gameObject.SetActive(false);
         }
 
-        public void Show(float posY) {
+        public virtual void Show(float posY) {
             gameObject.SetActive(true);
             Canvas.ForceUpdateCanvases();
             CalculateAndSetHeight();
@@ -58,7 +62,7 @@ namespace Cardinals.UI {
             );
         }
 
-        public void Show(float startPosY, float gap, float duration) {
+        public virtual void Show(float startPosY, float gap, float duration) {
             gameObject.SetActive(true);
             Canvas.ForceUpdateCanvases();
             CalculateAndSetHeight();
@@ -69,7 +73,7 @@ namespace Cardinals.UI {
             (transform as RectTransform).DOAnchorPosY(startPosY - gap, duration).SetEase(Ease.OutCubic);
         }
 
-        private void SetPanelColor(bool isWhite, Color? outlineColor) {
+        protected virtual void SetPanelColor(bool isWhite, Color? outlineColor) {
             if (isWhite) {
                 _panelColor = Constants.Common.Colors.CardinalsWhite;
                 _textColor = Constants.Common.Colors.CardinalsBlack;
@@ -95,7 +99,7 @@ namespace Cardinals.UI {
             _descriptionText.Get(gameObject).color = isWhite ? Color.black : Color.white;
         }
 
-        private void SetDescription(string title, string description, Sprite icon=null) {
+        private void SetDescriptionText(string title, string description, Sprite icon=null) {
             _titleText.Get(gameObject).text = title;
 
             TextMeshProUGUI tmp = _descriptionText.Get(gameObject);
@@ -109,7 +113,7 @@ namespace Cardinals.UI {
             }
         }
 
-        public float CalculateAndSetHeight() {
+        public virtual float CalculateAndSetHeight() {
             float descriptionHeight 
                 = _descriptionText.Get(gameObject).GetStringHeight(_descriptionText.Get(gameObject).text);
             

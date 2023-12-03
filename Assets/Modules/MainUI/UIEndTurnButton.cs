@@ -8,7 +8,7 @@ using Util;
 public class UIEndTurnButton : MonoBehaviour
 {   
     private ComponentGetter<Button> _button 
-        = new ComponentGetter<Button>(TypeOfGetter.This);
+        = new ComponentGetter<Button>(TypeOfGetter.Child);
 
     public void Init() {
         _button.Get(gameObject).onClick.AddListener(EndTurn);
@@ -20,10 +20,10 @@ public class UIEndTurnButton : MonoBehaviour
     }
 
     public void Activate() {
-        gameObject.SetActive(true);
+        _button.Get(gameObject).interactable = true;
     }
 
     public void Deactivate() {
-        gameObject.SetActive(false);
+        _button.Get(gameObject).interactable = false;
     }
 }

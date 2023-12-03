@@ -138,7 +138,7 @@ namespace Cardinals
         {
             GameManager.I.Stage.CardManager.SetCardSelectable(false);
             _onTile?.Leave(this);
-            GameManager.I.UI.UITileInfo.Hide();
+            GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
             for(int i = 0; i < count; i++)
             {
@@ -161,7 +161,7 @@ namespace Cardinals
             }
 
             _onTile.Arrive(this);
-            GameManager.I.UI.UITileInfo.Show(_onTile);
+            GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
             GameManager.I.Stage.CardManager.UpdateCardState(count, true);
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
 
@@ -172,7 +172,7 @@ namespace Cardinals
         {
             GameManager.I.Stage.CardManager.SetCardSelectable(false);
             _onTile?.Leave(this);
-            GameManager.I.UI.UITileInfo.Hide();
+            GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
             for (int i = 0; i < count; i++)
             {
@@ -190,7 +190,7 @@ namespace Cardinals
                 }
             }
             _onTile.Arrive(this);
-            GameManager.I.UI.UITileInfo.Show(_onTile);
+            GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
             GameManager.I.Stage.CardManager.UpdateCardState(count, true);
             GameManager.I.Stage.CardManager.SetCardSelectable(true);
             

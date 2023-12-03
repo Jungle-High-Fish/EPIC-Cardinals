@@ -17,6 +17,6 @@ MonoBehaviour:
     \uCD08\uACFC\uB41C \uCE58\uC720\uB7C9 \uC758 \uB450\uBC30\uB9CC\uD07C \uC801\uC5D0\uAC8C
     \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
   totemSprite: {fileID: 21300000, guid: 9711407b4c1b5264cbf74788f003cbb8, type: 3}
-  patternSprite: {fileID: 21300000, guid: 8602fea37e4e343c9b6babf20470c55a, type: 3}
+  patternSprite: {fileID: 21300000, guid: 5f2f4dc1685b7b1439c7de87f395cb89, type: 3}
   blessType: 4
   relatedMagicType: 2
