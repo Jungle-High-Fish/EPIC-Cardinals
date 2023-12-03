@@ -160,11 +160,11 @@ namespace Cardinals.BoardEvent.Shop
         {
             bool result = true;
             
-            // if (GameManager.I.Stage.Player.PlayerInfo.Gold < item.Price)
-            // {
-            //     StartCoroutine(NotiMessage("돈이 부족하여 구매할 수 없음"));
-            //     result = false;
-            // }
+            if (GameManager.I.Stage.Player.PlayerInfo.Gold < item.Price)
+            {
+                StartCoroutine(NotiMessage("돈이 부족하여 구매할 수 없음"));
+                result = false;
+            }
 
             return result;
         }
