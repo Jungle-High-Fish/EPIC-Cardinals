@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using Cardinals.Entity.UI;
 using Cardinals.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -49,13 +50,16 @@ namespace Cardinals
             }
         }
         #endregion
-        
        
 
         private Action _turnStartedEvent;
         
         public Action DieEvent { get; set; }
 
+        [Header("Bubble")]
+        private BubbleText _bubbleText;
+        public BubbleText BubbleText => _bubbleText;
+        public Bubble Bubble { protected get; set; }
 
         [ShowInInspector] private int _defenseCount;
         public Action<int> UpdateDefenseEvent { get; set; }
@@ -76,11 +80,10 @@ namespace Cardinals
             Hp = MaxHp;
             
             // 초기 세팅
+            _bubbleText = GetComponent<BubbleText>();
             Buffs = new();
             Buffs.CollectionChanged += OnBuffCollectionChanged;
             DieEvent += () => { Buffs.CollectionChanged -= OnBuffCollectionChanged; };
-            
-            
         }
 
         /// <summary>
@@ -132,6 +135,7 @@ namespace Cardinals
             {
                 Hp -= damage;
                 Animator?.Play("Hit");
+                Bubble?.SetBubble(BubbleText.hit);
 
                 if (this is Player) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
@@ -148,6 +152,7 @@ namespace Cardinals
         public void Attack(BaseEntity target, int damage)
         {
             target.Hit(CalculDamage(damage));
+            Bubble?.SetBubble(BubbleText.attack);
             Animator?.Play("Attack");
         }
 
