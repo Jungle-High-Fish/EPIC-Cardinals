@@ -4,6 +4,7 @@ using Cardinals.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using DG.Tweening;
 
 namespace Cardinals.UI
 {
@@ -24,6 +25,9 @@ namespace Cardinals.UI
 
         public void Init(Sprite sprite, Color? innerColor=null)
         {
+            transform.localScale = Vector3.one * 1.5f;
+            transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
+
             _background.Get(gameObject).color = innerColor ?? Constants.Common.Colors.CardinalsWhite;
             _icon.Get(gameObject).sprite = sprite;
 

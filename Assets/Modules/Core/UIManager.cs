@@ -17,7 +17,6 @@ namespace Cardinals
     {
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
-        public UIPlayerInfo UIPlayerInfo => _uiPlayerInfo;
         public UICardSystem UICardSystem => _uiCardSystem;
         public UITileSelection UITileSelection => _uiTileSelection;
         public UIMagicLevelUpPanel UIMagicLevelUpPanel => _uiMagicLevelUpPanel;
