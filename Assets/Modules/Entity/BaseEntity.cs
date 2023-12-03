@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -136,7 +137,8 @@ namespace Cardinals
                 Hp -= damage;
                 Animator?.Play("Hit");
                 Bubble?.SetBubble(BubbleText.hit);
-
+                transform.DOShakeScale(0.5f, .1f, 2, 45f);
+                
                 if (this is Player) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
                 }
