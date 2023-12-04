@@ -126,7 +126,6 @@ namespace Cardinals
             }
 
             // 방어도 초기화
-            
         }
 
         public bool CheckBuffExist(BuffType buffType)

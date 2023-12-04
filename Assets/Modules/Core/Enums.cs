@@ -426,5 +426,13 @@ namespace Cardinals.Enums {
         Attack,
         Defense,
     }
-
+    
+    public enum TutorialQuestType
+    {
+        Card,
+        TileMagicSelect,
+        KillMonster,
+        EndTurn,
+        BlessSelect
+    }
 }

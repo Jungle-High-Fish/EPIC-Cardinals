@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cardinals.Board;
 using Cardinals.Enums;
+using Cardinals.Tutorial;
 using DG.Tweening;
 using JetBrains.Annotations;
 using TMPro;
@@ -67,6 +68,10 @@ namespace Cardinals.UI {
             void OnClickMagicSlot(TileMagicType magicType) {
                 requestHandled = true;
                 resultMagicType = magicType;
+
+                if (GameManager.I.Stage.CurEvent is TutorialEvent tutorialEvent) {
+                    tutorialEvent.CheckMagicSelectQuest();
+                }
             }
 
             IEnumerator Requester() {
