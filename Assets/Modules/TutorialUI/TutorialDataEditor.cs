@@ -1,12 +1,13 @@
 using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
+
 
 using Cardinals.Tutorial;
 
 #if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
 
 namespace Cardinals.Game {
     public class TutorialDataEditor : OdinMenuEditorWindow {

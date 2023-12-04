@@ -5,6 +5,7 @@ using Cardinals.Game;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Cardinals.UI.Description
 {
@@ -38,17 +39,22 @@ namespace Cardinals.UI.Description
         {
             if (_curPotion != null)
             {
-                GameManager.I.Player.PlayerInfo.UsePotion(_index);
-            
-                GetComponent<UIIcon>().Init(null, new Color(0.88f, 0.88f, 0.88f, 1f));
-            
-                var descs =  GetComponents<PotionDescription>();
-                for (int i = descs.Length - 1; i >= 0; i--)
+                if (GameManager.I.Player.PlayerInfo.UsePotion(_index))
                 {
-                    Destroy(descs[i]);
+                    GetComponent<UIIcon>().Init(null, new Color(0.88f, 0.88f, 0.88f, 1f));
+
+                    var descs = GetComponents<PotionDescription>();
+                    for (int i = descs.Length - 1; i >= 0; i--)
+                    {
+                        Destroy(descs[i]);
+                    }
+
+                    GetComponent<DescriptionConnector>().OffPanel();
+                } else
+                {
+                    (transform as RectTransform).DOShakeAnchorPos(0.3f, 5f);
+                    GameManager.I.Player.Bubble.SetBubble("포션을 쓸 수 없어");
                 }
-            
-                GetComponent<DescriptionConnector>().OffPanel();
             }
             
         }
