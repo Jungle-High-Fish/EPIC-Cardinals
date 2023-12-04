@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using Cardinals.Enums;
 using Cardinals.Game;
 using TMPro;
 using UnityEngine;
@@ -16,28 +18,31 @@ namespace Cardinals.Enemy
         private ComponentGetter<Transform> _renderer
             = new ComponentGetter<Transform>(TypeOfGetter.ChildByName, "Renderer");
         
-        [SerializeField] private Image _patternIconImg;
-        [SerializeField] private TextMeshProUGUI _patternCountTMP;
-        [SerializeField] private Image _bubbleImg;
-        public Image PatternIconImg => _patternIconImg;
-        public TextMeshProUGUI PatternCountTMP => _patternCountTMP;
-        public Image BubbleImg => _bubbleImg;
-        
         private bool _hasBerserk = false;
 
         private GameObject _normalRenderer;
         private GameObject _berserkRenderer;
 
+        [SerializeField] private Transform _renderParentTr;
+
         public void Init(BaseEnemy enemy)
         {
             BaseEnemy = enemy;
             BaseEnemy.DieEvent += Destroy;
-            BaseEnemy.ChangeRenderPrefabEvent += ChangePrefab;
-
+            
             InstantiateRenderPrefabs(enemy.EnemyData);
-            ChangePrefab(false);
 
             enemy.Renderers = GetComponentsInChildren<SpriteRenderer>();
+
+            Vector3 vector = enemy.EnemyData.enemyType switch
+            {
+                EnemyType.Two => new Vector2(0, .5f) ,
+                EnemyType.Four => new Vector2(0, 0.83f),
+                EnemyType.Boss => new Vector2(0, .5f),
+                _ => Vector2.zero
+            };
+
+            _renderParentTr.position += vector;
         }
 
         public void FlipX(bool flipX)
@@ -48,23 +53,11 @@ namespace Cardinals.Enemy
             }
         }
 
-        private void ChangePrefab(bool isBerserk)
-        {
-            if (isBerserk) {
-                if (_hasBerserk) {
-                    _normalRenderer.SetActive(false);
-                    _berserkRenderer.SetActive(true);
-                }
-            } else {
-                _normalRenderer.SetActive(true);
-                _berserkRenderer?.SetActive(false);
-            }
-        }
-
         private void InstantiateRenderPrefabs(EnemyDataSO enemyData) {
             GameObject normal = Instantiate(enemyData.prefab, _renderer.Get(gameObject).transform);
             normal.name = "Normal";
             _normalRenderer = normal;
+            _normalRenderer.SetActive(true);
 
             if (enemyData.berserkPrefab == null) return;
 
@@ -72,6 +65,11 @@ namespace Cardinals.Enemy
             GameObject berserk = Instantiate(enemyData.berserkPrefab, _renderer.Get(gameObject).transform);
             berserk.name = "Berserk";
             berserk.SetActive(false);
+            BaseEnemy.BerserkModeEvent += () =>
+            {
+                _normalRenderer.SetActive(false);
+                berserk.SetActive(true);
+            };
         }
         
         private void Destroy()

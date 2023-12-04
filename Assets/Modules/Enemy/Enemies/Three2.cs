@@ -25,7 +25,6 @@ namespace Cardinals.Enemy
                 };
                 
                 Turn = 0;
-                SetRenderPrefab(true);
             };
 
             DieEvent += () =>

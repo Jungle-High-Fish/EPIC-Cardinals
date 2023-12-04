@@ -52,7 +52,7 @@ namespace Cardinals.Game
             }
 
             GameManager.I.CurrentEnemies = _enemies;
-            _stageController.EnemyInfoController.Init(_enemyList.Length);
+            //_stageController.EnemyInfoController.Init(_enemyList.Length);
             GameManager.I.Stage.CardManager.OnBattle();
 
             do // 전투 시작
