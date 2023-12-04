@@ -93,6 +93,8 @@ namespace Cardinals
 
         public bool IsElectricShock { get; set; }
 
+        private int _selectedNumber;
+
         [Button]
         public void OnTurn()
         {
@@ -374,7 +376,7 @@ namespace Cardinals
                     }
 
                     int useNumber = _handCards[_selectCardIndex].CardNumber;
-
+                    _selectedNumber = useNumber;
                     if (_isTutorial) {
                         var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber) {
@@ -500,6 +502,12 @@ namespace Cardinals
         public bool CheckUseCardOnAction()
         {
             bool result = true;
+
+            if (!(_prevCardNumber == -1 || _prevCardNumber + 1 == _selectedNumber))
+            {
+                result = false;
+            }              
+            
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
                GameManager.I.Player.OnTile.Type == TileType.Blank)
             {
@@ -527,7 +535,6 @@ namespace Cardinals
            
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
-               
                 _prevCardNumber = num;
                 switch (GameManager.I.Player.OnTile.Type)
                 {
