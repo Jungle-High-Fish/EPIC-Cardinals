@@ -164,6 +164,7 @@ namespace Cardinals.Board {
 			);
 
 			if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWater2) && left > 0) {
+				GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
 				GameManager.I.Stage.Enemies.Reverse<BaseEnemy>().ToList().ForEach(enemy => {
 					enemy.Hit(left * 2);
 				});

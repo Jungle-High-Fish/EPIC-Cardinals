@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
+using Cardinals.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -37,17 +38,23 @@ namespace Cardinals
         public int MaxHp { get; protected set; }
         public Action<int, int> UpdateHpEvent { get; set; }
 
+        public Action<BaseBuff> AddBuffEvent { get; set; } 
+
         #region Buff Event Related
         protected ObservableCollection<BaseBuff> Buffs { get; set; }
 
-        public Action<BaseBuff> AddBuffEvent { get; set; }
+        public Action<BaseBuff> AddNewBuffEvent { get; set; }
+        public Action<BaseBuff> ExecuteBuffEvent { get; set; }
+        public Action SuccessDefenseEvent { get; set; }
+        public Action BrokenDefenseEvent { get; set; }
 
         private void OnBuffCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             if (args.Action == NotifyCollectionChangedAction.Add)
             {
                 BaseBuff buff = (sender as ObservableCollection<BaseBuff>).Last();
-                AddBuffEvent?.Invoke(buff);
+                buff.ExecuteEvent += ExecuteBuffEvent;
+                AddNewBuffEvent?.Invoke(buff);
             }
         }
         #endregion
@@ -138,7 +145,16 @@ namespace Cardinals
             {
                 var calculDamage = Math.Max(0, damage - DefenseCount);
                 DefenseCount -= damage;
-                damage = calculDamage; 
+                damage = calculDamage;
+
+                if (damage > 0)
+                {
+                    BrokenDefenseEvent?.Invoke();
+                }
+                else
+                {
+                    SuccessDefenseEvent?.Invoke();
+                }
             }
             
             if (damage > 0)
@@ -208,6 +224,8 @@ namespace Cardinals
             {
                 existBuff.Count += buff.Count;
             }
+            
+            AddBuffEvent?.Invoke(buff);
         }
         #endregion
     }

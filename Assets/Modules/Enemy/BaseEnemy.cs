@@ -175,6 +175,7 @@ namespace Cardinals
                 {
                     if (CheckBuffExist(BuffType.Burn))
                     {
+                        GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire1]?.Invoke();
                         Hit(1);
                     }
                 }
@@ -187,6 +188,7 @@ namespace Cardinals
                     {
                         if (burnBuff.Count >= 10)
                         {
+                            GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire2]?.Invoke();
                             burnBuff.Count -= 10;
                             GameManager.I.Stage.Meteor();
                         }

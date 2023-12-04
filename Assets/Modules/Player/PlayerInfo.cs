@@ -19,6 +19,8 @@ namespace Cardinals
         public Action<int, Potion> DeletePotionEvent { get; set; }
         public Action<int> UpdateGoldEvent { get; set; }
         public List<BlessType> BlessList => _blessList;
+        
+        public Dictionary<BlessType, Action> BlessEventDict = new();
         public List<Artifact> ArtifactList => _artifacts;
         public List<Potion> PotionList => _potions;
 
@@ -38,6 +40,11 @@ namespace Cardinals
             {
                 _artifacts.Add(null);
             }
+
+            foreach (var type in Enum.GetValues(typeof(BlessType)).Cast<BlessType>())
+            {
+                BlessEventDict.Add(type, new Action(() => { }));
+            }
         }
 
         private List<BlessType> _blessList = new();
@@ -52,7 +59,6 @@ namespace Cardinals
         {
             _blessList.Add(blessType);
             AddBlessEvent?.Invoke(blessType);
-            Debug.Log($"{blessType}을 획득했습니다");
         }
        
         public void AddPotion(PotionType potionType)

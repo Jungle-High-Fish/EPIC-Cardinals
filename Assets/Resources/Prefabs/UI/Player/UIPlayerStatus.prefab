@@ -202,6 +202,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1492545863447491631, guid: a252fc56559d3f04c9c03276144a4605,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3260052004860232157, guid: a252fc56559d3f04c9c03276144a4605,
         type: 3}
       propertyPath: _bubble
@@ -379,6 +384,7 @@ MonoBehaviour:
   _buffPrefab: {fileID: 5379653668884289483, guid: 05d2367bf056f27469489d27100cbaa2,
     type: 3}
   _buffListArea: {fileID: 8736108566583435726}
+  _addBuffDescriptionTr: {fileID: 7006988808361180813}
   _actionTr: {fileID: 2646910228630978183}
   _actionIconImg: {fileID: 1734966722804370619}
   _bubble: {fileID: 3964844940868515465}
@@ -406,6 +412,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &7006988808361180813 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1492545863447491631, guid: a252fc56559d3f04c9c03276144a4605,
+    type: 3}
+  m_PrefabInstance: {fileID: 8469940199068355234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7066705602142224025 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1700881754161050683, guid: a252fc56559d3f04c9c03276144a4605,
