@@ -91,6 +91,11 @@ public class ComponentGetter<T> where T : UnityEngine.Object {
 
 		return _object;
 	}
+
+	public void Clear()
+    {
+		_object = null;
+    }
 	#endregion
     
 	#region PrivateMethod

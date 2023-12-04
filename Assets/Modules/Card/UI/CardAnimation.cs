@@ -39,9 +39,9 @@ namespace Cardinals
             {
                 center += x.transform.position;
             });*/
-            Vector3 enemyPos = Camera.main.WorldToScreenPoint(GameManager.I.Stage.Enemies[GameManager.I.Stage.Board.BoardInputHandler.HoveredIdx].transform.position);
+            /*Vector3 enemyPos = Camera.main.WorldToScreenPoint(GameManager.I.Stage.Enemies[GameManager.I.Stage.Board.BoardInputHandler.HoveredIdx].transform.position);
             enemyPos.y -= 50f;
-            (transform as RectTransform).DOMove(enemyPos, 0.15f);
+            (transform as RectTransform).DOMove(enemyPos, 0.15f);*/
             transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.15f);
             yield return new WaitForSeconds(0.3f);
 
