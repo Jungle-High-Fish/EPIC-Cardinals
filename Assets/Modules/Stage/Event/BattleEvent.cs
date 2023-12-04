@@ -64,6 +64,7 @@ namespace Cardinals.Game
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
+                GameManager.I.Stage.CardManager.OnTurn();
                 GameManager.I.Player.OnTurn();
 
                 // 턴 종료 버튼 활성화
@@ -86,6 +87,7 @@ namespace Cardinals.Game
                 _stageController.Board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1.5f);
+                GameManager.I.Player.BlessWater1();
             } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);
 
             if (_enemies.Count == 0)

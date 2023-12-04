@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693be6403982f9b4da71d8c7b536352a, type: 3}
+  m_Name: ContinuousAct
+  m_EditorClassIdentifier: 
+  TutorialName: ContinuousAct
+  Title: "\uC5F0\uC18D \uD589\uB3D9 #2"
+  Quests:
+  - Title: "1\uCE78 \uC774\uB3D9\uD558\uC5EC, \uACF5\uACA9 \uD0C0\uC77C\uC5D0 \uB3C4\uCC29\uD558\uC138\uC694."
+    Description: "\uC22B\uC790 \uCE74\uB4DC 1\uC744 \uBCF4\uB4DC \uC678\uACFD\uC5D0
+      \uB193\uC73C\uC138\uC694."
+    TargetQuests: 1
+    QuestType: 0
+    HasCardSequence: 1
+    NeedCardSequence:
+    - CardNumber: 1
+      HowToUse: 1
+  - Title: "\uC22B\uC790 \uCE74\uB4DC\uB97C \uC5F0\uC18D\uD574\uC11C \uB450 \uBC88
+      \uC0AC\uC6A9\uD558\uC138\uC694."
+    Description: "\uD589\uB3D9 \uD0C0\uC77C\uC5D0\uC11C \uC624\uB984\uCC28\uC21C\uC758
+      \uC22B\uC790 \uCE74\uB4DC\uB9CC \uC5F0\uC18D\uD574\uC11C \uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    TargetQuests: 2
+    QuestType: 0
+    HasCardSequence: 1
+    NeedCardSequence:
+    - CardNumber: 2
+      HowToUse: 0
+    - CardNumber: 3
+      HowToUse: 0
+  Cards: 010000000200000003000000

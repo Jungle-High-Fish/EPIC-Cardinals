@@ -60,9 +60,9 @@ namespace Cardinals
                 }
             }
         }
+        
         public override void OnTurn()
         {
-            GameManager.I.Stage.CardManager.OnTurn();
             _isDamagedThisTurn = false;
         }
 
