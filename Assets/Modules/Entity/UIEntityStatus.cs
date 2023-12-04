@@ -28,14 +28,16 @@ namespace Cardinals.UI
         [Header("Buff")]
         [SerializeField] private GameObject _buffPrefab;
         [SerializeField] private Transform _buffListArea;
+        [SerializeField] private Transform _addBuffDescriptionTr;
         
         public virtual void Init(BaseEntity entity)
         {
             _entity = entity;
             
             _entity.UpdateHpEvent += UpdateHp;
-            _entity.AddBuffEvent += AddBuff;
+            _entity.AddNewBuffEvent += AddNewBuff;
             _entity.UpdateDefenseEvent += UpdateDefense;
+            _entity.AddBuffEvent += AddBuff;
             
             UpdateHp(_entity.Hp, _entity.MaxHp);
         }
@@ -83,9 +85,16 @@ namespace Cardinals.UI
             }
         }
         
-        private void AddBuff(BaseBuff baseBuff)
+        private void AddNewBuff(BaseBuff baseBuff)
         {
             Instantiate(_buffPrefab, _buffListArea).GetComponent<UIBuff>().Init(baseBuff);
         }
+        
+        private void AddBuff(BaseBuff baseBuff)
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_AddBuffDescription);
+            Instantiate(prefab, _addBuffDescriptionTr).GetComponent<AddBuffDescription>().Init(baseBuff.Data);
+        }
+        
     }
 }

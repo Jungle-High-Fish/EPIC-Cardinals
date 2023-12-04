@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
+using Cardinals.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -37,17 +38,19 @@ namespace Cardinals
         public int MaxHp { get; protected set; }
         public Action<int, int> UpdateHpEvent { get; set; }
 
+        public Action<BaseBuff> AddBuffEvent { get; set; } 
+
         #region Buff Event Related
         protected ObservableCollection<BaseBuff> Buffs { get; set; }
 
-        public Action<BaseBuff> AddBuffEvent { get; set; }
+        public Action<BaseBuff> AddNewBuffEvent { get; set; }
 
         private void OnBuffCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             if (args.Action == NotifyCollectionChangedAction.Add)
             {
                 BaseBuff buff = (sender as ObservableCollection<BaseBuff>).Last();
-                AddBuffEvent?.Invoke(buff);
+                AddNewBuffEvent?.Invoke(buff);
             }
         }
         #endregion
@@ -208,6 +211,8 @@ namespace Cardinals
             {
                 existBuff.Count += buff.Count;
             }
+            
+            AddBuffEvent?.Invoke(buff);
         }
         #endregion
     }

@@ -70,7 +70,7 @@ namespace Cardinals
         {
             _player = GameManager.I.Player;
             _player.UpdateHpEvent += UpdateHp;
-            _player.AddBuffEvent += AddBuff;
+            _player.AddNewBuffEvent += AddBuff;
             _player.UpdateDefenseEvent += UpdateDefense;
 
             _player.PlayerInfo.AddPotionEvent += (_, __) => { ShowAlertImage(); };
