@@ -46,7 +46,6 @@ namespace Cardinals.Enemy
                 };
                 FixPattern = new(EnemyActionType.UserDebuff, action: ElectricShock);
                 Turn = 0;
-                SetRenderPrefab(true);
             };
 
             Rewards = new Reward[]

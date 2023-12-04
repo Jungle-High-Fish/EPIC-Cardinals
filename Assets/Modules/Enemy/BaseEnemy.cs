@@ -54,19 +54,20 @@ namespace Cardinals
             set
             {
                 _berserkMode = value;
-                if (_berserkMode) BerserkModeEvent?.Invoke();
+                if (_berserkMode)
+                {
+                    BerserkModeEvent?.Invoke();
+                }
             } 
         }
-        protected Action BerserkModeEvent { get; set; }
+        public Action BerserkModeEvent { get; set; }
         
         public Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
         public Pattern PrevPattern;
 
         private EnemyDataSO _enemyData;
         public EnemyDataSO EnemyData => _enemyData;
-
-        public event Action<bool> ChangeRenderPrefabEvent;
-
+        
         private EnemyRenderer _renderer;
 
         public EnemyRenderer Renderer
@@ -151,10 +152,6 @@ namespace Cardinals
             
         }
 
-        public void SetRenderPrefab(bool isBerserk) {
-            ChangeRenderPrefabEvent?.Invoke(isBerserk);
-        }
-
         public override void AddBuff(BaseBuff buff)
         {
             base.AddBuff(buff);
@@ -166,6 +163,7 @@ namespace Cardinals
                 {
                     if (CheckBuffExist(BuffType.Burn))
                     {
+                        GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire1]?.Invoke();
                         Hit(1);
                     }
                 }
@@ -178,6 +176,7 @@ namespace Cardinals
                     {
                         if (burnBuff.Count >= 10)
                         {
+                            GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire2]?.Invoke();
                             burnBuff.Count -= 10;
                             GameManager.I.Stage.Meteor();
                         }

@@ -81,7 +81,7 @@ namespace Cardinals
             InstantiateNewPlayerUI();
             InstantiateTileSelectionUI();
 
-            InstantiateEnemyUIParent();
+            //InstantiateEnemyUIParent();
             
             // TEMP
             TEMP_InstantiateUIMap();
@@ -120,10 +120,10 @@ namespace Cardinals
 
         public void SetEnemyUI(BaseEnemy enemyComp) {
             GameObject UIEnemyInfoPrefab 
-                = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIEnemyInfo);
+                = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIEnemyStatus);
             
-            GameObject uiEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, GameManager.I.Stage.EnemyInfoController.transform);
-            uiEnemyInfo.GetComponent<UIEnemyInfo>().Init(enemyComp);
+            GameObject uiEnemyInfo = GameObject.Instantiate(UIEnemyInfoPrefab, _enemyUICanvas.transform);
+            uiEnemyInfo.GetComponent<UIEnemyStatus>().Init(enemyComp);
         }
 
         public void SetCardSystemUI() {
@@ -189,7 +189,7 @@ namespace Cardinals
         {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerStatus);
             GameObject obj = Instantiate(prefab, _playerUICanvas.transform);
-            obj.GetComponent<UIPlayerStatus>().Init();
+            obj.GetComponent<UIPlayerStatus>().Init(GameManager.I.Player);
         }
 
         private void InstantiateCardSystemUI() {
@@ -249,14 +249,14 @@ namespace Cardinals
             obj.SetActive(false); 
         }
 
-        private void InstantiateEnemyUIParent()
-        {
-            var obj = new GameObject();
-            obj.transform.SetParent(_enemyUICanvas.transform);
-
-            obj.name = "@EnemyInfoController";
-            obj.AddComponent<EnemyInfoController>();
-        }
+        // private void InstantiateEnemyUIParent()
+        // {
+        //     var obj = new GameObject();
+        //     obj.transform.SetParent(_enemyUICanvas.transform);
+        //
+        //     obj.name = "@EnemyInfoController";
+        //     obj.AddComponent<EnemyInfoController>();
+        // }
 
         private void InstantiateHoveredTileInfoUI() {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_HoveredTileInfo);
