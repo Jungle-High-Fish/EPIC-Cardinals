@@ -122,6 +122,7 @@ namespace Cardinals.BoardEvent.Tile
             ClearPanel();
             SetMessage("성공적으로 이벤트가 완료되었다.");
             yield return new WaitForSeconds(1.5f); // 이벤트 완료 후, 잠깐 대기
+            _explainObj.SetActive(false);
             
             GameManager.I.UI.UIEndTurnButton.Activate();
         }

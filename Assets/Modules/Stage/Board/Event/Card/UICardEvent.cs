@@ -47,7 +47,12 @@ namespace Cardinals.BoardEvent.Card
             _curEvent = _eventData[Random.Range(0, _eventData.Length)];
             _eventGuideTMP.text = _curEvent.description;
             
-            if (GameManager.I.Stage.CardManager.HandCards.Count() == 0) // 카드가 없으면
+            Invoke(nameof(CheckCardExist), 1f);
+        }
+
+        void CheckCardExist()
+        {
+            if (GameManager.I.Stage.CardManager.HandCards.Count() == 0)
             {
                 // 이벤트 생략
                 EndEvent("이벤트를 수행하기 위한 카드가 부족합니다.");

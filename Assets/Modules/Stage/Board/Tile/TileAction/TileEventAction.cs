@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Util;
@@ -21,8 +22,15 @@ namespace Cardinals.Board {
 
             _renderer ??= _tile.GetComponentInChildren<SpriteRenderer>();
             _renderer.sprite =  ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_BoardEvent + type);
-             
-            // 타일 위에 해당 컴포넌트 설정 필요
+
+            
+            _renderer.transform.localScale = Vector3.zero;
+            _renderer.transform.DOScale(1, 1).SetEase(Ease.OutBounce)
+                .OnComplete(() =>
+                {
+                    _renderer.transform.LookAt(Camera.main.transform);
+                    _renderer.transform.Rotate(0, 180, 0);
+                });
         }
         
         
