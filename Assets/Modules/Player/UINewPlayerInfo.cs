@@ -81,6 +81,8 @@ namespace Cardinals.UI.Description
             var sprite = data.patternSprite;
             var obj = InstantiateIcon(sprite, _blessParentTr, TileMagic.Data(data.relatedMagicType).elementColor);
             obj.AddComponent<BlessDescription>().Init(type); // 설명창 추가
+
+            GameManager.I.Player.PlayerInfo.BlessEventDict[type] += obj.GetComponent<UIIcon>().EffectBless;
         }
 
         private List<UIPotion> _potionList = new();

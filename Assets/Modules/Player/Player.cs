@@ -90,6 +90,7 @@ namespace Cardinals
             {
                 DefenseCount = 0;
             }
+            else GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
         }
 
         public void EndBattle()
@@ -105,6 +106,7 @@ namespace Cardinals
             }
 
             //TODO : 힐 수치 Constants에서 끌어쓰기
+            GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater1]?.Invoke();
             Heal(3);
         }
 
@@ -112,6 +114,8 @@ namespace Cardinals
         {
             if (DefenseCount > 0)
             {
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth1]?.Invoke();
+                
                 var enemies = (GameManager.I.Stage.CurEvent as BattleEvent).Enemies;
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {

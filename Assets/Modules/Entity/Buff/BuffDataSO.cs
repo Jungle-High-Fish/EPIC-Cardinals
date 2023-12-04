@@ -19,6 +19,8 @@ public class BuffDataSO : ScriptableObject
     public string description;
     public Sprite sprite;
 
+    public Sprite effectSprite;
+
     public static BuffDataSO Data(BuffType type) {
         return ResourceLoader.LoadSO<BuffDataSO>(
             Cardinals.Constants.FilePath.Resources.SO_BuffData + type

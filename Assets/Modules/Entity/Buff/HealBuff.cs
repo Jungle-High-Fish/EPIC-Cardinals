@@ -13,6 +13,7 @@ namespace Cardinals.Buff
         public override void Execute(BaseEntity entity)
         {
             entity.Heal(3);
+            base.Execute(entity);
         }
     }
 

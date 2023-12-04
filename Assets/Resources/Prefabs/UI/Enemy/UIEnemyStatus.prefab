@@ -359,6 +359,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1492545863447491631, guid: a252fc56559d3f04c9c03276144a4605,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3088648392762794533, guid: a252fc56559d3f04c9c03276144a4605,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -564,6 +569,7 @@ MonoBehaviour:
   _buffPrefab: {fileID: 5379653668884289483, guid: 05d2367bf056f27469489d27100cbaa2,
     type: 3}
   _buffListArea: {fileID: 7846686108496908512}
+  _addBuffDescriptionTr: {fileID: 8422910219981541283}
   _patternTr: {fileID: 3777491595111266726}
   _patternIconImg: {fileID: 382407582258796176}
   _patternCountTMP: {fileID: 1602292921665330971}
@@ -576,6 +582,12 @@ RectTransform:
 --- !u!224 &7846686108496908512 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 916378933119069036, guid: a252fc56559d3f04c9c03276144a4605,
+    type: 3}
+  m_PrefabInstance: {fileID: 6940793293068696460}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8422910219981541283 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1492545863447491631, guid: a252fc56559d3f04c9c03276144a4605,
     type: 3}
   m_PrefabInstance: {fileID: 6940793293068696460}
   m_PrefabAsset: {fileID: 0}
