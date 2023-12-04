@@ -72,7 +72,7 @@ namespace Cardinals.Game
                 yield return GameManager.I.WaitNext(); // 대기?
 
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
-                
+                GameManager.I.Stage.CardManager.SetCardSelectable(false);
                 // 적 행동
                 for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnTurn();
                 yield return new WaitForSeconds(1f);
