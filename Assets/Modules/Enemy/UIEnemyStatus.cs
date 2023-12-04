@@ -63,6 +63,8 @@ namespace Cardinals.UI
             {
                 _patternCountTMP.text = $"{pattern.Value}";
             }
+            
+            _patternTr.GetComponent<GridSizeUpdator>().Resizing();
         }
 
         private bool CheckSetWeakDamage(EnemyActionType type)

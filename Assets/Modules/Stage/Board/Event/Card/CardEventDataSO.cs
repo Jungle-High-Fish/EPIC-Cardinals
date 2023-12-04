@@ -9,6 +9,7 @@ namespace Cardinals.BoardEvent.Card
     public class CardEventDataSO : ScriptableObject
     {
         public BoardEventCardType type;
+        [TextArea]
         public string description;
         public string endText;
     }

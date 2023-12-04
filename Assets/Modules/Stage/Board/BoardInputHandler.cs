@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cardinals.Enums;
 using Cardinals.UI;
 using UnityEngine;
@@ -239,7 +240,15 @@ namespace Cardinals.Board {
 			List<RaycastResult> results = new List<RaycastResult>();
 			EventSystem.current.RaycastAll(pointerEventData, results);
 
+			if(results.Any(result => result.gameObject.GetComponent<UIMouseDetector>()?.MouseDetectorType  == MouseDetectorType.CardEvent))
+			{
+				_isMouseHoverUI = true;
+				_hoveredMouseDetectorType = MouseDetectorType.CardEvent;
+				return;
+			}
+			
 			bool isMouseHoverUI = false;
+			
 			foreach (var result in results) {
 				UIMouseDetector mouseDetector = result.gameObject.GetComponent<UIMouseDetector>();
 				if (mouseDetector == null) {
