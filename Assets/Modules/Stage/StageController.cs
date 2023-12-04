@@ -405,6 +405,12 @@ namespace Cardinals.Game {
         {
             GameManager.I.Player.PlayerInfo.AddPotion(potionType);
         }
+
+        [Button]
+        public void Test_Artifact(ArtifactType artifactType)
+        {
+            GameManager.I.Player.PlayerInfo.AddArtifact(artifactType);
+        }
         #endregion
     }
 

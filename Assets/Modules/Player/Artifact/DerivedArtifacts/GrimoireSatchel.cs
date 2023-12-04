@@ -15,7 +15,9 @@ namespace Cardinals.Game
 
         private void OnEffect()
         {
-            GameManager.I.Player.SetMaxHP(GameManager.I.Player.MaxHp-10);
+            GameManager.I.Player.SetMaxHP(GameManager.I.Player.MaxHp - 10);
+            GameManager.I.Player.Hp = 30;
+            
         }
     }
 }
