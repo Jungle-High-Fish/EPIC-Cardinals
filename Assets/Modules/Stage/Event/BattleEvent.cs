@@ -64,6 +64,7 @@ namespace Cardinals.Game
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
+                GameManager.I.Stage.CardManager.OnTurn();
                 GameManager.I.Player.OnTurn();
 
                 // 턴 종료 버튼 활성화

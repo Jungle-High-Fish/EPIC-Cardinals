@@ -9,6 +9,7 @@ using Util;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
+using Cardinals.Tutorial;
 
 namespace Cardinals.Board
 {
@@ -65,6 +66,9 @@ namespace Cardinals.Board
         public void OnMouseDown()
         {
             GameManager.I.Stage.SelectedBless = _baseBless;
+            if (GameManager.I.Stage.CurEvent is TutorialEvent tutorialEvent) {
+                tutorialEvent.CheckBlessSelectQuest();
+            }
         }
 
         private void LookAtCamera(Vector3 target)
