@@ -29,6 +29,8 @@ namespace Cardinals
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
+        private int _boardRoundCount = 0;
+
         public Action<PlayerActionType> UpdateActionEvent { get; set; }
         public PlayerActionType CurActionType { get; private set; }
 
@@ -60,7 +62,7 @@ namespace Cardinals
                 }
             }
         }
-        
+
         public override void OnTurn()
         {
             _isDamagedThisTurn = false;
@@ -147,7 +149,19 @@ namespace Cardinals
             for(int i = 0; i < count; i++)
             {
                 if (_onTile.Next == GameManager.I.Stage.Board.GetStartTile()) {
+                    _boardRoundCount++;
+
                     GameManager.I.Stage.GenerateBoardEvent();
+
+                    if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Rigloo))
+                    {
+                        Heal(2);
+                    }
+
+                    if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Verdant))
+                    {
+                        GameManager.I.Stage.Board.GetRandomTile(false).TileMagic.GainExpToNextLevel();
+                    }
                 }
 
                 SetFlipOnMoveByPosition(_onTile.Next);

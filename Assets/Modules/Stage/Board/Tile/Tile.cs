@@ -323,6 +323,7 @@ namespace Cardinals.Board {
                 GameManager.I.UI.UIHoveredTileInfo.Hide(false);
             }
             //GameManager.I.UI.UIHoveredTileInfo.Hide(false);
+            GameManager.I.UI.UIMouseHint.Hide();
         }
 
         private void OnMouseOver() {
@@ -333,6 +334,8 @@ namespace Cardinals.Board {
             if (Input.GetMouseButtonUp(1)) {
                 GameManager.I.UI.UIHoveredTileInfo.Hide(false);
             }
+
+            GameManager.I.UI.UIMouseHint.Show();
         }
     }
 

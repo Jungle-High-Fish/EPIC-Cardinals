@@ -204,16 +204,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: "(\uC22B\uC790 \uCE74\uB4DC 2\uB97C \uBCF4\uB4DC \uC678\uAC01\uC5D0 \uB193\uC73C\uC138\uC694.)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c77f582d94f06a34a8c811733dc9d44f, type: 2}
-  m_sharedMaterial: {fileID: 8491749742121679421, guid: c77f582d94f06a34a8c811733dc9d44f,
+  m_fontAsset: {fileID: 11400000, guid: c6b141a2f977ea44a81fcdc0fdb3b1a1, type: 2}
+  m_sharedMaterial: {fileID: 3661216314331481761, guid: c6b141a2f977ea44a81fcdc0fdb3b1a1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4280558628
+  m_fontColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -429,8 +429,8 @@ MonoBehaviour:
   m_text: "3 \uBC29\uC5B4\uB3C4\uB97C \uD68D\uB4DD\uD558\uC5EC \uC801\uC758 \uACF5\uACA9\uC744
     \uB9C9\uC73C\uC138\uC694!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c295c94b96d155240ae155ff0f3bd26d, type: 2}
-  m_sharedMaterial: {fileID: -1300497808526000583, guid: c295c94b96d155240ae155ff0f3bd26d,
+  m_fontAsset: {fileID: 11400000, guid: c6b141a2f977ea44a81fcdc0fdb3b1a1, type: 2}
+  m_sharedMaterial: {fileID: 3661216314331481761, guid: c6b141a2f977ea44a81fcdc0fdb3b1a1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
