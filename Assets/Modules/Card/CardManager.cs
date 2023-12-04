@@ -412,11 +412,11 @@ namespace Cardinals
                             yield break;
                         
                         case MouseState.CardEvent:
+                            yield return Discard(_selectCardIndex, CardAnimationType.UseMove);
                             GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();
-                            yield return Discard(_selectCardIndex, CardAnimationType.TurnEnd);
 
                             _cardUsedCountOnThisTurn++;
                             if (_isTutorial) {
