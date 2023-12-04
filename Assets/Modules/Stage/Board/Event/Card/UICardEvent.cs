@@ -38,8 +38,6 @@ namespace Cardinals.BoardEvent.Card
         [Button]
         public void Init()
         {
-            transform.SetSiblingIndex(5);
-            
             gameObject.SetActive(true);
             _eventObj.SetActive(true);
             _endObj.SetActive(false);
