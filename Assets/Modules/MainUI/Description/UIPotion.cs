@@ -23,7 +23,7 @@ namespace Cardinals.UI.Description
         public void Init(int index)
         {
             _index = index;
-            GetComponent<UIIcon>().Init(null);
+            GetComponent<UIIcon>().Init(null, new Color(0.88f, 0.88f, 0.88f, 1f));
         }
         
 
@@ -40,7 +40,7 @@ namespace Cardinals.UI.Description
             {
                 GameManager.I.Player.PlayerInfo.UsePotion(_index);
             
-                GetComponent<UIIcon>().Init(null);
+                GetComponent<UIIcon>().Init(null, new Color(0.88f, 0.88f, 0.88f, 1f));
             
                 var descs =  GetComponents<PotionDescription>();
                 for (int i = descs.Length - 1; i >= 0; i--)

@@ -17,15 +17,12 @@ namespace Cardinals
     {
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
-        public UIPlayerInfo UIPlayerInfo => _uiPlayerInfo;
-        public UIEndTurnButton UIEndTurnButton => _uiEndTurnButton;
         public UICardSystem UICardSystem => _uiCardSystem;
         public UITileSelection UITileSelection => _uiTileSelection;
         public UIMagicLevelUpPanel UIMagicLevelUpPanel => _uiMagicLevelUpPanel;
-        public UIMapButton UIMapButton => _uiMapButton;
         public UITileInfo UIHoveredTileInfo => _uiHoveredTileInfo;
-        public UITileInfo UITileInfo => _uiTileInfo;
         public UINewPlayerInfo UINewPlayerInfo => _uiNewPlayerInfo;
+        public UIEndTurnButton UIEndTurnButton => _uiNewPlayerInfo.EndTurnButton;
 
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -39,14 +36,12 @@ namespace Cardinals
 
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
-        private UIEndTurnButton _uiEndTurnButton;
         private UIMapButton _uiMapButton;
         private UIPlayerInfo _uiPlayerInfo;
         private UICardSystem _uiCardSystem;
         private UITileSelection _uiTileSelection;
         private UIMagicLevelUpPanel _uiMagicLevelUpPanel;
         private UITileInfo _uiHoveredTileInfo;
-        private UITileInfo _uiTileInfo;
         private UINewPlayerInfo _uiNewPlayerInfo;
 
         #region Board-Event 
@@ -73,8 +68,7 @@ namespace Cardinals
             
             
             InstantiateStageInfoUI();
-            InstantiateTurnEndButtonUI();
-            InstantiateMapButtonUI();
+            //InstantiateMapButtonUI();
             InstantiateRewardUI();
             //InstantiatePlayerUI();
             InstantiateNewPlayerUI();
@@ -95,7 +89,6 @@ namespace Cardinals
             InstantiateMagicLevelUpUI();
             
             InstantiateHoveredTileInfoUI();
-            InstantiateTileInfoUI();
         }
 
         void InitDescriptionCanvas()
@@ -149,15 +142,6 @@ namespace Cardinals
             stageInfoUIObj.SetActive(false);
         }
 
-        private void InstantiateTurnEndButtonUI() {
-            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TurnEndButton);
-            GameObject turnEndButtonUIObj = Instantiate(prefab, _mainUICanvas.transform);
-
-            _uiEndTurnButton = turnEndButtonUIObj.GetComponent<UIEndTurnButton>();
-            _uiEndTurnButton.Init();
-            turnEndButtonUIObj.SetActive(false);
-        }
-
         private void InstantiateMapButtonUI() {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_MapButton);
             GameObject turnEndButtonUIObj = Instantiate(prefab, _mainUICanvas.transform);
@@ -182,11 +166,13 @@ namespace Cardinals
             _uiPlayerInfo = playerUIObj.GetComponent<UIPlayerInfo>();
             playerUIObj.SetActive(false);
         }
+
         private void InstantiateNewPlayerUI() {
             GameObject playerUIPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UINewPlayerInfo);
             GameObject playerUIObj = Instantiate(playerUIPrefab, _playerUICanvas.transform);
 
             _uiNewPlayerInfo = playerUIObj.GetComponent<UINewPlayerInfo>();
+            _uiNewPlayerInfo.Init();
         }
 
         public void InstantiatePlayerStatusUI()
@@ -267,14 +253,6 @@ namespace Cardinals
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
 
             _uiHoveredTileInfo = obj.GetComponent<UITileInfo>();
-            obj.SetActive(false);
-        }
-
-        private void InstantiateTileInfoUI() {
-            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TileInfo);
-            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
-
-            _uiTileInfo = obj.GetComponent<UITileInfo>();
             obj.SetActive(false);
         }
         

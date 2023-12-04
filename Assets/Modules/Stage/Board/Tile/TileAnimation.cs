@@ -80,6 +80,7 @@ namespace Cardinals.Board {
 			
 			InitFloatAnimation(true);
 			InitFloatAnimation(false);
+			InitFloatLittleAnimation();
 
 			InitAttackAnimation();
 			InitDefenceAnimation();
@@ -140,7 +141,21 @@ namespace Cardinals.Board {
 			).OnComplete(AnimationComplete(isUp ? TileAnimationType.Float : TileAnimationType.FloatDown))
 			.SetAutoKill(false).Pause();
 			
-			_animationDict.Add(isUp ? TileAnimationType.Float : TileAnimationType.FloatDown, (floatAnimation, 1f, 0));
+			_animationDict.Add(isUp ? TileAnimationType.Float : TileAnimationType.FloatDown, (floatAnimation, 0.5f, 0));
+			return floatAnimation;
+		}
+
+		private Sequence InitFloatLittleAnimation() {
+			Sequence floatAnimation = DOTween.Sequence();
+			floatAnimation.Append(
+				transform.DOMoveY(
+					_tile.Get(gameObject).TilePositionOnGround.y + 0.1f, 
+					0.3f
+				).SetEase(Ease.InOutSine)
+			).OnComplete(AnimationComplete(TileAnimationType.FloatLittle))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(TileAnimationType.FloatLittle, (floatAnimation, .3f, 0));
 			return floatAnimation;
 		}
 

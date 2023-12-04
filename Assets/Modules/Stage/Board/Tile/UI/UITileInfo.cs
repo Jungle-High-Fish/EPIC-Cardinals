@@ -55,13 +55,19 @@ namespace Cardinals.UI {
 
         private Tile _tile;
 
-        private bool _canHover = true;
+        private bool _isOnTile = true;
         private bool _isHovering = false;
 
         private BoardEventType _prevEventType = BoardEventType.Empty;
         private TileMagicType _prevMagicType = TileMagicType.None;
+
+        private float _prevExp = 0;
         
-        public void Show(Tile tile, bool isAnimation = true, bool canHover = true) {
+        public void InitOnTile() {
+            Show(GameManager.I.Stage.Board[0]);
+        }
+
+        public void Show(Tile tile, bool isAnimation = true, bool isOnTile = true) {
             gameObject.SetActive(true);
             
             if (isAnimation) {
@@ -80,15 +86,15 @@ namespace Cardinals.UI {
                 _eventEmblem.Get(gameObject).gameObject.SetActive(false);
                 _actionEmblem.Get(gameObject).gameObject.SetActive(true);
                 _levelGuage.Get(gameObject).gameObject.SetActive(true);
+
+                _prevExp = _tile.Exp;
             }
 
-            _descriptionArea.Get(gameObject).Init(_tile);
-            _canHover = canHover;
+            _descriptionArea.Get(gameObject).Init(_tile, isOnTile);
+            _isOnTile = isOnTile;
 
-            if (!_canHover) {
-                Canvas.ForceUpdateCanvases();
-                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-            }
+            Canvas.ForceUpdateCanvases();
+            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
         }
 
         public void Hide(bool isAnimation = true) {
@@ -114,15 +120,15 @@ namespace Cardinals.UI {
         public void OnPointerEnter(PointerEventData eventData) {
             _isHovering = true;
 
-            if (_tile == null) return;
-            if (_canHover == false) return;
+            // if (_tile == null) return;
+            // if (_canHover == false) return;
 
-            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+            // StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
         }
 
         public void OnPointerExit(PointerEventData eventData) {
             _isHovering = false;
-            _descriptionArea.Get(gameObject).HidePanels();
+            // _descriptionArea.Get(gameObject).HidePanels();
         }
 
         private void ShowEventTileInfo() {
@@ -159,14 +165,20 @@ namespace Cardinals.UI {
             _header.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
             _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
-            _expBar.Get(gameObject).transform.localScale = new Vector3(
-                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 0.8f), 
-                0.8f, 
-                0.8f
-            );
+            bool needUpdateExp = false;
+            if (_prevExp != _tile.Exp) {
+                needUpdateExp = true;
+            }
+            _prevExp = _tile.Exp;
 
             _levelText.Get(gameObject).text = $"Lv. {_tile.Level}";
             _expText.Get(gameObject).text = $"{_tile.Exp}/{Constants.GameSetting.Tile.LevelUpExp[_tile.Level]}";
+
+            _expBar.Get(gameObject).transform.localScale = new Vector3(
+                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1f), 
+                1f, 
+                1f
+            );
 
             _actionEmblem.Get(gameObject).sprite = ResourceLoader.LoadSO<TileSymbolsSO>(
                 Constants.FilePath.Resources.SO_TileSymbolsData
@@ -175,18 +187,23 @@ namespace Cardinals.UI {
             if (needUpdateDescription) {
                 RefreshDescription();
             }
+
+            if (needUpdateExp) {
+                UpdateExp();
+            }
         }
 
         private void RefreshDescription() {
-            _descriptionArea.Get(gameObject).Init(_tile);
+            _descriptionArea.Get(gameObject).Init(_tile, _isOnTile);
 
-            if (_canHover && _isHovering) {
-                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-            }
+            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
+        }
 
-            if (!_canHover) {
-                StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-            }
+        private void UpdateExp() {
+            _expBar.Get(gameObject).transform
+                .DOScaleX(Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1f), 0.4f)
+                .SetEase(Ease.OutCubic);
+            _levelGuage.Get(gameObject).transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 3, 0);
         }
 
         private void ShowAnimation() {

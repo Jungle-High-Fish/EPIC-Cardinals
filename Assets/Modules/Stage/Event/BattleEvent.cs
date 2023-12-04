@@ -127,7 +127,7 @@ namespace Cardinals.Game
         /// <param name="rewards"></param>
         IEnumerator WaitReward(IEnumerable<Reward> rewards)
         {
-            GameManager.I.UI.UIEndTurnButton.Activate();
+            GameManager.I.UI.UIEndTurnButton.Activate(true);
             
             // 보상 설정
             _stageController.RewardBox.Set(rewards); // 해당 위치에서 구체화 됩니다. 

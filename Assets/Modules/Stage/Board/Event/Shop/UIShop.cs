@@ -109,7 +109,6 @@ namespace Cardinals.BoardEvent.Shop
 
         public void On()
         {
-            //GameManager.I.UI.UIPlayerInfo.OpenPanel(); // 플레이어 창도 같이 띄워준다.
             gameObject.SetActive(true);   
         }
 

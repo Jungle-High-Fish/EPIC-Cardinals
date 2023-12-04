@@ -84,6 +84,7 @@ namespace Cardinals.Board {
         private bool _isSelectable;
         private bool _isSelected;
         private bool _isMouseHovered;
+        private bool _isPlayerOn;
 
         // 타일 위치 관련 변수
         private Vector3 _tilePositionOnGround;
@@ -204,6 +205,8 @@ namespace Cardinals.Board {
                 transform.position = _tilePositionOnGround;
                 _tileAnimation.Get(gameObject).Play(TileAnimationType.Float, false);
                 _rigidBody.Get(gameObject).isKinematic = true;
+
+                _isPlayerOn = true;
             }
         }
 
@@ -214,6 +217,7 @@ namespace Cardinals.Board {
 
             if (boardPiece is Player) {
                 _rigidBody.Get(gameObject).isKinematic = false;
+                _isPlayerOn = false;
             }
         }
 
@@ -306,12 +310,29 @@ namespace Cardinals.Board {
         private void OnMouseEnter() {
             _isMouseHovered = true;
 
-            GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
+            if (_isPlayerOn == false && _isSelected == false) {
+                
+            }
+            //GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
         }
 
         private void OnMouseExit() {
             _isMouseHovered = false;
+
+            if (_isPlayerOn == false && _isSelected == false) {
+                GameManager.I.UI.UIHoveredTileInfo.Hide(false);
+            }
             //GameManager.I.UI.UIHoveredTileInfo.Hide(false);
+        }
+
+        private void OnMouseOver() {
+            if (Input.GetMouseButtonDown(1)) {
+                GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
+            }
+
+            if (Input.GetMouseButtonUp(1)) {
+                GameManager.I.UI.UIHoveredTileInfo.Hide(false);
+            }
         }
     }
 

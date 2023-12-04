@@ -85,8 +85,6 @@ namespace Cardinals.Game {
             // 축복 선택
             yield return SelectBlessFlow();
 
-
-            GameManager.I.UI.UIMapButton.On();
             GameManager.I.UI.TEMP_UIStageMap.Init(); // temp map
             // 다음 사건을 읽음
             while (_stage.MoveNext())
@@ -217,7 +215,7 @@ namespace Cardinals.Game {
             _player.Init();
             
             // UI 추가
-            GameManager.I.UI.UINewPlayerInfo.Init(); // 창에 이벤트 연결
+            GameManager.I.UI.UINewPlayerInfo.Set(); // 창에 이벤트 연결
             GameManager.I.UI.InstantiatePlayerStatusUI(); // Status 창 연결
 
             _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());

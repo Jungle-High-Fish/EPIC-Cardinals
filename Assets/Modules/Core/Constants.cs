@@ -16,6 +16,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_HoveredTileInfo = "UI/TileInfo/HoveredTileInfoUI";
             public const string Prefabs_UI_TileInfo = "UI/TileInfo/TileInfoUI";
             public const string Prefabs_UI_TileDescription = "UI/TileInfo/TileDescriptionUI";
+            public const string Prefabs_UI_OnTileDescription = "UI/TileInfo/OnTileDescriptionUI";
 
             public const string Prefabs_CornerTile = "Board/Tiles/CornerTile";
             public const string Prefabs_MouseDetector = "Board/MouseDetector";

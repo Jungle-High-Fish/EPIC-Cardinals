@@ -9,12 +9,14 @@ using Util;
 namespace Cardinals.UI {
     public class UITileDescriptionHandler: MonoBehaviour {
         private Tile _tile;
+        private bool _isOnTile;
 
         private List<UITileDescription> _descriptionPanels 
             = new List<UITileDescription>();
 
-        public void Init(Tile tile) {
+        public void Init(Tile tile, bool isOnTile) {
             _tile = tile;
+            _isOnTile = isOnTile;
 
             ClearDescriptionPanel();
 
@@ -76,11 +78,18 @@ namespace Cardinals.UI {
         }
 
         private UITileDescription InstantiateDescriptionPanel() {
-            GameObject prefab 
-                = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TileDescription);
+            GameObject prefab;
+            if (_isOnTile) {
+                prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_OnTileDescription);
+            } else {
+                prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TileDescription);
+            }
+                
             GameObject panel = Instantiate(prefab, transform);
-            panel.transform.SetAsFirstSibling();
 
+            if (_isOnTile) {
+                return panel.GetComponent<UIOnTileDescription>();
+            }
             return panel.GetComponent<UITileDescription>();
         }
 
