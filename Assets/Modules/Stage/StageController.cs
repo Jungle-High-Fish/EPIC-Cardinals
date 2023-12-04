@@ -33,8 +33,8 @@ namespace Cardinals.Game {
         private Transform _enemyParentTransform;
         
         private Transform _coreTransform;
-        private EnemyInfoController _enemyInfoController;
-        public EnemyInfoController EnemyInfoController => _enemyInfoController;
+        //private EnemyInfoController _enemyInfoController;
+        //public EnemyInfoController EnemyInfoController => _enemyInfoController;
         private Board.Board _board;
         private Player _player;
         private CardManager _cardManager;
@@ -197,7 +197,7 @@ namespace Cardinals.Game {
         private void InstantiateBaseObjs() {
             GameObject EnemyParentTransformObj = new GameObject($"@{Constants.Common.InstanceName.EnemyPlace}");
             _enemyParentTransform = EnemyParentTransformObj.transform;
-            _enemyInfoController = FindObjectOfType<EnemyInfoController>();
+            //_enemyInfoController = FindObjectOfType<EnemyInfoController>();
             
             GameObject BoardObj = new GameObject($"@{Constants.Common.InstanceName.Board}");
             BoardObj.transform.position = Vector3.zero;
