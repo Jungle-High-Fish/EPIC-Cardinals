@@ -197,6 +197,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 904942313772535841, guid: a252fc56559d3f04c9c03276144a4605,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 126.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 904942313772535841, guid: a252fc56559d3f04c9c03276144a4605,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 249.8
+      objectReference: {fileID: 0}
     - target: {fileID: 916378933119069036, guid: a252fc56559d3f04c9c03276144a4605,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -216,6 +226,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879050634780625542, guid: a252fc56559d3f04c9c03276144a4605,
+        type: 3}
+      propertyPath: _anchor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879050634780625542, guid: a252fc56559d3f04c9c03276144a4605,
+        type: 3}
+      propertyPath: _isPlayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5840978633286460778, guid: a252fc56559d3f04c9c03276144a4605,
         type: 3}
