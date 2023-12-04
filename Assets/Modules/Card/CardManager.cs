@@ -8,6 +8,7 @@ using Cardinals.Enums;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using Cardinals.Board;
+using Cardinals.Tutorial;
 
 namespace Cardinals
 {
@@ -19,6 +20,12 @@ namespace Cardinals
         private bool _lastCardUsedForAction;
         private bool _isMouseOnCardDeck;
         private int _continuousUseCount;
+        private int _cardUsedCountOnThisTurn;
+
+        #region Tutorial
+        private bool _isTutorial;
+        #endregion
+
         private CardState _state;
         private MouseState _mouseState = MouseState.Cancel;
 
@@ -102,6 +109,7 @@ namespace Cardinals
                 _canActionUse = true;
             }
             
+            _cardUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
             UpdateCardState(-1, true);
         }
@@ -109,14 +117,15 @@ namespace Cardinals
         [Button]
         public void EndTurn()
         {
-            
             StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
         }
 
-        public void OnBattle()
+        public void OnBattle(bool isTutorial=false)
         {
             _lastCardUsedForAction = false;
             _prevCardNumber = -1;
+
+            _isTutorial = isTutorial;
             Debug.Log("배틀 시작");
         }
 
@@ -125,6 +134,27 @@ namespace Cardinals
             EndTurn();
             Debug.Log("배틀 끝");
         }
+
+        public void DrawHandDecksForTutorial(int[] cardNumbers) {
+            _lastCardUsedForAction = false;
+            _prevCardNumber = -1;
+            
+            for (int i = 0; i < cardNumbers.Length; i++) {
+                AddCard(cardNumbers[i], true, CardPileType.Hand);
+            }
+
+            _canActionUse = false;
+            if (!_lastCardUsedForAction&&_newCardUseMod)
+            {
+                _canActionUse = true;
+            }
+            
+            _cardUsedCountOnThisTurn = 0;
+            _continuousUseCount = 0;
+
+            UpdateCardState(-1, true);
+        }
+
         public void SetCardSelectable(bool isSelectable)
         {
             foreach(CardUI c in _handcardsUI)
@@ -325,35 +355,59 @@ namespace Cardinals
                         }
                     }
 
-                    int useNumber;
+                    int useNumber = _handCards[_selectCardIndex].CardNumber;
+
+                    if (_isTutorial) {
+                        var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+                        if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber) {
+                            goto DismissCards;
+                        }
+
+                        if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != MouseState.Action) {
+                            goto DismissCards;
+                        }
+                    }
+
                     switch (_mouseState)
                     {
                         case MouseState.Action:
                             var target = GameManager.I.Stage.Enemies[boardInputHandler.HoveredIdx];
-                            useNumber = _handCards[_selectCardIndex].CardNumber;
 
                             if (!CardUseAction(useNumber, target))
                             {
                                 break;
                             }
-                            
+
+                            _cardUsedCountOnThisTurn++;
+                            if (_isTutorial) {
+                                CheckTutorialStateForCard(useNumber);
+                            }
                             yield break;
 
                         case MouseState.Move:
-                            useNumber = _handCards[_selectCardIndex].CardNumber;
                             CardUseMove(useNumber);
+
+                            _cardUsedCountOnThisTurn++;
+                            if (_isTutorial) {
+                                CheckTutorialStateForCard(useNumber);
+                            }
                             yield break;
                         
                         case MouseState.CardEvent:
-                            useNumber = _handCards[_selectCardIndex].CardNumber;
                             GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();
                             yield return Discard(_selectCardIndex, CardAnimationType.TurnEnd);
+
+                            _cardUsedCountOnThisTurn++;
+                            if (_isTutorial) {
+                                CheckTutorialStateForCard(useNumber);
+                            }
                             yield break;
                     }
 
+                    DismissCards:
                     _handcardsUI[_selectCardIndex].IsSelect = false;
                     _handcardsUI[_selectCardIndex].transform.localScale=new Vector3(1, 1, 1);
                     _cardDeckUIParent.GetComponent<HorizontalLayoutGroup>().SetLayoutHorizontal();
@@ -373,6 +427,26 @@ namespace Cardinals
                 if (c == null)
                     continue;
                 c.ClickDismiss();
+            }
+        }
+
+        private void SetCardUnselectableExcept(int cardNumber) {
+            foreach(CardUI c in _handcardsUI)
+            {
+                if (c.Card.CardNumber == cardNumber) {
+                    c.IsSelectable = true;
+                } else {
+                    c.IsSelectable = false;
+                }
+            }
+        }
+
+        private void CheckTutorialStateForCard(int useNumber) {
+            (GameManager.I.Stage.CurEvent as TutorialEvent).CheckCardQuest(useNumber, MouseState.Move);
+            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+
+            if (cardSequenceCheck.hasSequence) {
+                SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
             }
         }
 
@@ -431,22 +505,7 @@ namespace Cardinals
         private bool CardUseAction(int num, BaseEntity target=null)
         {
             if (!CheckUseCardOnAction()) return false;
-            // if(GameManager.I.Player.OnTile.Type==TileType.Start||
-            //     GameManager.I.Player.OnTile.Type == TileType.Blank)
-            // {
-            //     return false;
-            // }
-            // if (!_canActionUse)
-            // {
-            //     return false;
-            // }
-            //
-            // // [디버프] 감전
-            // if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
-            // {
-            //     Debug.Log("뭐지 감전당했나?");
-            //     return false;
-            // }
+           
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
                

@@ -9,11 +9,14 @@ using Util;
 using Sirenix.OdinInspector;
 using Cardinals.Board;
 using System;
+using Cardinals.Tutorial;
+using Cardinals.Game;
+using TMPro;
 
-namespace Cardinals.Game
+namespace Cardinals.Tutorial
 {
-    [CreateAssetMenu(fileName = "BattleEvent", menuName = "Cardinals/Event/Battle")]
-    public class BattleEvent: BaseEvent
+    [CreateAssetMenu(fileName = "TutorialEvent", menuName = "Cardinals/Event/Tutorial")]
+    public class TutorialEvent: BaseEvent
     {
         private List<BaseEnemy> _enemies;
         public List<BaseEnemy> Enemies => _enemies;
@@ -21,18 +24,136 @@ namespace Cardinals.Game
         [SerializeField, InlineEditor] private EnemyDataSO[] _enemyList;
         public EnemyDataSO[] EnemyList => _enemyList;
 
+        [SerializeField] private List<TutorialDataSO> _tutorialData;
+
+        #region Tutorial
+        private bool [] _isTutorialClear;
+        private int _curTutorialIndex;
+        private int _curQuestIndex;
+        private int _curSequenceIndex;
+        #endregion
+
         #region Battle
         private StageController _stageController;
 
         public override IEnumerator Flow(StageController stageController)
         {
             Debug.Log("전투 플로우 실행");
+
+            GameManager.I.UI.UIEndTurnButton.Deactivate();
             
             // 전투 세팅
             _stageController = stageController;
             List<Reward> rewards = new();
-        
-            // 몬스터 설정
+            
+            // 몬스터 세팅
+            InitEnemies(rewards);
+
+            // 카드 매니저 세팅
+            GameManager.I.Stage.CardManager.OnBattle(true);
+
+            // 튜토리얼 데이터
+            _isTutorialClear = new bool[_tutorialData.Count];
+            for (int i = 0; i < _isTutorialClear.Length; i++) _isTutorialClear[i] = false;
+            _curTutorialIndex = 0;
+            _curQuestIndex = 0;
+            _curSequenceIndex = 0;
+
+            do // 전투 시작
+            {
+                // 튜토리얼 UI 세팅
+                TutorialDataSO curTutorial = _tutorialData[_curTutorialIndex];
+                GameManager.I.UI.UITutorial.Init(curTutorial);
+
+                // 전투 업데이트
+                GameManager.I.Player.StartTurn();
+                _enemies.ForEach(enemy => enemy.StartTurn());
+
+                // 플레이어 행동 초기화
+
+                // 플레이어 행동
+                GameManager.I.Stage.CardManager.DrawHandDecksForTutorial(curTutorial.Cards);
+                GameManager.I.Player.OnTurn();
+
+                yield return GameManager.I.WaitNext(); // 대기?
+
+                GameManager.I.Stage.CardManager.SetCardSelectable(false);
+
+                // 적 행동
+                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnTurn();
+                yield return new WaitForSeconds(1f);
+                
+                // 카운트 처리
+                GameManager.I.Player.EndTurn();
+                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].EndTurn();
+                
+                // 보드 관련 처리
+                yield return SummonsAction();
+                _stageController.Board.OnTurnEnd();
+                
+                yield return new WaitForSeconds(1f);
+            } while (_isTutorialClear.Any(x => !x));
+
+            if (_enemies.Count == 0)
+            {
+                IsClear = true;
+                
+                // 전투 종료 초기화
+                GameManager.I.Player.Win();
+                GameManager.I.Player.EndBattle();
+                GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
+                RemoveSummons();
+                yield return WaitReward(rewards);
+            }
+        }
+
+        public void CheckCardQuest(int cardNumber, MouseState howToUse) {
+            var curTutorial = _tutorialData[_curTutorialIndex];
+
+            if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.Card) {
+                return;
+            }
+
+            if (curTutorial.Quests[_curQuestIndex].HasCardSequence == true) {
+                if (curTutorial.Quests[_curQuestIndex].NeedCardSequence[_curSequenceIndex].CardNumber != cardNumber) {
+                    return;
+                }
+
+                if (curTutorial.Quests[_curQuestIndex].NeedCardSequence[_curSequenceIndex].HowToUse != howToUse) {
+                    return;
+                }
+
+                _curSequenceIndex++;
+            }
+
+            var questResult = GameManager.I.UI.UITutorial.AchieveQuest(_curQuestIndex, 1);
+            if (questResult.hasClear) {
+                if (questResult.nextIdx == -1) {
+                    GameManager.I.UI.UITutorial.ShowEndTurnQuest(false);
+                    return;
+                }
+
+                _curQuestIndex = questResult.nextIdx;
+                if (curTutorial.Quests[_curQuestIndex].HasCardSequence) {
+                    _curSequenceIndex = 0;
+                }
+            }
+        }
+
+        public (bool hasSequence, QuestData.CardUseQuestData targetSequence) CheckIfHasCardSequence() {
+            var curTutorial = _tutorialData[_curTutorialIndex];
+            if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.Card) {
+                return (false, null);
+            }
+
+            if (curTutorial.Quests[_curQuestIndex].HasCardSequence == false) {
+                return (false, null);
+            }
+
+            return (true, curTutorial.Quests[_curQuestIndex].NeedCardSequence[_curSequenceIndex]);
+        }
+
+        private void InitEnemies(List<Reward> rewards) {
             Vector3[] enemyPositions = _stageController.Board.SetEnemyNumber(_enemyList.Length);
 
             _enemies = new();
@@ -53,53 +174,6 @@ namespace Cardinals.Game
 
             GameManager.I.CurrentEnemies = _enemies;
             _stageController.EnemyInfoController.Init(_enemyList.Length);
-            GameManager.I.Stage.CardManager.OnBattle();
-
-            do // 전투 시작
-            {
-                // 전투 업데이트
-                GameManager.I.Player.StartTurn();
-                _enemies.ForEach(enemy => enemy.StartTurn());
-
-                // 플레이어 행동 초기화
-
-                // 플레이어 행동
-                GameManager.I.Stage.CardManager.OnTurn();
-                GameManager.I.Player.OnTurn();
-
-                // 턴 종료 버튼 활성화
-                GameManager.I.UI.UIEndTurnButton.Activate();
-
-                yield return GameManager.I.WaitNext(); // 대기?
-
-                GameManager.I.UI.UIEndTurnButton.Deactivate();
-                GameManager.I.Stage.CardManager.SetCardSelectable(false);
-                // 적 행동
-                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnTurn();
-                yield return new WaitForSeconds(1f);
-                
-                // 카운트 처리
-                GameManager.I.Player.EndTurn();
-                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].EndTurn();
-                
-                // 보드 관련 처리
-                yield return SummonsAction();
-                _stageController.Board.OnTurnEnd();
-                
-                yield return new WaitForSeconds(1f);
-            } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);
-
-            if (_enemies.Count == 0)
-            {
-                IsClear = true;
-                
-                // 전투 종료 초기화
-                GameManager.I.Player.Win();
-                GameManager.I.Player.EndBattle();
-                GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
-                RemoveSummons();
-                yield return WaitReward(rewards);
-            }
         }
 
         private IEnumerator SummonsAction()

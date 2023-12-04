@@ -19,8 +19,19 @@ MonoBehaviour:
     Description: "\uC22B\uC790 \uCE74\uB4DC 2\uB97C \uBCF4\uB4DC \uC678\uAC01\uC5D0
       \uB193\uC73C\uC138\uC694."
     TargetQuests: 1
+    QuestType: 0
+    HasCardSequence: 1
+    NeedCardSequence:
+    - CardNumber: 2
+      HowToUse: 1
   - Title: "3\uC758 \uBC29\uC5B4\uB3C4\uB97C \uD68D\uB4DD\uD558\uC5EC \uC801\uC758
       \uACF5\uACA9\uC744 \uB9C9\uC73C\uC138\uC694."
     Description: "\uC22B\uC790 \uCE74\uB4DC 3\uC744 \uBCF4\uB4DC \uAC00\uC6B4\uB370\uC5D0
       \uB193\uC73C\uC138\uC694."
     TargetQuests: 1
+    QuestType: 0
+    HasCardSequence: 1
+    NeedCardSequence:
+    - CardNumber: 3
+      HowToUse: 0
+  Cards: 0200000003000000

@@ -18,18 +18,20 @@ namespace Cardinals.UI {
 
         [Button]
         public void Init(TutorialDataSO tutorialData) {
+            gameObject.SetActive(true);
+
             Clear();
 
             _tutorialTitle.Get(gameObject).text = tutorialData.Title;
 
+            Vector2 newSize = new Vector2(
+                (transform as RectTransform).sizeDelta.x,
+                tutorialData.Quests.Length * 85 + 110f
+            );
+
             IEnumerator InitQuests(float t) {
                 foreach (var quest in tutorialData.Quests) {
-                    var questObj = Instantiate(
-                        ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TutorialQuest), 
-                        _questArea.Get(gameObject)
-                    );
-                    var questUI = questObj.GetComponent<UIQuest>();
-                    questUI.Init(quest);
+                    var questUI = InstantiateQuest(quest);
                     _quests.Add(questUI);
 
                     yield return new WaitForSeconds(t);
@@ -37,12 +39,6 @@ namespace Cardinals.UI {
             }
 
             StartCoroutine(InitQuests(0.2f));
-
-            Vector2 newSize = new Vector2(
-                (transform as RectTransform).sizeDelta.x,
-                tutorialData.Quests.Length * 85 + 110f
-            );
-
             (transform as RectTransform).DOSizeDelta(newSize, 0.2f * tutorialData.Quests.Length).SetEase(Ease.OutCubic);
         }
 
@@ -60,11 +56,40 @@ namespace Cardinals.UI {
             }
         }
 
+        public void ShowEndTurnQuest(bool isForNextEvent) {
+            Vector2 newSize = new Vector2(
+                (transform as RectTransform).sizeDelta.x,
+                (transform as RectTransform).sizeDelta.y + 85
+            );
+
+            IEnumerator ShowQuest(float t) {
+                yield return new WaitForSeconds(t);
+                var questUI = InstantiateQuest(QuestData.EndTurnQuest());
+                _quests.Add(questUI);
+
+                GameManager.I.UI.UIEndTurnButton.Activate(isForNextEvent);
+            }
+
+            (transform as RectTransform).DOSizeDelta(newSize, 0.3f).SetEase(Ease.OutCubic);
+            StartCoroutine(ShowQuest(0.25f));
+        }
+
         private void Clear() {
             foreach (var quest in _quests) {
                 Destroy(quest.gameObject);
             }
             _quests.Clear();
+        }
+
+        private UIQuest InstantiateQuest(QuestData quest) {
+            var questObj = Instantiate(
+                ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TutorialQuest), 
+                _questArea.Get(gameObject)
+            );
+            var questUI = questObj.GetComponent<UIQuest>();
+            questUI.Init(quest);
+
+            return questUI;
         }
     }
 }

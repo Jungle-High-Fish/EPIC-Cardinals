@@ -7,6 +7,7 @@ using Cardinals.Enemy;
 using Cardinals.Game;
 using Cardinals.UI;
 using Cardinals.UI.Description;
+using Cardinals.Tutorial;
 using Unity.VisualScripting;
 using UnityEngine;
 using Util;
@@ -54,6 +55,12 @@ namespace Cardinals
         public UIRoulette UIRoulette => _uiRoulette;
         public UITileEvent UITileEvent => _uiTileEvent;
         #endregion
+
+        #region Tutorial
+        private UITutorial _uiTutorial;
+
+        public UITutorial UITutorial => _uiTutorial;
+        #endregion
         
         public TEMP_UIStageMap TEMP_UIStageMap { get; private set; }
         
@@ -89,6 +96,9 @@ namespace Cardinals
             InstantiateMagicLevelUpUI();
             
             InstantiateHoveredTileInfoUI();
+
+            // Tutorial
+            InstantiateTutorialUI();
         }
 
         void InitDescriptionCanvas()
@@ -256,5 +266,12 @@ namespace Cardinals
             obj.SetActive(false);
         }
         
+        private void InstantiateTutorialUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Tutorial);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+
+            _uiTutorial = obj.GetComponent<UITutorial>();
+            obj.SetActive(false);
+        }
     }
 }

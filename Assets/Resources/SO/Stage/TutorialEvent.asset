@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e30d668242ed12469cd7f6348bc37b5, type: 3}
+  m_Name: TutorialEvent
+  m_EditorClassIdentifier: 
+  _type: 1
+  _enemyList:
+  - {fileID: 11400000, guid: 3c45a79026deca3489e2ff9b9d9b5354, type: 2}
+  _tutorialData:
+  - {fileID: 11400000, guid: e11f58e0be4a67741b66e26c6523837f, type: 2}
