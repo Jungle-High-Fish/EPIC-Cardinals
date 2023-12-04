@@ -318,7 +318,7 @@ namespace Cardinals.Game {
         public void GenEnemySkill_TB()
         {
             // 썬더 볼트
-            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            var list = GameManager.I.Stage.Board.GetCursedTilesList()?.ToList();
             if (list != null)
             {
                 var index = Random.Range(0, list.Count);
@@ -337,7 +337,8 @@ namespace Cardinals.Game {
             for (int i = 0; i < 4; i++)
             {
                 var list = GameManager.I.Stage.Board.GetBoardEdgeTileSequence(i, false)
-                    .Where(t => t.TileState == TileState.Normal).ToList();
+                    .Where(t => t.TileState == TileState.Normal)
+                    .Where(t => GameManager.I.Player.OnTile != t).ToList();
 
                 if (list.Count > 0)
                 {
@@ -356,14 +357,14 @@ namespace Cardinals.Game {
             // 저주 적용
             foreach (var tile in tiles)
             {
-                tile.SetCurse(TileCurseType.ThunderBolt, 2);
+                tile.SetCurse(TileCurseType.ThunderBolt, 3);
             }
         }
 
         [Button]
         public void TestEnemySkill_Fireball()
         {
-            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            var list = GameManager.I.Stage.Board.GetCursedTilesList()?.ToList();
             
             if (list != null)
             {

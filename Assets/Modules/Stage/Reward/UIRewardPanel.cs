@@ -42,7 +42,8 @@ namespace Cardinals.UI
      {
          gameObject.SetActive(true);
          transform.localScale = Vector3.zero;
-         transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
+         transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic)
+             .OnComplete(() => { GetComponent<GridSizeUpdator>().Resizing(); });
      }
  
      

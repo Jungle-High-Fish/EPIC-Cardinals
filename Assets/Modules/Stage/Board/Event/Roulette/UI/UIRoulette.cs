@@ -36,6 +36,7 @@ namespace Cardinals.BoardEvent.Roulette
 
         public void Init()
         {
+            GameManager.I.UI.UIEndTurnButton.Deactivate();
             gameObject.SetActive(true);
             _resultObj.SetActive(false);
             Roulette.Init();
@@ -84,6 +85,7 @@ namespace Cardinals.BoardEvent.Roulette
         IEnumerator Close()
         {
             yield return new WaitForSeconds(2f);
+            GameManager.I.UI.UIEndTurnButton.Activate();
             gameObject.SetActive(false);
         }
     }

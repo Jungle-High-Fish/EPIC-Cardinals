@@ -30,7 +30,7 @@ namespace Cardinals.Enemy
 
         void SpawnFireball()
         {
-            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            var list = GameManager.I.Stage.Board.GetCursedTilesList()?.ToList();
             
             if (list != null)
             {

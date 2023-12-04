@@ -58,7 +58,7 @@ namespace Cardinals.Enemy
 
         void ThunderBolt()
         {
-            var list = GameManager.I.Stage.Board.GetCursedTilesList().ToList();
+            var list = GameManager.I.Stage.Board.GetCursedTilesList()?.ToList();
             if (list != null)
             {
                 var index = Random.Range(0, list.Count);
@@ -76,7 +76,8 @@ namespace Cardinals.Enemy
             for (int i = 0; i < 4; i++)
             {
                 var list = GameManager.I.Stage.Board.GetBoardEdgeTileSequence(i, false)
-                    .Where(t => t.TileState == TileState.Normal).ToList();
+                    .Where(t => t.TileState == TileState.Normal)
+                    .Where(t => GameManager.I.Player.OnTile != t).ToList();
 
                 if (list.Count > 0)
                 {
