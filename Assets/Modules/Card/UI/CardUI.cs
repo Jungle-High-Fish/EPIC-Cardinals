@@ -164,7 +164,7 @@ namespace Cardinals
 
         private void SetCardUIHovered()
         {
-            if (!_isDiscard)
+            if (!_isDiscard&&_isSelectable)
             {
                 (transform as RectTransform).DOAnchorPosY(_CardUIPos.y + 30, 0.1f);
             }
@@ -173,7 +173,7 @@ namespace Cardinals
 
         private void SetCardUIRestore()
         {
-            if (!_isDiscard)
+            if (!_isDiscard && _isSelectable)
             {
                 (transform as RectTransform).DOAnchorPosY(_CardUIPos.y, 0.1f);
             }

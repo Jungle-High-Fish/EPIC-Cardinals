@@ -109,6 +109,7 @@ namespace Cardinals
         [Button]
         public void EndTurn()
         {
+            
             StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
         }
 
