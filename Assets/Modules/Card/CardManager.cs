@@ -494,7 +494,13 @@ namespace Cardinals
 
         public void WarpArtifact()
         {
-            CardUseMove(1);
+            StartCoroutine(GameManager.I.Player.MoveTo(1, 0.4f));
+            _state = CardState.Idle;
+            _prevCardNumber = -1;
+            _continuousUseCount = 0;
+            _canActionUse = true;
+            _lastCardUsedForAction = false;
+            DismissAllCards();
         }
 
         public bool CheckUseCardOnAction()
