@@ -270,7 +270,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -326,7 +326,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 107.97, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6019640934187793244
 MonoBehaviour:
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
-  m_VerticalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &7584898962201053394
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,8 +763,8 @@ MonoBehaviour:
 
     dfasdfasdfasdfa111111111111111111111'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c295c94b96d155240ae155ff0f3bd26d, type: 2}
-  m_sharedMaterial: {fileID: -1300497808526000583, guid: c295c94b96d155240ae155ff0f3bd26d,
+  m_fontAsset: {fileID: 11400000, guid: c6b141a2f977ea44a81fcdc0fdb3b1a1, type: 2}
+  m_sharedMaterial: {fileID: 3661216314331481761, guid: c6b141a2f977ea44a81fcdc0fdb3b1a1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
