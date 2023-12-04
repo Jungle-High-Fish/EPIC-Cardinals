@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -57,6 +58,29 @@ namespace Util {
 
             //Debug.Log($"textHeight: {textHeight}, lineSpacing: {lineSpacing}, margin: {tmp.margin.y}, {tmp.margin.w}, lineCount: {textInfo.lineCount}, fontSize: {tmp.fontSize}, lineHeight: {textInfo.lineInfo[0].lineHeight}");
             return textHeight + lineSpacing + tmp.margin.y + tmp.margin.w;
+        }
+
+        public static void DOStrikethrough(this TextMeshProUGUI tmp, float t) {
+            string targetText = tmp.text;
+            int targetLength = targetText.Length;
+
+            targetText = targetText.Insert(0, "<s>");
+
+            string newText = "";
+            IEnumerator Coroutine() {
+                for (int i = 2; i < targetLength; i++) {
+                    if (targetText[i] == '\n') {
+                        continue;
+                    }
+                    
+                    newText = targetText.Insert(i, "</s>");
+                    tmp.text = newText;
+                    yield return new WaitForSeconds(t / targetLength);
+                }
+                tmp.text = targetText + "</s>";
+            }
+
+            tmp.StartCoroutine(Coroutine());
         }
     }
 }
