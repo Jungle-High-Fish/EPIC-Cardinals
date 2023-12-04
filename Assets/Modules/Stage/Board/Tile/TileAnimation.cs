@@ -117,7 +117,8 @@ namespace Cardinals.Board {
 		private Sequence InitFlipAnimation(bool isBackWard=false) {
 			Sequence flipAnimation = DOTween.Sequence();
 			flipAnimation.Append(
-				_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
+				transform.DOPunchPosition(Vector3.up, 1.5f, 1, 0f)
+				//_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
 			).Insert(
 				0.1f, _rendererTransform.Get(gameObject).DORotate(
 					new Vector3(0, _tile.Get(gameObject).TileRotation.y, isBackWard ? 180 : 0), 
