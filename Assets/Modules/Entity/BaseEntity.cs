@@ -45,6 +45,8 @@ namespace Cardinals
 
         public Action<BaseBuff> AddNewBuffEvent { get; set; }
         public Action<BaseBuff> ExecuteBuffEvent { get; set; }
+        public Action SuccessDefenseEvent { get; set; }
+        public Action BrokenDefenseEvent { get; set; }
 
         private void OnBuffCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
@@ -143,7 +145,16 @@ namespace Cardinals
             {
                 var calculDamage = Math.Max(0, damage - DefenseCount);
                 DefenseCount -= damage;
-                damage = calculDamage; 
+                damage = calculDamage;
+
+                if (damage > 0)
+                {
+                    BrokenDefenseEvent?.Invoke();
+                }
+                else
+                {
+                    SuccessDefenseEvent?.Invoke();
+                }
             }
             
             if (damage > 0)

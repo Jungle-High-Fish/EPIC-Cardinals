@@ -40,6 +40,8 @@ namespace Cardinals.UI
             _entity.UpdateDefenseEvent += UpdateDefense;
             _entity.AddBuffEvent += AddBuff;
             _entity.ExecuteBuffEvent += ExecuteBuff;
+            _entity.SuccessDefenseEvent += SuccessDefense;
+            _entity.BrokenDefenseEvent += BrokenDefense;
             
             UpdateHp(_entity.Hp, _entity.MaxHp);
         }
@@ -105,6 +107,20 @@ namespace Cardinals.UI
                 var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_ExecuteBuffPrefab);
                 Instantiate(prefab, _addBuffDescriptionTr).GetComponent<ExecuteBuff>().Init(baseBuff.Data.effectSprite);
             }
+        }
+
+        private void SuccessDefense()
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_ExecuteBuffPrefab);
+            var sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprite_UI_Entity_SuccessDefense);
+            Instantiate(prefab, _addBuffDescriptionTr).GetComponent<ExecuteBuff>().Init(sprite);
+        }
+        
+        private void BrokenDefense()
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_ExecuteBuffPrefab);
+            var sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprite_UI_Entity_BrokenDefense);
+            Instantiate(prefab, _addBuffDescriptionTr).GetComponent<ExecuteBuff>().Init(sprite);
         }
     }
 }

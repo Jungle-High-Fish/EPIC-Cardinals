@@ -13,7 +13,7 @@ public class ExecuteBuff : MonoBehaviour
         _img.sprite = sprite;
         
         _img.DOFade(0, _effectDuration);
-        transform.DOPunchScale(Vector3.one, _effectDuration, 2, .1f)
+        transform.DOScale(2, _effectDuration)
             .OnComplete(() => { Destroy(gameObject); });
     }
 }
