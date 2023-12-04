@@ -125,7 +125,7 @@ namespace Cardinals.Board {
 					0.5f
 				)
 			).AppendInterval(0.5f)
-			.OnComplete(AnimationComplete(TileAnimationType.Flip))
+			.OnComplete(AnimationComplete(isBackWard ? TileAnimationType.Flip : TileAnimationType.FlipBack))
 			.SetAutoKill(false).Pause();
 			
 			_animationDict.Add(isBackWard ? TileAnimationType.Flip : TileAnimationType.FlipBack, (flipAnimation, 1.5f, 0));
