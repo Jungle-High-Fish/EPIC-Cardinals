@@ -38,6 +38,7 @@ namespace Cardinals.BoardEvent.Card
         [Button]
         public void Init()
         {
+            GameManager.I.UI.UIEndTurnButton.Deactivate();
             gameObject.SetActive(true);
             _eventObj.SetActive(true);
             _endObj.SetActive(false);
@@ -85,11 +86,13 @@ namespace Cardinals.BoardEvent.Card
             
             _eventObj.SetActive(false);
             _endObj.SetActive(true);
+            GameManager.I.UI.UIEndTurnButton.Activate();
         }
 
         void Close()
         {
             gameObject.SetActive(false);
+            GameManager.I.UI.UIEndTurnButton.Activate();
         }
     }
 }

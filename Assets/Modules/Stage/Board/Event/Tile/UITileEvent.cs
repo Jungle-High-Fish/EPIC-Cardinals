@@ -38,6 +38,7 @@ namespace Cardinals.BoardEvent.Tile
 
         public void Init()
         {
+            GameManager.I.UI.UIEndTurnButton.Deactivate();
             _explainTMP.text = string.Empty;
 
             _closeBTN.gameObject.SetActive(false);
@@ -68,6 +69,8 @@ namespace Cardinals.BoardEvent.Tile
                 StopCoroutine(_eventSeq);
                 _eventSeq = null;
             }
+            
+            GameManager.I.UI.UIEndTurnButton.Activate();
         }
 
         private void ClearPanel()
@@ -120,7 +123,7 @@ namespace Cardinals.BoardEvent.Tile
             SetMessage("성공적으로 이벤트가 완료되었다.");
             yield return new WaitForSeconds(1.5f); // 이벤트 완료 후, 잠깐 대기
             
-            Cancel();
+            GameManager.I.UI.UIEndTurnButton.Activate();
         }
 
         /// <summary>
