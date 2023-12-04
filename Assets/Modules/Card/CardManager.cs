@@ -509,10 +509,11 @@ namespace Cardinals
         {
             bool result = true;
 
-            if (!(_prevCardNumber == -1 || _prevCardNumber + 1 == _selectedNumber))
+            if (!_handcardsUI[_selectCardIndex].CanAction)
             {
                 result = false;
-            }              
+            }
+            
             
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
                GameManager.I.Player.OnTile.Type == TileType.Blank)
