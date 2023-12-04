@@ -7,6 +7,7 @@ using Cardinals.Enums;
 using Cardinals.Game;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Util;
 
 namespace Cardinals
 {
@@ -15,6 +16,16 @@ namespace Cardinals
         public string Name { get; private set; }
         
         protected int Turn { get; set; }
+
+        private ComponentGetter<Animator> _animator
+            = new ComponentGetter<Animator>(TypeOfGetter.Child);
+        protected override Animator Animator
+        {
+            get
+            {
+                return _animator.Get(gameObject);
+            }
+        }
 
         private Reward[] _rewards;
         public Reward[] Rewards
@@ -57,6 +68,7 @@ namespace Cardinals
                 if (_berserkMode)
                 {
                     BerserkModeEvent?.Invoke();
+                    _animator.Clear();
                 }
             } 
         }
