@@ -134,13 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RootBone: {fileID: 1909982845134714565}
-  m_BoneTransforms:
-  - {fileID: 1909982845134714565}
-  - {fileID: 3362426976642002296}
-  - {fileID: 1094463807149071432}
+  m_BoneTransforms: []
   m_Bounds:
-    m_Center: {x: 0.066616654, y: -0.10592866, z: 0}
-    m_Extent: {x: 1.7914529, y: 1.3787117, z: 0}
+    m_Center: {x: 0.049652576, y: -0.080886126, z: 0}
+    m_Extent: {x: 1.8033516, y: 1.4037542, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
