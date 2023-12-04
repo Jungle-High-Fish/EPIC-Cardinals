@@ -93,6 +93,8 @@ namespace Cardinals
 
         public bool IsElectricShock { get; set; }
 
+        private int _selectedNumber;
+
         [Button]
         public void OnTurn()
         {
@@ -374,7 +376,7 @@ namespace Cardinals
                     }
 
                     int useNumber = _handCards[_selectCardIndex].CardNumber;
-
+                    _selectedNumber = useNumber;
                     if (_isTutorial) {
                         var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber) {
@@ -480,16 +482,36 @@ namespace Cardinals
             _lastCardUsedForAction = false;
             DismissAllCards();
         }
-
-        public void CardUsePrevMove(int num)
+      
+        public void PotionUseMove(int num)
         {
-            StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f));
-            _state = CardState.Idle;
+            StartCoroutine(GameManager.I.Player.MoveTo(num, 0.4f));
             _prevCardNumber = -1;
+            _continuousUseCount = 0;
             _canActionUse = true;
             _lastCardUsedForAction = false;
-            StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove));
             DismissAllCards();
+        }
+
+        public void PotionUsePrevMove(int num)
+        {
+            StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f));
+            _prevCardNumber = -1;
+            _continuousUseCount = 0;
+            _canActionUse = true;
+            _lastCardUsedForAction = false;
+            DismissAllCards();
+        }
+
+        public void PotionUseAction(int num)
+        {
+            StartCoroutine(GameManager.I.Player.CardAction(num, GameManager.I.Stage.Enemies[Random.Range(0,GameManager.I.Stage.Enemies.Count)]));
+            _state = CardState.Idle;
+            DismissAllCards();
+            if (GameManager.I.Stage.Enemies.Count == 0)
+            {
+                EndBattle();
+            }
         }
 
         public void WarpArtifact()
@@ -506,6 +528,12 @@ namespace Cardinals
         public bool CheckUseCardOnAction()
         {
             bool result = true;
+
+            if (!(_prevCardNumber == -1 || _prevCardNumber + 1 == _selectedNumber))
+            {
+                result = false;
+            }              
+            
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
                GameManager.I.Player.OnTile.Type == TileType.Blank)
             {
@@ -533,7 +561,6 @@ namespace Cardinals
            
             if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
             {
-               
                 _prevCardNumber = num;
                 switch (GameManager.I.Player.OnTile.Type)
                 {

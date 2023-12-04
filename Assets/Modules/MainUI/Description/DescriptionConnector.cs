@@ -28,7 +28,23 @@ namespace Cardinals.UI
             Multi,  // 여러 오브젝트 정보를 한번에 띄우려 할 때 사용
         }
 
-        [SerializeField] private Transform _itemAreaTr => transform;
+        [SerializeField] private Transform _transform;
+        private Transform _itemAreaTr
+        {
+            get
+            {
+                if (_transform == null)
+                {
+                    _transform = GetComponent<Transform>();
+                    if (_transform == null)
+                    {
+                        _transform = GetComponent<RectTransform>();
+                    }
+                }
+
+                return _transform;
+            }
+        }
         [SerializeField] private DescriptionArea _descriptionArea;
         [SerializeField] private HoverRenderType _hoverRenderType;
         [SerializeField] private CountType _countType;

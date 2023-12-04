@@ -48,7 +48,7 @@ namespace Cardinals.BoardEvent.Shop
             _priceTMP.text = $"{_item.Price}";
             _boughtObj.SetActive(false);
             
-            GetComponentInChildren<DescriptionConnector>()?.Init();
+            GetComponentInChildren<DescriptionConnector>().Init();
         }
         
         private void Buy()
