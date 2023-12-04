@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enums;
 using Cardinals.Tutorial;
 using DG.Tweening;
 using TMPro;
@@ -8,6 +9,8 @@ using Util;
 
 namespace Cardinals.UI {
     public class UIQuest: MonoBehaviour {
+        public TutorialQuestType QuestType => _questData.QuestType;
+
         private ComponentGetter<TextMeshProUGUI> _questTitle
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "QuestInfo/QuestTextArea/QuestTitle");
         private ComponentGetter<TextMeshProUGUI> _questDescription
@@ -42,6 +45,7 @@ namespace Cardinals.UI {
                 _questCount.Get(gameObject).color = Color.gray;
 
                 _questTitle.Get(gameObject).DOStrikethrough(0.3f);
+                transform.DOPunchScale(Vector3.one * 0.7f, 1, 0);
                 return true;
             } else {
                 return false;

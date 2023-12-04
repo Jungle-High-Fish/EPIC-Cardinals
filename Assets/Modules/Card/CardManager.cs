@@ -136,9 +136,6 @@ namespace Cardinals
         }
 
         public void DrawHandDecksForTutorial(int[] cardNumbers) {
-            _lastCardUsedForAction = false;
-            _prevCardNumber = -1;
-            
             for (int i = 0; i < cardNumbers.Length; i++) {
                 AddCard(cardNumbers[i], true, CardPileType.Hand);
             }
@@ -153,10 +150,24 @@ namespace Cardinals
             _continuousUseCount = 0;
 
             UpdateCardState(-1, true);
+
+            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+
+            if (cardSequenceCheck.hasSequence) {
+                SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
+            }
         }
 
         public void SetCardSelectable(bool isSelectable)
         {
+            if (isSelectable == true && _isTutorial) {
+                var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+                if (cardSequenceCheck.hasSequence) {
+                    SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
+                    return;
+                }
+            }
+
             foreach(CardUI c in _handcardsUI)
             {
                 c.IsSelectable = isSelectable;
@@ -178,6 +189,13 @@ namespace Cardinals
                     break;
 
                 case CardPileType.Hand:
+                    if (_handCards.Count == 0)
+                    {
+                        _handCards.Add(card);
+                        UpdateCardUI(card, 0);
+                        break;
+                    }
+
                     for (int j = 0; j < _handCards.Count; j++)
                     {
                         if (_handCards[j].CardNumber >= card.CardNumber)
@@ -363,7 +381,7 @@ namespace Cardinals
                             goto DismissCards;
                         }
 
-                        if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != MouseState.Action) {
+                        if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != _mouseState) {
                             goto DismissCards;
                         }
                     }
@@ -380,7 +398,7 @@ namespace Cardinals
 
                             _cardUsedCountOnThisTurn++;
                             if (_isTutorial) {
-                                CheckTutorialStateForCard(useNumber);
+                                CheckTutorialStateForCard(useNumber, MouseState.Action);
                             }
                             yield break;
 
@@ -389,7 +407,7 @@ namespace Cardinals
 
                             _cardUsedCountOnThisTurn++;
                             if (_isTutorial) {
-                                CheckTutorialStateForCard(useNumber);
+                                CheckTutorialStateForCard(useNumber, MouseState.Move);
                             }
                             yield break;
                         
@@ -402,7 +420,7 @@ namespace Cardinals
 
                             _cardUsedCountOnThisTurn++;
                             if (_isTutorial) {
-                                CheckTutorialStateForCard(useNumber);
+                                CheckTutorialStateForCard(useNumber, MouseState.CardEvent);
                             }
                             yield break;
                     }
@@ -441,8 +459,8 @@ namespace Cardinals
             }
         }
 
-        private void CheckTutorialStateForCard(int useNumber) {
-            (GameManager.I.Stage.CurEvent as TutorialEvent).CheckCardQuest(useNumber, MouseState.Move);
+        private void CheckTutorialStateForCard(int useNumber, MouseState mouseState) {
+            (GameManager.I.Stage.CurEvent as TutorialEvent).CheckCardQuest(useNumber, mouseState);
             var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
 
             if (cardSequenceCheck.hasSequence) {

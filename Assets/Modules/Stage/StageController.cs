@@ -10,6 +10,7 @@ using Cardinals.Enemy;
 using Cardinals.Enemy.Summon;
 using Sirenix.OdinInspector;
 using Util;
+using Cardinals.Tutorial;
 using Random = UnityEngine.Random;
 
 namespace Cardinals.Game {
@@ -22,9 +23,12 @@ namespace Cardinals.Game {
         public List<BaseEnemy> Enemies {
             get {
                 if (_curEvent == null) return null;
-                if (_curEvent is not BattleEvent) return null;
                 
-                return (_curEvent as BattleEvent).Enemies;
+                if (_curEvent is BattleEvent battleEvent)
+                    return battleEvent.Enemies;
+                else if (_curEvent is TutorialEvent tutorialEvent)
+                    return tutorialEvent.Enemies;
+                else return null;
             }
         }
         
@@ -83,7 +87,7 @@ namespace Cardinals.Game {
             yield return GameManager.I.UI.UIStage.Visit();
             
             // 축복 선택
-            yield return SelectBlessFlow();
+            //yield return SelectBlessFlow();
 
             GameManager.I.UI.TEMP_UIStageMap.Init(); // temp map
             // 다음 사건을 읽음
@@ -116,7 +120,7 @@ namespace Cardinals.Game {
         /// <summary>
         /// 랜덤한 축복을 제공하는 플로우 입니다.
         /// </summary>
-        IEnumerator SelectBlessFlow()
+        public IEnumerator SelectBlessFlow()
         {
             // 현재 가지고 있지 않은 축복 2개 선택    
             List<BlessType> canGetBlesses = new();

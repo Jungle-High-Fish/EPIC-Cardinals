@@ -53,17 +53,24 @@ namespace Cardinals.Tutorial
             GameManager.I.Stage.CardManager.OnBattle(true);
 
             // 튜토리얼 데이터
-            _isTutorialClear = new bool[_tutorialData.Count];
-            for (int i = 0; i < _isTutorialClear.Length; i++) _isTutorialClear[i] = false;
+            _isTutorialClear = new bool[_tutorialData.Count - 1];
+            for (int i = 0; i < _isTutorialClear.Length - 1; i++) _isTutorialClear[i] = false;
             _curTutorialIndex = 0;
             _curQuestIndex = 0;
             _curSequenceIndex = 0;
 
+            TutorialDataSO curTutorial = null;
             do // 전투 시작
             {
                 // 튜토리얼 UI 세팅
-                TutorialDataSO curTutorial = _tutorialData[_curTutorialIndex];
-                GameManager.I.UI.UITutorial.Init(curTutorial);
+                if (curTutorial == null || curTutorial != _tutorialData[_curTutorialIndex]) {
+                    curTutorial = _tutorialData[_curTutorialIndex];
+                    GameManager.I.UI.UITutorial.Init(curTutorial);
+                }
+
+                if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.KillMonster) {
+                    GameManager.I.UI.UIEndTurnButton.Deactivate();
+                }
 
                 // 전투 업데이트
                 GameManager.I.Player.StartTurn();
@@ -72,10 +79,16 @@ namespace Cardinals.Tutorial
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
-                GameManager.I.Stage.CardManager.DrawHandDecksForTutorial(curTutorial.Cards);
+                if (curTutorial.Quests[_curQuestIndex].QuestType == TutorialQuestType.KillMonster) {
+                    GameManager.I.Stage.CardManager.OnTurn();
+                } else {
+                    GameManager.I.Stage.CardManager.DrawHandDecksForTutorial(curTutorial.Cards);
+                }
                 GameManager.I.Player.OnTurn();
 
                 yield return GameManager.I.WaitNext(); // 대기?
+
+                CheckTurnEndQuest();
 
                 GameManager.I.Stage.CardManager.SetCardSelectable(false);
 
@@ -92,6 +105,13 @@ namespace Cardinals.Tutorial
                 _stageController.Board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1f);
+
+                // 튜토리얼 처리
+                if (_curQuestIndex == -1 || _tutorialData[_curTutorialIndex].Quests[_curQuestIndex].QuestType != TutorialQuestType.KillMonster) {
+                    _isTutorialClear[_curTutorialIndex++] = true;
+                    _curQuestIndex = 0;
+                    _curSequenceIndex = 0;
+                }
             } while (_isTutorialClear.Any(x => !x));
 
             if (_enemies.Count == 0)
@@ -103,11 +123,22 @@ namespace Cardinals.Tutorial
                 GameManager.I.Player.EndBattle();
                 GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
                 RemoveSummons();
-                yield return WaitReward(rewards);
+
+                GameManager.I.UI.UIEndTurnButton.Deactivate();
+
+                _curTutorialIndex = _tutorialData.Count - 1;
+                curTutorial = _tutorialData[_curTutorialIndex];
+                GameManager.I.UI.UITutorial.Init(curTutorial);
+
+                yield return GameManager.I.Stage.SelectBlessFlow();
             }
         }
 
         public void CheckCardQuest(int cardNumber, MouseState howToUse) {
+            if (_curQuestIndex == -1) {
+                return;
+            }
+
             var curTutorial = _tutorialData[_curTutorialIndex];
 
             if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.Card) {
@@ -128,20 +159,92 @@ namespace Cardinals.Tutorial
 
             var questResult = GameManager.I.UI.UITutorial.AchieveQuest(_curQuestIndex, 1);
             if (questResult.hasClear) {
+                _curQuestIndex = questResult.nextIdx;
                 if (questResult.nextIdx == -1) {
                     GameManager.I.UI.UITutorial.ShowEndTurnQuest(false);
                     return;
                 }
 
-                _curQuestIndex = questResult.nextIdx;
                 if (curTutorial.Quests[_curQuestIndex].HasCardSequence) {
                     _curSequenceIndex = 0;
                 }
             }
         }
 
-        public (bool hasSequence, QuestData.CardUseQuestData targetSequence) CheckIfHasCardSequence() {
+        public void CheckMagicSelectQuest() {
+            if (_curQuestIndex == -1) {
+                return;
+            }
+
             var curTutorial = _tutorialData[_curTutorialIndex];
+
+            if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.TileMagicSelect) {
+                return;
+            }
+
+            var questResult = GameManager.I.UI.UITutorial.AchieveQuest(_curQuestIndex, 1);
+            if (questResult.hasClear) {
+                _curQuestIndex = questResult.nextIdx;
+                if (questResult.nextIdx == -1) {
+                    GameManager.I.UI.UITutorial.ShowEndTurnQuest(false);
+                    return;
+                }
+            }
+        }
+
+        public void CheckEnemyKillQuest() {
+            if (_curQuestIndex == -1) {
+                return;
+            }
+
+            var curTutorial = _tutorialData[_curTutorialIndex];
+
+            if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.KillMonster) {
+                return;
+            }
+
+            var questResult = GameManager.I.UI.UITutorial.AchieveQuest(_curQuestIndex, 1);
+            if (questResult.hasClear) {
+                _curQuestIndex = questResult.nextIdx;
+                if (questResult.nextIdx == -1) {
+                    GameManager.I.UI.UITutorial.ShowEndTurnQuest(false);
+                    return;
+                }
+            }
+        }
+
+        public void CheckBlessSelectQuest() {
+            if (_curQuestIndex == -1) {
+                return;
+            }
+
+            var curTutorial = _tutorialData[_curTutorialIndex];
+
+            if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.BlessSelect) {
+                return;
+            }
+
+            var questResult = GameManager.I.UI.UITutorial.AchieveQuest(_curQuestIndex, 1);
+            if (questResult.hasClear) {
+                _curQuestIndex = questResult.nextIdx;
+                if (questResult.nextIdx == -1) {
+                    GameManager.I.UI.UITutorial.Close();
+                    return;
+                }
+            }
+        }
+
+        public void CheckTurnEndQuest() {
+            GameManager.I.UI.UITutorial.AchieveEndTurnQuest();
+        }
+
+        public (bool hasSequence, QuestData.CardUseQuestData targetSequence) CheckIfHasCardSequence() {
+            if (_curQuestIndex == -1) {
+                return (false, null);
+            }
+
+            var curTutorial = _tutorialData[_curTutorialIndex];
+
             if (curTutorial.Quests[_curQuestIndex].QuestType != TutorialQuestType.Card) {
                 return (false, null);
             }
@@ -164,16 +267,17 @@ namespace Cardinals.Tutorial
                 
                 enemy.DieEvent += () =>
                 {
-                    AddReward(rewards, enemy.Rewards);
+                    //AddReward(rewards, enemy.Rewards);
                     _enemies.Remove(enemy);
                     if (_enemies.Count> 0) GameManager.I.Stage.Board.SetEnemyNumber(_enemies.Count); // 1마리가 되었을 때, 카드 드래그 영역 수정
+                    CheckEnemyKillQuest();
                 };
                 
                 _enemies.Add(enemy);
             }
 
             GameManager.I.CurrentEnemies = _enemies;
-            _stageController.EnemyInfoController.Init(_enemyList.Length);
+            //_stageController.EnemyInfoController.Init(_enemyList.Length);
         }
 
         private IEnumerator SummonsAction()

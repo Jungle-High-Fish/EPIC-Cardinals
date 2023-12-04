@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Enums;
 using Cardinals.Tutorial;
 using DG.Tweening;
 using Sirenix.OdinInspector;
@@ -42,6 +43,14 @@ namespace Cardinals.UI {
             (transform as RectTransform).DOSizeDelta(newSize, 0.2f * tutorialData.Quests.Length).SetEase(Ease.OutCubic);
         }
 
+        public void Close() {
+            Clear();
+            (transform as RectTransform)
+                .DOAnchorPosY((transform as RectTransform).anchoredPosition.y + 1000, 0.5f)
+                .SetEase(Ease.OutCubic)
+                .OnComplete(() => gameObject.SetActive(false));
+        }
+
         [Button]
         public (bool hasClear, int nextIdx) AchieveQuest(int index, int count) {
             bool clear = _quests[index].Achieve(count);
@@ -72,6 +81,12 @@ namespace Cardinals.UI {
 
             (transform as RectTransform).DOSizeDelta(newSize, 0.3f).SetEase(Ease.OutCubic);
             StartCoroutine(ShowQuest(0.25f));
+        }
+
+        public void AchieveEndTurnQuest() {
+            if (_quests[_quests.Count - 1].QuestType == TutorialQuestType.EndTurn) {
+                _quests[_quests.Count - 1].Achieve(1);
+            }
         }
 
         private void Clear() {

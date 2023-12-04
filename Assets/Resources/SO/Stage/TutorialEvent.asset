@@ -17,3 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c45a79026deca3489e2ff9b9d9b5354, type: 2}
   _tutorialData:
   - {fileID: 11400000, guid: e11f58e0be4a67741b66e26c6523837f, type: 2}
+  - {fileID: 11400000, guid: 4cf8c0ce61ad6f04789afead3555d1a2, type: 2}
+  - {fileID: 11400000, guid: 653bbc1fcb9f60343a052b95384ab094, type: 2}
+  - {fileID: 11400000, guid: fad0f37d882624e4e8625c761ec7858d, type: 2}
+  - {fileID: 11400000, guid: 4364b2fbc49819744ba9f8a3484090c6, type: 2}
