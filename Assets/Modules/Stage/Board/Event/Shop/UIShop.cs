@@ -41,12 +41,13 @@ namespace Cardinals.BoardEvent.Shop
 
         public void Awake()
         {
-            _closeBTN.onClick.AddListener(() => { gameObject.SetActive(false); });
+            _closeBTN.onClick.AddListener(Close);
         }
 
         [Button]
         public void Init(int artifactCnt = 2, int potionCnt = 3)
         {
+            GameManager.I.UI.UIEndTurnButton.Deactivate();
             _msgBoxObj.SetActive(false);
             Clear();
             SetArtifact(artifactCnt);
@@ -175,6 +176,12 @@ namespace Cardinals.BoardEvent.Shop
             _msgBoxObj.SetActive(true);
             yield return new WaitForSeconds(showTime);
             _msgBoxObj.SetActive(false);
+        }
+
+        void Close()
+        {
+            gameObject.SetActive(false);
+            GameManager.I.UI.UIEndTurnButton.Activate();
         }
     }
 }

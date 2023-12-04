@@ -24,11 +24,13 @@ public class RewardBox : MonoBehaviour
     /// </summary>
     public void Set(IEnumerable<Reward> rewards)
     {
-        gameObject.SetActive(true);
-        
         // 기존 항목들 제거
-        _rewards.ForEach(r => r.Remove());
+        for (int i = _rewards.Count - 1; i >= 0; i--)
+        {
+            _rewards[i].Remove();
+        }
         
+        gameObject.SetActive(true);
         foreach (var r in rewards)
         {
             r.Value = r.Type switch
@@ -59,6 +61,7 @@ public class RewardBox : MonoBehaviour
     /// </summary>
     public void Disable()
     {
+        
         gameObject.SetActive(false);
     }
 
