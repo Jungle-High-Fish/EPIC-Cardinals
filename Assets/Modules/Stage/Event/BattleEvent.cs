@@ -85,7 +85,7 @@ namespace Cardinals.Game
                 yield return SummonsAction();
                 _stageController.Board.OnTurnEnd();
                 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1.5f);
             } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);
 
             if (_enemies.Count == 0)

@@ -90,7 +90,7 @@ namespace Cardinals
             }
         }
 
-        protected virtual Animator Animator { get; } // 추후 Abstract로..
+        protected virtual Animator Animator { get; set; } // 추후 Abstract로..
         
         public virtual void Init(int maxHp) {
             MaxHp = maxHp;
