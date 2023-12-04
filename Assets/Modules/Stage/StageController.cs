@@ -399,6 +399,12 @@ namespace Cardinals.Game {
                 }
             }
         }
+
+        [Button]
+        public void Test_Potion(PotionType potionType)
+        {
+            GameManager.I.Player.PlayerInfo.AddPotion(potionType);
+        }
         #endregion
     }
 
