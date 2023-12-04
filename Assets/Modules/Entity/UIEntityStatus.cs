@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Cardinals.Entity.UI;
+using Cardinals.Enums;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -38,6 +39,7 @@ namespace Cardinals.UI
             _entity.AddNewBuffEvent += AddNewBuff;
             _entity.UpdateDefenseEvent += UpdateDefense;
             _entity.AddBuffEvent += AddBuff;
+            _entity.ExecuteBuffEvent += ExecuteBuff;
             
             UpdateHp(_entity.Hp, _entity.MaxHp);
         }
@@ -95,6 +97,14 @@ namespace Cardinals.UI
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_AddBuffDescription);
             Instantiate(prefab, _addBuffDescriptionTr).GetComponent<AddBuffDescription>().Init(baseBuff.Data);
         }
-        
+
+        private void ExecuteBuff(BaseBuff baseBuff)
+        {
+            if (baseBuff.Data.effectSprite != null)
+            {
+                var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_ExecuteBuffPrefab);
+                Instantiate(prefab, _addBuffDescriptionTr).GetComponent<ExecuteBuff>().Init(baseBuff.Data.effectSprite);
+            }
+        }
     }
 }

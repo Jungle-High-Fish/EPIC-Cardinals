@@ -12,6 +12,7 @@ namespace Cardinals.Buff
         public override void Execute(BaseEntity entity)
         {
             entity.Hit(Value);
+            base.Execute(entity);
         }
     }
 }

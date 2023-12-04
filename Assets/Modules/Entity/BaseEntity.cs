@@ -44,12 +44,14 @@ namespace Cardinals
         protected ObservableCollection<BaseBuff> Buffs { get; set; }
 
         public Action<BaseBuff> AddNewBuffEvent { get; set; }
+        public Action<BaseBuff> ExecuteBuffEvent { get; set; }
 
         private void OnBuffCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             if (args.Action == NotifyCollectionChangedAction.Add)
             {
                 BaseBuff buff = (sender as ObservableCollection<BaseBuff>).Last();
+                buff.ExecuteEvent += ExecuteBuffEvent;
                 AddNewBuffEvent?.Invoke(buff);
             }
         }

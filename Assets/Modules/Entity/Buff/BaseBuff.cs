@@ -43,6 +43,8 @@ namespace Cardinals
         protected int Value { get; set; }
 
         public Action RemoveEvent { get; set; }
+        
+        public Action<BaseBuff> ExecuteEvent { get; set; }
 
         /// <summary>
         /// 
@@ -50,7 +52,7 @@ namespace Cardinals
         /// <param name="entity"></param>
         public virtual void Execute(BaseEntity entity)
         {
-            
+            ExecuteEvent?.Invoke(this);
         }
         
         public void EndTurn()
