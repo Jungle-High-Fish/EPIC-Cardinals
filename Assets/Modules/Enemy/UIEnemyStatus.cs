@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Cardinals.Enemy;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
@@ -30,15 +31,73 @@ namespace Cardinals.UI
             enemy.DieEvent += Destroy;
             
             // 위치 설정
-            Vector3 pos = enemy.EnemyData.enemyType switch
+            SetContentSize();
+            SetPatternObjPos(enemy);
+        }
+        /// <summary>
+        /// 공통으로 지원하는 UI들의 위치를 조정합니다.
+        /// </summary>
+        protected void SetContentSize()
+        {
+            var spriteRenderer = _entity.Renderers.FirstOrDefault();
+
+            if (spriteRenderer == null) 
+                return;
+            
+            // Sprite의 텍스처 너비를 구합니다
+            float spriteWidth = spriteRenderer.sprite.rect.width;
+            float spriteHeightHalf = spriteRenderer.sprite.rect.height / 4;
+
+            var pos = _statusTr.localPosition;
+            pos.y -= spriteHeightHalf;
+
+            var enemy = _entity as BaseEnemy;
+            if (enemy != null)
             {
-                EnemyType.Two => new Vector2(0, 40),
-                EnemyType.Four => new Vector2(0, 120),
-                EnemyType.Boss => new Vector2(80, 30),
+                // 예외 처리로 값 감산
+                pos += enemy.EnemyData.enemyType switch
+                {
+                    EnemyType.One => new Vector3(0, -30),
+                    EnemyType.Three1 or EnemyType.Three2 => new Vector3(0, -30),
+                    _ => Vector2.zero
+                };
+            }
+            
+            // 스테이터스 오브젝트 위치 설정
+            _statusTr.localPosition = pos;
+            
+            // 체력바 설정
+            _maxHPRect.sizeDelta = new Vector2( spriteWidth, _maxHPRect.sizeDelta.y); // 크기
+            
+            // 버프 최대 갯수 설정
+            _buffListArea.GetComponent<GridLayoutGroup>().constraintCount = (int) spriteWidth / 36;
+            
+            _statusTr.GetComponent<GridSizeUpdator>().Resizing();
+        }
+
+        /// <summary>
+        /// 몬스터에서만 지원하는 UI들의 위치를 조정합니다.
+        /// </summary>
+        private void SetPatternObjPos(BaseEnemy enemy)
+        {
+            var spriteRenderer = _entity.Renderers.FirstOrDefault();
+            
+            // Sprite의 텍스처 높이를 구합니다
+            float spriteHeightHalf = spriteRenderer.sprite.rect.height / 2;
+
+            var pos = _patternTr.localPosition;
+            pos.y = spriteHeightHalf;
+            
+            // 예외 처리로 값 감산
+            pos += enemy.EnemyData.enemyType switch
+            {
+                EnemyType.One => new Vector3(0, -60),
+                EnemyType.Three1 or EnemyType.Three2 => new Vector3(0, -60),
                 _ => Vector2.zero
             };
                 
             _patternTr.GetComponent<RectTransform>().position += pos;
+            _patternTr.localPosition = pos;
         }
         
         private void UpdatePattern(Pattern pattern)
