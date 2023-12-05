@@ -15,7 +15,7 @@ namespace Cardinals
         private int _cardIndex;
         private bool _canAction;
         private bool _canMove;
-        private bool _isDiscard=false; // discardµÉ Ä«µå¶ó¸é true
+        private bool _isDiscard=false; // discardï¿½ï¿½ Ä«ï¿½ï¿½ï¿½ï¿½ true
         private Vector2 _CardUIPos;
         [SerializeField] private GameObject _actionMark;
         [SerializeField] private GameObject _moveMark;
@@ -34,8 +34,10 @@ namespace Cardinals
         public CardAnimation CardAnim => _cardAnimation;
         public bool IsSelect
         {
-            set => _isSelect = value;
-           
+            set
+            {
+                _isSelect = value;
+            }
         }
 
         public bool IsDiscard
@@ -133,6 +135,8 @@ namespace Cardinals
             _cardManager.SelectCardIndex = _cardIndex;
             _isSelect = true;
             _cardManager.State = CardState.Select;
+            
+            GameManager.I.Sound.CardClick();
 
             StartCoroutine(_cardManager.Dragging());
         }

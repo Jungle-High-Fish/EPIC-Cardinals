@@ -113,6 +113,7 @@ namespace Cardinals
             
             _cardUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
+            _state = CardState.Idle;
             UpdateCardState(-1, true);
         }
 
@@ -302,10 +303,13 @@ namespace Cardinals
            
         }
 
-        private IEnumerator Discard(int index, CardAnimationType animationType)
+        private IEnumerator Discard(int index, CardAnimationType animationType, System.Action changeDiscardState)
         {
             _handcardsUI[index].IsDiscard = true;
             _handcardsUI[index].IsSelect = false;
+
+            GameManager.I.Sound.CardUse();
+            
             yield return _handcardsUI[index].CardAnim.Play(animationType);
             Destroy(_handcardsUI[index].gameObject);
             _handcardsUI.RemoveAt(index);
@@ -317,6 +321,8 @@ namespace Cardinals
             }
             _handCards.Remove(card);
             UpdateCardIndex();
+
+            changeDiscardState();
         }
 
         [Button]
@@ -393,10 +399,16 @@ namespace Cardinals
                         case MouseState.Action:
                             var target = GameManager.I.Stage.Enemies[boardInputHandler.HoveredIdx];
 
-                            if (!CardUseAction(useNumber, target))
+                            if (!CheckUseCardOnAction())
                             {
                                 break;
                             }
+
+                            if (_prevCardNumber != -1 && _prevCardNumber + 1 != useNumber)
+                            {
+                                break;
+                            }
+                            StartCoroutine(CardUseAction(useNumber, target));
 
                             _cardUsedCountOnThisTurn++;
                             if (_isTutorial) {
@@ -405,7 +417,7 @@ namespace Cardinals
                             yield break;
 
                         case MouseState.Move:
-                            CardUseMove(useNumber);
+                            StartCoroutine(CardUseMove(useNumber));
 
                             _cardUsedCountOnThisTurn++;
                             if (_isTutorial) {
@@ -414,7 +426,7 @@ namespace Cardinals
                             yield break;
                         
                         case MouseState.CardEvent:
-                            yield return Discard(_selectCardIndex, CardAnimationType.UseMove);
+                            yield return Discard(_selectCardIndex, CardAnimationType.UseMove, () => { });
                             GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
@@ -470,17 +482,20 @@ namespace Cardinals
             }
         }
 
-        public void CardUseMove(int num)
+        public IEnumerator CardUseMove(int num)
         {
-            StartCoroutine(GameManager.I.Player.MoveTo(num,0.4f));
+            SetCardSelectable(false);
+            StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove,() => {  }));
+            yield return GameManager.I.Player.MoveTo(num,0.4f);
 
-            StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove));
+            
             _state = CardState.Idle;
             _prevCardNumber = -1;
             _continuousUseCount = 0;
             _canActionUse = true;
             _lastCardUsedForAction = false;
             DismissAllCards();
+            SetCardSelectable(true);
         }
       
         public void PotionUseMove(int num)
@@ -556,51 +571,55 @@ namespace Cardinals
             
             return result;
         }
-        private bool CardUseAction(int num, BaseEntity target=null)
+
+        private IEnumerator CardUseAction(int num, BaseEntity target=null)
         {
-            if (!CheckUseCardOnAction()) return false;
-           
-            if(_prevCardNumber == -1 || _prevCardNumber + 1 == num)
+            SetCardSelectable(false);
+            _prevCardNumber = num;
+
+            bool hasDiscard = false;
+            void ChangeDiscard()
             {
-                _prevCardNumber = num;
-                switch (GameManager.I.Player.OnTile.Type)
-                {
-                    case TileType.Attack:
-                        StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseAttack));
-                        break;
-                    case TileType.Defence:
-                        StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseDefense));
-                        break;
-                    default:
-                        StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove));
-                        break;
-                }
-
-                // [디버프] 슬로우
-                if (GameManager.I.Player.CheckBuffExist(BuffType.Slow)&& _continuousUseCount == 0)
-                {
-                    GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 행동이 무시되었어");
-                    Debug.Log("슬로우 때문에 행동 무시");
-                }
-                else
-                {
-                    StartCoroutine(GameManager.I.Player.CardAction(num, target));
-                }
-
-                _continuousUseCount++;
-                _state = CardState.Idle;
-                _lastCardUsedForAction = true;
-                UpdateCardState(num, false);
-                DismissAllCards();
-                if (GameManager.I.Stage.Enemies.Count == 0)
-                {
-                    EndBattle();
-                }
-                return true;
+                hasDiscard = true;
             }
 
-            return false;
+            switch (GameManager.I.Player.OnTile.Type)
+            {
+                case TileType.Attack:
+                    StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseAttack, ChangeDiscard));
+                    break;
+                case TileType.Defence:
+                    StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseDefense, ChangeDiscard));
+                    break;
+                default:
+                    StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove, ChangeDiscard));
+                    break;
+            }
 
+            // [디버프] 슬로우
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
+            {
+                GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 행동이 무시되었어");
+                Debug.Log("슬로우 때문에 행동 무시");
+            }
+            else
+            {
+                yield return GameManager.I.Player.CardAction(num, target);
+            }
+
+            yield return new WaitUntil(() => hasDiscard);
+
+            _continuousUseCount++;
+            _state = CardState.Idle;
+            _lastCardUsedForAction = true;
+            UpdateCardState(num, false);
+            DismissAllCards();
+            if (GameManager.I.Stage.Enemies.Count == 0)
+            {
+                EndBattle();
+            }
+            SetCardSelectable(true);
+            
         }
 
         private void UpdateCardIndex()
