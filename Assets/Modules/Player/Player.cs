@@ -142,7 +142,6 @@ namespace Cardinals
       
         public IEnumerator MoveTo(int count,float time)
         {
-            GameManager.I.Stage.CardManager.SetCardSelectable(false);
             _onTile?.Leave(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
@@ -184,7 +183,6 @@ namespace Cardinals
             _onTile.Arrive(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
             GameManager.I.Stage.CardManager.UpdateCardState(count, true);
-            GameManager.I.Stage.CardManager.SetCardSelectable(true);
 
             SetFlipTowardEnemy();
         }
@@ -232,7 +230,6 @@ namespace Cardinals
         }
         
         public IEnumerator CardAction(int num, BaseEntity target) {
-            GameManager.I.Stage.CardManager.SetCardSelectable(false);
             
             yield return _onTile.CardAction(num, target);
             yield return null;
@@ -244,7 +241,6 @@ namespace Cardinals
                 GameManager.I.Stage.CardManager.WarpArtifact();
             }
 
-            GameManager.I.Stage.CardManager.SetCardSelectable(true);
         }
         
         [Button]
