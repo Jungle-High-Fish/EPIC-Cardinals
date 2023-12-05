@@ -529,10 +529,10 @@ namespace Cardinals
         {
             bool result = true;
 
-            if (!_handcardsUI[_selectCardIndex].CanAction)
-            {
-                result = false;
-            }
+            // if (!_handcardsUI[_selectCardIndex].CanAction)
+            // {
+            //     result = false;
+            // }
             
             
             if(GameManager.I.Player.OnTile.Type==TileType.Start||
