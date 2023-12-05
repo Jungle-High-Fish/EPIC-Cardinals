@@ -28,6 +28,11 @@ namespace Cardinals.Game {
             );
         }
 
+        public virtual void OnEffect()
+        {
+
+        }
+
         #region IProduct
         public Sprite Sprite => Data().sprite;
         public string Description => Data().description;
