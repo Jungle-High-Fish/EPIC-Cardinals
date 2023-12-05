@@ -616,7 +616,7 @@ MonoBehaviour:
   _cardClick: {fileID: 8300000, guid: 688281f34e94ba94e89619ac009650a3, type: 3}
   _cardDraw: {fileID: 0}
   _cardDiscard: {fileID: 0}
-  _cardUse: {fileID: 0}
+  _cardUse: {fileID: 8300000, guid: 6957e622538c8084aa6ac5dc719486d8, type: 3}
   _playerMove: {fileID: 8300000, guid: 5a05223448d9eec409d4654c5d481ff4, type: 3}
 --- !u!82 &546446610
 AudioSource:
