@@ -173,9 +173,10 @@ namespace Cardinals
                 nextPos.y += 1.3f;
                 transform.DOJump(nextPos, 2, 1, time);
                 Animator.Play("Jump");
-                yield return new WaitForSeconds(time);
 
+                yield return new WaitForSeconds(time / 2);
                 GameManager.I.Sound.PlayerMove();
+                yield return new WaitForSeconds(time / 2);
 
                 _onTile = _onTile.Next;
                 CheckSummonOnTile();
