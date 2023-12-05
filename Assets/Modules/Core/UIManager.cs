@@ -61,6 +61,11 @@ namespace Cardinals
 
         public UITutorial UITutorial => _uiTutorial;
         #endregion
+
+        #region Mouse
+        private UIMouseHint _uiMouseHint;
+        public UIMouseHint UIMouseHint => _uiMouseHint;
+        #endregion
         
         public TEMP_UIStageMap TEMP_UIStageMap { get; private set; }
         
@@ -99,6 +104,9 @@ namespace Cardinals
 
             // Tutorial
             InstantiateTutorialUI();
+
+            // Mouse
+            InstantiateMouseHintUI();
         }
 
         void InitDescriptionCanvas()
@@ -271,6 +279,14 @@ namespace Cardinals
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
 
             _uiTutorial = obj.GetComponent<UITutorial>();
+            obj.SetActive(false);
+        }
+
+        private void InstantiateMouseHintUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_MouseHint);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+
+            _uiMouseHint = obj.GetComponent<UIMouseHint>();
             obj.SetActive(false);
         }
     }

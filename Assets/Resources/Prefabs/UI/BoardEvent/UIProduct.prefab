@@ -726,7 +726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2e8e6dc60bf042bf84a7a16ec9468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemAreaTr: {fileID: 6658819530140431831}
+  _transform: {fileID: 6658819530140431831}
   _descriptionArea: {fileID: 0}
   _hoverRenderType: 2
   _countType: 1
+  _anchor: 0

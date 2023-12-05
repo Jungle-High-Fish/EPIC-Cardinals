@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artifactType: 1
   artifactName: "\uC2E0\uB85D\uC758 \uAF43"
-  description: "3\uBC14\uD034 \uB3CC \uB54C \uB9C8\uB2E4, \uC6D0\uD558\uB294 \uD0C0\uC77C\uC744
-    1\uB2E8\uACC4 \uC131\uC7A5\uC2DC\uD0B5\uB2C8\uB2E4."
+  description: "\uD55C \uBC14\uD034 \uB3CC \uB54C \uB9C8\uB2E4, \uB79C\uB364\uD55C
+    \uD0C0\uC77C\uC744 1\uB2E8\uACC4 \uC131\uC7A5\uC2DC\uD0B5\uB2C8\uB2E4."
   sprite: {fileID: 21300000, guid: b48bc40460b244a09be3aa2c6a4e4a39, type: 3}
   price: 200
