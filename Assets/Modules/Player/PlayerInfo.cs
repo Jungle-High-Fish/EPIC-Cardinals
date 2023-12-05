@@ -84,10 +84,14 @@ namespace Cardinals
 
         public bool UsePotion(int index)
         {
-            if (_potions[index].UsePotion())
+            var potion = _potions[index];
+            if (potion != null)
             {
-                DeletePotion(index);
-                return true;
+                if (potion.UsePotion())
+                {
+                    DeletePotion(index);
+                    return true;
+                }
             }
 
             return false;
