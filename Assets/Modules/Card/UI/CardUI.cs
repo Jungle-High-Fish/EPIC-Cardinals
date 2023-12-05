@@ -25,8 +25,6 @@ namespace Cardinals
         
         ComponentGetter<Image> _image 
             = new ComponentGetter<Image>(TypeOfGetter.This);
-        ComponentGetter<AudioSource> _audioSource
-            = new ComponentGetter<AudioSource>(TypeOfGetter.This);
 
         private bool _isSelectable;
         private Card _card;
@@ -137,7 +135,8 @@ namespace Cardinals
             _cardManager.SelectCardIndex = _cardIndex;
             _isSelect = true;
             _cardManager.State = CardState.Select;
-            _audioSource.Get(gameObject).Play();
+            
+            GameManager.I.Sound.CardClick();
 
             StartCoroutine(_cardManager.Dragging());
         }
