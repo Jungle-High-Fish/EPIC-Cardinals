@@ -37,7 +37,7 @@ namespace Cardinals
         public LightController LightController => _lightController.Get();
 
         private ComponentGetter<SoundManager> _soundManager
-            = new ComponentGetter<SoundManager>(TypeOfGetter.This);
+            = new ComponentGetter<SoundManager>(TypeOfGetter.Global);
         #region Game
 
         [Button]
