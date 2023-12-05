@@ -411,6 +411,12 @@ namespace Cardinals.Game {
         {
             GameManager.I.Player.PlayerInfo.AddArtifact(artifactType);
         }
+
+        [Button]
+        public void Test_AddMoney(int num)
+        {
+            GameManager.I.Player.PlayerInfo.AddGold(num);
+        }
         #endregion
     }
 

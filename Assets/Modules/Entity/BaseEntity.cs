@@ -21,7 +21,7 @@ namespace Cardinals
             get => _hp;
             set
             {
-                var calculHp = Math.Min(Math.Max(0, value), MaxHp);
+                var calculHp = Mathf.Clamp(value, 0, MaxHp);
 
                 if (calculHp != _hp)
                 {
@@ -35,7 +35,17 @@ namespace Cardinals
             }
         }
 
-        public int MaxHp { get; protected set; }
+        private int _maxHP;
+        public int MaxHp {
+            get => _maxHP;
+            protected set
+            {
+                _maxHP = value;
+                _hp = Mathf.Clamp(_hp, 0, _maxHP);
+
+                UpdateHpEvent?.Invoke(_hp, _maxHP);
+            } 
+        }
         public Action<int, int> UpdateHpEvent { get; set; }
 
         public Action<BaseBuff> AddBuffEvent { get; set; } 

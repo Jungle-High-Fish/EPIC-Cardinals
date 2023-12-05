@@ -10,14 +10,11 @@ namespace Cardinals.Game
         public GrimoireSatchel(ArtifactType type)
         {
             Type = type;
-            OnEffect();
         }
 
-        private void OnEffect()
+        public override void OnEffect()
         {
             GameManager.I.Player.SetMaxHP(GameManager.I.Player.MaxHp - 10);
-            GameManager.I.Player.Hp = 30;
-            
         }
     }
 }

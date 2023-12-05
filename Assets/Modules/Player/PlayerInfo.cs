@@ -105,6 +105,7 @@ namespace Cardinals
                 {
                     Artifact artifact = EnumHelper.GetArtifact(artifactType);
                     _artifacts[i] = artifact;
+                    artifact.OnEffect();
                     AddArtifactEvent?.Invoke(artifact);
                     break;
                 }
