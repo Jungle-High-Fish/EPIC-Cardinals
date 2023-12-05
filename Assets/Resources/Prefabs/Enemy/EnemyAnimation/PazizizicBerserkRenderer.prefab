@@ -134,13 +134,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RootBone: {fileID: 1909982845134714565}
-  m_BoneTransforms: []
+  m_BoneTransforms:
+  - {fileID: 1909982845134714565}
+  - {fileID: 3362426976642002296}
+  - {fileID: 1094463807149071432}
   m_Bounds:
     m_Center: {x: 0.049652576, y: -0.080886126, z: 0}
     m_Extent: {x: 1.8033516, y: 1.4037542, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
-  m_AutoRebind: 0
+  m_AutoRebind: 1
 --- !u!1 &8147078520519574331
 GameObject:
   m_ObjectHideFlags: 0
