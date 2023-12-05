@@ -87,7 +87,11 @@ namespace Cardinals.Game
                 _stageController.Board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1.5f);
-                GameManager.I.Player.BlessWater1();
+                if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWater1))
+                {
+                    GameManager.I.Player.BlessWater1();
+                }
+                
             } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);
 
             if (_enemies.Count == 0)
