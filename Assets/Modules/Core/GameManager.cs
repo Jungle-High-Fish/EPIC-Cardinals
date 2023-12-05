@@ -15,6 +15,7 @@ namespace Cardinals
     {
         public UIManager UI => _ui;
         public StageController Stage => _stage;
+        public SoundManager Sound => _soundManager.Get(gameObject);
         
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
@@ -34,6 +35,9 @@ namespace Cardinals
         private ComponentGetter<LightController> _lightController
             = new ComponentGetter<LightController>(TypeOfGetter.Global);
         public LightController LightController => _lightController.Get();
+
+        private ComponentGetter<SoundManager> _soundManager
+            = new ComponentGetter<SoundManager>(TypeOfGetter.This);
         #region Game
 
         [Button]

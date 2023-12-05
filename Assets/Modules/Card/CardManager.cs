@@ -307,6 +307,9 @@ namespace Cardinals
         {
             _handcardsUI[index].IsDiscard = true;
             _handcardsUI[index].IsSelect = false;
+
+            GameManager.I.Sound.CardUse();
+            
             yield return _handcardsUI[index].CardAnim.Play(animationType);
             Destroy(_handcardsUI[index].gameObject);
             _handcardsUI.RemoveAt(index);
