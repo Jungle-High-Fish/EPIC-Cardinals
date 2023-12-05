@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
 using DG.Tweening;
@@ -16,11 +17,13 @@ namespace Cardinals.UI
     {
         protected BaseEntity _entity;
         
+        [Header("Status")]
+        [SerializeField] protected RectTransform _statusTr;
+        
         [Header("HP")]
         [SerializeField] private TextMeshProUGUI _hpTMP;
-        [SerializeField] private RectTransform _maxHPRect;
+        [SerializeField] protected RectTransform _maxHPRect;
         [SerializeField] private RectTransform _curHPRect;
-        [SerializeField] private float _curHPEndPosX;
 
         [Header("Defense")]
         [SerializeField] private GameObject _defenseObj;
@@ -28,7 +31,7 @@ namespace Cardinals.UI
 
         [Header("Buff")]
         [SerializeField] private GameObject _buffPrefab;
-        [SerializeField] private Transform _buffListArea;
+        [SerializeField] protected Transform _buffListArea;
         [SerializeField] private Transform _addBuffDescriptionTr;
         
         public virtual void Init(BaseEntity entity)
@@ -43,9 +46,10 @@ namespace Cardinals.UI
             _entity.SuccessDefenseEvent += SuccessDefense;
             _entity.BrokenDefenseEvent += BrokenDefense;
             
+            
             UpdateHp(_entity.Hp, _entity.MaxHp);
         }
-
+        
         public void Update()
         {
             if (_entity != null)

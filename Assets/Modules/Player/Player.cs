@@ -10,6 +10,7 @@ using Cardinals.Enums;
 using Cardinals.Game;
 using Cardinals.Buff;
 using Sirenix.Utilities;
+using Unity.Mathematics;
 
 namespace Cardinals
 {
@@ -34,10 +35,13 @@ namespace Cardinals
         public Action<PlayerActionType> UpdateActionEvent { get; set; }
         public PlayerActionType CurActionType { get; private set; }
 
+        private Quaternion _defaultRotate;
+
         public override void Init(int _ = default) {
             base.Init(_initHp);
             _playerInfo = new PlayerInfo();
-            
+
+            _defaultRotate = Renderers.First().transform.rotation;
             Debug.Log("플레이어 초기화 완료");
         }
 
@@ -297,9 +301,12 @@ namespace Cardinals
                 filpX = !filpX;
             }
             
-            Renderers.ForEach(r => r.flipX = filpX);
+
+            Renderers.ForEach(r => Flip(r, filpX));
+            //Renderers.ForEach(r => r.flipX = filpX);
             bool enemyFlipX = nextIdx > list.Count / 2;
-            GameManager.I.Stage.Enemies.ForEach(e => e.Renderer.FlipX(enemyFlipX));
+
+            GameManager.I.Stage.Enemies.ForEach(e => Flip(e.Renderers.First(), enemyFlipX));
         }
 
         void SetFlipTowardEnemy()
@@ -312,8 +319,23 @@ namespace Cardinals
             {
                 filpX = false;
             }
-            
-            Renderers.ForEach(r => r.flipX = filpX);
+
+            Renderers.ForEach(r => Flip(r, filpX));
+        }
+
+        void Flip(SpriteRenderer renderer,  bool filpX)
+        {
+            if (renderer.flipX != filpX)
+            {
+                renderer.transform.DORotate(new Vector3(0, 180, 0), 0.25f, RotateMode.LocalAxisAdd)
+                    .SetEase(Ease.InCirc)
+                    .OnComplete(() =>
+                    {
+                        renderer.flipX = filpX;
+                        renderer.transform.rotation = _defaultRotate;
+                    });
+            }
+
         }
     }
 }
