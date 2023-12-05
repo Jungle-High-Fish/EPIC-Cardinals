@@ -104,7 +104,7 @@ namespace Cardinals.Tutorial
                 yield return SummonsAction();
                 _stageController.Board.OnTurnEnd();
                 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1.5f);
 
                 // 튜토리얼 처리
                 if (_curQuestIndex == -1 || _tutorialData[_curTutorialIndex].Quests[_curQuestIndex].QuestType != TutorialQuestType.KillMonster) {

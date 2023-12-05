@@ -15,6 +15,7 @@ namespace Cardinals
     {
         public UIManager UI => _ui;
         public StageController Stage => _stage;
+        public SoundManager Sound => _soundManager;
         
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
@@ -34,6 +35,8 @@ namespace Cardinals
         private ComponentGetter<LightController> _lightController
             = new ComponentGetter<LightController>(TypeOfGetter.Global);
         public LightController LightController => _lightController.Get();
+
+        private SoundManager _soundManager;
         #region Game
 
         [Button]
@@ -58,6 +61,7 @@ namespace Cardinals
         {
             _ui = InitUI();
             _stage = LoadStage();
+            _soundManager = InitSound();
 
             yield return _stage.Load(stage);
             yield return _stage.Flow();
@@ -77,6 +81,15 @@ namespace Cardinals
 
             _ui.Init();
             return _ui;
+        }
+
+        private SoundManager InitSound() {
+            GameObject soundManagerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_SoundManager);
+            var soundManagerObj = Instantiate(soundManagerPrefab);
+            soundManagerObj.name = "@" + Constants.Common.InstanceName.SoundManager;
+
+            var soundManager = soundManagerObj.GetComponent<SoundManager>();
+            return soundManager;
         }
 
         public void GameClear()

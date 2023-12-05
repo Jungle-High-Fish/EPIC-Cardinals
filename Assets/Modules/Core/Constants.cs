@@ -12,6 +12,8 @@ namespace Cardinals.Constants {
             public const string Prefabs = "Prefabs/";
             public const string Prefabs_StageGround = "Stage/Ground";
 
+            public const string Prefabs_SoundManager = "SoundManager";
+
             public const string Prefabs_Tile = "Board/Tiles/TileUV2";
             public const string Prefabs_UI_HoveredTileInfo = "UI/TileInfo/HoveredTileInfoUI";
             public const string Prefabs_UI_TileInfo = "UI/TileInfo/TileInfoUI";
@@ -144,6 +146,9 @@ namespace Cardinals.Constants {
     namespace Common {
         public static class InstanceName {
             public const string StageController = "StageContoller";
+
+            
+            public const string SoundManager = "Sound Manager";
             
             public const string UI = "UI";
             public const string MainUICanvas = "Main UI Canvas";
