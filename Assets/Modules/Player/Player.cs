@@ -74,14 +74,8 @@ namespace Cardinals
 
         public override void EndTurn()
         {
-            // 버프/디버프 소모
-            for(int i = Buffs.Count -1; i >= 0 ; i--)
-            {
-                var buff = Buffs[i];
-                buff.Execute(this);
-                buff.EndTurn();
-            }
-
+            base.EndTurn(); // 버프/디버프 소모
+            
             //GameManager.I.Next();
             GameManager.I.Stage.CardManager.EndTurn();
             GameManager.I.Player.UpdateAction(PlayerActionType.None);
@@ -122,7 +116,7 @@ namespace Cardinals
             {
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth1]?.Invoke();
                 
-                var enemies = (GameManager.I.Stage.CurEvent as BattleEvent).Enemies;
+                var enemies = GameManager.I.CurrentEnemies.ToList();
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
                     if (enemies[i].PrevPattern.Type == EnemyActionType.Attack)

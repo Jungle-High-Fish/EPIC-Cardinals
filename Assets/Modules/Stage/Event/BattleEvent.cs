@@ -15,57 +15,36 @@ namespace Cardinals.Game
     [CreateAssetMenu(fileName = "BattleEvent", menuName = "Cardinals/Event/Battle")]
     public class BattleEvent: BaseEvent
     {
-        private List<BaseEnemy> _enemies;
-        public List<BaseEnemy> Enemies => _enemies;
-
         [SerializeField, InlineEditor] private EnemyDataSO[] _enemyList;
-        public EnemyDataSO[] EnemyList => _enemyList;
-
-        #region Battle
-        private StageController _stageController;
 
         public override IEnumerator Flow(StageController stageController)
         {
             Debug.Log("전투 플로우 실행");
             
             // 전투 세팅
-            _stageController = stageController;
+            Player player = GameManager.I.Player;
+            StageController stage = GameManager.I.Stage;
+            Board.Board board = GameManager.I.Stage.Board;
+            List<BaseEnemy> enemies = new();
             List<Reward> rewards = new();
-        
-            // 몬스터 설정
-            Vector3[] enemyPositions = _stageController.Board.SetEnemyNumber(_enemyList.Length);
 
-            _enemies = new();
-            for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
-            {
-                var enemyData = _enemyList[i];
-                var enemy = _stageController.InstantiateEnemy(enemyData, enemyPositions[i]);
-                
-                enemy.DieEvent += () =>
-                {
-                    AddReward(rewards, enemy.Rewards);
-                    _enemies.Remove(enemy);
-                    if (_enemies.Count> 0) GameManager.I.Stage.Board.SetEnemyNumber(_enemies.Count); // 1마리가 되었을 때, 카드 드래그 영역 수정
-                };
-                
-                _enemies.Add(enemy);
-            }
-
-            GameManager.I.CurrentEnemies = _enemies;
-            //_stageController.EnemyInfoController.Init(_enemyList.Length);
-            GameManager.I.Stage.CardManager.OnBattle();
+            // 몬스터 정보 초기화
+            InitEnemy(enemies, rewards);
+            GameManager.I.CurrentEnemies = enemies;
+            
+            stage.CardManager.OnBattle();
 
             do // 전투 시작
             {
                 // 전투 업데이트
-                GameManager.I.Player.StartTurn();
-                _enemies.ForEach(enemy => enemy.StartTurn());
+                player.StartTurn();
+                enemies.ForEach(enemy => enemy.StartTurn());
 
                 // 플레이어 행동 초기화
 
                 // 플레이어 행동
-                GameManager.I.Stage.CardManager.OnTurn();
-                GameManager.I.Player.OnTurn();
+                stage.CardManager.OnTurn();
+                player.OnTurn();
 
                 // 턴 종료 버튼 활성화
                 GameManager.I.UI.UIEndTurnButton.Activate();
@@ -73,40 +52,71 @@ namespace Cardinals.Game
                 yield return GameManager.I.WaitNext(); // 대기?
 
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
-                GameManager.I.Stage.CardManager.SetCardSelectable(false);
+                stage.CardManager.SetCardSelectable(false);
+                
+                // 버프 처리
+                player.OnBuff();
+                for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].OnBuff();
+                
                 // 적 행동
-                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnTurn();
+                for (int i = enemies.Count - 1; i >= 0; i--)
+                {
+                    enemies[i].OnTurn();
+                }
                 yield return new WaitForSeconds(1f);
                 
-                // 카운트 처리
-                GameManager.I.Player.EndTurn();
-                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].EndTurn();
+                // 턴 종료 처리
+                player.EndTurn();
+                for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].EndTurn();
                 
                 // 보드 관련 처리
                 yield return SummonsAction();
-                _stageController.Board.OnTurnEnd();
+                board.OnTurnEnd();
                 
                 yield return new WaitForSeconds(1.5f);
-                if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWater1))
+                if (player.PlayerInfo.CheckBlessExist(BlessType.BlessWater1))
                 {
-                    GameManager.I.Player.BlessWater1();
+                    player.BlessWater1();
                 }
                 
-            } while (_enemies.Count > 0 && GameManager.I.Player.Hp > 0);
+            } while (enemies.Count > 0 && player.Hp > 0);
 
-            if (_enemies.Count == 0)
+            if (enemies.Count == 0)
             {
                 IsClear = true;
                 
                 // 전투 종료 초기화
-                GameManager.I.Player.Win();
-                GameManager.I.Player.EndBattle();
-                GameManager.I.Stage.Board.ClearBoardAfterBattleEvent();
+                player.Win();
+                player.EndBattle();
+                board.ClearBoardAfterBattleEvent();
                 RemoveSummons();
                 yield return WaitReward(rewards);
             }
         }
 
+        /// <summary>
+        /// 몬스터 초기화
+        /// </summary>
+        private void InitEnemy(List<BaseEnemy> enemies, List<Reward> rewards)
+        {
+            Vector3[] enemyPositions = GameManager.I.Stage.Board.SetEnemyNumber(_enemyList.Length);
+            
+            for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
+            {
+                var enemyData = _enemyList[i];
+                var enemy = GameManager.I.Stage.InstantiateEnemy(enemyData, enemyPositions[i]);
+                
+                enemy.DieEvent += () =>
+                {
+                    AddReward(rewards, enemy.Rewards);
+                    enemies.Remove(enemy);
+                    if (enemies.Count> 0) 
+                        GameManager.I.Stage.Board.SetEnemyNumber(enemies.Count); // 1마리가 되었을 때, 카드 드래그 영역 수정
+                };
+                
+                enemies.Add(enemy);
+            }
+        }
         private IEnumerator SummonsAction()
         {
             var summons = GameManager.I.Stage.Summons;
@@ -136,12 +146,12 @@ namespace Cardinals.Game
             GameManager.I.UI.UIEndTurnButton.Activate(true);
             
             // 보상 설정
-            _stageController.RewardBox.Set(rewards); // 해당 위치에서 구체화 됩니다. 
+            GameManager.I.Stage.RewardBox.Set(rewards); // 해당 위치에서 구체화 됩니다. 
 
             IsSelect = false;
             yield return new WaitUntil(() => IsSelect); // 플레이어의 보상 선택 후 [턴 종료] 대기
             
-            _stageController.RewardBox.Disable();
+            GameManager.I.Stage.RewardBox.Disable();
         }
 
         /// <summary>
@@ -175,6 +185,5 @@ namespace Cardinals.Game
                 }
             }
         }
-        #endregion
     }
 }

@@ -25,7 +25,7 @@ namespace Cardinals.Game {
                 if (_curEvent == null) return null;
                 
                 if (_curEvent is BattleEvent battleEvent)
-                    return battleEvent.Enemies;
+                    return GameManager.I.CurrentEnemies.ToList();
                 else if (_curEvent is TutorialEvent tutorialEvent)
                     return tutorialEvent.Enemies;
                 else return null;
@@ -37,8 +37,6 @@ namespace Cardinals.Game {
         private Transform _enemyParentTransform;
         
         private Transform _coreTransform;
-        //private EnemyInfoController _enemyInfoController;
-        //public EnemyInfoController EnemyInfoController => _enemyInfoController;
         private Board.Board _board;
         private Player _player;
         private CardManager _cardManager;
