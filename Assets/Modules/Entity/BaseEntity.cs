@@ -8,6 +8,7 @@ using Cardinals.Enums;
 using Cardinals.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Cardinals
@@ -126,16 +127,18 @@ namespace Cardinals
         /// </summary>
         public abstract void OnTurn();
 
+        public virtual void OnBuff()
+        {
+            Buffs.ForEach(b => b.Execute(this));
+        }
+
         public virtual void EndTurn()
         {
             // 버프/디버프 소모
             for (int i = Buffs.Count - 1; i >= 0; i--)
             {
-                Buffs[i].Execute(this);
                 Buffs[i].EndTurn();
             }
-
-            // 방어도 초기화
         }
 
         public bool CheckBuffExist(BuffType buffType)
