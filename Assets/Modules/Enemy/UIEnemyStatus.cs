@@ -28,6 +28,7 @@ namespace Cardinals.UI
 
             BaseEnemy enemy = entity as BaseEnemy;
             enemy.UpdatePatternEvent += UpdatePattern;
+            enemy.OnTurnEvent += UseIcon;
             enemy.DieEvent += Destroy;
             
             // 위치 설정
@@ -102,6 +103,8 @@ namespace Cardinals.UI
         
         private void UpdatePattern(Pattern pattern)
         {
+            _patternTr.gameObject.SetActive(true);
+            
             // 이펙트
             _patternTr.localScale = Vector3.zero;
             _patternTr.DOScale(1, .5f).SetEase(Ease.InOutElastic);
@@ -128,17 +131,17 @@ namespace Cardinals.UI
 
         private bool CheckSetWeakDamage(EnemyActionType type)
         {
-            return _entity.CheckBuffExist(BuffType.Weak) &&
+            return _entity != null &&
+                   _entity.CheckBuffExist(BuffType.Weak) &&
                    (type == EnemyActionType.Attack ||
                     type == EnemyActionType.AreaAttack);
         }
 
         private void UseIcon()
         {
-            _patternTr.DOScale(2, .5f).SetEase(Ease.InOutElastic)
-                .OnComplete(() => _patternTr.localScale = Vector3.one);
-            _patternIconImg.DOFade(.5f, .5f)
-                .OnComplete(() => _patternIconImg.color = Color.white);
+            _patternTr.DOPunchScale(new Vector2(.7f, .7f), .3f, 1, 0)
+                .SetEase(Ease.InOutElastic)
+                .OnComplete(()=> { _patternTr.gameObject.SetActive(false); });
         }
 
         private Dictionary<string, Sprite> EnemyPatternIconDict =>

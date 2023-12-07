@@ -77,6 +77,7 @@ namespace Cardinals
         
         public Pattern CurPattern => FixPattern ?? Patterns[Turn % Patterns.Length];
         public Pattern PrevPattern;
+        public Action OnTurnEvent;
 
         private EnemyDataSO _enemyData;
         public EnemyDataSO EnemyData => _enemyData;
@@ -160,6 +161,7 @@ namespace Cardinals
                     curPat.Action();
                     break;
             }
+            OnTurnEvent?.Invoke();
 
             // 초기화
             if (FixPattern == null)
