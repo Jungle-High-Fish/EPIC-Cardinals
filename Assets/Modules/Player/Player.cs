@@ -67,30 +67,30 @@ namespace Cardinals
             }
         }
 
-        public override void OnTurn()
+        public override IEnumerator OnTurn()
         {
             _isDamagedThisTurn = false;
+            
+            yield return null;
         }
 
-        public override void EndTurn()
+        public override IEnumerator EndTurn()
         {
-            base.EndTurn(); // 버프/디버프 소모
+            yield return base.EndTurn(); // 버프/디버프 소모
             
-            //GameManager.I.Next();
-            GameManager.I.Stage.CardManager.EndTurn();
+            yield return GameManager.I.Stage.CardManager.EndTurn();
             GameManager.I.Player.UpdateAction(PlayerActionType.None);
-            
             
             if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth1))
             {
                 BlessEarth1();
             }
             
-            if (!PlayerInfo.CheckBlessExist(BlessType.BlessEarth2))
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2))
             {
-                DefenseCount = 0;
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
             }
-            else GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
+            else DefenseCount = 0;
         }
 
         public void EndBattle()

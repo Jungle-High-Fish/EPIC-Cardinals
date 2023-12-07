@@ -22,7 +22,6 @@ public class GridSizeUpdator : MonoBehaviour
         verticalLayout.Reverse().ForEach(g => g.Update());
         foreach (var _fitter in fitters.Reverse())
         {
-            Debug.Log(_fitter.gameObject.name);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_fitter.transform);
         }
 

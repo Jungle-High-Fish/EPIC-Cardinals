@@ -25,6 +25,7 @@ namespace Cardinals.Game
             Player player = GameManager.I.Player;
             StageController stage = GameManager.I.Stage;
             Board.Board board = GameManager.I.Stage.Board;
+            CardManager cardManager = GameManager.I.Stage.CardManager;
             List<BaseEnemy> enemies = new();
             List<Reward> rewards = new();
 
@@ -32,48 +33,55 @@ namespace Cardinals.Game
             InitEnemy(enemies, rewards);
             GameManager.I.CurrentEnemies = enemies;
             
-            stage.CardManager.OnBattle();
+            cardManager.OnBattle();
 
             do // 전투 시작
             {
                 // 전투 업데이트
-                player.StartTurn();
-                enemies.ForEach(enemy => enemy.StartTurn());
-
-                // 플레이어 행동 초기화
+                yield return player.StartTurn();
+                foreach (var enemy in enemies)
+                {
+                    yield return enemy.StartTurn();
+                }
 
                 // 플레이어 행동
-                stage.CardManager.OnTurn();
-                player.OnTurn();
+                yield return cardManager.OnTurn();
+                yield return player.OnTurn();
 
                 // 턴 종료 버튼 활성화
                 GameManager.I.UI.UIEndTurnButton.Activate();
 
-                yield return GameManager.I.WaitNext(); // 대기?
+                yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
 
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
-                stage.CardManager.SetCardSelectable(false);
+                cardManager.SetCardSelectable(false);
                 
                 // 버프 처리
                 player.OnBuff();
                 for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].OnBuff();
                 
                 // 적 행동
+                foreach (var e in enemies)
+                {
+                    yield return e.OnPreTurn();
+                }
+                
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
-                    enemies[i].OnTurn();
+                    yield return enemies[i].OnTurn();
                 }
-                yield return new WaitForSeconds(1f);
                 
-                // 턴 종료 처리
-                player.EndTurn();
-                for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].EndTurn();
+                // 플레이어 턴 종료 처리
+                yield return player.EndTurn();
+                for (int i = enemies.Count - 1; i >= 0; i--)
+                {
+                    yield return enemies[i].EndTurn();
+                }
                 
                 // 보드 관련 처리
                 yield return SummonsAction();
-                board.OnTurnEnd();
+                yield return board.OnTurnEnd();
                 
-                yield return new WaitForSeconds(1.5f);
                 if (player.PlayerInfo.CheckBlessExist(BlessType.BlessWater1))
                 {
                     player.BlessWater1();
@@ -81,6 +89,7 @@ namespace Cardinals.Game
                 
             } while (enemies.Count > 0 && player.Hp > 0);
 
+            // 플레이어의 승리
             if (enemies.Count == 0)
             {
                 IsClear = true;
