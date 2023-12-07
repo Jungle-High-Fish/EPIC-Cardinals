@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cardinals.Board;
@@ -107,12 +108,12 @@ namespace Cardinals
         /// </summary>
         protected List<Tile> AreaAttackTiles { get; } = new();
 
-        public override void StartTurn()
+        public override IEnumerator StartTurn()
         {
             base.StartTurn();
-
             UpdatePatternEvent?.Invoke(CurPattern);
 
+            yield return null;
         }
 
         private void ExecutePreActionByPattern(Pattern pattern)
@@ -126,16 +127,24 @@ namespace Cardinals
                     break;
             }
         }
-        
-        public override void OnTurn()
+
+        public override IEnumerator EndTurn()
+        {
+            yield return base.EndTurn();
+        }
+
+        public override IEnumerator OnPreTurn()
         {
             DefenseCount = 0;
+            yield return new WaitForSeconds(.5f);
+        }
 
+        public override IEnumerator OnTurn()
+        {
             PrevPattern = CurPattern;
             Pattern curPat = CurPattern;
             int value = curPat.Value ?? 0;
             
-            Debug.Log($"적({Name}): {curPat.Type.ToString()} 수행");
             switch (curPat.Type)
             {
                 case EnemyActionType.Attack :
@@ -162,6 +171,7 @@ namespace Cardinals
                 _fixPattern = null;
             }
             
+            yield return new WaitForSeconds(.5f);
         }
 
         public override void AddBuff(BaseBuff buff)

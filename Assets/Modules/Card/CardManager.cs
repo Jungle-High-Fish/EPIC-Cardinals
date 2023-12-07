@@ -96,17 +96,17 @@ namespace Cardinals
         private int _selectedNumber;
 
         [Button]
-        public void OnTurn()
+        public IEnumerator OnTurn()
         {
             int drawCardOffset = 0;
             if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Grimoire))
             {
                 drawCardOffset = 1;
             }
-            Draw(Constants.GameSetting.Player.CardDrawCount+drawCardOffset);
+            Draw(Constants.GameSetting.Player.CardDrawCount + drawCardOffset);
 
             _canActionUse = false;
-            if (!_lastCardUsedForAction&&_newCardUseMod)
+            if (!_lastCardUsedForAction && _newCardUseMod)
             {
                 _canActionUse = true;
             }
@@ -115,12 +115,14 @@ namespace Cardinals
             _continuousUseCount = 0;
             _state = CardState.Idle;
             UpdateCardState(-1, true);
+
+            yield return null;
         }
 
         [Button]
-        public void EndTurn()
+        public IEnumerator EndTurn()
         {
-            StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
+            yield return DiscardAll(0, CardAnimationType.TurnEnd);
         }
 
         public void OnBattle(bool isTutorial=false)
@@ -134,7 +136,7 @@ namespace Cardinals
 
         public void EndBattle()
         {
-            EndTurn();
+            StartCoroutine(EndTurn());
             Debug.Log("배틀 끝");
         }
 
