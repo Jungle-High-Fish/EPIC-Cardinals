@@ -25,6 +25,7 @@ namespace Cardinals
         ComponentGetter<Image> _image
                 = new ComponentGetter<Image>(TypeOfGetter.This);
         [SerializeField] private TextMeshProUGUI _numberText;
+        private DiceAnimation _diceAnimation;
 
         public bool IsSelect
         {
@@ -75,7 +76,7 @@ namespace Cardinals
             }
         }
         public Dice Dice => _dice;
-
+        public DiceAnimation DiceAnimation => _diceAnimation;
         public void Init(Dice dice, int index, DiceManager diceManager)
         {
             _dice = dice;
@@ -83,6 +84,7 @@ namespace Cardinals
             _diceManager = diceManager;
             _isSelectable = true;
             _diceUIPos = (transform as RectTransform).anchoredPosition;
+            _diceAnimation = GetComponent<DiceAnimation>();
             switch (dice.DiceType)
             {
                 case (DiceType.Normal):
@@ -167,7 +169,7 @@ namespace Cardinals
         {
             if (!_isDiscard && _isSelectable)
             {
-                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y + 5, 0.1f);
+                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y + 15f, 0.1f);
             }
 
         }

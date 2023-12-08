@@ -392,6 +392,15 @@ namespace Cardinals.Enums {
         Gold
     }
 
+    public enum DiceAnimationType
+    {
+        Empty,
+        UseAttack,
+        UseDefense,
+        UseMove,
+        TurnEnd
+    }
+
     public enum CardState
     {
         Idle,
