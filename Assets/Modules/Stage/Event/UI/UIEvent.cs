@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cardinals.Enums;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 namespace Cardinals.Game
 {
@@ -11,30 +12,28 @@ namespace Cardinals.Game
     /// </summary>
     public class UIEvent : MonoBehaviour
     {
+        private UIStageMap _map;
         [SerializeField] private Image _iconImg;
         [SerializeField] private GameObject _clearObj;
-        [SerializeField] private GameObject _curEvtObj;
         
-        public void Init(BaseEvent evt)
+        public void Init(UIStageMap map, BaseEvent evt)
         {
+            _map = map;
             evt.UIEvent = this;
-            
-            // [TODO] Resource Manager에서 Icon 정보 읽어서 설정하기
-            // _iconImg.sprite = null; evt.Type
+
+            _iconImg.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_MapIcons + evt.Type);
 
             _clearObj.SetActive(false);
-            _curEvtObj.SetActive(false);
         }
 
-        public void On()
+        public IEnumerator On()
         {
-            _curEvtObj.SetActive(true); 
+            yield return _map.MovePlayerIcon(this);
         }
         
         public void Clear()
         {
             _clearObj.SetActive(true);
-            _curEvtObj.SetActive(false);
         }
     }
 }

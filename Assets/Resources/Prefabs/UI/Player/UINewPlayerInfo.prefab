@@ -1507,8 +1507,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40, y: 0}
-  m_SizeDelta: {x: -120, y: -20}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1399518228958002512
 CanvasRenderer:
@@ -2302,6 +2302,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MapButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836964736449396718, guid: b5d13c71abc06a148ba2149bb7868c20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1836964736449396719, guid: b5d13c71abc06a148ba2149bb7868c20,
         type: 3}

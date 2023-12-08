@@ -10,7 +10,7 @@ namespace Cardinals.Game {
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Name");
         
         public void Init(Stage stage) {
-            _stageNameText.Get(gameObject).SetText(stage.Name);
+            _stageNameText.Get(gameObject).SetText($"<wiggle>{stage.Name}</wiggle>");
         }
     }
 }
