@@ -36,8 +36,8 @@ namespace Cardinals.UI.Description
         public void Init() {
             _tileInfo.Get(gameObject).gameObject.SetActive(false);
             _endTurnButton.Get(gameObject).Deactivate();
-            _mapButton.Get(gameObject).Init();
-            _mapButton.Get(gameObject).Deactivate();
+            // _mapButton.Get(gameObject).Init();
+            // _mapButton.Get(gameObject).Deactivate();
         }
 
         public void Set()
@@ -67,7 +67,7 @@ namespace Cardinals.UI.Description
             _endTurnButton.Get(gameObject).Init();
             _tileInfo.Get(gameObject).InitOnTile();
 
-            _mapButton.Get(gameObject).Activate();
+            //_mapButton.Get(gameObject).Activate();
         }
 
         void UpdateMoneyUI(int value)

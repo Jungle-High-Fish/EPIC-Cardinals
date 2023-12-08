@@ -36,9 +36,6 @@ namespace Cardinals.Game
             // 데이타 초기화
             _name = name;
             Events = events;
-            
-            // 초기 값 등록
-            GameManager.I.UI.UIStage.Init(this);
         }
 
         /// <summary>

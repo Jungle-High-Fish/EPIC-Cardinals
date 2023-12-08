@@ -68,6 +68,7 @@ namespace Cardinals
         #endregion
         
         public TEMP_UIStageMap TEMP_UIStageMap { get; private set; }
+        public UIStageMap UIStageMap { get; private set; }
         
         public void Init() {
             InstantiateCanvas(Constants.Common.InstanceName.MainUICanvas, out _mainUICanvas);
@@ -88,8 +89,6 @@ namespace Cardinals
 
             //InstantiateEnemyUIParent();
             
-            // TEMP
-            TEMP_InstantiateUIMap();
             
             // Board Event
             InstantiateBoardEventCardUI();
@@ -157,7 +156,7 @@ namespace Cardinals
             GameObject stageInfoUIObj = Instantiate(prefab, _mainUICanvas.transform);
 
             _uiStage = stageInfoUIObj.GetComponent<UIStage>();
-            stageInfoUIObj.SetActive(false);
+            // stageInfoUIObj.SetActive(false);
         }
 
         private void InstantiateMapButtonUI() {
@@ -247,14 +246,6 @@ namespace Cardinals
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
             _uiMagicLevelUpPanel = obj.GetComponent<UIMagicLevelUpPanel>();
             obj.SetActive(false);
-        }
-        
-        
-        private void TEMP_InstantiateUIMap() {
-            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Stage_Map);
-            GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
-            TEMP_UIStageMap = obj.GetComponent<TEMP_UIStageMap>();
-            obj.SetActive(false); 
         }
 
         // private void InstantiateEnemyUIParent()
