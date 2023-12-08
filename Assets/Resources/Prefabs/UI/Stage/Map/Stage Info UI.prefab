@@ -101,7 +101,8 @@ GameObject:
   - component: {fileID: 8696500305652520188}
   - component: {fileID: 8696500305652520130}
   - component: {fileID: 8696500305652520131}
-  - component: {fileID: 4997678084520651531}
+  - component: {fileID: 1842182261599973289}
+  - component: {fileID: 1559409830807859201}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<wiggle>\uC218\uC0C1\uD55C \uCD08\uC6D0</wiggle>"
+  m_text: "\uC218\uC0C1\uD55C \uCD08\uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c295c94b96d155240ae155ff0f3bd26d, type: 2}
   m_sharedMaterial: {fileID: -1300497808526000583, guid: c295c94b96d155240ae155ff0f3bd26d,
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &4997678084520651531
+--- !u!114 &1842182261599973289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,26 +240,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typewriterStartsAutomatically: 0
-  animationLoop: 1
+  typewriterStartsAutomatically: 1
+  animationLoop: 0
   timeScale: 0
-  _text: "<wiggle>\uC218\uC0C1\uD55C \uCD08\uC6D0</wiggle>"
+  _text: "\uC218\uC0C1\uD55C \uCD08\uC6D0"
   useDynamicScaling: 1
   referenceFontSize: 10
   isResettingTimeOnNewText: 1
   useDefaultDatabases: 1
-  databaseBehaviors: {fileID: 0}
-  databaseAppearances: {fileID: 0}
+  databaseBehaviors: {fileID: 11400000, guid: e496ac1bef6c5264eb5d391769296724, type: 2}
+  databaseAppearances: {fileID: 11400000, guid: f1b7312728ea50e4b92e2641aa60331d,
+    type: 2}
   useDefaultStyleSheet: 1
   styleSheet: {fileID: 0}
-  databaseActions: {fileID: 0}
+  databaseActions: {fileID: 11400000, guid: 582b5c07f2f1bf042adb49f09974ffc1, type: 2}
   defaultAppearancesTags:
   - vertexp
-  defaultDisappearancesTags:
-  - vertexp
-  defaultBehaviorsTags:
-  - wiggle
-  defaultTagsMode: 1
+  defaultDisappearancesTags: []
+  defaultBehaviorsTags: []
+  defaultTagsMode: 0
+--- !u!114 &1559409830807859201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696500305652520189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a6945b90dcd0c4b81619c0d8b5c283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTypeWriter: 1
+  startTypewriterMode: 3
+  hideAppearancesOnSkip: 0
+  hideDisappearancesOnSkip: 0
+  triggerEventsOnSkip: 0
+  resetTypingSpeedAtStartup: 1
+  disappearanceOrientation: 0
+  onTextShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  onTypewriterStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onTextDisappeared:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  onMessage:
+    m_PersistentCalls:
+      m_Calls: []
+  waitForNormalChars: 0.1
+  waitLong: 0.6
+  waitMiddle: 0.2
+  avoidMultiplePunctuactionWait: 0
+  waitForNewLines: 1
+  waitForLastCharacter: 1
+  useTypewriterWaitForDisappearances: 1
+  disappearanceWaitTime: 0.015
+  disappearanceSpeedMultiplier: 1
 --- !u!1 &8696500306431754311
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +360,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8696500306431754310}
     m_Modifications:
+    - target: {fileID: 2886441177998618781, guid: 7d54405eb9734ce4db2565cbfe227fe8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -485
+      objectReference: {fileID: 0}
     - target: {fileID: 3804927986511882632, guid: 7d54405eb9734ce4db2565cbfe227fe8,
         type: 3}
       propertyPath: m_IsActive
@@ -365,7 +413,7 @@ PrefabInstance:
     - target: {fileID: 7580080010575489927, guid: 7d54405eb9734ce4db2565cbfe227fe8,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7580080010575489927, guid: 7d54405eb9734ce4db2565cbfe227fe8,
         type: 3}
@@ -410,7 +458,7 @@ PrefabInstance:
     - target: {fileID: 7580080010575489927, guid: 7d54405eb9734ce4db2565cbfe227fe8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 7580080010575489927, guid: 7d54405eb9734ce4db2565cbfe227fe8,
         type: 3}
