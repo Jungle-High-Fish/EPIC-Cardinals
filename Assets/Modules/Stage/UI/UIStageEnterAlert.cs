@@ -9,8 +9,14 @@ namespace Cardinals.Game {
         private ComponentGetter<TextMeshProUGUI> _stageNameText
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Name");
         
-        public void Init(Stage stage) {
-            _stageNameText.Get(gameObject).SetText($"<wiggle>{stage.Name}</wiggle>");
+        public IEnumerator Init(Stage stage) {
+            _stageNameText.Get(gameObject).SetText(string.Empty);
+            gameObject.SetActive(true);
+            _stageNameText.Get(gameObject).SetText(stage.Name);
+            yield return new WaitForSeconds(1f);
+            
+
+            yield return new WaitForSeconds(3f);
         }
     }
 }
