@@ -19,7 +19,7 @@ namespace Cardinals
         private bool _isSelectable;
         private bool _isDiscard = false;
 
-        private Vector2 _DiceUIPos;
+        private Vector2 _diceUIPos;
         private Dice _dice;
         private DiceManager _diceManager;
         ComponentGetter<Image> _image
@@ -44,11 +44,11 @@ namespace Cardinals
                 _isSelectable = value;
                 if (_isSelectable)
                 {
-                    _image.Get(gameObject).color = Color.white;
+                    //_image.Get(gameObject).color = Color.white;
                 }
                 else
                 {
-                    _image.Get(gameObject).color = Color.gray;
+                    //_image.Get(gameObject).color = Color.gray;
                 }
             }
         }
@@ -82,15 +82,43 @@ namespace Cardinals
             _diceIndex = index;
             _diceManager = diceManager;
             _isSelectable = true;
-            Image image = GetComponent<Image>();
-            _DiceUIPos = (transform as RectTransform).anchoredPosition;
+            _diceUIPos = (transform as RectTransform).anchoredPosition;
+            switch (dice.DiceType)
+            {
+                case (DiceType.Normal):
+                    _image.Get(gameObject).color = new Color(0.8f, 0.8f, 0.8f);
+                    break;
+
+                case (DiceType.Fire):
+                    _image.Get(gameObject).color = new Color(0.9245283f, 0.51689120f, 0.4404593f);
+                    break;
+                case (DiceType.Water):
+                    _image.Get(gameObject).color = new Color(0.4332948f, 0.6019194f, 0.8584906f);
+                    break;
+                case (DiceType.Earth):
+                    _image.Get(gameObject).color = new Color(0.6320754f, 0.5570136f, 0.5277234f);
+                    break;
+            }
+        }
+
+        public void EnableCardUI()
+        {
+            GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
+            transform.localScale = new Vector3(1, 1, 1);
+            gameObject.SetActive(true);
         }
 
         public void UpdateDiceUI(int number)
         {
             _numberText.text = number.ToString();
         }
-
+   
+        public void DismissDiceUI()
+        {
+            IsSelect = false;
+            transform.localScale = new Vector3(1, 1, 1);
+            GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
+        }
         public void OnPointerDown(PointerEventData eventData)
         {
             if (_diceManager.State != CardState.Idle)
@@ -139,7 +167,7 @@ namespace Cardinals
         {
             if (!_isDiscard && _isSelectable)
             {
-                (transform as RectTransform).DOAnchorPosY(_DiceUIPos.y + 5, 0.1f);
+                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y + 5, 0.1f);
             }
 
         }
@@ -148,7 +176,7 @@ namespace Cardinals
         {
             if (!_isDiscard && _isSelectable)
             {
-                (transform as RectTransform).DOAnchorPosY(_DiceUIPos.y, 0.1f);
+                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y, 0.1f);
             }
 
         }

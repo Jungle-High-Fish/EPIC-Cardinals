@@ -5,6 +5,7 @@ using Cardinals.Enums;
 using Sirenix.OdinInspector;
 using Cardinals.Board;
 using Cardinals.Tutorial;
+using Cardinals.Buff;
 using UnityEngine.UI;
 using Util;
 
@@ -63,15 +64,15 @@ namespace Cardinals
         [Button]
         public void Init()
         {
-            SetCardDeckUIParent(GameObject.Find("CardDeck").transform); // 나중에 바꿔주세요~
+            SetCardDeckUIParent(GameObject.Find("DiceDeck").transform); // 나중에 바꿔주세요~
             _dices = new();
             _dicesUI = new();
             _newDiceUseMod = true;
 
             AddDice(new List<int>() { 1,2,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 1,2,3}, DiceType.Normal);
+            AddDice(new List<int>() { 1,2,3}, DiceType.Fire);
             AddDice(new List<int>() { 1,2,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 3,4,5 }, DiceType.Normal);
+            AddDice(new List<int>() { 3,4,5 }, DiceType.Water);
             AddDice(new List<int>() {3,4,5 }, DiceType.Normal);
 
         }
@@ -84,14 +85,12 @@ namespace Cardinals
         [Button]
         public void OnTurn()
         {
-            /*
-            int drawCardOffset = 0;
-            if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Grimoire))
-            {
-                drawCardOffset = 1;
-            }
-            Draw(Constants.GameSetting.Player.CardDrawCount + drawCardOffset);*/
 
+            foreach(DiceUI d in _dicesUI)
+            {
+                d.EnableCardUI();
+            }
+            RollAllDice();
             _canActionUse = false;
             if (!_lastDiceUsedForAction && _newDiceUseMod)
             {
@@ -178,7 +177,20 @@ namespace Cardinals
         {
             Dice dice = new Dice(numbers, type);
             _dices.Add(dice);
+
             GameObject diceUI = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Dice),_diceDeckUIParent);
+            Vector3 UIPos = Vector3.zero;
+            if (_dicesUI.Count == 0)
+            {
+                UIPos = new Vector3(100f, 100f, 0);
+            }
+            else
+            {
+                UIPos = _dicesUI[_dicesUI.Count - 1].GetComponent<RectTransform>().anchoredPosition;
+                UIPos.x += 100f;
+            }
+
+            diceUI.GetComponent<RectTransform>().anchoredPosition = UIPos;
             diceUI.GetComponent<DiceUI>().Init(dice, _dicesUI.Count,this);
             _dicesUI.Add(diceUI.GetComponent<DiceUI>());
             //UpdateCardUI(dice, 0);
@@ -290,7 +302,7 @@ namespace Cardinals
                             {
                                 break;
                             }
-                            StartCoroutine(DiceUseAction(useNumber, target));
+                            StartCoroutine(DiceUseAction(useNumber, _dices[_selectDiceIndex].DiceType,target));
 
                             _diceUsedCountOnThisTurn++;
                             if (_isTutorial)
@@ -324,11 +336,8 @@ namespace Cardinals
                             yield break;
                     }
 
-                    DismissCards:
-                    _dicesUI[_selectDiceIndex].IsSelect = false;
-                    _dicesUI[_selectDiceIndex].transform.localScale = new Vector3(1, 1, 1);
-                    _diceDeckUIParent.GetComponent<HorizontalLayoutGroup>().SetLayoutHorizontal();
-                    _diceDeckUIParent.GetComponent<HorizontalLayoutGroup>().SetLayoutVertical();
+                DismissCards:
+                    _dicesUI[_selectDiceIndex].DismissDiceUI();
                     DismissAllCards();
 
                     _state = CardState.Idle;
@@ -464,7 +473,7 @@ namespace Cardinals
             return result;
         }
 
-        private IEnumerator DiceUseAction(int num, BaseEntity target = null)
+        private IEnumerator DiceUseAction(int num, DiceType type, BaseEntity target = null)
         {
             SetDiceSelectable(false);
             _prevDiceNumber = num;
@@ -497,6 +506,8 @@ namespace Cardinals
             else
             {
                 yield return GameManager.I.Player.CardAction(num, target);
+                DiceBuffByType(num, type, target);
+                
             }
 
             yield return new WaitUntil(() => hasDiscard);
@@ -512,6 +523,26 @@ namespace Cardinals
             }
             SetDiceSelectable(true);
 
+        }
+
+        private void DiceBuffByType(int num, DiceType type, BaseEntity target = null)
+        {
+            if(type==DiceType.Fire 
+                && GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Fire)
+            {
+                target.AddBuff(new Burn(num));
+            }
+            else if(type == DiceType.Water
+                && GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Water)
+            {
+                target.AddBuff(new Weak(num));
+            }
+
+            else if(type == DiceType.Earth
+                && GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Earth)
+            {
+                //[TODO] 무력 디버프 생기면 여기에 추가
+            }
         }
 
         public void UpdateDiceState(int usedDiceNumber, bool isMove)
