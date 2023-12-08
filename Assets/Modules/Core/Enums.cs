@@ -385,6 +385,16 @@ namespace Cardinals.Enums {
         Gold
     }
 
+    public enum DiceType
+    {
+        Empty,
+        Normal,
+        Fire,
+        Water,
+        Earth,
+        Gold
+    }
+
     public enum CardState
     {
         Idle,
