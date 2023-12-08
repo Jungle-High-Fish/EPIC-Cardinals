@@ -82,10 +82,12 @@ namespace Cardinals.Board {
             }
         }
 
-        public void OnTurnEnd() {
+        public IEnumerator OnTurnEnd() {
             for (int i = 0; i < _tileSequence.Count; i++) {
                 _tileSequence[i].OnTurnEnd();
             }
+
+            yield return null;
         }
 
         public List<Tile> GetBoardEdgeTileSequence(int edgeIndex, bool includeCorner=true) {

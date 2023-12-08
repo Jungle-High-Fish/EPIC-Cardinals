@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -117,28 +118,41 @@ namespace Cardinals
         /// <summary>
         /// 새로운 턴 시작 시, 수행할 액션
         /// </summary>
-        public virtual void StartTurn()
+        public virtual IEnumerator StartTurn()
         {
             _turnStartedEvent?.Invoke();
+
+            yield return null;
         }
-        
+
+        public virtual IEnumerator OnPreTurn()
+        {
+            yield return null;
+        }
+
         /// <summary>
         /// 본인 턴 때, 수행할 액션
         /// </summary>
-        public abstract void OnTurn();
+        public abstract IEnumerator OnTurn();
+        public virtual IEnumerator OnPostTurn()
+        {
+            yield return null;
+        }
 
         public virtual void OnBuff()
         {
             Buffs.ForEach(b => b.Execute(this));
         }
 
-        public virtual void EndTurn()
+        public virtual IEnumerator EndTurn()
         {
             // 버프/디버프 소모
             for (int i = Buffs.Count - 1; i >= 0; i--)
             {
                 Buffs[i].EndTurn();
             }
+
+            yield return null;
         }
 
         public bool CheckBuffExist(BuffType buffType)
