@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Game;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,30 +15,38 @@ namespace Cardinals.Game
     /// </summary>
     public class UIStage : MonoBehaviour
     {
-        private ComponentGetter<UIStageEnterAlert> _stageEnterAlert
-            = new ComponentGetter<UIStageEnterAlert>(TypeOfGetter.ChildByName, "Stage Enter Alert");
-        
-        private ComponentGetter<UIStageMap> _stageMap
-            = new ComponentGetter<UIStageMap>(TypeOfGetter.ChildByName, "Stage Map");
+        private UIStageEnterAlert _stageEnterAlert;
+        private UIStageMap _stageMap;
 
-        public void Init(Stage stage)
+        public void Start()
         {
-            _stageEnterAlert.Get(gameObject).Init(stage);
-            _stageMap.Get(gameObject).Init(stage);
+            _stageEnterAlert = GetComponentInChildren<UIStageEnterAlert>();
+            _stageMap = GetComponentInChildren<UIStageMap>();
+            
+            _stageEnterAlert.gameObject.SetActive(false);
+            _stageMap.gameObject.SetActive(false);
+        }
+
+        public IEnumerator Init(Stage stage)
+        {
+            yield return _stageEnterAlert.Init(stage);
+            _stageMap.Init(stage);
+
+            yield return null;
         }
 
         public IEnumerator Visit()
         {
-            _stageEnterAlert.Get(gameObject).gameObject.SetActive(true);
-            yield return new WaitForSeconds(1.5f);
-            _stageEnterAlert.Get(gameObject).gameObject.SetActive(false);
-        }
+            bool completeDO = false;
+            _stageEnterAlert.gameObject.SetActive(true);
+            _stageEnterAlert.transform.DOScale(Vector3.one, 1.5f)
+                .OnComplete(() =>
+                {
+                    _stageEnterAlert.gameObject.SetActive(false);
+                    completeDO = true;
+                });
 
-        public IEnumerator EventIntro()
-        {
-            _stageMap.Get(gameObject).gameObject.SetActive(true);
-            yield return new WaitForSeconds(1.5f);
-            _stageMap.Get(gameObject).gameObject.SetActive(false);
+            yield return new WaitUntil(() => completeDO);
         }
     }
 }

@@ -256,7 +256,10 @@ namespace Cardinals.Enums {
     public enum StageEventType
     {
         Empty,
-        Battle,
+        Tutorial,
+        BattleCommon,
+        BattleElite,
+        BattleBoss,
     }
 
     public enum EnemyType

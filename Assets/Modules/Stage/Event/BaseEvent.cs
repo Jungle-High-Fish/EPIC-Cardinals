@@ -17,19 +17,15 @@ namespace Cardinals.Game
         public bool IsClear
         {
             get => _isClear;
-            set
-            {
-                _isClear = value;
-                if(_isClear) UIEvent.Clear();
-            }
+            set => _isClear = value;
         }
 
         /// <summary>
-        /// 이벤트 실행 전 활성화 되는 함수
+        /// 이벤트 플로우 시작 전 실행
         /// </summary>
-        public void On()
+        public IEnumerator On()
         {
-            UIEvent.On();
+            yield return UIEvent.On();
         }
 
         public void Dispose()

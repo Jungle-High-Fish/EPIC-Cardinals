@@ -67,7 +67,7 @@ namespace Cardinals.Game {
             _stage.Init(-1);
 
             InstantiateBaseObjs();
-
+            
             InstantiateGround();
 
             yield return _board.SetBoard(stage.BoardData);
@@ -81,25 +81,20 @@ namespace Cardinals.Game {
         private int temp_event_index = 0;
         
         public IEnumerator Flow() {
-            GameManager.I.UI.UIStage.Init(_stage);
+            yield return GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
             
             // 축복 선택
             //yield return SelectBlessFlow();
-
-            GameManager.I.UI.TEMP_UIStageMap.Init(); // temp map
+            
             // 다음 사건을 읽음
             while (_stage.MoveNext())
             {
-                GameManager.I.UI.TEMP_UIStageMap.StartEvent(temp_event_index); // temp map
-                
                 // 현재 사건에 따른 이벤트 플로우 수행
                 using var evt = _stage.Current as Game.BaseEvent;
                 _curEvent = evt;
                 
-                evt.On();
-                
-                yield return GameManager.I.UI.UIStage.EventIntro();
+                yield return _curEvent.On();
                 yield return evt.Flow(this);
 
                 if (!evt.IsClear)
@@ -107,8 +102,6 @@ namespace Cardinals.Game {
                     GameManager.I.GameOver();
                     yield break;
                 }
-
-                GameManager.I.UI.TEMP_UIStageMap.ClearEvent(temp_event_index++); // temp map
             }
 
             GameManager.I.GameClear();
