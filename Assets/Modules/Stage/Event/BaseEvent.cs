@@ -17,11 +17,7 @@ namespace Cardinals.Game
         public bool IsClear
         {
             get => _isClear;
-            set
-            {
-                _isClear = value;
-                if(_isClear) UIEvent.Clear();
-            }
+            set => _isClear = value;
         }
 
         /// <summary>

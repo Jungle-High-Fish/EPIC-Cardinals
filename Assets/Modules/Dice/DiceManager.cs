@@ -64,17 +64,17 @@ namespace Cardinals
         [Button]
         public void Init()
         {
-            SetCardDeckUIParent(GameObject.Find("DiceDeck").transform); // ���߿� �ٲ��ּ���~
+            SetCardDeckUIParent(GameObject.Find("DiceDeck").transform); // [TODO] ���߿� �ٲ��ּ���~
             _dices = new();
             _dicesUI = new();
             _newDiceUseMod = true;
 
-            AddDice(new List<int>() { 1,2,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 1,2,3}, DiceType.Fire);
-            AddDice(new List<int>() { 1,2,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 3,4,5 }, DiceType.Water);
-            AddDice(new List<int>() {3,4,5 }, DiceType.Normal);
-
+            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+            AddDice(new List<int>() { 1,1,2,2,3,3}, DiceType.Fire);
+            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+            AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
+            AddDice(new List<int>() {3,3,4,4,5,5 }, DiceType.Normal);
+            RollAllDice();
         }
 
         public void SetCardDeckUIParent(Transform parent)
@@ -192,6 +192,7 @@ namespace Cardinals
 
             diceUI.GetComponent<RectTransform>().anchoredPosition = UIPos;
             diceUI.GetComponent<DiceUI>().Init(dice, _dicesUI.Count,this);
+            diceUI.GetComponent<DiceUI>().DiceDescription.Init(numbers, type);
             _dicesUI.Add(diceUI.GetComponent<DiceUI>());
             //UpdateCardUI(dice, 0);
         }
@@ -199,7 +200,9 @@ namespace Cardinals
         [Button]
         public void Roll(int index)
         {
-            int rollResult = _dices[index].DiceNumbers[Random.Range(0, _dices[index].DiceNumbers.Count)];
+            int resultIndex = Random.Range(0, _dices[index].DiceNumbers.Count);
+            int rollResult = _dices[index].DiceNumbers[resultIndex];
+            _dices[index].RollResultIndex = resultIndex;
             _dices[index].RollResultNumber = rollResult;
             _dicesUI[index].UpdateDiceUI(rollResult);
         }
@@ -213,16 +216,15 @@ namespace Cardinals
             }
         }
 
-        private IEnumerator Discard(int index, CardAnimationType animationType, System.Action changeDiscardState)
+        private IEnumerator Discard(int index, DiceAnimationType animationType, System.Action changeDiscardState)
         {
             _dicesUI[index].IsDiscard = true;
             _dicesUI[index].IsSelect = false;
 
             GameManager.I.Sound.CardUse();
 
-            //yield return _handcardsUI[index].CardAnim.Play(animationType);
+            yield return _dicesUI[index].DiceAnimation.Play(animationType);
             _dicesUI[index].gameObject.SetActive(false);
-            //UpdateCardIndex();
 
             changeDiscardState();
             yield break;
@@ -322,7 +324,7 @@ namespace Cardinals
                             yield break;
 
                         case MouseState.CardEvent:
-                            yield return Discard(_selectDiceIndex, CardAnimationType.UseMove, () => { });
+                            yield return Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { });
                             GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateDiceState(useNumber, false);
@@ -386,7 +388,7 @@ namespace Cardinals
         public IEnumerator DiceUseMove(int num)
         {
             SetDiceSelectable(false);
-            StartCoroutine(Discard(_selectDiceIndex, CardAnimationType.UseMove, () => { }));
+            StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             yield return GameManager.I.Player.MoveTo(num, 0.4f);
 
 
@@ -487,13 +489,13 @@ namespace Cardinals
             switch (GameManager.I.Player.OnTile.Type)
             {
                 case TileType.Attack:
-                    StartCoroutine(Discard(_selectDiceIndex, CardAnimationType.UseAttack, ChangeDiscard));
+                    StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseAttack, ChangeDiscard));
                     break;
                 case TileType.Defence:
-                    StartCoroutine(Discard(_selectDiceIndex, CardAnimationType.UseDefense, ChangeDiscard));
+                    StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseDefense, ChangeDiscard));
                     break;
                 default:
-                    StartCoroutine(Discard(_selectDiceIndex, CardAnimationType.UseMove, ChangeDiscard));
+                    StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, ChangeDiscard));
                     break;
             }
 

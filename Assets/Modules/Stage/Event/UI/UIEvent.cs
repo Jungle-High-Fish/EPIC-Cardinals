@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -31,9 +32,15 @@ namespace Cardinals.Game
             yield return _map.MovePlayerIcon(this);
         }
         
-        public void Clear()
+        public IEnumerator Clear()
         {
+            bool completeDO = false;
             _clearObj.SetActive(true);
+            _clearObj.transform.localScale = Vector3.one;
+            _clearObj.transform.DOPunchScale(Vector3.one, 0.5f, 2, 1)
+                .OnComplete(() => { completeDO = true; });
+
+            yield return new WaitUntil(() => completeDO );
         }
     }
 }
