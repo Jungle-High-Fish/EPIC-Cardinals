@@ -18,35 +18,49 @@ namespace Cardinals.Board {
 
     public class Board: MonoBehaviour {
         public Tile this[int x] => _tileSequence[x];
-        public Tile this[int x, int y] => _boardBuilder[x, y];
+        public Tile this[int x, int y] => _boardBuilder is NormalBoardBuilder ? (_boardBuilder as NormalBoardBuilder)[x, y] : null;
         public List<Tile> TileSequence => _tileSequence;
 
-        public BoardInputHandler BoardInputHandler => _boardInputHandler;
+        public IBoardInputHandler BoardInputHandler => _boardInputHandler;
 
         [ShowInInspector, ReadOnly]
         private List<Tile> _tileSequence;
-        private BoardBuilder _boardBuilder;
-        private BoardInputHandler _boardInputHandler;
+        private IBoardBuilder _boardBuilder;
+        private IBoardInputHandler _boardInputHandler;
         
         private bool _isTileSelectable;
         private TileSelectionType _selectionType;
         private List<Tile> _selectedTiles;
 
         [Button("테스트", ButtonSizes.Large)]
-        public IEnumerator SetBoard(BoardDataSO boardDataSO) {
+        public IEnumerator SetBoard(BoardData boardDataSO) {
             if (_boardBuilder != null) {
                 _boardBuilder.Clear();
                 _boardBuilder = null;
             }
 
             _tileSequence = new List<Tile>();
-            _boardBuilder = new BoardBuilder(this, OnTileClicked);
 
-            var enemyPlaceHandlerObj = Instantiate(
-                ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_MouseDetector),
-                transform
-            );
-            _boardInputHandler = enemyPlaceHandlerObj.GetComponent<BoardInputHandler>();
+            if (boardDataSO is CircleBoardDataSO)
+                _boardBuilder = new CircleBoardBuilder(this, OnTileClicked);
+            else if (boardDataSO is NormalBoardDataSO) {
+                _boardBuilder = new NormalBoardBuilder(this, OnTileClicked);
+            }
+
+            if (_boardBuilder is NormalBoardBuilder) {
+                GameObject enemyPlaceHandlerObj = Instantiate(
+                    ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_NormalMouseDetector),
+                    transform
+                );
+                _boardInputHandler = enemyPlaceHandlerObj.GetComponent<NormalBoardInputHandler>();
+            }
+            else if (_boardBuilder is CircleBoardBuilder) {
+                GameObject enemyPlaceHandlerObj = Instantiate(
+                    ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_CircleMouseDetector),
+                    transform
+                );
+                _boardInputHandler = enemyPlaceHandlerObj.GetComponent<CircleBoardInputHandler>();
+            }
 
             yield return BoardLoadWithAnimation(boardDataSO);
             _boardInputHandler.Init(_boardBuilder);
@@ -71,10 +85,6 @@ namespace Cardinals.Board {
                 return;
             }
 
-            // if (tile.Piece != null) {
-            //     return null;
-            // }
-
             tile.Arrive(piece);
 
             if (piece is Player) {
@@ -91,43 +101,64 @@ namespace Cardinals.Board {
         }
 
         public List<Tile> GetBoardEdgeTileSequence(int edgeIndex, bool includeCorner=true) {
-            if (edgeIndex >= _boardBuilder.CornerTiles.Count) {
-                return null;
-            }
+            if (_boardBuilder is NormalBoardBuilder) {
+                var normalBuilder = _boardBuilder as NormalBoardBuilder;
 
-            List<Tile> tileSequence = new List<Tile>();
-
-            Tile targetTile = _boardBuilder.CornerTiles[edgeIndex];
-
-            if (includeCorner) {
-                tileSequence.Add(targetTile);
-            }
-
-            while (true) {
-                targetTile = targetTile.Next;
-                if (targetTile == null) {
+                if (edgeIndex >= normalBuilder.CornerTiles.Count) {
                     return null;
                 }
 
-                if (targetTile.Type == TileType.Start) {
-                    return tileSequence;
-                }
+                List<Tile> tileSequence = new List<Tile>();
 
-                if (targetTile.Type == TileType.Blank) {
-                    if (includeCorner == false) {
-                        return tileSequence;
-                    } else {
-                        tileSequence.Add(targetTile);
+                Tile targetTile = normalBuilder.CornerTiles[edgeIndex];
+
+                if (includeCorner) {
+                    tileSequence.Add(targetTile);
+                }
+            
+                while (true) {
+                    targetTile = targetTile.Next;
+                    if (targetTile == null) {
+                        return null;
+                    }
+
+                    if (targetTile.Type == TileType.Start) {
                         return tileSequence;
                     }
-                }
 
-                tileSequence.Add(targetTile);
+                    if (targetTile.Type == TileType.Blank) {
+                        if (includeCorner == false) {
+                            return tileSequence;
+                        } else {
+                            tileSequence.Add(targetTile);
+                            return tileSequence;
+                        }
+                    }
+
+                    tileSequence.Add(targetTile);
+                }
+            } else if (_boardBuilder is CircleBoardBuilder) {
+                var circleBuilder = _boardBuilder as CircleBoardBuilder;
+
+                int tileCount = circleBuilder.TileCount;
+                int tilePerEdge = circleBuilder.TileCountPerEdge;
+
+                List<Tile> tileSequence = new List<Tile>();
+                for (int i = edgeIndex * tilePerEdge; i < (edgeIndex + 1) * tilePerEdge && i < tileCount; i++) {
+                    tileSequence.Add(_tileSequence[i]);
+                }
+                return tileSequence;
             }
+
+            return null;
         }
 
         public Tile GetRandomTile(bool includeCorner = true)
         {
+            if (_boardBuilder is CircleBoardBuilder) {
+                includeCorner = true;
+            }
+
             if (includeCorner)
             {
                 return _tileSequence[UnityEngine.Random.Range(0, _tileSequence.Count)];
@@ -141,14 +172,26 @@ namespace Cardinals.Board {
         }
 
         public int GetBoardEdgeNum() {
-            return _boardBuilder.CornerTiles.Count;
+            if (_boardBuilder is NormalBoardBuilder)
+                return (_boardBuilder as NormalBoardBuilder).CornerTiles.Count;
+            else if (_boardBuilder is CircleBoardBuilder) {
+                return (_boardBuilder as CircleBoardBuilder).EdgeCount;
+            }
+
+            return -1;
         }
         
 
         public IEnumerable<Tile> GetCursedTilesList()
-        {
-            var list = TileSequence
-                .Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence)
+        {   
+            List<Tile> targetList;
+            if (_boardBuilder is NormalBoardBuilder) {
+                targetList = _tileSequence.Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence).ToList();
+            } else {
+                targetList = _tileSequence;
+            }
+
+            var list = targetList
                 .Where(t => t.TileState == TileState.Normal)
                 .Where(t => t != GameManager.I.Player.OnTile);
 
@@ -166,7 +209,7 @@ namespace Cardinals.Board {
         /// </summary>
         public void ClearBoardAfterBattleEvent()
         {
-            foreach (var tile in  _tileSequence)
+            foreach (var tile in _tileSequence)
             {
                 tile.TileCurse.ClearCurse();
                 tile.ChangeState(TileState.Normal);
@@ -234,7 +277,7 @@ namespace Cardinals.Board {
             return GameManager.I.UI.UIMagicLevelUpPanel.RequestTileLevelUp(originalMagicType, originalLevel);
         }
 
-        private IEnumerator BoardLoadWithAnimation(BoardDataSO boardDataSO) {
+        private IEnumerator BoardLoadWithAnimation(BoardData boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();
         }
@@ -368,17 +411,25 @@ namespace Cardinals.Board {
         private List<Tile> GetEdgeContains(Tile target) {
             List<Tile> result = new List<Tile>();
             
-            List<Tile> prevs = new List<Tile>();
-            for (Tile t = target.Prev; _boardBuilder.CornerTiles.Contains(t) == false; t = t.Prev) {
-                prevs.Add(t);
-            }
-            prevs.Reverse();
+            if (_boardBuilder is NormalBoardBuilder) {
+                var normalBuilder = _boardBuilder as NormalBoardBuilder;
 
-            result.AddRange(prevs);
-            result.Add(target);
+                List<Tile> prevs = new List<Tile>();
+                for (Tile t = target.Prev; normalBuilder.CornerTiles.Contains(t) == false; t = t.Prev) {
+                    prevs.Add(t);
+                }
+                prevs.Reverse();
 
-            for (Tile t = target.Next; _boardBuilder.CornerTiles.Contains(t) == false; t = t.Next) {
-                result.Add(t);
+                result.AddRange(prevs);
+                result.Add(target);
+
+                for (Tile t = target.Next; normalBuilder.CornerTiles.Contains(t) == false; t = t.Next) {
+                    result.Add(t);
+                }
+            } else if (_boardBuilder is CircleBoardBuilder) {
+                var circleBuilder = _boardBuilder as CircleBoardBuilder;
+                int targetEdgeIdx = _tileSequence.IndexOf(target) / circleBuilder.TileCountPerEdge;
+                result.AddRange(GetBoardEdgeTileSequence(targetEdgeIdx));
             }
 
             return result;
@@ -390,38 +441,54 @@ namespace Cardinals.Board {
         /// <returns> 타일 시퀀스가 루프를 이룰 때 true를 반환합니다. </returns>
         private bool MakeSequenceFromBoard() {
             _tileSequence.Clear();
-            if (_boardBuilder.IsStartTileValid() == false) {
-                //Debug.LogError("Start Position is not set");
-                return false;
-            }
 
-            Vector2Int targetPos = _boardBuilder.StartTilePos;
-            TileDirection targetDirection = _boardBuilder[targetPos].Direction;
+            if (_boardBuilder is NormalBoardBuilder) {
+                var normalBuilder = _boardBuilder as NormalBoardBuilder;
 
-            while (true) {
-                _tileSequence.Add(_boardBuilder[targetPos]);
-
-                targetPos = targetPos + EnumHelper.TileDirectionToVector2Int(targetDirection);
-                if (_boardBuilder.IsTilePosValid(targetPos) == false) {
+                if (normalBuilder.IsStartTileValid() == false) {
+                    //Debug.LogError("Start Position is not set");
                     return false;
                 }
 
-                Tile nextTile = _boardBuilder[targetPos];
-                if (nextTile == null) {
-                    return false;
-                }
+                Vector2Int targetPos = normalBuilder.StartTilePos;
+                TileDirection targetDirection = normalBuilder[targetPos].Direction;
 
-                _tileSequence[_tileSequence.Count - 1].Next = nextTile;
+                while (true) {
+                    _tileSequence.Add(normalBuilder[targetPos]);
 
-                if (nextTile.Type == TileType.Start) {
-                    return true;
+                    targetPos = targetPos + EnumHelper.TileDirectionToVector2Int(targetDirection);
+                    if (normalBuilder.IsTilePosValid(targetPos) == false) {
+                        return false;
+                    }
+
+                    Tile nextTile = normalBuilder[targetPos];
+                    if (nextTile == null) {
+                        return false;
+                    }
+
+                    _tileSequence[_tileSequence.Count - 1].Next = nextTile;
+
+                    if (nextTile.Type == TileType.Start) {
+                        return true;
+                    }
+                    
+                    targetDirection = nextTile.Direction;
                 }
-                
-                targetDirection = nextTile.Direction;
+            } else if (_boardBuilder is CircleBoardBuilder) {
+                var tileArray = (_boardBuilder as CircleBoardBuilder).Board.ToArray();
+                int startTileIndex = (_boardBuilder as CircleBoardBuilder).StartTileIdx;
+                _tileSequence.AddRange(tileArray[startTileIndex..]);
+                _tileSequence.AddRange(tileArray[..startTileIndex]);
+                for (int i = 0; i < _tileSequence.Count; i++) {
+                    _tileSequence[i].Next = _tileSequence[(i + 1) % _tileSequence.Count];
+                }
+                return true;
             }
+
+            return false;
         }
 
-
+        // TODO: 새 기획에 맞게 수정 필요
         /// <summary>
         /// 이벤트 발생 가능한 타일을 반환하는 함수
         /// </summary>
@@ -431,6 +498,7 @@ namespace Cardinals.Board {
             TileEventAction returnEvtAction = null;
 
             List<TileEventAction> list = new();
+            
             foreach (var tile in _tileSequence.Where(x=> x.Type == TileType.Start || x.Type == TileType.Blank)) // 코너 타일만
             {
                 var eventAction = tile.TileAction as TileEventAction;

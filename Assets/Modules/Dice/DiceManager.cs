@@ -64,7 +64,7 @@ namespace Cardinals
         [Button]
         public void Init()
         {
-            SetCardDeckUIParent(GameObject.Find("DiceDeck").transform); // ³ªÁß¿¡ ¹Ù²ãÁÖ¼¼¿ä~
+            SetCardDeckUIParent(GameObject.Find("DiceDeck").transform); // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ù²ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~
             _dices = new();
             _dicesUI = new();
             _newDiceUseMod = true;
@@ -116,13 +116,13 @@ namespace Cardinals
             _prevDiceNumber = -1;
 
             _isTutorial = isTutorial;
-            Debug.Log("¹èÆ² ½ÃÀÛ");
+            Debug.Log("ï¿½ï¿½Æ² ï¿½ï¿½ï¿½ï¿½");
         }
 
         public void EndBattle()
         {
             EndTurn();
-            Debug.Log("¹èÆ² ³¡");
+            Debug.Log("ï¿½ï¿½Æ² ï¿½ï¿½");
         }
 
         public void DrawHandDecksForTutorial(int[] cardNumbers)
@@ -241,10 +241,10 @@ namespace Cardinals
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    BoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
+                    IBoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
                     if (boardInputHandler.IsMouseHoverUI)
                     {
-                        if (boardInputHandler.HoveredMouseDetectorType == MouseDetectorType.CardPile)
+                        if (boardInputHandler.HoveredMouseDetectorType == UIMouseDetectorType.CardPile)
                         {
                             _mouseState = MouseState.Cancel;
                         }
@@ -462,11 +462,11 @@ namespace Cardinals
                 result = false;
             }
 
-            // [µð¹öÇÁ] °¨Àü
+            // [ï¿½ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½
             if (GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
-                Debug.Log("¹¹Áö °¨Àü´çÇß³ª?");
-                GameManager.I.Player.Bubble.SetBubble("°¨Àü´çÇØ¼­ ¾µ ¼ö ¾ø¾î");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½?");
+                GameManager.I.Player.Bubble.SetBubble("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
                 result = false;
             }
 
@@ -497,11 +497,11 @@ namespace Cardinals
                     break;
             }
 
-            // [µð¹öÇÁ] ½½·Î¿ì
+            // [ï¿½ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Î¿ï¿½
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
             {
-                GameManager.I.Player.Bubble.SetBubble("½½·Î¿ì ¶§¹®¿¡ Çàµ¿ÀÌ ¹«½ÃµÇ¾ú¾î");
-                Debug.Log("½½·Î¿ì ¶§¹®¿¡ Çàµ¿ ¹«½Ã");
+                GameManager.I.Player.Bubble.SetBubble("ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ï¿½ï¿½");
+                Debug.Log("ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ ï¿½ï¿½ï¿½ï¿½");
             }
             else
             {
@@ -541,7 +541,7 @@ namespace Cardinals
             else if(type == DiceType.Earth
                 && GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Earth)
             {
-                //[TODO] ¹«·Â µð¹öÇÁ »ý±â¸é ¿©±â¿¡ Ãß°¡
+                //[TODO] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ß°ï¿½
             }
         }
 
@@ -577,7 +577,7 @@ namespace Cardinals
             int prevNum = usedDiceNumber + 1;
             for (int i = 0; i < _dicesUI.Count; i++)
             {
-                // [µð¹öÇÁ] °¨Àü
+                // [ï¿½ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½
                 if (GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
                 {
                     return;

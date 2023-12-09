@@ -416,7 +416,7 @@ namespace Cardinals.Enums {
         CardEvent,
     }
 
-    public enum MouseDetectorType
+    public enum UIMouseDetectorType
     {
         CardPile,
         CardEvent,

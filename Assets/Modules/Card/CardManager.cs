@@ -364,9 +364,9 @@ namespace Cardinals
             { 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    BoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
+                    IBoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
                     if (boardInputHandler.IsMouseHoverUI) {
-                        if (boardInputHandler.HoveredMouseDetectorType == MouseDetectorType.CardPile) {
+                        if (boardInputHandler.HoveredMouseDetectorType == UIMouseDetectorType.CardPile) {
                             _mouseState = MouseState.Cancel;
                         } else {
                             _mouseState = MouseState.CardEvent;
