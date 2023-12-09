@@ -82,7 +82,7 @@ namespace Cardinals.Board {
 						triangleList.Add(0);
 					}
 
-					mouseDetector.Init(0, _verticeList.ToArray(), triangleList.ToArray(), _uvList.ToArray());
+					mouseDetector.Init(i, _verticeList.ToArray(), triangleList.ToArray(), _uvList.ToArray());
 
 					_mouseDetectors.Add(mouseDetector);
 

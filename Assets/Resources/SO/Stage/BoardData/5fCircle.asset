@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5fCircle
   m_EditorClassIdentifier: 
   boardName: 5fCircle
-  tileCount: 6
+  tileCount: 16
   radius: 5
   startTileIndex: 0
   edgeCount: 4
