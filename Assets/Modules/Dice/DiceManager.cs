@@ -69,11 +69,11 @@ namespace Cardinals
             _dicesUI = new();
             _newDiceUseMod = true;
 
-            AddDice(new List<int>() { 1,2,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 1,2,3}, DiceType.Fire);
-            AddDice(new List<int>() { 1,2,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 3,4,5 }, DiceType.Water);
-            AddDice(new List<int>() {3,4,5 }, DiceType.Normal);
+            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+            AddDice(new List<int>() { 1,1,2,2,3,3}, DiceType.Fire);
+            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+            AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
+            AddDice(new List<int>() {3,3,4,4,5,5 }, DiceType.Normal);
             RollAllDice();
         }
 
@@ -192,6 +192,7 @@ namespace Cardinals
 
             diceUI.GetComponent<RectTransform>().anchoredPosition = UIPos;
             diceUI.GetComponent<DiceUI>().Init(dice, _dicesUI.Count,this);
+            diceUI.GetComponent<DiceUI>().DiceDescription.Init(numbers, type);
             _dicesUI.Add(diceUI.GetComponent<DiceUI>());
             //UpdateCardUI(dice, 0);
         }
@@ -199,7 +200,9 @@ namespace Cardinals
         [Button]
         public void Roll(int index)
         {
-            int rollResult = _dices[index].DiceNumbers[Random.Range(0, _dices[index].DiceNumbers.Count)];
+            int resultIndex = Random.Range(0, _dices[index].DiceNumbers.Count);
+            int rollResult = _dices[index].DiceNumbers[resultIndex];
+            _dices[index].RollResultIndex = resultIndex;
             _dices[index].RollResultNumber = rollResult;
             _dicesUI[index].UpdateDiceUI(rollResult);
         }
