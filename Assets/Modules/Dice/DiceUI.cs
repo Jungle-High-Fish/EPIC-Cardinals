@@ -25,6 +25,8 @@ namespace Cardinals
         ComponentGetter<Image> _image
                 = new ComponentGetter<Image>(TypeOfGetter.This);
         [SerializeField] private TextMeshProUGUI _numberText;
+        private DiceAnimation _diceAnimation;
+        private DiceDescription _diceDescription;
 
         public bool IsSelect
         {
@@ -75,7 +77,8 @@ namespace Cardinals
             }
         }
         public Dice Dice => _dice;
-
+        public DiceAnimation DiceAnimation => _diceAnimation;
+        public DiceDescription DiceDescription => _diceDescription;
         public void Init(Dice dice, int index, DiceManager diceManager)
         {
             _dice = dice;
@@ -83,6 +86,8 @@ namespace Cardinals
             _diceManager = diceManager;
             _isSelectable = true;
             _diceUIPos = (transform as RectTransform).anchoredPosition;
+            _diceAnimation = GetComponent<DiceAnimation>();
+            _diceDescription = GetComponent<DiceDescription>();
             switch (dice.DiceType)
             {
                 case (DiceType.Normal):
@@ -103,8 +108,10 @@ namespace Cardinals
 
         public void EnableCardUI()
         {
+            IsDiscard = false;
             GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
             transform.localScale = new Vector3(1, 1, 1);
+            DiceDescription.SetDescriptionUIRestored(Dice.RollResultIndex);
             gameObject.SetActive(true);
         }
 
@@ -118,6 +125,8 @@ namespace Cardinals
             IsSelect = false;
             transform.localScale = new Vector3(1, 1, 1);
             GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
+            DiceDescription.SetDescriptionUIRestored(Dice.RollResultIndex);
+
         }
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -132,7 +141,7 @@ namespace Cardinals
             _diceManager.State = CardState.Select;
 
             GameManager.I.Sound.CardClick();
-
+            DiceDescription.SetDescriptionUIRestored(Dice.RollResultIndex);
             StartCoroutine(_diceManager.Dragging());
         }
         public void OnPointerEnter(PointerEventData eventData)
@@ -165,9 +174,10 @@ namespace Cardinals
 
         private void SetCardUIHovered()
         {
-            if (!_isDiscard && _isSelectable)
+            if (!_isDiscard && _isSelectable&&!_isSelect)
             {
-                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y + 5, 0.1f);
+                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y + 15f, 0.1f);
+                DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex);
             }
 
         }
@@ -177,6 +187,7 @@ namespace Cardinals
             if (!_isDiscard && _isSelectable)
             {
                 (transform as RectTransform).DOAnchorPosY(_diceUIPos.y, 0.1f);
+                DiceDescription.SetDescriptionUIRestored(Dice.RollResultIndex);
             }
 
         }
