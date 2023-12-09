@@ -17,13 +17,13 @@ namespace Cardinals.Game
         }
 
         public string Name => _name;
-        public BoardDataSO BoardData => _boardDataSO;
+        public BoardData BoardData => _boardDataSO;
 
         [SerializeField] private string _name;
 
         [InlineEditor]
         [SerializeField] private BaseEvent[] _events;
-        [SerializeField] private BoardDataSO _boardDataSO;
+        [SerializeField] private BoardData _boardDataSO;
         
         private int Index { get; set; }
         

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System;
 
 namespace Cardinals.Board {
-    public class BoardBuilder
+    public class NormalBoardBuilder: IBoardBuilder
     {
         public Tile this[int x, int y] => _board[y][x];
         public Tile this[Vector2Int pos] => _board[pos.y][pos.x];
@@ -36,7 +36,7 @@ namespace Cardinals.Board {
         private Action<Tile> _onTileClicked;
 
         #region 생성자
-        public BoardBuilder(Board boardController, Action<Tile> onTileClicked) {
+        public NormalBoardBuilder(Board boardController, Action<Tile> onTileClicked) {
             _boardController = boardController;
             _onTileClicked = onTileClicked;
 
@@ -55,8 +55,8 @@ namespace Cardinals.Board {
         /// BoardDataSO를 이용하여 보드를 로드합니다.
         /// </summary>
         /// <param name="boardDataSO"></param>
-        public void Load(BoardDataSO boardDataSO) {
-            ImmediateLoadDataSO(boardDataSO);
+        public void Load(BoardData boardDataSO) {
+            ImmediateLoadDataSO(boardDataSO as NormalBoardDataSO);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace Cardinals.Board {
         /// 애니메이션 재생 시간은 이 값에 타일 갯수를 곱한 것과 같습니다.
         /// </param>
         /// <returns></returns>
-        public IEnumerator LoadWithAnimation(BoardDataSO boardDataSO, float animationDelay=0.1f) {
-            yield return LoadDataSO(boardDataSO, animationDelay);
+        public IEnumerator LoadWithAnimation(BoardData boardDataSO, float animationDelay=0.1f) {
+            yield return LoadDataSO(boardDataSO as NormalBoardDataSO, animationDelay);
         }
         #endregion
 
@@ -110,7 +110,7 @@ namespace Cardinals.Board {
             return pos.x >= 0 && pos.x < _boardWidth && pos.y >= 0 && pos.y < _boardHeight;
         }
 
-	    private IEnumerator LoadDataSO(BoardDataSO boardDataSO, float delay=0f) {
+	    private IEnumerator LoadDataSO(NormalBoardDataSO boardDataSO, float delay=0f) {
             _board.Clear();
             _startTilePos = new Vector2Int(-1, -1);
 
@@ -149,7 +149,7 @@ namespace Cardinals.Board {
             }
         }
 
-        private void ImmediateLoadDataSO(BoardDataSO boardDataSO) {
+        private void ImmediateLoadDataSO(NormalBoardDataSO boardDataSO) {
             _board.Clear();
             _startTilePos = new Vector2Int(-1, -1);
 

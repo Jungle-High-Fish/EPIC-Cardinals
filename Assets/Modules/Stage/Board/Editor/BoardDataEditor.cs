@@ -35,7 +35,7 @@ namespace Cardinals.Board {
                     Constants.FilePath.Resources.SO +
                     Constants.FilePath.Resources.SO_BoardData
                 ), 
-                typeof(BoardDataSO)
+                typeof(NormalBoardDataSO)
             );
 
             return tree;
@@ -49,7 +49,7 @@ namespace Cardinals.Board {
                 GUILayout.FlexibleSpace();
 
                 if (SirenixEditorGUI.ToolbarButton("삭제")) {
-                    BoardDataSO boardData = (BoardDataSO)selection.SelectedValue;
+                    NormalBoardDataSO boardData = (NormalBoardDataSO)selection.SelectedValue;
                     string path = AssetDatabase.GetAssetPath(boardData);
                     AssetDatabase.DeleteAsset(path);
                     AssetDatabase.SaveAssets();
@@ -65,10 +65,10 @@ namespace Cardinals.Board {
 
             [Title("보드 설정")]
             [InlineEditor(ObjectFieldMode = InlineEditorObjectFieldModes.Hidden)]
-            [ShowInInspector] private BoardDataSO _boardData;
+            [ShowInInspector] private NormalBoardDataSO _boardData;
             
             public CreateNewBoardData() {
-                _boardData = ScriptableObject.CreateInstance<BoardDataSO>();
+                _boardData = ScriptableObject.CreateInstance<NormalBoardDataSO>();
                 _boardData.Init("New Board");
             }
 

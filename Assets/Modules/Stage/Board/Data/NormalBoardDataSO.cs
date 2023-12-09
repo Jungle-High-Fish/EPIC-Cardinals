@@ -11,7 +11,7 @@ using Sirenix.OdinInspector.Editor;
 namespace Cardinals.Board {
 
     [CreateAssetMenu(fileName = "BoardData", menuName = "Cardinals/Board Data", order = 0)]
-    public class BoardDataSO: ScriptableObject {
+    public class NormalBoardDataSO: BoardData {
         [System.Serializable]
         public class LineWrapper {
             public List<TileType> tiles;

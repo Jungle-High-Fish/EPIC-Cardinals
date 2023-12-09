@@ -10,11 +10,11 @@ using Util;
 
 namespace Cardinals.Board {
 
-	public class BoardInputHandler: MonoBehaviour {
+	public class NormalBoardInputHandler: MonoBehaviour, IBoardInputHandler {
 		public bool IsMouseHover => _isMouseHover;
 		public bool IsMouseHoverUI => _isMouseHoverUI;
 		public int HoveredIdx => _hoveredIdx;
-		public MouseDetectorType HoveredMouseDetectorType => _hoveredMouseDetectorType;
+		public UIMouseDetectorType HoveredMouseDetectorType => _hoveredMouseDetectorType;
 
 		private Vector3 _leftTopPos;
 		private Vector3 _rightTopPos;
@@ -29,16 +29,16 @@ namespace Cardinals.Board {
 		private float _convexOffset = 0f;
 		private float _tileVerticePosOffset = Constants.GameSetting.Board.TileHeight / 2;
 
-		private BoardBuilder _builder;
+		private NormalBoardBuilder _builder;
 
 		private bool _isMouseHover = false;
 		private bool _isMouseHoverUI = false;
 		private int _hoveredIdx = int.MaxValue;
-		private MouseDetectorType _hoveredMouseDetectorType = default;
+		private UIMouseDetectorType _hoveredMouseDetectorType = default;
 		private List<MouseDetector> _mouseDetectors = new List<MouseDetector>();
 
-		public void Init(BoardBuilder builder) {
-			_builder = builder;
+		public void Init(IBoardBuilder builder) {
+			_builder = builder as NormalBoardBuilder;
 
 			SetMeshData();
 		}
@@ -240,10 +240,10 @@ namespace Cardinals.Board {
 			List<RaycastResult> results = new List<RaycastResult>();
 			EventSystem.current.RaycastAll(pointerEventData, results);
 
-			if(results.Any(result => result.gameObject.GetComponent<UIMouseDetector>()?.MouseDetectorType  == MouseDetectorType.CardEvent))
+			if(results.Any(result => result.gameObject.GetComponent<UIMouseDetector>()?.MouseDetectorType  == UIMouseDetectorType.CardEvent))
 			{
 				_isMouseHoverUI = true;
-				_hoveredMouseDetectorType = MouseDetectorType.CardEvent;
+				_hoveredMouseDetectorType = UIMouseDetectorType.CardEvent;
 				return;
 			}
 			

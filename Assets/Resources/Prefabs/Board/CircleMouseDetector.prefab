@@ -73,9 +73,9 @@ GameObject:
   - component: {fileID: 8560469211873877248}
   - component: {fileID: 8560469211873877254}
   - component: {fileID: 8560469211873877249}
-  - component: {fileID: 8560469211873877255}
+  - component: {fileID: 5716706214793447506}
   m_Layer: 0
-  m_Name: MouseDetector
+  m_Name: CircleMouseDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560469211873877251}
   m_Mesh: {fileID: 0}
---- !u!114 &8560469211873877255
+--- !u!114 &5716706214793447506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,6 +157,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8560469211873877251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd928ba9b338d4f20a52af767367fd96, type: 3}
+  m_Script: {fileID: 11500000, guid: e1462c420de5b46ffa1ad16b8c03d835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
