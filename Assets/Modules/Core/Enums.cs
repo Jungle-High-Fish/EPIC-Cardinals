@@ -395,6 +395,15 @@ namespace Cardinals.Enums {
         Gold
     }
 
+    public enum DiceAnimationType
+    {
+        Empty,
+        UseAttack,
+        UseDefense,
+        UseMove,
+        TurnEnd
+    }
+
     public enum CardState
     {
         Idle,
@@ -416,7 +425,7 @@ namespace Cardinals.Enums {
         CardEvent,
     }
 
-    public enum MouseDetectorType
+    public enum UIMouseDetectorType
     {
         CardPile,
         CardEvent,
