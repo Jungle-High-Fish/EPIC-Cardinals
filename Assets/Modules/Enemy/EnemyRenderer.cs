@@ -36,9 +36,9 @@ namespace Cardinals.Enemy
 
             Vector3 vector = enemy.EnemyData.enemyType switch
             {
-                EnemyType.Two => new Vector2(0, .5f) ,
-                EnemyType.Four => new Vector2(0, 0.83f),
-                EnemyType.Boss => new Vector2(0, .5f),
+                EnemyType.TweTwe => new Vector2(0, .5f) ,
+                EnemyType.PicPic => new Vector2(0, 0.83f),
+                EnemyType.Pazizizizic => new Vector2(0, .5f),
                 _ => Vector2.zero
             };
 

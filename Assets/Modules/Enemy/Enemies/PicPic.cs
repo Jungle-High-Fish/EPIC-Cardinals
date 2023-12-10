@@ -7,7 +7,7 @@ using UnityEngine.ProBuilder;
 
 namespace Cardinals.Enemy
 {
-    public class Four :BaseEnemy
+    public class PicPic :BaseEnemy
     {
         public override void Init(EnemyDataSO enemyData)
         {

@@ -48,13 +48,14 @@ namespace Cardinals.Game
                 yield return cardManager.OnTurn();
                 yield return player.OnTurn();
 
-                // 턴 종료 버튼 활성화
-                GameManager.I.UI.UIEndTurnButton.Activate();
+                // 아래 내용 플레이어 OnTurn으로 이동했습니다.
+                // // 턴 종료 버튼 활성화
+                // GameManager.I.UI.UIEndTurnButton.Activate();
+                //
+                // yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
 
-                yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
-
-                GameManager.I.UI.UIEndTurnButton.Deactivate();
-                cardManager.SetCardSelectable(false);
+                // GameManager.I.UI.UIEndTurnButton.Deactivate();
+                // cardManager.SetCardSelectable(false);
                 
                 // 버프 처리
                 player.OnBuff();

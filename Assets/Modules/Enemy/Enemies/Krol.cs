@@ -5,7 +5,7 @@ using Cardinals.Game;
 
 namespace Cardinals.Enemy
 {
-    public class One : BaseEnemy
+    public class Krol : BaseEnemy
     {
         public override void Init(EnemyDataSO enemyData)
         {
