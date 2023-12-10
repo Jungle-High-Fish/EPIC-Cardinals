@@ -313,7 +313,8 @@ namespace Cardinals.Enums {
         Empty = 0,
         Turn,   // 턴 마다 감소
         Event,  // 한 사건 동안 유지 (이후 해제)
-        Stage   // 한 게임 내내 유지 (이후 해제)
+        Stage,   // 한 게임 내내 유지 (이후 해제)
+        Once,
     }
 
     public enum RewardType

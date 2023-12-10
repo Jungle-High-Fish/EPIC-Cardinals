@@ -71,7 +71,7 @@ namespace Cardinals
                     BerserkModeEvent?.Invoke();
                     _animator.Clear();
                 }
-            } 
+            }
         }
         public Action BerserkModeEvent { get; set; }
         
@@ -142,26 +142,40 @@ namespace Cardinals
 
         public override IEnumerator OnTurn()
         {
-            PrevPattern = CurPattern;
-            Pattern curPat = CurPattern;
-            int value = curPat.Value ?? 0;
-            
-            switch (curPat.Type)
+            if (CheckBuffExist(BuffType.Stun))
             {
-                case EnemyActionType.Attack :
-                    Attack(GameManager.I.Player, value);
-                    break;
-                case EnemyActionType.Defense :
-                    DefenseCount += value;
-                    break;
-                case EnemyActionType.AreaAttack :
-                case EnemyActionType.TileDebuff :
-                case EnemyActionType.UserDebuff :
-                case EnemyActionType.TileCurse :
-                    curPat.Action();
-                    break;
+                PrevPattern = null;
+                // 행동 하지 않음... 스턴 효과 애니메이션 출력?
             }
-            OnTurnEvent?.Invoke();
+            else
+            {
+                PrevPattern = CurPattern;
+                Pattern curPat = CurPattern;
+                int value = curPat.Value ?? 0;
+            
+                switch (curPat.Type)
+                {
+                    case EnemyActionType.Attack :
+                        Attack(GameManager.I.Player, value);
+                        break;
+                    case EnemyActionType.Defense :
+                        DefenseCount += value;
+                        break;
+                    case EnemyActionType.AreaAttack :
+                    case EnemyActionType.TileDebuff :
+                    case EnemyActionType.UserDebuff :
+                    case EnemyActionType.TileCurse :
+                    case EnemyActionType.Spawn :
+                        curPat?.Action();
+                        break;
+                    case EnemyActionType.NoAction :
+                    case EnemyActionType.Confusion :
+                    case EnemyActionType.Sleep :
+                        break;
+                    default: break;
+                }
+                OnTurnEvent?.Invoke();
+            }
 
             // 초기화
             if (FixPattern == null)

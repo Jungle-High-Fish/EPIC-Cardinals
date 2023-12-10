@@ -83,6 +83,7 @@ namespace Cardinals.Game {
         public IEnumerator Flow() {
             yield return GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
+            Player.HomeReturnEvent += GenerateBoardEvent;
             
             // 축복 선택
             //yield return SelectBlessFlow();
@@ -104,6 +105,7 @@ namespace Cardinals.Game {
                 }
             }
 
+            Player.HomeReturnEvent -= GenerateBoardEvent;
             GameManager.I.GameClear();
         }
 
@@ -273,7 +275,7 @@ namespace Cardinals.Game {
         public void AddBuff()
         {
             Enemies.FirstOrDefault().AddBuff(new Burn(1));
-            //Enemies.FirstOrDefault().AddBuff(new Slow());
+            // Enemies.FirstOrDefault().AddBuff(new Slow());
             // Enemies.FirstOrDefault().AddBuff(new Weak(1));
             // Enemies.FirstOrDefault().AddBuff(new ElectricShock());
             // Enemies.FirstOrDefault().AddBuff(new HealBuff(5));
