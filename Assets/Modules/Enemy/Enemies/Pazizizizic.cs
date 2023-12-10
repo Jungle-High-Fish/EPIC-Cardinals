@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Cardinals.Enemy
 {
-    public class Boss : BaseEnemy
+    public class Pazizizizic : BaseEnemy
     {
         public override int Hp
         {
