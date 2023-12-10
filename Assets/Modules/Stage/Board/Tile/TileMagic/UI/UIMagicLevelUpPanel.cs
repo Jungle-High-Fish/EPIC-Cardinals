@@ -55,7 +55,12 @@ namespace Cardinals.UI {
             bool requestHandled = false;
             TileMagicType resultMagicType = TileMagicType.None;
 
-            List<TileMagicType> excludes = new List<TileMagicType>() { TileMagicType.None};
+            List<TileMagicType> excludes = new List<TileMagicType>() { 
+                TileMagicType.None, 
+                TileMagicType.Attack, 
+                TileMagicType.Defence
+            };
+            
             if (excludeMagicType != TileMagicType.None) {
                 excludes.Add(excludeMagicType);
             }

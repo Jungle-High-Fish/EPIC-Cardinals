@@ -60,7 +60,7 @@ namespace Cardinals.UI {
                 _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
 
                 _actionEmblem.Get(gameObject).sprite 
-                    = ResourceLoader.LoadSO<TileSymbolsSO>(Constants.FilePath.Resources.SO_TileSymbolsData)[_tile.Type, _tile.Level];
+                    = TileMagic.Data(_tile.TileMagic.Type).uiSprite;
 
                 if (_tile.Level == 0 || _tile.TileState == TileState.Cursed) {
                     _tileLevelEffectSprite.Get(gameObject).gameObject.SetActive(false);

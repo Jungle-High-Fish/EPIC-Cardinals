@@ -136,7 +136,6 @@ namespace Cardinals.Constants {
             public const string SO_PotionData = "Potions/";
             public const string SO_BuffData = "Buffs/";
             public const string SO_MagicData = "Magic/";
-            public const string SO_TileSymbolsData = "TileSymbols/TileSymbols";
             public const string SO_TileCurseUIData = "TileCurses/";
             public const string SO_BoardEventData = "BoardEvent/";
             public const string SO_EnemyData = "Stage/Enemies/";

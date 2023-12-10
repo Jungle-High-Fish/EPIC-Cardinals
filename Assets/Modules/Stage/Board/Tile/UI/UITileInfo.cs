@@ -78,7 +78,7 @@ namespace Cardinals.UI {
 
             _tile = tile;
 
-            if (_tile.TileAction is TileEventAction) {
+            if (_tile.HasEvent) {
                 _eventEmblem.Get(gameObject).gameObject.SetActive(true);
                 _actionEmblem.Get(gameObject).gameObject.SetActive(false);
                 _levelGuage.Get(gameObject).gameObject.SetActive(false);
@@ -110,7 +110,7 @@ namespace Cardinals.UI {
         private void Update() {
             if (_tile == null) return;
 
-            if (_tile.TileAction is TileEventAction) {
+            if (_tile.HasEvent) {
                 ShowEventTileInfo();
             } else {
                 ShowNormalTileInfo();
@@ -133,16 +133,16 @@ namespace Cardinals.UI {
 
         private void ShowEventTileInfo() {
             bool needUpdateDescription = false;
-            if (_prevEventType != (_tile.TileAction as TileEventAction).EventType) {
+            if (_prevEventType != _tile.TileEvent.EventType) {
                 needUpdateDescription = true;
             }
-            _prevEventType = (_tile.TileAction as TileEventAction).EventType;
+            _prevEventType = _tile.TileEvent.EventType;
 
             _header.Get(gameObject).color = TileMagic.Data(TileMagicType.None).elementColor;
 
             _eventEmblem.Get(gameObject).sprite = 
                 ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_BoardEvent + 
-                (_tile.TileAction as TileEventAction).EventType);
+                _tile.TileEvent.EventType);
             
             if (_eventEmblem.Get(gameObject).sprite == null) {
                 _eventEmblem.Get(gameObject).color = Color.clear;
@@ -180,9 +180,7 @@ namespace Cardinals.UI {
                 1f
             );
 
-            _actionEmblem.Get(gameObject).sprite = ResourceLoader.LoadSO<TileSymbolsSO>(
-                Constants.FilePath.Resources.SO_TileSymbolsData
-            )[_tile.Type, _tile.Level];
+            _actionEmblem.Get(gameObject).sprite = TileMagic.Data(_tile.TileMagic.Type).uiSprite;
 
             if (needUpdateDescription) {
                 RefreshDescription();

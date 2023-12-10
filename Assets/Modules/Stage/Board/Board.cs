@@ -20,6 +20,7 @@ namespace Cardinals.Board {
         public Tile this[int x] => _tileSequence[x];
         public Tile this[int x, int y] => _boardBuilder is NormalBoardBuilder ? (_boardBuilder as NormalBoardBuilder)[x, y] : null;
         public List<Tile> TileSequence => _tileSequence;
+        public bool IsBoardSquare => _boardBuilder is NormalBoardBuilder;
 
         public IBoardInputHandler BoardInputHandler => _boardInputHandler;
 
@@ -165,7 +166,12 @@ namespace Cardinals.Board {
             }
             else
             {
-                var list = _tileSequence.Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence).ToList();
+                List<Tile> list;
+                if (_boardBuilder is NormalBoardBuilder) {
+                    list = _tileSequence.Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence).ToList();
+                } else {
+                    list = _tileSequence;
+                }
                 var idx = Random.Range(0, list.Count());
                 return list[idx];
             }
@@ -488,27 +494,19 @@ namespace Cardinals.Board {
             return false;
         }
 
-        // TODO: 새 기획에 맞게 수정 필요
         /// <summary>
         /// 이벤트 발생 가능한 타일을 반환하는 함수
         /// </summary>
         /// <returns>발생 가능한 타일이 없는 경우, null 반환 </returns>
-        public TileEventAction GetCanSetEventTileEventAction()
+        public TileEvent GetCanSetEventTileEventAction()
         {
-            TileEventAction returnEvtAction = null;
+            TileEvent returnEvtAction = null;
 
-            List<TileEventAction> list = new();
+            List<TileEvent> list = new();
             
-            foreach (var tile in _tileSequence.Where(x=> x.Type == TileType.Start || x.Type == TileType.Blank)) // 코너 타일만
+            foreach (var tile in _tileSequence.Where(x => x.HasEvent)) // 코너 타일만
             {
-                var eventAction = tile.TileAction as TileEventAction;
-                if(eventAction != null) // 혹시 형변환 몰라 체크
-                { 
-                    if (eventAction.EventType == default) // 현재 이벤트 지정이 되있지 않은 경우
-                    {
-                        list.Add(eventAction);
-                    }
-                }
+                list.Add(tile.TileEvent);
             }
 
             if (list.Count > 0)
