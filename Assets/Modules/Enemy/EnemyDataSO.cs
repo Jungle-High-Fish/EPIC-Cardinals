@@ -9,6 +9,7 @@ namespace Cardinals.Game {
     [CreateAssetMenu(fileName = "EnemyData", menuName = "Cardinals/EnemyData", order = 1)]
     public class EnemyDataSO: ScriptableObject {
         public string enemyName;
+        public EnemyGrade enemyGrade;
         public EnemyType enemyType;
         [AssetSelector(Paths = "Assets/Resources/Prefabs/Enemy/EnemyAnimation")]
         [InlineEditor(InlineEditorModes.LargePreview)] 

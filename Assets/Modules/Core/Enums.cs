@@ -276,7 +276,14 @@ namespace Cardinals.Enums {
         Eight,
         Nine,
     }
-    
+
+    public enum EnemyGrade
+    {
+        Ignore,
+        Common,
+        Elite,
+        Boss
+    }
     public enum EnemyActionType
     {
         Empty,
