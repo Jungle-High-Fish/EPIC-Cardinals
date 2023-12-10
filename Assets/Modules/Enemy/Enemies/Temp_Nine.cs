@@ -13,7 +13,7 @@ namespace Cardinals.Enemy
         {
             base.Init(enemyData);
 
-            _sleepCount = 3;
+            _sleepCount = 2;
             
             Patterns = new[]
             {
@@ -34,6 +34,7 @@ namespace Cardinals.Enemy
         {
             if (_sleepCount > 0)
             {
+                _sleepCount--;
                 FixPattern = new Pattern(EnemyActionType.Sleep);
             }
 
