@@ -12,12 +12,6 @@ namespace Cardinals.Board {
 
     [CreateAssetMenu(fileName = "CircleBoardData", menuName = "Cardinals/Circle Board Data", order = 0)]
     public class CircleBoardDataSO: BoardData {
-        [System.Serializable]
-        public class LineWrapper {
-            public List<TileType> tiles;
-            public List<TileDirection> directions;
-        }
-
         public const int DefaultTileCount = 16;
 
         [LabelText("보드 이름")]
