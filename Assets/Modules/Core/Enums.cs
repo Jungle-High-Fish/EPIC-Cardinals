@@ -142,25 +142,23 @@ namespace Cardinals.Enums {
             }
         }
 
-        public static Type GetEnemyInstanceType(EnemyType enemyType) {
-            switch (enemyType) {
-                case EnemyType.Ignore:
-                    return null;
-                case EnemyType.Krol:
-                    return typeof(Krol);
-                case EnemyType.TweTwe:
-                    return typeof(TweTwe);
-                case EnemyType.PiPi:
-                    return typeof(PiPi);
-                case EnemyType.PoPo:
-                    return typeof(PoPo);
-                case EnemyType.PicPic:
-                    return typeof(PicPic);
-                case EnemyType.Pazizizizic:
-                    return typeof(Pazizizizic);
-                default:
-                    return null;
-            }
+        public static Type GetEnemyInstanceType(EnemyType enemyType)
+        {
+            return enemyType switch
+            {
+                EnemyType.Krol        => typeof(Krol),
+                EnemyType.TweTwe      => typeof(TweTwe),
+                EnemyType.PiPi        => typeof(PiPi),
+                EnemyType.PoPo        => typeof(PoPo),
+                EnemyType.PicPic      => typeof(PicPic),
+                EnemyType.Pazizizizic => typeof(Pazizizizic),
+                EnemyType.Five        => typeof(temp_Five),
+                EnemyType.Six         => typeof(temp_Six),
+                EnemyType.Seven       => typeof(Temp_Seven),
+                EnemyType.Eight       => typeof(Temp_Eight),
+                EnemyType.Nine        => typeof(Temp_Nine),
+                _ => null
+            };
         }
 
         public static TileCurseData GetTileCurseInstanceType(TileCurseType type)
@@ -224,7 +222,8 @@ namespace Cardinals.Enums {
     public enum TileCurseType {
         None,
         Fireball,
-        ThunderBolt
+        ThunderBolt,
+        Seal,
     }
 
     public enum TileState {
@@ -270,7 +269,12 @@ namespace Cardinals.Enums {
         PiPi,
         PoPo,
         PicPic,
-        Pazizizizic
+        Pazizizizic,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
     }
     
     public enum EnemyActionType
@@ -282,6 +286,10 @@ namespace Cardinals.Enums {
         TileCurse,
         TileDebuff,
         UserDebuff,
+        Sleep,
+        Confusion,
+        Spawn,
+        NoAction,
         Unknown, // 알 수 없음 ?
     }
 
@@ -294,6 +302,10 @@ namespace Cardinals.Enums {
         Poison,
         Slow,
         Heal,
+        Confusion,
+        RotationRate,
+        Doll,
+        Stun,
     }
 
     public enum BuffCountDecreaseType : int
