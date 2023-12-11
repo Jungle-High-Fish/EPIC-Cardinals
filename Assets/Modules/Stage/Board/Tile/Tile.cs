@@ -110,6 +110,9 @@ namespace Cardinals.Board {
 
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
+
+        // 타일 봉인 관련 변수
+        private bool _isSealed = false;
         
         public void Init(
             TileData tileData, 
@@ -290,7 +293,7 @@ namespace Cardinals.Board {
             }
 
             if (originalState == TileState.Cursed) {
-                if (_tileState == TileState.Normal) {
+                if (_tileState == TileState.Normal || _tileState == TileState.Seal) {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
                 }
             }
@@ -298,7 +301,6 @@ namespace Cardinals.Board {
             if (originalState == TileState.Seal) {
                 if (_tileState == TileState.Cursed) {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
-                    // [TODO] 수정 필요
                 }
             }
         }
@@ -306,6 +308,9 @@ namespace Cardinals.Board {
         public void ChangeState(TileState state) {
             TileState originalState = _tileState;
             _tileState = state;
+            if (_tileState == TileState.Seal) {
+                _isSealed = true;
+            }
             ApplyState(originalState);
         }
 
