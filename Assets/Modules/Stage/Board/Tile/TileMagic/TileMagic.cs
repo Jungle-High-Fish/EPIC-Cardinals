@@ -38,8 +38,8 @@ namespace Cardinals.Board {
             );
         }
 
-		public void Init() {
-			_type = TileMagicType.None;
+		public void Init(TileMagicType type) {
+			_type = type;
 			_level = 0;
 			_exp = 0;
 		}
@@ -130,6 +130,12 @@ namespace Cardinals.Board {
 			switch (_type) {
 				case TileMagicType.None:
 					break;
+				case TileMagicType.Attack:
+					MagicActionAttack(value, target);
+					break;
+				case TileMagicType.Defence:
+					MagicActionDefence(value);
+					break;
 				case TileMagicType.Fire:
 					MagicActionFireMain(target);
 					MagicActionFireSub(value, target);
@@ -143,6 +149,14 @@ namespace Cardinals.Board {
 					MagicActionEarthSub();
 					break;
 			}
+		}
+
+		private void MagicActionAttack(int value, BaseEntity target) {
+			GameManager.I.Player.Attack(target, value);
+		}
+
+		private void MagicActionDefence(int value) {
+			GameManager.I.Player.Defense(value);
 		}
 
 		// 행동마다 해당 적에게 2/4/6의 데미지를 줍니다.

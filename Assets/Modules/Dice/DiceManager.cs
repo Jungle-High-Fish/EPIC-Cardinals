@@ -452,12 +452,14 @@ namespace Cardinals
             //     result = false;
             // }
 
-
-            if (GameManager.I.Player.OnTile.Type == TileType.Start ||
-               GameManager.I.Player.OnTile.Type == TileType.Blank)
-            {
-                result = false;
+            if (GameManager.I.Stage.Board.IsBoardSquare) {
+                if (GameManager.I.Player.OnTile.Type == TileType.Start ||
+                GameManager.I.Player.OnTile.Type == TileType.Blank)
+                {
+                    result = false;
+                }
             }
+            
 
             if (!_canActionUse)
             {
@@ -486,16 +488,15 @@ namespace Cardinals
                 hasDiscard = true;
             }
 
-            switch (GameManager.I.Player.OnTile.Type)
+            switch (GameManager.I.Player.OnTile.TileMagic.Type)
             {
-                case TileType.Attack:
-                    StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseAttack, ChangeDiscard));
-                    break;
-                case TileType.Defence:
+                case TileMagicType.Defence:
+                case TileMagicType.Earth:
+                case TileMagicType.Water:
                     StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseDefense, ChangeDiscard));
                     break;
                 default:
-                    StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, ChangeDiscard));
+                    StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseAttack, ChangeDiscard));
                     break;
             }
 

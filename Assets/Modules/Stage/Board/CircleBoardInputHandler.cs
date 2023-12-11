@@ -134,6 +134,7 @@ namespace Cardinals.Board {
 					{
 						mouseDetector.RendererEnable(true);
 
+						// TODO: 마법에 따라 설정 필요
 						// 플레이어 행동 설정
 						if (GameManager.I.Stage.CardManager.CheckUseCardOnAction())
 						{

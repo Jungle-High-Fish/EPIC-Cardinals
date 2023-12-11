@@ -8,37 +8,38 @@ using UnityEngine;
 using Util;
 
 namespace Cardinals.Board {
-    
-    public class TileEventAction: TileAction
+    [Serializable]
+    public class TileEvent: MonoBehaviour
     {
-        [Header("컴포넌트")]
-        [SerializeField] [ReadOnly] private BoardEventType _eventType;
         public BoardEventType EventType => _eventType;
         
-        [SerializeField] private SpriteRenderer _renderer;
+        private BoardEventType _eventType;
+
+        private ComponentGetter<SpriteRenderer> _renderer 
+            = new ComponentGetter<SpriteRenderer>(TypeOfGetter.ChildByName, "Renderer/EventSprite");
+        private ComponentGetter<Tile> _tile = new ComponentGetter<Tile>(TypeOfGetter.This);
+
         public void Set(BoardEventType type)
         {
             _eventType = type; // 타입에 맞는 이벤트 지정
 
-            _renderer ??= _tile.GetComponentInChildren<SpriteRenderer>();
-            _renderer.sprite =  ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_BoardEvent + type);
-
+            _renderer.Get(gameObject).sprite =  ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_BoardEvent + type);
             
-            _renderer.transform.localScale = Vector3.zero;
-            _renderer.transform.DOScale(1, 1).SetEase(Ease.OutBounce)
+            _renderer.Get(gameObject).transform.localScale = Vector3.zero;
+            _renderer.Get(gameObject).transform.DOScale(1, 1).SetEase(Ease.OutBounce)
                 .OnComplete(() =>
                 {
-                    _renderer.transform.LookAt(Camera.main.transform);
-                    _renderer.transform.Rotate(0, 180, 0);
+                    _renderer.Get(gameObject).transform.LookAt(Camera.main.transform);
+                    _renderer.Get(gameObject).transform.Rotate(0, 180, 0);
                 });
         }
-        
-        
-        public override void Act(int value, BaseEntity target) {
-            // nothing
+
+        public void ClearEvent() {
+            _eventType = BoardEventType.Empty;
+            _renderer.Get(gameObject).sprite = null;
         }
 
-        public override void ArriveAction() {
+        public void Activate() {
 
             if (_eventType != default)
             {
@@ -59,8 +60,7 @@ namespace Cardinals.Board {
                     default: break;
                 }
 
-                _renderer.sprite = null;
-                _eventType = default; 
+                ClearEvent();
             }
         }
         

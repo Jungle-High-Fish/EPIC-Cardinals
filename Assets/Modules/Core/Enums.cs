@@ -11,22 +11,6 @@ using Cardinals.Game;
 namespace Cardinals.Enums {
 
     public static class EnumHelper {
-        public static Type GetTileActionType(TileType tileType) {
-            switch (tileType) {
-                case TileType.Null:
-                    return typeof(TileNullAction);
-                case TileType.Blank:
-                case TileType.Start:
-                    return typeof(TileEventAction);
-                case TileType.Attack:
-                    return typeof(TileAttack);
-                case TileType.Defence:
-                    return typeof(TileDefence);
-                default:
-                    return typeof(TileNullAction);
-            }
-        }
-
         public static Potion GetPotion(PotionType potionType)
         {
             switch (potionType)
@@ -216,7 +200,9 @@ namespace Cardinals.Enums {
         None = 0,
         Fire,
         Water,
-        Earth
+        Earth,
+        Attack,
+        Defence
     }
 
     public enum TileCurseType {
