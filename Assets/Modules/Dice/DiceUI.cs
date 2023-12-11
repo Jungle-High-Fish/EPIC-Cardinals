@@ -93,17 +93,17 @@ namespace Cardinals
             switch (dice.DiceType)
             {
                 case (DiceType.Normal):
-                    _image.Get(gameObject).color = new Color(0.8f, 0.8f, 0.8f);
+                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Normal_1");
                     break;
 
                 case (DiceType.Fire):
-                    _image.Get(gameObject).color = new Color(0.9245283f, 0.51689120f, 0.4404593f);
+                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Fire_1");
                     break;
                 case (DiceType.Water):
-                    _image.Get(gameObject).color = new Color(0.4332948f, 0.6019194f, 0.8584906f);
+                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Water_1");
                     break;
                 case (DiceType.Earth):
-                    _image.Get(gameObject).color = new Color(0.6320754f, 0.5570136f, 0.5277234f);
+                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Earth_1");
                     break;
             }
         }
@@ -118,7 +118,8 @@ namespace Cardinals
 
         public void UpdateDiceUI(int number)
         {
-            _numberText.text = number.ToString();
+            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
+            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
    
         public void DismissDiceUI()
