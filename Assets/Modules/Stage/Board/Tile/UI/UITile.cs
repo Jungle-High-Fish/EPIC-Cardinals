@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cardinals.Enums;
 using Cardinals.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Util;
 
 namespace Cardinals.Board {
@@ -22,6 +23,11 @@ namespace Cardinals.Board {
             "Cube"
         );
 
+        ComponentGetter<Image> _sealedImage = new ComponentGetter<Image>(
+            TypeOfGetter.ChildByName, 
+            "Normal Tile UI/Sealed Image"
+        );
+
         private Tile _tile;
 
         public void Init(Tile tile) {
@@ -34,6 +40,17 @@ namespace Cardinals.Board {
 
         public void SetMaterial() {
             _materialUI.Get(gameObject).Set(_tile);
+        }
+
+        private void Update() {
+            if (_tile == null) return;
+
+            if (_tile.IsSealed) {
+                _sealedImage.Get(gameObject).gameObject.SetActive(true);
+            }
+            else {
+                _sealedImage.Get(gameObject).gameObject.SetActive(false);
+            }
         }
     }
 }

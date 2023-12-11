@@ -23,6 +23,7 @@ namespace Cardinals.Board {
         public TileMagic TileMagic => _tileMagic;
         public TileEvent TileEvent=> _tileEvent;
         public bool HasEvent => _tileEvent.EventType != BoardEventType.Empty;
+        public bool IsSealed => _isSealed;
 
         public UITile UITile => _uiTile.Get(gameObject);
 
@@ -288,6 +289,19 @@ namespace Cardinals.Board {
             _tileAnimation.Get(gameObject).StopAll();
         }
 
+        public void ChangeState(TileState state) {
+            TileState originalState = _tileState;
+            _tileState = state;
+            if (_tileState == TileState.Seal) {
+                _isSealed = true;
+            }
+            ApplyState(originalState);
+        }
+
+        public void ClearSealedState() {
+            _isSealed = false;
+        }
+
         // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
         private void ApplyState(TileState originalState) {
             if (originalState == TileState.Normal) {
@@ -307,15 +321,6 @@ namespace Cardinals.Board {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
                 }
             }
-        }
-
-        public void ChangeState(TileState state) {
-            TileState originalState = _tileState;
-            _tileState = state;
-            if (_tileState == TileState.Seal) {
-                _isSealed = true;
-            }
-            ApplyState(originalState);
         }
 
         private void OnMouseDown() {

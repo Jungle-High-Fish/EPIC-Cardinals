@@ -50,7 +50,7 @@ namespace Cardinals.Tutorial
             InitEnemies(rewards);
 
             // 카드 매니저 세팅
-            GameManager.I.Stage.CardManager.OnBattle(true);
+            GameManager.I.Stage.DiceManager.OnBattle(true);
 
             // 튜토리얼 데이터
             _isTutorialClear = new bool[_tutorialData.Count - 1];
@@ -80,9 +80,9 @@ namespace Cardinals.Tutorial
 
                 // 플레이어 행동
                 if (curTutorial.Quests[_curQuestIndex].QuestType == TutorialQuestType.KillMonster) {
-                    GameManager.I.Stage.CardManager.OnTurn();
+                    GameManager.I.Stage.DiceManager.OnTurn();
                 } else {
-                    GameManager.I.Stage.CardManager.DrawHandDecksForTutorial(curTutorial.Cards);
+                    GameManager.I.Stage.DiceManager.DrawHandDecksForTutorial(curTutorial.Cards);
                 }
                 GameManager.I.Player.OnTurn();
 
@@ -90,7 +90,7 @@ namespace Cardinals.Tutorial
 
                 CheckTurnEndQuest();
 
-                GameManager.I.Stage.CardManager.SetCardSelectable(false);
+                GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
 
                 // 적 행동
                 for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnTurn();
