@@ -203,6 +203,7 @@ namespace Cardinals.Board {
                     _tileCurse.ClearCurse();
                     ChangeState(TileState.Normal);
                     break;
+                case TileState.Seal:
                 default:
                     break;
             }
@@ -291,6 +292,13 @@ namespace Cardinals.Board {
             if (originalState == TileState.Cursed) {
                 if (_tileState == TileState.Normal) {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
+                }
+            }
+            
+            if (originalState == TileState.Seal) {
+                if (_tileState == TileState.Cursed) {
+                    _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
+                    // [TODO] 수정 필요
                 }
             }
         }

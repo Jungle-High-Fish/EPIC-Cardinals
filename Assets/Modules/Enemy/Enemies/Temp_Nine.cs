@@ -14,10 +14,10 @@ namespace Cardinals.Enemy
             base.Init(enemyData);
 
             _sleepCount = 2;
-            
+
+            AllSeal();
             Patterns = new[]
             {
-                new Pattern(EnemyActionType.TileCurse, action: AllSeal),
                 new Pattern(EnemyActionType.Attack, 15),
                 new Pattern(EnemyActionType.Attack, 7),
                 new Pattern(EnemyActionType.Defense, 6),

@@ -151,6 +151,7 @@ namespace Cardinals.Enums {
             {
                 TileCurseType.Fireball => new Fireball(),
                 TileCurseType.ThunderBolt => new ThunderBolt(),
+                TileCurseType.Seal => new Seal(),
                 _ => null
             };
 
@@ -214,7 +215,8 @@ namespace Cardinals.Enums {
 
     public enum TileState {
         Normal,
-        Cursed
+        Cursed,
+        Seal
     }
     
     public enum TileSelectionType {
