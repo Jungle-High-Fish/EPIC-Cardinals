@@ -16,7 +16,7 @@ namespace Cardinals
             if (GameManager.I.Player.OnTile.Type == Enums.TileType.Attack ||
                 GameManager.I.Player.OnTile.Type == Enums.TileType.Defence)
             {
-                GameManager.I.Stage.CardManager.PotionUseAction(3);
+                GameManager.I.Stage.DiceManager.PotionUseAction(3);
                 return true;
             }
             return false;

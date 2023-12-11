@@ -171,6 +171,7 @@ namespace Cardinals.Constants {
 
             public const string Core = "Core";
             public const string CardManager = "CardManager";
+            public const string DiceManager = "DiceManager";
         }
 
         public static class Colors {

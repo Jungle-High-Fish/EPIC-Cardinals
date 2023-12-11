@@ -64,7 +64,6 @@ namespace Cardinals
         [Button]
         public void Init()
         {
-            SetCardDeckUIParent(GameObject.Find("DiceDeck").transform); // [TODO] 나중에 바꿔주세요~
             _dices = new();
             _dicesUI = new();
             _newDiceUseMod = true;
@@ -74,22 +73,24 @@ namespace Cardinals
             AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
             AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
             AddDice(new List<int>() {3,3,4,4,5,5 }, DiceType.Normal);
+            SetDiceSelectable(false);
             RollAllDice();
         }
 
-        public void SetCardDeckUIParent(Transform parent)
+        public void SetDiceDeckUIParent(Transform parent)
         {
             _diceDeckUIParent = parent;
         }
 
         [Button]
-        public void OnTurn()
+        public IEnumerator OnTurn()
         {
 
             foreach(DiceUI d in _dicesUI)
             {
                 d.EnableCardUI();
             }
+            SetDiceSelectable(true);
             RollAllDice();
             _canActionUse = false;
             if (!_lastDiceUsedForAction && _newDiceUseMod)
@@ -101,12 +102,14 @@ namespace Cardinals
             _continuousUseCount = 0;
             _state = CardState.Idle;
             UpdateDiceState(-1, true);
+            yield break;
         }
 
         [Button]
-        public void EndTurn()
+        public IEnumerator EndTurn()
         {
             //StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
+            yield break;
         }
 
 
