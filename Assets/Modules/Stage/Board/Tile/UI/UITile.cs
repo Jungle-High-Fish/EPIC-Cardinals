@@ -23,7 +23,7 @@ namespace Cardinals.Board {
             "Cube"
         );
 
-        ComponentGetter<Image> _sealedImage = new ComponentGetter<Image>(
+        ObjectGetter _sealedImage = new ObjectGetter(
             TypeOfGetter.ChildByName, 
             "Normal Tile UI/Sealed Image"
         );
@@ -46,10 +46,10 @@ namespace Cardinals.Board {
             if (_tile == null) return;
 
             if (_tile.IsSealed) {
-                _sealedImage.Get(gameObject).gameObject.SetActive(true);
+                _sealedImage.Get(gameObject).SetActive(true);
             }
             else {
-                _sealedImage.Get(gameObject).gameObject.SetActive(false);
+                _sealedImage.Get(gameObject).SetActive(false);
             }
         }
     }
