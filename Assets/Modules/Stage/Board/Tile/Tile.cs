@@ -204,7 +204,11 @@ namespace Cardinals.Board {
                 case TileState.Cursed:
                     _tileEffect.ArriveAction(boardPiece);
                     _tileCurse.ClearCurse();
-                    ChangeState(TileState.Normal);
+                    if (_isSealed == false) {
+                        ChangeState(TileState.Normal);
+                    } else {
+                        ChangeState(TileState.Seal);
+                    }
                     break;
                 case TileState.Seal:
                 default:
