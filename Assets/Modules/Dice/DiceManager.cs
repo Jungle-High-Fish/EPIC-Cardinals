@@ -393,7 +393,16 @@ namespace Cardinals
         {
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
-            yield return GameManager.I.Player.MoveTo(num, 0.4f);
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&Random.Range(0,2)==1)
+            {
+                GameManager.I.Player.Bubble.SetBubble("혼란하다 혼란해..");
+                yield return GameManager.I.Player.PrevMoveTo(num, 0.4f);
+            }
+            else
+            {
+                yield return GameManager.I.Player.MoveTo(num, 0.4f);
+            }
+            
 
 
             _state = CardState.Idle;
