@@ -105,7 +105,7 @@ namespace Cardinals.Board {
 		private void Update() {
 			if (_mouseDetectors.Count == 0) return;
 
-			if (GameManager.I.Stage.CardManager.State != CardState.Select) {
+			if (GameManager.I.Stage.DiceManager.State != CardState.Select) {
 				foreach(var m in _mouseDetectors) {
 					m.RendererEnable(false);
 				}
@@ -130,13 +130,13 @@ namespace Cardinals.Board {
 						m.RendererEnable(false);
 					}
 
-					if (newIdx >= 0 && GameManager.I.Stage.CardManager.State == CardState.Select)
+					if (newIdx >= 0 && GameManager.I.Stage.DiceManager.State == CardState.Select)
 					{
 						mouseDetector.RendererEnable(true);
 
 						// TODO: 마법에 따라 설정 필요
 						// 플레이어 행동 설정
-						if (GameManager.I.Stage.CardManager.CheckUseCardOnAction())
+						if (GameManager.I.Stage.DiceManager.CheckUseDiceOnAction())
 						{
 							if (GameManager.I.Player.OnTile.Type == TileType.Attack)
 							{
@@ -207,7 +207,7 @@ namespace Cardinals.Board {
 
 		private bool IsSelectState()
 		{
-			return GameManager.I.Stage.CardManager.State == CardState.Select;
+			return GameManager.I.Stage.DiceManager.State == CardState.Select;
 		}
 
 		private void CreateGroundDetector() {

@@ -218,6 +218,7 @@ namespace Cardinals.Board {
             foreach (var tile in _tileSequence)
             {
                 tile.TileCurse.ClearCurse();
+                tile.ClearSealedState();
                 tile.ChangeState(TileState.Normal);
             }
         }

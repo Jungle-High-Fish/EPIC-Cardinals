@@ -11,6 +11,7 @@ using Cardinals.Game;
 using Cardinals.Buff;
 using Sirenix.Utilities;
 using Unity.Mathematics;
+using Modules.Entity.Buff;
 
 namespace Cardinals
 {
@@ -212,7 +213,11 @@ namespace Cardinals
                 prevPos.y += 1.3f;
                 transform.DOJump(prevPos, 2, 1, time);
                 Animator.Play("Jump");
-                yield return new WaitForSeconds(time);
+
+                yield return new WaitForSeconds(time / 2);
+                GameManager.I.Sound.PlayerMove();
+                yield return new WaitForSeconds(time / 2);
+
                 _onTile = _onTile.Prev;
                 yield return CheckSummonOnTile();
                 if (i != count - 1)
@@ -220,6 +225,7 @@ namespace Cardinals
                     _onTile.StepOn(this);
                 }
             }
+
             _onTile.Arrive(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
             GameManager.I.Stage.DiceManager.UpdateDiceState(count, true);
@@ -258,7 +264,7 @@ namespace Cardinals
         public void TestAddBuff(BuffType buffType)
         {
            // AddBuff(new Slow());
-            AddBuff(new ElectricShock());
+            AddBuff(new Confusion());
         }
 
 
