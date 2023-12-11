@@ -15,8 +15,9 @@ namespace Cardinals.Enemy.Summon
         
         [Header("Information")]
         protected Tile _onTile;
-        [SerializeField] protected float _moveCount;
-        [SerializeField] protected float _moveDuration;
+        [SerializeField] protected int _moveCount;
+        protected virtual int MoveCount => _moveCount; 
+        [SerializeField] protected float _moveDuration = .2f;
         
         [Header("Component")]
         [SerializeField] protected SpriteRenderer _renderer;
@@ -39,7 +40,7 @@ namespace Cardinals.Enemy.Summon
             var playerTile = GameManager.I.Player.OnTile; 
             Tile tile = _onTile;
             
-            for (int i = 0; i < _moveCount; i++)
+            for (int i = 0; i < MoveCount; i++)
             {
                 tile = tile.Next;
                 transform.DOMove(GetPosition(tile.transform.position), _moveDuration);
@@ -55,8 +56,16 @@ namespace Cardinals.Enemy.Summon
             _onTile = tile;
         }
         
-        public abstract IEnumerator OnCollisionPlayer();
+        public virtual IEnumerator OnCollisionPlayer()
+        {
+            yield return null;
+        }
         
+        public virtual IEnumerator ArrivePlayer()
+        {
+            yield return null;
+        }
+
         public void Destroy()
         {
             GameManager.I.Stage.BoardObjects.Remove(this);

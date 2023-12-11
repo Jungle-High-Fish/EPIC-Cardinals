@@ -13,15 +13,18 @@ namespace Cardinals.BoardEvent
     /// </summary>
     public abstract class BaseBoardEventObject : BaseBoardObject
     {
-        public Board.Tile OnTile { get; }
+        private NewBoardEventDataSO _data;
+        protected override int MoveCount => _data.moveCount; 
         
-        protected NewBoardEventDataSO _data;
         private int _count;
-        public void Init(NewBoardEventType type)
+        public void Init(Board.Tile tile, NewBoardEventType type)
         {
-            _data = ResourceLoader.LoadSO<NewBoardEventDataSO>(Resources.SO_BoardEventData);
-
+            Init(tile);
+            
+            _data = ResourceLoader.LoadSO<NewBoardEventDataSO>(Resources.SO_BoardEventData + type);
             _count = _data.keepTurnCount;
+
+            _renderer.sprite = _data.sprite;
         }
 
         public override IEnumerator OnTurn()
@@ -40,7 +43,20 @@ namespace Cardinals.BoardEvent
 
         public override IEnumerator OnCollisionPlayer()
         {
-            yield return Execute();
+            if (_data.executeType == NewBoardEventExecuteType.Touch)
+            {
+                yield return Execute();
+                base.Destroy();
+            }
+        }
+
+        public override IEnumerator ArrivePlayer()
+        {
+            if (_data.executeType == NewBoardEventExecuteType.Arrive)
+            {
+                yield return Execute();
+                base.Destroy();
+            }
         }
 
         protected abstract IEnumerator Execute();

@@ -6,6 +6,8 @@ namespace Cardinals.BoardEvent
     [CreateAssetMenu(fileName = "NewBoardEventData", menuName = "Cardinals/NewBoardEventData", order = 1)]
     public class NewBoardEventDataSO : ScriptableObject
     {
+        public NewBoardEventType type;
+        
         public string name;
         
         [TextArea] public string description;
@@ -15,7 +17,9 @@ namespace Cardinals.BoardEvent
         public Sprite sprite;
         
         public NewBoardEventOnType onBoardType;
+
+        public NewBoardEventExecuteType executeType;
         
-        [Tooltip("on Board Type이 Move일 때, 매 턴 이동하는 거리")] public int moveDistance;
+        [Tooltip("on Board Type이 Move일 때, 매 턴 이동하는 거리")] public int moveCount;
     }
 }

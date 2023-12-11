@@ -37,8 +37,12 @@ namespace Cardinals.Game
             //cardManager.OnBattle();
             diceManager.OnBattle();
 
+            int turn = 0;
             do // 전투 시작
             {
+                // 3턴마다 보드 이벤트 생성
+                if (++turn % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
+                
                 // 전투 업데이트
                 yield return player.StartTurn();
                 foreach (var enemy in enemies)

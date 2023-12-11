@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
 using Cardinals.Board.Curse;
+using Cardinals.BoardEvent.Event;
 using Cardinals.Enemy;
 using Cardinals.Game;
 
@@ -141,6 +142,16 @@ namespace Cardinals.Enums {
                 EnemyType.Seven       => typeof(Temp_Seven),
                 EnemyType.Eight       => typeof(Temp_Eight),
                 EnemyType.Nine        => typeof(Temp_Nine),
+                _ => null
+            };
+        }
+
+        public static Type GetNewBoardEventType(NewBoardEventType type)
+        {
+            return type switch
+            {
+                NewBoardEventType.Roulette => typeof(Roulette),
+                NewBoardEventType.PotionGoblin => typeof(PotionGoblin),
                 _ => null
             };
         }
@@ -362,6 +373,13 @@ namespace Cardinals.Enums {
         Ignore,
         Fix,
         Move
+    }
+
+    public enum NewBoardEventExecuteType
+    {
+        Ignore,
+        Touch,
+        Arrive
     }
     
     public enum BoardEventType : int

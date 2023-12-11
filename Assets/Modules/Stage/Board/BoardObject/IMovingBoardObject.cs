@@ -24,6 +24,11 @@ namespace Cardinals.BoardEvent
         /// 플레이어와 충돌 처리
         /// </summary>
         public IEnumerator OnCollisionPlayer();
+
+        /// <summary>
+        /// 도착 이벤트 일 때
+        /// </summary>
+        public IEnumerator ArrivePlayer();
         
         /// <summary>
         /// 제거 로직

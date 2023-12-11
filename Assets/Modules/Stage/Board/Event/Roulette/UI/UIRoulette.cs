@@ -53,7 +53,8 @@ namespace Cardinals.BoardEvent.Roulette
             switch (data.type)
             {
                 case BoardEventRoulette.DrawCard:
-                    GameManager.I.Stage.DrawCard(_drawCardCount);
+                    Debug.Log("이제 룰렛의 Draw Card는 어떻게 되는 것일까?");
+                    // GameManager.I.Stage.DrawCard(_drawCardCount);
                     break;
                 case BoardEventRoulette.GetGold:
                     GameManager.I.Stage.AddGold(_getGoldValue);
