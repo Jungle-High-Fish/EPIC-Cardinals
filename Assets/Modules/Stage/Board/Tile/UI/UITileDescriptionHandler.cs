@@ -24,6 +24,10 @@ namespace Cardinals.UI {
                 _descriptionPanels.Add(AddCurseDescription());
             }
 
+            if (_tile.IsSealed) {
+                _descriptionPanels.Add(AddSealedDescription());
+            }
+
             if (_tile.HasEvent) {
                 if (_tile.TileEvent.EventType != BoardEventType.Empty) {
                     _descriptionPanels.Add(AddEventDescription());
@@ -99,6 +103,18 @@ namespace Cardinals.UI {
             string title = data.curseName;
             string description = data.curseDescription;
             Sprite icon = data.sprite;
+
+            UITileDescription panel = InstantiateDescriptionPanel();
+            (panel.transform as RectTransform).MatchWidthUpper(transform as RectTransform);
+            panel.SetDescription(title, description, icon, false);
+
+            return panel;
+        }
+
+        private UITileDescription AddSealedDescription() {
+            string title = "봉인된 타일";
+            string description = "봉인된 타일에서는 행동이 불가능합니다.";
+            Sprite icon = null;
 
             UITileDescription panel = InstantiateDescriptionPanel();
             (panel.transform as RectTransform).MatchWidthUpper(transform as RectTransform);
