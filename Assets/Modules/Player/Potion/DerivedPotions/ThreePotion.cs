@@ -13,15 +13,10 @@ namespace Cardinals
 
         public override bool UsePotion()
         {
-            if (GameManager.I.Stage.Board.IsBoardSquare) {
-                if(GameManager.I.Player.OnTile.Type==Enums.TileType.Attack||
-                    GameManager.I.Player.OnTile.Type == Enums.TileType.Defence)
-                {
-                    GameManager.I.Stage.CardManager.PotionUseAction(3);
-                    return true;
-                }
-            } else {
-                GameManager.I.Stage.CardManager.PotionUseAction(3);
+            if (GameManager.I.Player.OnTile.Type == Enums.TileType.Attack ||
+                GameManager.I.Player.OnTile.Type == Enums.TileType.Defence)
+            {
+                GameManager.I.Stage.DiceManager.PotionUseAction(3);
                 return true;
             }
             return false;

@@ -80,7 +80,7 @@ namespace Cardinals
                 GameManager.I.UI.UIEndTurnButton.Activate();
                 yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
-                GameManager.I.Stage.CardManager.SetCardSelectable(false);
+                GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             }
         }
 
@@ -88,7 +88,8 @@ namespace Cardinals
         {
             yield return base.EndTurn(); // 버프/디버프 소모
             
-            yield return GameManager.I.Stage.CardManager.EndTurn();
+            //yield return GameManager.I.Stage.CardManager.EndTurn();
+            yield return GameManager.I.Stage.DiceManager.EndTurn();
             GameManager.I.Player.UpdateAction(PlayerActionType.None);
             
             if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth1))
@@ -200,7 +201,7 @@ namespace Cardinals
         
         public IEnumerator PrevMoveTo(int count, float time)
         {
-            GameManager.I.Stage.CardManager.SetCardSelectable(false);
+            GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             _onTile?.Leave(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
@@ -221,8 +222,8 @@ namespace Cardinals
             }
             _onTile.Arrive(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
-            GameManager.I.Stage.CardManager.UpdateCardState(count, true);
-            GameManager.I.Stage.CardManager.SetCardSelectable(true);
+            GameManager.I.Stage.DiceManager.UpdateDiceState(count, true);
+            GameManager.I.Stage.DiceManager.SetDiceSelectable(true);
             
             SetFlipTowardEnemy();
         }
@@ -246,11 +247,11 @@ namespace Cardinals
             yield return null;
 
             // [유물] 워프 부적
-            if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
+            /*if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
                 && num == 4)
             {
                 GameManager.I.Stage.CardManager.WarpArtifact();
-            }
+            }*/
 
         }
         

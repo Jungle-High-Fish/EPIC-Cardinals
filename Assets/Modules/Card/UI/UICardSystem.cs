@@ -10,6 +10,9 @@ namespace Cardinals.Game {
 		ComponentGetter<UICardDeck> _cardDeck
 			= new ComponentGetter<UICardDeck>(TypeOfGetter.ChildByName, "CardDeck");
 
+		ComponentGetter<UICardDeck> _diceDeck
+			= new ComponentGetter<UICardDeck>(TypeOfGetter.ChildByName, "DiceDeck");
+
 		ComponentGetter<UICardUseSlot> _cardMoveSlot
 			= new ComponentGetter<UICardUseSlot>(TypeOfGetter.ChildByName, "CardMoveSlot");
 		ComponentGetter<UICardUseSlot> _cardActionSlot
@@ -17,6 +20,7 @@ namespace Cardinals.Game {
 
 		public void Init() {
 			GameManager.I.Stage.CardManager.SetCardDeckUIParent(_cardDeck.Get(gameObject).transform);
+			GameManager.I.Stage.DiceManager.SetDiceDeckUIParent(_diceDeck.Get(gameObject).transform);
 			_cardDeck.Get(gameObject).Init(OnCardDeckMouseHover);
 		}
 
