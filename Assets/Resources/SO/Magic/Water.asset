@@ -20,6 +20,10 @@ MonoBehaviour:
   tileMaterial: {fileID: 2100000, guid: 249c780054dca204a8207115d8e1cf0c, type: 2}
   sprite: {fileID: 21300000, guid: 245c79d7836974092904eb9e4d6d6788, type: 3}
   uiSprite: {fileID: 21300000, guid: 0f9d356461f3d487da884c882fffb963, type: 3}
+  tileLevelEffectSprite:
+  - {fileID: 21300000, guid: 2834f99f084fa4bd39eb7ef82f981789, type: 3}
+  - {fileID: 21300000, guid: e48afaa1703324a3ca1924f9beabd6e1, type: 3}
+  - {fileID: 21300000, guid: e06277cb5987d4111a13d36e100f46e2, type: 3}
   mainMagicName: "\uB9D1\uC740 \uBB3C"
   mainMagicDescription: "\uD589\uB3D9 \uB9C8\uB2E4, 1/2/3\uC758 \uCCB4\uB825\uC744
     \uD68C\uBCF5\uD569\uB2C8\uB2E4.\n3 \uC774\uC0C1\uC758 \uD589\uB3D9 \uC2DC, \uC801\uC5D0\uAC8C

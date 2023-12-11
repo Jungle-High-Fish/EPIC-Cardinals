@@ -66,9 +66,11 @@ namespace Cardinals
             set
             {
                 _canAction = value;
-                if (GameManager.I.Player.OnTile.Type == TileType.Start || GameManager.I.Player.OnTile.Type == TileType.Blank)
-                {
-                    _canAction = false;
+                if (GameManager.I.Stage.Board.IsBoardSquare) {
+                    if (GameManager.I.Player.OnTile.Type == TileType.Start || GameManager.I.Player.OnTile.Type == TileType.Blank)
+                    {
+                        _canAction = false;
+                    }
                 }
 
                 SetActionMark(_canAction);
@@ -188,6 +190,7 @@ namespace Cardinals
         {
             //_actionMark.SetActive(isActive);
 
+            // TODO: 타일 마법에 따라 마크 변경 필요
             if (GameManager.I.Player.OnTile.Type == TileType.Attack)
             {
                 _actionMark.GetComponent<Image>().sprite =

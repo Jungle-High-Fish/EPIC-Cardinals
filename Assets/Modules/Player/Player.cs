@@ -71,7 +71,17 @@ namespace Cardinals
         {
             _isDamagedThisTurn = false;
             
-            yield return null;
+            if (CheckBuffExist(BuffType.Stun))
+            {
+                // 행동 하지 않음... 스턴 효과 애니메이션 출력?
+            }
+            else
+            {
+                GameManager.I.UI.UIEndTurnButton.Activate();
+                yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
+                GameManager.I.UI.UIEndTurnButton.Deactivate();
+                GameManager.I.Stage.CardManager.SetCardSelectable(false);
+            }
         }
 
         public override IEnumerator EndTurn()
@@ -120,7 +130,7 @@ namespace Cardinals
                 var enemies = GameManager.I.CurrentEnemies.ToList();
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
-                    if (enemies[i].PrevPattern.Type == EnemyActionType.Attack)
+                    if (enemies[i].PrevPattern?.Type == EnemyActionType.Attack)
                     {
                         enemies[i].Hit(DefenseCount);
                     }
@@ -138,6 +148,8 @@ namespace Cardinals
             _onTile = tile;
             transform.position = tile.transform.position + new Vector3(0, 1.3f, 0);
         }
+
+        public Action HomeReturnEvent { get; set; }
       
         public IEnumerator MoveTo(int count,float time)
         {
@@ -149,7 +161,7 @@ namespace Cardinals
                 if (_onTile.Next == GameManager.I.Stage.Board.GetStartTile()) {
                     _boardRoundCount++;
 
-                    GameManager.I.Stage.GenerateBoardEvent();
+                    HomeReturnEvent.Invoke();
 
                     if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Rigloo))
                     {

@@ -61,10 +61,12 @@ namespace Cardinals
             set
             {
                 _canAction = value;
-                if (GameManager.I.Player.OnTile.Type == TileType.Start || GameManager.I.Player.OnTile.Type == TileType.Blank)
-                {
-                    _canAction = false;
+                if (GameManager.I.Stage.Board.IsBoardSquare) {
+                    if (GameManager.I.Player.OnTile.Type == TileType.Start || GameManager.I.Player.OnTile.Type == TileType.Blank) {
+                        _canAction = false;
+                    }
                 }
+                
             }
         }
 

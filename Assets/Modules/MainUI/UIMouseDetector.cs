@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Cardinals.UI {
     public class UIMouseDetector: MonoBehaviour {
-        public MouseDetectorType MouseDetectorType => _mouseDetectorType;
+        public UIMouseDetectorType MouseDetectorType => _mouseDetectorType;
         
-        [SerializeField] private MouseDetectorType _mouseDetectorType;
+        [SerializeField] private UIMouseDetectorType _mouseDetectorType;
     }
 }
 

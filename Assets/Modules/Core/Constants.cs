@@ -21,7 +21,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_OnTileDescription = "UI/TileInfo/OnTileDescriptionUI";
 
             public const string Prefabs_CornerTile = "Board/Tiles/CornerTile";
-            public const string Prefabs_MouseDetector = "Board/MouseDetector";
+            public const string Prefabs_NormalMouseDetector = "Board/NormalMouseDetector";
+            public const string Prefabs_CircleMouseDetector = "Board/CircleMouseDetector";
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
             public const string Prefabs_Stage_Totem = "Stage/Totem";
@@ -82,6 +83,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Enemy_Spawn_Summon = "Enemy/Spawn/Summon";
             public const string Prefabs_Enemy_Spawn_Fireball = "Enemy/Spawn/Fireball";
             public const string Prefabs_Enemy_Spawn_ThunderBolt= "Enemy/Spawn/ThunderBolt";
+            public const string Prefabs_Enemy_Spawn_Ryuka= "Enemy/Spawn/Ryuka";
 
             public const string Prefabs_UI_Tutorial = "UI/Tutorial/TutorialUI";
             public const string Prefabs_UI_TutorialQuest = "UI/Tutorial/QuestUI";
@@ -134,7 +136,6 @@ namespace Cardinals.Constants {
             public const string SO_PotionData = "Potions/";
             public const string SO_BuffData = "Buffs/";
             public const string SO_MagicData = "Magic/";
-            public const string SO_TileSymbolsData = "TileSymbols/TileSymbols";
             public const string SO_TileCurseUIData = "TileCurses/";
             public const string SO_BoardEventData = "BoardEvent/";
             public const string SO_EnemyData = "Stage/Enemies/";

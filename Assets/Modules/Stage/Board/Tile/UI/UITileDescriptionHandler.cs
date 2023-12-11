@@ -24,8 +24,8 @@ namespace Cardinals.UI {
                 _descriptionPanels.Add(AddCurseDescription());
             }
 
-            if (_tile.TileAction is TileEventAction) {
-                if ((_tile.TileAction as TileEventAction).EventType != BoardEventType.Empty) {
+            if (_tile.HasEvent) {
+                if (_tile.TileEvent.EventType != BoardEventType.Empty) {
                     _descriptionPanels.Add(AddEventDescription());
                 }
             }
@@ -108,7 +108,7 @@ namespace Cardinals.UI {
         }
 
         private UITileDescription AddEventDescription() {
-            BoardEventDataSO data = BoardEventDataSO.Data((_tile.TileAction as TileEventAction).EventType);
+            BoardEventDataSO data = BoardEventDataSO.Data(_tile.TileEvent.EventType);
 
             string title = data.eventName;
             string description = data.eventDescription;

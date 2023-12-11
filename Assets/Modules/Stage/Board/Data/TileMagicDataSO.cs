@@ -24,6 +24,9 @@ namespace Cardinals.Game
         [AssetSelector(Paths = "Assets/Resources/Sprites/UI/Icons/Elements")]
         [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
         public Sprite uiSprite;
+        [AssetSelector(Paths = "Assets/Resources/Sprites/Tile/TileLevelEffect")]
+        [PreviewField(Height = 100, Alignment = ObjectFieldAlignment.Left)]
+        public Sprite[] tileLevelEffectSprite = new Sprite[3];
 		public string mainMagicName;
         [Multiline]
         public string mainMagicDescription;

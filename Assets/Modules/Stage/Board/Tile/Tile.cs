@@ -10,14 +10,21 @@ namespace Cardinals.Board {
 
     public class Tile: MonoBehaviour {
         public TileType Type => _tileData.type;
+        public TileState TileState=> _tileState;
         public TileDirection Direction => _tileData.direction;
+
         public Vector3 TilePositionOnGround => _tilePositionOnGround;
         public Vector3 TileRotation => _tileRotation;
+
         public int Level => _tileMagic.Level;
         public int Exp => _tileMagic.Exp;
-        public UITile UITile => _uiTile.Get(gameObject);
 
         public TileCurse TileCurse => _tileCurse;
+        public TileMagic TileMagic => _tileMagic;
+        public TileEvent TileEvent=> _tileEvent;
+        public bool HasEvent => _tileEvent.EventType != BoardEventType.Empty;
+
+        public UITile UITile => _uiTile.Get(gameObject);
 
         public Tile Next {
             get => _next;
@@ -80,7 +87,6 @@ namespace Cardinals.Board {
 
         // 타일 상태 관련 변수
         private TileState _tileState;
-        public TileState TileState=> _tileState;
         private bool _isSelectable;
         private bool _isSelected;
         private bool _isMouseHovered;
@@ -90,13 +96,11 @@ namespace Cardinals.Board {
         private Vector3 _tilePositionOnGround;
         private Vector3 _tileRotation;
 
-        // 타일의 액션 관련 변수
-        private TileAction _tileAction;
-        public TileAction TileAction=> _tileAction;
+        // 타일의 이벤트 관련 변수
+        private TileEvent _tileEvent;
 
         // 타일의 마법 관련 변수
         private TileMagic _tileMagic; 
-        public TileMagic TileMagic => _tileMagic;
 
         // 타일의 이펙트 관련 변수
         private TileEffect _tileEffect;
@@ -122,12 +126,10 @@ namespace Cardinals.Board {
 
             _tileAnimation.Get(gameObject).Init();
 
-            _tileAction = GetComponent(EnumHelper.GetTileActionType(_tileData.type)) as TileAction;
-            if (_tileAction == null) {
-                _tileAction = gameObject.AddComponent(EnumHelper.GetTileActionType(_tileData.type)) as TileAction;
+            _tileEvent = GetComponent<TileEvent>();
+            if (_tileEvent == null) {
+                _tileEvent = gameObject.AddComponent<TileEvent>();
             }
-            
-            _tileAction.Init(this);
 
             _tileEffect = GetComponent<TileEffect>();
             if (_tileEffect == null) {
@@ -141,19 +143,28 @@ namespace Cardinals.Board {
             }
             _tileCurse.Init();
 
-            if (_tileAction is not (TileEventAction or TileNullAction) ) {
-                _tileMagic = GetComponent<TileMagic>();
-                if (_tileMagic == null) {
-                    _tileMagic = gameObject.AddComponent<TileMagic>();
-                }
-                _tileMagic.Init();
-            } else {
-                _tileMagic = null;
+            _tileMagic = GetComponent<TileMagic>();
+            if (_tileMagic == null) {
+                _tileMagic = gameObject.AddComponent<TileMagic>();
             }
+            TileMagicType initialMagicType;
+            if (_tileData.type == TileType.Attack) {
+                initialMagicType = TileMagicType.Attack;
+            } else if (_tileData.type == TileType.Defence) {
+                initialMagicType = TileMagicType.Defence;
+            } else {
+                initialMagicType = TileMagicType.None;
+            }
+            _tileMagic.Init(initialMagicType);
 
-            if (tileData.type == TileType.Attack || tileData.type == TileType.Defence) {
+            if (GameManager.I.Stage.Board.IsBoardSquare) {
+                if (tileData.type == TileType.Attack || tileData.type == TileType.Defence) {
+                    _uiTile.Get(gameObject).Init(this);
+                }
+            } else {
                 _uiTile.Get(gameObject).Init(this);
             }
+            
         }
 
         public void OnTurnEnd() {
@@ -184,15 +195,15 @@ namespace Cardinals.Board {
 
             switch (_tileState) {
                 case TileState.Normal:
-                    _tileAction.ArriveAction();
+                    _tileEvent.Activate();
                     _tileEffect.ArriveAction(boardPiece);
                     break;
                 case TileState.Cursed:
-                    _tileAction.ArriveAction();
                     _tileEffect.ArriveAction(boardPiece);
                     _tileCurse.ClearCurse();
                     ChangeState(TileState.Normal);
                     break;
+                case TileState.Seal:
                 default:
                     break;
             }
@@ -221,20 +232,11 @@ namespace Cardinals.Board {
             }
         }
 
-        public IEnumerator CardAction(int value, BaseEntity target) {            
-            _tileAction.Act(value, target);
+        public IEnumerator CardAction(int value, BaseEntity target) {
+            _tileMagic.OnAction(value, target);
 
-            if (_tileMagic != null) {
-                _tileMagic.OnAction(value, target);
-            }
-
-            float animTime = 0f;
-            if (_tileAction is TileAttack) {
-                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Attack);
-                GameManager.I.CameraController.ShakeCamera(0.1f, 0.7f, 0.1f);
-            } else if (_tileAction is TileDefence) {
-                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Defence);
-            }
+            float animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Attack);
+            GameManager.I.CameraController.ShakeCamera(0.1f, 0.7f, 0.1f);
 
             yield return new WaitForSeconds(animTime);
         }
@@ -243,6 +245,7 @@ namespace Cardinals.Board {
             var data = EnumHelper.GetTileCurseInstanceType(curseType);
             data.Init(this, turn);
             _tileCurse.SetCurse(data);
+            _tileEvent.ClearEvent();
             ChangeState(TileState.Cursed);
         }
 
@@ -289,6 +292,13 @@ namespace Cardinals.Board {
             if (originalState == TileState.Cursed) {
                 if (_tileState == TileState.Normal) {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
+                }
+            }
+            
+            if (originalState == TileState.Seal) {
+                if (_tileState == TileState.Cursed) {
+                    _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
+                    // [TODO] 수정 필요
                 }
             }
         }

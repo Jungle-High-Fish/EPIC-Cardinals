@@ -364,9 +364,9 @@ namespace Cardinals
             { 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    BoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
+                    IBoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
                     if (boardInputHandler.IsMouseHoverUI) {
-                        if (boardInputHandler.HoveredMouseDetectorType == MouseDetectorType.CardPile) {
+                        if (boardInputHandler.HoveredMouseDetectorType == UIMouseDetectorType.CardPile) {
                             _mouseState = MouseState.Cancel;
                         } else {
                             _mouseState = MouseState.CardEvent;
@@ -551,12 +551,14 @@ namespace Cardinals
             //     result = false;
             // }
             
-            
-            if(GameManager.I.Player.OnTile.Type==TileType.Start||
-               GameManager.I.Player.OnTile.Type == TileType.Blank)
-            {
-                result = false;
+            if (GameManager.I.Stage.Board.IsBoardSquare) {
+                if(GameManager.I.Player.OnTile.Type==TileType.Start||
+                GameManager.I.Player.OnTile.Type == TileType.Blank)
+                {
+                    result = false;
+                }
             }
+            
             
             if (!_canActionUse)
             {
@@ -585,16 +587,15 @@ namespace Cardinals
                 hasDiscard = true;
             }
 
-            switch (GameManager.I.Player.OnTile.Type)
+            switch (GameManager.I.Player.OnTile.TileMagic.Type)
             {
-                case TileType.Attack:
-                    StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseAttack, ChangeDiscard));
-                    break;
-                case TileType.Defence:
+                case TileMagicType.Defence:
+                case TileMagicType.Earth:
+                case TileMagicType.Water:
                     StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseDefense, ChangeDiscard));
                     break;
                 default:
-                    StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseMove, ChangeDiscard));
+                    StartCoroutine(Discard(_selectCardIndex, CardAnimationType.UseAttack, ChangeDiscard));
                     break;
             }
 
