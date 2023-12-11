@@ -27,16 +27,17 @@ namespace Cardinals.Enemy
 
         void SpawnRyuka()
         {
-            var list = GameManager.I.Stage.Board.TileSequence.ToList();
+            var list = GameManager.I.Stage.Board.TileSequence
+                .Where(t => GameManager.I.Player.OnTile != t).ToList();
 
             for (int i = 0; i < 2; i++)
             {
                 var idx = Random.Range(0, list.Count);
-                var tr = list[idx].transform;
+                var tile = list[idx]; 
            
                 var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Enemy_Spawn_Ryuka);
                 var ryuka = GameObject.Instantiate(prefab).GetComponent<Enemy.Summon.Ryuka>();
-                ryuka.Init();
+                ryuka.Init(tile);
             }
         }
     }

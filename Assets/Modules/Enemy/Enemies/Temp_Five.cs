@@ -18,9 +18,8 @@ namespace Cardinals.Enemy
             FixPattern = new Pattern(EnemyActionType.UserDebuff, action: Confusion);
             Patterns = new[]
             {
+                new Pattern(EnemyActionType.Attack, 7),
                 new Pattern(EnemyActionType.Attack, 5),
-                new Pattern(EnemyActionType.Attack, 5),
-                new Pattern(EnemyActionType.Defense, 7),
             };
             
             Rewards = new Reward[]

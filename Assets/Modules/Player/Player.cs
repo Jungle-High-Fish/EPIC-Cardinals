@@ -162,7 +162,7 @@ namespace Cardinals
                 if (_onTile.Next == GameManager.I.Stage.Board.GetStartTile()) {
                     _boardRoundCount++;
 
-                    HomeReturnEvent.Invoke();
+                    HomeReturnEvent?.Invoke();
 
                     if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Rigloo))
                     {
@@ -187,11 +187,13 @@ namespace Cardinals
                 yield return new WaitForSeconds(time / 2);
 
                 _onTile = _onTile.Next;
-                CheckSummonOnTile();
+                yield return CheckCollisionBoardObject();
                 if (i != count - 1) {
                     _onTile.StepOn(this);
                 }
             }
+
+            yield return CheckArriveBoardObject();
 
             _onTile.Arrive(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
@@ -219,13 +221,15 @@ namespace Cardinals
                 yield return new WaitForSeconds(time / 2);
 
                 _onTile = _onTile.Prev;
-                CheckSummonOnTile();
+                yield return CheckCollisionBoardObject();
                 if (i != count - 1)
                 {
                     _onTile.StepOn(this);
                 }
             }
 
+            yield return CheckArriveBoardObject();
+            
             _onTile.Arrive(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
             GameManager.I.Stage.DiceManager.UpdateDiceState(count, true);
@@ -234,17 +238,28 @@ namespace Cardinals
             SetFlipTowardEnemy();
         }
 
-        private void CheckSummonOnTile()
+        private IEnumerator CheckCollisionBoardObject()
         {
-            var summons = GameManager.I.Stage.Summons;
+            var summons = GameManager.I.Stage.BoardObjects;
             for (int i = summons.Count - 1; i >= 0; i--)
             {
                 if (_onTile == summons[i].OnTile)
                 {
-                    summons[i].Execute();
+                    yield return summons[i].OnCollisionPlayer();
                 }
             }
-
+        }
+        
+        private IEnumerator CheckArriveBoardObject()
+        {
+            var summons = GameManager.I.Stage.BoardObjects;
+            for (int i = summons.Count - 1; i >= 0; i--)
+            {
+                if (_onTile == summons[i].OnTile)
+                {
+                    yield return summons[i].ArrivePlayer();
+                }
+            }
         }
         
         public IEnumerator CardAction(int num, BaseEntity target) {

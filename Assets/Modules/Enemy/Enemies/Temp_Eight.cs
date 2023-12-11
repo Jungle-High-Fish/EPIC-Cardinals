@@ -14,7 +14,7 @@ namespace Cardinals.Enemy
             Patterns = new[]
             {
                 new Pattern(EnemyActionType.Attack, 10),
-                new Pattern(EnemyActionType.Attack, 8),
+                new Pattern(EnemyActionType.Defense, 8),
                 new Pattern(EnemyActionType.Attack, 5)
             };
             

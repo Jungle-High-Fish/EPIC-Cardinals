@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Eight
   m_EditorClassIdentifier: 
   enemyName: 8
+  enemyGrade: 2
   enemyType: 10
   prefab: {fileID: 8525769555492493473, guid: 24876d21c49c26e4a86f6c4911fc7ff3, type: 3}
   berserkPrefab: {fileID: 0}
-  maxHP: 20
+  maxHP: 30
