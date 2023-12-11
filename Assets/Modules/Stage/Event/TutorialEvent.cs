@@ -282,7 +282,7 @@ namespace Cardinals.Tutorial
 
         private IEnumerator SummonsAction()
         {
-            var summons = GameManager.I.Stage.Summons;
+            var summons = GameManager.I.Stage.BoardObjects;
             for (int i = summons.Count - 1; i >= 0; i--)
             {
                 yield return summons[i].OnTurn();
@@ -293,10 +293,10 @@ namespace Cardinals.Tutorial
 
         private void RemoveSummons()
         {
-            var summons = GameManager.I.Stage.Summons;
+            var summons = GameManager.I.Stage.BoardObjects;
             for (int i = summons.Count - 1; i >= 0; i--)
             {
-                summons[i].Delete();
+                summons[i].Destroy();
             }
         }
 

@@ -186,7 +186,7 @@ namespace Cardinals
                 yield return new WaitForSeconds(time / 2);
 
                 _onTile = _onTile.Next;
-                CheckSummonOnTile();
+                yield return CheckSummonOnTile();
                 if (i != count - 1) {
                     _onTile.StepOn(this);
                 }
@@ -214,7 +214,7 @@ namespace Cardinals
                 Animator.Play("Jump");
                 yield return new WaitForSeconds(time);
                 _onTile = _onTile.Prev;
-                CheckSummonOnTile();
+                yield return CheckSummonOnTile();
                 if (i != count - 1)
                 {
                     _onTile.StepOn(this);
@@ -228,17 +228,16 @@ namespace Cardinals
             SetFlipTowardEnemy();
         }
 
-        private void CheckSummonOnTile()
+        private IEnumerator CheckSummonOnTile()
         {
-            var summons = GameManager.I.Stage.Summons;
+            var summons = GameManager.I.Stage.BoardObjects;
             for (int i = summons.Count - 1; i >= 0; i--)
             {
                 if (_onTile == summons[i].OnTile)
                 {
-                    summons[i].Execute();
+                    yield return summons[i].OnCollisionPlayer();
                 }
             }
-
         }
         
         public IEnumerator CardAction(int num, BaseEntity target) {

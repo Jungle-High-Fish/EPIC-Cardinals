@@ -348,6 +348,22 @@ namespace Cardinals.Enums {
     }
 
     #region Board Event
+    
+
+    public enum NewBoardEventType
+    {
+        Ignore,
+        PotionGoblin,
+        Roulette,
+    }
+
+    public enum NewBoardEventOnType
+    {
+        Ignore,
+        Fix,
+        Move
+    }
+    
     public enum BoardEventType : int
     {
         Empty,

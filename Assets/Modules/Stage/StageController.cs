@@ -5,9 +5,9 @@ using Cardinals.Enums;
 using System;
 using System.Linq;
 using Cardinals.Board;
+using Cardinals.BoardEvent;
 using Cardinals.Buff;
 using Cardinals.Enemy;
-using Cardinals.Enemy.Summon;
 using Sirenix.OdinInspector;
 using Util;
 using Cardinals.Tutorial;
@@ -61,7 +61,7 @@ namespace Cardinals.Game {
             }
         }
 
-        public List<BaseEnemySummon> Summons { get; set; } = new();
+        public List<IMovingBoardObject> BoardObjects { get; set; } = new();
         
         public IEnumerator Load(Stage stage) 
         {
