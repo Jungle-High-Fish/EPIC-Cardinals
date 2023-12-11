@@ -9,7 +9,6 @@ namespace Cardinals.Board.Curse
     {
         public Fireball() : base(TileCurseType.Fireball)
         {
-            
             Action = SpawnFireball;
         }
 

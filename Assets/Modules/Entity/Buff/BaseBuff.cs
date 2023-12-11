@@ -29,8 +29,8 @@ namespace Cardinals
             set
             {
                 _count = value;
-                if ( CountDecreaseType == BuffCountDecreaseType.Turn 
-                     && _count == 0)
+                if ( (CountDecreaseType == BuffCountDecreaseType.Turn 
+                     && _count == 0))
                 {
                     Remove();
                 }
@@ -57,23 +57,34 @@ namespace Cardinals
         
         public void EndTurn()
         {
-            if (CountDecreaseType <= BuffCountDecreaseType.Turn)
+            switch (CountDecreaseType)
             {
-                Count--;
+                case BuffCountDecreaseType.Once:
+                    Remove();
+                    break;
+                case BuffCountDecreaseType.Turn:
+                    Count--;
+                    break;
+                default: break;
             }
         }
         
         public void EndEvent()
         {
-            if (CountDecreaseType <= BuffCountDecreaseType.Event)
+            switch (CountDecreaseType)
             {
-                Remove();
+                case BuffCountDecreaseType.Once : 
+                case BuffCountDecreaseType.Turn :
+                case BuffCountDecreaseType.Event : 
+                    Remove();
+                    break;
+                default: break;
             }
         }
 
         public void EndStage()
         {
-            if (CountDecreaseType <= BuffCountDecreaseType.Stage)
+            if (CountDecreaseType == BuffCountDecreaseType.Stage)
             {
                 Remove();
             }

@@ -25,7 +25,8 @@ namespace Cardinals.Game
             Player player = GameManager.I.Player;
             StageController stage = GameManager.I.Stage;
             Board.Board board = GameManager.I.Stage.Board;
-            CardManager cardManager = GameManager.I.Stage.CardManager;
+            //CardManager cardManager = GameManager.I.Stage.CardManager;
+            DiceManager diceManager = GameManager.I.Stage.DiceManager;
             List<BaseEnemy> enemies = new();
             List<Reward> rewards = new();
 
@@ -33,7 +34,8 @@ namespace Cardinals.Game
             InitEnemy(enemies, rewards);
             GameManager.I.CurrentEnemies = enemies;
             
-            cardManager.OnBattle();
+            //cardManager.OnBattle();
+            diceManager.OnBattle();
 
             do // 전투 시작
             {
@@ -45,16 +47,18 @@ namespace Cardinals.Game
                 }
 
                 // 플레이어 행동
-                yield return cardManager.OnTurn();
+                //yield return cardManager.OnTurn();
+                yield return diceManager.OnTurn();
                 yield return player.OnTurn();
 
-                // 턴 종료 버튼 활성화
-                GameManager.I.UI.UIEndTurnButton.Activate();
+                // 아래 내용 플레이어 OnTurn으로 이동했습니다.
+                // // 턴 종료 버튼 활성화
+                // GameManager.I.UI.UIEndTurnButton.Activate();
+                //
+                // yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
 
-                yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
-
-                GameManager.I.UI.UIEndTurnButton.Deactivate();
-                cardManager.SetCardSelectable(false);
+                // GameManager.I.UI.UIEndTurnButton.Deactivate();
+                // cardManager.SetCardSelectable(false);
                 
                 // 버프 처리
                 player.OnBuff();

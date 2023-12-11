@@ -15,7 +15,7 @@ namespace Cardinals
 
         public override bool UsePotion()
         {
-            GameManager.I.Stage.CardManager.PotionUsePrevMove(3);
+            GameManager.I.Stage.DiceManager.PotionUsePrevMove(3);
             return true;
         }
     }

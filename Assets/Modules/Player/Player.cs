@@ -11,6 +11,7 @@ using Cardinals.Game;
 using Cardinals.Buff;
 using Sirenix.Utilities;
 using Unity.Mathematics;
+using Modules.Entity.Buff;
 
 namespace Cardinals
 {
@@ -71,14 +72,25 @@ namespace Cardinals
         {
             _isDamagedThisTurn = false;
             
-            yield return null;
+            if (CheckBuffExist(BuffType.Stun))
+            {
+                // 행동 하지 않음... 스턴 효과 애니메이션 출력?
+            }
+            else
+            {
+                GameManager.I.UI.UIEndTurnButton.Activate();
+                yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
+                GameManager.I.UI.UIEndTurnButton.Deactivate();
+                GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
+            }
         }
 
         public override IEnumerator EndTurn()
         {
             yield return base.EndTurn(); // 버프/디버프 소모
             
-            yield return GameManager.I.Stage.CardManager.EndTurn();
+            //yield return GameManager.I.Stage.CardManager.EndTurn();
+            yield return GameManager.I.Stage.DiceManager.EndTurn();
             GameManager.I.Player.UpdateAction(PlayerActionType.None);
             
             if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth1))
@@ -119,7 +131,7 @@ namespace Cardinals
                 var enemies = GameManager.I.CurrentEnemies.ToList();
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
-                    if (enemies[i].PrevPattern.Type == EnemyActionType.Attack)
+                    if (enemies[i].PrevPattern?.Type == EnemyActionType.Attack)
                     {
                         enemies[i].Hit(DefenseCount);
                     }
@@ -137,6 +149,8 @@ namespace Cardinals
             _onTile = tile;
             transform.position = tile.transform.position + new Vector3(0, 1.3f, 0);
         }
+
+        public Action HomeReturnEvent { get; set; }
       
         public IEnumerator MoveTo(int count,float time)
         {
@@ -148,7 +162,7 @@ namespace Cardinals
                 if (_onTile.Next == GameManager.I.Stage.Board.GetStartTile()) {
                     _boardRoundCount++;
 
-                    GameManager.I.Stage.GenerateBoardEvent();
+                    HomeReturnEvent.Invoke();
 
                     if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Rigloo))
                     {
@@ -188,7 +202,7 @@ namespace Cardinals
         
         public IEnumerator PrevMoveTo(int count, float time)
         {
-            GameManager.I.Stage.CardManager.SetCardSelectable(false);
+            GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             _onTile?.Leave(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
@@ -199,7 +213,11 @@ namespace Cardinals
                 prevPos.y += 1.3f;
                 transform.DOJump(prevPos, 2, 1, time);
                 Animator.Play("Jump");
-                yield return new WaitForSeconds(time);
+
+                yield return new WaitForSeconds(time / 2);
+                GameManager.I.Sound.PlayerMove();
+                yield return new WaitForSeconds(time / 2);
+
                 _onTile = _onTile.Prev;
                 CheckSummonOnTile();
                 if (i != count - 1)
@@ -207,10 +225,11 @@ namespace Cardinals
                     _onTile.StepOn(this);
                 }
             }
+
             _onTile.Arrive(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
-            GameManager.I.Stage.CardManager.UpdateCardState(count, true);
-            GameManager.I.Stage.CardManager.SetCardSelectable(true);
+            GameManager.I.Stage.DiceManager.UpdateDiceState(count, true);
+            GameManager.I.Stage.DiceManager.SetDiceSelectable(true);
             
             SetFlipTowardEnemy();
         }
@@ -234,11 +253,11 @@ namespace Cardinals
             yield return null;
 
             // [유물] 워프 부적
-            if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
+            /*if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Warp)
                 && num == 4)
             {
                 GameManager.I.Stage.CardManager.WarpArtifact();
-            }
+            }*/
 
         }
         
@@ -246,7 +265,7 @@ namespace Cardinals
         public void TestAddBuff(BuffType buffType)
         {
            // AddBuff(new Slow());
-            AddBuff(new ElectricShock());
+            AddBuff(new Confusion());
         }
 
 

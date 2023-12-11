@@ -58,8 +58,8 @@ namespace Cardinals.UI
                 // 예외 처리로 값 감산
                 pos += enemy.EnemyData.enemyType switch
                 {
-                    EnemyType.One => new Vector3(0, -30),
-                    EnemyType.Three1 or EnemyType.Three2 => new Vector3(0, -30),
+                    EnemyType.Krol => new Vector3(0, -30),
+                    EnemyType.PiPi or EnemyType.PoPo => new Vector3(0, -30),
                     _ => Vector2.zero
                 };
             }
@@ -92,8 +92,8 @@ namespace Cardinals.UI
             // 예외 처리로 값 감산
             pos += enemy.EnemyData.enemyType switch
             {
-                EnemyType.One => new Vector3(0, -60),
-                EnemyType.Three1 or EnemyType.Three2 => new Vector3(0, -60),
+                EnemyType.Krol => new Vector3(0, -60),
+                EnemyType.PiPi or EnemyType.PoPo => new Vector3(0, -60),
                 _ => Vector2.zero
             };
                 

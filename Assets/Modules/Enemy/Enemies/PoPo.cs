@@ -4,7 +4,7 @@ using Cardinals.Game;
 
 namespace Cardinals.Enemy
 {
-    public class Three2 : BaseEnemy
+    public class PoPo : BaseEnemy
     {
         public override void Init(EnemyDataSO enemyData)
         {
@@ -29,7 +29,7 @@ namespace Cardinals.Enemy
 
             DieEvent += () =>
             {
-                var pair = GameManager.I.CurrentEnemies.FirstOrDefault(e => e.GetType() == typeof(Three1));
+                var pair = GameManager.I.CurrentEnemies.FirstOrDefault(e => e.GetType() == typeof(PiPi));
                 if(pair != null) 
                     pair.BerserkMode = true;
             };

@@ -83,6 +83,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Enemy_Spawn_Summon = "Enemy/Spawn/Summon";
             public const string Prefabs_Enemy_Spawn_Fireball = "Enemy/Spawn/Fireball";
             public const string Prefabs_Enemy_Spawn_ThunderBolt= "Enemy/Spawn/ThunderBolt";
+            public const string Prefabs_Enemy_Spawn_Ryuka= "Enemy/Spawn/Ryuka";
 
             public const string Prefabs_UI_Tutorial = "UI/Tutorial/TutorialUI";
             public const string Prefabs_UI_TutorialQuest = "UI/Tutorial/QuestUI";
@@ -171,6 +172,7 @@ namespace Cardinals.Constants {
 
             public const string Core = "Core";
             public const string CardManager = "CardManager";
+            public const string DiceManager = "DiceManager";
         }
 
         public static class Colors {

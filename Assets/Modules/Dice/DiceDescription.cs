@@ -38,14 +38,22 @@ namespace Cardinals
 
         public void SetDescriptionUIHovered(int index)
         {
+            ResetOutline();
             _diceDescription.transform.GetChild(index).GetComponent<Outline>().enabled = true;
             _diceDescription.SetActive(true);
         }
 
-        public void SetDescriptionUIRestored(int index)
+        public void SetDescriptionUIRestored()
         {
-            _diceDescription.transform.GetChild(index).GetComponent<Outline>().enabled = false;
             _diceDescription.SetActive(false);
+        }
+
+        private void ResetOutline()
+        {
+            foreach(Transform t in _diceDescription.transform)
+            {
+                t.GetComponent<Outline>().enabled = false;
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Cardinals.Game {
         public Board.Board Board => _board;
         public Player Player => _player;
         public CardManager CardManager => _cardManager;
+        public DiceManager DiceManager => _diceManager;
         public BaseEvent CurEvent => _curEvent;
         public List<BaseEnemy> Enemies {
             get {
@@ -40,6 +41,7 @@ namespace Cardinals.Game {
         private Board.Board _board;
         private Player _player;
         private CardManager _cardManager;
+        private DiceManager _diceManager;
         private BaseEvent _curEvent;
 
         private RewardBox _rewardBox;
@@ -73,7 +75,6 @@ namespace Cardinals.Game {
             yield return _board.SetBoard(stage.BoardData);
 
             SetCardSystem();
-
             PlacePlayer();
         }
 
@@ -83,6 +84,7 @@ namespace Cardinals.Game {
         public IEnumerator Flow() {
             yield return GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
+            Player.HomeReturnEvent += GenerateBoardEvent;
             
             // 축복 선택
             //yield return SelectBlessFlow();
@@ -104,6 +106,7 @@ namespace Cardinals.Game {
                 }
             }
 
+            Player.HomeReturnEvent -= GenerateBoardEvent;
             GameManager.I.GameClear();
         }
 
@@ -222,10 +225,18 @@ namespace Cardinals.Game {
             cardManagerObj.transform.position = Vector3.zero;
             _cardManager = cardManagerObj.AddComponent<CardManager>();
             _cardManager.transform.SetParent(_coreTransform);
+           // _cardManager.gameObject.SetActive(false);
             _cardManager.Init();
+            GameObject diceManagerObj = new GameObject($"@{Constants.Common.InstanceName.DiceManager}");
+            diceManagerObj.transform.position = Vector3.zero;
+            _diceManager = diceManagerObj.AddComponent<DiceManager>();
+            _diceManager.transform.SetParent(_coreTransform);
+            
 
             GameManager.I.UI.SetCardSystemUI();
+            _diceManager.Init();
         }
+
 
         /// <summary>
         /// [축복] 메테오 소환
@@ -273,7 +284,7 @@ namespace Cardinals.Game {
         public void AddBuff()
         {
             Enemies.FirstOrDefault().AddBuff(new Burn(1));
-            //Enemies.FirstOrDefault().AddBuff(new Slow());
+            // Enemies.FirstOrDefault().AddBuff(new Slow());
             // Enemies.FirstOrDefault().AddBuff(new Weak(1));
             // Enemies.FirstOrDefault().AddBuff(new ElectricShock());
             // Enemies.FirstOrDefault().AddBuff(new HealBuff(5));

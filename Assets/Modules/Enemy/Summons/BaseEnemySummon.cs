@@ -31,6 +31,15 @@ namespace Cardinals.Enemy.Summon
         {
         
         }
+        
+        /// <summary>
+        /// 소환수의 위치를 변경
+        /// </summary>
+        /// <param name="tile"></param>
+        protected void SetTile(Tile tile)
+        {
+            _onTile = tile;
+        }
 
         public void Delete()
         {
