@@ -205,6 +205,7 @@ namespace Cardinals
             _dices[index].RollResultIndex = resultIndex;
             _dices[index].RollResultNumber = rollResult;
             _dicesUI[index].UpdateDiceUI(rollResult);
+            _dicesUI[index].DiceDescription.SetDescriptionUIRestored();
         }
 
         [Button]
