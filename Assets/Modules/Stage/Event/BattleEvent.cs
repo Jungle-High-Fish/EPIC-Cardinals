@@ -37,11 +37,11 @@ namespace Cardinals.Game
             //cardManager.OnBattle();
             diceManager.OnBattle();
 
-            int turn = 0;
+            int turn = 1;
             do // 전투 시작
             {
                 // 3턴마다 보드 이벤트 생성
-                if (++turn % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
+                if (turn++ % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
                 
                 // 전투 업데이트
                 yield return player.StartTurn();
@@ -54,6 +54,7 @@ namespace Cardinals.Game
                 //yield return cardManager.OnTurn();
                 yield return diceManager.OnTurn();
                 yield return player.OnTurn();
+                if (CheckPlayerWin) break;
 
                 // 아래 내용 플레이어 OnTurn으로 이동했습니다.
                 // // 턴 종료 버튼 활성화
@@ -73,11 +74,13 @@ namespace Cardinals.Game
                 {
                     yield return e.OnPreTurn();
                 }
-                
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
                     yield return enemies[i].OnTurn();
                 }
+
+                if (CheckEnemyWin) break;
+                
                 
                 // 플레이어 턴 종료 처리
                 yield return player.EndTurn();
@@ -95,10 +98,10 @@ namespace Cardinals.Game
                     player.BlessWater1();
                 }
                 
-            } while (enemies.Count > 0 && player.Hp > 0);
+            } while (!(CheckPlayerWin || CheckEnemyWin));
 
             // 플레이어의 승리
-            if (enemies.Count == 0)
+            if (CheckPlayerWin)
             {
                 IsClear = true;
                 
@@ -110,6 +113,10 @@ namespace Cardinals.Game
                 yield return WaitReward(rewards);
             }
         }
+
+        private bool CheckPlayerWin => !GameManager.I.CurrentEnemies.Any();
+
+        private bool CheckEnemyWin => GameManager.I.Player.Hp == 0;
 
         /// <summary>
         /// 몬스터 초기화
