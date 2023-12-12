@@ -90,22 +90,22 @@ namespace Cardinals
             _diceUIPos = (transform as RectTransform).anchoredPosition;
             _diceAnimation = GetComponent<DiceAnimation>();
             _diceDescription = GetComponent<DiceDescription>();
-            switch (dice.DiceType)
-            {
-                case (DiceType.Normal):
-                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Normal_1");
-                    break;
 
-                case (DiceType.Fire):
-                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Fire_1");
-                    break;
-                case (DiceType.Water):
-                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Water_1");
-                    break;
-                case (DiceType.Earth):
-                    _image.Get(gameObject).sprite = ResourceLoader.LoadSprite("/Dice/Dice_Earth_1");
-                    break;
-            }
+            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + "1";
+            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+
+        }
+
+        public void UpdateDiceUI(Dice dice)
+        {
+            _dice = dice;
+            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + _dice.RollResultNumber.ToString();
+            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+        }
+        public void RollDiceUI(int number)
+        {
+            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
+            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
 
         public void EnableCardUI()
@@ -114,12 +114,6 @@ namespace Cardinals
             GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
             transform.localScale = new Vector3(1, 1, 1);
             gameObject.SetActive(true);
-        }
-
-        public void UpdateDiceUI(int number)
-        {
-            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
-            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
    
         public void DismissDiceUI()
