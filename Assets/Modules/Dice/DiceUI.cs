@@ -96,18 +96,24 @@ namespace Cardinals
 
         }
 
+        public void UpdateDiceUI(Dice dice)
+        {
+            _dice = dice;
+            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + _dice.RollResultNumber.ToString();
+            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+        }
+        public void RollDiceUI(int number)
+        {
+            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
+            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+        }
+
         public void EnableCardUI()
         {
             IsDiscard = false;
             GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
             transform.localScale = new Vector3(1, 1, 1);
             gameObject.SetActive(true);
-        }
-
-        public void UpdateDiceUI(int number)
-        {
-            string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
-            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
    
         public void DismissDiceUI()
