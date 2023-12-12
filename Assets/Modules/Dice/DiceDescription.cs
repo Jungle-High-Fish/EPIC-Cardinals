@@ -25,6 +25,19 @@ namespace Cardinals
             }
         }
 
+        public void UpdateDiceDescription(Dice dice)
+        {
+            List<int> numbers = dice.DiceNumbers;
+            DiceType type = dice.DiceType;
+
+            for (int i = 0; i < _diceDescription.transform.childCount; i++)
+            {
+                Image image = _diceDescription.transform.GetChild(i).GetComponent<Image>();
+                string path = "Dice/Dice_" + type.ToString() + "_" + numbers[i].ToString();
+                image.sprite = ResourceLoader.LoadSprite(path);
+
+            }
+        }
         public void SetDescriptionUIHovered(int index)
         {
             ResetOutline();
