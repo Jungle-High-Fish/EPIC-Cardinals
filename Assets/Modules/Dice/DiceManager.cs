@@ -8,6 +8,7 @@ using Cardinals.Tutorial;
 using Cardinals.Buff;
 using UnityEngine.UI;
 using Util;
+using System.Linq;
 
 namespace Cardinals
 {
@@ -203,12 +204,24 @@ namespace Cardinals
         [Button]
         public void Roll(int index)
         {
-            int resultIndex = Random.Range(0, _dices[index].DiceNumbers.Count);
+            int resultIndex = UnityEngine.Random.Range(0, _dices[index].DiceNumbers.Count);
             int rollResult = _dices[index].DiceNumbers[resultIndex];
             _dices[index].RollResultIndex = resultIndex;
             _dices[index].RollResultNumber = rollResult;
-            _dicesUI[index].UpdateDiceUI(rollResult);
+            _dicesUI[index].RollDiceUI(rollResult);
             _dicesUI[index].DiceDescription.SetDescriptionUIRestored();
+        }
+
+        [Button]
+        public void SortDices()
+        {
+            _dices.Sort((p1, p2) => p1.RollResultNumber.CompareTo(p2.RollResultNumber));
+            for(int i = 0; i < _dicesUI.Count; i++)
+            {
+                _dicesUI[i].UpdateDiceUI(_dices[i]);
+                _dicesUI[i].DiceDescription.UpdateDiceDescription(_dices[i]);
+            }
+
         }
 
         [Button]
