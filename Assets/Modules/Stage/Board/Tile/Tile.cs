@@ -23,6 +23,7 @@ namespace Cardinals.Board {
         public TileMagic TileMagic => _tileMagic;
         public TileEvent TileEvent=> _tileEvent;
         public bool HasEvent => _tileEvent.EventType != BoardEventType.Empty;
+        public bool IsSealed => _isSealed;
 
         public UITile UITile => _uiTile.Get(gameObject);
 
@@ -110,6 +111,9 @@ namespace Cardinals.Board {
 
         // 타일 위 기물 관련 변수
         private List<IBoardPiece> _boardPieces = new List<IBoardPiece>();
+
+        // 타일 봉인 관련 변수
+        private bool _isSealed = false;
         
         public void Init(
             TileData tileData, 
@@ -201,7 +205,11 @@ namespace Cardinals.Board {
                 case TileState.Cursed:
                     _tileEffect.ArriveAction(boardPiece);
                     _tileCurse.ClearCurse();
-                    ChangeState(TileState.Normal);
+                    if (_isSealed == false) {
+                        ChangeState(TileState.Normal);
+                    } else {
+                        ChangeState(TileState.Seal);
+                    }
                     break;
                 case TileState.Seal:
                 default:
@@ -281,6 +289,19 @@ namespace Cardinals.Board {
             _tileAnimation.Get(gameObject).StopAll();
         }
 
+        public void ChangeState(TileState state) {
+            TileState originalState = _tileState;
+            _tileState = state;
+            if (_tileState == TileState.Seal) {
+                _isSealed = true;
+            }
+            ApplyState(originalState);
+        }
+
+        public void ClearSealedState() {
+            _isSealed = false;
+        }
+
         // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
         private void ApplyState(TileState originalState) {
             if (originalState == TileState.Normal) {
@@ -290,7 +311,7 @@ namespace Cardinals.Board {
             }
 
             if (originalState == TileState.Cursed) {
-                if (_tileState == TileState.Normal) {
+                if (_tileState == TileState.Normal || _tileState == TileState.Seal) {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
                 }
             }
@@ -298,15 +319,8 @@ namespace Cardinals.Board {
             if (originalState == TileState.Seal) {
                 if (_tileState == TileState.Cursed) {
                     _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
-                    // [TODO] 수정 필요
                 }
             }
-        }
-
-        public void ChangeState(TileState state) {
-            TileState originalState = _tileState;
-            _tileState = state;
-            ApplyState(originalState);
         }
 
         private void OnMouseDown() {

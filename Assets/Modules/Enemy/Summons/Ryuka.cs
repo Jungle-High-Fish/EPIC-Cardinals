@@ -1,42 +1,23 @@
 ﻿using System.Collections;
 using System.Linq;
 using Cardinals.Board;
+using Cardinals.BoardEvent;
 using DG.Tweening;
 using UnityEngine;
 
 namespace Cardinals.Enemy.Summon
 {
-    public class Ryuka : BaseEnemySummon
+    public class Ryuka : BaseBoardObject
     {
-        public void Init()
-        {
-            
-        }
-        //Vector3 GetPosition(Vector3 vector3) => vector3 + new Vector3(0, _maxY, 0);
-        
         public override IEnumerator OnTurn()
         {
-            // var playerTile = GameManager.I.Player.OnTile; 
-            // Tile tile = _onTile;
-            //
-            // for (int i = 0; i < _moveCount; i++)
-            // {
-            //     tile = tile.Next;
-            //     transform.DOMove(GetPosition(tile.transform.position), _moveDuration);
-            //     yield return new WaitForSeconds(_moveDuration);
-            //
-            //     if (playerTile == tile) // 이동했는데 플레이어 타일
-            //     {
-            //         Execute();
-            //         break;
-            //     }
-            // }
-            //
-            // SetTile(tile);
-            
-            yield return null;
+            Execute();
+            yield return base.OnTurn();
         }
 
+        /// <summary>
+        /// 몬스터 체력을 회복 시킴
+        /// </summary>
         void Execute()
         {
             var enemy = GameManager.I.CurrentEnemies.FirstOrDefault();
@@ -45,6 +26,17 @@ namespace Cardinals.Enemy.Summon
             {
                 enemy.Heal(2);
             }
+        }
+
+        public override IEnumerator OnCollisionPlayer()
+        {
+            transform
+                .DOShakePosition(.5f, .5f)
+                .OnComplete(() =>
+                {
+                    base.Destroy();
+                });
+            yield return null;
         }
     }
 }
