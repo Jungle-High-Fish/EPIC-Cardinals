@@ -268,14 +268,7 @@ namespace Cardinals.Board {
                 yDegree = 0;
             }
 
-            // bool isCornerTile = 
-            //     boardPos.x == 0 && boardPos.y == 0 ||
-            //     boardPos.x == 0 && boardPos.y == _boardHeight - 1 ||
-            //     boardPos.x == _boardWidth - 1 && boardPos.y == 0 ||
-            //     boardPos.x == _boardWidth - 1 && boardPos.y == _boardHeight - 1;
             bool isCornerTile = tileData.type == TileType.Blank || tileData.type == TileType.Start;
-
-            //Debug.Log(isCornerTile);
 
             Vector3 targetPos = 
                 _tileInstantiateLeftTopPos + new Vector3(targetX, 0, -targetY);
