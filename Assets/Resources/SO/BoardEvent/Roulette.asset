@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da6c2df5fbd2e94b9fc5ad87019e1af, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c31830d19b34547b47a122252505d31, type: 3}
   m_Name: Roulette
   m_EditorClassIdentifier: 
-  eventType: 2
-  eventName: "\uB8F0\uB81B \uC774\uBCA4\uD2B8"
-  eventDescription: "\uC774 \uC774\uBCA4\uD2B8 \uD0C0\uC77C\uC744 \uBC1F\uC73C\uBA74
-    \uB79C\uB364 \uBCF4\uC0C1\uC744 \uD68D\uB4DD\uD560 \uC218 \uC788\uB294 \uB8F0\uB81B\uC774
-    \uB098\uD0C0\uB0A9\uB2C8\uB2E4."
+  type: 2
+  name: "\uB8F0\uB81B"
+  description: "\uB3C4\uCC29 \uC2DC, \uB8F0\uB81B \uC774\uBCA4\uD2B8\uB97C \uC2E4\uD589\uD569\uB2C8\uB2E4."
+  keepTurnCount: 2
   sprite: {fileID: 21300000, guid: ceb2dc5cc704d80438b3a3a658b2c572, type: 3}
+  onBoardType: 1
+  executeType: 2
+  moveDistance: 0

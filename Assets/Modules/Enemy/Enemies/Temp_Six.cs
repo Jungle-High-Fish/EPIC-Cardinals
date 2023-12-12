@@ -17,9 +17,9 @@ namespace Cardinals.Enemy
             Patterns = new[]
             {
                 new Pattern(EnemyActionType.TileCurse, action: Seal),
-                new Pattern(EnemyActionType.Attack, 8),
+                new Pattern(EnemyActionType.Attack, 7),
+                new Pattern(EnemyActionType.Attack, 10),
                 new Pattern(EnemyActionType.Defense, 8),
-                new Pattern(EnemyActionType.NoAction),
             };
             
             Rewards = new Reward[]

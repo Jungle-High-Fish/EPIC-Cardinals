@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pazizizizic
   m_EditorClassIdentifier: 
   enemyName: "\uD30C\uC9C0\uC9C0\uC9C0\uC9C1\uC774"
+  enemyGrade: 3
   enemyType: 6
   prefab: {fileID: 8586937502347207555, guid: 5493556b42a57c54299c9b497b86734a, type: 3}
   berserkPrefab: {fileID: 7048143759726750530, guid: 1acb2cac4109ef04aa29424a11a4e5ee,

@@ -20,6 +20,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_TileDescription = "UI/TileInfo/TileDescriptionUI";
             public const string Prefabs_UI_OnTileDescription = "UI/TileInfo/OnTileDescriptionUI";
 
+            public const string Prefabs_BoardEventObject = "Board/BoardEventObject";
             public const string Prefabs_CornerTile = "Board/Tiles/CornerTile";
             public const string Prefabs_NormalMouseDetector = "Board/NormalMouseDetector";
             public const string Prefabs_CircleMouseDetector = "Board/CircleMouseDetector";
@@ -102,7 +103,7 @@ namespace Cardinals.Constants {
             public const string Sprites_Card_Basic5 = "Card/CardBasic5";
             public const string Sprites_Card_Attack_Mark = "Card/Card_State_Attack";
             public const string Sprites_Card_Defense_Mark = "Card/Card_State_Defense";
-            
+
             public const string Sprite_UI_Entity_SuccessDefense = "Entity/SuccessDefense";
             public const string Sprite_UI_Entity_BrokenDefense = "Entity/BrokenDefense";
 

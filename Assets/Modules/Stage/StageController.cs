@@ -5,12 +5,13 @@ using Cardinals.Enums;
 using System;
 using System.Linq;
 using Cardinals.Board;
+using Cardinals.BoardEvent;
 using Cardinals.Buff;
 using Cardinals.Enemy;
-using Cardinals.Enemy.Summon;
 using Sirenix.OdinInspector;
 using Util;
 using Cardinals.Tutorial;
+using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 
 namespace Cardinals.Game {
@@ -61,7 +62,7 @@ namespace Cardinals.Game {
             }
         }
 
-        public List<BaseEnemySummon> Summons { get; set; } = new();
+        public List<IMovingBoardObject> BoardObjects { get; set; } = new();
         
         public IEnumerator Load(Stage stage) 
         {
@@ -84,7 +85,6 @@ namespace Cardinals.Game {
         public IEnumerator Flow() {
             yield return GameManager.I.UI.UIStage.Init(_stage);
             yield return GameManager.I.UI.UIStage.Visit();
-            Player.HomeReturnEvent += GenerateBoardEvent;
             
             // 축복 선택
             //yield return SelectBlessFlow();
@@ -106,7 +106,6 @@ namespace Cardinals.Game {
                 }
             }
 
-            Player.HomeReturnEvent -= GenerateBoardEvent;
             GameManager.I.GameClear();
         }
 
@@ -273,11 +272,13 @@ namespace Cardinals.Game {
             Player.PlayerInfo.AddArtifact(artifact);
         }
 
-        public void AddRandomPotion()
+        public PotionType AddRandomPotion()
         {
             int idx = Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
             var potion = (PotionType)idx;
             Player.PlayerInfo.AddPotion(potion);
+
+            return potion;
         }
 
         [Button]
@@ -298,21 +299,50 @@ namespace Cardinals.Game {
         }
         #endregion
 
-        private int _boardEventIdx;
+        // private int _boardEventIdx;
+        // [Button]
+        // public void GenerateBoardEvent()
+        // {
+        //     var tileAction = Board.GetCanSetEventTileEventAction();
+        //     if (tileAction != null)
+        //     {
+        //         // 이벤트 설정                
+        //         int enumLength = Enum.GetNames(typeof(BoardEventType)).Length;
+        //         _boardEventIdx = Math.Max(1, (++_boardEventIdx % enumLength));
+        //         var type = (BoardEventType)_boardEventIdx;
+        //         
+        //         tileAction.Set(type);
+        //     }
+        //     else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
+        // }
+        
         [Button]
-        public void GenerateBoardEvent()
+        public void GenerateNewBoardEvent()
         {
-            var tileAction = Board.GetCanSetEventTileEventAction();
-            if (tileAction != null)
+            var tiles = Board.TileSequence
+                .Where(t => t != Player.OnTile && // 현재 플레이어가 서 있지 않은
+                            !BoardObjects.Any(o => o is BaseBoardEventObject && t == o.OnTile )) // 이벤트가 존재하지 않는 ..
+                .ToList();
+            
+            if (tiles.Any())
             {
-                // 이벤트 설정                
-                int enumLength = Enum.GetNames(typeof(BoardEventType)).Length;
-                _boardEventIdx = Math.Max(1, (++_boardEventIdx % enumLength));
-                var type = (BoardEventType)_boardEventIdx;
+                // 이벤트를 생성할 타일 설정
+                Tile tile = tiles[Random.Range(0, tiles.Count())];
                 
-                tileAction.Set(type);
+                // 이벤트 설정                
+                int enumLength = Enum.GetNames(typeof(NewBoardEventType)).Length;
+                var evt = Random.Range(1, enumLength);
+                var evtType = (NewBoardEventType)evt;
+                
+                // 오브젝트 생성 및 컴프넌트 설정
+                var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_BoardEventObject);
+                var obj = Instantiate(prefab);
+
+                Type type = EnumHelper.GetNewBoardEventType(evtType);
+                obj.AddComponent(type);
+                obj.GetComponent<BaseBoardEventObject>().Init(tile, evtType);
             }
-            else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
+            else Debug.Log("보드 내 이벤트 생성 가능한 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }
 
         #region TestCode
