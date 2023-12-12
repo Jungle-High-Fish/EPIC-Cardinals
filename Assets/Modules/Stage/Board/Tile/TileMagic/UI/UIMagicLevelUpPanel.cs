@@ -80,7 +80,7 @@ namespace Cardinals.UI {
             }
 
             IEnumerator Requester() {
-                _titleText.Get(gameObject).text = "마법 부여!";
+                _titleText.Get(gameObject).text = "Enchantment!";
                 TextAnimation(_titleText.Get(gameObject));
 
                 gameObject.SetActive(true);
@@ -118,7 +118,7 @@ namespace Cardinals.UI {
             }
 
             IEnumerator Requester() {
-                _titleText.Get(gameObject).text = "마법 진화!";
+                _titleText.Get(gameObject).text = "Enchant Evolve!";
                 TextAnimation(_titleText.Get(gameObject));
                 
                 gameObject.SetActive(true);

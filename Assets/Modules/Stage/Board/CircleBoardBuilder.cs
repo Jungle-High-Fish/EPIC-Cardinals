@@ -131,7 +131,7 @@ namespace Cardinals.Board {
                 ResourceLoader.LoadPrefab(
                     Constants.FilePath.Resources.Prefabs_Tile
                 ),
-                targetPos,
+                targetPos + new Vector3(0, Constants.GameSetting.Board.TileInstantiateHeight, 0),
                 Quaternion.Euler(0, 180f + targetAngle, 0),
                 _boardController.transform
             );

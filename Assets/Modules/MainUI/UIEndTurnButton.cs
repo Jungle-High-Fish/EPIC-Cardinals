@@ -15,7 +15,7 @@ public class UIEndTurnButton : MonoBehaviour
 
     public void Init() {
         _button.Get(gameObject).onClick.AddListener(EndTurn);
-        _text.Get(gameObject).text = "턴 종료";
+        _text.Get(gameObject).text = "End Turn";
     }
 
 	public void EndTurn() {
@@ -29,9 +29,9 @@ public class UIEndTurnButton : MonoBehaviour
         _button.Get(gameObject).interactable = true;
 
         if (isForNextEvent) {
-            _text.Get(gameObject).text = "다음 이벤트";
+            _text.Get(gameObject).text = "Next Event";
         } else {
-            _text.Get(gameObject).text = "턴 종료";
+            _text.Get(gameObject).text = "End Turn";
         }
     }
 

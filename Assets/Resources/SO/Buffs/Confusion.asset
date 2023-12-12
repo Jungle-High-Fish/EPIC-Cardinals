@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 7
   decreaseType: 2
-  buffName: "\uD63C\uB780"
-  description: "\uC774\uB3D9\uC5D0 \uC8FC\uC0AC\uC704 \uC0AC\uC6A9 \uC2DC, 50% \uD655\uB960\uB85C
-    \uB4A4\uB85C \uAC10."
+  buffName: Confusion
+  description: When using dice for movement, there's a 50% chance to move backwards.
   sprite: {fileID: 21300000, guid: aad3f0c0265ab48268da2df9a846776a, type: 3}
   effectSprite: {fileID: 0}

@@ -281,6 +281,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5634572601927275659}
     m_Modifications:
+    - target: {fileID: 333235408990714300, guid: 82a0c0bce7a1a174ab18467248ba5515,
+        type: 3}
+      propertyPath: m_text
+      value: Change
+      objectReference: {fileID: 0}
+    - target: {fileID: 395472496410325171, guid: 82a0c0bce7a1a174ab18467248ba5515,
+        type: 3}
+      propertyPath: m_text
+      value: Level Up
+      objectReference: {fileID: 0}
     - target: {fileID: 6033080497394604915, guid: 82a0c0bce7a1a174ab18467248ba5515,
         type: 3}
       propertyPath: m_Name

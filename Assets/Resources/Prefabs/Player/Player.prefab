@@ -116,11 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db664e5561e2704db67335e808d7829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: "\uAC00\uBCF4\uC790\uAD6C~~!!"
-  hit: "\uC73D!!"
-  attack: "\uBC1B\uC544\uB77C!!"
-  die: "\uC73C\uC73D.."
-  win: "\uC57C\uD638~~!"
+  start: Let's Go!
+  hit: Ugh!!
+  attack: Take this!!
+  die: Ugh...
+  win: Yay~~!
   spec1: 
   spec2: 
   spec3: 

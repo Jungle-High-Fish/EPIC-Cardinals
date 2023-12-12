@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Defence
   m_EditorClassIdentifier: 
   magicType: 5
-  elementName: "\uBC29\uC5B4"
+  elementName: Defense
   elementColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
   particleColor1: {r: 0, g: 0, b: 0, a: 0}
   particleColor2: {r: 0, g: 0, b: 0, a: 0}
@@ -24,8 +24,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  mainMagicName: "\uBC29\uC5B4"
-  mainMagicDescription: "\uB0B8 \uCE74\uB4DC\uC758 \uC22B\uC790\uB9CC\uD07C \uBC29\uC5B4\uB3C4\uB97C
-    \uC313\uC2B5\uB2C8\uB2E4."
+  mainMagicName: Defense
+  mainMagicDescription: Gain defense equal to the number on the Dice.
   hasBuffEffect: 0
   buffType: 0

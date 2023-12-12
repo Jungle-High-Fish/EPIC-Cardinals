@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   magicType: 4
-  elementName: "\uACF5\uACA9"
+  elementName: Attack
   elementColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
   particleColor1: {r: 0, g: 0, b: 0, a: 0}
   particleColor2: {r: 0, g: 0, b: 0, a: 0}
@@ -24,7 +24,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  mainMagicName: "\uACF5\uACA9"
-  mainMagicDescription: "\uC8FC\uC0AC\uC704\uC758 \uC22B\uC790\uB9CC\uD07C \uACF5\uACA9\uD569\uB2C8\uB2E4."
+  mainMagicName: Attack
+  mainMagicDescription: Attack with a strength equal to the number rolled on the
+    dice.
   hasBuffEffect: 0
   buffType: 0

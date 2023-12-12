@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1564105171277220395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -625,8 +625,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537594929334503537}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.1200005, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0, y: 1.285, z: 0}
+  m_LocalScale: {x: 0.655, y: 0.655, z: 0.655}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6072974738662425146}
@@ -6616,6 +6616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666399836464942695, guid: 4ebd84d9851c6e241b2793c687e76951,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebd84d9851c6e241b2793c687e76951, type: 3}
