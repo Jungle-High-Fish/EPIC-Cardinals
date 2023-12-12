@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 83.755005, y: 0}
-  m_SizeDelta: {x: 127.51, y: 0}
+  m_AnchoredPosition: {x: 128.565, y: 0}
+  m_SizeDelta: {x: 217.13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3627962005608108234
 CanvasRenderer:
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD604\uC7AC \uD0C0\uC77C"
+  m_text: Current Tile
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2, type: 2}
   m_sharedMaterial: {fileID: 1784925987956549289, guid: 0d08dcc69bddcb0458bd0a79944003b2,
@@ -670,7 +670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD3EC\uC158"
+  m_text: Potion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2, type: 2}
   m_sharedMaterial: {fileID: 1784925987956549289, guid: 0d08dcc69bddcb0458bd0a79944003b2,
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD134 \uC885\uB8CC"
+  m_text: Turn End
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55d7b3d2b6e985b4fb91cd9e6064257f, type: 2}
   m_sharedMaterial: {fileID: -5667824550487740012, guid: 55d7b3d2b6e985b4fb91cd9e6064257f,
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCD95\uBCF5"
+  m_text: Bless
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2, type: 2}
   m_sharedMaterial: {fileID: 1784925987956549289, guid: 0d08dcc69bddcb0458bd0a79944003b2,
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC544\uD2F0\uD329\uD2B8"
+  m_text: Artifacts
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2, type: 2}
   m_sharedMaterial: {fileID: 1784925987956549289, guid: 0d08dcc69bddcb0458bd0a79944003b2,

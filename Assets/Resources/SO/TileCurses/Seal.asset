@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Seal
   m_EditorClassIdentifier: 
   curseType: 3
-  curseName: "\uBD09\uC778"
-  curseDescription: "\uC800\uC8FC\uB97C \uD574\uC81C\uD558\uC9C0 \uBABB\uD558\uBA74,
-    \uD574\uB2F9 \uD0C0\uC77C \uC7A0\uAE08. (\uC0AC\uC6A9 \uBD88\uAC00)\r\n\uD574\uB2F9
-    \uC804\uD22C \uB3D9\uC548 \uC9C0\uC18D"
+  curseName: Sealed
+  curseDescription: If the curse is not lifted, lock the specific tile. (Unusable)
+    This effect lasts for the duration of the battle.
   sprite: {fileID: 21300000, guid: fe2f5cf10b08c334e99ad4331d4aaaad, type: 3}
