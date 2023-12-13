@@ -8,6 +8,7 @@ using Cardinals.Constants;
 using Sirenix.OdinInspector;
 using Unity.Burst.Intrinsics;
 using Cardinals.Util;
+using Cardinals.UI;
 
 namespace Cardinals
 {
@@ -15,8 +16,11 @@ namespace Cardinals
     {
         public UIManager UI => _ui;
         public StageController Stage => _stage;
+        public GameSetting GameSetting => _gameSetting;
         public SoundManager Sound => _soundManager;
         
+        private GameSetting _gameSetting;
+
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
         private static StageController _stage;
@@ -42,11 +46,28 @@ namespace Cardinals
         [Button]
         public void GameStart()
         {
+            LoadGameSetting();
+
             StartCoroutine(MainGameFlow());
         }
 
         private void Start() {
             GameStart();
+        }
+
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (_ui.GameSettingUI.IsActive) {
+                    _ui.GameSettingUI.Hide();
+                } else {
+                    _ui.GameSettingUI.Show();
+                }
+            }
+        }
+
+        private void LoadGameSetting() {
+            _gameSetting = new GameSetting();
+            _gameSetting.Init();
         }
 
         private IEnumerator MainGameFlow()
@@ -60,8 +81,13 @@ namespace Cardinals
         private IEnumerator StageFlow(Stage stage)
         {
             _ui = InitUI();
+            
+            _gameSetting.InitUI(_ui.GameSettingUI);
+            
             _stage = LoadStage();
+
             _soundManager = InitSound();
+            _soundManager.PlayBGM();
 
             yield return _stage.Load(stage);
             yield return _stage.Flow();

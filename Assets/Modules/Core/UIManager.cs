@@ -16,6 +16,8 @@ namespace Cardinals
 {
     public class UIManager : MonoBehaviour
     {
+        public GameSettingUI GameSettingUI => _gameSettingUI;
+
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
         public UICardSystem UICardSystem => _uiCardSystem;
@@ -34,6 +36,8 @@ namespace Cardinals
         private Canvas _enemyUICanvas;
         private Canvas _systemUICanvas;
         private Canvas _descriptionUICanvas;
+
+        private GameSettingUI _gameSettingUI;
 
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
@@ -79,6 +83,7 @@ namespace Cardinals
             _systemUICanvas.GetComponent<Canvas>().sortingOrder = 1;
             InitDescriptionCanvas();
             
+            InstantiateGameSettingUI();
             
             InstantiateStageInfoUI();
             //InstantiateMapButtonUI();
@@ -149,6 +154,14 @@ namespace Cardinals
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.worldCamera = Camera.main;
             canvas.transform.SetParent(transform);
+        }
+
+        private void InstantiateGameSettingUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_GameSetting);
+            GameObject gameSettingUIObj = Instantiate(prefab, _systemUICanvas.transform);
+
+            _gameSettingUI = gameSettingUIObj.GetComponent<GameSettingUI>();
+            gameSettingUIObj.SetActive(false);
         }
 
         private void InstantiateStageInfoUI() {
