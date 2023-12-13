@@ -297,6 +297,24 @@ namespace Cardinals
             Animator.Play("Shield");
         }
 
+        [Button]
+        public override int Heal(int value)
+        {
+
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessWater2))
+            {
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
+                int damage = (MaxHp -Hp) < value ? (MaxHp - _hp) : value;
+                GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)].Hit(damage);
+            }
+
+            int _mathHeal = _hp + value;
+            Hp += value;
+
+            
+
+            return _mathHeal - _hp;
+        }
         public void Win()
         {   
             Animator.Play("Win");
