@@ -8,6 +8,8 @@ using Cardinals.Constants;
 using Sirenix.OdinInspector;
 using Unity.Burst.Intrinsics;
 using Cardinals.Util;
+using Cardinals.UI;
+using UnityEngine.SceneManagement;
 
 namespace Cardinals
 {
@@ -15,8 +17,11 @@ namespace Cardinals
     {
         public UIManager UI => _ui;
         public StageController Stage => _stage;
+        public GameSetting GameSetting => _gameSetting;
         public SoundManager Sound => _soundManager;
         
+        private GameSetting _gameSetting;
+
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
         private static StageController _stage;
@@ -42,11 +47,41 @@ namespace Cardinals
         [Button]
         public void GameStart()
         {
-            StartCoroutine(MainGameFlow());
+            StartCoroutine(LoadMainGame());
         }
 
         private void Start() {
-            GameStart();
+            LoadGameSetting();
+
+            _ui = InitUI();
+            _soundManager = InitSound();
+            _soundManager.PlayBGM();
+            _gameSetting.InitUI(_ui.GameSettingUI);
+        }
+
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (_ui.GameSettingUI.IsActive) {
+                    _ui.GameSettingUI.Hide();
+                } else {
+                    _ui.GameSettingUI.Show();
+                }
+            }
+        }
+
+        private void LoadGameSetting() {
+            _gameSetting = new GameSetting();
+            _gameSetting.Init();
+        }
+
+        IEnumerator LoadMainGame() {
+            var loading = SceneManager.LoadSceneAsync("StageTest");
+
+            while (!loading.isDone) {
+                yield return null;
+            }
+            
+            StartCoroutine(MainGameFlow());
         }
 
         private IEnumerator MainGameFlow()
@@ -58,10 +93,13 @@ namespace Cardinals
         }
 
         private IEnumerator StageFlow(Stage stage)
-        {
+        {   
             _ui = InitUI();
-            _stage = LoadStage();
             _soundManager = InitSound();
+            _soundManager.PlayBGM();
+            _gameSetting.InitUI(_ui.GameSettingUI);
+
+            _stage = LoadStage();
 
             yield return _stage.Load(stage);
             yield return _stage.Flow();
