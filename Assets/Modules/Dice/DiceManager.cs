@@ -340,13 +340,19 @@ namespace Cardinals
                                 break;
                             }
 
+                            if(GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind1)
+                                && useNumber==1 && _prevDiceNumber == 5)
+                            {
+                                StartCoroutine(DiceUseAction(useNumber, _dices[_selectDiceIndex].DiceType, target));
+                                yield break;
+                            }
+
                             if (_prevDiceNumber != -1 && _prevDiceNumber + 1 != useNumber)
                             {
                                 break;
                             }
                             StartCoroutine(DiceUseAction(useNumber, _dices[_selectDiceIndex].DiceType,target));
-
-                            _diceUsedCountOnThisTurn++;
+                            
                             if (_isTutorial)
                             {
                                 CheckTutorialStateForCard(useNumber, MouseState.Action);
@@ -355,8 +361,7 @@ namespace Cardinals
 
                         case MouseState.Move:
                             StartCoroutine(DiceUseMove(useNumber));
-
-                            _diceUsedCountOnThisTurn++;
+                            
                             if (_isTutorial)
                             {
                                 CheckTutorialStateForCard(useNumber, MouseState.Move);
@@ -427,6 +432,7 @@ namespace Cardinals
 
         public IEnumerator DiceUseMove(int num)
         {
+            _diceUsedCountOnThisTurn++;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&Random.Range(0,2)==1)
@@ -528,6 +534,7 @@ namespace Cardinals
 
         private IEnumerator DiceUseAction(int num, DiceType type, BaseEntity target = null)
         {
+            _diceUsedCountOnThisTurn++;
             SetDiceSelectable(false);
             _prevDiceNumber = num;
 
@@ -547,6 +554,12 @@ namespace Cardinals
                 default:
                     StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseAttack, ChangeDiscard));
                     break;
+            }
+
+            //[축복] 태풍 : 3번째 행동마다 적에게 3의 데미지를 추가로 부여
+            if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind2)&& _continuousUseCount == 2)
+            {
+                target.Hit(3);
             }
 
             // [�����] ���ο�

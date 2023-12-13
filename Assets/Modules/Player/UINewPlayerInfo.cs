@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cardinals.Board;
 using Cardinals.Enums;
 using Cardinals.Game;
+using DG.Tweening;
 using Modules.Utils;
 using TMPro;
 using Unity.VisualScripting;
@@ -42,6 +43,8 @@ namespace Cardinals.UI.Description
 
         public void Set()
         {
+            ShowPanel();
+
             if (GameManager.I.Stage == null) return;
             if (GameManager.I.Stage.Player == null) return;
             
@@ -118,6 +121,23 @@ namespace Cardinals.UI.Description
             else obj.GetComponent<UIIcon>().Init(sprite, innerColor);
 
             return obj;
+        }
+
+        private void ShowPanel() {
+            gameObject.SetActive(true);
+            Canvas.ForceUpdateCanvases();
+            var rect = transform as RectTransform;
+            var curPos = rect.anchoredPosition;
+            rect.anchoredPosition = new Vector2(curPos.x + rect.sizeDelta.x, curPos.y);
+            rect.DOAnchorPosX(curPos.x, 1f).SetEase(Ease.OutQuart).OnComplete(() => {
+                SetPosition();
+            });
+        }
+
+        private void SetPosition() {
+            var rect = transform as RectTransform;
+            rect.MatchHeigthRightSide();
+            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 370);
         }
     }
 

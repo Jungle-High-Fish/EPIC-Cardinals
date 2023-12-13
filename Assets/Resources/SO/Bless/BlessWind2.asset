@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d699eebe2430db24994c3a0e6b0cc7a9, type: 3}
+  m_Name: BlessWind2
+  m_EditorClassIdentifier: 
+  blessName: BlessWind2
+  description: "\uD0C0\uC77C\uC5D0\uC11C 3\uBC88\uC9F8 \uD589\uB3D9\uB9C8\uB2E4,
+    \uC801\uC5D0\uAC8C 3\uC758 \uB370\uBBF8\uC9C0\uB97C \uCD94\uAC00\uB85C \uC90D\uB2C8\uB2E4."
+  totemSprite: {fileID: 21300000, guid: e773de8f6298364449e8def0c9cb225e, type: 3}
+  patternSprite: {fileID: 21300000, guid: 878d0db97c4df95478a9453fed4bd13c, type: 3}
+  blessType: 8
+  relatedMagicType: 0

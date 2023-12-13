@@ -33,10 +33,6 @@ namespace Cardinals
         [Header("Player")]
         [SerializeField] private AudioClip _playerMove;
 
-        [Header("Setting")]
-        [SerializeField, Range(0f, 1f)] private float _bgmVolume = 0.5f;
-        [SerializeField, Range(0f, 1f)] private float _effectVolume = 0.5f;
-
         private ComponentGetter<AudioSource> _effectAudioSource1
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 1");
         private ComponentGetter<AudioSource> _effectAudioSource2
@@ -45,6 +41,9 @@ namespace Cardinals
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 3");
         private ComponentGetter<AudioSource> _effectAudioSource4
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 4");
+
+        private ComponentGetter<AudioSource> _bgmAudioSource
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "BGM Sound Source 1");
 
         private Queue<AudioClip> _effectAudioClipQueue = new Queue<AudioClip>();
         private List<AudioSource> _effectAudioSourceList = new List<AudioSource>();
@@ -90,18 +89,32 @@ namespace Cardinals
             _effectAudioClipQueue.Enqueue(_playerMove);
         }
 
+        public void PlayBGM() {
+            if (_bgm == null) return;
+
+            _bgmAudioSource.Get(gameObject).clip = _bgm;
+            _bgmAudioSource.Get(gameObject).volume = GameManager.I.GameSetting.BgmVolume / 100f;
+            _bgmAudioSource.Get(gameObject).loop = true;
+            _bgmAudioSource.Get(gameObject).Play();
+        }
+
         private void Awake() {
             _effectAudioSourceList.Add(_effectAudioSource1.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource2.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource3.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource4.Get(gameObject));
+
+            GameManager.I.GameSetting.OnSoundSettingChanged += () => {
+                _bgmAudioSource.Get(gameObject).volume = GameManager.I.GameSetting.BgmVolume / 100f;
+                _effectAudioSourceList.ForEach(x => x.volume = GameManager.I.GameSetting.SfxVolume / 100f);
+            };
         }
 
         private void Update() {
             if (_effectAudioClipQueue.Count > 0) {
                 var targetAudioSource = _effectAudioSourceList.FirstOrDefault(x => !x.isPlaying);
                 if (targetAudioSource != null) {
-                    targetAudioSource.volume = _effectVolume;
+                    targetAudioSource.volume = GameManager.I.GameSetting.SfxVolume / 100f;
                     targetAudioSource.PlayOneShot(_effectAudioClipQueue.Dequeue());
                 }
             }

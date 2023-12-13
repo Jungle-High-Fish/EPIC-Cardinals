@@ -90,6 +90,12 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_TutorialQuest = "UI/Tutorial/QuestUI";
 
             public const string Prefabs_UI_MouseHint = "UI/MouseHint";
+
+            public const string Prefabs_UI_CheckboxOption = "UI/GameSetting/Checkbox Option";
+            public const string Prefabs_UI_DropdownOption = "UI/GameSetting/Dropdown Option";
+            public const string Prefabs_UI_SliderOption = "UI/GameSetting/Slider Option";
+            public const string Prefabs_UI_GameSetting = "UI/GameSetting/Game Setting UI";
+
             
             // Particle
             public const string Prefabs_Particle_Attack = "Particle/Trail";

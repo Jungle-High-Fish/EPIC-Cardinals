@@ -29,6 +29,7 @@ namespace Cardinals
             _newGameBTN.onClick.AddListener(ChoiceCharacter);
             _startBTN.onClick.AddListener(NewGame);
             _exitBTN.onClick.AddListener(Exit);
+            _optionBTN.onClick.AddListener(OpenOption);
             _backBTN.onClick.AddListener(Title);
 
             SetTileView(true);
@@ -63,9 +64,14 @@ namespace Cardinals
             _charactersTr.GetChild(curCharIdx).gameObject.SetActive(true);
         }
 
+        public void OpenOption()
+        {
+            GameManager.I.UI.GameSettingUI.Show();
+        }
+
         void NewGame()
         {
-            SceneManager.LoadScene("StageTest");
+            GameManager.I.GameStart();
         }
 
         void Exit()

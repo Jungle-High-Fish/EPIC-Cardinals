@@ -226,7 +226,7 @@ namespace Cardinals
             return (int) Math.Floor(damage);
         }
 
-        public int Heal(int value)
+        public virtual int Heal(int value)
         {
             int _mathHeal = _hp + value;
             Hp += value;
