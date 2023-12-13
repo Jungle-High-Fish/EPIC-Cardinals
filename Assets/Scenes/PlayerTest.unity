@@ -397,12 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622fb43d643c196499df5d18e380434c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1584855332}
-  _drawCardCount: 0
-  _mouseState: 2
+  _newCardUseMod: 0
   _cardDeckUIParent: {fileID: 1775422151105929515}
-  _cardUIPrefab: {fileID: 5325587684102739020, guid: c11787424fdb33f4eab644c830852d1b,
-    type: 3}
 --- !u!4 &348048372
 Transform:
   m_ObjectHideFlags: 0
@@ -606,7 +602,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -665,6 +661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56cc1ef88216d145bee18725138fad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderers: []
+  _initHp: 0
   _onTile: {fileID: 0}
 --- !u!1 &1769138213
 GameObject:
@@ -1312,7 +1310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardManager: {fileID: 348048371}
   _slotState: 1
 --- !u!222 &1775422152144106728
 CanvasRenderer:
@@ -1364,7 +1361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d89ca42562d8b74ba3b9a4399675e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardManager: {fileID: 348048371}
   _slotState: 0
 --- !u!224 &1775422152144106734
 RectTransform:

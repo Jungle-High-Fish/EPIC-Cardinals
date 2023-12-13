@@ -505,7 +505,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622fb43d643c196499df5d18e380434c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseState: 2
+  _newCardUseMod: 0
   _cardDeckUIParent: {fileID: 263857831}
 --- !u!4 &437358052
 Transform:
@@ -2302,7 +2302,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconImg: {fileID: 88148577}
   _clearObj: {fileID: 1498861996}
-  _curEvtObj: {fileID: 542880368}
 --- !u!1001 &1000042010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2426,7 +2425,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconImg: {fileID: 1343327044}
   _clearObj: {fileID: 686437316}
-  _curEvtObj: {fileID: 1369030087}
 --- !u!1 &1087953906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4442,7 +4440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconImg: {fileID: 331326369}
   _clearObj: {fileID: 29600972}
-  _curEvtObj: {fileID: 1545046927}
 --- !u!1 &2136110063
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,7 +4494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconImg: {fileID: 1823643175}
   _clearObj: {fileID: 50298558}
-  _curEvtObj: {fileID: 507905142}
 --- !u!1001 &116868996630132011
 PrefabInstance:
   m_ObjectHideFlags: 0
