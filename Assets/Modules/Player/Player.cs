@@ -23,6 +23,7 @@ namespace Cardinals
         
         [SerializeField] private Board.Tile _onTile;
         private bool _isDamagedThisTurn;
+        [InlineEditor]
         [SerializeField] private PlayerInfo _playerInfo;
 
         
@@ -85,6 +86,16 @@ namespace Cardinals
             }
         }
 
+        public IEnumerator PreEndTurn()
+        {
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2) && DefenseCount == 0)
+            {
+                DefenseCount = 4;
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
+            }
+
+            yield break;
+        }
         public override IEnumerator EndTurn()
         {
             yield return base.EndTurn(); // 버프/디버프 소모
@@ -97,12 +108,8 @@ namespace Cardinals
             {
                 BlessEarth1();
             }
-            
-            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2))
-            {
-                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
-            }
-            else DefenseCount = 0;
+
+            DefenseCount = 0;
         }
 
         public void EndBattle()
@@ -290,6 +297,24 @@ namespace Cardinals
             Animator.Play("Shield");
         }
 
+        [Button]
+        public override int Heal(int value)
+        {
+
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessWater2))
+            {
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
+                int damage = (MaxHp -Hp) < value ? (MaxHp - _hp) : value;
+                GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)].Hit(damage);
+            }
+
+            int _mathHeal = _hp + value;
+            Hp += value;
+
+            
+
+            return _mathHeal - _hp;
+        }
         public void Win()
         {   
             Animator.Play("Win");

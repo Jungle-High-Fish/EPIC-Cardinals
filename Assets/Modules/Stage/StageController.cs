@@ -406,7 +406,12 @@ namespace Cardinals.Game {
                 tile.SetCurse(TileCurseType.Fireball, 2);
             }
         }
-        
+
+        [Button]
+        public void Test_GetBless(BlessType blessType)
+        {
+            Player.PlayerInfo.GetBless(blessType);
+        }
 
         [Button]
         public void Test_SetEvent(BoardEventType eventType)
