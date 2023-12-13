@@ -356,6 +356,8 @@ namespace Cardinals.Enums {
         BlessWater2,
         BlessEarth1,
         BlessEarth2,
+        BlessWind1,
+        BlessWind2
     }
 
     #region Board Event
