@@ -11,7 +11,7 @@ namespace Cardinals
     public class DiceDescription : MonoBehaviour
     {
         [SerializeField] private GameObject _diceDescription;
-        [SerializeField] private GameObject _rerollDescription;
+        [SerializeField] private GameObject _rerollPanel;
         public void Init(List<int> numbers, DiceType type)
         {
             for(int i = 0; i < numbers.Count; i++)
@@ -43,11 +43,13 @@ namespace Cardinals
             ResetOutline();
             _diceDescription.transform.GetChild(index).GetComponent<Outline>().enabled = true;
             _diceDescription.SetActive(true);
+            _rerollPanel.SetActive(true);
         }
 
         public void SetDescriptionUIRestored()
         {
             _diceDescription.SetActive(false);
+            _rerollPanel.SetActive(false);
         }
 
         private void ResetOutline()

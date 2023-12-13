@@ -16,6 +16,7 @@ namespace Cardinals
         {
             _diceNumbers = numbers.ToList();
             _diceType = type;
+           
         }
 
         public List<int> DiceNumbers => _diceNumbers;
