@@ -214,7 +214,8 @@ namespace Cardinals.Enums {
         Water,
         Earth,
         Attack,
-        Defence
+        Defence,
+        Wind
     }
 
     public enum TileCurseType {
