@@ -91,6 +91,11 @@ namespace Cardinals.Constants {
 
             public const string Prefabs_UI_MouseHint = "UI/MouseHint";
 
+            public const string Prefabs_UI_CheckboxOption = "UI/GameSetting/Checkbox Option";
+            public const string Prefabs_UI_DropdownOption = "UI/GameSetting/Dropdown Option";
+            public const string Prefabs_UI_SliderOption = "UI/GameSetting/Slider Option";
+            public const string Prefabs_UI_GameSetting = "UI/GameSetting/Game Setting UI";
+
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
