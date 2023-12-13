@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Cardinals.Game;
 using Util;
 using System.Linq;
+using DG.Tweening;
 
 namespace Cardinals.Board {
 
@@ -160,8 +161,22 @@ namespace Cardinals.Board {
 		}
 
 		// 행동마다 해당 적에게 2/4/6의 데미지를 줍니다.
-		private void MagicActionFireMain(BaseEntity target) {
-			target.Hit(Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]);
+		private void MagicActionFireMain(BaseEntity target)
+		{
+			var targetPos = target.transform.position + new Vector3(0, -1, 0);
+			var obj = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_FireAttack));
+			obj.transform.position = transform.position;
+            
+			obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
+				.OnComplete(() =>
+				{
+					target.Hit(Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]); // 실제 데미지 입히는 영역
+
+					var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
+					explosion.transform.position = targetPos;
+                    
+					Destroy(obj);
+				});
 		}
 
 		// 3 이상의 행동에서 적에게 화상 효과를 부여합니다.
