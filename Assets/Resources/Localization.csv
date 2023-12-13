@@ -8,9 +8,10 @@ UI_GAMESETTING_TITLE,Option,게임 설정
 UI_GAMESETTING_FULLSCREEN,Full Screen,전체화면
 UI_GAMESETTING_RESOLUTION,Resolution,해상도
 UI_GAMESETTING_BGM,BGM,배경 음악
+UI_GAMESETTING_LANGUAGE_WARN,"To make the changes effective, please restart the client.",변경사항을 적용하려면<br>클라이언트를 재시작하십시오.
 UI_GAMESETTING_LANGUAGE,Language,언어
 UI_GAMESETTING_SFX,SFX,효과음
 UI_CLOSE,Close,닫기
-UI_EXIT_GAME,Exit Game,게임 종료
+UI_EXIT_GAME,Quit,게임 종료
 UI_ROULETTE_SPIN,SPIN!,스핀!
 STAGE_SUSPICIOUS_MEADOW,Suspicious Meadow,수상한 초원

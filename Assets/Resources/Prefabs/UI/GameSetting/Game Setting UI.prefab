@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 3682523491121071015}
   - component: {fileID: 5464531650145530497}
   - component: {fileID: 4192601534617809080}
+  - component: {fileID: 4577124811982205691}
   m_Layer: 5
   m_Name: Language Warning Panel
   m_TagString: Untagged
@@ -363,6 +364,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbf2b9a112a34841925fb1396ea0044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4577124811982205691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290362704462249833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 6, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5524606373344850064
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,8 +577,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4282271047
+  m_fontColor: {r: 0.2784314, g: 0.27058825, b: 0.24313727, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1160,8 +1176,8 @@ MonoBehaviour:
   m_text: "\uC5B8\uC5B4\uC124\uC815\uC744 \uC801\uC6A9\uD558\uB824\uBA74\\n\uD074\uB77C\uC774\uC5B8\uD2B8\uB97C
     \uC7AC\uC2DC\uC791\uD558\uC138\uC694."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 55d7b3d2b6e985b4fb91cd9e6064257f, type: 2}
-  m_sharedMaterial: {fileID: -5667824550487740012, guid: 55d7b3d2b6e985b4fb91cd9e6064257f,
+  m_fontAsset: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2, type: 2}
+  m_sharedMaterial: {fileID: 1784925987956549289, guid: 0d08dcc69bddcb0458bd0a79944003b2,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1186,8 +1202,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1198,7 +1214,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 30
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
