@@ -39,13 +39,14 @@ namespace Cardinals.UI {
                 GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_LANGUAGE],
                 GameManager.I.Localization.LanguageNameList,
                 GameManager.I.Localization.LanguageList,
-                0,
+                languageIndex,
                 (value) => {
                     _language = GameManager.I.Localization.LanguageList[value];
                     PlayerPrefs.SetString("Language", GameManager.I.Localization.LanguageList[value]);
                     PlayerPrefs.Save();
 
                     GameManager.I.Localization.LoadData(_language);
+                    gameSettingUI.ShowLanguageWarnPanel();
                 }
             );
 
