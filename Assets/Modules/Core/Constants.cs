@@ -96,6 +96,12 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_SliderOption = "UI/GameSetting/Slider Option";
             public const string Prefabs_UI_GameSetting = "UI/GameSetting/Game Setting UI";
 
+            
+            // Particle
+            public const string Prefabs_Particle_Attack = "Particle/Trail";
+            public const string Prefabs_Particle_FireAttack = "Particle/FireTrail";
+            public const string Prefabs_Particle_Explosion = "Particle/EEEXPLOSION";
+            
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";

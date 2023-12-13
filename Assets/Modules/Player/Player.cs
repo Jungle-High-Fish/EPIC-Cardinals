@@ -12,6 +12,7 @@ using Cardinals.Buff;
 using Sirenix.Utilities;
 using Unity.Mathematics;
 using Modules.Entity.Buff;
+using Util;
 
 namespace Cardinals
 {
@@ -23,8 +24,10 @@ namespace Cardinals
         
         [SerializeField] private Board.Tile _onTile;
         private bool _isDamagedThisTurn;
+        [InlineEditor]
         [SerializeField] private PlayerInfo _playerInfo;
 
+        
         
         private Animator _animator;
         protected override Animator Animator => (_animator ??= GetComponentInChildren<Animator>());
@@ -85,6 +88,16 @@ namespace Cardinals
             }
         }
 
+        public IEnumerator PreEndTurn()
+        {
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2) && DefenseCount == 0)
+            {
+                DefenseCount = 4;
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
+            }
+
+            yield break;
+        }
         public override IEnumerator EndTurn()
         {
             yield return base.EndTurn(); // 버프/디버프 소모
@@ -97,12 +110,8 @@ namespace Cardinals
             {
                 BlessEarth1();
             }
-            
-            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2))
-            {
-                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
-            }
-            else DefenseCount = 0;
+
+            DefenseCount = 0;
         }
 
         public void EndBattle()
@@ -283,6 +292,26 @@ namespace Cardinals
             AddBuff(new Confusion());
         }
 
+        public override void Attack(BaseEntity target, int damage)
+        {
+            Bubble?.SetBubble(BubbleText.attack);
+            Animator?.Play("Attack");
+
+            var targetPos = target.transform.position + new Vector3(0, -1, 0);
+            var obj = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Attack));
+            obj.transform.position = transform.position;
+            
+            obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    target.Hit(CalculDamage(damage));
+
+                    var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
+                    explosion.transform.position = targetPos;
+                    
+                    Destroy(obj);
+                });
+        }
 
         public void Defense(int value)
         {
@@ -290,6 +319,24 @@ namespace Cardinals
             Animator.Play("Shield");
         }
 
+        [Button]
+        public override int Heal(int value)
+        {
+
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessWater2))
+            {
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
+                int damage = (MaxHp -Hp) < value ? (MaxHp - _hp) : value;
+                GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)].Hit(damage);
+            }
+
+            int _mathHeal = _hp + value;
+            Hp += value;
+
+            
+
+            return _mathHeal - _hp;
+        }
         public void Win()
         {   
             Animator.Play("Win");

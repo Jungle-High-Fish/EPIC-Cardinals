@@ -202,7 +202,7 @@ namespace Cardinals
         /// </summary>
         /// <param name="target">피격 대상</param>
         /// <param name="damage">데미지</param>
-        public void Attack(BaseEntity target, int damage)
+        public virtual void Attack(BaseEntity target, int damage)
         {
             target.Hit(CalculDamage(damage));
             Bubble?.SetBubble(BubbleText.attack);
@@ -214,7 +214,7 @@ namespace Cardinals
         /// </summary>
         /// <param name="originDamage"></param>
         /// <returns></returns>
-        int CalculDamage(int originDamage)
+        protected int CalculDamage(int originDamage)
         {
             float damage = originDamage;
 
@@ -226,7 +226,7 @@ namespace Cardinals
             return (int) Math.Floor(damage);
         }
 
-        public int Heal(int value)
+        public virtual int Heal(int value)
         {
             int _mathHeal = _hp + value;
             Hp += value;
