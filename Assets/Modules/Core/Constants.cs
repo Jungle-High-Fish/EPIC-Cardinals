@@ -90,7 +90,12 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_TutorialQuest = "UI/Tutorial/QuestUI";
 
             public const string Prefabs_UI_MouseHint = "UI/MouseHint";
-
+            
+            // Particle
+            public const string Prefabs_Particle_Attack = "Particle/Trail";
+            public const string Prefabs_Particle_FireAttack = "Particle/FireTrail";
+            public const string Prefabs_Particle_Explosion = "Particle/EEEXPLOSION";
+            
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
