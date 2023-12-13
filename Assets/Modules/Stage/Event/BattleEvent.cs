@@ -68,7 +68,10 @@ namespace Cardinals.Game
                 // 버프 처리
                 player.OnBuff();
                 for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].OnBuff();
-                
+
+                // 플레이어 PreEndTurn 처리
+                yield return player.PreEndTurn();
+
                 // 적 행동
                 foreach (var e in enemies)
                 {

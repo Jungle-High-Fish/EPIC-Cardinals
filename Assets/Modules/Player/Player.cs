@@ -23,6 +23,7 @@ namespace Cardinals
         
         [SerializeField] private Board.Tile _onTile;
         private bool _isDamagedThisTurn;
+        [InlineEditor]
         [SerializeField] private PlayerInfo _playerInfo;
 
         
@@ -85,6 +86,16 @@ namespace Cardinals
             }
         }
 
+        public IEnumerator PreEndTurn()
+        {
+            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2) && DefenseCount == 0)
+            {
+                DefenseCount = 4;
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
+            }
+
+            yield break;
+        }
         public override IEnumerator EndTurn()
         {
             yield return base.EndTurn(); // 버프/디버프 소모
@@ -97,12 +108,8 @@ namespace Cardinals
             {
                 BlessEarth1();
             }
-            
-            if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2))
-            {
-                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
-            }
-            else DefenseCount = 0;
+
+            DefenseCount = 0;
         }
 
         public void EndBattle()
