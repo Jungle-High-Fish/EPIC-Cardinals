@@ -29,6 +29,19 @@ namespace Util {
 
             rectTransform.pivot = new Vector2(0.5f, 1);
         }
+
+        public static void MatchHeigthRightSide(this RectTransform rectTransform, RectTransform parent=null) {
+            if (parent != null) {
+                rectTransform.SetParent(parent);
+            }
+            
+            rectTransform.anchorMin = new Vector2(1, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+
+            rectTransform.pivot = new Vector2(1, 0f);
+        }
         
         public static void DestroyChildren(this Transform parent)
         {

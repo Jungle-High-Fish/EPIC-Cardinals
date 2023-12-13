@@ -203,6 +203,7 @@ namespace Cardinals
 
             _uiNewPlayerInfo = playerUIObj.GetComponent<UINewPlayerInfo>();
             _uiNewPlayerInfo.Init();
+            playerUIObj.SetActive(false);
         }
 
         public void InstantiatePlayerStatusUI()
