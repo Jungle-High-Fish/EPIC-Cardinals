@@ -128,6 +128,27 @@ namespace Cardinals
             EndTurn();
             Debug.Log("��Ʋ ��");
         }
+        [Button]
+        public void TutorialRoll(int[] diceNumbers)
+        {
+            for(int i = 0; i < diceNumbers.Length; i++)
+            {
+                if (diceNumbers[i] == -1)
+                {
+                    StartCoroutine(Discard(i, DiceAnimationType.Empty, () => { }));
+                }
+
+                else
+                {
+                    int resultIndex = _dices[i].DiceNumbers.FindIndex(n => n==diceNumbers[i]);
+                    int rollResult = _dices[i].DiceNumbers[resultIndex];
+                    _dices[i].RollResultIndex = resultIndex;
+                    _dices[i].RollResultNumber = rollResult;
+                    _dicesUI[i].RollDiceUI(rollResult);
+                    _dicesUI[i].DiceDescription.SetDescriptionUIRestored();
+                }
+            }
+        }
 
         public void DrawHandDecksForTutorial(int[] cardNumbers)
         {
@@ -191,7 +212,7 @@ namespace Cardinals
             else
             {
                 UIPos = _dicesUI[_dicesUI.Count - 1].GetComponent<RectTransform>().anchoredPosition;
-                UIPos.x += 100f;
+                UIPos.x += 140f;
             }
 
             diceUI.GetComponent<RectTransform>().anchoredPosition = UIPos;
@@ -211,6 +232,8 @@ namespace Cardinals
             _dicesUI[index].RollDiceUI(rollResult);
             _dicesUI[index].DiceDescription.SetDescriptionUIRestored();
         }
+
+       
 
         [Button]
         public void SortDices()
