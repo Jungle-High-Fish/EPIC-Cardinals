@@ -556,6 +556,12 @@ namespace Cardinals
                     break;
             }
 
+            //[축복] 태풍 : 3번째 행동마다 적에게 3의 데미지를 추가로 부여
+            if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind2)&& _continuousUseCount == 2)
+            {
+                target.Hit(3);
+            }
+
             // [�����] ���ο�
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
             {
