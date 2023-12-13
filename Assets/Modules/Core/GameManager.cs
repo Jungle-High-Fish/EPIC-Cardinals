@@ -18,9 +18,11 @@ namespace Cardinals
         public UIManager UI => _ui;
         public StageController Stage => _stage;
         public GameSetting GameSetting => _gameSetting;
+        public Localization Localization => _localization;
         public SoundManager Sound => _soundManager;
         
         private GameSetting _gameSetting;
+        private Localization _localization;
 
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
@@ -43,6 +45,11 @@ namespace Cardinals
 
         private SoundManager _soundManager;
         #region Game
+
+        [Button]
+        private void DeleteAllPlayerPrefs() {
+            PlayerPrefs.DeleteAll();
+        }
 
         [Button]
         public void GameStart()
@@ -70,6 +77,8 @@ namespace Cardinals
         }
 
         private void LoadGameSetting() {
+            _localization = new Localization();
+
             _gameSetting = new GameSetting();
             _gameSetting.Init();
         }
