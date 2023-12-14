@@ -111,7 +111,16 @@ namespace Cardinals
         [Button]
         public IEnumerator EndTurn()
         {
+            SetDiceSelectable(false);
             //StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
+            for(int i = 0; i < _dicesUI.Count; i++)
+            {
+                if (_dicesUI[i].IsDiscard)
+                    continue;
+
+                StartCoroutine(Discard(i, DiceAnimationType.UseMove, () => { }));
+            }
+            yield return new WaitForSeconds(0.5f);
             yield break;
         }
 
@@ -125,10 +134,9 @@ namespace Cardinals
             Debug.Log("��Ʋ ����");
         }
 
-        public void EndBattle()
+        public IEnumerator EndBattle()
         {
-            EndTurn();
-            Debug.Log("��Ʋ ��");
+            yield return EndTurn();
         }
         [Button]
         public void TutorialRoll(int[] diceNumbers)
@@ -293,6 +301,7 @@ namespace Cardinals
             yield break;
         }
        
+
 
         public IEnumerator Dragging()
         {
@@ -507,7 +516,7 @@ namespace Cardinals
             DismissAllCards();
             if (GameManager.I.Stage.Enemies.Count == 0)
             {
-                EndBattle();
+                StartCoroutine(EndBattle());
             }
         }
 
@@ -606,9 +615,9 @@ namespace Cardinals
             _lastDiceUsedForAction = true;
             UpdateDiceState(num, false);
             DismissAllCards();
-            if (GameManager.I.Stage.Enemies.Count == 0)
+            if (GameManager.I.CurrentEnemies.Count() == 0)
             {
-                EndBattle();
+                yield return EndBattle();
             }
             SetDiceSelectable(true);
 

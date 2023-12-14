@@ -82,7 +82,9 @@ namespace Cardinals
             else
             {
                 GameManager.I.UI.UIEndTurnButton.Activate();
+
                 yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
+
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
                 GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             }

@@ -18,7 +18,7 @@ MonoBehaviour:
     \uC774\uB3D9\uD569\uB2C8\uB2E4.\r\n\uC811\uCD09 \uC2DC, \uB79C\uB364 \uD3EC\uC158
     \uD55C\uAC1C\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4."
   keepTurnCount: 3
-  sprite: {fileID: 21300000, guid: 43d28d3c6e6c57c45b6b6c51a61eaeee, type: 3}
+  sprite: {fileID: 21300000, guid: a04f2f9dd660fc84c80bf814a111db9c, type: 3}
   onBoardType: 2
   executeType: 1
   moveCount: 4
