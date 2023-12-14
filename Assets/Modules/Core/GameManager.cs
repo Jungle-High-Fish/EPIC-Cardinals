@@ -19,10 +19,12 @@ namespace Cardinals
         public StageController Stage => _stage;
         public GameSetting GameSetting => _gameSetting;
         public Localization Localization => _localization;
+        public SteamHandler SteamHandler => _steamHandler;
         public SoundManager Sound => _soundManager;
         
         private GameSetting _gameSetting;
         private Localization _localization;
+        private SteamHandler _steamHandler;
 
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
@@ -58,12 +60,10 @@ namespace Cardinals
         }
 
         private void Start() {
-            LoadGameSetting();
+            SteamHandlerInit();
 
-            _ui = InitUI();
-            _soundManager = InitSound();
-            _soundManager.PlayBGM();
-            _gameSetting.InitUI(_ui.GameSettingUI);
+            LoadGameSetting();
+            GenerateCoreObjects();
         }
 
         private void Update() {
@@ -74,6 +74,17 @@ namespace Cardinals
                     _ui.GameSettingUI.Show();
                 }
             }
+
+            _steamHandler.EveryFrame();
+        }
+
+        private void OnApplicationQuit() {
+            Steamworks.SteamClient.Shutdown();
+        }
+
+        private void SteamHandlerInit() {
+            _steamHandler = new SteamHandler();
+            _steamHandler.Init();
         }
 
         private void LoadGameSetting() {
@@ -81,6 +92,10 @@ namespace Cardinals
 
             _gameSetting = new GameSetting();
             _gameSetting.Init();
+        }
+
+        private void LoadSaveData() {
+            
         }
 
         IEnumerator LoadMainGame() {
@@ -103,11 +118,7 @@ namespace Cardinals
 
         private IEnumerator StageFlow(Stage stage)
         {   
-            _ui = InitUI();
-            _soundManager = InitSound();
-            _soundManager.PlayBGM();
-            _gameSetting.InitUI(_ui.GameSettingUI);
-
+            GenerateCoreObjects();
             _stage = LoadStage();
 
             yield return _stage.Load(stage);
@@ -120,6 +131,13 @@ namespace Cardinals
             StageController stageController = stageControllerObj.AddComponent<StageController>();
 
             return stageController;
+        }
+
+        private void GenerateCoreObjects() {
+            _ui = InitUI();
+            _soundManager = InitSound();
+            _soundManager.PlayBGM();
+            _gameSetting.InitUI(_ui.GameSettingUI);
         }
 
         private UIManager InitUI() {

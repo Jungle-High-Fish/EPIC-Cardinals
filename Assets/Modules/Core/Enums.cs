@@ -261,6 +261,17 @@ namespace Cardinals.Enums {
         BattleBoss,
     }
 
+    public enum StageEventList
+    {
+        Empty,
+        Tutorial,
+        BattleKrol,
+        BattelTweTwe,
+        BattlePiPiPoPo,
+        BattlePicPic,
+        BattlePazizizic
+    }
+
     public enum EnemyType
     {
         Ignore,

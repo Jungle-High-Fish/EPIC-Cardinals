@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: Stage
   m_EditorClassIdentifier: 
   _name: Suspicious Meadow
-  _events:
-  - {fileID: 11400000, guid: 7b0d59ecb6c0ee94ca7ecac51c0fbb5d, type: 2}
-  - {fileID: 11400000, guid: 76d6012f20facef4991df0780f23280f, type: 2}
-  - {fileID: 11400000, guid: a6b1ac23687303b488070dd09fb7a26f, type: 2}
-  - {fileID: 11400000, guid: 9a0d472761aae7a41985435e9f220d27, type: 2}
-  - {fileID: 11400000, guid: 251c10cd133c72643811823264607240, type: 2}
+  _eventPool: {fileID: 11400000, guid: 2d0c9d5e006da9744bd86c3258414309, type: 2}
+  _eventSequence: 0200000003000000030000000300000004000000
   _boardDataSO: {fileID: 11400000, guid: a215bdf472da542eabf20825bd5b77db, type: 2}

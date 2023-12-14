@@ -152,6 +152,7 @@ namespace Cardinals.Constants {
             public const string SO_BoardEventData = "BoardEvent/";
             public const string SO_EnemyData = "Stage/Enemies/";
             public const string SO_TutorialData = "Tutorial/";
+            public const string SO_StageEventList = "Stage/StageEventList";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";
