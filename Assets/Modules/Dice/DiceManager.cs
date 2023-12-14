@@ -76,8 +76,10 @@ namespace Cardinals
             AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
             AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
             AddDice(new List<int>() {3,3,4,4,5,5 }, DiceType.Normal);
-            SetDiceSelectable(false);
-            RollAllDice();
+            foreach(DiceUI d in _dicesUI)
+            {
+                d.gameObject.SetActive(false);
+            }
         }
 
         public void SetDiceDeckUIParent(Transform parent)
@@ -111,7 +113,16 @@ namespace Cardinals
         [Button]
         public IEnumerator EndTurn()
         {
+            SetDiceSelectable(false);
             //StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
+            for(int i = 0; i < _dicesUI.Count; i++)
+            {
+                if (_dicesUI[i].IsDiscard)
+                    continue;
+
+                StartCoroutine(Discard(i, DiceAnimationType.UseMove, () => { }));
+            }
+            yield return new WaitForSeconds(0.5f);
             yield break;
         }
 
@@ -125,10 +136,9 @@ namespace Cardinals
             Debug.Log("��Ʋ ����");
         }
 
-        public void EndBattle()
+        public IEnumerator EndBattle()
         {
-            EndTurn();
-            Debug.Log("��Ʋ ��");
+            yield return EndTurn();
         }
         [Button]
         public void TutorialRoll(int[] diceNumbers)
@@ -221,7 +231,28 @@ namespace Cardinals
             diceUI.GetComponent<DiceUI>().Init(dice, _dicesUI.Count,this);
             diceUI.GetComponent<DiceUI>().DiceDescription.Init(numbers, type);
             _dicesUI.Add(diceUI.GetComponent<DiceUI>());
-            //UpdateCardUI(dice, 0);
+        }
+
+       
+        public void ChangeDice(int index, Dice dice)
+        {
+            bool isDiscard = _dicesUI[index].IsDiscard;
+            int resultIndex = UnityEngine.Random.Range(0, dice.DiceNumbers.Count);
+            int rollResult = dice.DiceNumbers[resultIndex];
+            dice.RollResultIndex = resultIndex;
+            dice.RollResultNumber = rollResult;
+
+            _dices.RemoveAt(index);
+            _dices.Insert(index,dice);
+            _dicesUI[index].UpdateDiceUI(dice);
+            _dicesUI[index].DiceDescription.UpdateDiceDescription(dice);
+
+            if (isDiscard)
+            {
+                _dicesUI[index].IsDiscard = true;
+                _dicesUI[index].IsSelect = false;
+                _dicesUI[index].gameObject.SetActive(false);
+            }
         }
 
         [Button]
@@ -271,6 +302,8 @@ namespace Cardinals
             changeDiscardState();
             yield break;
         }
+       
+
 
         public IEnumerator Dragging()
         {
@@ -485,7 +518,7 @@ namespace Cardinals
             DismissAllCards();
             if (GameManager.I.Stage.Enemies.Count == 0)
             {
-                EndBattle();
+                StartCoroutine(EndBattle());
             }
         }
 
@@ -584,9 +617,9 @@ namespace Cardinals
             _lastDiceUsedForAction = true;
             UpdateDiceState(num, false);
             DismissAllCards();
-            if (GameManager.I.Stage.Enemies.Count == 0)
+            if (GameManager.I.CurrentEnemies.Count() == 0)
             {
-                EndBattle();
+                yield return EndBattle();
             }
             SetDiceSelectable(true);
 
