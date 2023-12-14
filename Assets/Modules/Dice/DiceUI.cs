@@ -99,9 +99,12 @@ namespace Cardinals
 
         public void UpdateDiceUI(Dice dice)
         {
+            Image image = GetComponent<Image>();
             _dice = dice;
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + _dice.RollResultNumber.ToString();
-            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+            Sprite sprite = ResourceLoader.LoadSprite(path);
+            image.sprite = sprite;
+            //_image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
         public void RollDiceUI(int number)
         {

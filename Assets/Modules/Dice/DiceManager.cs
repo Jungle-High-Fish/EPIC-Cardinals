@@ -230,6 +230,28 @@ namespace Cardinals
             //UpdateCardUI(dice, 0);
         }
 
+       
+        public void ChangeDice(int index, Dice dice)
+        {
+            bool isDiscard = _dicesUI[index].IsDiscard;
+            int resultIndex = UnityEngine.Random.Range(0, dice.DiceNumbers.Count);
+            int rollResult = dice.DiceNumbers[resultIndex];
+            dice.RollResultIndex = resultIndex;
+            dice.RollResultNumber = rollResult;
+
+            _dices.RemoveAt(index);
+            _dices.Insert(index,dice);
+            _dicesUI[index].UpdateDiceUI(dice);
+            _dicesUI[index].DiceDescription.UpdateDiceDescription(dice);
+
+            if (isDiscard)
+            {
+                _dicesUI[index].IsDiscard = true;
+                _dicesUI[index].IsSelect = false;
+                _dicesUI[index].gameObject.SetActive(false);
+            }
+        }
+
         [Button]
         public void Roll(int index)
         {
@@ -277,6 +299,7 @@ namespace Cardinals
             changeDiscardState();
             yield break;
         }
+       
 
 
         public IEnumerator Dragging()
