@@ -12,20 +12,26 @@ namespace Cardinals.UI {
 
         private ComponentGetter<TextMeshProUGUI> _titleText
             = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Title Text");
-
         private ComponentGetter<RectTransform> _settingContainer
             = new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "Setting Container");
-
         private ComponentGetter<Button> _closeButton
             = new ComponentGetter<Button>(TypeOfGetter.ChildByName, "Close Button Panel/Close Button");
-        
         private ComponentGetter<Button> _exitGameButton
             = new ComponentGetter<Button>(TypeOfGetter.ChildByName, "Close Button Panel/Exit Game Button");
+
+        private ComponentGetter<RectTransform> _languageWarnPanel
+            = new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "Language Warning Panel");
+        private ComponentGetter<TextMeshProUGUI> _languageWarnText
+            = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Language Warning Panel/Text");
+        private ComponentGetter<Button> _languageWarnCloseButton
+            = new ComponentGetter<Button>(TypeOfGetter.ChildByName, "Language Warning Panel/Close Button Panel/Close Button");
+        private ComponentGetter<TextMeshProUGUI> _languageWarnCloseButtonText
+            = new ComponentGetter<TextMeshProUGUI>(TypeOfGetter.ChildByName, "Language Warning Panel/Close Button Panel/Close Button/Text");
 
         private bool _isActive = false;
 
         public void Init(List<SettingDataForUI> settingDatas) {
-            _titleText.Get(gameObject).text = "게임 설정";
+            _titleText.Get(gameObject).text = GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_TITLE];
 
             foreach (var settingData in settingDatas) {
                 AddOption(settingData);
@@ -34,15 +40,32 @@ namespace Cardinals.UI {
             _closeButton.Get(gameObject).onClick.AddListener(() => {
                 Hide();
             });
+            _closeButton.Get(gameObject).GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_CLOSE];
 
             _exitGameButton.Get(gameObject).onClick.AddListener(() => {
                 Application.Quit();
+            });
+            _exitGameButton.Get(gameObject).GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_EXIT_GAME];
+
+            _languageWarnCloseButton.Get(gameObject).onClick.AddListener(() => {
+                _languageWarnPanel.Get(gameObject).gameObject.SetActive(false);
             });
         }
 
         public void Show() {
             _isActive = true;
             gameObject.SetActive(true);
+            _languageWarnPanel.Get(gameObject).gameObject.SetActive(false);
+        }
+
+        public void ShowLanguageWarnPanel() {
+            _languageWarnPanel.Get(gameObject).gameObject.SetActive(true);
+            _languageWarnText.Get(gameObject).text 
+                = GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_LANGUAGE_WARN];
+            _languageWarnCloseButtonText.Get(gameObject).text 
+                = GameManager.I.Localization[LocalizationEnum.UI_CLOSE];
         }
 
         public void Hide() {
