@@ -96,7 +96,7 @@ MonoBehaviour:
   _resultTMP: {fileID: 3594960158945034632}
   _reducedHpValue: 5
   _drawCardCount: 2
-  _getGoldValue: 100
+  _getGoldValue: 5
 --- !u!114 &702016976853158267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,12 +116,12 @@ MonoBehaviour:
   _pieceParent: {fileID: 702016977257243766}
   _lineParent: {fileID: 702016976593661336}
   _roulettePieceDatas:
-  - {fileID: 11400000, guid: d7189a95e23fb444284b17c1112b7a1c, type: 2}
   - {fileID: 11400000, guid: 6804b3f051b07314bb41ea2f54c6d1f6, type: 2}
-  - {fileID: 11400000, guid: 4fe9ce70bd9fd0848925f0fdb33e82a0, type: 2}
   - {fileID: 11400000, guid: b420f3c3e957dcb49939d5d53a9d89c6, type: 2}
   - {fileID: 11400000, guid: 9c73412a17ee25e4b84dd937ff663516, type: 2}
   - {fileID: 11400000, guid: 752dde2f32e756548a85bc232a84dc2e, type: 2}
+  - {fileID: 11400000, guid: 0891a7f63fc3b174e9a259c6c338ea21, type: 2}
+  - {fileID: 11400000, guid: 36a8f9bb96cb26049be853abab5146d9, type: 2}
   _spinDuration: 1
   _spinningRoulette: {fileID: 702016978351559887}
   _spinningCurve:

@@ -345,6 +345,11 @@ namespace Cardinals.Game {
             else Debug.Log("보드 내 이벤트 생성 가능한 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }
 
+        public void GetRewardDice()
+        {
+            
+        }
+
         #region TestCode
         [Button]
         public void GenEnemySkill_TB()

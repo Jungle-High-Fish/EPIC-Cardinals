@@ -405,6 +405,8 @@ namespace Cardinals.Enums {
         RandomPotion,
         RandomTileGradeUp,
         ReducedHp,
+        GetRandomDice,
+        DamageToEnemy,
     }
 
     public enum BoardEventCardType
