@@ -495,6 +495,7 @@ namespace Cardinals.Enums {
         Move,
         Attack,
         Defense,
+        Heal
     }
     
     public enum TutorialQuestType

@@ -138,13 +138,19 @@ namespace Cardinals.Board {
 						// 플레이어 행동 설정
 						if (GameManager.I.Stage.DiceManager.CheckUseDiceOnAction())
 						{
-							if (GameManager.I.Player.OnTile.Type == TileType.Attack)
+							if (GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Attack ||
+							    GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Fire )
 							{
 								playerActionType = PlayerActionType.Attack;
 							}
-							else if (GameManager.I.Player.OnTile.Type == TileType.Defence)
+							else if (GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Defence ||
+							         GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Earth)
 							{
 								playerActionType = PlayerActionType.Defense;
+							}
+							else if (GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Water)
+							{
+								playerActionType = PlayerActionType.Heal;
 							}
 						}
 						else
@@ -160,6 +166,7 @@ namespace Cardinals.Board {
 				if (IsSelectState() && 
 				    !(playerActionType == PlayerActionType.Attack || 
 				      playerActionType == PlayerActionType.Defense ||
+				      playerActionType == PlayerActionType.Heal ||
 				      playerActionType == PlayerActionType.CantUsed)) 
 				{
 					playerActionType = PlayerActionType.Move;
