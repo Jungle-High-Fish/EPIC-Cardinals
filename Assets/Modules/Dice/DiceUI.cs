@@ -149,6 +149,12 @@ namespace Cardinals
 
             if(eventData.button == PointerEventData.InputButton.Right)
             {
+                if (GameManager.I.Player.PlayerInfo.Gold <= 0)
+                {
+                    GameManager.I.Player.Bubble.SetBubble("µ·ÀÌ ¾ø¾î...");
+                    return;
+                }
+                GameManager.I.Player.PlayerInfo.UseGold(1);
                 _diceManager.Roll(_diceIndex);
             }
             
