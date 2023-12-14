@@ -65,17 +65,24 @@ namespace Cardinals
         }
 
         [Button]
-        public void Init()
+        public void Init(List<(int[], DiceType)> initialDiceList = null)
         {
             _dices = new();
             _dicesUI = new();
             _newDiceUseMod = true;
-
-            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 1,1,2,2,3,3}, DiceType.Fire);
-            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
-            AddDice(new List<int>() {3,3,4,4,5,5 }, DiceType.Normal);
+            
+            if (initialDiceList != null) {
+                foreach ((int[], DiceType) dice in initialDiceList) {
+                    AddDice(dice.Item1.ToList(), dice.Item2);
+                }
+            } else {
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Fire);
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+                AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
+                AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Normal);
+            }
+            
             foreach(DiceUI d in _dicesUI)
             {
                 d.gameObject.SetActive(false);

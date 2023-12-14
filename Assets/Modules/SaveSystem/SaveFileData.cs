@@ -4,6 +4,7 @@ using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 namespace Cardinals {
     [Serializable]
@@ -41,6 +42,16 @@ namespace Cardinals {
             SetSaveFileInfo(fileName);
 
             ValidationCode = GenerateValidationCode();
+        }
+
+        public List<(int[], DiceType)> GetDiceList() {
+            var diceList = new List<(int[], DiceType)>();
+
+            foreach (var dice in DiceList) {
+                diceList.Add((dice.DiceNumbers, dice.DiceType));
+            }
+
+            return diceList;
         }
 
         [Serializable]

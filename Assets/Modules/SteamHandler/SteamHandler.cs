@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Steamworks;
 using UnityEngine;
 
@@ -34,6 +36,45 @@ namespace Cardinals {
                     }
                 }
             }
+        }
+
+        public bool IsCloudSaveAvailable() {
+            if (!_isSteamAvailable) {
+                return false;
+            }
+
+            return SteamRemoteStorage.IsCloudEnabled;
+        }
+
+        public List<string> GetSteamCloudFiles() {
+            if (!_isSteamAvailable) {
+                return new List<string>();
+            }
+
+            var fileList = new List<string>();
+            var fileCount = SteamRemoteStorage.Files;
+
+            return fileList;
+        }
+
+        public List<DateTime> GetModifiedTime(List<string> fileNameList) {
+            if (!_isSteamAvailable) {
+                return new List<DateTime>();
+            }
+
+            var modifiedTimeList = new List<DateTime>();
+
+            for (int i = 0; i < fileNameList.Count; i++) {
+                var fileName = fileNameList[i];
+                if (!SteamRemoteStorage.FileExists(fileName)) {
+                    continue;
+                }
+                var fileTime = SteamRemoteStorage.FileTime(fileName);
+
+                modifiedTimeList.Add(fileTime);
+            }
+
+            return modifiedTimeList;
         }
     }
 }

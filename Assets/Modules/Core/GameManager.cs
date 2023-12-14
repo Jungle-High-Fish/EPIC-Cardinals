@@ -29,6 +29,7 @@ namespace Cardinals
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
         private static StageController _stage;
+        private int _currentStageIndex = 0;
         
         /// <summary>
         /// 외부에서 참조 가능한 현재 전투 중인 적
@@ -94,8 +95,12 @@ namespace Cardinals
             _gameSetting.Init();
         }
 
-        private void LoadSaveData() {
+        private void LoadFromSaveData(SaveFileData saveFileData) {
             
+        }
+
+        private void MakeNewSaveData() {
+            _currentStageIndex = 0;
         }
 
         IEnumerator LoadMainGame() {
@@ -110,9 +115,10 @@ namespace Cardinals
 
         private IEnumerator MainGameFlow()
         {
-            foreach (var stage in _stageList)
+            for (int i = _currentStageIndex; i < _stageList.Count; i++)
             {
-                yield return StageFlow(stage);
+                _currentStageIndex = i;
+                yield return StageFlow(_stageList[i]);
             }
         }
 
