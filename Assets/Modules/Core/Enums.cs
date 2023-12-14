@@ -277,7 +277,7 @@ namespace Cardinals.Enums {
         Nine,
     }
 
-    public enum EnemyGrade
+    public enum EnemyGradeType
     {
         Ignore,
         Common,
@@ -332,6 +332,7 @@ namespace Cardinals.Enums {
         Potion,
         Card,
         Artifact,
+        RandomDice,
     }
 
     public enum PotionType : int
@@ -433,9 +434,9 @@ namespace Cardinals.Enums {
         Gold
     }
 
-    public enum DiceType
+    public enum DiceType : int
     {
-        Empty,
+        Empty = 0,
         Normal,
         Fire,
         Water,

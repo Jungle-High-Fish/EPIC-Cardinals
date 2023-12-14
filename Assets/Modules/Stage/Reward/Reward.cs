@@ -19,13 +19,16 @@ namespace Cardinals.Game
         /// </summary>
         public int Count { get; set; }
         
+        public object Data { get; set; }
+        
         public Action DeleteEvent { get; set; }
 
-        public Reward(RewardType type, int value = 0, int count = 0)
+        public Reward(RewardType type, int value = 0, int count = 0, object data = null)
         {
             Type = type;
             Value = value;
             Count = count;
+            Data = data;
         }
 
         public void Remove()

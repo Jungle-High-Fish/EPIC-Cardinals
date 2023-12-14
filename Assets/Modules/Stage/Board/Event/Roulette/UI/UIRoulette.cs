@@ -78,7 +78,7 @@ namespace Cardinals.BoardEvent.Roulette
                     GameManager.I.Stage.HitPlayer(_reducedHpValue);
                     break;
                 case BoardEventRoulette.GetRandomDice:
-                    GameManager.I.Stage.GetRewardDice();
+                    GameManager.I.Stage.GetRewardDice(EnemyGradeType.Elite);
                     break;
                 case BoardEventRoulette.DamageToEnemy:
                     var list = GameManager.I.CurrentEnemies.ToList();

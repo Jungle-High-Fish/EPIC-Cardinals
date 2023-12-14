@@ -40,6 +40,10 @@ namespace Cardinals.UI
                     sprite = artifact.Sprite;
                     text = artifact.Name;
                     break;
+                case RewardType.RandomDice:
+                    sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Dice); 
+                    text = $"Dice";
+                    break;
             }
             
             _iconImg.sprite = sprite;
@@ -67,7 +71,6 @@ namespace Cardinals.UI
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
             
             baseReward.Remove();
             baseReward = null;
