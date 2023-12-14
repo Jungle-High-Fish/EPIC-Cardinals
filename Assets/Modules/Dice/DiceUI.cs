@@ -99,9 +99,12 @@ namespace Cardinals
 
         public void UpdateDiceUI(Dice dice)
         {
+            Image image = GetComponent<Image>();
             _dice = dice;
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + _dice.RollResultNumber.ToString();
-            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+            Sprite sprite = ResourceLoader.LoadSprite(path);
+            image.sprite = sprite;
+            //_image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
         public void RollDiceUI(int number)
         {
@@ -146,6 +149,12 @@ namespace Cardinals
 
             if(eventData.button == PointerEventData.InputButton.Right)
             {
+                if (GameManager.I.Player.PlayerInfo.Gold <= 0)
+                {
+                    GameManager.I.Player.Bubble.SetBubble("µ·ÀÌ ¾ø¾î...");
+                    return;
+                }
+                GameManager.I.Player.PlayerInfo.UseGold(1);
                 _diceManager.Roll(_diceIndex);
             }
             
