@@ -35,6 +35,7 @@ namespace Cardinals
 
         public bool IsDiscard
         {
+            get => _isDiscard;
             set => _isDiscard = value;
         }
 
