@@ -92,7 +92,7 @@ namespace Cardinals
         {
             if (PlayerInfo.CheckBlessExist(BlessType.BlessEarth2) && DefenseCount == 0)
             {
-                DefenseCount = 4;
+                AddDefenseCount(4);
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
             }
 
@@ -111,12 +111,12 @@ namespace Cardinals
                 BlessEarth1();
             }
 
-            DefenseCount = 0;
+            ResetDefenseCount();
         }
 
         public void EndBattle()
         {
-            DefenseCount = 0;
+            ResetDefenseCount();
         }
 
         public void BlessWater1()
@@ -315,7 +315,7 @@ namespace Cardinals
 
         public void Defense(int value)
         {
-            DefenseCount += value;
+            AddDefenseCount(value);
             Animator.Play("Shield");
         }
 

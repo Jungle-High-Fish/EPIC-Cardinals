@@ -209,8 +209,8 @@ namespace Cardinals.Board {
 
 		// 행동마다 방어력을 2/4/6만큼 얻습니다.
 		private void MagicActionEarthMain() {
-			GameManager.I.Stage.Player.DefenseCount 
-				+= Constants.GameSetting.Tile.EarthMagicMainDefense[_level - 1];
+			int value = Constants.GameSetting.Tile.EarthMagicMainDefense[_level - 1];
+			GameManager.I.Stage.Player.AddDefenseCount(value);
 		}
 
 		private void MagicActionEarthSub() {

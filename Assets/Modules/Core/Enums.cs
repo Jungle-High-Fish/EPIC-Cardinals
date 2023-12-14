@@ -313,6 +313,7 @@ namespace Cardinals.Enums {
         RotationRate,
         Doll,
         Stun,
+        Powerless,
     }
 
     public enum BuffCountDecreaseType : int
