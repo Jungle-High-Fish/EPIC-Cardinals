@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -27,10 +28,24 @@ namespace Cardinals
         private void Start()
         {
             _newGameBTN.onClick.AddListener(ChoiceCharacter);
+            _newGameBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_MAIN_NEW_START];
+
             _startBTN.onClick.AddListener(NewGame);
+            _startBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_MAIN_START];
+
             _exitBTN.onClick.AddListener(Exit);
+            _exitBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_EXIT_GAME];
+
             _optionBTN.onClick.AddListener(OpenOption);
+            _optionBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_TITLE];
+
             _backBTN.onClick.AddListener(Title);
+            _backBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_MAIN_BACK];
 
             SetTileView(true);
         }

@@ -12,6 +12,7 @@ using Cardinals.Buff;
 using Sirenix.Utilities;
 using Unity.Mathematics;
 using Modules.Entity.Buff;
+using Util;
 
 namespace Cardinals
 {
@@ -26,6 +27,7 @@ namespace Cardinals
         [InlineEditor]
         [SerializeField] private PlayerInfo _playerInfo;
 
+        
         
         private Animator _animator;
         protected override Animator Animator => (_animator ??= GetComponentInChildren<Animator>());
@@ -290,6 +292,26 @@ namespace Cardinals
             AddBuff(new Confusion());
         }
 
+        public override void Attack(BaseEntity target, int damage)
+        {
+            Bubble?.SetBubble(BubbleText.attack);
+            Animator?.Play("Attack");
+
+            var targetPos = target.transform.position + new Vector3(0, -1, 0);
+            var obj = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Attack));
+            obj.transform.position = transform.position;
+            
+            obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    target.Hit(CalculDamage(damage));
+
+                    var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
+                    explosion.transform.position = targetPos;
+                    
+                    Destroy(obj);
+                });
+        }
 
         public void Defense(int value)
         {

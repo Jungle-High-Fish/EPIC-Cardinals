@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Shader/Explosion.meta
+guid: b0e08ffa264314d818e7fbdef763c189
+========
 guid: f283c54c30192b747ab0f76e065b506e
+>>>>>>>> d68c34cf03e6a5004d9d41100455ee0315252e5e:Assets/Modules/Localization.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

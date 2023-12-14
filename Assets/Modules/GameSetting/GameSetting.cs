@@ -10,17 +10,20 @@ namespace Cardinals.UI {
     public class GameSetting {
         public event Action OnSoundSettingChanged;
 
+        public string Language => _language;
         public Resolution Resolution => _resolution;
         public bool IsFullScreen => _isFullScreen;
         public float BgmVolume => _bgmVolume;
         public float SfxVolume => _sfxVolume;
 
+        private string _language;
         private Resolution _resolution;
         private bool _isFullScreen;
         private int _bgmVolume;
         private int _sfxVolume;
 
         public void Init() {
+            GetLanguage();
             GetResolution();
             GetFullScreen();
             GetBgmVolume();
@@ -28,13 +31,33 @@ namespace Cardinals.UI {
         }
 
         public void InitUI(GameSettingUI gameSettingUI) {
+            int languageIndex = GameManager.I.Localization.LanguageList.FindIndex((language) => {
+                return language == _language;
+            });
+
+            GameSettingUI.DropdownDataForUI languages = new GameSettingUI.DropdownDataForUI(
+                GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_LANGUAGE],
+                GameManager.I.Localization.LanguageNameList,
+                GameManager.I.Localization.LanguageList,
+                languageIndex,
+                (value) => {
+                    _language = GameManager.I.Localization.LanguageList[value];
+                    PlayerPrefs.SetString("Language", GameManager.I.Localization.LanguageList[value]);
+                    PlayerPrefs.Save();
+
+                    GameManager.I.Localization.LoadData(_language);
+                    gameSettingUI.ShowLanguageWarnPanel();
+                }
+            );
+
             GameSettingUI.CheckboxDataForUI isFullScreenData = new GameSettingUI.CheckboxDataForUI(
-                "전체화면",
+                GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_FULLSCREEN],
                 _isFullScreen,
                 (value) => {
                     _isFullScreen = value;
                     Screen.fullScreen = value;
                     PlayerPrefs.SetInt("IsFullScreen", value ? 1 : 0);
+                    PlayerPrefs.Save();
                 }
             );
             
@@ -48,7 +71,7 @@ namespace Cardinals.UI {
             });
 
             GameSettingUI.DropdownDataForUI resolutionData = new GameSettingUI.DropdownDataForUI(
-                "해상도",
+                GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_RESOLUTION],
                 resolutionStrings,
                 resolutions,
                 currentResolutionIndex,
@@ -65,7 +88,7 @@ namespace Cardinals.UI {
             );
 
             GameSettingUI.SliderDataForUI bgmVolumeData = new GameSettingUI.SliderDataForUI(
-                "배경 음악",
+                GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_BGM],
                 0,
                 100,
                 true,
@@ -79,7 +102,7 @@ namespace Cardinals.UI {
             );
 
             GameSettingUI.SliderDataForUI sfxVolumeData = new GameSettingUI.SliderDataForUI(
-                "효과음",
+                GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_SFX],
                 0,
                 100,
                 true,
@@ -93,12 +116,21 @@ namespace Cardinals.UI {
             );
 
             gameSettingUI.Init(new List<GameSettingUI.SettingDataForUI>() {
+                languages,
                 isFullScreenData,
                 resolutionData,
                 bgmVolumeData,
                 sfxVolumeData
             });
         } 
+
+        private void GetLanguage() {
+            if (PlayerPrefs.HasKey("Language")) {
+                _language = PlayerPrefs.GetString("Language");
+            } else {
+                _language = GameManager.I.Localization.LanguageList[0];
+            }
+        }
 
         private void GetResolution() {
             if (PlayerPrefs.HasKey("ResolutionWidth") && PlayerPrefs.HasKey("ResolutionHeight")) {
