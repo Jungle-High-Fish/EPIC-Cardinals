@@ -92,10 +92,10 @@ namespace Cardinals
         
         [ShowInInspector] private int _defenseCount;
         public Action<int> UpdateDefenseEvent { get; set; }
-        public int DefenseCount
+        protected int DefenseCount
         {
             get => _defenseCount;
-            set
+            private set
             {
                 _defenseCount = Math.Max(0, value);
                 UpdateDefenseEvent?.Invoke(_defenseCount);
@@ -224,6 +224,15 @@ namespace Cardinals
             }
             
             return (int) Math.Floor(damage);
+        }
+
+        protected void ResetDefenseCount(int resetValue = 0) => DefenseCount = resetValue;
+        public void AddDefenseCount(int value)
+        {
+            if(CheckBuffExist(BuffType.Powerless))
+                value = (int)Math.Ceiling((float) value / 2);
+
+            DefenseCount += value;
         }
 
         public virtual int Heal(int value)

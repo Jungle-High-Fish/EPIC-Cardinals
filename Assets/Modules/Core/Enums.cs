@@ -277,7 +277,7 @@ namespace Cardinals.Enums {
         Nine,
     }
 
-    public enum EnemyGrade
+    public enum EnemyGradeType
     {
         Ignore,
         Common,
@@ -313,6 +313,7 @@ namespace Cardinals.Enums {
         RotationRate,
         Doll,
         Stun,
+        Powerless,
     }
 
     public enum BuffCountDecreaseType : int
@@ -331,6 +332,7 @@ namespace Cardinals.Enums {
         Potion,
         Card,
         Artifact,
+        RandomDice,
     }
 
     public enum PotionType : int
@@ -404,6 +406,8 @@ namespace Cardinals.Enums {
         RandomPotion,
         RandomTileGradeUp,
         ReducedHp,
+        GetRandomDice,
+        DamageToEnemy,
     }
 
     public enum BoardEventCardType
@@ -430,9 +434,9 @@ namespace Cardinals.Enums {
         Gold
     }
 
-    public enum DiceType
+    public enum DiceType : int
     {
-        Empty,
+        Empty = 0,
         Normal,
         Fire,
         Water,
@@ -492,6 +496,7 @@ namespace Cardinals.Enums {
         Move,
         Attack,
         Defense,
+        Heal
     }
     
     public enum TutorialQuestType

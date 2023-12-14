@@ -2,7 +2,9 @@
 using System;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Cardinals.UI.Description;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -31,14 +33,22 @@ namespace Cardinals.UI
                     text = $"{baseReward.Value} Gold";
                     break;
                 case RewardType.Potion:
-                    var potion = EnumHelper.GetPotion((PotionType) baseReward.Value);
+                    var pType = (PotionType)baseReward.Value;
+                    var potion = EnumHelper.GetPotion(pType);
                     sprite = potion.Sprite;
                     text = potion.Name;
+                    transform.AddComponent<PotionDescription>().Init(pType);
                     break;
                 case RewardType.Artifact:
-                    var artifact = EnumHelper.GetArtifact((ArtifactType) baseReward.Value);
+                    var aType = (ArtifactType)baseReward.Value;
+                    var artifact = EnumHelper.GetArtifact(aType);
                     sprite = artifact.Sprite;
                     text = artifact.Name;
+                    transform.AddComponent<ArtifactDescription>().Init(aType);
+                    break;
+                case RewardType.RandomDice:
+                    sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Dice); 
+                    text = $"Dice";
                     break;
             }
             
@@ -67,7 +77,6 @@ namespace Cardinals.UI
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
             
             baseReward.Remove();
             baseReward = null;

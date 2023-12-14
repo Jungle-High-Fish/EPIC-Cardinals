@@ -639,7 +639,7 @@ namespace Cardinals
             else if(type == DiceType.Earth
                 && GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Earth)
             {
-                //[TODO] ���� ����� ����� ���⿡ �߰�
+                target.AddBuff(new Powerless(num));
             }
         }
 

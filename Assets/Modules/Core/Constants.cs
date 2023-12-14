@@ -121,6 +121,7 @@ namespace Cardinals.Constants {
             public const string Sprites_Player_Action = "Player/Action/";
             
             public const string Sprites_UI_Coin = "UI/Icons/UI_Coin";
+            public const string Sprites_UI_Dice = "UI/Icons/UI_Random_Dice";
             public const string Sprites_UI_IconPrefab = "UI/IconPrefab";
             
             public const string Sprites_UI_Enemy_Ballon_LeftTail = "UI/Enemy/UI_Ballon_LeftTail";
@@ -152,6 +153,7 @@ namespace Cardinals.Constants {
             public const string SO_BoardEventData = "BoardEvent/";
             public const string SO_EnemyData = "Stage/Enemies/";
             public const string SO_TutorialData = "Tutorial/";
+            public const string SO_Dice_Reward = "Dice/Reward/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";

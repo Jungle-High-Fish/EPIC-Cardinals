@@ -11,6 +11,7 @@ using Cardinals.Enemy;
 using Sirenix.OdinInspector;
 using Util;
 using Cardinals.Tutorial;
+using TMPro;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 
@@ -343,6 +344,19 @@ namespace Cardinals.Game {
                 obj.GetComponent<BaseBoardEventObject>().Init(tile, evtType);
             }
             else Debug.Log("보드 내 이벤트 생성 가능한 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
+        }
+
+        public Dice GetRewardDice(EnemyGradeType grade)
+        {
+            // 눈
+            var dices = ResourceLoader.LoadSO<RewardDiceSO>(Constants.FilePath.Resources.SO_Dice_Reward + grade);
+            var idx = Random.Range(0, dices.numbers.Length);
+            var number = dices.numbers[idx].ToIntArray();
+            
+            // 타입
+            var type = (DiceType) Random.Range((int)DiceType.Normal, (int)DiceType.Earth + 1);
+            
+            return new Dice(number.ToList(), type);
         }
 
         #region TestCode
