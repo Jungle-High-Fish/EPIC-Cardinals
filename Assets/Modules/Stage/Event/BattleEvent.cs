@@ -103,6 +103,7 @@ namespace Cardinals.Game
                 
             } while (!(CheckPlayerWin || CheckEnemyWin));
 
+            yield return GameManager.I.Stage.DiceManager.EndBattle();
             // 플레이어의 승리
             if (CheckPlayerWin)
             {
@@ -137,8 +138,16 @@ namespace Cardinals.Game
                 {
                     AddReward(rewards, enemy.Rewards);
                     enemies.Remove(enemy);
-                    if (enemies.Count> 0) 
+                    if (enemies.Count> 0)
+                    {
                         GameManager.I.Stage.Board.SetEnemyNumber(enemies.Count); // 1마리가 되었을 때, 카드 드래그 영역 수정
+                    }
+                    else
+                    {
+                        
+                        GameManager.I.Next();
+                    }
+                        
                 };
                 
                 enemies.Add(enemy);
