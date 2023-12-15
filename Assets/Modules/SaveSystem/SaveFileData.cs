@@ -12,6 +12,7 @@ namespace Cardinals {
         // Savefile Info
         public string fileName;
         public DateTime saveTime;
+        public bool isCloudSave;
 
         // Player Info
         public BlessType[] BlessList;
@@ -19,13 +20,14 @@ namespace Cardinals {
         public int Coin;
         public int MaxHP;
         public int HP;
+        public int OnTileIndex;
 
         // Dice Info
         public DiceSaveData[] DiceList;
 
         // Stage Info
-        public StageEventList[][] StageEventSequence;
-        public int ClearedStageIndex;
+        public List<StageEventListWrapper> StageEventSequence;
+        public int CurrentStageIndex;
         public int ClearedStageEventIndex;
 
         // Savefile Validation
@@ -35,11 +37,20 @@ namespace Cardinals {
             return ValidationCode == GenerateValidationCode();
         }
 
-        public void SetData(string fileName, Player player, DiceManager diceManager, Stage[] stage, int clearedStageIndex) {
+        public void SetData(bool isCloudSave, string fileName, Player player, DiceManager diceManager, Stage[] stage, int clearedStageIndex) {
             SetPlayerData(player);
             SetDiceData(diceManager);
             SetStageData(stage, clearedStageIndex);
-            SetSaveFileInfo(fileName);
+            SetSaveFileInfo(fileName, isCloudSave);
+
+            ValidationCode = GenerateValidationCode();
+        }
+
+        public void UpdateData(Player player, DiceManager diceManager, Stage currentStage, int currentStageIndex) {
+            SetPlayerData(player);
+            SetDiceData(diceManager);
+            CurrentStageIndex = currentStageIndex;
+            ClearedStageEventIndex = currentStage.Index - 1;
 
             ValidationCode = GenerateValidationCode();
         }
@@ -64,10 +75,17 @@ namespace Cardinals {
             var playerInfo = player.PlayerInfo;
 
             BlessList = playerInfo.BlessList.ToArray();
-            PotionList = playerInfo.PotionList.ConvertAll(potion => potion.PotionType).ToArray();
+            List<PotionType> potionList = new List<PotionType>();
+            foreach (var potion in playerInfo.PotionList) {
+                if (potion != null) {
+                    potionList.Add(potion.PotionType);
+                }
+            }
+            PotionList = potionList.ToArray();
             Coin = playerInfo.Gold;
             MaxHP = player.MaxHp;
             HP = player.Hp;
+            OnTileIndex = GameManager.I.Stage.Board.GetTileIndex(player.OnTile);
         }
 
         private void SetDiceData(DiceManager diceManager) {
@@ -81,19 +99,23 @@ namespace Cardinals {
             }).ToArray();
         }
 
-        private void SetStageData(Stage[] stage, int clearedStageIndex) {
-            ClearedStageIndex = clearedStageIndex;
-            ClearedStageEventIndex = stage[clearedStageIndex].Index - 1;
+        private void SetStageData(Stage[] stage, int currentStageIndex) {
+            CurrentStageIndex = currentStageIndex;
+            ClearedStageEventIndex = stage[currentStageIndex].Index - 1;
+            if (ClearedStageEventIndex < -1) {
+                ClearedStageEventIndex = -1;
+            }
 
-            StageEventSequence = new StageEventList[stage.Length][];
+            StageEventSequence = new List<StageEventListWrapper>();
             for (int i = 0; i < stage.Length; i++) {
-                StageEventSequence[i] = stage[i].EventNames;
+                StageEventSequence.Add(new StageEventListWrapper(stage[i].EventNames));
             }
         }
 
-        private void SetSaveFileInfo(string fileName) {
+        private void SetSaveFileInfo(string fileName, bool isCloudSave) {
             this.fileName = fileName;
             saveTime = DateTime.Now;
+            this.isCloudSave = isCloudSave;
         }
 
         private string GenerateValidationCode() {
@@ -109,15 +131,16 @@ namespace Cardinals {
             validationString += Coin;
             validationString += MaxHP;
             validationString += HP;
+            validationString += OnTileIndex;
             
             // dice info
             validationString += string.Join("", DiceList);
             
             // stage info
-            for (int i = 0; i < StageEventSequence.Length; i++) {
+            for (int i = 0; i < StageEventSequence.Count; i++) {
                 validationString += string.Join("", StageEventSequence[i]);
             }
-            validationString += ClearedStageIndex;
+            validationString += CurrentStageIndex;
             validationString += ClearedStageEventIndex;
 
             // generate validation code
@@ -125,6 +148,15 @@ namespace Cardinals {
             var tmpHash = new SHA512Managed().ComputeHash(tmpSource);
 
             return Convert.ToBase64String(tmpHash);
+        }
+
+        [Serializable]
+        public struct StageEventListWrapper {
+            public StageEventList[] StageEventList;
+
+            public StageEventListWrapper(StageEventList[] stageEventList) {
+                StageEventList = stageEventList;
+            }
         }
     }
 }

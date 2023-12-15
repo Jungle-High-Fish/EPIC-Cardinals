@@ -13,6 +13,7 @@ namespace Cardinals
     {
         [Header("Title Button")] [SerializeField] private Transform _titleTr;
         [SerializeField] private Button _newGameBTN;
+        [SerializeField] private Button _loadGameBTN;
         [SerializeField] private Button _optionBTN;
         [SerializeField] private Button _exitBTN;
         
@@ -30,6 +31,13 @@ namespace Cardinals
             _newGameBTN.onClick.AddListener(ChoiceCharacter);
             _newGameBTN.GetComponentInChildren<TextMeshProUGUI>().text 
                 = GameManager.I.Localization[LocalizationEnum.UI_MAIN_NEW_START];
+
+            _loadGameBTN.onClick.AddListener(() => GameManager.I.UI.SaveFileLoaderPanel.Show(
+                GameManager.I.SaveSystem.GetLocalSaveFileList(),
+                GameManager.I.SaveSystem.GetCloudSaveFileList()
+            ));
+            _loadGameBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+                = GameManager.I.Localization[LocalizationEnum.UI_MAIN_CONTINUE];
 
             _startBTN.onClick.AddListener(NewGame);
             _startBTN.GetComponentInChildren<TextMeshProUGUI>().text 

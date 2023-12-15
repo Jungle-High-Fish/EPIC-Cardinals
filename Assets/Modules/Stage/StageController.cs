@@ -67,7 +67,6 @@ namespace Cardinals.Game {
         public IEnumerator Load(Stage stage) 
         {
             _stage = stage;
-            _stage.Init(-1);
 
             InstantiateBaseObjs();
             
@@ -75,8 +74,21 @@ namespace Cardinals.Game {
 
             yield return _board.SetBoard(stage.BoardData);
 
-            SetCardSystem();
-            PlacePlayer();
+            if (GameManager.I.SaveSystem.CurrentSaveFileData == null) {
+                SetCardSystem();
+                PlacePlayer();
+                
+                var newSave = GameManager.I.SaveSystem.GenerateAutoSaveFile(
+                    GameManager.I.RuntimeStageList.ToArray(), 
+                    Player, 
+                    DiceManager
+                );
+
+                GameManager.I.SaveSystem.Save(newSave);
+            } else {
+                SetCardSystem(GameManager.I.SaveSystem.CurrentSaveFileData.GetDiceList());
+                PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
+            }
         }
 
         [Header("임시 맵(하드코딩됨)")]
@@ -92,6 +104,15 @@ namespace Cardinals.Game {
             // 다음 사건을 읽음
             while (_stage.MoveNext())
             {
+                GameManager.I.SaveSystem.CurrentSaveFileData.UpdateData(
+                    Player,
+                    GameManager.I.Stage.DiceManager,
+                    _stage,
+                    GameManager.I.CurrentStageIndex
+                );
+                var saveResult = GameManager.I.SaveSystem.SaveCurrentSaveFileData();
+                // TODO: 세이브 실패 시 처리
+
                 // 현재 사건에 따른 이벤트 플로우 수행
                 using var evt = _stage.Current as Game.BaseEvent;
                 _curEvent = evt;
@@ -205,35 +226,49 @@ namespace Cardinals.Game {
             _coreTransform.position = Vector3.zero;
         }
 
-        private void PlacePlayer() {
+        private void PlacePlayer(SaveFileData saveFileData = null) {
             GameObject playerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player);
             GameObject playerObj = GameObject.Instantiate(playerPrefab);
             _player = playerObj.GetComponent<Player>();
+
             _player.Init();
+            
             
             // UI 추가
             GameManager.I.UI.UINewPlayerInfo.Set(); // 창에 이벤트 연결
             GameManager.I.UI.InstantiatePlayerStatusUI(); // Status 창 연결
 
-            _board.PlacePieceToTile(playerObj.GetComponent<Player>(), _board.GetStartTile());
-            
+            if (saveFileData != null) {
+                _player.SetData(
+                    saveFileData.PotionList, 
+                    saveFileData.BlessList, 
+                    saveFileData.Coin, 
+                    saveFileData.MaxHP, 
+                    saveFileData.HP
+                );
+            }
+
+            _board.PlacePieceToTile(
+                playerObj.GetComponent<Player>(), 
+                saveFileData == null ? _board.GetStartTile() : _board[saveFileData.OnTileIndex]
+            );
         }
 
-        private void SetCardSystem() {
+        private void SetCardSystem(List<(int[], DiceType)> initialDiceList = null) {
             GameObject cardManagerObj = new GameObject($"@{Constants.Common.InstanceName.CardManager}");
             cardManagerObj.transform.position = Vector3.zero;
             _cardManager = cardManagerObj.AddComponent<CardManager>();
             _cardManager.transform.SetParent(_coreTransform);
            // _cardManager.gameObject.SetActive(false);
             _cardManager.Init();
+
             GameObject diceManagerObj = new GameObject($"@{Constants.Common.InstanceName.DiceManager}");
             diceManagerObj.transform.position = Vector3.zero;
             _diceManager = diceManagerObj.AddComponent<DiceManager>();
             _diceManager.transform.SetParent(_coreTransform);
-            
 
             GameManager.I.UI.SetCardSystemUI();
-            _diceManager.Init();
+            _diceManager.Init(initialDiceList);
         }
 
 

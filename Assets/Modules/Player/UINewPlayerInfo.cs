@@ -69,8 +69,6 @@ namespace Cardinals.UI.Description
 
             _endTurnButton.Get(gameObject).Init();
             _tileInfo.Get(gameObject).InitOnTile();
-
-            //_mapButton.Get(gameObject).Activate();
         }
 
         void UpdateMoneyUI(int value)

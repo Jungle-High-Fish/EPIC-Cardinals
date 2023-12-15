@@ -150,5 +150,10 @@ namespace Cardinals
             Gold -= value;
             UpdateGoldEvent?.Invoke(Gold);
         }
+
+        public void SetGold(int value) {
+            Gold = value;
+            UpdateGoldEvent?.Invoke(Gold);
+        }
     }
 }

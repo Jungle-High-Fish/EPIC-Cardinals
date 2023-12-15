@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Steamworks;
 using UnityEngine;
 
@@ -51,10 +52,52 @@ namespace Cardinals {
                 return new List<string>();
             }
 
-            var fileList = new List<string>();
-            var fileCount = SteamRemoteStorage.Files;
+            var fileList = SteamRemoteStorage.Files;
+            fileList.ToList().RemoveAll((f) => !f.StartsWith(SteamClient.SteamId + "/"));
+            fileList = fileList.ToList().ConvertAll((f) => f.Replace(SteamClient.SteamId + "/", ""));
 
-            return fileList;
+            return fileList.ToList();
+        }
+
+        public bool IsSteamCloudFileExists(string fileName) {
+            if (!IsCloudSaveAvailable()) {
+                return false;
+            }
+
+            return SteamRemoteStorage.FileExists(GetUserSteamCloudSavePath(fileName));
+        }
+
+        public bool SaveSteamCloudFile(string fileName, string data) {
+            if (!IsCloudSaveAvailable()) {
+                return false;
+            }
+
+            return SteamRemoteStorage.FileWrite(GetUserSteamCloudSavePath(fileName), System.Text.Encoding.UTF8.GetBytes(data));
+        }
+
+        public string LoadSteamCloudFile(string fileName) {
+            if (!IsCloudSaveAvailable()) {
+                return null;
+            }
+
+            if (!SteamRemoteStorage.FileExists(GetUserSteamCloudSavePath(fileName))) {
+                return null;
+            }
+
+            var fileData = SteamRemoteStorage.FileRead(GetUserSteamCloudSavePath(fileName));
+            return System.Text.Encoding.UTF8.GetString(fileData);
+        }
+        
+        public bool DeleteSteamCloudFile(string fileName) {
+            if (!IsCloudSaveAvailable()) {
+                return false;
+            }
+
+            if (!SteamRemoteStorage.FileExists(GetUserSteamCloudSavePath(fileName))) {
+                return false;
+            }
+
+            return SteamRemoteStorage.FileDelete(GetUserSteamCloudSavePath(fileName));
         }
 
         public List<DateTime> GetModifiedTime(List<string> fileNameList) {
@@ -66,15 +109,23 @@ namespace Cardinals {
 
             for (int i = 0; i < fileNameList.Count; i++) {
                 var fileName = fileNameList[i];
-                if (!SteamRemoteStorage.FileExists(fileName)) {
+                if (!SteamRemoteStorage.FileExists(GetUserSteamCloudSavePath(fileName))) {
                     continue;
                 }
-                var fileTime = SteamRemoteStorage.FileTime(fileName);
+                var fileTime = SteamRemoteStorage.FileTime(GetUserSteamCloudSavePath(fileName));
 
                 modifiedTimeList.Add(fileTime);
             }
 
             return modifiedTimeList;
+        }
+
+        private string GetUserSteamCloudSavePath(string fileName) {
+            if (!_isSteamAvailable) {
+                return null;
+            }
+
+            return SteamClient.SteamId + "/" + fileName;
         }
     }
 }

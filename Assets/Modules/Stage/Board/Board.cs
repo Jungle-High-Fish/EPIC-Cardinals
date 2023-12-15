@@ -177,6 +177,10 @@ namespace Cardinals.Board {
             }
         }
 
+        public int GetTileIndex(Tile tile) {
+            return _tileSequence.IndexOf(tile);
+        }
+
         public int GetBoardEdgeNum() {
             if (_boardBuilder is NormalBoardBuilder)
                 return (_boardBuilder as NormalBoardBuilder).CornerTiles.Count;

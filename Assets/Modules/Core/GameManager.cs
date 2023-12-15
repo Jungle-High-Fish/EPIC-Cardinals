@@ -20,14 +20,20 @@ namespace Cardinals
         public GameSetting GameSetting => _gameSetting;
         public Localization Localization => _localization;
         public SteamHandler SteamHandler => _steamHandler;
+        public SaveSystem SaveSystem => _saveSystem;
         public SoundManager Sound => _soundManager;
+
+        public int CurrentStageIndex => _currentStageIndex;
+        public List<Stage> RuntimeStageList => _stageRuntimeList;
         
         private GameSetting _gameSetting;
         private Localization _localization;
         private SteamHandler _steamHandler;
+        private SaveSystem _saveSystem;
 
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
+        private List<Stage> _stageRuntimeList;
         private static StageController _stage;
         private int _currentStageIndex = 0;
         
@@ -55,13 +61,14 @@ namespace Cardinals
         }
 
         [Button]
-        public void GameStart()
+        public void GameStart(SaveFileData saveFileData=null)
         {
-            StartCoroutine(LoadMainGame());
+            StartCoroutine(LoadMainGame(saveFileData));
         }
 
         private void Start() {
             SteamHandlerInit();
+            SaveSystemInit();
 
             LoadGameSetting();
             GenerateCoreObjects();
@@ -88,6 +95,10 @@ namespace Cardinals
             _steamHandler.Init();
         }
 
+        private void SaveSystemInit() {
+            _saveSystem = new SaveSystem();
+        }
+
         private void LoadGameSetting() {
             _localization = new Localization();
 
@@ -96,18 +107,43 @@ namespace Cardinals
         }
 
         private void LoadFromSaveData(SaveFileData saveFileData) {
-            
+            _stageRuntimeList = new List<Stage>();
+            for (int i = 0; i < _stageList.Count; i++) {
+                var stage = _stageList[i];
+                stage.Init(
+                    i == saveFileData.CurrentStageIndex ? saveFileData.ClearedStageEventIndex : -1, 
+                    saveFileData.StageEventSequence[i].StageEventList
+                );
+                _stageRuntimeList.Add(stage);
+            }
+
+            _currentStageIndex = saveFileData.CurrentStageIndex;
         }
 
-        private void MakeNewSaveData() {
+        private void MakeNewGameData() {
+            _saveSystem.ClearCurrentSaveFileData();
+
+            _stageRuntimeList = new List<Stage>();
+            for (int i = 0; i < _stageList.Count; i++) {
+                var stage = _stageList[i];
+                stage.Init(-1);
+                _stageRuntimeList.Add(stage);
+            }
+
             _currentStageIndex = 0;
         }
 
-        IEnumerator LoadMainGame() {
+        IEnumerator LoadMainGame(SaveFileData saveFileData=null) {
             var loading = SceneManager.LoadSceneAsync("StageTest");
 
             while (!loading.isDone) {
                 yield return null;
+            }
+
+            if (saveFileData == null) {
+                MakeNewGameData();
+            } else {
+                LoadFromSaveData(saveFileData);
             }
             
             StartCoroutine(MainGameFlow());
@@ -115,23 +151,23 @@ namespace Cardinals
 
         private IEnumerator MainGameFlow()
         {
-            for (int i = _currentStageIndex; i < _stageList.Count; i++)
+            for (int i = _currentStageIndex; i < _stageRuntimeList.Count; i++)
             {
                 _currentStageIndex = i;
-                yield return StageFlow(_stageList[i]);
+                yield return StageFlow(_stageRuntimeList[i]);
             }
         }
 
         private IEnumerator StageFlow(Stage stage)
         {   
             GenerateCoreObjects();
-            _stage = LoadStage();
+            _stage = LoadStageController();
 
             yield return _stage.Load(stage);
             yield return _stage.Flow();
         }
     
-        private StageController LoadStage()
+        private StageController LoadStageController()
         {
             GameObject stageControllerObj = new GameObject("@" + Constants.Common.InstanceName.StageController);
             StageController stageController = stageControllerObj.AddComponent<StageController>();
