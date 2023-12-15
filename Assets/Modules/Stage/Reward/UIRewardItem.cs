@@ -67,17 +67,26 @@ namespace Cardinals.UI
             {
                 case RewardType.Gold:
                     GameManager.I.Stage.AddGold(baseReward.Value);
+                    Remove();
                     break;
                 case RewardType.Potion:
                     GameManager.I.Stage.Player.PlayerInfo.AddPotion((PotionType) baseReward.Value);
+                    Remove();
                     break;
                 case RewardType.Artifact:
                     GameManager.I.Stage.Player.PlayerInfo.AddArtifact((ArtifactType) baseReward.Value);
+                    Remove();
+                    break;
+                case RewardType.RandomDice:
+                    GameManager.I.UI.UINewDicePanel.Init((Dice)baseReward.Data, Remove);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+        }
+
+        void Remove()
+        {
             baseReward.Remove();
             baseReward = null;
         }

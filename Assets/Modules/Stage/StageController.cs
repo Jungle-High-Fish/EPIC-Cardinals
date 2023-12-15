@@ -351,7 +351,7 @@ namespace Cardinals.Game {
             // 눈
             var dices = ResourceLoader.LoadSO<RewardDiceSO>(Constants.FilePath.Resources.SO_Dice_Reward + grade);
             var idx = Random.Range(0, dices.numbers.Length);
-            var number = dices.numbers[idx].ToIntArray();
+            var number = dices.numbers[idx].Select(n => n - '0');
             
             // 타입
             var type = (DiceType) Random.Range((int)DiceType.Normal, (int)DiceType.Earth + 1);

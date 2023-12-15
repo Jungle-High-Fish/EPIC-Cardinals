@@ -37,12 +37,19 @@ public class RewardBox : MonoBehaviour
         gameObject.SetActive(true);
         foreach (var r in rewards)
         {
-            r.Value = r.Type switch
+            switch (r.Type)
             {
-                RewardType.Potion => GetRandomPotion(),
-                RewardType.Artifact => GetRandomArtifact(),
-                _ => r.Value
-            };
+                case RewardType.Potion:
+                    r.Value = GetRandomPotion();
+                    break;
+                case RewardType.Artifact:
+                    r.Value = GetRandomArtifact();
+                    break;
+                case RewardType.RandomDice:
+                    r.Data = GameManager.I.Stage.GetRewardDice((EnemyGradeType)r.Value);
+                    break;
+                default: break;
+            }
             
             _rewards.Add(r);
 
@@ -71,17 +78,17 @@ public class RewardBox : MonoBehaviour
         {
             case EnemyGradeType.Common :
                 rewards.Add(new (RewardType.Gold, 2));
-                rewards.Add(new (RewardType.RandomDice));
+                rewards.Add(new (RewardType.RandomDice, (int)grade));
                 break;
             case EnemyGradeType.Elite :
                 rewards.Add(new (RewardType.Gold, 5));
                 rewards.Add(new (RewardType.Potion));
-                rewards.Add(new (RewardType.RandomDice));
+                rewards.Add(new (RewardType.RandomDice, (int)grade));
                 break;
             case EnemyGradeType.Boss :
                 rewards.Add(new (RewardType.Gold, 8));
                 rewards.Add(new (RewardType.Potion));
-                rewards.Add(new (RewardType.RandomDice));
+                rewards.Add(new (RewardType.RandomDice, (int)grade ));
                 break;
         }
 
