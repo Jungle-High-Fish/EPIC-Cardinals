@@ -32,6 +32,7 @@ namespace Cardinals
         [SerializeField] private bool _newDiceUseMod;
         [ShowInInspector] private List<Dice> _dices;
         private List<DiceUI> _dicesUI;
+        public List<Dice> Dices => _dices;
 
         //public IEnumerable<Card> HandCards => _handCards;
 

@@ -75,6 +75,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_DiceSurface = "UI/Dice/DiceSurface";
 
             public const string Prefabs_UI_TileSelection = "UI/Stage/Tile Selection UI";
+            public const string Prefabs_UI_NewDicePanel = "UI/NewDicePanel/NewDicePanel";
 
             public const string Prefabs_UI_MagicLevelUpPanel = "UI/Stage/Magic Level Up/Magic Level Up Panel";
             public const string Prefabs_UI_MagicSlot = "UI/Stage/Magic Level Up/Magic Slot";

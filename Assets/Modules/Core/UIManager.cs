@@ -8,6 +8,7 @@ using Cardinals.Game;
 using Cardinals.UI;
 using Cardinals.UI.Description;
 using Cardinals.Tutorial;
+using Cardinals.UI.NewDice;
 using Unity.VisualScripting;
 using UnityEngine;
 using Util;
@@ -26,6 +27,7 @@ namespace Cardinals
         public UITileInfo UIHoveredTileInfo => _uiHoveredTileInfo;
         public UINewPlayerInfo UINewPlayerInfo => _uiNewPlayerInfo;
         public UIEndTurnButton UIEndTurnButton => _uiNewPlayerInfo.EndTurnButton;
+        public UINewDicePanel UINewDicePanel => _uiNewDicePanel;
 
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -48,6 +50,7 @@ namespace Cardinals
         private UIMagicLevelUpPanel _uiMagicLevelUpPanel;
         private UITileInfo _uiHoveredTileInfo;
         private UINewPlayerInfo _uiNewPlayerInfo;
+        private UINewDicePanel _uiNewDicePanel;
 
         #region Board-Event 
         private UICardEvent _uiCardEvent;
@@ -91,6 +94,7 @@ namespace Cardinals
             //InstantiatePlayerUI();
             InstantiateNewPlayerUI();
             InstantiateTileSelectionUI();
+            InstantiateNewDicePanelUI();
 
             //InstantiateEnemyUIParent();
             
@@ -225,6 +229,14 @@ namespace Cardinals
             _uiTileSelection = tileSelectionUIObj.GetComponent<UITileSelection>();
 
             tileSelectionUIObj.SetActive(false);
+        }
+
+        private void InstantiateNewDicePanelUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_NewDicePanel);
+            GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
+            _uiNewDicePanel = obj.GetComponent<UINewDicePanel>();
+            obj.SetActive(false);
         }
 
         private void InstantiateBoardEventCardUI() {
