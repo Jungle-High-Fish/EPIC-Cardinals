@@ -28,11 +28,12 @@ namespace Cardinals.Game
             //CardManager cardManager = GameManager.I.Stage.CardManager;
             DiceManager diceManager = GameManager.I.Stage.DiceManager;
             List<BaseEnemy> enemies = new();
-            List<Reward> rewards = new();
-
+            EnemyGradeType enemyGradeType;
+            
             // 몬스터 정보 초기화
-            InitEnemy(enemies, rewards);
+            InitEnemy(enemies);
             GameManager.I.CurrentEnemies = enemies;
+            enemyGradeType = enemies.First().EnemyData.enemyGradeType;
             
             //cardManager.OnBattle();
             diceManager.OnBattle();
@@ -114,7 +115,7 @@ namespace Cardinals.Game
                 player.EndBattle();
                 board.ClearBoardAfterBattleEvent();
                 RemoveSummons();
-                yield return WaitReward(rewards);
+                yield return WaitReward(enemyGradeType);
             }
         }
 
@@ -125,7 +126,7 @@ namespace Cardinals.Game
         /// <summary>
         /// 몬스터 초기화
         /// </summary>
-        private void InitEnemy(List<BaseEnemy> enemies, List<Reward> rewards)
+        private void InitEnemy(List<BaseEnemy> enemies)
         {
             Vector3[] enemyPositions = GameManager.I.Stage.Board.SetEnemyNumber(_enemyList.Length);
             
@@ -136,7 +137,6 @@ namespace Cardinals.Game
                 
                 enemy.DieEvent += () =>
                 {
-                    AddReward(rewards, enemy.Rewards);
                     enemies.Remove(enemy);
                     if (enemies.Count> 0)
                     {
@@ -178,12 +178,12 @@ namespace Cardinals.Game
         /// 플레이어 전리품 획득 대기
         /// </summary>
         /// <param name="rewards"></param>
-        IEnumerator WaitReward(IEnumerable<Reward> rewards)
+        IEnumerator WaitReward(EnemyGradeType grade)
         {
             GameManager.I.UI.UIEndTurnButton.Activate(true);
             
             // 보상 설정
-            GameManager.I.Stage.RewardBox.Set(rewards); // 해당 위치에서 구체화 됩니다. 
+            GameManager.I.Stage.RewardBox.SetByGrade(grade); // 해당 위치에서 구체화 됩니다. 
 
             IsSelect = false;
             yield return new WaitUntil(() => IsSelect); // 플레이어의 보상 선택 후 [턴 종료] 대기

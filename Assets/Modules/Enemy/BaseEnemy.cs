@@ -136,7 +136,7 @@ namespace Cardinals
 
         public override IEnumerator OnPreTurn()
         {
-            DefenseCount = 0;
+            ResetDefenseCount();
             yield return new WaitForSeconds(.5f);
         }
 
@@ -159,7 +159,7 @@ namespace Cardinals
                         Attack(GameManager.I.Player, value);
                         break;
                     case EnemyActionType.Defense :
-                        DefenseCount += value;
+                        AddDefenseCount(value);
                         break;
                     case EnemyActionType.AreaAttack :
                     case EnemyActionType.TileDebuff :

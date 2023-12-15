@@ -34,6 +34,7 @@ namespace Cardinals
         [SerializeField] private bool _newDiceUseMod;
         [ShowInInspector] private List<Dice> _dices;
         private List<DiceUI> _dicesUI;
+        public List<Dice> Dices => _dices;
 
         //public IEnumerable<Card> HandCards => _handCards;
 
@@ -648,7 +649,7 @@ namespace Cardinals
             else if(type == DiceType.Earth
                 && GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Earth)
             {
-                //[TODO] ���� ����� ����� ���⿡ �߰�
+                target.AddBuff(new Powerless(num));
             }
         }
 

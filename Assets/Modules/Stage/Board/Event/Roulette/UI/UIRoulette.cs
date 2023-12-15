@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Cardinals.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Cardinals.BoardEvent.Roulette
 {
@@ -74,6 +76,15 @@ namespace Cardinals.BoardEvent.Roulette
                     break;
                 case BoardEventRoulette.ReducedHp:
                     GameManager.I.Stage.HitPlayer(_reducedHpValue);
+                    break;
+                case BoardEventRoulette.GetRandomDice:
+                    var dice = GameManager.I.Stage.GetRewardDice(EnemyGradeType.Elite);
+                    GameManager.I.UI.UINewDicePanel.Init(dice, null);
+                    break;
+                case BoardEventRoulette.DamageToEnemy:
+                    var list = GameManager.I.CurrentEnemies.ToList();
+                    var target = list[Random.Range(0, list.Count)];
+                    GameManager.I.Player.Attack(target, 10);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

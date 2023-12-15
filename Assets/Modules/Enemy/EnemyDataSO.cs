@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Cardinals.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Cardinals.Game {
 
     [CreateAssetMenu(fileName = "EnemyData", menuName = "Cardinals/EnemyData", order = 1)]
     public class EnemyDataSO: ScriptableObject {
         public string enemyName;
-        public EnemyGrade enemyGrade;
+        [FormerlySerializedAs("enemyGrade")] public EnemyGradeType enemyGradeType;
         public EnemyType enemyType;
         [AssetSelector(Paths = "Assets/Resources/Prefabs/Enemy/EnemyAnimation")]
         [InlineEditor(InlineEditorModes.LargePreview)] 
