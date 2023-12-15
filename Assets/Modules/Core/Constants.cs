@@ -97,6 +97,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_SliderOption = "UI/GameSetting/Slider Option";
             public const string Prefabs_UI_GameSetting = "UI/GameSetting/Game Setting UI";
 
+            public const string Prefabs_UI_SaveFileDataPanel = "UI/SaveSystem/Save File Data Panel";
+            public const string Prefabs_UI_SaveFileLoaderPanel = "UI/SaveSystem/Save File Loader Panel";
             
             // Particle
             public const string Prefabs_Particle_Attack = "Particle/Trail";
@@ -154,6 +156,7 @@ namespace Cardinals.Constants {
             public const string SO_BoardEventData = "BoardEvent/";
             public const string SO_EnemyData = "Stage/Enemies/";
             public const string SO_TutorialData = "Tutorial/";
+            public const string SO_StageEventList = "Stage/StageEventList";
             public const string SO_Dice_Reward = "Dice/Reward/";
             
             public const string Enemy = "Enemy/";

@@ -2629,6 +2629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleTr: {fileID: 510781655}
   _newGameBTN: {fileID: 480401449}
+  _loadGameBTN: {fileID: 1243499538}
   _optionBTN: {fileID: 239313909}
   _exitBTN: {fileID: 723387283}
   _characterSelecterTr: {fileID: 208318480}

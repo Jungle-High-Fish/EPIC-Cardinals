@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2835d0d6a009a5c4cbb2ec480e6f309e, type: 3}
+  m_Name: StageEventList
+  m_EditorClassIdentifier: 
+  StageEventBindDataList:
+  - StageEventName: 1
+    EventData: {fileID: 11400000, guid: 251c10cd133c72643811823264607240, type: 2}
+  - StageEventName: 2
+    EventData: {fileID: 11400000, guid: 14fd5f645ed97c44292e21636ed0e397, type: 2}
+  - StageEventName: 3
+    EventData: {fileID: 11400000, guid: 76d6012f20facef4991df0780f23280f, type: 2}
+  - StageEventName: 4
+    EventData: {fileID: 11400000, guid: 7b0d59ecb6c0ee94ca7ecac51c0fbb5d, type: 2}
+  - StageEventName: 5
+    EventData: {fileID: 11400000, guid: a6b1ac23687303b488070dd09fb7a26f, type: 2}
+  - StageEventName: 6
+    EventData: {fileID: 11400000, guid: 9a0d472761aae7a41985435e9f220d27, type: 2}

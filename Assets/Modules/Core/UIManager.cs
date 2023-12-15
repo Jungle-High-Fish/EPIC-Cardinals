@@ -18,6 +18,7 @@ namespace Cardinals
     public class UIManager : MonoBehaviour
     {
         public GameSettingUI GameSettingUI => _gameSettingUI;
+        public SaveFileLoaderPanel SaveFileLoaderPanel => _saveFileLoaderPanel;
 
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
@@ -40,6 +41,7 @@ namespace Cardinals
         private Canvas _descriptionUICanvas;
 
         private GameSettingUI _gameSettingUI;
+        private SaveFileLoaderPanel _saveFileLoaderPanel;
 
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
@@ -87,6 +89,7 @@ namespace Cardinals
             InitDescriptionCanvas();
             
             InstantiateGameSettingUI();
+            InstantiateSaveFileLoaderUI();
             
             InstantiateStageInfoUI();
             //InstantiateMapButtonUI();
@@ -166,6 +169,15 @@ namespace Cardinals
 
             _gameSettingUI = gameSettingUIObj.GetComponent<GameSettingUI>();
             gameSettingUIObj.SetActive(false);
+        }
+
+        private void InstantiateSaveFileLoaderUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_SaveFileLoaderPanel);
+            GameObject saveFileLoaderUIObj = Instantiate(prefab, _systemUICanvas.transform);
+
+            _saveFileLoaderPanel = saveFileLoaderUIObj.GetComponent<SaveFileLoaderPanel>();
+            _saveFileLoaderPanel.Init();
+            saveFileLoaderUIObj.SetActive(false);
         }
 
         private void InstantiateStageInfoUI() {

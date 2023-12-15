@@ -46,7 +46,14 @@ namespace Cardinals
             _playerInfo = new PlayerInfo();
 
             _defaultRotate = Renderers.First().transform.rotation;
-            Debug.Log("플레이어 초기화 완료");
+        }
+
+        public void SetData(PotionType[] potionList, BlessType[] blessList, int coin, int maxHp, int hp)
+        {
+            potionList.ForEach(p => _playerInfo.AddPotion(p));
+            blessList.ForEach(b => _playerInfo.GetBless(b));
+            _playerInfo.SetGold(coin);
+            Hp = hp;
         }
 
         public override int Hp {

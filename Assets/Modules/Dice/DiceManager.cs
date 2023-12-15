@@ -14,6 +14,8 @@ namespace Cardinals
 {
     public class DiceManager : MonoBehaviour
     {
+        public List<Dice> Dices => _dices;
+
         private int _prevDiceNumber = -1;
         private int _selectDiceIndex;
         private bool _canActionUse;
@@ -64,17 +66,24 @@ namespace Cardinals
         }
 
         [Button]
-        public void Init()
+        public void Init(List<(int[], DiceType)> initialDiceList = null)
         {
             _dices = new();
             _dicesUI = new();
             _newDiceUseMod = true;
-
-            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 1,1,2,2,3,3}, DiceType.Fire);
-            AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
-            AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
-            AddDice(new List<int>() {3,3,4,4,5,5 }, DiceType.Normal);
+            
+            if (initialDiceList != null) {
+                foreach ((int[], DiceType) dice in initialDiceList) {
+                    AddDice(dice.Item1.ToList(), dice.Item2);
+                }
+            } else {
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Fire);
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+                AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
+                AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Normal);
+            }
+            
             foreach(DiceUI d in _dicesUI)
             {
                 d.gameObject.SetActive(false);
@@ -558,8 +567,8 @@ namespace Cardinals
             // [�����] ����
             if (GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
-                Debug.Log("���� �������߳�?");
-                GameManager.I.Player.Bubble.SetBubble("�������ؼ� �� �� ����");
+                Debug.Log("뭐지? 감전당했나?");
+                GameManager.I.Player.Bubble.SetBubble("감전당해서 사용할 수 없어...");
                 result = false;
             }
 
@@ -599,7 +608,7 @@ namespace Cardinals
             // [�����] ���ο�
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
             {
-                GameManager.I.Player.Bubble.SetBubble("���ο� ������ �ൿ�� ���õǾ���");
+                GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 첫 번째 행동이 무시되었어.");
                 Debug.Log("���ο� ������ �ൿ ����");
             }
             else

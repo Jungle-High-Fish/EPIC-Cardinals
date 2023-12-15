@@ -19,14 +19,23 @@ namespace Cardinals
         public StageController Stage => _stage;
         public GameSetting GameSetting => _gameSetting;
         public Localization Localization => _localization;
+        public SteamHandler SteamHandler => _steamHandler;
+        public SaveSystem SaveSystem => _saveSystem;
         public SoundManager Sound => _soundManager;
+
+        public int CurrentStageIndex => _currentStageIndex;
+        public List<Stage> RuntimeStageList => _stageRuntimeList;
         
         private GameSetting _gameSetting;
         private Localization _localization;
+        private SteamHandler _steamHandler;
+        private SaveSystem _saveSystem;
 
         private static UIManager _ui;
         [SerializeField] private List<Stage> _stageList;
+        private List<Stage> _stageRuntimeList;
         private static StageController _stage;
+        private int _currentStageIndex = 0;
         
         /// <summary>
         /// 외부에서 참조 가능한 현재 전투 중인 적
@@ -52,18 +61,17 @@ namespace Cardinals
         }
 
         [Button]
-        public void GameStart()
+        public void GameStart(SaveFileData saveFileData=null)
         {
-            StartCoroutine(LoadMainGame());
+            StartCoroutine(LoadMainGame(saveFileData));
         }
 
         private void Start() {
-            LoadGameSetting();
+            SteamHandlerInit();
+            SaveSystemInit();
 
-            _ui = InitUI();
-            _soundManager = InitSound();
-            _soundManager.PlayBGM();
-            _gameSetting.InitUI(_ui.GameSettingUI);
+            LoadGameSetting();
+            GenerateCoreObjects();
         }
 
         private void Update() {
@@ -74,6 +82,21 @@ namespace Cardinals
                     _ui.GameSettingUI.Show();
                 }
             }
+
+            _steamHandler.EveryFrame();
+        }
+
+        private void OnApplicationQuit() {
+            Steamworks.SteamClient.Shutdown();
+        }
+
+        private void SteamHandlerInit() {
+            _steamHandler = new SteamHandler();
+            _steamHandler.Init();
+        }
+
+        private void SaveSystemInit() {
+            _saveSystem = new SaveSystem();
         }
 
         private void LoadGameSetting() {
@@ -83,11 +106,44 @@ namespace Cardinals
             _gameSetting.Init();
         }
 
-        IEnumerator LoadMainGame() {
+        private void LoadFromSaveData(SaveFileData saveFileData) {
+            _stageRuntimeList = new List<Stage>();
+            for (int i = 0; i < _stageList.Count; i++) {
+                var stage = _stageList[i];
+                stage.Init(
+                    i == saveFileData.CurrentStageIndex ? saveFileData.ClearedStageEventIndex : -1, 
+                    saveFileData.StageEventSequence[i].StageEventList
+                );
+                _stageRuntimeList.Add(stage);
+            }
+
+            _currentStageIndex = saveFileData.CurrentStageIndex;
+        }
+
+        private void MakeNewGameData() {
+            _saveSystem.ClearCurrentSaveFileData();
+
+            _stageRuntimeList = new List<Stage>();
+            for (int i = 0; i < _stageList.Count; i++) {
+                var stage = _stageList[i];
+                stage.Init(-1);
+                _stageRuntimeList.Add(stage);
+            }
+
+            _currentStageIndex = 0;
+        }
+
+        IEnumerator LoadMainGame(SaveFileData saveFileData=null) {
             var loading = SceneManager.LoadSceneAsync("StageTest");
 
             while (!loading.isDone) {
                 yield return null;
+            }
+
+            if (saveFileData == null) {
+                MakeNewGameData();
+            } else {
+                LoadFromSaveData(saveFileData);
             }
             
             StartCoroutine(MainGameFlow());
@@ -95,31 +151,35 @@ namespace Cardinals
 
         private IEnumerator MainGameFlow()
         {
-            foreach (var stage in _stageList)
+            for (int i = _currentStageIndex; i < _stageRuntimeList.Count; i++)
             {
-                yield return StageFlow(stage);
+                _currentStageIndex = i;
+                yield return StageFlow(_stageRuntimeList[i]);
             }
         }
 
         private IEnumerator StageFlow(Stage stage)
         {   
-            _ui = InitUI();
-            _soundManager = InitSound();
-            _soundManager.PlayBGM();
-            _gameSetting.InitUI(_ui.GameSettingUI);
-
-            _stage = LoadStage();
+            GenerateCoreObjects();
+            _stage = LoadStageController();
 
             yield return _stage.Load(stage);
             yield return _stage.Flow();
         }
     
-        private StageController LoadStage()
+        private StageController LoadStageController()
         {
             GameObject stageControllerObj = new GameObject("@" + Constants.Common.InstanceName.StageController);
             StageController stageController = stageControllerObj.AddComponent<StageController>();
 
             return stageController;
+        }
+
+        private void GenerateCoreObjects() {
+            _ui = InitUI();
+            _soundManager = InitSound();
+            _soundManager.PlayBGM();
+            _gameSetting.InitUI(_ui.GameSettingUI);
         }
 
         private UIManager InitUI() {
