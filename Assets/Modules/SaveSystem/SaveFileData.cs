@@ -5,6 +5,7 @@ using Cardinals.Enums;
 using Cardinals.Game;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using Cardinals.Board;
 
 namespace Cardinals {
     [Serializable]
@@ -29,6 +30,7 @@ namespace Cardinals {
         public List<StageEventListWrapper> StageEventSequence;
         public int CurrentStageIndex;
         public int ClearedStageEventIndex;
+        public List<TileSaveData> TileSaveDataList;
 
         // Savefile Validation
         public string ValidationCode;
@@ -41,6 +43,7 @@ namespace Cardinals {
             SetPlayerData(player);
             SetDiceData(diceManager);
             SetStageData(stage, clearedStageIndex);
+            SetTileData();
             SetSaveFileInfo(fileName, isCloudSave);
 
             ValidationCode = GenerateValidationCode();
@@ -51,6 +54,7 @@ namespace Cardinals {
             SetDiceData(diceManager);
             CurrentStageIndex = currentStageIndex;
             ClearedStageEventIndex = currentStage.Index - 1;
+            SetTileData();
 
             ValidationCode = GenerateValidationCode();
         }
@@ -112,6 +116,21 @@ namespace Cardinals {
             }
         }
 
+        private void SetTileData() {
+            Board.Board board = GameManager.I.Stage.Board;
+            TileSaveDataList = new List<TileSaveData>();
+            for (int i = 0; i < board.TileSequence.Count; i++) {
+                var tile = board.TileSequence[i];
+                var tileSaveData = new TileSaveData() {
+                    TileMagicType = tile.TileMagic.Type,
+                    Level = tile.TileMagic.Level,
+                    Exp = tile.TileMagic.Exp
+                };
+
+                TileSaveDataList.Add(tileSaveData);
+            }
+        }
+
         private void SetSaveFileInfo(string fileName, bool isCloudSave) {
             this.fileName = fileName;
             saveTime = DateTime.Now;
@@ -157,6 +176,13 @@ namespace Cardinals {
             public StageEventListWrapper(StageEventList[] stageEventList) {
                 StageEventList = stageEventList;
             }
+        }
+
+        [Serializable]
+        public struct TileSaveData {
+            public TileMagicType TileMagicType;
+            public int Level;
+            public int Exp;
         }
     }
 }
