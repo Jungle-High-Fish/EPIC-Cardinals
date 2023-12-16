@@ -255,6 +255,7 @@ namespace Cardinals.Board {
             _tileCurse.SetCurse(data);
             _tileEvent.ClearEvent();
             ChangeState(TileState.Cursed);
+            GameManager.I.Player.MotionWorry();
         }
 
         public void SetEffect(TileEffectData data) {

@@ -431,6 +431,11 @@ namespace Cardinals
         {
             Animator.Play("Idle");
         }
+        
+        public void MotionWorry()
+        {
+            Animator.Play("Worry");
+        }
     }
 }
 
