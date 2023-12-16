@@ -310,8 +310,6 @@ namespace Cardinals
             changeDiscardState?.Invoke();
         }
 
-        private bool Record() => false;
-
 
         public IEnumerator Dragging()
         {
@@ -322,10 +320,19 @@ namespace Cardinals
                 c.StartDraggingState();
             }
 
+            bool initFirstSelect = false;
             while (_state == CardState.Select)
             {
+                if (!initFirstSelect)
+                {
+                    GameManager.I.Player.MotionThinking();
+                    initFirstSelect = true;
+                }
+                
                 if (Input.GetMouseButtonUp(0))
                 {
+                    GameManager.I.Player.MotionIdle();
+                    
                     IBoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
                     if (boardInputHandler.IsMouseHoverUI)
                     {
