@@ -291,6 +291,7 @@ namespace Cardinals.Board {
         private IEnumerator BoardLoadWithAnimation(BoardData boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();
+            yield return new WaitUntil(() => _tileSequence.All(t => t.HasTouchedGround));
         }
 
         private IEnumerator TileAnimation(float delay=0f) {

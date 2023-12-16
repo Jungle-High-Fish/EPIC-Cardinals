@@ -89,6 +89,8 @@ namespace Cardinals.Game {
             } else {
                 SetCardSystem(GameManager.I.SaveSystem.CurrentSaveFileData.GetDiceList());
                 PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
+
+                yield return LoadTileData(GameManager.I.SaveSystem.CurrentSaveFileData);
             }
         }
 
@@ -272,6 +274,19 @@ namespace Cardinals.Game {
             _diceManager.Init(initialDiceList);
         }
 
+        private IEnumerator LoadTileData(SaveFileData saveFileData) {
+            var tileDataList = saveFileData.TileSaveDataList;
+
+            bool[] hasLoaded = new bool[tileDataList.Count];
+            for (int i = 0; i < hasLoaded.Length; i++) hasLoaded[i] = false;
+
+            for (int i = 0; i < tileDataList.Count; i++) {
+                int t = i;
+                StartCoroutine(_board[i].SetMagicSaveData(tileDataList[i], () => { hasLoaded[t] = true; }));
+            }
+
+            yield return new WaitUntil(() => hasLoaded.All(x => x));
+        }
 
         /// <summary>
         /// [축복] 메테오 소환

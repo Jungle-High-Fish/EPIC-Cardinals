@@ -81,25 +81,40 @@ namespace Cardinals.Board {
 			StartCoroutine(MagicLevelUp());
 		}
 
+		public IEnumerator SetSaveData(TileMagicType type, int level, int exp) {
+			if (type == TileMagicType.None || type == TileMagicType.Attack || type == TileMagicType.Defence) {
+				Type = type;
+				_level = level;
+				_exp = exp;
+				yield break;
+			}
+			
+			yield return MagicChangeApplyAnimation(type, level, exp);
+		}
+
 		private IEnumerator MagicLevelUp() {
 			while (
 				_level < Constants.GameSetting.Tile.MaxLevel && 
 				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]
 			) {
-				_exp -= Constants.GameSetting.Tile.LevelUpExp[_level];
+				int newExp = _exp - Constants.GameSetting.Tile.LevelUpExp[_level];
 				
 				// TODO: 밟았을 때만 실행되도록 변경 필요
-				yield return LevelUpUI();
+				yield return LevelUpUI(newExp);
 			}
 
 			_isLevelUp = false;
 		}
 
-		private IEnumerator LevelUpUI() {
+		private IEnumerator LevelUpUI(int newExp) {
 			var levelUpRequest = GameManager.I.Stage.Board.RequestTileLevelUp(_type, _level);
 			yield return levelUpRequest.Requester();
 			var (newMagic, newLevel) = levelUpRequest.Result();
 
+			yield return MagicChangeApplyAnimation(newMagic, newLevel, newExp);
+		}
+
+		private IEnumerator MagicChangeApplyAnimation(TileMagicType newMagic, int newLevel, int newExp) {
 			// TODO: 마법 적용 애니메이션 구현 필요
 			//_rigidbody.Get(gameObject).isKinematic = false;
 			float animTime = _tile.Get(gameObject).Animation.Play(TileAnimationType.Rotate360);
@@ -120,6 +135,7 @@ namespace Cardinals.Board {
 
 			Type = newMagic;
 			_level = newLevel;
+			_exp = newExp;
 			_tile.Get(gameObject).UITile.SetMaterial();
 
 			yield return new WaitForSeconds(animTime - 0.4f);

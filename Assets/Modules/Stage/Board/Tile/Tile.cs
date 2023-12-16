@@ -24,6 +24,7 @@ namespace Cardinals.Board {
         public TileEvent TileEvent=> _tileEvent;
         public bool HasEvent => _tileEvent.EventType != BoardEventType.Empty;
         public bool IsSealed => _isSealed;
+        public bool HasTouchedGround => _hasTouchedGround;
 
         public UITile UITile => _uiTile.Get(gameObject);
 
@@ -92,6 +93,7 @@ namespace Cardinals.Board {
         private bool _isSelected;
         private bool _isMouseHovered;
         private bool _isPlayerOn;
+        private bool _hasTouchedGround = false;
 
         // 타일 위치 관련 변수
         private Vector3 _tilePositionOnGround;
@@ -258,6 +260,11 @@ namespace Cardinals.Board {
             GameManager.I.Player.MotionWorry();
         }
 
+        public IEnumerator SetMagicSaveData(SaveFileData.TileSaveData tileSaveData, Action onComplete) {
+            yield return _tileMagic.SetSaveData(tileSaveData.TileMagicType, tileSaveData.Level, tileSaveData.Exp);
+            onComplete?.Invoke();
+        }
+
         public void SetEffect(TileEffectData data) {
             _tileEffect.SetEffect(data);
         }
@@ -361,6 +368,12 @@ namespace Cardinals.Board {
             }
 
             GameManager.I.UI.UIMouseHint.Show();
+        }
+
+        private void OnCollisionEnter(Collision other) {
+            if (other.gameObject.CompareTag("Ground")) {
+                _hasTouchedGround = true;
+            }
         }
     }
 
