@@ -188,6 +188,7 @@ namespace Cardinals.Game
             IsSelect = false;
             yield return new WaitUntil(() => IsSelect); // 플레이어의 보상 선택 후 [턴 종료] 대기
             
+            GameManager.I.Player.MotionIdle();
             GameManager.I.Stage.RewardBox.Disable();
         }
 

@@ -31,6 +31,7 @@ namespace Cardinals
         
         private Animator _animator;
         protected override Animator Animator => (_animator ??= GetComponentInChildren<Animator>());
+        
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
@@ -419,7 +420,21 @@ namespace Cardinals
                         renderer.transform.rotation = _defaultRotate;
                     });
             }
+        }
 
+        public void MotionThinking()
+        {
+            Animator.Play("Thinking");
+        }
+
+        public void MotionIdle()
+        {
+            Animator.Play("Idle");
+        }
+        
+        public void MotionWorry()
+        {
+            Animator.Play("Worry");
         }
     }
 }
