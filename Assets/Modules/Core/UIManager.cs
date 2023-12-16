@@ -55,11 +55,11 @@ namespace Cardinals
         private UINewDicePanel _uiNewDicePanel;
 
         #region Board-Event 
-        private UICardEvent _uiCardEvent;
+        private UIDiceEvent _uiDiceEvent;
         private UIShop _uiShop;
         private UIRoulette _uiRoulette;
         private UITileEvent _uiTileEvent;
-        public UICardEvent UICardEvent => _uiCardEvent;
+        public UIDiceEvent UIDiceEvent => _uiDiceEvent;
         public UIShop UIShop => _uiShop;
         public UIRoulette UIRoulette => _uiRoulette;
         public UITileEvent UITileEvent => _uiTileEvent;
@@ -103,7 +103,7 @@ namespace Cardinals
             
             
             // Board Event
-            InstantiateBoardEventCardUI();
+            InstantiateBoardEventDiceUI();
             InstantiateBoardEventRouletteUI();
             InstantiateBoardEventShopUI();
             InstantiateBoardEventTileUI();
@@ -251,10 +251,10 @@ namespace Cardinals
             obj.SetActive(false);
         }
 
-        private void InstantiateBoardEventCardUI() {
-            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Card);
+        private void InstantiateBoardEventDiceUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Dice);
             GameObject obj = Instantiate(prefab, _cardUICanvas.transform);
-            _uiCardEvent = obj.GetComponent<UICardEvent>();
+            _uiDiceEvent = obj.GetComponent<UIDiceEvent>();
             obj.SetActive(false); 
         }
         

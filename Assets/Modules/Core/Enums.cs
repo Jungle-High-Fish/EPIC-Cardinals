@@ -152,6 +152,7 @@ namespace Cardinals.Enums {
             {
                 NewBoardEventType.Roulette => typeof(Roulette),
                 NewBoardEventType.PotionGoblin => typeof(PotionGoblin),
+                NewBoardEventType.DiceEvent => typeof(DiceEvent),
                 _ => null
             };
         }
@@ -382,6 +383,7 @@ namespace Cardinals.Enums {
         Ignore,
         PotionGoblin,
         Roulette,
+        DiceEvent,
     }
 
     public enum NewBoardEventOnType

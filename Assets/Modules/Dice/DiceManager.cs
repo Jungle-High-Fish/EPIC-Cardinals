@@ -15,6 +15,7 @@ namespace Cardinals
     public class DiceManager : MonoBehaviour
     {
         public List<Dice> Dices => _dices;
+        public List<DiceUI> DiceUis => _dicesUI;
 
         private int _prevDiceNumber = -1;
         private int _selectDiceIndex;
@@ -306,10 +307,10 @@ namespace Cardinals
             yield return _dicesUI[index].DiceAnimation.Play(animationType);
             _dicesUI[index].gameObject.SetActive(false);
 
-            changeDiscardState();
-            yield break;
+            changeDiscardState?.Invoke();
         }
-       
+
+        private bool Record() => false;
 
 
         public IEnumerator Dragging()
@@ -411,17 +412,21 @@ namespace Cardinals
                             yield break;
 
                         case MouseState.CardEvent:
-                            yield return Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { });
-                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
-                            _state = CardState.Idle;
-                            UpdateDiceState(useNumber, false);
-                            DismissAllCards();
-
-                            _diceUsedCountOnThisTurn++;
-                            if (_isTutorial)
-                            {
-                                CheckTutorialStateForCard(useNumber, MouseState.CardEvent);
-                            }
+                            yield return Discard(_selectDiceIndex, DiceAnimationType.UseMove, 
+                                () =>
+                                {
+                                    GameManager.I.UI.UIDiceEvent.SelectedCard(useNumber);
+                                    _state = CardState.Idle;
+                                    UpdateDiceState(useNumber, false);
+                                    DismissAllCards();
+                            
+                                    _diceUsedCountOnThisTurn++;
+                                    if (_isTutorial)
+                                    {
+                                        CheckTutorialStateForCard(useNumber, MouseState.CardEvent);
+                                    }
+                                });
+                            
                             yield break;
                     }
 

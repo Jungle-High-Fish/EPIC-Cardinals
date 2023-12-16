@@ -35,7 +35,8 @@ namespace Cardinals.Constants {
             
             public const string Prefabs_UI_BoardEvent_Shop = "UI/BoardEvent/UIShopPanel";
             public const string Prefabs_UI_BoardEvent_Product = "UI/BoardEvent/UIProduct";
-            public const string Prefabs_UI_BoardEvent_Card = "UI/BoardEvent/UICardEvent";
+            //public const string Prefabs_UI_BoardEvent_Card = "UI/BoardEvent/UICardEvent";
+            public const string Prefabs_UI_BoardEvent_Dice = "UI/BoardEvent/UIDiceEvent";
             public const string Prefabs_UI_BoardEvent_Roulette = "UI/BoardEvent/UIRoulette";
             public const string Prefabs_UI_BoardEvent_Tile = "UI/BoardEvent/UITileEvent";
             public const string Prefabs_UI_BoardEvent_TypeItem = "UI/BoardEvent/UITypeItem";
