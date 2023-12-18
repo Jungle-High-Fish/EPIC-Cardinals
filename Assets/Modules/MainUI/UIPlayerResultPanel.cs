@@ -39,12 +39,12 @@ namespace Cardinals
         public void Init()
         {
             _turnCntHeaderText           = "돈 바퀴 수";
-            _diceRollingCountHeaderText  = "주사위 굴린 수";
+            _diceRollingCountHeaderText  = "주사위 사용한 횟수";
             _enemyExecuteCountHeaderText = "몬스터 처치 수";
             _playTimeHeaderText          = "플레이 타임";
         }
         
-        public IEnumerator Set(int turnCnt, int diceRollCnt, int enemyExecuteCnt, int playTimeBySecond)
+        public IEnumerator Set(int turnCnt, int diceRollCnt, int enemyExecuteCnt, ulong playTimeBySecond)
         {
             // 초기화
             _titleBTN.gameObject.SetActive(false);

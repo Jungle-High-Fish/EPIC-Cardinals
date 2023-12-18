@@ -56,6 +56,7 @@ namespace Cardinals
         public LightController LightController => _lightController.Get();
 
         private SoundManager _soundManager;
+
         #region Game
 
         [Button]
@@ -121,6 +122,12 @@ namespace Cardinals
             }
 
             _currentStageIndex = saveFileData.CurrentStageIndex;
+
+            // 게임 누적 데이타
+            TurnCount = saveFileData.TurnCount;
+            DiceRollingCount = saveFileData.DiceRollingCount;
+            ExecuteEnemyCount = saveFileData.ExecuteEnemyCount;
+            PlayTime = saveFileData.PlayTime;
         }
 
         private void MakeNewGameData() {
@@ -154,6 +161,10 @@ namespace Cardinals
 
         private IEnumerator MainGameFlow()
         {
+            // 업적 관련 구독
+            timeRecordCoroutine = TimeRecord();
+            StartCoroutine(timeRecordCoroutine);
+            
             for (int i = _currentStageIndex; i < _stageRuntimeList.Count; i++)
             {
                 _currentStageIndex = i;
@@ -205,11 +216,13 @@ namespace Cardinals
         public void GameClear()
         {
             Debug.Log("게임 클리어");
+            GameEnd();
         }
 
         public void GameOver()
         {
             StartCoroutine(GameOverFlow());
+            GameEnd();
         }
 
         IEnumerator GameOverFlow()
@@ -244,7 +257,12 @@ namespace Cardinals
             yield return new WaitForSeconds(1.5f);
             
             // 결과 창 출력
-            yield return UI.UIPlayerResultPanel.Set(12, 2, 2, 420);
+            yield return UI.UIPlayerResultPanel.Set(TurnCount, DiceRollingCount, ExecuteEnemyCount, PlayTime);
+        }
+
+        public void GameEnd()
+        {
+            StopCoroutine(timeRecordCoroutine);   
         }
 
         public void Retry()
@@ -256,6 +274,24 @@ namespace Cardinals
         {
             
         }
+        #endregion
+
+        #region Game Play Info (업적 카운트)
+        public int TurnCount;
+        public int DiceRollingCount;
+        public int ExecuteEnemyCount;
+        public ulong PlayTime;
+
+        private IEnumerator timeRecordCoroutine;
+        IEnumerator TimeRecord()
+        {
+            while (true)
+            {
+                PlayTime++;
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        
         #endregion
 
         #region Util
