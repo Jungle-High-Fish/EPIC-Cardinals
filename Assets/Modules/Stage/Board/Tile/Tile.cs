@@ -257,7 +257,6 @@ namespace Cardinals.Board {
             _tileCurse.SetCurse(data);
             _tileEvent.ClearEvent();
             ChangeState(TileState.Cursed);
-            GameManager.I.Player.MotionWorry();
         }
 
         public IEnumerator SetMagicSaveData(SaveFileData.TileSaveData tileSaveData, Action onComplete) {
