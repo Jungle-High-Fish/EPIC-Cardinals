@@ -185,7 +185,7 @@ namespace Cardinals
 
             for(int i = 0; i < count; i++)
             {
-                if (_onTile.Next == GameManager.I.Stage.Board.GetStartTile()) {
+                if (_onTile.Next == (GameManager.I.Stage.CurEvent as BattleEvent).RoundStartTile) {
                     _boardRoundCount++;
 
                     HomeReturnEvent?.Invoke();

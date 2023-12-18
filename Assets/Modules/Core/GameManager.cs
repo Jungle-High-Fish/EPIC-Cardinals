@@ -76,6 +76,8 @@ namespace Cardinals
 
             LoadGameSetting();
             GenerateCoreObjects();
+
+            _steamHandler.SetLobbyStateDisplay();
         }
 
         private void Update() {

@@ -5,6 +5,7 @@
 		"tokens"
 		{
 			"#StatusBattle"	    "%eventidx% Event: Battle - %enemies%"
+			"#StatusLobby"      "Waiting for board game!"
 		}
 	}
 	"koreana"
@@ -12,6 +13,7 @@
 		"tokens"
 		{
 			"#StatusBattle"	    "%eventidx% 이벤트: %enemies% 전투 중"
+			"#StatusLobby"      "보드 게임 대기 중!"
 		}
 	}
 }

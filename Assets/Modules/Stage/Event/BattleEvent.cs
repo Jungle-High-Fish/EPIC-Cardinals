@@ -15,7 +15,14 @@ namespace Cardinals.Game
     [CreateAssetMenu(fileName = "BattleEvent", menuName = "Cardinals/Event/Battle")]
     public class BattleEvent: BaseEvent
     {
+        public int Turn => _turn;
+        public int Round => _round;
+        public Tile RoundStartTile => _roundStartTile;
+
         [SerializeField, InlineEditor] private EnemyDataSO[] _enemyList;
+        private int _turn = 1;
+        private int _round = 0;
+        private Tile _roundStartTile;
 
         public override IEnumerator Flow(StageController stageController)
         {
@@ -43,11 +50,12 @@ namespace Cardinals.Game
                 enemies.Select(x => x.EnemyData.enemyType).ToList()
             );
 
-            int turn = 1;
+            _turn = 1;
+            _roundStartTile = player.OnTile;
             do // 전투 시작
             {
                 // 3턴마다 보드 이벤트 생성
-                if (turn++ % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
+                if (_turn++ % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
                 
                 // 전투 업데이트
                 yield return player.StartTurn();
