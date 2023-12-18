@@ -34,7 +34,6 @@ namespace Cardinals.Enemy
             InstantiateRenderPrefabs(enemy.EnemyData);
 
             enemy.Renderers = GetComponentsInChildren<SpriteRenderer>();
-            enemy.Renderers.First().sortingOrder = 3;
                 
             Vector3 vector = enemy.EnemyData.enemyType switch
             {

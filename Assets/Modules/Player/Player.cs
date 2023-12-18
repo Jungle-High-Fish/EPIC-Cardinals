@@ -436,6 +436,12 @@ namespace Cardinals
         {
             Animator.Play("Worry");
         }
+
+        public void SetGameOver()
+        {
+            Renderers[0].sortingOrder = 2;
+            Renderers[1].sortingOrder = 3;
+        }
     }
 }
 
