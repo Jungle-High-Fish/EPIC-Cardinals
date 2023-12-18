@@ -4,6 +4,7 @@ using Cardinals.BoardEvent.Roulette;
 using Cardinals.BoardEvent.Shop;
 using Cardinals.BoardEvent.Tile;
 using Cardinals.Enemy;
+using Cardinals.Entity.UI;
 using Cardinals.Game;
 using Cardinals.UI;
 using Cardinals.UI.Description;
@@ -29,7 +30,9 @@ namespace Cardinals
         public UINewPlayerInfo UINewPlayerInfo => _uiNewPlayerInfo;
         public UIEndTurnButton UIEndTurnButton => _uiNewPlayerInfo.EndTurnButton;
         public UINewDicePanel UINewDicePanel => _uiNewDicePanel;
-
+        public Bubble UISystemBubble => _uiSystemBubble;
+        public UIPlayerResultPanel UIPlayerResultPanel => _uiPlayerResultPanel;
+        
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
 
@@ -53,6 +56,9 @@ namespace Cardinals
         private UITileInfo _uiHoveredTileInfo;
         private UINewPlayerInfo _uiNewPlayerInfo;
         private UINewDicePanel _uiNewDicePanel;
+        private UIPlayerResultPanel _uiPlayerResultPanel;
+        
+        private Bubble _uiSystemBubble;
 
         #region Board-Event 
         private UIDiceEvent _uiDiceEvent;
@@ -118,6 +124,9 @@ namespace Cardinals
 
             // Mouse
             InstantiateMouseHintUI();
+
+            InstantiateSystemBubbleUI();
+            InstantiatePlayResultUI();
         }
 
         void InitDescriptionCanvas()
@@ -317,6 +326,34 @@ namespace Cardinals
 
             _uiMouseHint = obj.GetComponent<UIMouseHint>();
             obj.SetActive(false);
+        }
+
+        private void InstantiateSystemBubbleUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Ending_SystemBubble);
+            GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
+
+            _uiSystemBubble = obj.GetComponent<Bubble>();
+            obj.SetActive(false);
+        }
+        
+        private void InstantiatePlayResultUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Ending_PlayerResultPanel);
+            GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
+
+            _uiPlayerResultPanel = obj.GetComponent<UIPlayerResultPanel>();
+            _uiPlayerResultPanel.Init();
+            obj.SetActive(false);
+        }
+
+        public void CanvasInactive()
+        {
+            _cardUICanvas.gameObject.SetActive(false);
+            _enemyUICanvas.gameObject.SetActive(false);
+            _descriptionUICanvas.gameObject.SetActive(false);
+            _mainUICanvas.gameObject.SetActive(false);
+            _playerUICanvas.gameObject.SetActive(false);
         }
     }
 }

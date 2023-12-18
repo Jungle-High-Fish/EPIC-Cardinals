@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Util;
 using Cardinals.Game;
@@ -9,7 +10,9 @@ using Sirenix.OdinInspector;
 using Unity.Burst.Intrinsics;
 using Cardinals.Util;
 using Cardinals.UI;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
+using Resources = Cardinals.Constants.FilePath.Resources;
 
 namespace Cardinals
 {
@@ -206,7 +209,51 @@ namespace Cardinals
 
         public void GameOver()
         {
-            Debug.Log("게임 오버");
+            StartCoroutine(GameOverFlow());
+        }
+
+        IEnumerator GameOverFlow()
+        {
+            bool next = false;
+            
+            UI.CanvasInactive(); // UI 닫기
+            CurrentEnemies.FirstOrDefault()?.gameObject.SetActive(false); // 몬스터 disable
+            
+            // 카메라 줌인
+            yield return CameraController.PlayerZoomIn();
+            
+            // 배경 검정색으로 
+            var prefab = ResourceLoader.LoadPrefab(Resources.Prefabs_UI_Ending_FadeInBlack);
+            var obj = Instantiate(prefab);
+            var renderer = obj.GetComponent<SpriteRenderer>();
+            renderer.color = new Color(0, 0, 0, 0);
+            renderer.DOFade(1, 1f).SetEase(Ease.Linear)
+                .OnComplete(() => { next = true;});
+            yield return new WaitUntil(() => next);
+            
+            // 카메라 이동
+            next = false;
+            Player.transform.DOMove(Player.transform .position+ new Vector3(-1.2f, .6f, -1.2f), 1.5f)
+                .OnComplete(() => { next = true;});
+            yield return new WaitUntil(() => next);
+            
+            // 텍스트 출력
+            UI.UISystemBubble.SetBubble("여기서 무너질 수 없어", -1);
+            (UI.UISystemBubble.transform as RectTransform).position = Camera.main.WorldToScreenPoint(Player.transform.position) + new Vector3(0, 150, 0);
+            yield return new WaitForSeconds(1.5f);
+            
+            // 결과 창 출력
+            yield return UI.UIPlayerResultPanel.Set(12, 2, 2, 420);
+        }
+
+        public void Retry()
+        {
+            
+        }
+
+        public void MoveTitleScene()
+        {
+            
         }
         #endregion
 

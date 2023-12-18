@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
 using TMPro;
@@ -33,7 +34,8 @@ namespace Cardinals.Enemy
             InstantiateRenderPrefabs(enemy.EnemyData);
 
             enemy.Renderers = GetComponentsInChildren<SpriteRenderer>();
-
+            enemy.Renderers.First().sortingOrder = 3;
+                
             Vector3 vector = enemy.EnemyData.enemyType switch
             {
                 EnemyType.TweTwe => new Vector2(0, .5f) ,
