@@ -31,6 +31,7 @@ namespace Cardinals
         
         private Animator _animator;
         protected override Animator Animator => (_animator ??= GetComponentInChildren<Animator>());
+        
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
@@ -44,8 +45,9 @@ namespace Cardinals
         public override void Init(int _ = default) {
             base.Init(_initHp);
             _playerInfo = new PlayerInfo();
-
+            
             _defaultRotate = Renderers.First().transform.rotation;
+            HomeReturnEvent += () => { GameManager.I.TurnCount++; };
         }
 
         public void SetData(PotionType[] potionList, BlessType[] blessList, int coin, int maxHp, int hp)
@@ -419,7 +421,27 @@ namespace Cardinals
                         renderer.transform.rotation = _defaultRotate;
                     });
             }
+        }
 
+        public void MotionThinking()
+        {
+            Animator.Play("Thinking");
+        }
+
+        public void MotionIdle()
+        {
+            Animator.Play("Idle");
+        }
+        
+        public void MotionWorry()
+        {
+            Animator.Play("Worry");
+        }
+
+        public void SetGameOver()
+        {
+            Renderers[0].sortingOrder = 2;
+            Renderers[1].sortingOrder = 3;
         }
     }
 }

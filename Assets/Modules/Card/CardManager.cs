@@ -429,7 +429,7 @@ namespace Cardinals
                         
                         case MouseState.CardEvent:
                             yield return Discard(_selectCardIndex, CardAnimationType.UseMove, () => { });
-                            GameManager.I.UI.UICardEvent.SelectedCard(useNumber);
+                            GameManager.I.UI.UIDiceEvent.SelectedCard(useNumber);
                             _state = CardState.Idle;
                             UpdateCardState(useNumber, false);
                             DismissAllCards();

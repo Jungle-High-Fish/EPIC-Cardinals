@@ -102,9 +102,7 @@ MonoBehaviour:
   _renderers:
   - {fileID: 1389953857676851944}
   - {fileID: 1389953857664558228}
-  _attackEffectPrefab: {fileID: 7961657896210422935, guid: b866bcafe2a638d428417d5473d8b8ea,
-    type: 3}
-  _initHp: 40
+  _initHp: 1
   _onTile: {fileID: 0}
 --- !u!114 &5650091141492861573
 MonoBehaviour:
@@ -329,11 +327,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5013154660610661086, guid: 9bbcca1324efb534b964157dc0996c59,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bbcca1324efb534b964157dc0996c59, type: 3}

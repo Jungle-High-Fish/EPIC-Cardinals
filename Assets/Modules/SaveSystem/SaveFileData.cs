@@ -32,6 +32,12 @@ namespace Cardinals {
         public int ClearedStageEventIndex;
         public List<TileSaveData> TileSaveDataList;
 
+        // Player Result Data
+        public int TurnCount;
+        public int DiceRollingCount;
+        public int ExecuteEnemyCount;
+        public ulong PlayTime;
+        
         // Savefile Validation
         public string ValidationCode;
 
@@ -44,6 +50,7 @@ namespace Cardinals {
             SetDiceData(diceManager);
             SetStageData(stage, clearedStageIndex);
             SetTileData();
+            SetGameData(GameManager.I);
             SetSaveFileInfo(fileName, isCloudSave);
 
             ValidationCode = GenerateValidationCode();
@@ -52,6 +59,7 @@ namespace Cardinals {
         public void UpdateData(Player player, DiceManager diceManager, Stage currentStage, int currentStageIndex) {
             SetPlayerData(player);
             SetDiceData(diceManager);
+            SetGameData(GameManager.I);
             CurrentStageIndex = currentStageIndex;
             ClearedStageEventIndex = currentStage.Index - 1;
             SetTileData();
@@ -131,6 +139,14 @@ namespace Cardinals {
             }
         }
 
+        private void SetGameData(GameManager game)
+        {
+            TurnCount = game.TurnCount;
+            DiceRollingCount = game.DiceRollingCount;
+            ExecuteEnemyCount = game.ExecuteEnemyCount;
+            PlayTime = game.PlayTime;
+        }
+
         private void SetSaveFileInfo(string fileName, bool isCloudSave) {
             this.fileName = fileName;
             saveTime = DateTime.Now;
@@ -161,6 +177,12 @@ namespace Cardinals {
             }
             validationString += CurrentStageIndex;
             validationString += ClearedStageEventIndex;
+            
+            // Play Data
+            validationString += TurnCount;
+            validationString += DiceRollingCount;
+            validationString += ExecuteEnemyCount;
+            validationString += PlayTime;
 
             // generate validation code
             var tmpSource = System.Text.Encoding.UTF8.GetBytes(validationString);
