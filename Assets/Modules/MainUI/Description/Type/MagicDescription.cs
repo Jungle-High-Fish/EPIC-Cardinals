@@ -15,7 +15,11 @@ namespace Cardinals.UI.Description
     {
         private TileMagicDataSO _data;
         public string Name => _data.elementName;
-        public string Description => _data.mainMagicDescription;
+        public string Description => TMPUtils.GetTextWithLevel(
+            _data.mainMagicDescription,
+            -1,
+            _data.elementColor
+        );
         public Sprite IconSprite => _data.uiSprite;
         public Color Color { get; set; }
 

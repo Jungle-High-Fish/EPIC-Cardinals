@@ -37,7 +37,18 @@ namespace Util {
                     levelList.Add(int.Parse(lt.Replace(" ", "")));
                 }
 
-                result = result.Replace(rawLevelText, $"{levelList[level - 1]}");
+                if (level > 0) {
+                    result = result.Replace(rawLevelText, $"{levelList[level - 1]}");
+                } else {
+                    string levelValues = "";
+                    for (int j = 0; j < levelList.Count; j++) {
+                        levelValues += $"{levelList[j]}<sub><b><size=100%>Lv.{j + 1}</size></b></sub>";
+                        if (j != levelList.Count - 1) {
+                            levelValues += "/";
+                        }
+                    }
+                    result = result.Replace(rawLevelText, levelValues);
+                }
             }
 
             string levelRegex = @"@level";
