@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using Steamworks;
 using UnityEngine;
+using Cardinals.Enums;
+using Cardinals.Game;
 
 namespace Cardinals {
     public class SteamHandler {
@@ -45,6 +47,50 @@ namespace Cardinals {
                     }
                 }
             }
+        }
+
+        public void SetBattleStateDisplay(int eventIdx, List<EnemyType> enemyType) {
+            if (!_isSteamAvailable) {
+                return;
+            }
+
+            string GetOrdinalNumber(int n) {
+                switch (n % 10) {
+                    case 1:
+                        return n + "st";
+                    case 2:
+                        return n + "nd";
+                    case 3:
+                        return n + "rd";
+                    default:
+                        return n + "th";
+                }
+            }
+
+            string eventIdxStr = GetOrdinalNumber(eventIdx).ToString();
+
+            string enemiesStr = "";
+            for (int i = 0; i < enemyType.Count; i++) {
+                enemiesStr += $"{EnemyDataSO.Data(enemyType[i]).enemyName}";
+                if (i != enemyType.Count - 1) {
+                    enemiesStr += "/";
+                }
+            }
+
+            SteamFriends.SetRichPresence(
+                "eventidx", 
+                eventIdxStr
+            );
+
+            SteamFriends.SetRichPresence(
+                "enemies", 
+                enemiesStr
+            );
+
+            SteamFriends.SetRichPresence(
+                "steam_display", 
+                "#StatusBattle"
+            );
         }
 
         public bool IsCloudSaveAvailable() {

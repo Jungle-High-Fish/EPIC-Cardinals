@@ -18,6 +18,7 @@ using Random = UnityEngine.Random;
 namespace Cardinals.Game {
     
     public class StageController : MonoBehaviour {
+        public int Index => _stage.Index;
         public Board.Board Board => _board;
         public Player Player => _player;
         public CardManager CardManager => _cardManager;

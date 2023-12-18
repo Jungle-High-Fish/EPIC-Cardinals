@@ -38,6 +38,11 @@ namespace Cardinals.Game
             //cardManager.OnBattle();
             diceManager.OnBattle();
 
+            GameManager.I.SteamHandler.SetBattleStateDisplay(
+                GameManager.I.Stage.Index,
+                enemies.Select(x => x.EnemyData.enemyType).ToList()
+            );
+
             int turn = 1;
             do // 전투 시작
             {
