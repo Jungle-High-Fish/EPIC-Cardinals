@@ -36,7 +36,7 @@ namespace Cardinals.UI {
 
             if (_tile.TileMagic != null) {
                 TileMagicDataSO data = TileMagic.Data(_tile.TileMagic.Type);
-                _descriptionPanels.Add(AddMagicDescription(data));
+                _descriptionPanels.Add(AddMagicDescription(data, _tile.TileMagic.Level));
 
                 if (data.hasBuffEffect) {
                     BuffDataSO buffData = BuffDataSO.Data(data.buffType);
@@ -137,9 +137,16 @@ namespace Cardinals.UI {
             return panel;
         }
 
-        private UITileDescription AddMagicDescription(TileMagicDataSO data) {
+        private UITileDescription AddMagicDescription(TileMagicDataSO data, int level) {
             string title = data.elementName;
-            string description = data.mainMagicDescription;
+            if (data.magicType != TileMagicType.Attack && data.magicType != TileMagicType.Defence) {
+                title += $"<b><size=60%><cspace=-0.1em> Lv.{level}</cspace></size></b>";
+            }
+            string description = TMPUtils.GetTextWithLevel(
+                data.mainMagicDescription,
+                level,
+                data.elementColor
+            );
             Sprite icon = data.uiSprite;
 
             UITileDescription panel = InstantiateDescriptionPanel();

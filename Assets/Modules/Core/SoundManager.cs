@@ -103,11 +103,9 @@ namespace Cardinals
             _effectAudioSourceList.Add(_effectAudioSource2.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource3.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource4.Get(gameObject));
-
-            GameManager.I.GameSetting.OnSoundSettingChanged += () => {
-                _bgmAudioSource.Get(gameObject).volume = GameManager.I.GameSetting.BgmVolume / 100f;
-                _effectAudioSourceList.ForEach(x => x.volume = GameManager.I.GameSetting.SfxVolume / 100f);
-            };
+            
+            GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
+            GameManager.I.GameSetting.OnSoundSettingChanged += OnSoundSettingChange;
         }
 
         private void Update() {
@@ -118,6 +116,15 @@ namespace Cardinals
                     targetAudioSource.PlayOneShot(_effectAudioClipQueue.Dequeue());
                 }
             }
+        }
+
+        private void OnDisable() {
+            GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
+        }
+
+        private void OnSoundSettingChange() {
+            _bgmAudioSource.Get(gameObject).volume = GameManager.I.GameSetting.BgmVolume / 100f;
+            _effectAudioSourceList.ForEach(x => x.volume = GameManager.I.GameSetting.SfxVolume / 100f);
         }
         #endregion
     }
