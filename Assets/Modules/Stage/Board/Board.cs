@@ -80,13 +80,13 @@ namespace Cardinals.Board {
             return _boardBuilder.StartTile;
         }
 
-        public void PlacePieceToTile(IBoardPiece piece, Tile tile) {
+        public IEnumerator PlacePieceToTile(IBoardPiece piece, Tile tile) {
             if (tile == null) {
                 Debug.LogError("Tile is null");
-                return;
+                yield break;
             }
 
-            tile.Arrive(piece);
+            yield return tile.Arrive(piece);
 
             if (piece is Player) {
                 (piece as Player).SetTile(tile);

@@ -8,8 +8,6 @@ using Util;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using UnityEngine.AI;
 
 namespace Cardinals.UI {
     public class UITileInfo: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
@@ -64,7 +62,7 @@ namespace Cardinals.UI {
         private float _prevExp = 0;
         
         public void InitOnTile() {
-            Show(GameManager.I.Stage.Board[0]);
+            //Show(GameManager.I.Stage.Board[0]);
         }
 
         public void Show(Tile tile, bool isAnimation = true, bool isOnTile = true) {

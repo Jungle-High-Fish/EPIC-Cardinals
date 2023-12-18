@@ -25,7 +25,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e48afaa1703324a3ca1924f9beabd6e1, type: 3}
   - {fileID: 21300000, guid: e06277cb5987d4111a13d36e100f46e2, type: 3}
   mainMagicName: Clear Water
-  mainMagicDescription: With each action, regain 1/2/3 health. When taking an action
-    using a number greater than 3, inflict a debuff on the enemy.
+  mainMagicDescription: With each action, regain <level=1,2,3> health. When taking
+    an action using a number greater than 3, inflict a <debuff=Weak> weak debuff
+    on the enemy.
   hasBuffEffect: 1
   buffType: 2

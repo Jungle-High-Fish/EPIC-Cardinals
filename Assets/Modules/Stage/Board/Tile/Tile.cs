@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Util;
@@ -184,20 +185,28 @@ namespace Cardinals.Board {
             }
         }
 
-        public void Place(IBoardPiece boardPiece) {
+        public IEnumerator Place(IBoardPiece boardPiece, bool isFalling=false) {
             _boardPieces.Add(boardPiece);
 
             Transform pieceTransform = (boardPiece as MonoBehaviour).transform;
             pieceTransform.SetParent(transform);
-            pieceTransform.localPosition = Vector3.zero + new Vector3(0, 1.3f, 0);
+
+            if (isFalling == false) {
+                pieceTransform.localPosition = Vector3.zero + new Vector3(0, 1.3f, 0);
+                yield return null;
+            } else {
+                pieceTransform.localPosition = Vector3.zero + new Vector3(0, 5f, 0);
+                pieceTransform.DOLocalMoveY(1.3f, 0.5f).SetEase(Ease.InQuint);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
 
         public void StepOn(IBoardPiece boardPiece) {
             _tileEffect.StepOnAction(boardPiece);
         }
 
-        public void Arrive(IBoardPiece boardPiece) {
-            Place(boardPiece);
+        public IEnumerator Arrive(IBoardPiece boardPiece, bool isFalling=false) {
+            yield return Place(boardPiece, isFalling);
 
             switch (_tileState) {
                 case TileState.Normal:
@@ -223,6 +232,8 @@ namespace Cardinals.Board {
             }
 
             if (boardPiece is Player) {
+                GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(this);
+                
                 transform.position = _tilePositionOnGround;
                 _tileAnimation.Get(gameObject).Play(TileAnimationType.Float, false);
                 _rigidBody.Get(gameObject).isKinematic = true;
