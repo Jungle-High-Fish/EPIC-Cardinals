@@ -279,8 +279,8 @@ RectTransform:
   - {fileID: 96983965302523306}
   - {fileID: 8225686884054584156}
   - {fileID: 8933264797799614185}
-  - {fileID: 1663002216546511023}
   - {fileID: 6882018599427508851}
+  - {fileID: 1663002216546511023}
   - {fileID: 6350697342332647996}
   - {fileID: 4821315670672245407}
   - {fileID: 4602300511183695109}
@@ -562,7 +562,7 @@ RectTransform:
   - {fileID: 3036883002466850286}
   - {fileID: 750009301356867704}
   m_Father: {fileID: 276319594207951928}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1755,7 +1755,7 @@ GameObject:
   - component: {fileID: 8815946485714881631}
   - component: {fileID: 9117771232667601040}
   m_Layer: 5
-  m_Name: Artifact
+  m_Name: Turn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1776,7 +1776,7 @@ RectTransform:
   - {fileID: 9180850635919573367}
   - {fileID: 6583363024936075525}
   m_Father: {fileID: 276319594207951928}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2432,6 +2432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919245244491054985, guid: fa02e2735a9a68c418237077eb1440c7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 934880840206790449, guid: fa02e2735a9a68c418237077eb1440c7,
         type: 3}

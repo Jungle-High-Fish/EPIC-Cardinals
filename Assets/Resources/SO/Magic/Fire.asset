@@ -25,8 +25,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8919c0ce006c148e9bbe48412009c215, type: 3}
   - {fileID: 21300000, guid: 42c4e8d04eb31480693cca2f8fe0193f, type: 3}
   mainMagicName: Fire Ball
-  mainMagicDescription: With each action, inflict 2/4/6 damage on the target enemy.
-    When taking an action using a number greater than 3, apply a burn effect to the
-    enemy.
+  mainMagicDescription: With each action, inflict <level=2,4,6> damage on the target
+    enemy. When taking an action using a number greater than 3, apply a <debuff=Burn>
+    burn effect to the enemy.
   hasBuffEffect: 1
   buffType: 1

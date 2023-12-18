@@ -1,0 +1,17 @@
+"lang"
+{
+	"english"
+	{
+		"tokens"
+		{
+			"#StatusBattle"	    "%eventidx% Event: Battle - %enemies%"
+		}
+	}
+	"koreana"
+	{
+		"tokens"
+		{
+			"#StatusBattle"	    "%eventidx% 이벤트: %enemies% 전투 중"
+		}
+	}
+}
