@@ -77,7 +77,7 @@ namespace Cardinals.Game {
 
             if (GameManager.I.SaveSystem.CurrentSaveFileData == null) {
                 SetCardSystem();
-                PlacePlayer();
+                yield return PlacePlayer();
                 
                 var newSave = GameManager.I.SaveSystem.GenerateAutoSaveFile(
                     GameManager.I.RuntimeStageList.ToArray(), 
@@ -88,7 +88,7 @@ namespace Cardinals.Game {
                 GameManager.I.SaveSystem.Save(newSave);
             } else {
                 SetCardSystem(GameManager.I.SaveSystem.CurrentSaveFileData.GetDiceList());
-                PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
+                yield return PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
 
                 yield return LoadTileData(GameManager.I.SaveSystem.CurrentSaveFileData);
             }
@@ -229,7 +229,7 @@ namespace Cardinals.Game {
             _coreTransform.position = Vector3.zero;
         }
 
-        private void PlacePlayer(SaveFileData saveFileData = null) {
+        private IEnumerator PlacePlayer(SaveFileData saveFileData = null) {
             GameObject playerPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player);
             GameObject playerObj = GameObject.Instantiate(playerPrefab);
             _player = playerObj.GetComponent<Player>();
@@ -251,8 +251,7 @@ namespace Cardinals.Game {
                 );
             }
 
-            _board.PlacePieceToTile(
-                playerObj.GetComponent<Player>(), 
+            yield return playerObj.GetComponent<Player>().PlaceOnTile(
                 saveFileData == null ? _board.GetStartTile() : _board[saveFileData.OnTileIndex]
             );
         }

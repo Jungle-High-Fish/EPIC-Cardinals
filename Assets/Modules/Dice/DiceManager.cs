@@ -140,7 +140,6 @@ namespace Cardinals
             _prevDiceNumber = -1;
 
             _isTutorial = isTutorial;
-            Debug.Log("��Ʋ ����");
         }
 
         public IEnumerator EndBattle()

@@ -162,13 +162,19 @@ namespace Cardinals
             MaxHp = value;
         }
 
-        public void SetTile(Board.Tile tile)
+        public void SetTile(Tile tile)
         {
             _onTile = tile;
-            transform.position = tile.transform.position + new Vector3(0, 1.3f, 0);
+            //transform.position = tile.transform.position + new Vector3(0, 1.3f, 0);
         }
 
         public Action HomeReturnEvent { get; set; }
+
+        public IEnumerator PlaceOnTile(Tile tile)
+        {
+            SetTile(tile);
+            yield return _onTile.Arrive(this, true);
+        }
       
         public IEnumerator MoveTo(int count,float time)
         {
@@ -213,16 +219,13 @@ namespace Cardinals
 
             yield return CheckArriveBoardObject();
 
-            _onTile.Arrive(this);
-            GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
-            GameManager.I.Stage.CardManager.UpdateCardState(count, true);
+            yield return _onTile.Arrive(this);
 
             SetFlipTowardEnemy();
         }
         
         public IEnumerator PrevMoveTo(int count, float time)
         {
-            GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             _onTile?.Leave(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
@@ -248,10 +251,7 @@ namespace Cardinals
 
             yield return CheckArriveBoardObject();
             
-            _onTile.Arrive(this);
-            GameManager.I.UI.UINewPlayerInfo.TileInfo.Show(_onTile);
-            GameManager.I.Stage.DiceManager.UpdateDiceState(count, true);
-            GameManager.I.Stage.DiceManager.SetDiceSelectable(true);
+            yield return _onTile.Arrive(this);
             
             SetFlipTowardEnemy();
         }

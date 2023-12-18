@@ -5,11 +5,15 @@ using UnityEngine;
 
 namespace Util {
     public static class TMPUtils {
-        static readonly string[] CustomTags = new string[] {
-            "level=",
-        };
+        public enum CustomTag {
+            Level
+        }
 
-        public static void SetTextWithCustomTag(this TextMeshProUGUI textMeshProUGUI, string text, Color emphasisColor) {
+        static readonly Dictionary<CustomTag, string> CustomTags = new Dictionary<CustomTag, string>() {
+            { CustomTag.Level, "level=" }
+        };
+        
+        public static void SetTextWithLevel(this TextMeshProUGUI textMeshProUGUI, string text, Color emphasisColor) {
             
         }
 
@@ -25,7 +29,7 @@ namespace Util {
                     if (!IsCustomTag(targetTag)) {
                         result += substrings[i];
                     } else {
-                        
+                        result += TagConvert(targetTag);
                     }
                  } else {
                     result += substrings[i];
@@ -33,13 +37,24 @@ namespace Util {
             }
 
             bool IsCustomTag(string tag) {
-                foreach (var customTag in CustomTags) {
+                foreach (var customTag in CustomTags.Values) {
                     if (tag.StartsWith(customTag)) {
                         return true;
                     }
                 }
 
                 return false; 
+            }
+
+            string TagConvert(string tag) {
+                if (tag.StartsWith(CustomTags[CustomTag.Level])) {
+                    var splitString = tag.Split('=');
+                    var tagStr = splitString[0];
+                    var level = splitString[1];
+                    return $"<color=@emphasisColor>@level({level})</color>";
+                }
+
+                return "";
             }
         }
     }
