@@ -101,6 +101,10 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_SaveFileDataPanel = "UI/SaveSystem/Save File Data Panel";
             public const string Prefabs_UI_SaveFileLoaderPanel = "UI/SaveSystem/Save File Loader Panel";
             
+            public const string Prefabs_UI_Ending_FadeInBlack = "UI/Ending/FadeInBlack";
+            public const string Prefabs_UI_Ending_SystemBubble = "UI/Ending/SystemBubble";
+            public const string Prefabs_UI_Ending_PlayerResultPanel = "UI/Ending/UIPlayerResultPanel";
+            
             // Particle
             public const string Prefabs_Particle_Attack = "Particle/Trail";
             public const string Prefabs_Particle_FireAttack = "Particle/FireTrail";

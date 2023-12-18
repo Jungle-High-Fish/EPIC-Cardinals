@@ -45,8 +45,9 @@ namespace Cardinals
         public override void Init(int _ = default) {
             base.Init(_initHp);
             _playerInfo = new PlayerInfo();
-
+            
             _defaultRotate = Renderers.First().transform.rotation;
+            HomeReturnEvent += () => { GameManager.I.TurnCount++; };
         }
 
         public void SetData(PotionType[] potionList, BlessType[] blessList, int coin, int maxHp, int hp)
@@ -435,6 +436,12 @@ namespace Cardinals
         public void MotionWorry()
         {
             Animator.Play("Worry");
+        }
+
+        public void SetGameOver()
+        {
+            Renderers[0].sortingOrder = 2;
+            Renderers[1].sortingOrder = 3;
         }
     }
 }

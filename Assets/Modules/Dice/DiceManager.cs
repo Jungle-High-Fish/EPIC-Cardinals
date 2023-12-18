@@ -497,8 +497,8 @@ namespace Cardinals
             {
                 yield return GameManager.I.Player.MoveTo(num, 0.4f);
             }
-            
 
+            GameManager.I.DiceRollingCount++;
 
             _state = CardState.Idle;
             _prevDiceNumber = -1;
@@ -625,7 +625,7 @@ namespace Cardinals
             {
                 yield return GameManager.I.Player.CardAction(num, target);
                 DiceBuffByType(num, type, target);
-                
+                GameManager.I.DiceRollingCount++;
             }
 
             yield return new WaitUntil(() => hasDiscard);

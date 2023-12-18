@@ -27,8 +27,9 @@ namespace Cardinals.Entity.UI
             }
         }
 
+        private float _waitTime;
         [Button]
-        public void SetBubble(string text)
+        public void SetBubble(string text, float waitTime = 1.5f)
         {
             Init();
             if (coroutine != null)
@@ -36,6 +37,8 @@ namespace Cardinals.Entity.UI
                 StopCoroutine(coroutine);
                 coroutine = null;
             }
+            
+            _waitTime = waitTime;
             
             gameObject.SetActive(true);
             _textTMP.text = text;
@@ -47,13 +50,20 @@ namespace Cardinals.Entity.UI
         
         private void TextEnd()
         {
-            coroutine = Wait();
-            StartCoroutine(coroutine);
+            if (_waitTime == -1)
+            {
+                // 말풍선을 계속 출력
+            }
+            else
+            {
+                coroutine = Wait();
+                StartCoroutine(coroutine);
+            }
         }
 
         private IEnumerator Wait()
         {
-            float waitTime = 1.5f;
+            float waitTime = _waitTime;
             do
             {
                 yield return new WaitForSeconds(.1f);

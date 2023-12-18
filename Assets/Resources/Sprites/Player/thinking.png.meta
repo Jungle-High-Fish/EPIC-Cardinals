@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d4d0323b1b7f4d144af22e63eea4f038
+guid: 77e4b730f47ca894ca29e2458f6f3c56
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 90
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,38 +101,26 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: thinking_0
+      name: Thinking_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 34
-        width: 364
-        height: 393
+        x: 26
+        y: 32
+        width: 399
+        height: 434
       alignment: 9
-      pivot: {x: 0.53031766, y: 0.052871346}
+      pivot: {x: 0.5189254, y: 0.0488644}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a6449e378d4d7841be08f659504eb7d
-      internalID: -793621741
+      spriteID: 17c3b67d67869c84d81b9ec4c1b19516
+      internalID: 802121158
       vertices: []
       indices: 
       edges: []
@@ -148,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      thinking_0: -793621741
+      Thinking_0: 802121158
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
