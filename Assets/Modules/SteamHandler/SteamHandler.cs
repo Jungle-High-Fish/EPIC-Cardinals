@@ -49,6 +49,17 @@ namespace Cardinals {
             }
         }
 
+        public void SetLobbyStateDisplay() {
+            if (!_isSteamAvailable) {
+                return;
+            }
+
+            SteamFriends.SetRichPresence(
+                "steam_display", 
+                "#StatusLobby"
+            );
+        }
+
         public void SetBattleStateDisplay(int eventIdx, List<EnemyType> enemyType) {
             if (!_isSteamAvailable) {
                 return;
@@ -67,7 +78,7 @@ namespace Cardinals {
                 }
             }
 
-            string eventIdxStr = GetOrdinalNumber(eventIdx).ToString();
+            string eventIdxStr = GetOrdinalNumber(eventIdx + 1).ToString();
 
             string enemiesStr = "";
             for (int i = 0; i < enemyType.Count; i++) {
