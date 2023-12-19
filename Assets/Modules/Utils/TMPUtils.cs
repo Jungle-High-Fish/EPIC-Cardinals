@@ -20,7 +20,10 @@ namespace Util {
             string parsedText = Parse(text);
             string result = parsedText;
 
+        #pragma warning disable 0164
         LevelMatching:
+        #pragma warning restore 0164
+
             string levelValueRegex = @"@levelValue\s*\(((\s*\d+\s*,)*\s*\d\s*)\)";
             var levelValueMatches = Regex.Matches(result, levelValueRegex);
 

@@ -25,7 +25,7 @@ namespace Cardinals.Enemy.Summon
         
         protected override Vector3 GetPosition(Vector3 vector3) => vector3 + new Vector3(0, _maxY, 0);
         
-        public void Init(Tile tile)
+        public override void Init(Tile tile)
         {
             base.Init(tile);
 

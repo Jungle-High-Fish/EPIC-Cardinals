@@ -115,6 +115,7 @@ namespace Cardinals.BoardEvent.Tile
                 2 => AddExpToNTile(5),
                 3 => ChangeTileType(),
                 4 => AddExpByType(2),
+                _ => throw new NotImplementedException(),
             };
 
             yield return _eventSeq; // 각 이벤트 수행

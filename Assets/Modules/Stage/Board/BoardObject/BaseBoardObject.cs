@@ -23,7 +23,7 @@ namespace Cardinals.Enemy.Summon
         [SerializeField] protected SpriteRenderer _renderer;
         [SerializeField] protected Animator _animator;
 
-        public void Init(Tile tile)
+        public virtual void Init(Tile tile)
         {
             _renderer = GetComponentInChildren<SpriteRenderer>();
             _animator = GetComponentInChildren<Animator>();

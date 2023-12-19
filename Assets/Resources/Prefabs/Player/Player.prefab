@@ -102,7 +102,7 @@ MonoBehaviour:
   _renderers:
   - {fileID: 1389953857676851944}
   - {fileID: 1389953857664558228}
-  _initHp: 1
+  _initHp: 40
   _onTile: {fileID: 0}
 --- !u!114 &5650091141492861573
 MonoBehaviour:
