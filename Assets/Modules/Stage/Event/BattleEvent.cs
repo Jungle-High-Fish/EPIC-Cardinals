@@ -55,6 +55,7 @@ namespace Cardinals.Game
 
             // 시작 정보 초기화
             _turn = 1;
+            _round = 0;
             _roundStartTile = player.OnTile;
             GameManager.I.StartCoroutine(stage.StartFlag.Show(_roundStartTile));
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
