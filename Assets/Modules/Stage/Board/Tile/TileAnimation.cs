@@ -202,7 +202,7 @@ namespace Cardinals.Board {
 				//_rigidbody.Get(gameObject).DOJump(_tile.Get(gameObject).TilePositionOnGround, 1.5f, 1, 1f)
 			).Insert(
 				0.2f, _rendererTransform.Get(gameObject).DORotate(
-					new Vector3(0, _tile.Get(gameObject).TileRotation.y, 360), 
+					new Vector3(0, 0, 360), 
 					0.5f,
 					RotateMode.FastBeyond360
 				)

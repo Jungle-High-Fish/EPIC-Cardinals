@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cardinals.Board;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Cardinals.Tutorial;
 using DG.Tweening;
 using Modules.Utils;
 using TMPro;
@@ -17,6 +18,7 @@ namespace Cardinals.UI.Description
     {
         public UIEndTurnButton EndTurnButton => _endTurnButton.Get(gameObject);
         public UITileInfo TileInfo => _tileInfo.Get(gameObject);
+        public UITurnRoundStatus TurnRoundStatus => _turnRoundStatus.Get(gameObject);
 
         [Header("Component")]
         [SerializeField] private TextMeshProUGUI _moneyTMP;
@@ -30,6 +32,9 @@ namespace Cardinals.UI.Description
             = new ComponentGetter<UIEndTurnButton>(TypeOfGetter.Child);
         private ComponentGetter<UITileInfo> _tileInfo 
             = new ComponentGetter<UITileInfo>(TypeOfGetter.Child);
+
+        private ComponentGetter<UITurnRoundStatus> _turnRoundStatus 
+            = new ComponentGetter<UITurnRoundStatus>(TypeOfGetter.Child);
 
         private ComponentGetter<UIMapButton> _mapButton 
             = new ComponentGetter<UIMapButton>(TypeOfGetter.Child);
@@ -69,6 +74,8 @@ namespace Cardinals.UI.Description
 
             _endTurnButton.Get(gameObject).Init();
             _tileInfo.Get(gameObject).InitOnTile();
+
+            _turnRoundStatus.Get(gameObject).Set(0, 0);
         }
 
         void UpdateMoneyUI(int value)

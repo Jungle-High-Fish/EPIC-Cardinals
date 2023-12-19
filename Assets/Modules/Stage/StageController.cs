@@ -49,6 +49,8 @@ namespace Cardinals.Game {
 
         private RewardBox _rewardBox;
 
+        private StartFlag _startFlag;
+
         public RewardBox RewardBox
         {
             get
@@ -94,9 +96,6 @@ namespace Cardinals.Game {
                 yield return LoadTileData(GameManager.I.SaveSystem.CurrentSaveFileData);
             }
         }
-
-        [Header("임시 맵(하드코딩됨)")]
-        private int temp_event_index = 0;
         
         public IEnumerator Flow() {
             yield return GameManager.I.UI.UIStage.Init(_stage);

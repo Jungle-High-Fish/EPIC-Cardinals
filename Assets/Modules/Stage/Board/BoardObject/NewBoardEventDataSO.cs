@@ -8,7 +8,7 @@ namespace Cardinals.BoardEvent
     {
         public NewBoardEventType type;
         
-        public string name;
+        public string eventName;
         
         [TextArea] public string description;
 
