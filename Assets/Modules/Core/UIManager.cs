@@ -32,6 +32,7 @@ namespace Cardinals
         public UINewDicePanel UINewDicePanel => _uiNewDicePanel;
         public Bubble UISystemBubble => _uiSystemBubble;
         public UIPlayerResultPanel UIPlayerResultPanel => _uiPlayerResultPanel;
+        public UIClearDemoGame UIClearDemoGame => _uiClearDemoGame;
         
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -57,6 +58,7 @@ namespace Cardinals
         private UINewPlayerInfo _uiNewPlayerInfo;
         private UINewDicePanel _uiNewDicePanel;
         private UIPlayerResultPanel _uiPlayerResultPanel;
+        private UIClearDemoGame _uiClearDemoGame;
         
         private Bubble _uiSystemBubble;
 
@@ -127,6 +129,7 @@ namespace Cardinals
 
             InstantiateSystemBubbleUI();
             InstantiatePlayResultUI();
+            InstantiateClearDemoGameUI();
         }
 
         void InitDescriptionCanvas()
@@ -346,7 +349,17 @@ namespace Cardinals
             _uiPlayerResultPanel.Init();
             obj.SetActive(false);
         }
+        
+        private void InstantiateClearDemoGameUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Ending_ClearDemoGamePanel);
+            GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
 
+            _uiClearDemoGame = obj.GetComponent<UIClearDemoGame>();
+            _uiClearDemoGame.Init();
+            obj.SetActive(false);
+        }
+        
         public void CanvasInactive()
         {
             _cardUICanvas.gameObject.SetActive(false);

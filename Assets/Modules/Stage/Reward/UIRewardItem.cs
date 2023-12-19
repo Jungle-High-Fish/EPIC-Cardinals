@@ -50,6 +50,10 @@ namespace Cardinals.UI
                     sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Dice); 
                     text = $"Dice";
                     break;
+                case RewardType.NextStageMap:
+                    sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Icon_Map); 
+                    text = $"Next Stage Map";
+                    break;
             }
             
             _iconImg.sprite = sprite;
@@ -79,6 +83,9 @@ namespace Cardinals.UI
                     break;
                 case RewardType.RandomDice:
                     GameManager.I.UI.UINewDicePanel.Init((Dice)baseReward.Data, Remove);
+                    break;
+                case RewardType.NextStageMap:
+                    GameManager.I.UI.UIClearDemoGame.On();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

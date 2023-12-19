@@ -260,6 +260,7 @@ namespace Cardinals.Enums {
         BattleCommon,
         BattleElite,
         BattleBoss,
+        DemoClearEnding,
     }
 
     public enum StageEventList
@@ -270,7 +271,8 @@ namespace Cardinals.Enums {
         BattelTweTwe,
         BattlePiPiPoPo,
         BattlePicPic,
-        BattlePazizizic
+        BattlePazizizic,
+        DemoClearEnding,
     }
 
     public enum EnemyType
@@ -345,6 +347,7 @@ namespace Cardinals.Enums {
         Card,
         Artifact,
         RandomDice,
+        NextStageMap,
     }
 
     public enum PotionType : int

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: StageEventList
   m_EditorClassIdentifier: 
   StageEventBindDataList:
+  - StageEventName: 7
+    EventData: {fileID: 11400000, guid: df4a26a25becd8c45af4413183d55a39, type: 2}
   - StageEventName: 1
     EventData: {fileID: 11400000, guid: 251c10cd133c72643811823264607240, type: 2}
   - StageEventName: 2
