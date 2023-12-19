@@ -13,6 +13,7 @@ namespace Cardinals.Board {
         public TileType Type => _tileData.type;
         public TileState TileState=> _tileState;
         public TileDirection Direction => _tileData.direction;
+        public Transform RendererTransform => _tileAnimation.Get(gameObject).RendererTransform;
 
         public Vector3 TilePositionOnGround => _tilePositionOnGround;
         public Vector3 TileRotation => _tileRotation;

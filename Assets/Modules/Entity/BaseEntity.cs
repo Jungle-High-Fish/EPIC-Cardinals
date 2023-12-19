@@ -10,6 +10,7 @@ using Cardinals.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using Steamworks.ServerList;
 using UnityEngine;
 
 namespace Cardinals
@@ -192,6 +193,8 @@ namespace Cardinals
                 
                 if (this is Player) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
+                } else if (this is BaseEnemy) {
+                    GameManager.I.CameraController.ShakeCamera(0.3f, 1f, 1);
                 }
             }
         }

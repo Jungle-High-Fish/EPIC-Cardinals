@@ -48,7 +48,6 @@ namespace Cardinals.Game {
         private BaseEvent _curEvent;
 
         private RewardBox _rewardBox;
-
         private StartFlag _startFlag;
 
         public RewardBox RewardBox
@@ -63,6 +62,18 @@ namespace Cardinals.Game {
                 }
                 
                 return _rewardBox;
+            }
+        }
+
+        public StartFlag StartFlag {
+            get {
+                if (_startFlag == null) {
+                    GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_StartFlag);
+                    _startFlag = Instantiate(prefab).GetComponent<StartFlag>();
+                    _startFlag.Init();
+                }
+
+                return _startFlag;
             }
         }
 
