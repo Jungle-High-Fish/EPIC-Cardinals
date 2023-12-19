@@ -153,6 +153,7 @@ namespace Cardinals.Enums {
                 NewBoardEventType.Roulette => typeof(Roulette),
                 NewBoardEventType.PotionGoblin => typeof(PotionGoblin),
                 NewBoardEventType.DiceEvent => typeof(DiceEvent),
+                NewBoardEventType.AlchemyEvent => typeof(AlchemyEvent),
                 _ => null
             };
         }
@@ -260,6 +261,7 @@ namespace Cardinals.Enums {
         BattleCommon,
         BattleElite,
         BattleBoss,
+        DemoClearEnding,
     }
 
     public enum StageEventList
@@ -270,7 +272,8 @@ namespace Cardinals.Enums {
         BattelTweTwe,
         BattlePiPiPoPo,
         BattlePicPic,
-        BattlePazizizic
+        BattlePazizizic,
+        DemoClearEnding,
     }
 
     public enum EnemyType
@@ -345,6 +348,7 @@ namespace Cardinals.Enums {
         Card,
         Artifact,
         RandomDice,
+        NextStageMap,
     }
 
     public enum PotionType : int
@@ -384,6 +388,7 @@ namespace Cardinals.Enums {
         PotionGoblin,
         Roulette,
         DiceEvent,
+        AlchemyEvent,
     }
 
     public enum NewBoardEventOnType
@@ -430,6 +435,19 @@ namespace Cardinals.Enums {
         CopyOneTimeCard,
         Heal,
         Money
+    }
+
+    /// <summary>
+    /// 해당 이벤트는 지정된 인덱스에 관련있는 이벤트 입니다
+    /// </summary>
+    public enum BoardEventAlchemyType : int
+    {
+        Empty = 0,
+        AllTileExp,
+        GetRandomPotion,
+        MaxHpUp,
+        GetMoney,
+        DamageAllEnemy,
     }
     #endregion
 

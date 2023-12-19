@@ -87,6 +87,8 @@ namespace Cardinals.UI.NewDice
 
         public void SelectedItem(UIDice dice)
         {
+            if (!gameObject.activeSelf) return;
+            
             // 기존 선택한 항목이 존재한다면 선택 취소 처리
             if (_selectedUIDice is not null)
             {
