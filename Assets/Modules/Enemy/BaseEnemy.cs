@@ -213,10 +213,10 @@ namespace Cardinals
                     var burnBuff = Buffs.FirstOrDefault(x => x.Type == BuffType.Burn);
                     if (burnBuff != null)
                     {
-                        if (burnBuff.Count >= 10)
+                        if (burnBuff.Count >= 5)
                         {
                             GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire2]?.Invoke();
-                            burnBuff.Count -= 10;
+                            burnBuff.Count -= 5;
                             GameManager.I.Stage.Meteor();
                         }
                     }
