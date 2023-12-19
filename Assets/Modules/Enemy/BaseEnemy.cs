@@ -216,7 +216,7 @@ namespace Cardinals
                         if (burnBuff.Count >= 5)
                         {
                             GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire2]?.Invoke();
-                            burnBuff.Count -= 10;
+                            burnBuff.Count -= 5;
                             GameManager.I.Stage.Meteor();
                         }
                     }
