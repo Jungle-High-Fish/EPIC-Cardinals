@@ -10,6 +10,8 @@ using System;
 namespace Cardinals.Board {
 
 	public class TileAnimation : MonoBehaviour {
+		public Transform RendererTransform => _rendererTransform.Get(gameObject);
+
 		private ComponentGetter<MMF_Player> _MMFPlayer
 			= new ComponentGetter<MMF_Player>(TypeOfGetter.This);
 
@@ -204,7 +206,7 @@ namespace Cardinals.Board {
 				0.2f, _rendererTransform.Get(gameObject).DORotate(
 					new Vector3(0, 0, 360), 
 					0.5f,
-					RotateMode.FastBeyond360
+					RotateMode.LocalAxisAdd
 				)
 			).AppendInterval(0.5f)
 			.OnComplete(AnimationComplete(TileAnimationType.Rotate360))
