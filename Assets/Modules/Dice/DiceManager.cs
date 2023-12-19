@@ -619,7 +619,7 @@ namespace Cardinals
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
             {
                 GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 첫 번째 행동이 무시되었어.");
-                Debug.Log("���ο� ������ �ൿ ����");
+                Debug.Log("슬로우 걸렸다굴");
             }
             else
             {

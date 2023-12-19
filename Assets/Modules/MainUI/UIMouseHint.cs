@@ -14,17 +14,13 @@ public class UIMouseHint : MonoBehaviour
     private ComponentGetter<Image> _image 
         = new ComponentGetter<Image>(TypeOfGetter.This);
 
-    private IEnumerator _changeSprite;
-
     public void Show() {
         gameObject.SetActive(true);
-        _changeSprite = ChangeSprite();
-        StartCoroutine(_changeSprite);
+        _image.Get(gameObject).sprite = sprite1;
     }
 
     public void Hide() {
         gameObject.SetActive(false);
-        StopCoroutine(_changeSprite);
     }
 
     private void Update() {
