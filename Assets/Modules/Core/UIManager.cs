@@ -1,4 +1,5 @@
 using System;
+using Cardinals.BoardEvent.Alchemy;
 using Cardinals.BoardEvent.Card;
 using Cardinals.BoardEvent.Roulette;
 using Cardinals.BoardEvent.Shop;
@@ -67,10 +68,12 @@ namespace Cardinals
         private UIShop _uiShop;
         private UIRoulette _uiRoulette;
         private UITileEvent _uiTileEvent;
+        private UIAlchemyEventPanel _uiAlchemyEventPanel;
         public UIDiceEvent UIDiceEvent => _uiDiceEvent;
         public UIShop UIShop => _uiShop;
         public UIRoulette UIRoulette => _uiRoulette;
         public UITileEvent UITileEvent => _uiTileEvent;
+        public UIAlchemyEventPanel UIAlchemyEventPanel => _uiAlchemyEventPanel;
         #endregion
 
         #region Tutorial
@@ -115,6 +118,8 @@ namespace Cardinals
             InstantiateBoardEventRouletteUI();
             InstantiateBoardEventShopUI();
             InstantiateBoardEventTileUI();
+            InstantiateAlchemyEventPanelUI();
+            
 
             // Tile Level Up
             InstantiateMagicLevelUpUI();
@@ -288,6 +293,14 @@ namespace Cardinals
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_Tile);
             GameObject obj = Instantiate(prefab, _mainUICanvas.transform);
             _uiTileEvent = obj.GetComponent<UITileEvent>();
+            obj.SetActive(false); 
+        }
+
+        private void InstantiateAlchemyEventPanelUI()
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_BoardEvent_AlchemyEvent);
+            GameObject obj = Instantiate(prefab, _systemUICanvas.transform);
+            _uiAlchemyEventPanel = obj.GetComponent<UIAlchemyEventPanel>();
             obj.SetActive(false); 
         }
 

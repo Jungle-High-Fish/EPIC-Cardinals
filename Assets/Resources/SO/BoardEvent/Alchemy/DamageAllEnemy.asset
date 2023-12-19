@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3da16e2a8a2f5c4ba69caecf34daceb, type: 3}
+  m_Name: DamageAllEnemy
+  m_EditorClassIdentifier: 
+  type: 5
+  eventDescription: "\uC8FC\uC0AC\uC704\uB97C \uAD74\uB824 5\uAC00 \uB098\uC628\uB2E4\uBA74,\n\uC804\uCCB4
+    \uC801\uC5D0\uAC8C 10\uC758 \uB370\uBBF8\uC9C0"

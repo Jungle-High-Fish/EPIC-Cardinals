@@ -41,6 +41,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_BoardEvent_Roulette = "UI/BoardEvent/UIRoulette";
             public const string Prefabs_UI_BoardEvent_Tile = "UI/BoardEvent/UITileEvent";
             public const string Prefabs_UI_BoardEvent_TypeItem = "UI/BoardEvent/UITypeItem";
+            public const string Prefabs_UI_BoardEvent_AlchemyEvent = "UI/BoardEvent/UIAlchemyEventPanel";
             
             public const string Prefabs_UI_Description = "UI/DescriptionPrefab";
             public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
@@ -132,6 +133,8 @@ namespace Cardinals.Constants {
             
             public const string Sprites_UI_Coin = "UI/Icons/UI_Coin";
             public const string Sprites_UI_Dice = "UI/Icons/UI_Random_Dice";
+            public const string Sprites_UI_Result_Success = "UI/Icons/Success";
+            public const string Sprites_UI_Result_Fail = "UI/Icons/Fail";
             public const string Sprites_UI_IconPrefab = "UI/IconPrefab";
             public const string Sprites_UI_Icon_Map = "UI/Map/UI_Icon_Map";
             
@@ -164,6 +167,7 @@ namespace Cardinals.Constants {
             public const string SO_MagicData = "Magic/";
             public const string SO_TileCurseUIData = "TileCurses/";
             public const string SO_BoardEventData = "BoardEvent/";
+            public const string SO_BoardEvent_AlchemyEventData = "BoardEvent/Alchemy/";
             public const string SO_EnemyData = "Stage/Enemies/";
             public const string SO_TutorialData = "Tutorial/";
             public const string SO_StageEventList = "Stage/StageEventList";
