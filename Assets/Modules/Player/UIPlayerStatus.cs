@@ -6,7 +6,6 @@ using Cardinals.Enums;
 using Cardinals.UI;
 using Util;
 using UnityEngine;
-using Cardinals.Enums;
 using UnityEngine.UI;
 
 namespace Cardinals.UI

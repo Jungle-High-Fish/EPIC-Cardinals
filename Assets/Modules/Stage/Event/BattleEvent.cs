@@ -50,10 +50,19 @@ namespace Cardinals.Game
                 enemies.Select(x => x.EnemyData.enemyType).ToList()
             );
 
+            // 플레이어 이벤트 등록
+            player.HomeReturnEvent += OnPlayerRound;
+
+            // 시작 정보 초기화
             _turn = 1;
             _roundStartTile = player.OnTile;
+            
+
             do // 전투 시작
             {
+                // 턴 UI 업데이트
+                GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
+
                 // 3턴마다 보드 이벤트 생성
                 if (_turn++ % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
                 
@@ -130,6 +139,8 @@ namespace Cardinals.Game
                 RemoveSummons();
                 yield return WaitReward(enemyGradeType);
             }
+
+            player.HomeReturnEvent -= OnPlayerRound;
         }
 
         private bool CheckPlayerWin => !GameManager.I.CurrentEnemies.Any();
@@ -165,6 +176,11 @@ namespace Cardinals.Game
                 
                 enemies.Add(enemy);
             }
+        }
+
+        private void OnPlayerRound() {
+            _round++;
+            GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
         }
         
         private IEnumerator SummonsAction()

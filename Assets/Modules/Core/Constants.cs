@@ -27,6 +27,7 @@ namespace Cardinals.Constants {
             
             public const string Prefabs_Stage_RewardBox = "Stage/RewardBox";
             public const string Prefabs_Stage_Totem = "Stage/Totem";
+            public const string Prefabs_Stage_Flag = "Board/MapObject/Flag";
             
             public const string Prefabs_UI_Canvas = "UI/Canvas";
 
