@@ -236,7 +236,7 @@ namespace Cardinals.Constants {
             };
 
             public static readonly List<int> WaterMagicMainCure = new List<int> {
-                1, 2, 3,
+                2, 3, 4,
             };
 
             public static readonly List<int> EarthMagicMainDefense = new List<int> {
