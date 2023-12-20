@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Enums;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Util;
@@ -76,7 +77,11 @@ namespace Cardinals.Board {
             = new ComponentGetter<TileAnimation>(TypeOfGetter.This);
 
         private ComponentGetter<ParticleSystem> _particleSystem
-            = new ComponentGetter<ParticleSystem>(TypeOfGetter.ChildByName, "Effect Particle");
+            = new ComponentGetter<ParticleSystem>(TypeOfGetter.ChildByName, "Effects/Effect Particle");
+
+        private ComponentGetter<MMF_Player> _canLevelUpTwinkleMMF
+            = new (TypeOfGetter.ChildByName, "Effects/CanLevelUpTwinkleMMP");
+        public MMF_Player CanLevelUpTwinkleMMF => _canLevelUpTwinkleMMF.Get(gameObject);
         
         // 타일 UI 관련 변수
         private ComponentGetter<UITile> _uiTile

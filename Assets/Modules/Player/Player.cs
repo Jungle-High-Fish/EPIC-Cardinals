@@ -12,6 +12,7 @@ using Cardinals.Buff;
 using Sirenix.Utilities;
 using Unity.Mathematics;
 using Modules.Entity.Buff;
+using MoreMountains.Feedbacks;
 using Util;
 
 namespace Cardinals
@@ -205,7 +206,7 @@ namespace Cardinals
 
                 Vector3 nextPos = _onTile.Next.transform.position;
                 nextPos.y += 1.3f;
-                transform.DOJump(nextPos, 2, 1, time);
+                transform.DOJump(nextPos, 2, 1, time).OnComplete(CreateLandingParticle);
                 Animator.Play("Jump");
 
                 yield return new WaitForSeconds(time / 2);
@@ -217,6 +218,7 @@ namespace Cardinals
                 if (i != count - 1) {
                     _onTile.StepOn(this);
                 }
+                
             }
 
             yield return CheckArriveBoardObject();
@@ -236,7 +238,7 @@ namespace Cardinals
                 SetFlipOnMoveByPosition(_onTile.Prev);
                 Vector3 prevPos = _onTile.Prev.transform.position;
                 prevPos.y += 1.3f;
-                transform.DOJump(prevPos, 2, 1, time);
+                transform.DOJump(prevPos, 2, 1, time).OnComplete(CreateLandingParticle);
                 Animator.Play("Jump");
 
                 yield return new WaitForSeconds(time / 2);
@@ -258,6 +260,13 @@ namespace Cardinals
             SetFlipTowardEnemy();
         }
 
+        private void CreateLandingParticle()
+        {
+            // 파티클 생성
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_LandingDust);
+            Instantiate(prefab, transform.position + new Vector3(0, -1f, 0), quaternion.identity);
+        }
+        
         private IEnumerator CheckCollisionBoardObject()
         {
             var summons = GameManager.I.Stage.BoardObjects;
@@ -316,11 +325,9 @@ namespace Cardinals
                 .OnComplete(() =>
                 {
                     target.Hit(CalculDamage(damage));
-
-                    var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
-                    explosion.transform.position = targetPos;
-                    
-                    Destroy(obj);
+                    // var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
+                    // explosion.transform.position = targetPos;
+                     Destroy(obj);
                 });
         }
 

@@ -112,6 +112,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_Particle_Attack = "Particle/Trail";
             public const string Prefabs_Particle_FireAttack = "Particle/FireTrail";
             public const string Prefabs_Particle_Explosion = "Particle/EEEXPLOSION";
+            public const string Prefabs_Particle_LandingDust = "Particle/Feel/DustParticles";
             
             // Sprite
             public const string Sprites = "Sprites/";
