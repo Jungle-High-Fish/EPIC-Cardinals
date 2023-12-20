@@ -24,6 +24,7 @@ namespace Cardinals.UI {
         public void Show(List<(string, DateTime)> localSaveFileList, List<(string, DateTime)> cloudSaveFileList) {
             Clear();
             gameObject.SetActive(true);
+            localSaveFileList.Sort((a, b) => b.Item2.CompareTo(a.Item2));
             foreach (var (fileName, modifiedTime) in localSaveFileList) {
                 var saveFileDataPanel = Instantiate(
                     ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_SaveFileDataPanel), 
@@ -55,6 +56,7 @@ namespace Cardinals.UI {
                 return;
             }
 
+            cloudSaveFileList.Sort((a, b) => b.Item2.CompareTo(a.Item2));
             foreach (var (fileName, modifiedTime) in cloudSaveFileList) {
                 var saveFileDataPanel = Instantiate(
                     ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_SaveFileDataPanel), 
