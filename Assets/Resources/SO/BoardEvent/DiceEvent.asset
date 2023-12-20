@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DiceEvent
   m_EditorClassIdentifier: 
   type: 3
-  name: "\uC8FC\uC0AC\uC704 \uC774\uBCA4\uD2B8"
+  eventName: Dice Event
   description: "\uB3C4\uCC29 \uC2DC, \uC8FC\uC0AC\uC704 \uC774\uBCA4\uD2B8\uB97C
     \uC2E4\uD589\uD569\uB2C8\uB2E4."
   keepTurnCount: 2
