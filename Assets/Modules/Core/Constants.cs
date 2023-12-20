@@ -41,6 +41,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_BoardEvent_Roulette = "UI/BoardEvent/UIRoulette";
             public const string Prefabs_UI_BoardEvent_Tile = "UI/BoardEvent/UITileEvent";
             public const string Prefabs_UI_BoardEvent_TypeItem = "UI/BoardEvent/UITypeItem";
+            public const string Prefabs_UI_BoardEvent_AlchemyEvent = "UI/BoardEvent/UIAlchemyEventPanel";
             
             public const string Prefabs_UI_Description = "UI/DescriptionPrefab";
             public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
@@ -105,6 +106,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_Ending_FadeInBlack = "UI/Ending/FadeInBlack";
             public const string Prefabs_UI_Ending_SystemBubble = "UI/Ending/SystemBubble";
             public const string Prefabs_UI_Ending_PlayerResultPanel = "UI/Ending/UIPlayerResultPanel";
+            public const string Prefabs_UI_Ending_ClearDemoGamePanel = "UI/Ending/UIClearDemoGamePanel";
             
             // Particle
             public const string Prefabs_Particle_Attack = "Particle/Trail";
@@ -131,7 +133,10 @@ namespace Cardinals.Constants {
             
             public const string Sprites_UI_Coin = "UI/Icons/UI_Coin";
             public const string Sprites_UI_Dice = "UI/Icons/UI_Random_Dice";
+            public const string Sprites_UI_Result_Success = "UI/Icons/Success";
+            public const string Sprites_UI_Result_Fail = "UI/Icons/Fail";
             public const string Sprites_UI_IconPrefab = "UI/IconPrefab";
+            public const string Sprites_UI_Icon_Map = "UI/Map/UI_Icon_Map";
             
             public const string Sprites_UI_Enemy_Ballon_LeftTail = "UI/Enemy/UI_Ballon_LeftTail";
             public const string Sprites_UI_Enemy_Ballon_RightTail = "UI/Enemy/UI_Ballon_RightTail";
@@ -145,6 +150,8 @@ namespace Cardinals.Constants {
             public const string Sprites_BoardInput_Triangle = "BoardInputHandler/selectTriangle";
             
             public const string Sprites_MapIcons = "MapIcons/";
+            
+            public const string Sprites_UI_Ending_ClearIllust = "UI/Ending/ClearIllust";
 
             // Material
             public const string Materials = "Materials/";
@@ -160,6 +167,7 @@ namespace Cardinals.Constants {
             public const string SO_MagicData = "Magic/";
             public const string SO_TileCurseUIData = "TileCurses/";
             public const string SO_BoardEventData = "BoardEvent/";
+            public const string SO_BoardEvent_AlchemyEventData = "BoardEvent/Alchemy/";
             public const string SO_EnemyData = "Stage/Enemies/";
             public const string SO_TutorialData = "Tutorial/";
             public const string SO_StageEventList = "Stage/StageEventList";

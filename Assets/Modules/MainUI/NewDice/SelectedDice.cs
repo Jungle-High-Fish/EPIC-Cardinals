@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.BoardEvent.Alchemy;
 using UnityEngine;
 
 namespace Cardinals.UI.NewDice
@@ -22,6 +23,7 @@ namespace Cardinals.UI.NewDice
         void SendSelectedDiceInfo(bool state)
         {
             var uiNewDice = GetComponentInParent<UINewDicePanel>();
+            var uiAlchemyEvent = GetComponentInParent<UIAlchemyEventPanel>();
             UIDice dice = null;
             
             if (state)
@@ -29,7 +31,8 @@ namespace Cardinals.UI.NewDice
                 dice = GetComponent<UIDice>();
             }
             
-            uiNewDice.SelectedItem(dice);
+            uiNewDice?.SelectedItem(dice);
+            uiAlchemyEvent?.SelectedItem(dice);
         }
     }
 
