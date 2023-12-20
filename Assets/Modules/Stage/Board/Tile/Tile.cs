@@ -257,7 +257,18 @@ namespace Cardinals.Board {
         public IEnumerator CardAction(int value, BaseEntity target) {
             _tileMagic.OnAction(value, target);
 
-            float animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Attack);
+            float animTime;
+
+            if (_tileMagic.Type == TileMagicType.Attack || _tileMagic.Type == TileMagicType.Fire) {
+                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Attack);
+            } else if (_tileMagic.Type == TileMagicType.Defence || _tileMagic.Type == TileMagicType.Earth) {
+                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Defence);
+            } else if (_tileMagic.Type == TileMagicType.Water) {
+                animTime = _tileAnimation.Get(gameObject).Play(TileAnimationType.Heal);
+            } else {
+                animTime = 0;
+            }
+
             GameManager.I.CameraController.ShakeCamera(0.1f, 0.7f, 0.1f);
 
             yield return new WaitForSeconds(animTime);
