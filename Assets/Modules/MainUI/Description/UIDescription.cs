@@ -26,7 +26,8 @@ namespace Cardinals.UI
         [SerializeField] private TextMeshProUGUI _descriptionTMP;
         [SerializeField] private Image _borderObjImg;
 
-        private bool _completeClear;
+        private bool _hasInit = false;
+
         public void Init(IDescription description)
         {
             _baseDescription = description; 
@@ -46,6 +47,14 @@ namespace Cardinals.UI
             _borderObjImg.color = color;
 
             transform.AddComponent<GridSizeUpdator>().Resizing();
+
+            _hasInit = true;
+        }
+
+        private void Update() {
+            if (!_hasInit) return;
+
+            _descriptionTMP.text = _baseDescription.Description;
         }
     }
 }

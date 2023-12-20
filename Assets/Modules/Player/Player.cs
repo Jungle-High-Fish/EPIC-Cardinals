@@ -35,8 +35,6 @@ namespace Cardinals
         public PlayerInfo PlayerInfo => _playerInfo;
         public Tile OnTile => _onTile;
 
-        private int _boardRoundCount = 0;
-
         public Action<PlayerActionType> UpdateActionEvent { get; set; }
         public PlayerActionType CurActionType { get; private set; }
 
@@ -132,14 +130,10 @@ namespace Cardinals
 
         public void BlessWater1()
         {
-            if (_isDamagedThisTurn)
-            {
-                return;
-            }
-
-            //TODO : 힐 수치 Constants에서 끌어쓰기
             GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater1]?.Invoke();
-            Heal(3);
+            if (GameManager.I.Stage.CurEvent is BattleEvent battleEvent) {
+                Heal(battleEvent.Round);
+            }
         }
 
         void BlessEarth1()
@@ -186,18 +180,11 @@ namespace Cardinals
             for(int i = 0; i < count; i++)
             {
                 if (_onTile.Next == (GameManager.I.Stage.CurEvent as BattleEvent).RoundStartTile) {
-                    _boardRoundCount++;
-
                     HomeReturnEvent?.Invoke();
 
-                    if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Rigloo))
-                    {
-                        Heal(2);
-                    }
-
-                    if (GameManager.I.Player.PlayerInfo.CheckArtifactExist(Enums.ArtifactType.Verdant))
-                    {
-                        GameManager.I.Stage.Board.GetRandomTile(false).TileMagic.GainExpToNextLevel();
+                    // [축복] 잔잔한 수면: 보드를 한 바퀴 돌 때마다, 돈 바퀴 수 만큼 회복합니다.
+                    if (_playerInfo.CheckBlessExist(BlessType.BlessWater1)) {
+                        BlessWater1();
                     }
                 }
 

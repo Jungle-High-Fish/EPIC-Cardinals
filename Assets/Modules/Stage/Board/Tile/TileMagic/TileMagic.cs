@@ -207,13 +207,6 @@ namespace Cardinals.Board {
 			int left = GameManager.I.Stage.Player.Heal(
 				Constants.GameSetting.Tile.WaterMagicMainCure[_level - 1]
 			);
-
-			if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWater2) && left > 0) {
-				GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
-				GameManager.I.Stage.Enemies.Reverse<BaseEnemy>().ToList().ForEach(enemy => {
-					enemy.Hit(left * 2);
-				});
-			}
 		}
 
 		// 3 이상의 행동에서 적에게 젖음 효과를 부여합니다.

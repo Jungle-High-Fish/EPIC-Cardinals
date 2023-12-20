@@ -390,8 +390,9 @@ namespace Cardinals
                             }
 
                             if(GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind1)
-                                && useNumber==1 && _prevDiceNumber == 5)
+                                && useNumber==1 && (_prevDiceNumber == 5 || _prevDiceNumber == 6))
                             {
+                                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWind1]?.Invoke();
                                 StartCoroutine(DiceUseAction(useNumber, _dices[_selectDiceIndex].DiceType, target));
                                 yield break;
                             }
@@ -612,6 +613,7 @@ namespace Cardinals
             //[축복] 태풍 : 3번째 행동마다 적에게 3의 데미지를 추가로 부여
             if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind2)&& _continuousUseCount == 2)
             {
+                GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWind2]?.Invoke();
                 target.Hit(3);
             }
 

@@ -36,6 +36,9 @@ namespace Cardinals.Game
             DiceManager diceManager = GameManager.I.Stage.DiceManager;
             List<BaseEnemy> enemies = new();
             EnemyGradeType enemyGradeType;
+
+            // 이벤트 시작 이벤트 호출
+            stage.OnEventStartCall();
             
             // 몬스터 정보 초기화
             InitEnemy(enemies);
@@ -120,12 +123,6 @@ namespace Cardinals.Game
                 // 보드 관련 처리
                 yield return SummonsAction();
                 yield return board.OnTurnEnd();
-                
-                if (player.PlayerInfo.CheckBlessExist(BlessType.BlessWater1))
-                {
-                    player.BlessWater1();
-                }
-                
             } while (!(CheckPlayerWin || CheckEnemyWin));
 
             yield return GameManager.I.Stage.DiceManager.EndBattle();

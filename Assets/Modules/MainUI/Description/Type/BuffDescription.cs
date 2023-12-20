@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals.Board;
 using Cardinals.Enums;
+using Cardinals.Game;
 using UnityEngine;
 using Util;
 
@@ -15,7 +17,8 @@ namespace Cardinals.UI.Description
         }
 
         public string Name => _data.buffName;
-        public string Description => _data.description;
+        public string Description => _data.Description;
+
         public Sprite IconSprite => _data.sprite;
         public Color Color { get; }
         public string Key => _data.type.ToString();
