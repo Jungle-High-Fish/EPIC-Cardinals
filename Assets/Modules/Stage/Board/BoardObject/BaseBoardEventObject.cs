@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using Cardinals.Enemy.Summon;
 using Cardinals.Enums;
+using Cardinals.UI;
+using Cardinals.UI.Description;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using Util;
 using Resources = Cardinals.Constants.FilePath.Resources;
@@ -25,6 +28,9 @@ namespace Cardinals.BoardEvent
             _count = _data.keepTurnCount;
 
             _renderer.sprite = _data.sprite;
+            
+            transform.AddComponent<BoardEventObjectDescription>().Init(_data);
+            GetComponent<DescriptionConnector>().Init();
         }
 
         public override IEnumerator OnTurn()

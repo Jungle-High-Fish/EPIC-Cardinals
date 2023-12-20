@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AlchemyEvent
   m_EditorClassIdentifier: 
   type: 4
-  eventName: AlchemyRolling
+  eventName: Alchemy Rolling
   description: "\uD134 \uB2F9 \uC2DC\uACC4\uBC29\uD5A5\uC73C\uB85C 2\uCE78\uC529
     \uC774\uB3D9.\r\n\uC811\uCD09 \uC2DC, \uC5F0\uAE08\uC220 \uC774\uBCA4\uD2B8 \uC2E4\uD589"
   keepTurnCount: 3
