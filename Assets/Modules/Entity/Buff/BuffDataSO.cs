@@ -16,13 +16,13 @@ public class BuffDataSO : ScriptableObject
         get {
             if (
                 GameManager.I.Player != null && 
-                GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire1) &&
-                GameManager.I.Stage.CurEvent is BattleEvent
+                GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire1)
             ) {
+                int round = (GameManager.I.Stage.CurEvent is BattleEvent) ? (GameManager.I.Stage.CurEvent as BattleEvent).Round : 0;
                 return TMPUtils.GetTextWithBless(
                     TMPUtils.CustomParse(description),
                     new Dictionary<BlessType, (string text, Color color)> {
-                        { BlessType.BlessFire1, ($"+ {(GameManager.I.Stage.CurEvent as BattleEvent).Round * 2}", TileMagic.Data(TileMagicType.Fire).elementColor) }
+                        { BlessType.BlessFire1, ($"+ {round * 2}", TileMagic.Data(TileMagicType.Fire).elementColor) }
                     }
                 );
             } else {
