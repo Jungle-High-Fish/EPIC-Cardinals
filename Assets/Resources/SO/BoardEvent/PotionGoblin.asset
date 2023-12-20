@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PotionGoblin
   m_EditorClassIdentifier: 
   type: 1
-  name: "\uD3EC\uC158 \uACE0\uBE14\uB9B0"
+  eventName: Potion Gobline
   description: "\uD134 \uB2F9 \uC2DC\uACC4\uBC29\uD5A5\uC73C\uB85C 4\uCE78\uC529
     \uC774\uB3D9\uD569\uB2C8\uB2E4.\r\n\uC811\uCD09 \uC2DC, \uB79C\uB364 \uD3EC\uC158
     \uD55C\uAC1C\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4."

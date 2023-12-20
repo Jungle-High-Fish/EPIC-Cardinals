@@ -74,7 +74,8 @@ namespace Cardinals
                         Animator.SetTrigger("Die");
                         Bubble.SetBubble(BubbleText.die);
                         DieEvent?.Invoke();
-                    }
+                        GameManager.I.Next();
+                     }
                 }
             }
         }

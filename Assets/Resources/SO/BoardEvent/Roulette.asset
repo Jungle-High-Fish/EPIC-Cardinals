@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Roulette
   m_EditorClassIdentifier: 
   type: 2
-  name: "\uB8F0\uB81B"
+  eventName: Roulette
   description: "\uB3C4\uCC29 \uC2DC, \uB8F0\uB81B \uC774\uBCA4\uD2B8\uB97C \uC2E4\uD589\uD569\uB2C8\uB2E4."
   keepTurnCount: 2
   sprite: {fileID: 21300000, guid: ceb2dc5cc704d80438b3a3a658b2c572, type: 3}
   onBoardType: 1
   executeType: 2
-  moveDistance: 0
+  moveCount: 0
