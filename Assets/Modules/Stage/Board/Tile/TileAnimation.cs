@@ -86,6 +86,7 @@ namespace Cardinals.Board {
 
 			InitAttackAnimation();
 			InitDefenceAnimation();
+			InitHealAnimation();
 
 			InitRotate360Animation();
 		}
@@ -195,6 +196,18 @@ namespace Cardinals.Board {
 
 			_animationDict.Add(TileAnimationType.Defence, (defenceAnimation, 0.7f, 0));
 			return defenceAnimation;
+		}
+
+		private Sequence InitHealAnimation() {
+			Sequence healAnimation = DOTween.Sequence();
+			healAnimation.Append(
+				transform.DOPunchPosition(Vector3.up * 0.5f, 1.2f, 1, 0f)
+			)
+			.OnComplete(AnimationComplete(TileAnimationType.Heal))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(TileAnimationType.Heal, (healAnimation, 1.2f, 0));
+			return healAnimation;
 		}
 
 		private Sequence InitRotate360Animation() {
