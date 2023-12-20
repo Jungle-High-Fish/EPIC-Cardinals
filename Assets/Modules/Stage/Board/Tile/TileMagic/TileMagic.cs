@@ -18,6 +18,17 @@ namespace Cardinals.Board {
 		private int _exp;
 		private bool _isLevelUp;
 
+		private bool IsLevelUp
+		{
+			get => _isLevelUp;
+			set
+			{
+				_isLevelUp = value;
+				if (_isLevelUp) _tile.Get(gameObject).CanLevelUpTwinkleMMF.PlayFeedbacks();
+				else _tile.Get(gameObject).CanLevelUpTwinkleMMF.StopFeedbacks();
+			}
+		}
+
 		private ComponentGetter<Tile> _tile
 			= new ComponentGetter<Tile>(TypeOfGetter.This);
 
@@ -61,7 +72,7 @@ namespace Cardinals.Board {
 
 			if (_level < Constants.GameSetting.Tile.MaxLevel && 
 				_exp >= Constants.GameSetting.Tile.LevelUpExp[_level]) {
-				_isLevelUp = true;
+				IsLevelUp = true;
 
 				if (GameManager.I.Stage.Player.OnTile == _tile.Get(gameObject)) {
 					ApplyLevelUp();
@@ -74,7 +85,7 @@ namespace Cardinals.Board {
 		}
 
 		public void ApplyLevelUp() {
-			if (_isLevelUp == false) {
+			if (IsLevelUp == false) {
 				return;
 			}
 
@@ -103,7 +114,7 @@ namespace Cardinals.Board {
 				yield return LevelUpUI(newExp);
 			}
 
-			_isLevelUp = false;
+			IsLevelUp = false;
 		}
 
 		private IEnumerator LevelUpUI(int newExp) {

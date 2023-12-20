@@ -104,6 +104,7 @@ namespace Cardinals
         }
 
         protected virtual Animator Animator { get; set; } // 추후 Abstract로..
+        protected Action HitEvent;
         
         public virtual void Init(int maxHp) {
             MaxHp = maxHp;
@@ -114,6 +115,14 @@ namespace Cardinals
             Buffs = new();
             Buffs.CollectionChanged += OnBuffCollectionChanged;
             DieEvent += () => { Buffs.CollectionChanged -= OnBuffCollectionChanged; };
+            
+            // Effects
+            HitEvent += () =>
+            {
+                Animator?.Play("Hit");
+                Bubble?.SetBubble(BubbleText.hit);
+                transform.DOShakeScale(0.5f, .1f, 2, 45f);
+            };
         }
 
         /// <summary>
@@ -187,9 +196,7 @@ namespace Cardinals
             if (damage > 0)
             {
                 Hp -= damage;
-                Animator?.Play("Hit");
-                Bubble?.SetBubble(BubbleText.hit);
-                transform.DOShakeScale(0.5f, .1f, 2, 45f);
+                HitEvent?.Invoke();
                 
                 if (this is Player) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);

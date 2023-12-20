@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,11 @@ namespace Cardinals.Enemy
 
         private GameObject _normalRenderer;
         private GameObject _berserkRenderer;
+
+        #region Effects
+        public MMF_Player HitMMF => _hitMFF;
+        [SerializeField] private MMF_Player _hitMFF;
+        #endregion
 
         [SerializeField] private Transform _renderParentTr;
 

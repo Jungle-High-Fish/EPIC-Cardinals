@@ -99,6 +99,7 @@ namespace Cardinals
             _enemyData = enemyData;
             Renderer = GetComponent<EnemyRenderer>();
             DieEvent += () => { GameManager.I.ExecuteEnemyCount++; };
+            HitEvent += () => _renderer.HitMMF.PlayFeedbacks();
         }
 
         public override void Init(int maxHp) {
