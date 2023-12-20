@@ -35,6 +35,8 @@ namespace Cardinals.Game {
                 else return null;
             }
         }
+
+        public event Action OnEventStart;
         
         private Stage _stage;
     
@@ -103,7 +105,6 @@ namespace Cardinals.Game {
             } else {
                 SetCardSystem(GameManager.I.SaveSystem.CurrentSaveFileData.GetDiceList());
                 yield return PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
-
                 yield return LoadTileData(GameManager.I.SaveSystem.CurrentSaveFileData);
             }
         }
@@ -142,6 +143,10 @@ namespace Cardinals.Game {
             }
 
             GameManager.I.GameClear();
+        }
+
+        public void OnEventStartCall() {
+            OnEventStart?.Invoke();
         }
 
         public BlessType SelectedBless { private get; set; }

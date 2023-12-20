@@ -251,7 +251,8 @@ namespace Cardinals.Enums {
         FloatDown,
         Attack,
         Defence,
-        Rotate360
+        Rotate360,
+        Heal,
     }
     
     public enum StageEventType

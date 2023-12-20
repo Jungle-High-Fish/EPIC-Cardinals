@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Cardinals.Enums;
 using TMPro;
 using UnityEngine;
 
@@ -8,16 +9,17 @@ namespace Util {
     public static class TMPUtils {
         public enum CustomTag {
             Level,
-            Debuff
+            Debuff,
+            CheckBless
         }
 
         static readonly Dictionary<CustomTag, string> CustomTags = new Dictionary<CustomTag, string>() {
             { CustomTag.Level, "level=" },
-            { CustomTag.Debuff, "debuff=" }
+            { CustomTag.Debuff, "debuff=" },
+            { CustomTag.CheckBless, "checkBless=" }
         };
 
-        public static string GetTextWithLevel(string text, int level, Color emphasisColor) {
-            string parsedText = Parse(text);
+        public static string GetTextWithLevel(string parsedText, int level, Color emphasisColor) {
             string result = parsedText;
 
         #pragma warning disable 0164
@@ -64,11 +66,52 @@ namespace Util {
             return result;
         }
         
-        public static void SetTextWithLevel(this TextMeshProUGUI textMeshProUGUI, string text, int level, Color emphasisColor) {
-            textMeshProUGUI.text = GetTextWithLevel(text, level, emphasisColor);
+        public static void SetTextWithLevel(this TextMeshProUGUI textMeshProUGUI, string parsedText, int level, Color emphasisColor) {
+            textMeshProUGUI.text = GetTextWithLevel(parsedText, level, emphasisColor);
+        }
+        
+        public static string GetTextWithBless(string parsedText, Dictionary<BlessType, (string text, Color color)> blessTexts) {
+            string result = parsedText;
+
+            string checkBlessRegex = @"@bless\s*\((\s*\w+\s*)\)";
+            var checkBlessMatches = Regex.Matches(result, checkBlessRegex);
+
+            if (checkBlessMatches.Count <= 0) {
+                return result;
+            }
+
+            for (int i = 0; i < checkBlessMatches.Count; i++) {
+                var checkBlessMatch = checkBlessMatches[i];
+                var rawCheckBlessText = checkBlessMatch.Value;
+                var checkBlessText = Regex.Replace(checkBlessMatch.Value, checkBlessRegex, @"$1");
+                var checkBlessType = (BlessType)System.Enum.Parse(typeof(BlessType), checkBlessText);
+
+                if (!blessTexts.ContainsKey(checkBlessType)) {
+                    result = result.Replace(rawCheckBlessText, "");
+                    continue;
+                }
+
+                var blessText = blessTexts[checkBlessType].text;
+                var blessColor = blessTexts[checkBlessType].color;
+
+                string replacement = 
+                    $"<color=#{ColorUtility.ToHtmlStringRGB(blessColor)}>{blessText}</color>" +
+                    $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Bless_{checkBlessType}\">";
+                result = result.Replace(rawCheckBlessText, replacement);
+            }
+
+            return result;
         }
 
-        private static string Parse(string text) {
+        public static void SetTextWithBless(
+            this TextMeshProUGUI textMeshProUGUI, 
+            string parsedText, 
+            Dictionary<BlessType, (string text, Color color)> blessTexts
+        ) {
+            textMeshProUGUI.text = GetTextWithBless(parsedText, blessTexts);
+        }
+
+        public static string CustomParse(string text) {
             string result = "";
 
             string[] substrings = text.Split('<', '>');
@@ -111,7 +154,14 @@ namespace Util {
                     var splitString = tag.Split('=');
                     var tagStr = splitString[0];
                     var debuffType = splitString[1];
-                    return $"<sprite=\"UI_Buffs_Sprite_Sheet\" name=\"UI_Buff_{debuffType}\">";
+                    return $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Buff_{debuffType}\">";
+                }
+
+                if (tag.StartsWith(CustomTags[CustomTag.CheckBless])) {
+                    var splitString = tag.Split('=');
+                    var tagStr = splitString[0];
+                    var blessType = splitString[1];
+                    return $"@bless({blessType})";
                 }
 
                 return "";

@@ -165,15 +165,15 @@ namespace Cardinals.Board {
 					MagicActionDefence(value);
 					break;
 				case TileMagicType.Fire:
-					MagicActionFireMain(target);
+					MagicActionFireMain(value, target);
 					MagicActionFireSub(value, target);
 					break;
 				case TileMagicType.Water:
-					MagicActionWaterMain();
+					MagicActionWaterMain(value);
 					MagicActionWaterSub(value, target);
 					break;
 				case TileMagicType.Earth:
-					MagicActionEarthMain();
+					MagicActionEarthMain(value);
 					MagicActionEarthSub();
 					break;
 			}
@@ -187,8 +187,8 @@ namespace Cardinals.Board {
 			GameManager.I.Player.Defense(value);
 		}
 
-		// 행동마다 해당 적에게 2/4/6의 데미지를 줍니다.
-		private void MagicActionFireMain(BaseEntity target)
+		// 행동마다 해당 적에게 2/4/6 + 주사위 숫자의 데미지를 줍니다.
+		private void MagicActionFireMain(int value, BaseEntity target)
 		{
 			var targetPos = target.transform.position + new Vector3(0, -1, 0);
 			var obj = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_FireAttack));
@@ -197,7 +197,7 @@ namespace Cardinals.Board {
 			obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
 				.OnComplete(() =>
 				{
-					target.Hit(Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]); // 실제 데미지 입히는 영역
+					target.Hit(value + Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]); // 실제 데미지 입히는 영역
 
 					var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
 					explosion.transform.position = targetPos;
@@ -208,36 +208,25 @@ namespace Cardinals.Board {
 
 		// 3 이상의 행동에서 적에게 화상 효과를 부여합니다.
 		private void MagicActionFireSub(int value, BaseEntity target) {
-			if (value >= 3) {
-				target.AddBuff(new Burn(1));
-			}
+			
 		}
 
-		// 행동마다 플레이어의 체력을 1/2/3만큼 회복합니다.
-		private void MagicActionWaterMain() {
+		// 행동마다 플레이어의 체력을 최대 2/4/6 만큼 회복합니다.
+		private void MagicActionWaterMain(int value) {
 			int left = GameManager.I.Stage.Player.Heal(
-				Constants.GameSetting.Tile.WaterMagicMainCure[_level - 1]
+				Mathf.Min(Constants.GameSetting.Tile.WaterMagicMainCure[_level - 1], value)
 			);
-
-			if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWater2) && left > 0) {
-				GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
-				GameManager.I.Stage.Enemies.Reverse<BaseEnemy>().ToList().ForEach(enemy => {
-					enemy.Hit(left * 2);
-				});
-			}
 		}
 
 		// 3 이상의 행동에서 적에게 젖음 효과를 부여합니다.
 		private void MagicActionWaterSub(int value, BaseEntity target) {
-			if (value >= 3) {
-				target.AddBuff(new Weak(1));
-			}
+			
 		}
 
-		// 행동마다 방어력을 2/4/6만큼 얻습니다.
-		private void MagicActionEarthMain() {
-			int value = Constants.GameSetting.Tile.EarthMagicMainDefense[_level - 1];
-			GameManager.I.Stage.Player.AddDefenseCount(value);
+		// 행동마다 방어력을 2/4/6 + 주사위 숫자만큼 얻습니다.
+		private void MagicActionEarthMain(int value) {
+			int defenseValue = Constants.GameSetting.Tile.EarthMagicMainDefense[_level - 1];
+			GameManager.I.Stage.Player.AddDefenseCount(defenseValue + value);
 		}
 
 		private void MagicActionEarthSub() {
