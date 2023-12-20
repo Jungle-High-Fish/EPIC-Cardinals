@@ -6,17 +6,41 @@ using Cardinals.Constants;
 using UnityEngine;
 
 using Util;
+using Cardinals.Game;
+using Cardinals.Board;
 
 [CreateAssetMenu(fileName = "Buff Data", menuName = "Cardinals/Buff Data")]
 public class BuffDataSO : ScriptableObject
 {
+    public string Description {
+        get {
+            if (
+                GameManager.I.Player != null && 
+                GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire1) &&
+                GameManager.I.Stage.CurEvent is BattleEvent
+            ) {
+                return TMPUtils.GetTextWithBless(
+                    TMPUtils.CustomParse(description),
+                    new Dictionary<BlessType, (string text, Color color)> {
+                        { BlessType.BlessFire1, ($"+ {(GameManager.I.Stage.CurEvent as BattleEvent).Round * 2}", TileMagic.Data(TileMagicType.Fire).elementColor) }
+                    }
+                );
+            } else {
+                return TMPUtils.GetTextWithBless(
+                    TMPUtils.CustomParse(description),
+                    new Dictionary<BlessType, (string text, Color color)>()
+                );
+            }
+        }
+    }
+
     public BuffType type;
     
     [Tooltip("버프 차감 방식")]
     public BuffCountDecreaseType decreaseType;
     
     public string buffName;
-    public string description;
+    [SerializeField] private string description;
     public Sprite sprite;
 
     public Sprite effectSprite;

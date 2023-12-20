@@ -143,7 +143,7 @@ namespace Cardinals.UI {
                 title += $"<b><size=60%><cspace=-0.1em> Lv.{level}</cspace></size></b>";
             }
             string description = TMPUtils.GetTextWithLevel(
-                data.mainMagicDescription,
+                TMPUtils.CustomParse(data.mainMagicDescription),
                 level,
                 data.elementColor
             );
@@ -158,7 +158,7 @@ namespace Cardinals.UI {
 
         private UITileDescription AddBuffDescription(BuffDataSO data) {
             string title = data.buffName;
-            string description = data.description;
+            string description = data.Description;
             Sprite icon = data.sprite;
 
             UITileDescription panel = InstantiateDescriptionPanel();

@@ -15,6 +15,6 @@ MonoBehaviour:
   type: 1
   decreaseType: 1
   buffName: Burn
-  description: At the end of the turn, take 1 damage.
+  description: At the end of the turn, take 1 <checkBless=BlessFire1> damage.
   sprite: {fileID: 21300000, guid: 3812216c353c94b8da221edc3fa33b04, type: 3}
   effectSprite: {fileID: 21300000, guid: ce2812617ee0eb9408ceaf4029bfd432, type: 3}

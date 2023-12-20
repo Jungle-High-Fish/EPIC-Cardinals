@@ -115,6 +115,28 @@ namespace Cardinals.UI {
             }
         }
 
+        private void OnEnable() {
+            if (GameManager.I.Player != null) {
+                GameManager.I.Player.PlayerInfo.AddBlessEvent -= OnAddBless;
+                GameManager.I.Player.PlayerInfo.AddBlessEvent += OnAddBless;
+            }
+
+            if (GameManager.I.Stage != null) {
+                GameManager.I.Stage.OnEventStart -= RefreshDescription;
+                GameManager.I.Stage.OnEventStart += RefreshDescription;
+            }
+        }
+
+        private void OnDisable() {
+            if (GameManager.I.Player != null) {
+                GameManager.I.Player.PlayerInfo.AddBlessEvent -= OnAddBless;
+            }
+
+            if (GameManager.I.Stage != null) {
+                GameManager.I.Stage.OnEventStart -= RefreshDescription;
+            }
+        }
+
         public void OnPointerEnter(PointerEventData eventData) {
             _isHovering = true;
 
@@ -189,17 +211,21 @@ namespace Cardinals.UI {
             }
         }
 
-        private void RefreshDescription() {
-            _descriptionArea.Get(gameObject).Init(_tile, _isOnTile);
-
-            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
-        }
-
         private void UpdateExp() {
             _expBar.Get(gameObject).transform
                 .DOScaleX(Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1f), 0.4f)
                 .SetEase(Ease.OutCubic);
             _levelGuage.Get(gameObject).transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 3, 0);
+        }
+
+        private void OnAddBless(BlessType type) {
+            RefreshDescription();
+        }
+
+        private void RefreshDescription() {
+            _descriptionArea.Get(gameObject).Init(_tile, _isOnTile);
+
+            StartCoroutine(_descriptionArea.Get(gameObject).ShowPanels());
         }
 
         private void ShowAnimation() {
