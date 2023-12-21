@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
-  m_Name: Six
+  m_Name: TheRock
   m_EditorClassIdentifier: 
   enemyName: 6
-  enemyGrade: 2
+  enemyGradeType: 2
   enemyType: 8
-  prefab: {fileID: 8525769555492493473, guid: 24876d21c49c26e4a86f6c4911fc7ff3, type: 3}
+  prefab: {fileID: 8525769555492493473, guid: 7066a02ae3844754e8ba886b5803372c, type: 3}
   berserkPrefab: {fileID: 0}
   maxHP: 35

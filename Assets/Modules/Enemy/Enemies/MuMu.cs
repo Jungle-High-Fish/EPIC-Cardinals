@@ -6,7 +6,7 @@ using Util;
 
 namespace Cardinals.Enemy
 {
-    public class Temp_Seven : BaseEnemy
+    public class MuMu : BaseEnemy
     {
         public override void Init(EnemyDataSO enemyData)
         {
