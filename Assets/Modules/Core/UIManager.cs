@@ -20,6 +20,7 @@ namespace Cardinals
     public class UIManager : MonoBehaviour
     {
         public GameSettingUI GameSettingUI => _gameSettingUI;
+        public UIPausePanel UIPausePanel => _uiPausePanel;
         public SaveFileLoaderPanel SaveFileLoaderPanel => _saveFileLoaderPanel;
 
         public UIStage UIStage => _uiStage;
@@ -46,6 +47,7 @@ namespace Cardinals
         private Canvas _descriptionUICanvas;
 
         private GameSettingUI _gameSettingUI;
+        private UIPausePanel _uiPausePanel;
         private SaveFileLoaderPanel _saveFileLoaderPanel;
 
         private UIStage _uiStage;
@@ -99,6 +101,7 @@ namespace Cardinals
             _systemUICanvas.GetComponent<Canvas>().sortingOrder = 1;
             InitDescriptionCanvas();
             
+            InstantiatePausePanelUI();
             InstantiateGameSettingUI();
             InstantiateSaveFileLoaderUI();
             
@@ -167,7 +170,7 @@ namespace Cardinals
             _uiCardSystem.Init();
         }
 
-        public void ForceUpdatUI() {
+        public void ForceUpdateUI() {
             Canvas.ForceUpdateCanvases();
         }
 
@@ -178,6 +181,15 @@ namespace Cardinals
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.worldCamera = Camera.main;
             canvas.transform.SetParent(transform);
+        }
+
+        private void InstantiatePausePanelUI() {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_PausePanel);
+            GameObject pausePanelUIObj = Instantiate(prefab, _systemUICanvas.transform);
+
+            _uiPausePanel = pausePanelUIObj.GetComponent<UIPausePanel>();
+            _uiPausePanel.Init();
+            pausePanelUIObj.SetActive(false);
         }
 
         private void InstantiateGameSettingUI() {
