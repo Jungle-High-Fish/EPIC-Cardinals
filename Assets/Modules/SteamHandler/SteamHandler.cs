@@ -15,9 +15,15 @@ namespace Cardinals {
         private bool _isSteamAvailable;
         
         public bool Init() {
+            if (SteamClient.IsValid) {
+                _isSteamAvailable = true;
+                return true;
+            }
+
             try {
-                Steamworks.SteamClient.Init(2735620);
-            } catch {
+                SteamClient.Init(2735620);
+            } catch (Exception e) {
+                Debug.Log(e);
                 _isSteamAvailable = false;
                 return false;
             }

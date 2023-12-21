@@ -70,6 +70,11 @@ namespace Cardinals
             StartCoroutine(LoadMainGame(saveFileData));
         }
 
+        public void GoToTitle() {
+            GameObject sceneChanger = new GameObject("@SceneChanger");
+            sceneChanger.AddComponent<SceneChanger>().ChangeScene("Title", this);
+        }
+
         private void Start() {
             SteamHandlerInit();
             SaveSystemInit();
@@ -82,10 +87,20 @@ namespace Cardinals
 
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Escape)) {
-                if (_ui.GameSettingUI.IsActive) {
+                if (FindAnyObjectByType<TitleManager>() != null) {
+                    if (_ui.GameSettingUI.IsActive) {
                     _ui.GameSettingUI.Hide();
+                    } else {
+                        _ui.GameSettingUI.Show();
+                    }
                 } else {
-                    _ui.GameSettingUI.Show();
+                    if (_ui.GameSettingUI.IsActive) {
+                        _ui.GameSettingUI.Hide();
+                    } else if (_ui.UIPausePanel.IsActive) {
+                        _ui.UIPausePanel.Hide();
+                    } else {
+                        _ui.UIPausePanel.Show();
+                    }
                 }
             }
 
