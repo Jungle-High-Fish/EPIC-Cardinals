@@ -1,24 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Cardinals.Buff;
 using Cardinals.Enums;
 using Cardinals.Game;
 using UnityEngine;
 
 namespace Cardinals.Enemy
 {
-    public class Temp_Nine : BaseEnemy
+    public class TheRock : BaseEnemy
     {
-        private int _sleepCount;
         public override void Init(EnemyDataSO enemyData)
         {
             base.Init(enemyData);
 
-            _sleepCount = 2;
-
-            AllSeal();
             Patterns = new[]
             {
-                new Pattern(EnemyActionType.Attack, 15),
+                new Pattern(EnemyActionType.TileCurse, action: Seal),
+                new Pattern(EnemyActionType.Attack, 7),
                 new Pattern(EnemyActionType.Attack, 10),
                 new Pattern(EnemyActionType.Defense, 8),
             };
@@ -30,24 +29,20 @@ namespace Cardinals.Enemy
             };
         }
 
-        public override IEnumerator StartTurn()
-        {
-            if (_sleepCount > 0)
-            {
-                _sleepCount--;
-                FixPattern = new Pattern(EnemyActionType.Sleep);
-            }
-
-            return base.StartTurn();
-        }
-
-        void AllSeal()
+        void Seal()
         {
             var list = GameManager.I.Stage.Board.GetCursedTilesList()?.ToList();
-
-            foreach (var tile in GameManager.I.Stage.Board.TileSequence)
+            
+            if (list != null)
             {
-                tile.SetCurse(TileCurseType.Seal, 2);
+                for (int i = 0; i < 2; i++)
+                {
+                    var index = Random.Range(0, list.Count);
+                    var tile = list[index];
+                    tile.SetCurse(TileCurseType.Seal, 2);
+                    
+                    list.RemoveAt(index);
+                }
             }
         }
     }

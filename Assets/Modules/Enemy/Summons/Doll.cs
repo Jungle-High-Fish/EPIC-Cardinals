@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 
-namespace Cardinals.Enemy.Summon
+namespace Cardinals.BoardObject.Summon
 {
     public class Doll : BaseBoardObject
     {
-        public override IEnumerator OnCollisionPlayer()
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

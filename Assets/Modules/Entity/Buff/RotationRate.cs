@@ -29,9 +29,9 @@ namespace Modules.Entity.Buff
 
         private void RotationRateHit()
         {
-            if ( _target is Temp_Eight)
+            if ( _target is DolDol)
             {
-                (_target as Temp_Eight).EffectiveHit(_damage);
+                (_target as DolDol).EffectiveHit(_damage);
             }
         }
     }
