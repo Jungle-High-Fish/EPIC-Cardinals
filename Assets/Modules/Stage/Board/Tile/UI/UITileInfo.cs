@@ -128,6 +128,8 @@ namespace Cardinals.UI {
         }
 
         private void OnDisable() {
+            if (GameManager.I == null) return;
+
             if (GameManager.I.Player != null) {
                 GameManager.I.Player.PlayerInfo.AddBlessEvent -= OnAddBless;
             }

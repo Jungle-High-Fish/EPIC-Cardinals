@@ -99,6 +99,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_DropdownOption = "UI/GameSetting/Dropdown Option";
             public const string Prefabs_UI_SliderOption = "UI/GameSetting/Slider Option";
             public const string Prefabs_UI_GameSetting = "UI/GameSetting/Game Setting UI";
+            public const string Prefabs_UI_PausePanel = "UI/GameSetting/Pause Panel";
 
             public const string Prefabs_UI_SaveFileDataPanel = "UI/SaveSystem/Save File Data Panel";
             public const string Prefabs_UI_SaveFileLoaderPanel = "UI/SaveSystem/Save File Loader Panel";

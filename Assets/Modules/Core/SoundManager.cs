@@ -119,7 +119,9 @@ namespace Cardinals
         }
 
         private void OnDisable() {
-            GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
+            if (GameManager.I != null) {
+                GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
+            }
         }
 
         private void OnSoundSettingChange() {
