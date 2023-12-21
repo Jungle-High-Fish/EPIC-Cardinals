@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Cardinals.BoardEvent;
 using UnityEngine;
 
-namespace Cardinals.BoardEvent.Event
+namespace Cardinals.BoardObject.Event
 {
-    public class DiceEvent : BaseBoardEventObject
+    public class DiceEvent : BaseBoardObject
     {
         protected override IEnumerator Execute()
         {

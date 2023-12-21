@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c31830d19b34547b47a122252505d31, type: 3}
   m_Name: PotionGoblin
   m_EditorClassIdentifier: 
-  type: 1
+  evtType: 1
+  objType: 0
   eventName: Potion Gobline
   description: "\uD134 \uB2F9 \uC2DC\uACC4\uBC29\uD5A5\uC73C\uB85C 4\uCE78\uC529
     \uC774\uB3D9\uD569\uB2C8\uB2E4.\r\n\uC811\uCD09 \uC2DC, \uB79C\uB364 \uD3EC\uC158

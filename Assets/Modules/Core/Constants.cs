@@ -167,8 +167,8 @@ namespace Cardinals.Constants {
             public const string SO_BuffData = "Buffs/";
             public const string SO_MagicData = "Magic/";
             public const string SO_TileCurseUIData = "TileCurses/";
-            public const string SO_BoardEventData = "BoardEvent/";
-            public const string SO_BoardEvent_AlchemyEventData = "BoardEvent/Alchemy/";
+            public const string SO_BoardObjectData = "BoardObject/";
+            public const string SO_BoardObject_AlchemyEventData = "BoardObject/Alchemy/";
             public const string SO_EnemyData = "Stage/Enemies/";
             public const string SO_TutorialData = "Tutorial/";
             public const string SO_StageEventList = "Stage/StageEventList";

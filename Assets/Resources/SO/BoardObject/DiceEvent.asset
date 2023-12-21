@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c31830d19b34547b47a122252505d31, type: 3}
-  m_Name: Roulette
+  m_Name: DiceEvent
   m_EditorClassIdentifier: 
-  type: 2
-  eventName: Roulette
-  description: "\uB3C4\uCC29 \uC2DC, \uB8F0\uB81B \uC774\uBCA4\uD2B8\uB97C \uC2E4\uD589\uD569\uB2C8\uB2E4."
+  evtType: 3
+  objType: 0
+  eventName: Dice Event
+  description: "\uB3C4\uCC29 \uC2DC, \uC8FC\uC0AC\uC704 \uC774\uBCA4\uD2B8\uB97C
+    \uC2E4\uD589\uD569\uB2C8\uB2E4."
   keepTurnCount: 2
-  sprite: {fileID: 21300000, guid: ceb2dc5cc704d80438b3a3a658b2c572, type: 3}
+  sprite: {fileID: 21300000, guid: 717dfbf55fce67342b997a0ddd682c0d, type: 3}
   onBoardType: 1
   executeType: 2
   moveCount: 0

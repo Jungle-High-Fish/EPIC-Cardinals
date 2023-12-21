@@ -1,13 +1,17 @@
 ﻿using Cardinals.Enums;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Cardinals.BoardEvent
 {
     [CreateAssetMenu(fileName = "NewBoardEventData", menuName = "Cardinals/NewBoardEventData", order = 1)]
-    public class NewBoardEventDataSO : ScriptableObject
+    public class NewBoardObjectDataSO : ScriptableObject
     {
-        public NewBoardEventType type;
+        [Header("Type")]
+        public NewBoardEventType evtType;
+        public NewBoardObjectType objType;
         
+        [Header("Default Info")]
         public string eventName;
         
         [TextArea] public string description;

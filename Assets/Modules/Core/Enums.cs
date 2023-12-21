@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
 using Cardinals.Board.Curse;
-using Cardinals.BoardEvent.Event;
+using Cardinals.BoardObject.Event;
 using Cardinals.Enemy;
 using Cardinals.Game;
 
@@ -381,15 +381,21 @@ namespace Cardinals.Enums {
     }
 
     #region Board Event
-    
 
-    public enum NewBoardEventType
+    public enum NewBoardEventType : int
     {
-        Ignore,
+        Ignore = 0,
         PotionGoblin,
         Roulette,
         DiceEvent,
-        AlchemyEvent,
+        AlchemyEvent
+    }
+    
+    public enum NewBoardObjectType
+    {
+        Ignore = 0,
+        Fireball,
+        Ryuka,
     }
 
     public enum NewBoardEventOnType

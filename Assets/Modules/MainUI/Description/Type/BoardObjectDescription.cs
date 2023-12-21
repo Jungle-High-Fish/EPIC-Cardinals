@@ -8,19 +8,18 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class BoardEventObjectDescription : MonoBehaviour, IDescription
+    public class BoardObjectDescription : MonoBehaviour, IDescription
     {
-        private NewBoardEventDataSO _data;
-        public void Init(NewBoardEventDataSO data)
+        private NewBoardObjectDataSO _data;
+        public void Init(NewBoardObjectDataSO data)
         {
             _data = data;
         }
-
 
         public string Name => _data.eventName;
         public string Description => _data.description;
         public Sprite IconSprite => null;
         public Color Color => default;
-        public string Key => $"boardEvent_{_data.type}";
+        public string Key => $"boardEvent_{_data.evtType}_{_data.objType}";
     }
 }

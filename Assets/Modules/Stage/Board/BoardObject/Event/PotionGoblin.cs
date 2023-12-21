@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Cardinals.BoardEvent.Event
+namespace Cardinals.BoardObject.Event
 {
-    public class PotionGoblin : BaseBoardEventObject
+    public class PotionGoblin : BaseBoardObject
     {
         protected override IEnumerator Execute()
         {
