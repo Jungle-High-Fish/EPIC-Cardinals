@@ -32,7 +32,7 @@ namespace Cardinals
         [SerializeField] private Button _retryBTN;
         public void Start()
         {
-            _titleBTN.onClick.AddListener(GameManager.I.MoveTitleScene);
+            _titleBTN.onClick.AddListener(GameManager.I.GoToTitle);
             _retryBTN.onClick.AddListener(GameManager.I.Retry);
         }
 
