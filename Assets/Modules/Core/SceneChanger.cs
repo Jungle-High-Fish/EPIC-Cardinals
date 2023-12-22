@@ -10,8 +10,8 @@ namespace Cardinals.Game {
         }
 
         private IEnumerator SceneLoad(string sceneName, GameManager gameManager) {
-            Destroy(gameManager);
             var loadScene = SceneManager.LoadSceneAsync(sceneName);
+            Destroy(gameManager);
 
             while (!loadScene.isDone) {
                 yield return null;
