@@ -6,6 +6,7 @@ using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ namespace Cardinals.UI
         [Header("HP")]
         [SerializeField] private TextMeshProUGUI _hpTMP;
         [SerializeField] protected RectTransform _maxHPRect;
+        [SerializeField] private RectTransform _orangeHPRect;
         [SerializeField] private RectTransform _curHPRect;
 
         [Header("Defense")]
@@ -57,12 +59,14 @@ namespace Cardinals.UI
                 transform.position = Camera.main.WorldToScreenPoint(_entity.transform.position) ;
             }
         }
-
+        
+        [Button]
         private void UpdateHp(int hp, int maxHp)
         {
             Vector3 vector3 = _curHPRect.localScale;
             vector3.x = (float) hp / maxHp;
             _curHPRect.localScale = vector3;
+            _orangeHPRect.DOScaleX(vector3.x, .3f).SetDelay(0.3f).SetEase(Ease.InOutElastic);
             
             _hpTMP.text = $"{hp}/{maxHp}";
             _maxHPRect.DOPunchScale(new Vector3(.5f, .5f, 1), .1f, 1)
