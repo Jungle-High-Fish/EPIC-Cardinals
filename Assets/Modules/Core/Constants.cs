@@ -175,6 +175,9 @@ namespace Cardinals.Constants {
             public const string SO_TutorialData = "Tutorial/";
             public const string SO_StageEventList = "Stage/StageEventList";
             public const string SO_Dice_Reward = "Dice/Reward/";
+
+            // Animator Controller
+            public const string AnimatorControllers = "AnimatorController/";
             
             public const string Enemy = "Enemy/";
             public const string Enemy_Pattern = "Enemy/Pattern/";

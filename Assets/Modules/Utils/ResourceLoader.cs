@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Util {
@@ -14,6 +15,8 @@ namespace Util {
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
 		private static Dictionary<string, ScriptableObject> _SOList = new ();
 		private static HashSet<string> _loadedSpriteDirectory = new HashSet<string>();
+
+		private static Dictionary<string, AnimatorController> _animatorControllerList = new Dictionary<string, AnimatorController>();
 
 		public static GameObject LoadPrefab(string prefabName)
 		{
@@ -83,6 +86,17 @@ namespace Util {
 
 			_loadedSpriteDirectory.Add(directoryName);
 			return _spriteList;
+		}
+
+		public static AnimatorController LoadAnimatorController(string controllerName) {
+			string targetPath = Cardinals.Constants.FilePath.Resources.AnimatorControllers + controllerName;
+
+			if (_animatorControllerList.ContainsKey(controllerName)) {
+				return _animatorControllerList[controllerName];
+			}
+
+			_animatorControllerList.Add(controllerName, Resources.Load<AnimatorController>(targetPath));
+			return _animatorControllerList[controllerName];
 		}
     }
 }

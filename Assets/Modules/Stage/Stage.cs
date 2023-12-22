@@ -122,7 +122,7 @@ namespace Cardinals.Game
             var needCount = _eventSequence.Count((e) => e == eventType);
             
             Unity.Mathematics.Random random = new Unity.Mathematics.Random();
-            random.InitState();
+            random.InitState((uint)((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds());
             var result = targetList.OrderBy(a => random.NextInt()).ToList().GetRange(0, needCount);
 
             return result;
