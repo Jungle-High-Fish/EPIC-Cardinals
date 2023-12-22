@@ -37,6 +37,10 @@ namespace Cardinals.Enemy
                 _sleepCount--;
                 FixPattern = new Pattern(EnemyActionType.Sleep);
             }
+            else
+            {
+                BerserkMode = true;
+            }
 
             return base.StartTurn();
         }

@@ -15,7 +15,7 @@ namespace Cardinals.Enemy
         public override int Hp
         {
             get => base.Hp;
-            set
+            protected set
             {
                 base.Hp = value;
                 if (!BerserkMode && Hp < MaxHp / 2)

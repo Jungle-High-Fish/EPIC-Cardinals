@@ -12,6 +12,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Steamworks.ServerList;
 using UnityEngine;
+using Util;
 
 namespace Cardinals
 {
@@ -22,7 +23,7 @@ namespace Cardinals
         public virtual int Hp
         {
             get => _hp;
-            set
+            protected set
             {
                 var calculHp = Mathf.Clamp(value, 0, MaxHp);
 
@@ -247,9 +248,12 @@ namespace Cardinals
 
         public virtual int Heal(int value)
         {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_HealParticle);
+            Instantiate(prefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+            
             int _mathHeal = _hp + value;
             Hp += value;
-
+            
             return _mathHeal - _hp;
         }
         /// <summary>

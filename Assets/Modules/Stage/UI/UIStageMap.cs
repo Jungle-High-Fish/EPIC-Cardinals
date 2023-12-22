@@ -82,7 +82,7 @@ namespace Cardinals.Game {
                 _playerIconTr.gameObject.SetActive(true);
                 _playerIconTr.localPosition = targetPos;
                 _playerIconTr.localScale = Vector3.zero;
-                _playerIconTr.DOScale(1, 1f).SetEase(Ease.OutElastic)
+                _playerIconTr.DOScale(Vector3.one, .3f).SetEase(Ease.OutExpo)
                     .OnComplete(() => { completeDO = true; });
             }
             else // 다음 이벤트 이동 시, 이동 효과
@@ -116,7 +116,7 @@ namespace Cardinals.Game {
         {
             _isAnimation = true;
             var x = open ? 650 : -650;
-            _mapGridTr.DOMoveX(x , 1f).SetEase(Ease.InQuad)
+            _mapGridTr.DOMoveX(x , .5f).SetEase(Ease.InQuad)
                 .OnComplete(() => { _isAnimation = false;});
             
             _onMap = !_onMap;
