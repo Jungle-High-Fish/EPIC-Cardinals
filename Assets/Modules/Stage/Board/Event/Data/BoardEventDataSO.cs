@@ -19,7 +19,7 @@ namespace Cardinals.Board {
 
         public static BoardEventDataSO Data(BoardEventType type) {
             return ResourceLoader.LoadSO<BoardEventDataSO>(
-                Constants.FilePath.Resources.SO_BoardEventData + type
+                Constants.FilePath.Resources.SO_BoardObjectData + type
             );
         }
     }

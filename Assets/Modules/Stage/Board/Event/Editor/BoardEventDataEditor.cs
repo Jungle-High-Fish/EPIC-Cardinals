@@ -35,7 +35,7 @@ namespace Cardinals.Game {
                 "이벤트 리스트", 
                 Constants.FilePath.Resources.Get(
                     Constants.FilePath.Resources.SO +
-                    Constants.FilePath.Resources.SO_BoardEventData
+                    Constants.FilePath.Resources.SO_BoardObjectData
                 ), 
                 typeof(BoardEventDataSO)
             );
@@ -81,7 +81,7 @@ namespace Cardinals.Game {
                     _BoardEventData, 
                     Constants.FilePath.Resources.Get(
                         Constants.FilePath.Resources.SO +
-                        Constants.FilePath.Resources.SO_BoardEventData + 
+                        Constants.FilePath.Resources.SO_BoardObjectData + 
                         _BoardEventData.eventType.ToString() + ".asset"
                     )
                 );

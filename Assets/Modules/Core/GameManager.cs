@@ -287,10 +287,6 @@ namespace Cardinals
             
         }
 
-        public void MoveTitleScene()
-        {
-            
-        }
         #endregion
 
         #region Game Play Info (업적 카운트)

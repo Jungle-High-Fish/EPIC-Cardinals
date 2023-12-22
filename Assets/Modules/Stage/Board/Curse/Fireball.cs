@@ -14,9 +14,9 @@ namespace Cardinals.Board.Curse
 
         void SpawnFireball()
         {
-            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Enemy_Spawn_Fireball);
-            var fireball = GameObject.Instantiate(prefab).GetComponent<Enemy.Summon.Fireball>();
-            fireball.Init(BaseTile);
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_BoardEventObject);
+            var obj = MonoBehaviour.Instantiate(prefab);
+            obj.AddComponent<BoardObject.Summon.Fireball>().Init(BaseTile, NewBoardObjectType.Fireball.ToString());
         }
     }
 }

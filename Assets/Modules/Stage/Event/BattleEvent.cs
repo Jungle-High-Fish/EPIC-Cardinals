@@ -112,6 +112,9 @@ namespace Cardinals.Game
 
                 if (CheckEnemyWin) break;
                 
+                // 보드 관련 처리
+                yield return SummonsAction();
+                yield return board.OnTurnEnd();
                 
                 // 플레이어 턴 종료 처리
                 yield return player.EndTurn();
@@ -120,9 +123,6 @@ namespace Cardinals.Game
                     yield return enemies[i].EndTurn();
                 }
                 
-                // 보드 관련 처리
-                yield return SummonsAction();
-                yield return board.OnTurnEnd();
             } while (!(CheckPlayerWin || CheckEnemyWin));
 
             yield return GameManager.I.Stage.DiceManager.EndBattle();

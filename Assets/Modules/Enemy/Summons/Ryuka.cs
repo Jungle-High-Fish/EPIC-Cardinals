@@ -5,38 +5,26 @@ using Cardinals.BoardEvent;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Cardinals.Enemy.Summon
+namespace Cardinals.BoardObject.Summon
 {
     public class Ryuka : BaseBoardObject
     {
-        public override IEnumerator OnTurn()
-        {
-            Execute();
-            yield return base.OnTurn();
-        }
-
         /// <summary>
         /// 몬스터 체력을 회복 시킴
         /// </summary>
-        void Execute()
+        public override IEnumerator OnTurn()
         {
             var enemy = GameManager.I.CurrentEnemies.FirstOrDefault();
-
-            if (enemy != null)
-            {
-                enemy.Heal(2);
-            }
+            enemy?.Heal(2);
+            
+            yield return base.OnTurn();
         }
 
-        public override IEnumerator OnCollisionPlayer()
+        protected override IEnumerator Execute()
         {
-            transform
-                .DOShakePosition(.5f, .5f)
-                .OnComplete(() =>
-                {
-                    base.Destroy();
-                });
-            yield return null;
+            bool next = false;
+            transform.DOShakePosition(.5f, .5f).OnComplete(() => { next = true; });
+            yield return new WaitUntil(() => next);
         }
     }
 }

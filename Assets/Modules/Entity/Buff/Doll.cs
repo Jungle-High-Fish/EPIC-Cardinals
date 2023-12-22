@@ -13,7 +13,7 @@ namespace Modules.Entity.Buff
 
         public static bool CheckDoll()
         {
-            return GameManager.I.Stage.BoardObjects.Any(x=> x is Cardinals.Enemy.Summon.Doll);
+            return GameManager.I.Stage.BoardObjects.Any(x=> x is Cardinals.BoardObject.Summon.Doll);
         }
     }
 }

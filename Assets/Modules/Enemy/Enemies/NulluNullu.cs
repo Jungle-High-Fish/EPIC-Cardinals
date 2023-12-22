@@ -8,9 +8,8 @@ using UnityEngine;
 
 namespace Cardinals.Enemy
 {
-    public class temp_Five : BaseEnemy
+    public class NulluNullu : BaseEnemy
     {
-        
         public override void Init(EnemyDataSO enemyData)
         {
             base.Init(enemyData);

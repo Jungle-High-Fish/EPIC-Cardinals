@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
-  m_Name: Five
+  m_Script: {fileID: 11500000, guid: 898ae7808d6e4ba2b97bf6a5c86b4536, type: 3}
+  m_Name: BattleEvent_TheRock
   m_EditorClassIdentifier: 
-  enemyName: 5
-  enemyGrade: 1
-  enemyType: 7
-  prefab: {fileID: 8525769555492493473, guid: 24876d21c49c26e4a86f6c4911fc7ff3, type: 3}
-  berserkPrefab: {fileID: 0}
-  maxHP: 25
+  _type: 2
+  _enemyList:
+  - {fileID: 11400000, guid: b3b241190e14a6946b14b44ce4f2d798, type: 2}

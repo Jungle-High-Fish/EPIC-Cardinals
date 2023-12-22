@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Cardinals.Board;
 using Cardinals.BoardEvent;
+using Cardinals.BoardObject;
 using Cardinals.Buff;
 using Cardinals.Enemy;
 using Sirenix.OdinInspector;
@@ -387,7 +388,7 @@ namespace Cardinals.Game {
         {
             var tiles = Board.TileSequence
                 .Where(t => t != Player.OnTile && // 현재 플레이어가 서 있지 않은
-                            !BoardObjects.Any(o => o is BaseBoardEventObject && t == o.OnTile )) // 이벤트가 존재하지 않는 ..
+                            !BoardObjects.Any(o => o is BaseBoardObject && t == o.OnTile )) // 이벤트가 존재하지 않는 ..
                 .ToList();
             
             if (tiles.Any())
@@ -406,7 +407,7 @@ namespace Cardinals.Game {
 
                 Type type = EnumHelper.GetNewBoardEventType(evtType);
                 obj.AddComponent(type);
-                obj.GetComponent<BaseBoardEventObject>().Init(tile, evtType);
+                obj.GetComponent<BaseBoardObject>().Init(tile, evtType.ToString());
             }
             else Debug.Log("보드 내 이벤트 생성 가능한 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
         }

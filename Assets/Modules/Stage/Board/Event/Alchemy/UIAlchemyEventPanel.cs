@@ -66,7 +66,7 @@ namespace Cardinals.BoardEvent.Alchemy
             var idx = Random.Range(1, Enum.GetNames(typeof(BoardEventAlchemyType)).Length);
             var evt = (BoardEventAlchemyType)idx;
             _evtData = ResourceLoader.LoadSO<AlchemyEventDataSO>(Constants.FilePath.Resources
-                .SO_BoardEvent_AlchemyEventData + evt);
+                .SO_BoardObject_AlchemyEventData + evt);
             _targetNumberTMP.text = idx.ToString();
             _eventDescriptionTMP.text = _evtData.eventDescription;
             

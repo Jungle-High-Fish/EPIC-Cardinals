@@ -15,11 +15,15 @@ namespace Cardinals
         [SerializeField] private Image _illustImg;
         [SerializeField] private Button _titleBTN;
 
+        public void Start()
+        {
+            _titleBTN.onClick.AddListener(GameManager.I.GoToTitle);
+        }
+
         public void Init()
         {
             _greetingsTMP.text = "안녕하세요~ 하이피쉬입니다. 앞으로 저희의 행보를 잘 지켜봐 달라규~";
             _illustImg.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Ending_ClearIllust);
-            _titleBTN.onClick.AddListener(GameManager.I.MoveTitleScene);
         }
 
         public void On()

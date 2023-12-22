@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cardinals.Board;
 using Cardinals.Board.Curse;
-using Cardinals.BoardEvent.Event;
+using Cardinals.BoardObject.Event;
 using Cardinals.Enemy;
 using Cardinals.Game;
 
@@ -137,11 +137,11 @@ namespace Cardinals.Enums {
                 EnemyType.PoPo        => typeof(PoPo),
                 EnemyType.PicPic      => typeof(PicPic),
                 EnemyType.Pazizizizic => typeof(Pazizizizic),
-                EnemyType.Five        => typeof(temp_Five),
-                EnemyType.Six         => typeof(temp_Six),
-                EnemyType.Seven       => typeof(Temp_Seven),
-                EnemyType.Eight       => typeof(Temp_Eight),
-                EnemyType.Nine        => typeof(Temp_Nine),
+                EnemyType.NulluNullu        => typeof(NulluNullu),
+                EnemyType.TheRock         => typeof(TheRock),
+                EnemyType.MuMu       => typeof(MuMu),
+                EnemyType.DolDol       => typeof(DolDol),
+                EnemyType.Charrrrrrrrrrrrruk        => typeof(Charrrrrrrrrrrrruk),
                 _ => null
             };
         }
@@ -274,6 +274,11 @@ namespace Cardinals.Enums {
         BattlePiPiPoPo,
         BattlePicPic,
         BattlePazizizic,
+        BattleNulluNullu,
+        BattelTheRock,
+        BattleMuMu,
+        BattleDolDol,
+        BattleCharrrrrrrrrrrrruk,
         DemoClearEnding,
     }
 
@@ -286,11 +291,11 @@ namespace Cardinals.Enums {
         PoPo,
         PicPic,
         Pazizizizic,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
+        NulluNullu,
+        TheRock,
+        MuMu,
+        DolDol,
+        Charrrrrrrrrrrrruk,
     }
 
     public enum EnemyGradeType
@@ -381,15 +386,21 @@ namespace Cardinals.Enums {
     }
 
     #region Board Event
-    
 
-    public enum NewBoardEventType
+    public enum NewBoardEventType : int
     {
-        Ignore,
+        Ignore = 0,
         PotionGoblin,
         Roulette,
         DiceEvent,
-        AlchemyEvent,
+        AlchemyEvent
+    }
+    
+    public enum NewBoardObjectType
+    {
+        Ignore = 0,
+        Fireball,
+        Ryuka,
     }
 
     public enum NewBoardEventOnType

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Cardinals.Enemy
 {
-    public class Temp_Eight : BaseEnemy
+    public class DolDol : BaseEnemy
     {
         public override void Init(EnemyDataSO enemyData)
         {

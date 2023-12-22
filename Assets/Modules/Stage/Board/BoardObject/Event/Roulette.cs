@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-namespace Cardinals.BoardEvent.Event
+namespace Cardinals.BoardObject.Event
 {
-    public class Roulette : BaseBoardEventObject
+    public class Roulette : BaseBoardObject
     {
         protected override IEnumerator Execute()
         {

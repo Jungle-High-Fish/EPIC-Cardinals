@@ -6,7 +6,7 @@ using Util;
 
 namespace Cardinals.Enemy
 {
-    public class Temp_Seven : BaseEnemy
+    public class MuMu : BaseEnemy
     {
         public override void Init(EnemyDataSO enemyData)
         {
@@ -35,9 +35,9 @@ namespace Cardinals.Enemy
                 var idx = Random.Range(0, list.Count);
                 var tile = list[idx]; 
            
-                var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Enemy_Spawn_Ryuka);
-                var ryuka = GameObject.Instantiate(prefab).GetComponent<Enemy.Summon.Ryuka>();
-                ryuka.Init(tile);
+                var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_BoardEventObject);
+                var obj = Instantiate(prefab);
+                obj.AddComponent<BoardObject.Summon.Ryuka>().Init(tile, NewBoardObjectType.Ryuka.ToString());
             }
         }
     }
