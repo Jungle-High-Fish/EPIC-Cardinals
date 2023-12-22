@@ -66,7 +66,7 @@ namespace Cardinals.UI
             Vector3 vector3 = _curHPRect.localScale;
             vector3.x = (float) hp / maxHp;
             _curHPRect.localScale = vector3;
-            _orangeHPRect.DOScaleX(vector3.x, .3f).SetDelay(0.3f).SetEase(Ease.InOutElastic);
+            _orangeHPRect.DOScaleX(vector3.x, .3f).SetDelay(0.3f).SetEase(Ease.InOutQuint);
             
             _hpTMP.text = $"{hp}/{maxHp}";
             _maxHPRect.DOPunchScale(new Vector3(.5f, .5f, 1), .1f, 1)
