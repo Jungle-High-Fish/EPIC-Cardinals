@@ -52,14 +52,6 @@ namespace Cardinals.Enemy
             _renderParentTr.position += vector;
         }
 
-        public void FlipX(bool flipX)
-        {
-            foreach (var render in BaseEnemy.Renderers)
-            {
-                render.flipX = flipX;
-            }
-        }
-
         private void InstantiateRenderPrefabs(EnemyDataSO enemyData) {
             GameObject normal = Instantiate(enemyData.prefab, _renderer.Get(gameObject).transform);
             normal.name = "Normal";

@@ -367,41 +367,32 @@ namespace Cardinals
         {
             bool filpX = true; // false일 때, 좌측을 바라봄
 
-            var list = GameManager.I.Stage.Board.TileSequence;
-            var curIdx = list.IndexOf(_onTile);
-            var nextIdx = list.IndexOf(moveTile);
+            var onTilePivot = (_onTile.transform.position.x + _onTile.transform.position.z) / 2;
+            var nextTilePivot = (moveTile.transform.position.x + moveTile.transform.position.z) / 2;
 
-            var value = list.Count / 4;
-            if (nextIdx <= value || nextIdx > value * 3)
-            {
-                filpX = false; 
-            }
-            
-            if (nextIdx != 0 && curIdx > nextIdx)
-            {
-                filpX = !filpX;
-            }
-            
-
+            filpX = onTilePivot < nextTilePivot;
             Renderers.ForEach(r => Flip(r, filpX));
-            //Renderers.ForEach(r => r.flipX = filpX);
-            bool enemyFlipX = nextIdx > list.Count / 2;
 
-            GameManager.I.Stage.Enemies.ForEach(e => Flip(e.Renderers.First(), enemyFlipX));
+            var enemy = GameManager.I.Stage.Enemies.FirstOrDefault();
+            if (enemy != null)
+            {
+                var enemyPivot = (enemy.transform.position.x + enemy.transform.position.z) / 2;
+                bool enemyFlipX = enemyPivot < nextTilePivot;
+                GameManager.I.Stage.Enemies.ForEach(e => Flip(e.Renderers.First(), enemyFlipX));
+            }
         }
 
         void SetFlipTowardEnemy()
         {
-            bool filpX = true;  // false일 때, 좌측을 바라봄
-            
-            var list = GameManager.I.Stage.Board.TileSequence;
-            var curIdx = (list.IndexOf(_onTile)) % list.Count;
-            if (curIdx > list.Count / 2)
+            var enemy = GameManager.I.Stage.Enemies.FirstOrDefault();
+            if (enemy != null)
             {
-                filpX = false;
+                var playerPivot = (transform.position.x + transform.position.z) / 2;
+                var enemyPivot = (enemy.transform.position.x + enemy.transform.position.z) / 2;
+                bool flipX = playerPivot < enemyPivot;
+            
+                Renderers.ForEach(r => Flip(r, flipX));
             }
-
-            Renderers.ForEach(r => Flip(r, filpX));
         }
 
         void Flip(SpriteRenderer renderer,  bool filpX)
