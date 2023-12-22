@@ -59,7 +59,7 @@ namespace Cardinals
 
         public override int Hp {
             get => base.Hp;
-            set
+            protected set
             {
                 var calculHp = Math.Min(Math.Max(0, value), MaxHp);
 
@@ -328,7 +328,6 @@ namespace Cardinals
         [Button]
         public override int Heal(int value)
         {
-
             if (PlayerInfo.CheckBlessExist(BlessType.BlessWater2))
             {
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
@@ -336,12 +335,7 @@ namespace Cardinals
                 GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)].Hit(damage);
             }
 
-            int _mathHeal = _hp + value;
-            Hp += value;
-
-            
-
-            return _mathHeal - _hp;
+            return base.Heal(value);
         }
         public void Win()
         {   
