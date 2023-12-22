@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 4912349037109977011}
   - component: {fileID: 8825351236654691841}
   - component: {fileID: 8388246344043112622}
+  - component: {fileID: 2336498682435807489}
   m_Layer: 5
   m_Name: DiceUI
   m_TagString: Untagged
@@ -567,6 +568,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _diceDescription: {fileID: 5466421640786249206}
   _rerollPanel: {fileID: 8594346463205153061}
+--- !u!95 &2336498682435807489
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325587684102739020}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5424337493020079712
 GameObject:
   m_ObjectHideFlags: 0
