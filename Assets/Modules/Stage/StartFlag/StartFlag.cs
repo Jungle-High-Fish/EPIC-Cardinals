@@ -16,7 +16,7 @@ namespace Cardinals.Game {
             Vector3 targetPos = tile.RendererTransform.localPosition;
             targetPos.z -= Constants.GameSetting.Board.TileHeight / 2 + 0.5f;
 
-            targetPos = tile.RendererTransform.TransformPoint(targetPos) + new Vector3(0, 0.3f, 0);
+            targetPos = tile.RendererTransform.TransformPoint(targetPos) + new Vector3(0, 0.9f, 0);
             transform.position = targetPos + new Vector3(0, 5f, 0);
 
             transform.DOMove(targetPos, 0.5f).SetEase(Ease.InQuint);
