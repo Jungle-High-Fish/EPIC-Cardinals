@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,8 +56,13 @@ namespace Cardinals.UI {
         }
 
         public void Show() {
+            gameObject.Background().Show(0.3f);
+
             _isActive = true;
             gameObject.SetActive(true);
+            (transform as RectTransform).localScale = Vector3.zero;
+            (transform as RectTransform).DOScale(1, 0.3f).SetEase(Ease.OutBack);
+
             _languageWarnPanel.Get(gameObject).gameObject.SetActive(false);
         }
 
@@ -69,6 +75,7 @@ namespace Cardinals.UI {
         }
 
         public void Hide() {
+            gameObject.Background().Hide();
             _isActive = false;
             gameObject.SetActive(false);
         }

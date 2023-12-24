@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cardinals;
+using Cardinals.UI;
 using TMPro;
 using UnityEngine;
 
@@ -41,6 +43,28 @@ namespace Util {
             rectTransform.offsetMax = Vector2.zero;
 
             rectTransform.pivot = new Vector2(1, 0f);
+        }
+
+        public static void SetUILeftBottom(this RectTransform rectTransform, RectTransform parent=null) {
+            if (parent != null) {
+                rectTransform.SetParent(parent);
+            }
+            
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.zero;
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+        }
+
+        public static void SetUICenter(this RectTransform rectTransform, RectTransform parent=null) {
+            if (parent != null) {
+                rectTransform.SetParent(parent);
+            }
+            
+            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
         }
         
         public static void DestroyChildren(this Transform parent)
@@ -94,6 +118,26 @@ namespace Util {
             }
 
             tmp.StartCoroutine(Coroutine());
+        }
+
+        public static Canvas GetCanvas(this RectTransform rectTransform) {
+            return rectTransform.GetComponentInParent<Canvas>();
+        }
+
+        public static Canvas GetCanvas(this GameObject gameObject) {
+            if (gameObject.transform is not RectTransform) {
+                throw new Exception($"GameObject [{gameObject.name}] is not a UI Object");
+            }
+
+            return gameObject.GetComponentInParent<Canvas>();
+        }
+
+        public static UIBackground Background(this GameObject gameObject) {
+            return GameManager.I.UI.Background(gameObject.GetCanvas());
+        }
+
+        public static UIBackground Background(this RectTransform rectTransfrom) {
+            return GameManager.I.UI.Background(rectTransfrom.GetCanvas());
         }
     }
 }
