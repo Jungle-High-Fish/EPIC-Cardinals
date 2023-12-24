@@ -27,9 +27,13 @@ namespace Cardinals.Game
             _clearObj.SetActive(false);
         }
 
-        public IEnumerator On()
+        public IEnumerator On(bool isStartEvent)
         {
-            yield return _map.MovePlayerIcon(this);
+            yield return _map.MovePlayerIcon(this, isStartEvent);
+        }
+
+        public void ImmediateOn(bool isStartEvent) {
+            _map.SetPlayerImmediate(this, isStartEvent);
         }
         
         public IEnumerator Clear()
@@ -41,6 +45,13 @@ namespace Cardinals.Game
                 .OnComplete(() => { completeDO = true; });
 
             yield return new WaitUntil(() => completeDO );
+        }
+
+        public void ImmediateClear()
+        {
+            _clearObj.transform.DOComplete();
+            _clearObj.SetActive(true);
+            _clearObj.transform.localScale = Vector3.one;
         }
     }
 }

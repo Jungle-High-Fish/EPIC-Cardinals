@@ -68,7 +68,7 @@ namespace Cardinals.Game {
         /// </summary>
         /// <param name="curEvt"></param>
         /// <returns></returns>
-        public IEnumerator MovePlayerIcon(UIEvent curEvt)
+        public IEnumerator MovePlayerIcon(UIEvent curEvt, bool isStartEvent)
         {
             bool completeDO = false;
 
@@ -80,8 +80,12 @@ namespace Cardinals.Game {
             yield return new WaitForSeconds(.5f);
 
             // 처음 이동 시, 뿅 나타남
-            if (index == 0)
+            if (isStartEvent)
             {
+                for (int i = 0; i < index; i++) {
+                    yield return ClearEvent(_eventNodeList[i]); // 이전 이벤트 클리어 표시
+                }
+
                 targetPos = _eventNodeList[index].transform.localPosition;
                 _playerIconTr.gameObject.SetActive(true);
                 _playerIconTr.localPosition = targetPos;
@@ -101,11 +105,38 @@ namespace Cardinals.Game {
             yield return new WaitForSeconds(1f);
             yield return MapOnOff(false); // 닫기
         }
-        
+
+        public void SetPlayerImmediate(UIEvent curEvt, bool isStartEvent, bool open=false) {
+            _playerIconTr.DOComplete();
+            (_mapGridTr as RectTransform).DOComplete();
+
+            var index = _eventNodeList.IndexOf(curEvt);
+            if (isStartEvent) {
+                for (int i = 0; i < index; i++) {
+                    ImmediateClearEvent(_eventNodeList[i]); // 이전 이벤트 클리어 표시
+                }
+
+                _playerIconTr.gameObject.SetActive(true);
+                _playerIconTr.localPosition = _eventNodeList[index].transform.localPosition;
+            }
+            else {
+                ImmediateClearEvent(_eventNodeList[index - 1]); // 이전 이벤트 클리어 표시
+                _playerIconTr.localPosition = _eventNodeList[index].transform.localPosition;
+            }
+
+            ImmediateOnOff(open);
+        }
+
         IEnumerator ClearEvent(UIEvent clearEvt)
         {
             var index = _eventNodeList.IndexOf(clearEvt);
             yield return  _eventNodeList[index].Clear();
+        }
+
+        void ImmediateClearEvent(UIEvent clearEvt)
+        {
+            var index = _eventNodeList.IndexOf(clearEvt);
+            _eventNodeList[index].ImmediateClear();
         }
 
         private void ClickMapBTN()
@@ -116,17 +147,24 @@ namespace Cardinals.Game {
             }
         }
 
-        private IEnumerator MapOnOff(bool open)
+        private IEnumerator MapOnOff(bool open, float duration = .5f)
         {
             _isAnimation = true;
             float leftX = -((_mapGridTr as RectTransform).rect.width - ((_mapBTN.transform as RectTransform).rect.width + 80f));
             var x = open ? 0 : leftX;
-            (_mapGridTr as RectTransform).DOAnchorPosX(x , .5f).SetEase(Ease.InQuad)
+            (_mapGridTr as RectTransform).DOAnchorPosX(x , duration).SetEase(Ease.InQuad)
                 .OnComplete(() => { _isAnimation = false;});
             
             _onMap = !_onMap;
 
             yield return new WaitUntil(() => !_isAnimation);
+        }
+
+        private void ImmediateOnOff(bool open) {
+            float leftX = -((_mapGridTr as RectTransform).rect.width - ((_mapBTN.transform as RectTransform).rect.width + 80f));
+            var x = open ? 0 : leftX;
+            (_mapGridTr as RectTransform).anchoredPosition = new Vector2(x, 0);
+            _onMap = !_onMap;
         }
 
         public void DestroyAllNodes() {    

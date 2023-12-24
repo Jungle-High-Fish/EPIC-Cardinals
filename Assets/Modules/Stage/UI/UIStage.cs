@@ -27,26 +27,34 @@ namespace Cardinals.Game
             _stageMap.gameObject.SetActive(false);
         }
 
-        public IEnumerator Init(Stage stage)
+        public IEnumerator Init(Stage stage, Action onComplete=null)
         {
             yield return _stageEnterAlert.Init(stage);
             _stageMap.Init(stage);
+            onComplete?.Invoke();
+        }
 
-            yield return null;
+        public void ImmediateInit(Stage stage) {
+            _stageEnterAlert.transform.DOComplete();
+            _stageEnterAlert.transform.localScale = Vector3.one;
+            _stageEnterAlert.gameObject.SetActive(false);
+
+            _stageMap.Init(stage);
         }
 
         public IEnumerator Visit()
         {
-            bool completeDO = false;
+            bool completeDO = true;
             _stageEnterAlert.gameObject.SetActive(true);
-            _stageEnterAlert.transform.DOScale(Vector3.one, 1.5f)
-                .OnComplete(() =>
-                {
-                    _stageEnterAlert.gameObject.SetActive(false);
-                    completeDO = true;
-                });
+            // _stageEnterAlert.transform.DOScale(Vector3.one, 1.5f)
+            //     .OnComplete(() =>
+            //     {
+            //         _stageEnterAlert.gameObject.SetActive(false);
+            //         completeDO = true;
+            //     });
 
             yield return new WaitUntil(() => completeDO);
+            _stageEnterAlert.gameObject.SetActive(false);
         }
     }
 }
