@@ -260,6 +260,10 @@ namespace Cardinals.Board {
         }
 
         public IEnumerator CardAction(int value, BaseEntity target) {
+            if (IsSealed) {
+                yield break;
+            }
+
             _tileMagic.OnAction(value, target);
 
             float animTime;

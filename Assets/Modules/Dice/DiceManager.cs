@@ -583,6 +583,12 @@ namespace Cardinals
                 result = false;
             }
 
+            if (GameManager.I.Player.OnTile.IsSealed) {
+                Debug.Log("뭐지? 봉인당했나?");
+                GameManager.I.Player.Bubble.SetBubble("봉인되어서 사용할 수 없어...");
+                result = false;
+            }
+
             return result;
         }
 
