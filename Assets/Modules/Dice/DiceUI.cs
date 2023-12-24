@@ -29,6 +29,11 @@ namespace Cardinals
         private DiceDescription _diceDescription;
         private Animator _diceAnimator;
 
+        public int Index
+        {
+            get => _diceIndex;
+            set => _diceIndex = value;
+        }
         public bool IsSelect
         {
             set => _isSelect = value;
@@ -86,7 +91,7 @@ namespace Cardinals
         public void Init(Dice dice, int index, DiceManager diceManager)
         {
             _dice = dice;
-            _diceIndex = index;
+            Index = index;
             _diceManager = diceManager;
             _isSelectable = true;
             _diceUIPos = (transform as RectTransform).anchoredPosition;
@@ -99,6 +104,13 @@ namespace Cardinals
 
         }
 
+        public void SortingDiceUI(int index, Vector2 diceUIPos)
+        {
+            Index = index;
+            (transform as RectTransform).DOAnchorPos(diceUIPos, 0.2f).SetEase(Ease.OutCubic);
+            _diceUIPos = diceUIPos;
+        }
+
         public void UpdateDiceUI(Dice dice)
         {
             Image image = GetComponent<Image>();
@@ -108,6 +120,7 @@ namespace Cardinals
             image.sprite = sprite;
             //_image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
+
         public IEnumerator RollDiceUI(int number)
         {
             _image.Get(gameObject).color = new Color(1, 1, 1, 1);
@@ -149,7 +162,7 @@ namespace Cardinals
                     return;
 
                 transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
-                _diceManager.SelectCardIndex = _diceIndex;
+                _diceManager.SelectCardIndex = Index;
                 _isSelect = true;
                 _diceManager.State = CardState.Select;
 
@@ -166,7 +179,7 @@ namespace Cardinals
                     return;
                 }
                 GameManager.I.Player.PlayerInfo.UseGold(1);
-                _diceManager.Roll(_diceIndex);
+                _diceManager.Roll(Index);
             }
             
         }
