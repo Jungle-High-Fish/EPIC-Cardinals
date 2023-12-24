@@ -301,10 +301,14 @@ namespace Cardinals
         {
             SetDiceSelectable(false);
             // 여기서 DiceUI anchoredPosition 변경
-            for(int i=0;i< _dicesUI.Count; i++)
+            float startPos = -((((float)(_dicesUI.Count - 1)) / 2f) * 130 + ((int)_dicesUI.Count / 2) * 10f);
+
+            for (int i=0;i< _dicesUI.Count; i++)
             {
-                Vector2 center = _dicesUI[i].GetComponent<RectTransform>().anchoredPosition;
-                center += new Vector2(300f, 200f);
+                (_dicesUI[i].transform as RectTransform).SetUICenter();
+
+                //Vector2 center = _dicesUI[i].GetComponent<RectTransform>().anchoredPosition;
+                Vector2 center = new Vector2(startPos + i * 140f, 0);
                 _dicesUI[i].GetComponent<RectTransform>().anchoredPosition = center;
             }
 

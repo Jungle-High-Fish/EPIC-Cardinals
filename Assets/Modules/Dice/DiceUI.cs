@@ -107,6 +107,7 @@ namespace Cardinals
         public void SortingDiceUI(int index, Vector2 diceUIPos)
         {
             Index = index;
+            (transform as RectTransform).SetUILeftBottom();
             (transform as RectTransform).DOAnchorPos(diceUIPos, 0.2f).SetEase(Ease.OutCubic);
             _diceUIPos = diceUIPos;
         }
