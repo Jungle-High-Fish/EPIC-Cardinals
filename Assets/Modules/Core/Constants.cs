@@ -13,6 +13,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_StageGround = "Stage/Ground";
 
             public const string Prefabs_SoundManager = "SoundManager";
+            
+            public const string Prefabs_UI_Background = "UI/UIBackground";
 
             public const string Prefabs_Tile = "Board/Tiles/TileUV2";
             public const string Prefabs_UI_HoveredTileInfo = "UI/TileInfo/HoveredTileInfoUI";
