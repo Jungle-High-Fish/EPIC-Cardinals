@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Cardinals.Enums;
 using Sirenix.OdinInspector;
@@ -276,25 +277,50 @@ namespace Cardinals
        
 
         [Button]
-        public void SortDices()
+        public IEnumerator SortDices()
         {
             _dices.Sort((p1, p2) => p1.RollResultNumber.CompareTo(p2.RollResultNumber));
-            for(int i = 0; i < _dicesUI.Count; i++)
+            for(int i = 0; i < _dices.Count; i++)
             {
-                _dicesUI[i].UpdateDiceUI(_dices[i]);
-                _dicesUI[i].DiceDescription.UpdateDiceDescription(_dices[i]);
+                for(int j = 0; j < _dicesUI.Count; j++)
+                {
+                    if (_dices[i].Equals(_dicesUI[j].Dice))
+                    {
+                        Vector2 diceUIPos = new Vector2(100 + 140f * i, 100f);
+                        _dicesUI[j].SortingDiceUI(i, diceUIPos);
+                        break;
+                    }
+                }
+                yield return new WaitForSeconds(0.1f);
             }
-
+            _dicesUI.Sort((p1, p2) => p1.Index.CompareTo(p2.Index));
         }
 
         [Button]
         public IEnumerator RollAllDice()
         {
+            SetDiceSelectable(false);
+            // 여기서 DiceUI anchoredPosition 변경
+            float startPos = -((((float)(_dicesUI.Count - 1)) / 2f) * 130 + ((int)_dicesUI.Count / 2) * 10f);
+
+            for (int i=0;i< _dicesUI.Count; i++)
+            {
+                (_dicesUI[i].transform as RectTransform).SetUICenter();
+
+                //Vector2 center = _dicesUI[i].GetComponent<RectTransform>().anchoredPosition;
+                Vector2 center = new Vector2(startPos + i * 140f, 0);
+                _dicesUI[i].GetComponent<RectTransform>().anchoredPosition = center;
+            }
+
             for(int i = 0; i < _dices.Count; i++)
             {
                 Roll(i);
                 yield return new WaitForSeconds(0.1f);
             }
+
+            yield return new WaitForSeconds(0.8f);
+            yield return SortDices();
+            SetDiceSelectable(true);
         }
 
         private IEnumerator Discard(int index, DiceAnimationType animationType, System.Action changeDiscardState)
@@ -490,7 +516,7 @@ namespace Cardinals
             _diceUsedCountOnThisTurn++;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
-            if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&Random.Range(0,2)==1)
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
             {
                 GameManager.I.Player.Bubble.SetBubble("혼란하다 혼란해..");
                 yield return GameManager.I.Player.PrevMoveTo(num, 0.4f);
@@ -533,7 +559,7 @@ namespace Cardinals
 
         public void PotionUseAction(int num)
         {
-            StartCoroutine(GameManager.I.Player.CardAction(num, GameManager.I.Stage.Enemies[Random.Range(0, GameManager.I.Stage.Enemies.Count)]));
+            StartCoroutine(GameManager.I.Player.CardAction(num, GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)]));
             _state = CardState.Idle;
             DismissAllCards();
             if (GameManager.I.Stage.Enemies.Count == 0)

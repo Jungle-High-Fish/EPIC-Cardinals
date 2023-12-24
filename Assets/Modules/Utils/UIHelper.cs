@@ -49,22 +49,26 @@ namespace Util {
             if (parent != null) {
                 rectTransform.SetParent(parent);
             }
-            
+
+            var origianlPosition = rectTransform.position;
+
             rectTransform.anchorMin = Vector2.zero;
             rectTransform.anchorMax = Vector2.zero;
-            rectTransform.offsetMin = Vector2.zero;
-            rectTransform.offsetMax = Vector2.zero;
+
+            rectTransform.position = origianlPosition;
         }
 
         public static void SetUICenter(this RectTransform rectTransform, RectTransform parent=null) {
             if (parent != null) {
                 rectTransform.SetParent(parent);
             }
+
+            var origianlPosition = rectTransform.position;
             
             rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-            rectTransform.offsetMin = Vector2.zero;
-            rectTransform.offsetMax = Vector2.zero;
+
+            rectTransform.position = origianlPosition;
         }
         
         public static void DestroyChildren(this Transform parent)
