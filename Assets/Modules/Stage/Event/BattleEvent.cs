@@ -122,7 +122,6 @@ namespace Cardinals.Game
                 {
                     yield return enemies[i].EndTurn();
                 }
-                
             } while (!(CheckPlayerWin || CheckEnemyWin));
 
             yield return GameManager.I.Stage.DiceManager.EndBattle();

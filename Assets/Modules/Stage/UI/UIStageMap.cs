@@ -33,7 +33,7 @@ namespace Cardinals.Game {
             
             Transform parent = _eventListTr;
 
-            float interval =  (parent.localPosition.magnitude * 2) / (stage.Events.Length - 1);
+            float interval = (parent.localPosition.magnitude * 2) / (stage.Events.Length - 1);
 
             InstantiateEventItem(parent, stage.Events[0], 0);
             for (int i = 1, cnt = stage.Events.Length; i < cnt; i++)
@@ -43,6 +43,10 @@ namespace Cardinals.Game {
 
             _playerIconTr.gameObject.SetActive(false);
             _playerIconTr.SetSiblingIndex(100);
+
+            Canvas.ForceUpdateCanvases();
+            float leftX = -((_mapGridTr as RectTransform).rect.width - ((_mapBTN.transform as RectTransform).rect.width + 80f));
+            (_mapGridTr as RectTransform).anchoredPosition = new Vector2(leftX, 0);
         }
 
         /// <summary>
@@ -115,8 +119,9 @@ namespace Cardinals.Game {
         private IEnumerator MapOnOff(bool open)
         {
             _isAnimation = true;
-            var x = open ? 650 : -650;
-            _mapGridTr.DOMoveX(x , .5f).SetEase(Ease.InQuad)
+            float leftX = -((_mapGridTr as RectTransform).rect.width - ((_mapBTN.transform as RectTransform).rect.width + 80f));
+            var x = open ? 0 : leftX;
+            (_mapGridTr as RectTransform).DOAnchorPosX(x , .5f).SetEase(Ease.InQuad)
                 .OnComplete(() => { _isAnimation = false;});
             
             _onMap = !_onMap;
