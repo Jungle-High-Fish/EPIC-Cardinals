@@ -104,7 +104,7 @@ namespace Cardinals
                 d.EnableCardUI();
             }
             SetDiceSelectable(true);
-            RollAllDice();
+            StartCoroutine(RollAllDice());
             _canActionUse = false;
             if (!_lastDiceUsedForAction && _newDiceUseMod)
             {
@@ -163,7 +163,7 @@ namespace Cardinals
                     int rollResult = _dices[i].DiceNumbers[resultIndex];
                     _dices[i].RollResultIndex = resultIndex;
                     _dices[i].RollResultNumber = rollResult;
-                    _dicesUI[i].RollDiceUI(rollResult);
+                    StartCoroutine(_dicesUI[i].RollDiceUI(rollResult));
                     _dicesUI[i].DiceDescription.SetDescriptionUIRestored();
                 }
             }
@@ -269,7 +269,7 @@ namespace Cardinals
             int rollResult = _dices[index].DiceNumbers[resultIndex];
             _dices[index].RollResultIndex = resultIndex;
             _dices[index].RollResultNumber = rollResult;
-            _dicesUI[index].RollDiceUI(rollResult);
+            StartCoroutine(_dicesUI[index].RollDiceUI(rollResult));
             _dicesUI[index].DiceDescription.SetDescriptionUIRestored();
         }
 
@@ -288,11 +288,12 @@ namespace Cardinals
         }
 
         [Button]
-        public void RollAllDice()
+        public IEnumerator RollAllDice()
         {
             for(int i = 0; i < _dices.Count; i++)
             {
                 Roll(i);
+                yield return new WaitForSeconds(0.1f);
             }
         }
 

@@ -27,6 +27,7 @@ namespace Cardinals
         [SerializeField] private TextMeshProUGUI _numberText;
         private DiceAnimation _diceAnimation;
         private DiceDescription _diceDescription;
+        private Animator _diceAnimator;
 
         public bool IsSelect
         {
@@ -91,7 +92,8 @@ namespace Cardinals
             _diceUIPos = (transform as RectTransform).anchoredPosition;
             _diceAnimation = GetComponent<DiceAnimation>();
             _diceDescription = GetComponent<DiceDescription>();
-
+            _diceAnimator = GetComponent<Animator>();
+            
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + "1";
             _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
 
@@ -106,16 +108,25 @@ namespace Cardinals
             image.sprite = sprite;
             //_image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
-        public void RollDiceUI(int number)
+        public IEnumerator RollDiceUI(int number)
         {
+            _image.Get(gameObject).color = new Color(1, 1, 1, 1);
+            _diceAnimator.runtimeAnimatorController = ResourceLoader.LoadAnimatorController(_dice.DiceType.ToString() + "DiceAnimator");
+            _diceAnimator.enabled = true;
+            _diceAnimator.Play("Roll");
+            yield return new WaitUntil(() => _diceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f);
+            _diceAnimator.enabled = false;
+
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
             _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+            transform.DOScale(1f, 0.3f).From(1.3f).SetEase(Ease.InBack);
         }
 
         public void EnableCardUI()
         {
             IsDiscard = false;
             GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
+            _image.Get(gameObject).color = new Color(1, 1, 1, 0);
             transform.localScale = new Vector3(1, 1, 1);
             gameObject.SetActive(true);
         }
@@ -201,6 +212,7 @@ namespace Cardinals
         {
             if (!_isDiscard && _isSelectable)
             {
+
                 (transform as RectTransform).DOAnchorPosY(_diceUIPos.y, 0.1f);
                 DiceDescription.SetDescriptionUIRestored();
             }
