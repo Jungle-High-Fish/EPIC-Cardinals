@@ -111,12 +111,26 @@ namespace Cardinals.Game {
         }
         
         public IEnumerator Flow() {
-            yield return GameManager.I.UI.UIStage.Init(_stage);
+            bool UIStageInitialized = false;
+            void SetUIStageInitialized() => UIStageInitialized = true;
+            var UIStageVisitCoroutine = StartCoroutine(GameManager.I.UI.UIStage.Init(_stage, SetUIStageInitialized));
+            while (!UIStageInitialized) {
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+                    UIStageInitialized = true;
+                    StopCoroutine(UIStageVisitCoroutine);
+                    GameManager.I.UI.UIStage.ImmediateInit(_stage);
+                }
+
+                yield return null;
+            }
+
             yield return GameManager.I.UI.UIStage.Visit();
             
             // 축복 선택
             //yield return SelectBlessFlow();
             
+            bool isStartEvent = true;
+
             // 다음 사건을 읽음
             while (_stage.MoveNext())
             {
@@ -133,7 +147,20 @@ namespace Cardinals.Game {
                 using var evt = _stage.Current as Game.BaseEvent;
                 _curEvent = evt;
                 
-                yield return _curEvent.On();
+                bool eventLoaded = false;
+                void SetEventLoaded() => eventLoaded = true;
+                var eventLoadCoroutine = StartCoroutine(_curEvent.On(isStartEvent, SetEventLoaded));
+
+                while (!eventLoaded) {
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+                        eventLoaded = true;
+                        StopCoroutine(eventLoadCoroutine);
+                        _curEvent.ImmediateOn(isStartEvent);
+                    }
+
+                    yield return null;
+                }
+
                 yield return evt.Flow(this);
 
                 if (!evt.IsClear)
@@ -141,6 +168,8 @@ namespace Cardinals.Game {
                     GameManager.I.GameOver();
                     yield break;
                 }
+
+                isStartEvent = false;
             }
 
             GameManager.I.GameClear();

@@ -23,9 +23,15 @@ namespace Cardinals.Game
         /// <summary>
         /// 이벤트 플로우 시작 전 실행
         /// </summary>
-        public IEnumerator On()
+        public IEnumerator On(bool isStartEvent, Action onComplete=null)
         {
-            yield return UIEvent.On();
+            yield return UIEvent.On(isStartEvent);
+            onComplete?.Invoke();
+        }
+
+        public void ImmediateOn(bool isStartEvent)
+        {
+            UIEvent.ImmediateOn(isStartEvent);
         }
 
         public void Dispose()
