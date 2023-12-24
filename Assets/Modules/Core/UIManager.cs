@@ -11,9 +11,10 @@ using Cardinals.UI;
 using Cardinals.UI.Description;
 using Cardinals.Tutorial;
 using Cardinals.UI.NewDice;
-using Unity.VisualScripting;
 using UnityEngine;
 using Util;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 namespace Cardinals
 {
@@ -45,6 +46,9 @@ namespace Cardinals
         private Canvas _enemyUICanvas;
         private Canvas _systemUICanvas;
         private Canvas _descriptionUICanvas;
+
+        private Dictionary<Canvas, UIBackground> _backgrounds
+            = new Dictionary<Canvas, UIBackground>();
 
         private GameSettingUI _gameSettingUI;
         private UIPausePanel _uiPausePanel;
@@ -174,6 +178,11 @@ namespace Cardinals
             Canvas.ForceUpdateCanvases();
         }
 
+        public UIBackground Background(Canvas canvas) {
+            UIBackground background = _backgrounds[canvas];
+            return background;
+        }
+
         private void InstantiateCanvas(string name, out Canvas canvas) {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Canvas);
             canvas = Instantiate(prefab).GetComponent<Canvas>();
@@ -181,6 +190,13 @@ namespace Cardinals
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.worldCamera = Camera.main;
             canvas.transform.SetParent(transform);
+
+            GameObject backgroundPrefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Background);
+            GameObject backgroundObj = Instantiate(backgroundPrefab, canvas.transform);
+            UIBackground background = backgroundObj.GetComponent<UIBackground>();
+            background.Init();
+
+            _backgrounds.Add(canvas, background);
         }
 
         private void InstantiatePausePanelUI() {
