@@ -162,7 +162,7 @@ namespace Cardinals
             {
                 if (GameManager.I.Player.PlayerInfo.Gold <= 0)
                 {
-                    GameManager.I.Player.Bubble.SetBubble("µ·ÀÌ ¾ø¾î...");
+                    GameManager.I.Player.Bubble.SetBubble("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...");
                     return;
                 }
                 GameManager.I.Player.PlayerInfo.UseGold(1);
