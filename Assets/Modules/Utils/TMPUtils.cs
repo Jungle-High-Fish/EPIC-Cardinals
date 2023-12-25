@@ -10,6 +10,7 @@ namespace Util {
         public enum CustomTag {
             Level,
             Debuff,
+            Element,
             CheckBless,
             CheckElement
         }
@@ -17,6 +18,7 @@ namespace Util {
         static readonly Dictionary<CustomTag, string> CustomTags = new Dictionary<CustomTag, string>() {
             { CustomTag.Level, "level=" },
             { CustomTag.Debuff, "debuff=" },
+            { CustomTag.Element, "element=" },
             { CustomTag.CheckBless, "checkBless=" },
             { CustomTag.CheckElement, "checkElement=" }
         };
@@ -198,6 +200,13 @@ namespace Util {
                     var tagStr = splitString[0];
                     var debuffType = splitString[1];
                     return $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Buff_{debuffType}\">";
+                }
+
+                if (tag.StartsWith(CustomTags[CustomTag.Element])) {
+                    var splitString = tag.Split('=');
+                    var tagStr = splitString[0];
+                    var elementType = splitString[1];
+                    return $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Magic_{elementType}\">";
                 }
 
                 if (tag.StartsWith(CustomTags[CustomTag.CheckBless])) {
