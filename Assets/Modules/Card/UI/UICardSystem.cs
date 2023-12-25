@@ -12,9 +12,6 @@ namespace Cardinals.Game {
 		ComponentGetter<RectTransform> _diceDeck
 			= new ComponentGetter<RectTransform>(TypeOfGetter.ChildByName, "DiceDeck");
 
-		ComponentGetter<Button> _sortButton
-			= new ComponentGetter<Button>(TypeOfGetter.ChildByName, "SortButton");
-
 		ComponentGetter<UICardUseSlot> _cardMoveSlot
 			= new ComponentGetter<UICardUseSlot>(TypeOfGetter.ChildByName, "CardMoveSlot");
 		ComponentGetter<UICardUseSlot> _cardActionSlot
@@ -22,7 +19,7 @@ namespace Cardinals.Game {
 
 		public void Init() {
 			GameManager.I.Stage.DiceManager.SetDiceDeckUIParent(_diceDeck.Get(gameObject).transform);
-			_sortButton.Get(gameObject).onClick.AddListener(() => GameManager.I.Stage.DiceManager.SortDices());
+			//_sortButton.Get(gameObject).onClick.AddListener(() => GameManager.I.Stage.DiceManager.SortDices());
 		}
 	}
 
