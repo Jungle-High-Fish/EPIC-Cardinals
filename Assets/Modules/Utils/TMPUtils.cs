@@ -10,13 +10,15 @@ namespace Util {
         public enum CustomTag {
             Level,
             Debuff,
-            CheckBless
+            CheckBless,
+            CheckElement
         }
 
         static readonly Dictionary<CustomTag, string> CustomTags = new Dictionary<CustomTag, string>() {
             { CustomTag.Level, "level=" },
             { CustomTag.Debuff, "debuff=" },
-            { CustomTag.CheckBless, "checkBless=" }
+            { CustomTag.CheckBless, "checkBless=" },
+            { CustomTag.CheckElement, "checkElement=" }
         };
 
         public static string GetTextWithLevel(string parsedText, int level, Color emphasisColor) {
@@ -111,6 +113,47 @@ namespace Util {
             textMeshProUGUI.text = GetTextWithBless(parsedText, blessTexts);
         }
 
+        public static string GetTextWithElement(string parsedText, Dictionary<TileMagicType, (string text, Color color)> elementTexts) {
+            string result = parsedText;
+
+            string checkElementRegex = @"@element\s*\((\s*\w+\s*)\)";
+            var checkElementMatches = Regex.Matches(result, checkElementRegex);
+
+            if (checkElementMatches.Count <= 0) {
+                return result;
+            }
+
+            for (int i = 0; i < checkElementMatches.Count; i++) {
+                var checkElementMatch = checkElementMatches[i];
+                var rawCheckElementText = checkElementMatch.Value;
+                var checkElementText = Regex.Replace(checkElementMatch.Value, checkElementRegex, @"$1");
+                var checkElementType = (TileMagicType)System.Enum.Parse(typeof(TileMagicType), checkElementText);
+
+                if (!elementTexts.ContainsKey(checkElementType)) {
+                    result = result.Replace(rawCheckElementText, "");
+                    continue;
+                }
+
+                var elementText = elementTexts[checkElementType].text;
+                var elementColor = elementTexts[checkElementType].color;
+
+                string replacement = 
+                    $"<color=#{ColorUtility.ToHtmlStringRGB(elementColor)}>{elementText}</color>" +
+                    $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Bless_{checkElementType}\">";
+                result = result.Replace(rawCheckElementText, replacement);
+            }
+
+            return result;
+        }
+
+        public static void SetTextWithElement(
+            this TextMeshProUGUI textMeshProUGUI, 
+            string parsedText, 
+            Dictionary<TileMagicType, (string text, Color color)> elementTexts
+        ) {
+            textMeshProUGUI.text = GetTextWithElement(parsedText, elementTexts);
+        }
+
         public static string CustomParse(string text) {
             string result = "";
 
@@ -162,6 +205,13 @@ namespace Util {
                     var tagStr = splitString[0];
                     var blessType = splitString[1];
                     return $"@bless({blessType})";
+                }
+
+                if (tag.StartsWith(CustomTags[CustomTag.CheckElement])) {
+                    var splitString = tag.Split('=');
+                    var tagStr = splitString[0];
+                    var elementType = splitString[1];
+                    return $"@element({elementType})";
                 }
 
                 return "";
