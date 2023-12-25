@@ -139,7 +139,7 @@ namespace Util {
 
                 string replacement = 
                     $"<color=#{ColorUtility.ToHtmlStringRGB(elementColor)}>{elementText}</color>" +
-                    $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Bless_{checkElementType}\">";
+                    $"<sprite=\"UI_TMP_SpriteSheet\" name=\"UI_Magic_{checkElementType}\">";
                 result = result.Replace(rawCheckElementText, replacement);
             }
 
