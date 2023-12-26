@@ -280,13 +280,13 @@ namespace Cardinals
         }
 
         [Button]
-        public void Roll(int index)
+        public void Roll(int index,Action onCompleted=null)
         {
             int resultIndex = UnityEngine.Random.Range(0, _dices[index].DiceNumbers.Count);
             int rollResult = _dices[index].DiceNumbers[resultIndex];
             _dices[index].RollResultIndex = resultIndex;
             _dices[index].RollResultNumber = rollResult;
-            StartCoroutine(_dicesUI[index].RollDiceUI(rollResult));
+            StartCoroutine(_dicesUI[index].RollDiceUI(rollResult,onCompleted));
             _dicesUI[index].DiceDescription.SetDescriptionUIRestored();
         }
 
