@@ -357,19 +357,21 @@ namespace Cardinals.Enums {
         NextStageMap,
     }
 
+    /// <summary>
+    /// 미사용 포션은 인덱스 0보다 작게 설정할 것
+    /// </summary>
     public enum PotionType : int
     {
         Empty = 0,
-        Growth,
-        Jump,
-        Reverse,
-        Quick,
-        Heal,
-        One,
-        Two,
-        Three,
-        Four
-
+        Growth = 1,
+        Jump = 2,
+        Reverse = 3,
+        Quick = -1,
+        Heal = 5,
+        One = 6,
+        Two = 7,
+        Three = 8,
+        Four = 9
     }
 
     public enum BlessType : int

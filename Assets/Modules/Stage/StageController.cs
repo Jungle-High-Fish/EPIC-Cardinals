@@ -368,12 +368,20 @@ namespace Cardinals.Game {
             Player.PlayerInfo.AddArtifact(artifact);
         }
 
+        [Button]
+        public PotionType GetRandomPotion()
+        {
+            var list = Enum.GetValues(typeof(PotionType)).Cast<PotionType>().Where(x => (int)x > 0).ToList();
+            int idx = Random.Range(0, list.Count());
+            var potion = list[idx];
+            
+            return potion;
+        }
+        
         public PotionType AddRandomPotion()
         {
-            int idx = Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
-            var potion = (PotionType)idx;
+            var potion = GetRandomPotion();
             Player.PlayerInfo.AddPotion(potion);
-
             return potion;
         }
 
