@@ -251,7 +251,8 @@ namespace Cardinals.Game {
             enemyRenderer.transform.position = position + new Vector3(0, 2, 0);
 
             GameManager.I.UI.SetEnemyUI(enemyComp);
-
+            
+            enemyComp.PostInit();
             return enemyComp;
         }
 
