@@ -263,6 +263,7 @@ namespace Cardinals.Enums {
         BattleElite,
         BattleBoss,
         DemoClearEnding,
+        Bless,
     }
 
     public enum StageEventList
@@ -280,6 +281,7 @@ namespace Cardinals.Enums {
         BattleDolDol,
         BattleCharrrrrrrrrrrrruk,
         DemoClearEnding,
+        Bless,
     }
 
     public enum EnemyType

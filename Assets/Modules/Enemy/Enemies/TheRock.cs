@@ -45,5 +45,11 @@ namespace Cardinals.Enemy
                 }
             }
         }
+        
+
+        public override void Flip(bool filpX, Quaternion quat = default)
+        {
+            // 해당 몬스터는 플레이어 위치에 따른 플립을 수행하지 않음
+        }
     }
 }
