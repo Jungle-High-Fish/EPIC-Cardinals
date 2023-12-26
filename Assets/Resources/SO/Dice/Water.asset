@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be6aec5522a88a46b63c5b7642ab25e, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  title: "<Element = Water> \uBB3C \uC8FC\uC0AC\uC704"
+  title: "<element=Water>  \uBB3C \uC8FC\uC0AC\uC704"
   information: "\uBB3C \uD0C0\uC77C\uC5D0 \uC0AC\uC6A9 \uC2DC, \uC801\uC5D0\uAC8C
-    \uD574\uB2F9 \uC22B\uC790\uB9CC\uD07C <Debuff = Weak>\uC57D\uD654 \uB514\uBC84\uD504\uB97C
+    \uD574\uB2F9 \uC22B\uC790\uB9CC\uD07C <debuff=Weak> \uC57D\uD654 \uB514\uBC84\uD504\uB97C
     \uBD80\uC5EC\uD569\uB2C8\uB2E4."
   diceType: 3
-  elementColor: {r: 0.3254902, g: 0.5137255, b: 1, a: 0}
+  elementColor: {r: 0.3254902, g: 0.5137255, b: 1, a: 1}

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135.89, y: -69}
-  m_SizeDelta: {x: 241.775, y: 40}
+  m_AnchoredPosition: {x: 181.82, y: -74.79964}
+  m_SizeDelta: {x: 333.64, y: 51.5993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4585678989321425007
 CanvasRenderer:
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -596,8 +596,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135.88751, y: -34}
-  m_SizeDelta: {x: 241.775, y: 40}
+  m_AnchoredPosition: {x: 181.82224, y: -34}
+  m_SizeDelta: {x: 333.6444, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4820585541477032154
 CanvasRenderer:
@@ -655,8 +655,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -996,9 +996,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _diceDescription: {fileID: 5466421640786249206}
   _rerollPanel: {fileID: 8594346463205153061}
-  _infoPanel: {fileID: 0}
-  _title: {fileID: 0}
-  _info: {fileID: 0}
+  _infoPanel: {fileID: 8233867290097557853}
+  _title: {fileID: 4396727110320981246}
+  _info: {fileID: 4622070331909247308}
 --- !u!95 &2336498682435807489
 Animator:
   serializedVersion: 5
@@ -1174,7 +1174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6383797434852854586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1350,7 +1350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5282831183431179364
 RectTransform:
   m_ObjectHideFlags: 0

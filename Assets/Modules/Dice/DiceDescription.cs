@@ -26,6 +26,11 @@ namespace Cardinals
                 surface.GetComponent<Image>().sprite = ResourceLoader.LoadSprite(path);
 
             }
+            DiceDataSO data = DiceDataSO.Data(type);
+            _title.text = TMPUtils.CustomParse(data.title);
+            _title.color = data.elementColor;
+            _info.text = TMPUtils.CustomParse(data.information);
+            _infoPanel.color = data.elementColor;
         }
 
         public void UpdateDiceDescription(Dice dice)
@@ -43,6 +48,7 @@ namespace Cardinals
 
             DiceDataSO data = DiceDataSO.Data(dice.DiceType);
             _title.text = TMPUtils.CustomParse(data.title);
+            _title.color = data.elementColor;
             _info.text = TMPUtils.CustomParse(data.information);
             _infoPanel.color = data.elementColor;
 
