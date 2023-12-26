@@ -29,6 +29,8 @@ namespace Cardinals
         private DiceDescription _diceDescription;
         private Animator _diceAnimator;
 
+        [SerializeField] private bool isJustDisplay; 
+
         public int Index
         {
             get => _diceIndex;
@@ -114,11 +116,11 @@ namespace Cardinals
 
         public void UpdateDiceUI(Dice dice)
         {
-            Image image = GetComponent<Image>();
+            _image.Get(gameObject).color = new Color(1, 1, 1, 1);
             _dice = dice;
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + _dice.RollResultNumber.ToString();
             Sprite sprite = ResourceLoader.LoadSprite(path);
-            image.sprite = sprite;
+            _image.Get(gameObject).sprite = sprite;
             //_image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
 
@@ -254,7 +256,7 @@ namespace Cardinals
 
         private void Update()
         {
-            MoveCardUI();
+            if(!isJustDisplay) MoveCardUI();
         }
     }
 }

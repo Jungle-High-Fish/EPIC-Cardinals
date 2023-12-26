@@ -40,7 +40,7 @@ public class RewardBox : MonoBehaviour
             switch (r.Type)
             {
                 case RewardType.Potion:
-                    r.Value = GetRandomPotion();
+                    r.Value = (int) GameManager.I.Stage.GetRandomPotion();
                     break;
                 case RewardType.Artifact:
                     r.Value = GetRandomArtifact();
@@ -101,11 +101,6 @@ public class RewardBox : MonoBehaviour
     public void Disable()
     {
         gameObject.SetActive(false);
-    }
-
-    int GetRandomPotion()
-    { 
-        return Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
     }
     
     int GetRandomCard()

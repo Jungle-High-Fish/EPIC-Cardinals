@@ -310,6 +310,11 @@ namespace Cardinals
                 yield return new WaitForSeconds(0.15f);
             }
             _dicesUI.Sort((p1, p2) => p1.Index.CompareTo(p2.Index));
+
+            for (int i = 0; i < _dicesUI.Count; i++)
+            {
+                _dicesUI[i].UpdateDiceUI(_dicesUI[i].Dice);
+            }
         }
 
         [Button]

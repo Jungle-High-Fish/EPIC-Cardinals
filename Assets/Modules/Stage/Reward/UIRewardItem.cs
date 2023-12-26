@@ -94,8 +94,10 @@ namespace Cardinals.UI
 
         void Remove()
         {
+            gameObject.SetActive(false);
             baseReward.Remove();
             baseReward = null;
+            GameManager.I.UI.UIRewardPanel.UpdateSize();
         }
     }
 }
