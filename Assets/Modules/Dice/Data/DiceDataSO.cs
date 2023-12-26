@@ -15,7 +15,7 @@ namespace Cardinals{
         public static DiceDataSO Data(DiceType type)
         {
             return ResourceLoader.LoadSO<DiceDataSO>(
-                Constants.FilePath.Resources.SO_TileCurseUIData + type
+                Constants.FilePath.Resources.SO_DiceData + type
             ); ;
         }
     }
