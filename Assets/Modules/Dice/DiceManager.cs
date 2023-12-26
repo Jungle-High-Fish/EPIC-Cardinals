@@ -79,9 +79,9 @@ namespace Cardinals
                 }
             } else {
                 AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
-                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Fire);
                 AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
-                AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Water);
+                AddDice(new List<int>() { 1,1,2,2,3,3 }, DiceType.Normal);
+                AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Normal);
                 AddDice(new List<int>() { 3,3,4,4,5,5 }, DiceType.Normal);
             }
             
@@ -103,6 +103,7 @@ namespace Cardinals
             foreach(DiceUI d in _dicesUI)
             {
                 d.EnableCardUI();
+                d.InitRenderer();
             }
             SetDiceSelectable(true);
 
