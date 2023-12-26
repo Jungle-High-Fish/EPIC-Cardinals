@@ -12,6 +12,9 @@ namespace Cardinals
     {
         [SerializeField] private GameObject _diceDescription;
         [SerializeField] private GameObject _rerollPanel;
+        [SerializeField] private Image _infoPanel;
+        [SerializeField] private TextMeshProUGUI _title;
+        [SerializeField] private TextMeshProUGUI _info;
         public void Init(List<int> numbers, DiceType type)
         {
             for(int i = 0; i < numbers.Count; i++)
@@ -23,6 +26,11 @@ namespace Cardinals
                 surface.GetComponent<Image>().sprite = ResourceLoader.LoadSprite(path);
 
             }
+            DiceDataSO data = DiceDataSO.Data(type);
+            _title.text = TMPUtils.CustomParse(data.title);
+            _title.color = data.elementColor;
+            _info.text = TMPUtils.CustomParse(data.information);
+            _infoPanel.color = data.elementColor;
         }
 
         public void UpdateDiceDescription(Dice dice)
@@ -37,6 +45,13 @@ namespace Cardinals
                 image.sprite = ResourceLoader.LoadSprite(path);
 
             }
+
+            DiceDataSO data = DiceDataSO.Data(dice.DiceType);
+            _title.text = TMPUtils.CustomParse(data.title);
+            _title.color = data.elementColor;
+            _info.text = TMPUtils.CustomParse(data.information);
+            _infoPanel.color = data.elementColor;
+
         }
         public void SetDescriptionUIHovered(int index)
         {
@@ -44,12 +59,14 @@ namespace Cardinals
             _diceDescription.transform.GetChild(index).GetComponent<Outline>().enabled = true;
             _diceDescription.SetActive(true);
             _rerollPanel.SetActive(true);
+            _infoPanel.gameObject.SetActive(true);
         }
 
         public void SetDescriptionUIRestored()
         {
             _diceDescription.SetActive(false);
             _rerollPanel.SetActive(false);
+            _infoPanel.gameObject.SetActive(false);
         }
 
         private void ResetOutline()

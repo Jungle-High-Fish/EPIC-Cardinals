@@ -160,8 +160,9 @@ namespace Util {
             string result = "";
 
             string[] substrings = text.Split('<', '>');
-            
-            int tagFlag = text[0] == '<' ? 0 : 1;
+
+            //int tagFlag = text[0] == '<' ? 0 : 1;
+            int tagFlag = 1;
             for (int i = 0; i < substrings.Length; i++) {
                  if (i % 2 == tagFlag) {
                     var targetTag = substrings[i].Replace(" ", "");
