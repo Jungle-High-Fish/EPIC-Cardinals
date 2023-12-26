@@ -105,7 +105,7 @@ namespace Cardinals
                 d.EnableCardUI();
             }
             SetDiceSelectable(true);
-            StartCoroutine(RollAllDice());
+
             _canActionUse = false;
             if (!_lastDiceUsedForAction && _newDiceUseMod)
             {
@@ -116,6 +116,9 @@ namespace Cardinals
             _continuousUseCount = 0;
             _state = CardState.Idle;
             UpdateDiceState(-1, true);
+
+            yield return RollAllDice();
+            
             yield break;
         }
 
@@ -124,14 +127,27 @@ namespace Cardinals
         {
             SetDiceSelectable(false);
             //StartCoroutine(DiscardAll(0, CardAnimationType.TurnEnd));
+            bool[] discarded = new bool[_dicesUI.Count];
+            for (int i = 0; i < _dicesUI.Count; i++)
+            {
+                discarded[i] = false;
+            }
+            
             for(int i = 0; i < _dicesUI.Count; i++)
             {
-                if (_dicesUI[i].IsDiscard)
+                if (_dicesUI[i].IsDiscard) {
+                    discarded[i] = true;
                     continue;
-
-                StartCoroutine(Discard(i, DiceAnimationType.UseMove, () => { }));
+                }
+                
+                int target = i;
+                StartCoroutine(Discard(i, DiceAnimationType.UseMove, () => { }, () => {
+                    discarded[target] = true;
+                }));
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitUntil(() => discarded.All(x => x == true));
+
+            yield return new WaitForSeconds(0.2f);
             yield break;
         }
 
@@ -323,7 +339,7 @@ namespace Cardinals
             SetDiceSelectable(true);
         }
 
-        private IEnumerator Discard(int index, DiceAnimationType animationType, System.Action changeDiscardState)
+        private IEnumerator Discard(int index, DiceAnimationType animationType, Action changeDiscardState, Action onDiscarded=null)
         {
             _dicesUI[index].IsDiscard = true;
             _dicesUI[index].IsSelect = false;
@@ -334,6 +350,7 @@ namespace Cardinals
             _dicesUI[index].gameObject.SetActive(false);
 
             changeDiscardState?.Invoke();
+            onDiscarded?.Invoke();
         }
 
 
