@@ -99,7 +99,7 @@ namespace Cardinals.BoardEvent.Shop
         {
             for (int i = 0; i < count; i++)
             {
-                PotionType potionType =  (PotionType)Random.Range(1, Enum.GetNames(typeof(PotionType)).Length);
+                PotionType potionType = GameManager.I.Stage.GetRandomPotion();
                 Potion potion = EnumHelper.GetPotion(potionType);
                 
                 var obj = Instantiate(_shopItemPrefab, _potionParentTr);

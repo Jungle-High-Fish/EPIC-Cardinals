@@ -24,6 +24,7 @@ namespace Cardinals.BoardEvent.Alchemy
         [SerializeField] private GameObject _rollingShield;
         [SerializeField] private GameObject _resultObj;
         [SerializeField] private Image _resultImg;
+        [SerializeField] private DiceUI _diceUI;
         
         [Header("Info")]
         [SerializeField] private TextMeshProUGUI _eventDescriptionTMP;
@@ -32,12 +33,14 @@ namespace Cardinals.BoardEvent.Alchemy
         private UIDice _selectedUIDice;
         private AlchemyEventDataSO _evtData;
         private bool _isRolling;
+        private bool _cancel;
 
         [Header("EventValue")]
         [SerializeField] private int _allTileExpValue;
         [SerializeField] private int _upMaxHpValue;
         [SerializeField] private int _getMoneyValue;
         [SerializeField] private int _damage;
+
         
         void Start()
         {
@@ -47,9 +50,11 @@ namespace Cardinals.BoardEvent.Alchemy
         
         public IEnumerator Init()
         {
+            _cancel = false;
             gameObject.SetActive(true);
             _rollingShield.SetActive(false);
             _resultObj.SetActive(false);
+            _diceUI.gameObject.SetActive(false);
             
             // 초기화 기존 선택 전체 취소 및 초기화
             for (int i = 0, cnt = _curDiceParentTr.childCount; i < cnt; i++)
@@ -72,8 +77,8 @@ namespace Cardinals.BoardEvent.Alchemy
             
             // 버튼 입력 대기
             _isRolling = false;
-            yield return new WaitUntil(() => _isRolling);
-            yield return Rolling();
+            yield return new WaitUntil(() => _isRolling || _cancel);
+            if(_isRolling) yield return Rolling();
         }
 
         private void B_Rolling() => _isRolling = true;
@@ -81,12 +86,16 @@ namespace Cardinals.BoardEvent.Alchemy
         IEnumerator Rolling()
         {
             _rollingShield.SetActive(true);
+            _diceUI.gameObject.SetActive(true);
+            _diceUI.Init(_selectedUIDice.Data, 0, GameManager.I.Stage.DiceManager);
             
             // 돌림
             var idx = Random.Range(0, _selectedUIDice.Data.DiceNumbers.Count);
             var resultNumber = _selectedUIDice.Data.DiceNumbers[idx];
 
-            yield return new WaitForSeconds(1f);
+
+            yield return _diceUI.RollDiceUI(resultNumber);
+            yield return new WaitForSeconds(.5f);
 
             // 결과 처리
             _resultObj.SetActive(true);
@@ -148,6 +157,7 @@ namespace Cardinals.BoardEvent.Alchemy
         
         void B_Cancel()
         {
+            _cancel = true;
             gameObject.SetActive(false);
         }
     }
