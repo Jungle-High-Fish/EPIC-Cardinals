@@ -29,6 +29,8 @@ namespace Cardinals
         private DiceDescription _diceDescription;
         private Animator _diceAnimator;
 
+        [SerializeField] private bool isJustDisplay; 
+
         public int Index
         {
             get => _diceIndex;
@@ -236,7 +238,7 @@ namespace Cardinals
 
         private void Update()
         {
-            MoveCardUI();
+            if(!isJustDisplay) MoveCardUI();
         }
     }
 }
