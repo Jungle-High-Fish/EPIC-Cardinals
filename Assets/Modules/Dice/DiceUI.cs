@@ -128,7 +128,7 @@ namespace Cardinals
             _diceAnimator.runtimeAnimatorController = ResourceLoader.LoadAnimatorController(_dice.DiceType.ToString() + "DiceAnimator");
             _diceAnimator.enabled = true;
             _diceAnimator.Play("Roll");
-            yield return new WaitUntil(() => _diceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f);
+            yield return new WaitUntil(() => _diceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
             yield return null;
             _diceAnimator.enabled = false;
 
@@ -154,6 +154,18 @@ namespace Cardinals
             DiceDescription.SetDescriptionUIRestored();
 
         }
+
+        private void Reroll()
+        {
+            if (GameManager.I.Player.PlayerInfo.Gold <= 0)
+            {
+                GameManager.I.Player.Bubble.SetBubble("���� ����...");
+                return;
+            }
+            GameManager.I.Player.PlayerInfo.UseGold(1);
+            _diceManager.Roll(Index);
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if(eventData.button== PointerEventData.InputButton.Left)
@@ -175,13 +187,7 @@ namespace Cardinals
 
             if(eventData.button == PointerEventData.InputButton.Right)
             {
-                if (GameManager.I.Player.PlayerInfo.Gold <= 0)
-                {
-                    GameManager.I.Player.Bubble.SetBubble("���� ����...");
-                    return;
-                }
-                GameManager.I.Player.PlayerInfo.UseGold(1);
-                _diceManager.Roll(Index);
+                Reroll();
             }
             
         }
