@@ -23,8 +23,8 @@ namespace Cardinals.Game
             _stageEnterAlert = GetComponentInChildren<UIStageEnterAlert>();
             _stageMap = GetComponentInChildren<UIStageMap>();
             
-            _stageEnterAlert.gameObject.SetActive(false);
-            _stageMap.gameObject.SetActive(false);
+            _stageEnterAlert?.gameObject.SetActive(false);
+            _stageMap?.gameObject.SetActive(false);
         }
 
         public IEnumerator Init(Stage stage, Action onComplete=null)

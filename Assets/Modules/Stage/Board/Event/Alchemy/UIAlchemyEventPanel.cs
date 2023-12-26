@@ -87,7 +87,7 @@ namespace Cardinals.BoardEvent.Alchemy
         {
             _rollingShield.SetActive(true);
             _diceUI.gameObject.SetActive(true);
-            _diceUI.Init(_selectedUIDice.Data, 0, GameManager.I.Stage.DiceManager);
+            _diceUI.Init(_selectedUIDice.Data, 0, null);
             
             // 돌림
             var idx = Random.Range(0, _selectedUIDice.Data.DiceNumbers.Count);

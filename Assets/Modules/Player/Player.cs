@@ -360,47 +360,26 @@ namespace Cardinals
 
         void SetFlipOnMoveByPosition(Tile moveTile)
         {
-            bool filpX = true; // false일 때, 좌측을 바라봄
-
-            var onTilePivot = (_onTile.transform.position.x + _onTile.transform.position.z) / 2;
-            var nextTilePivot = (moveTile.transform.position.x + moveTile.transform.position.z) / 2;
-
-            filpX = onTilePivot < nextTilePivot;
-            Renderers.ForEach(r => Flip(r, filpX));
-
-            var enemy = GameManager.I.Stage.Enemies.FirstOrDefault();
-            if (enemy != null)
+            bool filpX = ComparePivot(_onTile.transform, moveTile.transform); // false일 때, 좌측을 바라봄
+            Flip(filpX);
+            
+            if (GameManager.I.Stage.Enemies.Any())
             {
-                var enemyPivot = (enemy.transform.position.x + enemy.transform.position.z) / 2;
-                bool enemyFlipX = enemyPivot < nextTilePivot;
-                GameManager.I.Stage.Enemies.ForEach(e => Flip(e.Renderers.First(), enemyFlipX));
+                foreach (BaseEnemy enemy in GameManager.I.Stage.Enemies)
+                {
+                    bool enemyFlipX = ComparePivot(enemy.transform, moveTile.transform);
+                    enemy.Flip(enemyFlipX, _defaultRotate);
+                }
             }
         }
 
         void SetFlipTowardEnemy()
         {
-            var enemy = GameManager.I.Stage.Enemies.FirstOrDefault();
-            if (enemy != null)
+            if (GameManager.I.Stage.Enemies.Any())
             {
-                var playerPivot = (transform.position.x + transform.position.z) / 2;
-                var enemyPivot = (enemy.transform.position.x + enemy.transform.position.z) / 2;
-                bool flipX = playerPivot < enemyPivot;
-            
-                Renderers.ForEach(r => Flip(r, flipX));
-            }
-        }
-
-        void Flip(SpriteRenderer renderer,  bool filpX)
-        {
-            if (renderer.flipX != filpX)
-            {
-                renderer.transform.DORotate(new Vector3(0, 180, 0), 0.25f, RotateMode.LocalAxisAdd)
-                    .SetEase(Ease.InCirc)
-                    .OnComplete(() =>
-                    {
-                        renderer.flipX = filpX;
-                        renderer.transform.rotation = _defaultRotate;
-                    });
+                var enemy = GameManager.I.Stage.Enemies.First();
+                bool flipX = ComparePivot(transform, enemy.transform);
+                Flip(flipX);
             }
         }
 

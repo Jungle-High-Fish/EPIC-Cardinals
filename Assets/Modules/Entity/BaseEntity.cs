@@ -85,12 +85,16 @@ namespace Cardinals
 
         [Header("Render")]
         [SerializeField] private SpriteRenderer[] _renderers;
-
         public SpriteRenderer[] Renderers
         {
             get => _renderers;
-            set => _renderers = value;
+            set
+            {
+                _renderers = value;
+                _defaultRotate = Renderers.First().transform.rotation;
+            }
         }
+        protected Quaternion _defaultRotate { get; private set; }
         
         [ShowInInspector] private int _defenseCount;
         public Action<int> UpdateDefenseEvent { get; set; }
@@ -277,5 +281,36 @@ namespace Cardinals
             AddBuffEvent?.Invoke(buff);
         }
         #endregion
+        
+        
+
+        /// <summary>
+        /// 두 transform의 위치를 비교하여, tr2가 tr1보다 우측에 있다면 false를 반환
+        /// </summary>
+        /// <returns></returns>
+        protected bool ComparePivot(Transform tr1, Transform tr2)
+        {
+            var pivot1 = (tr1.position.x + tr1.position.z) / 2;
+            var pivot2 = (tr2.position.x + tr2.position.z) / 2;
+
+            return pivot1 < pivot2;
+        }
+        
+        public virtual void Flip(bool filpX,  Quaternion quat = default)
+        {
+            foreach (SpriteRenderer renderer in Renderers)
+            {
+                if (renderer.flipX != filpX)
+                {
+                    renderer.transform.DORotate(new Vector3(0, 180, 0), 0.25f, RotateMode.LocalAxisAdd)
+                        .SetEase(Ease.InCirc)
+                        .OnComplete(() =>
+                        {
+                            renderer.flipX = filpX;
+                            renderer.transform.rotation = quat == default ? _defaultRotate : quat;
+                        });
+                }
+            }
+        }
     }
 }
