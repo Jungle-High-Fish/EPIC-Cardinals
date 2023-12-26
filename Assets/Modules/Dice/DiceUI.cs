@@ -129,6 +129,7 @@ namespace Cardinals
             _diceAnimator.enabled = true;
             _diceAnimator.Play("Roll");
             yield return new WaitUntil(() => _diceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f);
+            yield return null;
             _diceAnimator.enabled = false;
 
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();

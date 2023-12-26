@@ -291,7 +291,7 @@ namespace Cardinals
                         break;
                     }
                 }
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.15f);
             }
             _dicesUI.Sort((p1, p2) => p1.Index.CompareTo(p2.Index));
         }
