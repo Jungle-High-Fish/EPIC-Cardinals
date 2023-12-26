@@ -24,10 +24,11 @@ namespace Cardinals
         private DiceManager _diceManager;
         ComponentGetter<Image> _image
                 = new ComponentGetter<Image>(TypeOfGetter.This);
+        [SerializeField] private Image _diceUIRenderer;
         [SerializeField] private TextMeshProUGUI _numberText;
-        private DiceAnimation _diceAnimation;
+        [SerializeField] private DiceAnimation _diceAnimation;
         private DiceDescription _diceDescription;
-        private Animator _diceAnimator;
+        [SerializeField] private Animator _diceAnimator;
 
         [SerializeField] private bool isJustDisplay; 
 
@@ -97,12 +98,10 @@ namespace Cardinals
             _diceManager = diceManager;
             _isSelectable = true;
             _diceUIPos = (transform as RectTransform).anchoredPosition;
-            _diceAnimation = GetComponent<DiceAnimation>();
             _diceDescription = GetComponent<DiceDescription>();
-            _diceAnimator = GetComponent<Animator>();
             
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + "1";
-            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
+            _diceUIRenderer.sprite = ResourceLoader.LoadSprite(path);
 
         }
 
@@ -116,17 +115,17 @@ namespace Cardinals
 
         public void UpdateDiceUI(Dice dice)
         {
-            _image.Get(gameObject).color = new Color(1, 1, 1, 1);
+            _diceUIRenderer.color = new Color(1, 1, 1, 1);
             _dice = dice;
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + _dice.RollResultNumber.ToString();
             Sprite sprite = ResourceLoader.LoadSprite(path);
-            _image.Get(gameObject).sprite = sprite;
+            _diceUIRenderer.sprite = sprite;
             //_image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
         }
 
         public IEnumerator RollDiceUI(int number, Action onCompleted=null)
         {
-            _image.Get(gameObject).color = new Color(1, 1, 1, 1);
+            _diceUIRenderer.color = new Color(1, 1, 1, 1);
             _diceAnimator.runtimeAnimatorController = ResourceLoader.LoadAnimatorController(_dice.DiceType.ToString() + "DiceAnimator");
             _diceAnimator.enabled = true;
             _diceAnimator.Play("Roll");
@@ -136,8 +135,8 @@ namespace Cardinals
             _diceAnimator.enabled = false;
 
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
-            _image.Get(gameObject).sprite = ResourceLoader.LoadSprite(path);
-            transform.DOScale(1f, 0.3f).From(1.3f).SetEase(Ease.InBack);
+            _diceUIRenderer.sprite = ResourceLoader.LoadSprite(path);
+            _diceUIRenderer.transform.DOScale(1f, 0.3f).From(1.3f).SetEase(Ease.InBack);
             onCompleted?.Invoke();
         }
 
@@ -145,7 +144,7 @@ namespace Cardinals
         {
             IsDiscard = false;
             GetComponent<RectTransform>().anchoredPosition = _diceUIPos;
-            _image.Get(gameObject).color = new Color(1, 1, 1, 0);
+            _diceUIRenderer.color = new Color(1, 1, 1, 0);
             transform.localScale = new Vector3(1, 1, 1);
             gameObject.SetActive(true);
         }
@@ -178,6 +177,10 @@ namespace Cardinals
 
         }
 
+        public void InitRenderer()
+        {
+            _diceUIRenderer.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
         public void OnPointerDown(PointerEventData eventData)
         {
             if (!CheckCanMove()) return;
@@ -187,7 +190,7 @@ namespace Cardinals
             {
                 if (_diceManager.State != CardState.Idle)
                     return;
-                
+
 
                 transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
                 _diceManager.SelectCardIndex = Index;
@@ -239,7 +242,7 @@ namespace Cardinals
         {
             if (!_isDiscard && _isSelectable&&!_isSelect)
             {
-                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y + 15f, 0.1f);
+                _diceUIRenderer.GetComponent<RectTransform>().DOAnchorPosY(15f, 0.1f);
                 DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex);
             }
 
@@ -250,7 +253,7 @@ namespace Cardinals
             if (!_isDiscard && _isSelectable)
             {
 
-                (transform as RectTransform).DOAnchorPosY(_diceUIPos.y, 0.1f);
+                _diceUIRenderer.GetComponent<RectTransform>().DOAnchorPosY(0, 0.1f);
                 DiceDescription.SetDescriptionUIRestored();
             }
 
