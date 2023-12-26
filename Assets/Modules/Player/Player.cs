@@ -109,6 +109,7 @@ namespace Cardinals
 
             yield break;
         }
+        
         public override IEnumerator EndTurn()
         {
             yield return base.EndTurn(); // 버프/디버프 소모
