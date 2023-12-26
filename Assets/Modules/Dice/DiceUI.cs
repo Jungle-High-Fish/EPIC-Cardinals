@@ -180,8 +180,8 @@ namespace Cardinals
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (!_isSelectable)
-                return;
+            if (!CheckCanMove()) return;
+            if (!_isSelectable) return;
 
             if (eventData.button== PointerEventData.InputButton.Left)
             {
@@ -207,11 +207,13 @@ namespace Cardinals
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!CheckCanMove()) return;
             SetCardUIHovered();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!CheckCanMove()) return;
             SetCardUIRestore();
         }
 
@@ -254,9 +256,19 @@ namespace Cardinals
 
         }
 
+        private bool CheckCanMove()
+        {
+            bool result = true;
+            result &= _diceManager != null;
+            
+            return result;
+        }
         private void Update()
         {
-            if(!isJustDisplay) MoveCardUI();
+            if (CheckCanMove())
+            {
+                MoveCardUI();
+            }
         }
     }
 }
