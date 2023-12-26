@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693be6403982f9b4da71d8c7b536352a, type: 3}
   m_Name: BlessSelect
   m_EditorClassIdentifier: 
-  TutorialName: BlessSelect
-  Title: "\uBCF4\uC0C1 - \uCD95\uBCF5 \uC120\uD0DD"
+  TutorialName: RewardSelect
+  Title: "\uBCF4\uC0C1\uC774\uC5D0\uC694!"
   Quests:
-  - Title: "\uCD95\uBCF5 \uC120\uD0DD"
-    Description: "\uCD95\uD558\uD569\uB2C8\uB2E4! \uBCF4\uC0C1\uC73C\uB85C \uCD95\uBCF5\uC744
-      \uC120\uD0DD\uD558\uACE0 \uC5EC\uC815\uC744 \uC774\uC5B4\uAC00\uC138\uC694!"
+  - Title: "\uBCF4\uC0C1 \uC120\uD0DD"
+    Description: "\uCD95\uD558\uD569\uB2C8\uB2E4! \uBCF4\uC0C1\uC744 \uBC1B\uACE0(\uC548
+      \uBC1B\uC544\uB3C4 \uB3FC\uC694!), \uC5EC\uC815\uC744 \uC774\uC5B4\uAC00\uC138\uC694!"
     TargetQuests: 1
-    QuestType: 4
+    QuestType: 5
     HasCardSequence: 0
     NeedCardSequence: []
   Cards: 

@@ -201,6 +201,7 @@ namespace Cardinals
 
             if(eventData.button == PointerEventData.InputButton.Right)
             {
+                GameManager.I.Player.Bubble.SetBubble("튜토리얼에서는 리롤할 수 없어...");
                 StartCoroutine(Reroll());
             }
             

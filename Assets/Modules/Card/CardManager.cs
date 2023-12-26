@@ -156,7 +156,7 @@ namespace Cardinals
 
             UpdateCardState(-1, true);
 
-            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
 
             if (cardSequenceCheck.hasSequence) {
                 SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
@@ -166,7 +166,7 @@ namespace Cardinals
         public void SetCardSelectable(bool isSelectable)
         {
             if (isSelectable == true && _isTutorial) {
-                var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+                var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                 if (cardSequenceCheck.hasSequence) {
                     SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
                     return;
@@ -386,7 +386,7 @@ namespace Cardinals
                     int useNumber = _handCards[_selectCardIndex].CardNumber;
                     _selectedNumber = useNumber;
                     if (_isTutorial) {
-                        var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+                        var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber) {
                             goto DismissCards;
                         }
@@ -477,7 +477,7 @@ namespace Cardinals
 
         private void CheckTutorialStateForCard(int useNumber, MouseState mouseState) {
             (GameManager.I.Stage.CurEvent as TutorialEvent).CheckCardQuest(useNumber, mouseState);
-            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
 
             if (cardSequenceCheck.hasSequence) {
                 SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);

@@ -15,14 +15,17 @@ namespace Cardinals.Game
     [CreateAssetMenu(fileName = "BattleEvent", menuName = "Cardinals/Event/Battle")]
     public class BattleEvent: BaseEvent
     {
-        public int Turn => _turn;
-        public int Round => _round;
+        public virtual int Turn => _turn;
+        public virtual int Round => _round;
         public Tile RoundStartTile => _roundStartTile;
 
-        [SerializeField, InlineEditor] private EnemyDataSO[] _enemyList;
-        private int _turn = 1;
-        private int _round = 0;
-        private Tile _roundStartTile;
+        [SerializeField, InlineEditor] protected EnemyDataSO[] _enemyList;
+        protected int _turn = 1;
+        protected int _round = 0;
+        protected Tile _roundStartTile;
+
+        protected bool CheckPlayerWin => !GameManager.I.CurrentEnemies.Any();
+        protected bool CheckEnemyWin => GameManager.I.Player.Hp == 0;
 
         public override IEnumerator Flow(StageController stageController)
         {
@@ -118,6 +121,8 @@ namespace Cardinals.Game
                 
                 // 플레이어 턴 종료 처리
                 yield return player.EndTurn();
+
+                // 적 턴 종료 처리
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
                     yield return enemies[i].EndTurn();
@@ -143,14 +148,10 @@ namespace Cardinals.Game
             player.HomeReturnEvent -= OnPlayerRound;
         }
 
-        private bool CheckPlayerWin => !GameManager.I.CurrentEnemies.Any();
-
-        private bool CheckEnemyWin => GameManager.I.Player.Hp == 0;
-
         /// <summary>
         /// 몬스터 초기화
         /// </summary>
-        private void InitEnemy(List<BaseEnemy> enemies)
+        protected void InitEnemy(List<BaseEnemy> enemies, Action onEnemyDie=null)
         {
             Vector3[] enemyPositions = GameManager.I.Stage.Board.SetEnemyNumber(_enemyList.Length);
             
@@ -168,22 +169,22 @@ namespace Cardinals.Game
                     }
                     else
                     {
-                        
                         GameManager.I.Next();
                     }
-                        
+
+                    onEnemyDie?.Invoke();   
                 };
                 
                 enemies.Add(enemy);
             }
         }
 
-        private void OnPlayerRound() {
+        protected void OnPlayerRound() {
             _round++;
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
         }
         
-        private IEnumerator SummonsAction()
+        protected IEnumerator SummonsAction()
         {
             var summons = GameManager.I.Stage.BoardObjects;
             for (int i = summons.Count - 1; i >= 0; i--)
@@ -194,7 +195,7 @@ namespace Cardinals.Game
             yield return null;
         }
 
-        private void RemoveSummons()
+        protected void RemoveSummons()
         {
             var summons = GameManager.I.Stage.BoardObjects;
             for (int i = summons.Count - 1; i >= 0; i--)
@@ -207,7 +208,7 @@ namespace Cardinals.Game
         /// 플레이어 전리품 획득 대기
         /// </summary>
         /// <param name="rewards"></param>
-        IEnumerator WaitReward(EnemyGradeType grade)
+        protected IEnumerator WaitReward(EnemyGradeType grade)
         {
             GameManager.I.UI.UIEndTurnButton.Activate(true);
             

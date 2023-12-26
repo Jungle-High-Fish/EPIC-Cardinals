@@ -550,6 +550,7 @@ namespace Cardinals.Enums {
         TileMagicSelect,
         KillMonster,
         EndTurn,
-        BlessSelect
+        BlessSelect,
+        RewardSelect
     }
 }
