@@ -11,7 +11,7 @@ namespace Cardinals.Game {
     {
         [Header("Component")]
         [SerializeField] private Transform _mapGridTr;
-        [SerializeField] private Transform _eventListTr;
+        [SerializeField] private RectTransform _eventListTr;
         [SerializeField] private Transform _playerIconTr;
         [SerializeField] private Button _mapBTN;
 
@@ -30,10 +30,10 @@ namespace Cardinals.Game {
         public void Init(Stage stage) {
             gameObject.SetActive(true);
             DestroyAllNodes();
-            
-            Transform parent = _eventListTr;
 
-            float interval = (parent.localPosition.magnitude * 2) / (stage.Events.Length - 1);
+            RectTransform parent = _eventListTr;
+
+            float interval = parent.sizeDelta.x / (stage.Events.Length - 1);
 
             InstantiateEventItem(parent, stage.Events[0], 0);
             for (int i = 1, cnt = stage.Events.Length; i < cnt; i++)
