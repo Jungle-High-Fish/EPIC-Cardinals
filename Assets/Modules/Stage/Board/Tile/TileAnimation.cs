@@ -44,6 +44,13 @@ namespace Cardinals.Board {
 			}
 		}
 
+		public void Stop(TileAnimationType animationType) {
+			_animationDict[animationType] = (_animationDict[animationType].anim, _animationDict[animationType].time, 0);
+			if (_animationDict[animationType].anim.IsPlaying()) {
+				_animationDict[animationType].anim.Complete(false);
+			}
+		}
+
 		public float Play(TileAnimationType animationType, bool isLoop = false) {
 			if (_animationDict[animationType].anim.IsPlaying()) {
 				_animationDict[animationType] = (

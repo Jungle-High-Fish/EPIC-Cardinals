@@ -17,7 +17,7 @@ using Random = UnityEngine.Random;
 namespace Cardinals.Board {
 
     public class Board: MonoBehaviour {
-        public Tile this[int x] => _tileSequence[x];
+        public Tile this[int x] => _tileSequence[x % _tileSequence.Count];
         public Tile this[int x, int y] => _boardBuilder is NormalBoardBuilder ? (_boardBuilder as NormalBoardBuilder)[x, y] : null;
         public List<Tile> TileSequence => _tileSequence;
         public bool IsBoardSquare => _boardBuilder is NormalBoardBuilder;
