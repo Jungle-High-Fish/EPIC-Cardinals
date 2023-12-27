@@ -27,6 +27,7 @@ namespace Cardinals
         private int _diceUsedCountOnThisTurn;
 
         #region Tutorial
+        public bool IsTutorial => _isTutorial;
         private bool _isTutorial;
         #endregion
 
@@ -99,7 +100,6 @@ namespace Cardinals
         [Button]
         public IEnumerator OnTurn()
         {
-
             foreach(DiceUI d in _dicesUI)
             {
                 d.EnableCardUI();
@@ -119,6 +119,30 @@ namespace Cardinals
             UpdateDiceState(-1, true);
 
             yield return RollAllDice();
+            
+            yield break;
+        }
+
+        public IEnumerator OnTutorialTurn(int[] diceNumbers) {
+            foreach(DiceUI d in _dicesUI)
+            {
+                d.EnableCardUI();
+            }
+            SetDiceSelectable(true);
+
+            _canActionUse = false;
+            if (!_lastDiceUsedForAction && _newDiceUseMod)
+            {
+                _canActionUse = true;
+            }
+
+            _diceUsedCountOnThisTurn = 0;
+            _continuousUseCount = 0;
+            _state = CardState.Idle;
+            UpdateDiceState(-1, true);
+
+            yield return TutorialRoll(diceNumbers);
+            SetDiceSelectable(true);
             
             yield break;
         }
@@ -165,14 +189,22 @@ namespace Cardinals
         {
             yield return EndTurn();
         }
+
         [Button]
-        public void TutorialRoll(int[] diceNumbers)
+        public IEnumerator TutorialRoll(int[] diceNumbers)
         {
+            bool[] rollCompleted = new bool[_dicesUI.Count];
+            for (int i = 0; i < _dicesUI.Count; i++)
+            {
+                rollCompleted[i] = false;
+            }
+
             for(int i = 0; i < diceNumbers.Length; i++)
             {
                 if (diceNumbers[i] == -1)
                 {
                     StartCoroutine(Discard(i, DiceAnimationType.Empty, () => { }));
+                    rollCompleted[i] = true;
                 }
 
                 else
@@ -181,48 +213,29 @@ namespace Cardinals
                     int rollResult = _dices[i].DiceNumbers[resultIndex];
                     _dices[i].RollResultIndex = resultIndex;
                     _dices[i].RollResultNumber = rollResult;
-                    StartCoroutine(_dicesUI[i].RollDiceUI(rollResult));
+
+                    int target = i;
+                    StartCoroutine(_dicesUI[i].RollDiceUI(rollResult, () => {
+                        rollCompleted[target] = true;
+                    }));
                     _dicesUI[i].DiceDescription.SetDescriptionUIRestored();
                 }
             }
+
+            yield return new WaitUntil(() => rollCompleted.All(x => x == true));
         }
 
-        public void DrawHandDecksForTutorial(int[] cardNumbers)
-        {
-           /* for (int i = 0; i < cardNumbers.Length; i++)
-            {
-                AddCard(cardNumbers[i], true, CardPileType.Hand);
-            }
-
-            _canActionUse = false;
-            if (!_lastCardUsedForAction && _newCardUseMod)
-            {
-                _canActionUse = true;
-            }
-
-            _cardUsedCountOnThisTurn = 0;
-            _continuousUseCount = 0;
-
-            UpdateCardState(-1, true);
-
-            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
-
-            if (cardSequenceCheck.hasSequence)
-            {
-                SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
-            }*/
-        }
         public void SetDiceSelectable(bool isSelectable)
         {
-            /*if (isSelectable == true && _isTutorial)
+            if (isSelectable == true && _isTutorial)
             {
-                var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+                var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                 if (cardSequenceCheck.hasSequence)
                 {
                     SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
                     return;
                 }
-            }*/
+            }
 
             foreach (DiceUI d in _dicesUI)
             {
@@ -290,8 +303,6 @@ namespace Cardinals
             StartCoroutine(_dicesUI[index].RollDiceUI(rollResult,onCompleted));
             _dicesUI[index].DiceDescription.SetDescriptionUIRestored();
         }
-
-       
 
         [Button]
         public IEnumerator SortDices()
@@ -417,14 +428,16 @@ namespace Cardinals
                     _selectedNumber = useNumber;
                     if (_isTutorial)
                     {
-                        var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+                        var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber)
                         {
+                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
                             goto DismissCards;
                         }
 
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != _mouseState)
                         {
+                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
                             goto DismissCards;
                         }
                     }
@@ -508,11 +521,11 @@ namespace Cardinals
             }
         }
 
-        private void SetCardUnselectableExcept(int cardNumber)
+        private void SetCardUnselectableExcept(int diceNumber)
         {
-            /*foreach (DiceUI d in _dicesUI)
+            foreach (DiceUI d in _dicesUI)
             {
-                if (d.Card.CardNumber == cardNumber)
+                if (d.Dice.RollResultNumber == diceNumber)
                 {
                     d.IsSelectable = true;
                 }
@@ -520,18 +533,18 @@ namespace Cardinals
                 {
                     d.IsSelectable = false;
                 }
-            }*/
+            }
         }
 
         private void CheckTutorialStateForCard(int useNumber, MouseState mouseState)
         {
-            /*(GameManager.I.Stage.CurEvent as TutorialEvent).CheckCardQuest(useNumber, mouseState);
-            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasCardSequence();
+            (GameManager.I.Stage.CurEvent as TutorialEvent).CheckCardQuest(useNumber, mouseState);
+            var cardSequenceCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
 
             if (cardSequenceCheck.hasSequence)
             {
                 SetCardUnselectableExcept(cardSequenceCheck.targetSequence.CardNumber);
-            }*/
+            }
         }
 
         public IEnumerator DiceUseMove(int num)

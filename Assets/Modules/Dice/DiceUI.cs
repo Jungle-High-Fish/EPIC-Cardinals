@@ -1,4 +1,5 @@
 using Cardinals.Enums;
+using Cardinals.Tutorial;
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -184,7 +185,11 @@ namespace Cardinals
         public void OnPointerDown(PointerEventData eventData)
         {
             if (!CheckCanMove()) return;
-            if (!_isSelectable) return;
+            if (!_isSelectable) {
+                if (GameManager.I.Stage.CurEvent is TutorialEvent && GameManager.I.IsWaitingForNext) {
+                    GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                }
+            }
 
             if (eventData.button== PointerEventData.InputButton.Left)
             {
@@ -204,6 +209,11 @@ namespace Cardinals
 
             if(eventData.button == PointerEventData.InputButton.Right)
             {
+                if (GameManager.I.Stage.CurEvent is TutorialEvent)
+                {
+                    GameManager.I.Player.Bubble.SetBubble("튜토리얼에서는 리롤할 수 없어...");
+                    return;
+                }
                 StartCoroutine(Reroll());
             }
             

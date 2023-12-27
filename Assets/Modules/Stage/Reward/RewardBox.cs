@@ -5,6 +5,7 @@ using System.Linq;
 using Cardinals;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Cardinals.Tutorial;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -133,6 +134,9 @@ public class RewardBox : MonoBehaviour
     
     void OnMouseDown()
     {
+        if (GameManager.I.Stage.CurEvent is TutorialEvent tutorial) {
+            tutorial.CheckRewardSelectQuest();
+        }
         GameManager.I.UI.UIRewardPanel.On();
     }
     
