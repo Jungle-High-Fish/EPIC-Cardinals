@@ -24,6 +24,7 @@ namespace Cardinals
         private bool _lastDiceUsedForAction;
         private bool _isMouseOnDiceDeck;
         private int _continuousUseCount;
+        private int _DiceUsedForMoveCountOnThisTurn;
         private int _diceUsedCountOnThisTurn;
 
         #region Tutorial
@@ -112,7 +113,7 @@ namespace Cardinals
             {
                 _canActionUse = true;
             }
-
+            _DiceUsedForMoveCountOnThisTurn = 0;
             _diceUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
             _state = CardState.Idle;
@@ -474,6 +475,12 @@ namespace Cardinals
                             yield break;
 
                         case MouseState.Move:
+
+                            if (!CheckUseDiceOnMove())
+                            {
+                                break;
+                            }
+
                             StartCoroutine(DiceUseMove(useNumber));
                             
                             if (_isTutorial)
@@ -548,9 +555,20 @@ namespace Cardinals
             }
         }
 
+        private bool CheckUseDiceOnMove()
+        {
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 1)
+            {
+                GameManager.I.Player.Bubble.SetBubble("슬로우때문에 이동할 수 없어..");
+                return false;
+            }
+            return true;
+        }
+
         public IEnumerator DiceUseMove(int num)
         {
             _diceUsedCountOnThisTurn++;
+            _DiceUsedForMoveCountOnThisTurn++;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
@@ -620,11 +638,6 @@ namespace Cardinals
         {
             bool result = true;
 
-            // if (!_handcardsUI[_selectCardIndex].CanAction)
-            // {
-            //     result = false;
-            // }
-
             if (GameManager.I.Stage.Board.IsBoardSquare) {
                 if (GameManager.I.Player.OnTile.Type == TileType.Start ||
                 GameManager.I.Player.OnTile.Type == TileType.Blank)
@@ -687,12 +700,7 @@ namespace Cardinals
                 target.Hit(3);
             }
 
-            // [�����] ���ο�
-            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
-            {
-                GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 첫 번째 행동이 무시되었어.");
-                Debug.Log("슬로우 걸렸다굴");
-            }
+           
             else
             {
                 yield return GameManager.I.Player.CardAction(num, target);
