@@ -104,6 +104,14 @@ namespace Cardinals
                 }
             }
 
+            if (Input.GetKeyDown(KeyCode.LeftShift)) {
+                if (_ui.UIDebugPanel.IsShow) {
+                    _ui.UIDebugPanel.Hide();
+                } else {
+                    _ui.UIDebugPanel.Show();
+                }
+            }
+
             _steamHandler.EveryFrame();
         }
 

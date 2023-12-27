@@ -117,6 +117,12 @@ namespace Cardinals.Constants {
             public const string Prefabs_Particle_Explosion = "Particle/EEEXPLOSION";
             public const string Prefabs_Particle_LandingDust = "Particle/Feel/DustParticles";
             public const string Prefabs_Particle_HealParticle = "Particle/HealParticle";
+
+            // Test UI
+            public const string Prefabs_UI_DebugDropdown = "UI/Debug/Debug Dropdown";
+            public const string Prefabs_UI_DebugInputField = "UI/Debug/Debug InputField";
+            public const string Prefabs_UI_DebugButton = "UI/Debug/Debug Button";
+            public const string Prefabs_UI_DebugPanel = "UI/Debug/Debug Panel";
             
             // Sprite
             public const string Sprites = "Sprites/";

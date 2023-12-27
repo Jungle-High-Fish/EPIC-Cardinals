@@ -28,8 +28,6 @@ namespace Cardinals
         private bool _isDamagedThisTurn;
         [InlineEditor]
         [SerializeField] private PlayerInfo _playerInfo;
-
-        
         
         private Animator _animator;
         protected override Animator Animator => (_animator ??= GetComponentInChildren<Animator>());
