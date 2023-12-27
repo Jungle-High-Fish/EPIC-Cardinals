@@ -100,6 +100,7 @@ namespace Cardinals.Tutorial
                 // 플레이어 행동
                 if (curTutorial.Quests[_curQuestIndex].QuestType == TutorialQuestType.KillMonster) {
                     yield return diceManager.OnTurn();
+                    GameManager.I.UI.UIEndTurnButton.Activate();
                 } else {
                     int[] diceNumbers = new int[5];
                     for (int i = 0; i < 5; i++) {
