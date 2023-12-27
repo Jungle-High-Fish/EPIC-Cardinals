@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evtType: 1
   objType: 0
-  eventName: Potion Gobline
-  description: "\uD134 \uB2F9 \uC2DC\uACC4\uBC29\uD5A5\uC73C\uB85C 4\uCE78\uC529
-    \uC774\uB3D9\uD569\uB2C8\uB2E4.\r\n\uC811\uCD09 \uC2DC, \uB79C\uB364 \uD3EC\uC158
-    \uD55C\uAC1C\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+  eventName: OBJECT_POTIONGOBLIN_NAME
+  description: OBJECT_POTIONGOBLIN_EXPLAIN
   keepTurnCount: 3
   sprite: {fileID: 21300000, guid: a04f2f9dd660fc84c80bf814a111db9c, type: 3}
   onBoardType: 2
   executeType: 1
   moveCount: 4
+  spec_sprite_1: {fileID: 0}
+  spec_sprite_2: {fileID: 0}
+  spec_sprite_3: {fileID: 0}

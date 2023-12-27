@@ -1,17 +1,105 @@
-ï»¿ID,EN-English,KO-í•œêµ­ì–´
-UI_MAIN_CONTINUE,Continue,ì´ì–´í•˜ê¸°
-UI_MAIN_NEW_START,New,ìƒˆë¡œí•˜ê¸°
-UI_MAIN_START,START,ê²Œì„ ì‹œì‘
-UI_MAIN_BACK,BACK,ë’¤ë¡œ
-UI_MAIN_DICE_SELECT,Dice Select,ì‚¬ìš© ì£¼ì‚¬ìœ„
-UI_GAMESETTING_TITLE,Option,ê²Œì„ ì„¤ì •
-UI_GAMESETTING_FULLSCREEN,Full Screen,ì „ì²´í™”ë©´
-UI_GAMESETTING_RESOLUTION,Resolution,í•´ìƒë„
-UI_GAMESETTING_BGM,BGM,ë°°ê²½ ìŒì•…
-UI_GAMESETTING_LANGUAGE_WARN,"To make the changes effective, please restart the client.",ë³€ê²½ì‚¬í•­ì„ ì ìš©í•˜ë ¤ë©´<br>í´ë¼ì´ì–¸íŠ¸ë¥¼ ì¬ì‹œì‘í•˜ì‹­ì‹œì˜¤.
-UI_GAMESETTING_LANGUAGE,Language,ì–¸ì–´
-UI_GAMESETTING_SFX,SFX,íš¨ê³¼ìŒ
-UI_CLOSE,Close,ë‹«ê¸°
-UI_EXIT_GAME,Quit,ê²Œì„ ì¢…ë£Œ
-UI_ROULETTE_SPIN,SPIN!,ìŠ¤í•€!
-STAGE_SUSPICIOUS_MEADOW,Suspicious Meadow,ìˆ˜ìƒí•œ ì´ˆì›
+ID	EN-English	KO-ÇÑ±¹¾î
+UI_MAIN_CONTINUE	Continue	ÀÌ¾îÇÏ±â
+UI_MAIN_NEW_START	New	»õ·ÎÇÏ±â
+UI_MAIN_START	START	°ÔÀÓ ½ÃÀÛ
+UI_MAIN_BACK	BACK	µÚ·Î
+UI_MAIN_DICE_SELECT	Dice Select	»ç¿ë ÁÖ»çÀ§
+UI_GAMESETTING_TITLE	Option	°ÔÀÓ ¼³Á¤
+UI_GAMESETTING_FULLSCREEN	Full Screen	ÀüÃ¼È­¸é
+UI_GAMESETTING_RESOLUTION	Resolution	ÇØ»óµµ
+UI_GAMESETTING_BGM	BGM	¹è°æ À½¾Ç
+UI_GAMESETTING_LANGUAGE_WARN	"To make the changes effective, please restart the client."	º¯°æ»çÇ×À» Àû¿ëÇÏ·Á¸é<br>Å¬¶óÀÌ¾ğÆ®¸¦ Àç½ÃÀÛÇÏ½Ê½Ã¿À.
+UI_GAMESETTING_LANGUAGE	Language	¾ğ¾î
+UI_GAMESETTING_SFX	SFX	È¿°úÀ½
+UI_CLOSE	Close	´İ±â
+UI_EXIT_GAME	Quit	°ÔÀÓ Á¾·á
+UI_ROULETTE_SPIN	SPIN!	½ºÇÉ!
+STAGE_SUSPICIOUS_MEADOW	Suspicious Meadow	¼ö»óÇÑ ÃÊ¿ø
+TILE_MAGIC_ATTACK_NAME	Attack	°ø°İ
+TILE_MAGIC_ATTACK_EXPLAIN	Attack damage equal to the number on the Dice.	ÁÖ»çÀ§ ´«±İ ¼ö¸¸Å­ ÀûÀ» °ø°İÇÕ´Ï´Ù.
+TILE_MAGIC_DEFENSE_NAME	Defense	¹æ¾î
+TILE_MAGIC_DEFENSE_EXPLAIN	Gain defense equal to the number on the Dice.	ÁÖ»çÀ§ ´«±İ ¼ö¸¸Å­ ¹æ¾î·ÂÀ» ¾ò½À´Ï´Ù.
+TILE_MAGIC_FIRE_NAME	Fire Ball	ÆÄÀÌ¾î º¼
+TILE_MAGIC_FIRE_EXPLAIN	"Each action, fire a fireball at that enemy for <level=2,4,6>damage."	"Çàµ¿ ¸¶´Ù, ÇØ´ç Àû¿¡°Ô ÆÄÀÌ¾îº¼À» ³¯·Á <level=2,4,6>ÀÇ µ¥¹ÌÁö¸¦ Áİ´Ï´Ù"
+TILE_MAGIC_WATER_NAME	Clear Water	¸¼Àº ¹°
+TILE_MAGIC_WATER_EXPLAIN	"Each action, you regain health equal to the number of Dice (Max <level=2,3,4>)."	"Çàµ¿ ¸¶´Ù, ÁÖ»çÀ§ ¼ö¸¸Å­ Ã¼·ÂÀ» È¸º¹ÇÕ´Ï´Ù(ÃÖ´ë <level=2,3,4>)."
+TILE_MAGIC_EARTH_NAME	Rock Armor	¹ÙÀ§ °©¿Ê
+TILE_MAGIC_EARTH_EXPLAIN	"Each action, gain <level=2,4,6>defense."	"Çàµ¿ ¸¶´Ù, <level=2,4,6>ÀÇ ¹æ¾îµµ¸¦ ¾ò½À´Ï´Ù."
+BUFF_BURN_NAME	Burn	È­»ó
+BUFF_BURN_EXPLAIN	"At the end of the turn, take 2 damage."	"ÅÏ Á¾·á ½Ã, 2ÀÇ µ¥¹ÌÁö¸¦ ÀÔ½À´Ï´Ù."
+BUFF_WEAK_NAME	Weak	¾àÈ­
+BUFF_WEAK_EXPLAIN	The damage dealt is reduced by 50%.	ÁÖ´Â ÇÇÇØ°¡ 50% °¨¼ÒÇÕ´Ï´Ù.
+BUFF_ELECTRICSHOCK_NAME	Electricshock	°¨Àü
+BUFF_ELECTRICSHOCK_EXPLAIN	You can use up to 2 dice in a row on a one tile.	ÇÑ Å¸ÀÏ¿¡¼­ ÁÖ»çÀ§¸¦ ¿¬¼ÓÀ¸·Î ÃÖ´ë 2°³±îÁö »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+BUFF_POISON_NAME	Poison	µ¶
+BUFF_POISON_EXPLAIN	"At the end of the turn, take damage equal to the number of stacks."	ÅÏÀÌ ³¡³ª¸é ÁßÃ¸ ¼ö¸¸Å­ ÇÇÇØ¸¦ ¹Ş½À´Ï´Ù.
+BUFF_SLOW_NAME	Slow	µĞÈ­
+BUFF_SLOW_EXPLAIN	"Each turn, you are limited to 2 moves with the dice."	"°¢ ÅÏ, ÀÌµ¿ °¡´É È½¼ö°¡ 2¹øÀ¸·Î Á¦ÇÑµË´Ï´Ù."
+BUFF_HEAL_NAME	Heal	È¸º¹
+BUFF_HEAL_EXPLAIN	"At end of the turn, heal for 3 Health."	"ÅÏ Á¾·á ½Ã, 3ÀÇ Ã¼·ÂÀ» È¸º¹ÇÕ´Ï´Ù."
+BUFF_CONFUSION_NAME	Confusion	È¥¶õ
+BUFF_CONFUSION_EXPLAIN	"When using dice for movement, there's a 50% chance to move backwards."	"ÁÖ»çÀ§¸¦ ÀÌµ¿¿¡ »ç¿ëÇÒ ¶§, 50% È®·ü·Î µÚ·Î ÀÌµ¿ÇÕ´Ï´Ù."
+BUFF_DOLL_NAME	Doll	ÀÎÇü
+BUFF_DOLL_EXPLAIN	"If a doll is present on the board, all damage dealt is equal to 1."	º¸µå¿¡ ÀÎÇüÀÌ ÀÖÀ¸¸é ¸ğµç ÇÇÇØ´Â 1ÀÌ µË´Ï´Ù.
+BUFF_ROTATIONRATE_NAME	Rotationrate	È¸Àü·ü
+BUFF_ROTATIONRATE_EXPLAIN	"Don't take damage from your actions. When you move around the board, take 10 damage."	"À¯ÀúÀÇ Çàµ¿À¸·Î ÇÇÇØ¸¦ ¹ŞÁö ¾Ê½À´Ï´Ù. À¯Àú°¡ º¸µå¸¦ ÇÑ¹ÙÄû µ¹¾ÒÀ» ¶§, 10ÀÇ µ¥¹ÌÁö¸¦ ÀÔ½À´Ï´Ù."
+BUFF_POWERLESS_NAME	Powerless	¹«·Â
+BUFF_POWERLESS_EXPLAIN	Reduces defense gained by 50%.	È¹µæÇÏ´Â ¹æ¾î·ÂÀÌ 50% °¨¼ÒÇÕ´Ï´Ù.
+POTION_JUMP_NAME	Jump Potion	µµ¾à Æ÷¼Ç
+POTION_JUMP_EXPLAIN	Move forward 3 tiles.	¾ÕÀ¸·Î 3Ä­ ÀÌµ¿ÇÕ´Ï´Ù.
+POTION_BACK_NAME	Reverse Potion	ÈÄÁø Æ÷¼Ç
+POTION_BACK_EXPLAIN	Move back 3 tiles.	µÚ·Î 3Ä­ ÀÌµ¿ÇÕ´Ï´Ù.
+POTION_NUM4_NAME	4 Potion	4 Æ÷¼Ç
+POTION_NUM4_EXPLAIN	It has the effect of a normal Dice number of 4.	ÀÏ¹İ ÁÖ»çÀ§ ´«±İ 4ÀÇ È¿°ú¸¦ °®½À´Ï´Ù.
+POTION_NUM3_NAME	3 Potion	3 Æ÷¼Ç
+POTION_NUM3_EXPLAIN	It has the effect of a normal Dice number of 3.	ÀÏ¹İ ÁÖ»çÀ§ ´«±İ 3ÀÇ È¿°ú¸¦ °®½À´Ï´Ù.
+POTION_NUM2_NAME	2 Potion	2 Æ÷¼Ç
+POTION_NUM2_EXPLAIN	It has the effect of a normal Dice number of 2.	ÀÏ¹İ ÁÖ»çÀ§ ´«±İ 2ÀÇ È¿°ú¸¦ °®½À´Ï´Ù.
+POTION_NUM1_NAME	1 Potion	1 Æ÷¼Ç
+POTION_NUM1_EXPLAIN	It has the effect of a normal Dice number of 1.	ÀÏ¹İ ÁÖ»çÀ§ ´«±İ 1ÀÇ È¿°ú¸¦ °®½À´Ï´Ù.
+POTION_HEAL_NAME	Heal Potion 	Èú Æ÷¼Ç
+POTION_HEAL_EXPLAIN	Gain a healing buff for 3 turns.	3ÅÏ µ¿¾È È¸º¹ ¹öÇÁ¸¦ È¹µæÇÕ´Ï´Ù.
+POTION_GROWTH_NAME	Growth Potion	¼ºÀå Æ÷¼Ç
+POTION_GROWTH_EXPLAIN	Increases the level of the tile you are currently stepping on by one level	ÇöÀç ¹â°í ÀÖ´Â Å¸ÀÏÀÇ ·¹º§ÀÌ ÇÑ ´Ü°è Áõ°¡ÇÕ´Ï´Ù.
+OBJECT_POTIONGOBLIN_NAME	Potion Goblin	Æ÷¼Ç °íºí¸°
+OBJECT_POTIONGOBLIN_EXPLAIN	"On contact, get 1 random potion."	"Á¢ÃË ½Ã, ·£´ı Æ÷¼Ç 1°³¸¦ È¹µæÇÕ´Ï´Ù."
+OBJECT_DICEEVENT_NAME	"Dice Event	"	ÁÖ»çÀ§ ÀÌº¥Æ®
+OBJECT_DICEEVENT_EXPLAIN	"On arrival, active a dice event."	"µµÂø ½Ã, ÁÖ»çÀ§ ÀÌº¥Æ®¸¦ ½ÇÇàÇÕ´Ï´Ù."
+OBJECT_ROULETTE_NAME	Roulette	·£´ı µ¹¸²ÆÇ
+OBJECT_ROULETTE_EXPLAIN	"Upon arrival, active a Roulette event."	"µµÂø ½Ã, ·ê·¿ ÀÌº¥Æ®¸¦ ½ÇÇàÇÕ´Ï´Ù."
+OBJECT_RYUKA_NAME	Ryuka	·ùÄ«
+OBJECT_RYUKA_EXPLAIN	"Heals an enemy for 2 Health per Object Turn. <br>On contact, Ryuka disappears."	"¿ÀºêÁ§Æ®ÅÏ ¸¶´Ù Àû¿¡°Ô 2ÀÇ Ã¼·ÂÀ» È¸º¹½ÃÄÑÁİ´Ï´Ù. <br>Á¢ÃË ½Ã, ·ùÄ«°¡ »ç¶óÁı´Ï´Ù."
+OBJECT_FIREBALL_NAME	Ember	ºÒ¾¾
+OBJECT_FIREBALL_EXPLAIN	Contact with the ember inflicts 5 damage.	"Á¢ÃË ½Ã, À¯Àú¿¡°Ô 5ÀÇ µ¥¹ÌÁö¸¦ ÀÔÈ÷°í »ç¶óÁı´Ï´Ù."
+OBJECT_ALCHEMY_NAME	Alchemy	¿¬±İ¼ú
+OBJECT_ALCHEMY_EXPLAIN	"On contact, active a Alchemy event."	"Á¢ÃË ½Ã, ¿¬±İ¼ú ÀÌº¥Æ®¸¦ ½ÇÇàÇÕ´Ï´Ù."
+DICE_NORMAL_NAME	Normal Dice	ÀÏ¹İ ÁÖ»çÀ§
+DICE_NORMAL_DESCRIPTION	It's just dice.	±×³É ÁÖ»çÀ§ÀÔ´Ï´Ù.
+DICE_FIRE_NAME	<element=Fire>  Fire Dice	<element=Fire>  ºÒ ÁÖ»çÀ§
+DICE_FIRE_DESCRIPTION	"When used on a fire tile, adds a <debuff = Burn> Burn debuff on an enemy equal to number of dice."	"ºÒ Å¸ÀÏ¿¡ »ç¿ë ½Ã, Àû¿¡°Ô ÇØ´ç ¼ıÀÚ¸¸Å­ <debuff = Burn> È­»ó µğ¹öÇÁ¸¦ ºÎ¿©ÇÕ´Ï´Ù."
+DICE_WATER_NAME	<element=Water>  Water Dice	<element=Water>  ¹° ÁÖ»çÀ§
+DICE_WATER_DESCRIPTION	"When used on a water tile, adds a <debuff=Weak> Weak debuff on an enemy equal to number of dice"	"¹° Å¸ÀÏ¿¡ »ç¿ë ½Ã, Àû¿¡°Ô ÇØ´ç ¼ıÀÚ¸¸Å­ <debuff=Weak> ¾àÈ­ µğ¹öÇÁ¸¦ ºÎ¿©ÇÕ´Ï´Ù."
+DICE_EARTH_NAME	<element=Earth>  Earth Dice	<element=Earth>  ¶¥ ÁÖ»çÀ§
+DICE_EARTH_DESCRIPTION	"When used on a rock tile, adds a <debuff=Powerless> Powerless debuff on an enemy equal to number of dice"	"¹ÙÀ§ Å¸ÀÏ¿¡ »ç¿ë ½Ã, ÇØ´ç ¼ıÀÚ¸¸Å­ <debuff=Powerless> ¹«·Â µğ¹öÇÁ¸¦ ºÎ¿©ÇÕ´Ï´Ù."
+TILE_CURSE_THUNDERBOLT_NAME	Thunderbolt	º­¶ô
+TILE_CURSE_THUNDERBOLT_EXPLAIN	"When the curse is activated, it strikes the user with a thunderbolt for 7 damage."	"ÀúÁÖ°¡ È°¼ºÈ­µÇ¸é, À¯Àú¿¡°Ô º­¶ôÀ» ³»·ÁÃÄ 7ÀÇ µ¥¹ÌÁö¸¦ Áİ´Ï´Ù."
+TILE_CURSE_LOCK_NAME	Sealed	Àá±è
+TILE_CURSE_LOCK_EXPLAIN	"When the curse is activated, lock this tile. (Unusable) This effect lasts for the duration of the battle."	ÀúÁÖ°¡ È°¼ºÈ­µÇ¸é Å¸ÀÏÀ» Àá±Ş´Ï´Ù. (»ç¿ë ºÒ°¡)<br>ÀÌ È¿°ú´Â ÀüÅõ°¡ ÁøÇàµÇ´Â µ¿¾È Áö¼ÓµË´Ï´Ù.
+TILE_CURSE_EMBER_NAME	Ember	ºÒ¾¾
+TILE_CURSE_EMBER_EXPLAIN	"When the curse is activated, an ember that moves 2 tiles each turn is summoned on this tile. Contact with the ember inflicts 5 damage."	"ÀúÁÖ°¡ È°¼ºÈ­µÇ¸é, ÀÌ Å¸ÀÏ¿¡ ¸Å ÅÏ 2Å¸ÀÏÀ» ÀÌµ¿ÇÏ´Â ºÒ¾¾°¡ ¼ÒÈ¯µË´Ï´Ù.<br>ºÒ¾¾¿Í Á¢ÃËÇÏ¸é 5ÀÇ ÇÇÇØ¸¦ ÀÔ½À´Ï´Ù."
+BLESS_EARTH1_NAME	Rock Debris	¹ÙÀ§ ÀÜÇØ
+BLESS_EARTH1_EXPLAIN	"After the enemy attacks, they take damage equal to the remaining defense."	ÀûÀÇ °ø°İÀÌ ³¡³ª¸é ³²Àº ¹æ¾î·Â¸¸Å­ ÇÇÇØ¸¦ ÀÔ½À´Ï´Ù.
+BLESS_EARTH2_NAME	Unbreakable Rock	±úÁöÁö ¾Ê´Â ¹ÙÀ§
+BLESS_EARTH2_EXPLAIN	"If you have no defense at the end of your turn, you immediately gain 4 defense."	"ÅÏÀÌ ³¡³¯ ¶§ ¹æ¾î·ÂÀÌ ¾ø´Ù¸é, Áï½Ã ¹æ¾î·Â 4¸¦ ¾ò½À´Ï´Ù."
+BLESS_FIRE1_NAME	Scorched Wound	±×À»¸° »óÃ³
+BLESS_FIRE1_EXPLAIN	"Each time you circle the board, your <debuff=Burn>burn debuff damage goes up by 2 for that battle."	"º¸µå¸¦ ÇÑ ¹ÙÄû µ¹ ¶§¸¶´Ù, ÇØ´ç ÀüÅõ¿¡¼­ <debuff=Burn>È­»ó µğ¹öÇÁ µ¥¹ÌÁö°¡ 2 ¾¿ ¿Ã¶ó°©´Ï´Ù."
+BLESS_FIRE2_NAME	Meteor	¸ŞÅ×¿À
+BLESS_FIRE2_EXPLAIN	"When the enemy's burn buff stacks reach 5, reset the stacks to 0 and summon a powerful meteor. (10 damage)      "	"ÀûÀÇ È­»ó ¹öÇÁ ÁßÃ¸ÀÌ 5ÀÌ µÇ¸é, ÁßÃ¸À» 0À¸·Î ¸¸µé°í °­·ÂÇÑ ¸ŞÅ×¿À¸¦ ¼ÒÈ¯ÇÕ´Ï´Ù. (10 µ¥¹ÌÁö)"
+BLESS_WATER1_NAME	Calm Surface	ÀÜÀÜÇÑ ¼ö¸é
+BLESS_WATER1_EXPLAIN	"Each time you circle the board, you heal for the number of laps you've circled in that battle."	º¸µå¸¦ µ¹ ¶§¸¶´Ù ÇØ´ç ÀüÅõ¿¡¼­ µ¹¾Ò´ø ¹ÙÄû ¼ö¸¸Å­ Ã¼·ÂÀ» È¸º¹ÇÕ´Ï´Ù.
+BLESS_WATER2_NAME	Flood	¹ü¶÷
+BLESS_WATER2_EXPLAIN	"When you recover, you attack the enemy with the number you recovered."	"È¸º¹ ½Ã, È¸º¹µÈ ¼öÄ¡¸¸Å­ ÀûÀ» °ø°İÇÕ´Ï´Ù."
+BLESS_WIND1_NAME	Tailwind	¼øÇ³
+BLESS_WIND1_EXPLAIN	"When acting on a tile, you can use a Dice number 1 after of 5 and 6."	"Å¸ÀÏ¿¡¼­ Çàµ¿ÇÒ ¶§, ÁÖ»çÀ§ ´«±İ 5¿Í 6 ´ÙÀ½¿¡ 1À» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù."
+BLESS_WIND2_NAME	Typhoon	ÅÂÇ³
+BLESS_WIND2_EXPLAIN	"For every third action on the tile, you attack an additional 3 damage to the enemy."	Å¸ÀÏ¿¡¼­ ¼¼ ¹øÂ° Çàµ¿À» ÇÒ ¶§¸¶´Ù Àû¿¡°Ô Ãß°¡·Î 3ÀÇ ÇÇÇØ¸¦ Áİ´Ï´Ù.

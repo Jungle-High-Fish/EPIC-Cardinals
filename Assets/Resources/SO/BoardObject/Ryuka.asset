@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evtType: 0
   objType: 2
-  eventName: "\uB958\uCE74"
-  description: "\uC624\uBE0C\uC81D\uD2B8\uD134 \uB9C8\uB2E4 \uC801\uC5D0\uAC8C 2\uC758
-    \uCCB4\uB825\uC744 \uD68C\uBCF5\uC2DC\uCF1C\uC90D\uB2C8\uB2E4.\r\n\uC811\uCD09
-    \uC2DC, \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+  eventName: 'OBJECT_RYUKA_NAME '
+  description: "OBJECT_RYUKA_EXPLAIN\r"
   keepTurnCount: -1
   sprite: {fileID: 21300000, guid: cc636fd4c1522b74696bb09cf497ccd8, type: 3}
   onBoardType: 1

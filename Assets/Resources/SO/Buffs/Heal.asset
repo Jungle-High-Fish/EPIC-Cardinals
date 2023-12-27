@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 6
   decreaseType: 1
-  buffName: Heal
-  description: ecover 3 health points every turn.
+  buffName: 'BUFF_HEAL_NAME '
+  description: 'BUFF_HEAL_EXPLAIN '
   sprite: {fileID: 21300000, guid: bbe6e3370237b674ca89589f927e2325, type: 3}
   effectSprite: {fileID: 21300000, guid: 601cf44935dc1ac4b8b76969a2210c15, type: 3}

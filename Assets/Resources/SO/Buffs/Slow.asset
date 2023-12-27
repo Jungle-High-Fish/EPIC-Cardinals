@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   decreaseType: 2
-  buffName: Slow
-  description: The first action taken on each tile is ignored.
+  buffName: 'BUFF_SLOW_NAME '
+  description: 'BUFF_SLOW_EXPLAIN '
   sprite: {fileID: 21300000, guid: 162ab454efdaa4c1e8d21b40af00fcf9, type: 3}
   effectSprite: {fileID: 0}

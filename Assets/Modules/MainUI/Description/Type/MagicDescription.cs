@@ -14,9 +14,9 @@ namespace Cardinals.UI.Description
     public class MagicDescription : MonoBehaviour, IDescription
     {
         private TileMagicDataSO _data;
-        public string Name => _data.elementName;
+        public string Name => TMPUtils.LocalizedText(_data.elementName);
         public string Description => TMPUtils.GetTextWithLevel(
-            TMPUtils.CustomParse(_data.mainMagicDescription),
+            TMPUtils.CustomParse(_data.mainMagicDescription, true),
             -1,
             _data.elementColor
         );
