@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 11
   decreaseType: 1
-  buffName: Broken
-  description: 50% less acquisition defense.
+  buffName: 'BUFF_POWERLESS_NAME '
+  description: 'BUFF_POWERLESS_EXPLAIN '
   sprite: {fileID: 21300000, guid: 6df76d0c45c647b40ac02848add45373, type: 3}
   effectSprite: {fileID: 0}

@@ -100,8 +100,8 @@ namespace Cardinals.UI {
         private UITileDescription AddCurseDescription() {
             TileCurseUIDataSO data = TileCurseData.Data(_tile.TileCurse.Data.CurseType);
 
-            string title = data.curseName;
-            string description = data.curseDescription;
+            string title = TMPUtils.LocalizedText(data.curseName);
+            string description = TMPUtils.LocalizedText(data.curseDescription);
             Sprite icon = data.sprite;
 
             UITileDescription panel = InstantiateDescriptionPanel();
@@ -138,12 +138,12 @@ namespace Cardinals.UI {
         }
 
         private UITileDescription AddMagicDescription(TileMagicDataSO data, int level) {
-            string title = data.elementName;
+            string title = TMPUtils.CustomParse(data.elementName,true);
             if (data.magicType != TileMagicType.Attack && data.magicType != TileMagicType.Defence) {
                 title += $"<b><size=60%><cspace=-0.1em> Lv.{level}</cspace></size></b>";
             }
             string description = TMPUtils.GetTextWithLevel(
-                TMPUtils.CustomParse(data.mainMagicDescription),
+                TMPUtils.CustomParse(data.mainMagicDescription, true),
                 level,
                 data.elementColor
             );
@@ -157,8 +157,8 @@ namespace Cardinals.UI {
         }
 
         private UITileDescription AddBuffDescription(BuffDataSO data) {
-            string title = data.buffName;
-            string description = data.Description;
+            string title = TMPUtils.LocalizedText(data.buffName);
+            string description = TMPUtils.LocalizedText(data.Description);
             Sprite icon = data.sprite;
 
             UITileDescription panel = InstantiateDescriptionPanel();

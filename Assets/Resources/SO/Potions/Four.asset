@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Four
   m_EditorClassIdentifier: 
   potionType: 9
-  potionName: "4 \uD3EC\uC158"
-  description: "4 \uC22B\uC790 \uCE74\uB4DC\uC758 \uD6A8\uACFC\uB97C \uAC16\uC2B5\uB2C8\uB2E4. "
+  potionName: POTION_NUM4_NAME
+  description: POTION_NUM4_EXPLAIN
   sprite: {fileID: 21300000, guid: cf1ce216d47284ba3b6282c35750a619, type: 3}
   price: 30

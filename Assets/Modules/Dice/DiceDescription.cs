@@ -27,9 +27,9 @@ namespace Cardinals
 
             }
             DiceDataSO data = DiceDataSO.Data(type);
-            _title.text = TMPUtils.CustomParse(data.title);
+            _title.text = TMPUtils.CustomParse(data.title,true);
             _title.color = data.elementColor;
-            _info.text = TMPUtils.CustomParse(data.information);
+            _info.text = TMPUtils.CustomParse(data.information, true);
             _infoPanel.color = data.elementColor;
         }
 
@@ -47,9 +47,9 @@ namespace Cardinals
             }
 
             DiceDataSO data = DiceDataSO.Data(dice.DiceType);
-            _title.text = TMPUtils.CustomParse(data.title);
+            _title.text = TMPUtils.CustomParse(data.title, true);
             _title.color = data.elementColor;
-            _info.text = TMPUtils.CustomParse(data.information);
+            _info.text = TMPUtils.CustomParse(data.information,true);
             _infoPanel.color = data.elementColor;
 
         }

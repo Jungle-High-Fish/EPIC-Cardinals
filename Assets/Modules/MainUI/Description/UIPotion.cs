@@ -53,7 +53,7 @@ namespace Cardinals.UI.Description
                 } else
                 {
                     (transform as RectTransform).DOShakeAnchorPos(0.3f, 5f);
-                    GameManager.I.Player.Bubble.SetBubble("Æ÷¼ÇÀ» ¾µ ¼ö ¾ø¾î");
+                    GameManager.I.Player.Bubble.SetBubble("í¬ì…˜ì„ ì“¸ ìˆ˜ ì—†ì–´");
                 }
             }
             

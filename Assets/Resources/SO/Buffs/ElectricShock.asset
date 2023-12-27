@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   decreaseType: 2
-  buffName: Electric Shock
-  description: You can use a maximum of 2 dice in a row for consecutive actions.
+  buffName: 'BUFF_ELECTRICSHOCK_NAME '
+  description: 'BUFF_ELECTRICSHOCK_EXPLAIN '
   sprite: {fileID: 21300000, guid: 28ccd593120d647a699a51c47bc428d7, type: 3}
   effectSprite: {fileID: 0}

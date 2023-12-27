@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be6aec5522a88a46b63c5b7642ab25e, type: 3}
   m_Name: Normal
   m_EditorClassIdentifier: 
-  title: "\uC77C\uBC18 \uC8FC\uC0AC\uC704"
-  information: "\uADF8\uB0E5 \uC8FC\uC0AC\uC704\uC785\uB2C8\uB2E4"
+  title: DICE_NORMAL_NAME
+  information: DICE_NORMAL_DESCRIPTION
   diceType: 1
   elementColor: {r: 0.28235295, g: 0.27058825, b: 0.24313727, a: 1}

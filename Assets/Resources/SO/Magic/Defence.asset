@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Defence
   m_EditorClassIdentifier: 
   magicType: 5
-  elementName: Defense
+  elementName: TILE_MAGIC_DEFENSE_NAME
   elementColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
   particleColor1: {r: 0, g: 0, b: 0, a: 0}
   particleColor2: {r: 0, g: 0, b: 0, a: 0}
@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  mainMagicName: Defense
-  mainMagicDescription: Gain defense equal to the number on the Dice.
+  mainMagicName: TILE_MAGIC_DEFENSE_NAME
+  mainMagicDescription: TILE_MAGIC_DEFENSE_EXPLAIN
   hasBuffEffect: 0
   buffType: 0
