@@ -719,13 +719,9 @@ namespace Cardinals
                 target.Hit(3);
             }
 
-           
-            else
-            {
-                yield return GameManager.I.Player.CardAction(num, target);
-                DiceBuffByType(num, type, target);
-                GameManager.I.DiceRollingCount++;
-            }
+            yield return GameManager.I.Player.CardAction(num, target);
+            DiceBuffByType(num, type, target);
+            GameManager.I.DiceRollingCount++;
 
             yield return new WaitUntil(() => hasDiscard);
 
