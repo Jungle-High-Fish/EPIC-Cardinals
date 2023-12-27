@@ -127,6 +127,7 @@ namespace Cardinals
             foreach(DiceUI d in _dicesUI)
             {
                 d.EnableCardUI();
+                d.InitRenderer();
             }
             SetDiceSelectable(true);
 
