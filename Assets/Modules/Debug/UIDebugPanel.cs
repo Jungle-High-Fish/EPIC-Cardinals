@@ -13,12 +13,17 @@ namespace Cardinals.Test {
         private ComponentGetter<Button> _button 
             = new(TypeOfGetter.ChildByName, "Close Button");
         private ComponentGetter<RectTransform> _debugComponentsParent 
-            = new(TypeOfGetter.ChildByName, "Debug List");
+            = new(TypeOfGetter.ChildByName, "Scroll View/Viewport/Debug List");
 
         private List<IDebugComponent> _debugComponents = new();
         private bool _isShow = false;
 
         public void Init() {
+            _button.Get(gameObject).onClick.RemoveAllListeners();
+            _button.Get(gameObject).onClick.AddListener(() => {
+                Hide();
+            });
+
             AddButton("메테오", () => {
                 GameManager.I.Stage.Meteor();
             });

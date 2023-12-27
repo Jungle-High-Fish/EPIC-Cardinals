@@ -104,7 +104,7 @@ namespace Cardinals
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F3)) {
                 if (_ui.UIDebugPanel.IsShow) {
                     _ui.UIDebugPanel.Hide();
                 } else {
