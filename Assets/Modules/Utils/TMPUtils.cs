@@ -166,7 +166,7 @@ namespace Util {
             return GameManager.I.Localization[localizationEnum];
         }
 
-        public static string CustomParse(string text, bool applyLocalization=true) {
+        public static string CustomParse(string text, bool applyLocalization=false) {
             if (applyLocalization) {
                 text = LocalizedText(text);
             }
