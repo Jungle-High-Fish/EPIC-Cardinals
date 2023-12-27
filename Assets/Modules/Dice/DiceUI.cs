@@ -189,6 +189,7 @@ namespace Cardinals
                 if (GameManager.I.Stage.CurEvent is TutorialEvent && GameManager.I.IsWaitingForNext) {
                     GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
                 }
+                return;
             }
 
             if (eventData.button== PointerEventData.InputButton.Left)
