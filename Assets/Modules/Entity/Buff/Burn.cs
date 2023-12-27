@@ -18,6 +18,11 @@ namespace Cardinals.Buff
                 entity.Hit(Value + (GameManager.I.Stage.CurEvent as BattleEvent).Round * 2);
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire1]?.Invoke();
             }
+            else
+            {
+                entity.Hit(Value);
+            }
+            
             base.Execute(entity);
         }
     }
