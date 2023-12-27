@@ -311,6 +311,14 @@ namespace Cardinals.Board {
             _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
         }
 
+        public void MarkAsTarget() {
+            _tileAnimation.Get(gameObject).Play(TileAnimationType.Jump, true);
+        }
+
+        public void UnMark() {
+            _tileAnimation.Get(gameObject).Stop(TileAnimationType.Jump);
+        }
+
         public void Unselect() {
             if (_isSelectable == false) {
                 _isSelected = false;
