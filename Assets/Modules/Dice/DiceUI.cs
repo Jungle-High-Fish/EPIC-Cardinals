@@ -40,6 +40,7 @@ namespace Cardinals
         }
         public bool IsSelect
         {
+            get => _isSelect;
             set => _isSelect = value;
         }
 
@@ -184,6 +185,7 @@ namespace Cardinals
         }
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (IsSelect) return;
             if (!CheckCanMove()) return;
             if (!_isSelectable) {
                 if (GameManager.I.Stage.CurEvent is TutorialEvent && GameManager.I.IsWaitingForNext) {
@@ -194,8 +196,7 @@ namespace Cardinals
 
             if (eventData.button== PointerEventData.InputButton.Left)
             {
-                if (_diceManager.State != CardState.Idle)
-                    return;
+                if (_diceManager.State != CardState.Idle) return;
 
 
                 transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
