@@ -35,7 +35,7 @@ namespace Cardinals.Enemy
             
             if (list != null)
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 2 && i < list.Count; i++)
                 {
                     var index = Random.Range(0, list.Count);
                     var tile = list[index];
@@ -44,6 +44,12 @@ namespace Cardinals.Enemy
                     list.RemoveAt(index);
                 }
             }
+        }
+        
+
+        public override void Flip(bool filpX, Quaternion quat = default)
+        {
+            // 해당 몬스터는 플레이어 위치에 따른 플립을 수행하지 않음
         }
     }
 }

@@ -1,9 +1,9 @@
 using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 
 #if UNITY_EDITOR
+using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
 
 namespace Cardinals.Game

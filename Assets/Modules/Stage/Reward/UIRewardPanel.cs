@@ -40,10 +40,19 @@ namespace Cardinals.UI
 
         public void On()
         {
-            gameObject.SetActive(true);
-            transform.localScale = Vector3.zero;
-            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic)
-                .OnComplete(() => { GetComponent<GridSizeUpdator>().Resizing(); });
+            if (!gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
+                UpdateSize();
+                
+                transform.localScale = Vector3.zero;
+                transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InOutCubic);
+            }
+        }
+
+        public void UpdateSize()
+        {
+            GetComponent<GridSizeUpdator>().Resizing();
         }
     
         

@@ -75,13 +75,14 @@ namespace Cardinals.Game
 
         public void GenerateEventsFromSequence()
         {
-            int t = 0, c = 0, e = 0, b = 0, en = 0;
+            int t = 0, c = 0, e = 0, b = 0, en = 0, bless = 0;
 
             var tutorialList = GetEventListFromPool(StageEventType.Tutorial);
             var commonList = GetEventListFromPool(StageEventType.BattleCommon);
             var eliteList = GetEventListFromPool(StageEventType.BattleElite);
             var bossList = GetEventListFromPool(StageEventType.BattleBoss);
             var endingList = GetEventListFromPool(StageEventType.DemoClearEnding);
+            var blessList = GetEventListFromPool(StageEventType.Bless);
 
             _events = new BaseEvent[_eventSequence.Length];
             _eventNames = new StageEventList[_eventSequence.Length];
@@ -108,6 +109,10 @@ namespace Cardinals.Game
                     case StageEventType.DemoClearEnding:
                         _events[i] = endingList[en].EventData;
                         _eventNames[i] = endingList[en++].StageEventName;
+                        break;
+                    case StageEventType.Bless:
+                        _events[i] = blessList[bless].EventData;
+                        _eventNames[i] = blessList[bless++].StageEventName;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

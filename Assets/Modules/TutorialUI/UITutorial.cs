@@ -46,7 +46,7 @@ namespace Cardinals.UI {
         public void Close() {
             Clear();
             (transform as RectTransform)
-                .DOAnchorPosY((transform as RectTransform).anchoredPosition.y + 1000, 0.5f)
+                .DOScale(Vector3.zero, 0.5f)
                 .SetEase(Ease.OutCubic)
                 .OnComplete(() => gameObject.SetActive(false));
         }
@@ -75,8 +75,6 @@ namespace Cardinals.UI {
                 yield return new WaitForSeconds(t);
                 var questUI = InstantiateQuest(QuestData.EndTurnQuest());
                 _quests.Add(questUI);
-
-                GameManager.I.UI.UIEndTurnButton.Activate(isForNextEvent);
             }
 
             (transform as RectTransform).DOSizeDelta(newSize, 0.3f).SetEase(Ease.OutCubic);

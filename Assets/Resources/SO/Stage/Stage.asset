@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Suspicious Meadow
   _eventPool: {fileID: 11400000, guid: 2d0c9d5e006da9744bd86c3258414309, type: 2}
-  _eventSequence: 020000000300000003000000030000000400000005000000
+  _eventSequence: 0100000002000000060000000300000003000000030000000400000005000000
   _boardDataSO: {fileID: 11400000, guid: a215bdf472da542eabf20825bd5b77db, type: 2}
