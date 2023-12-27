@@ -431,11 +431,13 @@ namespace Cardinals
                         var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber)
                         {
+                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
                             goto DismissCards;
                         }
 
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != _mouseState)
                         {
+                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
                             goto DismissCards;
                         }
                     }

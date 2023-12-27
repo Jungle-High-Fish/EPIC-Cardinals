@@ -308,6 +308,7 @@ namespace Cardinals
         #endregion
 
         #region Util
+        public bool IsWaitingForNext => !_next;
         private bool _next = true;
 
         public IEnumerator WaitNext() {
