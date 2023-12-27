@@ -303,6 +303,7 @@ namespace Cardinals
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerStatus);
             GameObject obj = Instantiate(prefab, _playerUICanvas.transform);
             obj.GetComponent<UIPlayerStatus>().Init(GameManager.I.Player);
+            obj.transform.SetSiblingIndex(1);
         }
 
         private void InstantiateCardSystemUI(Canvas canvas) {

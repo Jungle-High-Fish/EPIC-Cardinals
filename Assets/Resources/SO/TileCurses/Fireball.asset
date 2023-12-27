@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   curseType: 1
-  curseName: Fire Ball
-  curseDescription: When the curse is activated, a fireball that moves 2 spaces each
-    turn is summoned on this tile. Contact with the fireball inflicts 5 damage.
+  curseName: TILE_CURSE_EMBER_NAME
+  curseDescription: TILE_CURSE_EMBER_EXPLAIN
   sprite: {fileID: 21300000, guid: 1ed6d49ef1230dd41a2d706ef6fcda29, type: 3}

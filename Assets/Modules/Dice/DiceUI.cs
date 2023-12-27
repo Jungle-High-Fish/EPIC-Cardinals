@@ -40,6 +40,7 @@ namespace Cardinals
         }
         public bool IsSelect
         {
+            get => _isSelect;
             set => _isSelect = value;
         }
 
@@ -165,7 +166,7 @@ namespace Cardinals
             IsSelectable = false;
             if (GameManager.I.Player.PlayerInfo.Gold <= 0)
             {
-                GameManager.I.Player.Bubble.SetBubble("���� ����...");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_REROLL));
                 IsSelectable = true;
                 yield break;
             }
@@ -184,17 +185,18 @@ namespace Cardinals
         }
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (IsSelect) return;
             if (!CheckCanMove()) return;
             if (!_isSelectable) {
                 if (GameManager.I.Stage.CurEvent is TutorialEvent && GameManager.I.IsWaitingForNext) {
-                    GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL));
                 }
+                return;
             }
 
             if (eventData.button== PointerEventData.InputButton.Left)
             {
-                if (_diceManager.State != CardState.Idle)
-                    return;
+                if (_diceManager.State != CardState.Idle) return;
 
 
                 transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
@@ -211,7 +213,7 @@ namespace Cardinals
             {
                 if (GameManager.I.Stage.CurEvent is TutorialEvent)
                 {
-                    GameManager.I.Player.Bubble.SetBubble("튜토리얼에서는 리롤할 수 없어...");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL1));
                     return;
                 }
                 StartCoroutine(Reroll());

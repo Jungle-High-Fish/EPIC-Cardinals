@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d699eebe2430db24994c3a0e6b0cc7a9, type: 3}
   m_Name: BlessFire2
   m_EditorClassIdentifier: 
-  blessName: Meteor
-  description: 'When the enemy''s burn stacks reach 10, reset the stacks to 0 and
-    summon a powerful meteor. (20 damage)      '
+  blessName: BLESS_FIRE2_NAME
+  description: BLESS_FIRE2_EXPLAIN
   totemSprite: {fileID: 21300000, guid: 395379c3460577d4b9a3bab85ab6324c, type: 3}
   patternSprite: {fileID: 21300000, guid: 60e941d07af301145839bb078d1aa3a8, type: 3}
   blessType: 2

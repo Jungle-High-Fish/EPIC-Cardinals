@@ -569,7 +569,7 @@ namespace Cardinals
             if(GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
                 Debug.Log("뭐지 감전당했나?");
-                GameManager.I.Player.Bubble.SetBubble("감전당해서 쓸 수 없어");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_ELECTRICSHOCK));
                 result = false;
             }
             
@@ -602,7 +602,7 @@ namespace Cardinals
             // [디버프] 슬로우
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
             {
-                GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 행동이 무시되었어");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
                 Debug.Log("슬로우 때문에 행동 무시");
             }
             else

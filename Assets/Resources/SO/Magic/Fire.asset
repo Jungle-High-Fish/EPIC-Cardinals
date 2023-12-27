@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   magicType: 1
-  elementName: Fire
+  elementName: TILE_MAGIC_FIRE_NAME
   elementColor: {r: 0.8078432, g: 0.3137255, b: 0.36078432, a: 1}
   particleColor1: {r: 0.8078432, g: 0.3137255, b: 0.36078432, a: 1}
   particleColor2: {r: 0.624, g: 0.24233012, b: 0.27867967, a: 1}
@@ -24,9 +24,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cc2e7a72d887149c88e1885ecc17f87f, type: 3}
   - {fileID: 21300000, guid: 8919c0ce006c148e9bbe48412009c215, type: 3}
   - {fileID: 21300000, guid: 42c4e8d04eb31480693cca2f8fe0193f, type: 3}
-  mainMagicName: Fire Ball
-  mainMagicDescription: With each action, inflict <level=2,4,6> damage on the target
-    enemy. When taking an action using a number greater than 3, apply a <debuff=Burn>
-    burn effect to the enemy.
+  mainMagicName: TILE_MAGIC_FIRE_NAME
+  mainMagicDescription: TILE_MAGIC_FIRE_EXPLAIN
   hasBuffEffect: 1
   buffType: 1

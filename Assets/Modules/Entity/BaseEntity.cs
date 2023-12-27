@@ -130,6 +130,11 @@ namespace Cardinals
             };
         }
 
+        public virtual void PostInit()
+        {
+            
+        }
+
         /// <summary>
         /// 새로운 턴 시작 시, 수행할 액션
         /// </summary>

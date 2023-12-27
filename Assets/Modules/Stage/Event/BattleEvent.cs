@@ -24,6 +24,8 @@ namespace Cardinals.Game
         protected int _round = 0;
         protected Tile _roundStartTile;
 
+        private const int _boardEventInterval = 3;
+
         protected bool CheckPlayerWin => !GameManager.I.CurrentEnemies.Any();
         protected bool CheckEnemyWin => GameManager.I.Player.Hp == 0;
 
@@ -62,19 +64,21 @@ namespace Cardinals.Game
             player.HomeReturnEvent += OnPlayerRound;
 
             // 시작 정보 초기화
-            _turn = 1;
+            _turn = 0;
             _round = 0;
             _roundStartTile = player.OnTile;
             GameManager.I.StartCoroutine(stage.StartFlag.Show(_roundStartTile));
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
-
+            GameManager.I.UI.UINewPlayerInfo.AddTurnNoti(EventNotiContent);
+            
             do // 전투 시작
             {
+                _turn++;
                 // 턴 UI 업데이트
                 GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
-
+                GameManager.I.UI.UINewPlayerInfo.PrintTurnNoti();
                 // 3턴마다 보드 이벤트 생성
-                if (_turn++ % 3 == 0) GameManager.I.Stage.GenerateNewBoardEvent();
+                if (_turn % _boardEventInterval == 0) GameManager.I.Stage.GenerateNewBoardEvent();
                 
                 // 전투 업데이트
                 yield return player.StartTurn();
@@ -228,6 +232,19 @@ namespace Cardinals.Game
             {
                 summons[i].Destroy();
             }
+        }
+
+        private string EventNotiContent()
+        {
+            string text;
+            int value = _turn % _boardEventInterval;
+            if (value > 0)
+            {
+                text = $"{_boardEventInterval - value} 턴 후 보드 이벤트가 생성됩니다.";
+            }
+            else text = "보드 이벤트가 생성되었습니다.";
+
+            return text;
         }
 
         /// <summary>

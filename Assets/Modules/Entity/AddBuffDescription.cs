@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 public class AddBuffDescription : MonoBehaviour
 {
@@ -14,11 +15,11 @@ public class AddBuffDescription : MonoBehaviour
     public void Init(BuffDataSO data)
     {
         _iconImg.sprite = data.sprite;
-        _TMP.text = data.buffName;
+        _TMP.SetLocalizedText(data.buffName);
 
         GetComponent<GridSizeUpdator>().Resizing();
         
-        _TMP.text = data.buffName;
+        _TMP.SetLocalizedText(data.buffName);
         transform.DOLocalMoveY(100, 1.5f)
             .OnComplete(() => Destroy(gameObject));
     }

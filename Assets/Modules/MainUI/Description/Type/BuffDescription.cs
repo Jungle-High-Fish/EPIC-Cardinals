@@ -16,8 +16,8 @@ namespace Cardinals.UI.Description
             _data = ResourceLoader.LoadSO<BuffDataSO>(Constants.FilePath.Resources.SO_BuffData + type);
         }
 
-        public string Name => _data.buffName;
-        public string Description => _data.Description;
+        public string Name => TMPUtils.LocalizedText(_data.buffName);
+        public string Description => TMPUtils.LocalizedText(_data.Description);
 
         public Sprite IconSprite => _data.sprite;
         public Color Color { get; }

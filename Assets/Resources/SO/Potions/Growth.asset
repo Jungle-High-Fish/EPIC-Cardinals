@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Growth
   m_EditorClassIdentifier: 
   potionType: 1
-  potionName: "\uC131\uC7A5 \uD3EC\uC158"
-  description: "\uBC1F\uACE0 \uC788\uB294 \uD0C0\uC77C\uC744 \uD55C \uB2E8\uACC4
-    \uC131\uC7A5\uC2DC\uD0B5\uB2C8\uB2E4."
+  potionName: POTION_GROWTH_NAME
+  description: POTION_GROWTH_EXPLAIN
   sprite: {fileID: 21300000, guid: 0ed33d663c11b4ab193b9bccaa064640, type: 3}
   price: 50

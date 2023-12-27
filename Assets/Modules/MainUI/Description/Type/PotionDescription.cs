@@ -15,8 +15,8 @@ namespace Cardinals.UI.Description
             _data = ResourceLoader.LoadSO<PotionDataSO>(Constants.FilePath.Resources.SO_PotionData + type);
         }
 
-        public string Name => _data.potionName;
-        public string Description => _data.description;
+        public string Name => TMPUtils.LocalizedText(_data.potionName);
+        public string Description => TMPUtils.LocalizedText(_data.description);
         public Sprite IconSprite { get; }
         public Color Color { get; }
         public string Key => _data.potionType.ToString();

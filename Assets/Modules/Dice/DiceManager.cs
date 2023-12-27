@@ -24,8 +24,9 @@ namespace Cardinals
         private bool _lastDiceUsedForAction;
         private bool _isMouseOnDiceDeck;
         private int _continuousUseCount;
+        private int _DiceUsedForMoveCountOnThisTurn;
         private int _diceUsedCountOnThisTurn;
-
+        private bool _isPlayerMove;
         #region Tutorial
         public bool IsTutorial => _isTutorial;
         private bool _isTutorial;
@@ -48,6 +49,7 @@ namespace Cardinals
 
         public int SelectCardIndex
         {
+            get => _selectDiceIndex;
             set => _selectDiceIndex = value;
         }
 
@@ -112,9 +114,10 @@ namespace Cardinals
             {
                 _canActionUse = true;
             }
-
+            _DiceUsedForMoveCountOnThisTurn = 0;
             _diceUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
+            _isPlayerMove = false;
             _state = CardState.Idle;
             UpdateDiceState(-1, true);
 
@@ -393,7 +396,7 @@ namespace Cardinals
                 if (Input.GetMouseButtonUp(0))
                 {
                     GameManager.I.Player.MotionIdle();
-                    
+                    UpdateMarkedNextTile();
                     IBoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
                     if (boardInputHandler.IsMouseHoverUI)
                     {
@@ -432,13 +435,13 @@ namespace Cardinals
                         var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber)
                         {
-                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                            GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL));
                             goto DismissCards;
                         }
 
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != _mouseState)
                         {
-                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                            GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL));
                             goto DismissCards;
                         }
                     }
@@ -474,6 +477,12 @@ namespace Cardinals
                             yield break;
 
                         case MouseState.Move:
+
+                            if (!CheckUseDiceOnMove())
+                            {
+                                break;
+                            }
+
                             StartCoroutine(DiceUseMove(useNumber));
                             
                             if (_isTutorial)
@@ -548,14 +557,41 @@ namespace Cardinals
             }
         }
 
+        private bool CheckUseDiceOnMove()
+        {
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 1)
+            {
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
+                return false;
+            }
+            return true;
+        }
+        public void UpdateMarkedNextTile(PlayerActionType type = PlayerActionType.None)
+        {
+            if (_isPlayerMove)
+                return;
+            if (type == PlayerActionType.Move)
+            {
+                int onTileIndex = GameManager.I.Stage.Board.GetTileIndex(GameManager.I.Player.OnTile);
+                GameManager.I.Stage.Board[onTileIndex + _dices[SelectCardIndex].RollResultNumber].MarkAsTarget();
+            }
+            else
+            {
+                int onTileIndex = GameManager.I.Stage.Board.GetTileIndex(GameManager.I.Player.OnTile);
+                GameManager.I.Stage.Board[onTileIndex + _dices[SelectCardIndex].RollResultNumber].UnMark();
+            }
+        }
+
         public IEnumerator DiceUseMove(int num)
         {
             _diceUsedCountOnThisTurn++;
+            _DiceUsedForMoveCountOnThisTurn++;
+            _isPlayerMove = true;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
             {
-                GameManager.I.Player.Bubble.SetBubble("혼란하다 혼란해..");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_CONFUSE));
                 yield return GameManager.I.Player.PrevMoveTo(num, 0.4f);
             }
             else
@@ -572,6 +608,7 @@ namespace Cardinals
             _lastDiceUsedForAction = false;
             DismissAllCards();
             SetDiceSelectable(true);
+            _isPlayerMove = false;
         }
 
         public void PotionUseMove(int num)
@@ -620,11 +657,6 @@ namespace Cardinals
         {
             bool result = true;
 
-            // if (!_handcardsUI[_selectCardIndex].CanAction)
-            // {
-            //     result = false;
-            // }
-
             if (GameManager.I.Stage.Board.IsBoardSquare) {
                 if (GameManager.I.Player.OnTile.Type == TileType.Start ||
                 GameManager.I.Player.OnTile.Type == TileType.Blank)
@@ -643,13 +675,13 @@ namespace Cardinals
             if (GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
                 Debug.Log("뭐지? 감전당했나?");
-                GameManager.I.Player.Bubble.SetBubble("감전당해서 사용할 수 없어...");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_ELECTRICSHOCK));
                 result = false;
             }
 
             if (GameManager.I.Player.OnTile.IsSealed) {
                 Debug.Log("뭐지? 봉인당했나?");
-                GameManager.I.Player.Bubble.SetBubble("봉인되어서 사용할 수 없어...");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_LOCK));
                 result = false;
             }
 
@@ -687,18 +719,9 @@ namespace Cardinals
                 target.Hit(3);
             }
 
-            // [�����] ���ο�
-            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _continuousUseCount == 0)
-            {
-                GameManager.I.Player.Bubble.SetBubble("슬로우 때문에 첫 번째 행동이 무시되었어.");
-                Debug.Log("슬로우 걸렸다굴");
-            }
-            else
-            {
-                yield return GameManager.I.Player.CardAction(num, target);
-                DiceBuffByType(num, type, target);
-                GameManager.I.DiceRollingCount++;
-            }
+            yield return GameManager.I.Player.CardAction(num, target);
+            DiceBuffByType(num, type, target);
+            GameManager.I.DiceRollingCount++;
 
             yield return new WaitUntil(() => hasDiscard);
 
