@@ -77,6 +77,8 @@ namespace Cardinals.UI {
                 _quests.Add(questUI);
             }
 
+            GameManager.I.UI.UIEndTurnButton.Activate(isForNextEvent);
+
             (transform as RectTransform).DOSizeDelta(newSize, 0.3f).SetEase(Ease.OutCubic);
             StartCoroutine(ShowQuest(0.25f));
         }
