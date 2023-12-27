@@ -435,13 +435,13 @@ namespace Cardinals
                         var cardValidCheck = (GameManager.I.Stage.CurEvent as TutorialEvent).CheckIfHasDiceSequence();
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.CardNumber != useNumber)
                         {
-                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                            GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL));
                             goto DismissCards;
                         }
 
                         if (cardValidCheck.hasSequence && cardValidCheck.targetSequence.HowToUse != _mouseState)
                         {
-                            GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                            GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL));
                             goto DismissCards;
                         }
                     }
@@ -561,7 +561,7 @@ namespace Cardinals
         {
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 1)
             {
-                GameManager.I.Player.Bubble.SetBubble("슬로우때문에 이동할 수 없어..");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
                 return false;
             }
             return true;
@@ -591,7 +591,7 @@ namespace Cardinals
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
             {
-                GameManager.I.Player.Bubble.SetBubble("혼란하다 혼란해..");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_CONFUSE));
                 yield return GameManager.I.Player.PrevMoveTo(num, 0.4f);
             }
             else
@@ -675,13 +675,13 @@ namespace Cardinals
             if (GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
                 Debug.Log("뭐지? 감전당했나?");
-                GameManager.I.Player.Bubble.SetBubble("감전당해서 사용할 수 없어...");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_ELECTRICSHOCK));
                 result = false;
             }
 
             if (GameManager.I.Player.OnTile.IsSealed) {
                 Debug.Log("뭐지? 봉인당했나?");
-                GameManager.I.Player.Bubble.SetBubble("봉인되어서 사용할 수 없어...");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_LOCK));
                 result = false;
             }
 

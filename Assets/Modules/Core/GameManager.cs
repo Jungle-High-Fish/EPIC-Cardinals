@@ -269,7 +269,7 @@ namespace Cardinals
             yield return new WaitUntil(() => next);
             
             // 텍스트 출력
-            UI.UISystemBubble.SetBubble("여기서 무너질 수 없어", -1);
+            UI.UISystemBubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_GAMEOVER), -1);
             (UI.UISystemBubble.transform as RectTransform).position = Camera.main.WorldToScreenPoint(Player.transform.position) + new Vector3(0, 150, 0);
             yield return new WaitForSeconds(1.5f);
             

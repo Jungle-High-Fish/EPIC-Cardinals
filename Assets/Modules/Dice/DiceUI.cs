@@ -166,7 +166,7 @@ namespace Cardinals
             IsSelectable = false;
             if (GameManager.I.Player.PlayerInfo.Gold <= 0)
             {
-                GameManager.I.Player.Bubble.SetBubble("���� ����...");
+                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_REROLL));
                 IsSelectable = true;
                 yield break;
             }
@@ -189,7 +189,7 @@ namespace Cardinals
             if (!CheckCanMove()) return;
             if (!_isSelectable) {
                 if (GameManager.I.Stage.CurEvent is TutorialEvent && GameManager.I.IsWaitingForNext) {
-                    GameManager.I.Player.Bubble.SetBubble("지금은 튜토리얼을 따라서 사용해 줘..!");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL));
                 }
                 return;
             }
@@ -213,7 +213,7 @@ namespace Cardinals
             {
                 if (GameManager.I.Stage.CurEvent is TutorialEvent)
                 {
-                    GameManager.I.Player.Bubble.SetBubble("튜토리얼에서는 리롤할 수 없어...");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_TUTORIAL1));
                     return;
                 }
                 StartCoroutine(Reroll());
