@@ -80,7 +80,7 @@ SpriteAtlas:
   - UI_Buff_Doll
   - UI_Buff_Heal
   - UI_Buff_Cycle
-  - UI_Buff_Broken
+  - UI_Buff_Powerless
   - UI_Buff_Burn
   - UI_Buff_Poison
   m_RenderDataMap: {}

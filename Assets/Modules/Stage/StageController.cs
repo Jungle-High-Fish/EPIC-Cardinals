@@ -31,8 +31,6 @@ namespace Cardinals.Game {
                 
                 if (_curEvent is BattleEvent battleEvent)
                     return GameManager.I.CurrentEnemies.ToList();
-                else if (_curEvent is TutorialEvent tutorialEvent)
-                    return tutorialEvent.Enemies;
                 else return null;
             }
         }
