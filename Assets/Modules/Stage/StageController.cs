@@ -279,7 +279,7 @@ namespace Cardinals.Game {
             _player = playerObj.GetComponent<Player>();
 
             _player.Init();
-            
+            _player.UpdateActionEvent += _diceManager.UpdateMarkedNextTile;
             
             // UI 추가
             GameManager.I.UI.UINewPlayerInfo.Set(); // 창에 이벤트 연결

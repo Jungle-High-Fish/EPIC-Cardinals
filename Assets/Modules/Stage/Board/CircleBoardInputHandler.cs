@@ -159,7 +159,8 @@ namespace Cardinals.Board {
 						}
 					}
 
-					_hoveredIdx = newIdx;
+                    
+                    _hoveredIdx = newIdx;
 				}
 				else playerActionType = GameManager.I.Player.CurActionType;
 
@@ -173,7 +174,8 @@ namespace Cardinals.Board {
 				}
 				
 				GameManager.I.Player.UpdateAction(playerActionType);
-			} else {
+
+            } else {
 				_isMouseHover = false;
 
 				foreach(var m in _mouseDetectors) {

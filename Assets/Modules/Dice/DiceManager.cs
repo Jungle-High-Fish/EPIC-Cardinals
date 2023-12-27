@@ -26,7 +26,7 @@ namespace Cardinals
         private int _continuousUseCount;
         private int _DiceUsedForMoveCountOnThisTurn;
         private int _diceUsedCountOnThisTurn;
-
+        private bool _isPlayerMove;
         #region Tutorial
         public bool IsTutorial => _isTutorial;
         private bool _isTutorial;
@@ -49,6 +49,7 @@ namespace Cardinals
 
         public int SelectCardIndex
         {
+            get => _selectDiceIndex;
             set => _selectDiceIndex = value;
         }
 
@@ -116,6 +117,7 @@ namespace Cardinals
             _DiceUsedForMoveCountOnThisTurn = 0;
             _diceUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
+            _isPlayerMove = false;
             _state = CardState.Idle;
             UpdateDiceState(-1, true);
 
@@ -394,7 +396,7 @@ namespace Cardinals
                 if (Input.GetMouseButtonUp(0))
                 {
                     GameManager.I.Player.MotionIdle();
-                    
+                    UpdateMarkedNextTile();
                     IBoardInputHandler boardInputHandler = GameManager.I.Stage.Board.BoardInputHandler;
                     if (boardInputHandler.IsMouseHoverUI)
                     {
@@ -564,11 +566,27 @@ namespace Cardinals
             }
             return true;
         }
+        public void UpdateMarkedNextTile(PlayerActionType type = PlayerActionType.None)
+        {
+            if (_isPlayerMove)
+                return;
+            if (type == PlayerActionType.Move)
+            {
+                int onTileIndex = GameManager.I.Stage.Board.GetTileIndex(GameManager.I.Player.OnTile);
+                GameManager.I.Stage.Board[onTileIndex + _dices[SelectCardIndex].RollResultNumber].MarkAsTarget();
+            }
+            else
+            {
+                int onTileIndex = GameManager.I.Stage.Board.GetTileIndex(GameManager.I.Player.OnTile);
+                GameManager.I.Stage.Board[onTileIndex + _dices[SelectCardIndex].RollResultNumber].UnMark();
+            }
+        }
 
         public IEnumerator DiceUseMove(int num)
         {
             _diceUsedCountOnThisTurn++;
             _DiceUsedForMoveCountOnThisTurn++;
+            _isPlayerMove = true;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
@@ -590,6 +608,7 @@ namespace Cardinals
             _lastDiceUsedForAction = false;
             DismissAllCards();
             SetDiceSelectable(true);
+            _isPlayerMove = false;
         }
 
         public void PotionUseMove(int num)
