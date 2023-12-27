@@ -15,8 +15,6 @@ MonoBehaviour:
   StageEventBindDataList:
   - StageEventName: 1
     EventData: {fileID: 11400000, guid: 251c10cd133c72643811823264607240, type: 2}
-  - StageEventName: 2
-    EventData: {fileID: 11400000, guid: 14fd5f645ed97c44292e21636ed0e397, type: 2}
   - StageEventName: 3
     EventData: {fileID: 11400000, guid: 76d6012f20facef4991df0780f23280f, type: 2}
   - StageEventName: 4

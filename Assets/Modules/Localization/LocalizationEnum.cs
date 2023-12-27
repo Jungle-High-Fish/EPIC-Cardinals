@@ -15,6 +15,7 @@ namespace Cardinals {
         UI_GAMESETTING_SFX,
         UI_CLOSE,
         UI_EXIT_GAME,
+        UI_INIT_DICE_SELECT,
         UI_ROULETTE_SPIN,
         STAGE_SUSPICIOUS_MEADOW,
         TILE_MAGIC_ATTACK_NAME,

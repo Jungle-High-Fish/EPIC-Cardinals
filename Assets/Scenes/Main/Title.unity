@@ -2638,6 +2638,7 @@ MonoBehaviour:
   _zoomInPosY: -0.7
   _zoomInCameraSize: 3.2
   _charactersTr: {fileID: 919704015}
+  _characterDiceSelecterText: {fileID: 2111881630}
 --- !u!1 &723387281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,7 +5515,7 @@ GameObject:
   - component: {fileID: 2111881631}
   - component: {fileID: 2111881630}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
