@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Cardinals;
 using Cardinals.Enums;
 using TMPro;
 using UnityEngine;
@@ -156,7 +157,20 @@ namespace Util {
             textMeshProUGUI.text = GetTextWithElement(parsedText, elementTexts);
         }
 
-        public static string CustomParse(string text) {
+        public static void SetLocalizedText(this TextMeshProUGUI textMeshProUGUI, string id) {
+            textMeshProUGUI.text = LocalizedText(id);
+        }
+
+        public static string LocalizedText(string id) {
+            LocalizationEnum localizationEnum = (LocalizationEnum)System.Enum.Parse(typeof(LocalizationEnum), id);
+            return GameManager.I.Localization[localizationEnum];
+        }
+
+        public static string CustomParse(string text, bool applyLocalization=true) {
+            if (applyLocalization) {
+                text = LocalizedText(text);
+            }
+
             string result = "";
 
             string[] substrings = text.Split('<', '>');
