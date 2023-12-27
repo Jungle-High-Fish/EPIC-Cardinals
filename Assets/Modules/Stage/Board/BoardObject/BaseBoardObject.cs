@@ -6,6 +6,7 @@ using Cardinals.Enums;
 using Cardinals.UI;
 using Cardinals.UI.Description;
 using DG.Tweening;
+using TMPro;
 using Unity.VisualScripting;
 using Util;
 
@@ -28,6 +29,12 @@ namespace Cardinals.BoardObject
         [SerializeField] protected SpriteRenderer _renderer;
         [SerializeField] protected Animator _animator;
 
+        [Header("UI Component")]
+        private ObjectGetter _moveValueObject = new(TypeOfGetter.ChildByName, "Renderer/Canvas/Grid/MoveValue");
+        private ComponentGetter<TextMeshProUGUI> _moveValueTMP = new(TypeOfGetter.ChildByName, "Renderer/Canvas/Grid/MoveValue/TMP");
+        private ObjectGetter _turnCountObject = new(TypeOfGetter.ChildByName, "Renderer/Canvas/Grid/TurnCount");
+        private ComponentGetter<TextMeshProUGUI> _turnCountTMP = new(TypeOfGetter.ChildByName, "Renderer/Canvas/Grid/TurnCount/TMP");
+
         /// <summary>
         /// 보드에 생성되는 이벤트 초기화
         /// </summary>
@@ -44,9 +51,21 @@ namespace Cardinals.BoardObject
             // 데이타 설정            
             _data = ResourceLoader.LoadSO<NewBoardObjectDataSO>(Constants.FilePath.Resources.SO_BoardObjectData + type);
             _lifeCount = _data.keepTurnCount;
-
             _renderer.sprite = _data.sprite;
             
+            // UI 설정
+            if (_data.onBoardType == NewBoardEventOnType.Move)
+                _moveValueTMP.Get(gameObject).text = $"{_data.moveCount}";
+            else 
+                _moveValueObject.Get(gameObject).SetActive(false);
+
+            if (_data.keepTurnCount > 0)
+                _turnCountTMP.Get(gameObject).text = $"{_data.keepTurnCount}";
+            else 
+                _turnCountObject.Get(gameObject).SetActive(false);
+            GetComponent<GridSizeUpdator>().Resizing();
+
+
             // 설명창 설정
             var des = transform.AddComponent<BoardObjectDescription>();
             des.Init(_data);
@@ -76,9 +95,12 @@ namespace Cardinals.BoardObject
 
                 _onTile = tile;
             }
-            
-            if (--_lifeCount == 0)
+
+            _lifeCount--;
+            _turnCountTMP.Get(gameObject).text = $"{_lifeCount}";
+            if (_lifeCount == 0)
             {
+                _turnCountTMP.Get(gameObject).DOColor(Color.red, .5f).SetEase(Ease.InBounce);
                 transform.DOLocalMoveY(-1, .5f).SetEase(Ease.InBounce)
                     .OnComplete(Destroy);
             }
