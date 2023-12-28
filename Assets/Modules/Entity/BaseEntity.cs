@@ -195,20 +195,24 @@ namespace Cardinals
 
                 if (damage > 0)
                 {
+                    GameManager.I.Sound.PlayerDefenseHit();
                     BrokenDefenseEvent?.Invoke();
                 }
                 else
                 {
+                    GameManager.I.Sound.PlayerDefenseHit();
                     SuccessDefenseEvent?.Invoke();
                 }
             }
             
             if (damage > 0)
             {
+                
                 Hp -= damage;
                 HitEvent?.Invoke();
                 
                 if (this is Player) {
+                    GameManager.I.Sound.PlayerHit();
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
                 } else if (this is BaseEnemy) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 1f, 1);
@@ -249,6 +253,7 @@ namespace Cardinals
         protected void ResetDefenseCount(int resetValue = 0) => DefenseCount = resetValue;
         public void AddDefenseCount(int value)
         {
+            GameManager.I.Sound.BombNormalBall();
             if(CheckBuffExist(BuffType.Powerless))
                 value = (int)Math.Ceiling((float) value / 2);
 
@@ -257,6 +262,7 @@ namespace Cardinals
 
         public virtual int Heal(int value)
         {
+            GameManager.I.Sound.PlayerHeal();
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_HealParticle);
             Instantiate(prefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
             

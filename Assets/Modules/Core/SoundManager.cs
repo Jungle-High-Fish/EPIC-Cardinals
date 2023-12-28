@@ -16,22 +16,38 @@ using System.Linq;
 
 namespace Cardinals
 {
-    public class SoundManager: MonoBehaviour
-    {   
+    public class SoundManager : MonoBehaviour
+    {
         [Header("BGM")]
         [SerializeField] private AudioClip _bgm;
 
         [Header("Common UI")]
         [SerializeField] private AudioClip _buttonClick;
+        [SerializeField] private AudioClip _getCoin;
 
         [Header("Card")]
         [SerializeField] private AudioClip _cardClick;
         [SerializeField] private AudioClip _cardDraw;
         [SerializeField] private AudioClip _cardDiscard;
         [SerializeField] private AudioClip _cardUse;
+        [SerializeField] private AudioClip _cardReroll1;
+        [SerializeField] private AudioClip _cardReroll2;
+        [SerializeField] private AudioClip _cardReroll3;
+
 
         [Header("Player")]
         [SerializeField] private AudioClip _playerMove;
+        [SerializeField] private AudioClip _playerHit;
+        [SerializeField] private AudioClip _playerDefenseHit;
+        [SerializeField] private AudioClip _playerHeal;
+
+        [Header("TileEffect")]
+        [SerializeField] private AudioClip _normalBall1;
+        [SerializeField] private AudioClip _getDefense;
+        [SerializeField] private AudioClip _fireBall1;
+        [SerializeField] private AudioClip _fireBall2;
+        [SerializeField] private AudioClip _waterHeal;
+        [SerializeField] private AudioClip _earthDefense;
 
         private ComponentGetter<AudioSource> _effectAudioSource1
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 1");
@@ -49,47 +65,97 @@ namespace Cardinals
         private List<AudioSource> _effectAudioSourceList = new List<AudioSource>();
 
         #region Common UI
-        public void ButtonClick() {
+        public void ButtonClick()
+        {
             if (_buttonClick == null) return;
 
             _effectAudioClipQueue.Enqueue(_buttonClick);
         }
+
+        public void GetCoin()
+        {
+            if (_getCoin == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getCoin);
+        }
         #endregion
 
         #region Card
-        public void CardClick() {
+        public void CardClick()
+        {
             if (_cardClick == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardClick);
         }
 
-        public void CardUse() {
+        public void CardUse()
+        {
             if (_cardUse == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardUse);
         }
 
-        public void CardDraw() {
+        public void CardDraw()
+        {
             if (_cardDraw == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardDraw);
         }
 
-        public void CardDiscard() {
+        public void CardDiscard()
+        {
             if (_cardDiscard == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardDiscard);
         }
+
+        public void CardReroll()
+        {
+            if (_cardReroll1 == null) return;
+
+
+            AudioClip[] cardRerollOptions = { _cardReroll1, _cardReroll2, _cardReroll3 };
+
+            int randomIndex = UnityEngine.Random.Range(0, cardRerollOptions.Length);
+
+            _effectAudioClipQueue.Enqueue(cardRerollOptions[randomIndex]);
+        }
         #endregion
 
         #region Player
-        public void PlayerMove() {
+        public void PlayerMove()
+        {
             if (_playerMove == null) return;
 
             _effectAudioClipQueue.Enqueue(_playerMove);
         }
 
-        public void PlayBGM() {
+        public void PlayerHit()
+        {
+            if (_playerHit == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerHit);
+
+        }
+
+        public void PlayerHeal()
+        {
+            if (_playerHeal == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerHeal);
+
+        }
+
+        public void PlayerDefenseHit()
+        {
+            if (_playerDefenseHit == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerDefenseHit);
+
+        }
+
+        public void PlayBGM()
+        {
             if (_bgm == null) return;
 
             _bgmAudioSource.Get(gameObject).clip = _bgm;
@@ -98,36 +164,89 @@ namespace Cardinals
             _bgmAudioSource.Get(gameObject).Play();
         }
 
-        private void Awake() {
+        private void Awake()
+        {
             _effectAudioSourceList.Add(_effectAudioSource1.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource2.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource3.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource4.Get(gameObject));
-            
+
             GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
             GameManager.I.GameSetting.OnSoundSettingChanged += OnSoundSettingChange;
         }
 
-        private void Update() {
-            if (_effectAudioClipQueue.Count > 0) {
+        private void Update()
+        {
+            if (_effectAudioClipQueue.Count > 0)
+            {
                 var targetAudioSource = _effectAudioSourceList.FirstOrDefault(x => !x.isPlaying);
-                if (targetAudioSource != null) {
+                if (targetAudioSource != null)
+                {
                     targetAudioSource.volume = GameManager.I.GameSetting.SfxVolume / 100f;
                     targetAudioSource.PlayOneShot(_effectAudioClipQueue.Dequeue());
                 }
             }
         }
 
-        private void OnDisable() {
-            if (GameManager.I != null) {
+        private void OnDisable()
+        {
+            if (GameManager.I != null)
+            {
                 GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
             }
         }
 
-        private void OnSoundSettingChange() {
+        private void OnSoundSettingChange()
+        {
             _bgmAudioSource.Get(gameObject).volume = GameManager.I.GameSetting.BgmVolume / 100f;
             _effectAudioSourceList.ForEach(x => x.volume = GameManager.I.GameSetting.SfxVolume / 100f);
         }
         #endregion
+
+        #region TileMagic
+        public void FlyFireBall()
+        {
+            if (_fireBall1 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_fireBall1);
+        }
+
+        public void BombFireBall()
+        {
+            if (_fireBall2 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_fireBall2);
+        }
+
+        public void BombNormalBall()
+        {
+            if (_normalBall1 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_normalBall1);
+        }
+
+        public void GetDefense()
+        {
+            if (_getDefense == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getDefense);
+        }
+
+        public void WaterHeal()
+        {
+            if (_waterHeal == null) return;
+
+            _effectAudioClipQueue.Enqueue(_waterHeal);
+        }
+
+        public void EarthDefense()
+        {
+            if (_earthDefense == null) return;
+
+            _effectAudioClipQueue.Enqueue(_earthDefense);
+        }
+        #endregion
+
+
     }
 }

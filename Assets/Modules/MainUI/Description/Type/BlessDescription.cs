@@ -18,7 +18,7 @@ namespace Cardinals.UI.Description
         public Sprite IconSprite => null;
         public Color Color { get; set; }
 
-        public string Key => _data.blessType.ToString();
+        public string Key => $"bless_{_data.blessType.ToString()}";
 
         public void Init(BlessType blessType)
         {

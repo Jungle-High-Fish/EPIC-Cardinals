@@ -26,7 +26,6 @@ namespace Cardinals
         ComponentGetter<Image> _image
                 = new ComponentGetter<Image>(TypeOfGetter.This);
         [SerializeField] private Image _diceUIRenderer;
-        [SerializeField] private TextMeshProUGUI _numberText;
         [SerializeField] private DiceAnimation _diceAnimation;
         private DiceDescription _diceDescription;
         [SerializeField] private Animator _diceAnimator;
@@ -39,7 +38,7 @@ namespace Cardinals
             set => _diceIndex = value;
         }
         public bool IsSelect
-        {
+        { 
             get => _isSelect;
             set => _isSelect = value;
         }
@@ -127,6 +126,7 @@ namespace Cardinals
 
         public IEnumerator RollDiceUI(int number, Action onCompleted=null)
         {
+            GameManager.I.Sound.CardReroll();
             _diceUIRenderer.color = new Color(1, 1, 1, 1);
             _diceAnimator.runtimeAnimatorController = ResourceLoader.LoadAnimatorController(_dice.DiceType.ToString() + "DiceAnimator");
             _diceAnimator.enabled = true;
@@ -163,6 +163,7 @@ namespace Cardinals
         private IEnumerator Reroll()
         {
             SetCardUIRestore();
+            //GameManager.I.Sound.CardReroll();
             IsSelectable = false;
             if (GameManager.I.Player.PlayerInfo.Gold <= 0)
             {
@@ -255,7 +256,7 @@ namespace Cardinals
             if (!_isDiscard && _isSelectable&&!_isSelect)
             {
                 _diceUIRenderer.GetComponent<RectTransform>().DOAnchorPosY(15f, 0.1f);
-                DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex);
+                DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex,_dice.DiceBuffType);
             }
 
         }
