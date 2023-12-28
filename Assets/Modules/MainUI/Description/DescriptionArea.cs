@@ -18,6 +18,7 @@ namespace Cardinals.UI
         [SerializeField] private bool _canvasMode;
 
         private bool _isActive;
+        private Anchor _curAnchor;
 
 
         public void Update()
@@ -55,7 +56,7 @@ namespace Cardinals.UI
         {
             if (_canvasMode && _isActive)
             {
-                transform.position = Input.mousePosition;
+                transform.position = Input.mousePosition + (_curAnchor is Anchor.Right ? new Vector3(50, 0, 0) : Vector2.zero);
             }
         }
         #endregion
@@ -93,11 +94,12 @@ namespace Cardinals.UI
         
         public void OnPanel(Anchor anchor = Anchor.Right, params IDescription[] descriptions)
         {
-            if (_canvasMode)
-            {   
-                Vector2 mousePos = Input.mousePosition;
-                transform.position = mousePos;
-            }
+            _curAnchor = anchor;
+            // if (_canvasMode)
+            // {
+            //     Vector2 mousePos = Input.mousePosition;
+            //     transform.position = mousePos + (anchor is Anchor.Right ? new Vector3(50, 0, 0) : Vector2.zero);
+            // }
 
             if (descriptions != null)
             {
