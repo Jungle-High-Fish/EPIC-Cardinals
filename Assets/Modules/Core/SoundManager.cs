@@ -37,6 +37,8 @@ namespace Cardinals
 
         [Header("Player")]
         [SerializeField] private AudioClip _playerMove;
+        [SerializeField] private AudioClip _playerHit;
+        [SerializeField] private AudioClip _playerDefenseHit;
 
         [Header("TileEffect")]
         [SerializeField] private AudioClip _normalBall1;
@@ -125,6 +127,22 @@ namespace Cardinals
             if (_playerMove == null) return;
 
             _effectAudioClipQueue.Enqueue(_playerMove);
+        }
+
+        public void PlayerHit()
+        {
+            if (_playerHit == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerHit);
+
+        }
+
+        public void PlayerDefenseHit()
+        {
+            if (_playerDefenseHit == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerDefenseHit);
+
         }
 
         public void PlayBGM()

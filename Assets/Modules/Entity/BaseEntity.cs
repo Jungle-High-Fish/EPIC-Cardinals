@@ -195,20 +195,24 @@ namespace Cardinals
 
                 if (damage > 0)
                 {
+                    GameManager.I.Sound.PlayerDefenseHit();
                     BrokenDefenseEvent?.Invoke();
                 }
                 else
                 {
+                    GameManager.I.Sound.PlayerDefenseHit();
                     SuccessDefenseEvent?.Invoke();
                 }
             }
             
             if (damage > 0)
             {
+                
                 Hp -= damage;
                 HitEvent?.Invoke();
                 
                 if (this is Player) {
+                    GameManager.I.Sound.PlayerHit();
                     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
                 } else if (this is BaseEnemy) {
                     GameManager.I.CameraController.ShakeCamera(0.3f, 1f, 1);
