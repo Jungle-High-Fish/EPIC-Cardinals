@@ -30,6 +30,10 @@ namespace Cardinals
         [SerializeField] private AudioClip _cardDraw;
         [SerializeField] private AudioClip _cardDiscard;
         [SerializeField] private AudioClip _cardUse;
+        [SerializeField] private AudioClip _cardReroll1;
+        [SerializeField] private AudioClip _cardReroll2;
+        [SerializeField] private AudioClip _cardReroll3;
+
 
         [Header("Player")]
         [SerializeField] private AudioClip _playerMove;
@@ -96,6 +100,18 @@ namespace Cardinals
             if (_cardDiscard == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardDiscard);
+        }
+
+        public void CardReroll()
+        {
+            if (_cardReroll1 == null) return;
+
+
+            AudioClip[] cardRerollOptions = { _cardReroll1, _cardReroll2, _cardReroll3 };
+
+            int randomIndex = UnityEngine.Random.Range(0, cardRerollOptions.Length);
+
+            _effectAudioClipQueue.Enqueue(cardRerollOptions[randomIndex]);
         }
         #endregion
 
