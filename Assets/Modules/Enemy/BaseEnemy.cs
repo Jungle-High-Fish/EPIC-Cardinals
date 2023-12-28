@@ -71,6 +71,13 @@ namespace Cardinals
                 _berserkMode = value;
                 if (_berserkMode)
                 {
+                    // Effect
+                    transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                    var seq = DOTween.Sequence();
+                    seq.Append(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f));
+                    seq.Append(transform.DOScale(Vector3.one, .1f).SetEase(Ease.InQuad));
+                    seq.Play();
+                    
                     AddBuff(new Berserk());
                     BerserkModeEvent?.Invoke();
                     _animator.Clear();
