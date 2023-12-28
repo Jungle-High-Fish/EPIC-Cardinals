@@ -166,7 +166,14 @@ namespace Cardinals {
         TUOTORIAL_QUEST5_DES1,
         TUOTORIAL_QUEST5_DES2,
         TUOTORIAL_END1,
-        TUOTORIAL_END2
+        TUOTORIAL_END2,
+        UI_INGAME_BLESS,
+        UI_INGAME_POTION,
+        UI_INGAME_CURRENTTILE,
+        UI_INGAME_TURN,
+        UI_INGAME_LAP,
+        UI_INGAME_ENDTURN,
+        UI_INGAME_NEXTEVENT
 
     }
 }

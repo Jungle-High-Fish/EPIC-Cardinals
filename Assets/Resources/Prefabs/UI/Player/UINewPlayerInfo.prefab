@@ -309,6 +309,11 @@ MonoBehaviour:
   _artifactParentTr: {fileID: 0}
   _potionParentTr: {fileID: 7274367098524841571}
   _blessParentTr: {fileID: 750009301356867704}
+  _turnTMP: {fileID: 5859442886570622094}
+  _lapTMP: {fileID: 8401066040350017876}
+  _blessTMP: {fileID: 1018362449356328271}
+  _potionTMP: {fileID: 7243805448053491422}
+  _currenttileTMP: {fileID: 2657944933970236341}
 --- !u!114 &803190645723827635
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,6 +30,13 @@ namespace Cardinals.UI.Description
         [SerializeField] private Transform _potionParentTr;
         [SerializeField] private Transform _blessParentTr;
 
+        [Header("TextObject")]
+        [SerializeField] private TextMeshProUGUI _turnTMP;
+        [SerializeField] private TextMeshProUGUI _lapTMP;
+        [SerializeField] private TextMeshProUGUI _blessTMP;
+        [SerializeField] private TextMeshProUGUI _potionTMP;
+        [SerializeField] private TextMeshProUGUI _currenttileTMP;
+
         private GameObject IconPrefab => ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Sprites_UI_IconPrefab);
         
         private ComponentGetter<UIEndTurnButton> _endTurnButton 
@@ -46,7 +53,15 @@ namespace Cardinals.UI.Description
         private ObjectGetter _turnNotiBubbleObj = new(TypeOfGetter.ChildByName, "Turn Noti");
         private ComponentGetter<TextMeshProUGUI> _turnNotiBubbleTMP = new(TypeOfGetter.ChildByName, "Turn Noti/TMP");
 
-        
+        private void Start()
+        {
+            _turnTMP.text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_TURN];
+            _lapTMP.text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_LAP];
+            _blessTMP.text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_BLESS];
+            _potionTMP.text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_POTION];
+            _currenttileTMP.text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_CURRENTTILE];
+        }
+
         public void Init() {
             _tileInfo.Get(gameObject).gameObject.SetActive(false);
             _endTurnButton.Get(gameObject).Deactivate();

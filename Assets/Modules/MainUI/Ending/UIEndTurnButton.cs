@@ -15,7 +15,7 @@ public class UIEndTurnButton : MonoBehaviour
 
     public void Init() {
         _button.Get(gameObject).onClick.AddListener(EndTurn);
-        _text.Get(gameObject).text = "End Turn";
+        _text.Get(gameObject).text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_ENDTURN];
     }
 
 	public void EndTurn() {
@@ -29,9 +29,9 @@ public class UIEndTurnButton : MonoBehaviour
         _button.Get(gameObject).interactable = true;
 
         if (isForNextEvent) {
-            _text.Get(gameObject).text = "Next Event";
+            _text.Get(gameObject).text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_NEXTEVENT];
         } else {
-            _text.Get(gameObject).text = "End Turn";
+            _text.Get(gameObject).text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_ENDTURN];
         }
     }
 
