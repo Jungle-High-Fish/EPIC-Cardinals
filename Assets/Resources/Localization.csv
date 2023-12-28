@@ -46,6 +46,8 @@ BUFF_ROTATIONRATE_NAME,Rotationrate,회전률
 BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다."
 BUFF_POWERLESS_NAME,Powerless,무력
 BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.
+BUFF_BERSERK_NAME,Berserk,광폭화
+BUFF_BERSERK_EXPLAIN,This enemy is angry.,적이 분노했습니다.
 POTION_JUMP_NAME,Jump Potion,도약 포션
 POTION_JUMP_EXPLAIN,Move forward 3 tiles.,앞으로 3칸 이동합니다.
 POTION_BACK_NAME,Reverse Potion,후진 포션

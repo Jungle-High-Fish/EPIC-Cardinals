@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cardinals.Board;
+using Cardinals.Buff;
 using Cardinals.Enemy;
 using Cardinals.Enums;
 using Cardinals.Game;
@@ -70,6 +71,7 @@ namespace Cardinals
                 _berserkMode = value;
                 if (_berserkMode)
                 {
+                    AddBuff(new Berserk());
                     BerserkModeEvent?.Invoke();
                     _animator.Clear();
                 }
