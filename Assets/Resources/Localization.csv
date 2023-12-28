@@ -46,6 +46,8 @@ BUFF_ROTATIONRATE_NAME,Rotationrate,회전률
 BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다."
 BUFF_POWERLESS_NAME,Powerless,무력
 BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.
+BUFF_BERSERK_NAME,Berserk,광폭화
+BUFF_BERSERK_EXPLAIN,This enemy is angry.,적이 분노했습니다.
 POTION_JUMP_NAME,Jump Potion,도약 포션
 POTION_JUMP_EXPLAIN,Move forward 3 tiles.,앞으로 3칸 이동합니다.
 POTION_BACK_NAME,Reverse Potion,후진 포션
@@ -118,3 +120,23 @@ PLAYER_SCRIPT_REROLL,I don't have the money to roll the dice.,주사위를 돌�
 PLAYER_SCRIPT_TUTORIAL1,I can't reroll the dice in the tutorial.,튜토리얼에서는 주사위를 돌릴 수 없어..
 PLAYER_SCRIPT_CONFUSE,I'm confused...,혼란하다 혼란해..
 PLAYER_SCRIPT_POTION,I can't use potion..,포션을 쓸 수 없어..
+ENEMY_ACTION_ATTACK_NAME,Attack,공격
+ENEMY_ACTION_ATTACK_EXPLAIN,This enemy is trying to attack you.,이 적은 당신을 공격하려고 합니다.
+ENEMY_ACTION_DEFENSE_NAME,Defense,방어
+ENEMY_ACTION_DEFENSE_EXPLAIN,This enemy is trying to defend itself.,이 적은 방어하려고 합니다.
+ENEMY_ACTION_TILECURSE_NAME,Tile Curse, 타일 저주
+ENEMY_ACTION_TILECURSE_EXPLAIN,This enemy is trying to curse the tiles.,이 적은 타일에 저주를 걸려고 합니다.
+ENEMY_ACTION_TILEDEBUFF_NAME,Tile Debuff, 타일 디버프
+ENEMY_ACTION_TILEDEBUFF_EXPLAIN,This enemy is trying to debuff the tiles.,이 적은 타일에 디버프를 걸려고 합니다.
+ENEMY_ACTION_USERDEBUFF_NAME,User Debuff,디버프
+ENEMY_ACTION_USERDEBUFF_EXPLAIN,This enemy is trying to debuff you,이 적은 당신에게 디버프를 걸려고 합니다.
+ENEMY_ACTION_SLEEP_NAME,Sleep,수면
+ENEMY_ACTION_SLEEP_EXPLAIN,This enemy is asleep.,이 적은 잠들어 있습니다.
+ENEMY_ACTION_SPAWN_NAME,Spawn,소환
+ENEMY_ACTION_SPAWN_EXPLAIN,This enemy is trying to summon something.,이 적은 무언가를 소환하려고 합니다.
+ENEMY_ACTION_AREAATTACK_NAME,Area Attack,[미사용]범위 공격
+ENEMY_ACTION_AREAATTACK_EXPLAIN,-,이 적은 범위 공격을 하려고 합니다.
+ENEMY_ACTION_CONFUSION_NAME,Confusion,[미사용]혼란
+ENEMY_ACTION_CONFUSION_EXPLAIN,-,이 적은 혼란스러워합니다.
+ENEMY_ACTION_NOACTION_NAME,No Action, [미사용]무행동
+ENEMY_ACTION_NOACTION_EXPLAIN,-,이 적은 가만히 있습니다.
