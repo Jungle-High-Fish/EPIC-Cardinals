@@ -190,3 +190,12 @@ EVENT_ROULETTE_TILE,Power up a random tile.,랜덤한 타일을 강화합니다.
 EVENT_ROULETTE_HP,Loses health.,체력이 깎입니다.
 EVENT_DICE_MONEY1,Get money.,돈을 획득했다.
 EVENT_DICE_HEAL2,Your health has been restored,체력이 회복되었다
+EVENT_ALCHEMY_TITLE,Alchemy Rolling,굴리는 연금술
+EVENT_ALCHEMY_DES,~ Please choose the dice to roll ~,~ 굴릴 주사위를 고르세요 ~
+EVENT_ALCHEMY_ROLL,ROLLING,굴리기
+GAMEOVER_NUM_ROUND,Number of laps,돈 바퀴 수
+GAMEOVER_NUM_DICE,Number of dice used,사용한 주사위 횟수
+GAMEOVER_NUM_MONSTER,Monsters killed,몬스터 처치 수
+GAMEOVER_NUM_PLAYTIME,Play time,플레이 타임
+GAMEOVER_BUTTON_RE,Retry,다시하기
+GAMEOVER_BUTTON_TITLE,Title,타이틀로

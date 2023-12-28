@@ -44,6 +44,10 @@ namespace Cardinals.BoardEvent.Alchemy
         
         void Start()
         {
+            _headerTMP.text = GameManager.I.Localization[LocalizationEnum.EVENT_ALCHEMY_TITLE];
+            _chooseDiceDescTMP.text = GameManager.I.Localization[LocalizationEnum.EVENT_ALCHEMY_DES];
+            _rollingBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.EVENT_ALCHEMY_ROLL];
             _rollingBTN.onClick.AddListener(B_Rolling);
             _cancelBTN.onClick.AddListener(B_Cancel);
         }

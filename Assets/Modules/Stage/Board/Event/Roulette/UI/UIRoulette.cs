@@ -39,6 +39,8 @@ namespace Cardinals.BoardEvent.Roulette
 
         public void Init()
         {
+            _spinBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.UI_ROULETTE_SPIN];
             GameManager.I.UI.UIEndTurnButton.Deactivate();
             gameObject.SetActive(true);
             _resultObj.SetActive(false);

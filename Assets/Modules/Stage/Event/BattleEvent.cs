@@ -242,7 +242,7 @@ namespace Cardinals.Game
             {
                 text = String.Format(GameManager.I.Localization.Get(LocalizationEnum.UI_TURN_AN1), _boardEventInterval - value);
             }
-            else text = "보드 이벤트가 생성되었습니다.";
+            else text = GameManager.I.Localization.Get(LocalizationEnum.UI_TURN_AN2);
 
             return text;
         }
