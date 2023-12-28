@@ -271,7 +271,7 @@ namespace Cardinals
 
             diceUI.GetComponent<RectTransform>().anchoredPosition = UIPos;
             diceUI.GetComponent<DiceUI>().Init(dice, _dicesUI.Count,this);
-            diceUI.GetComponent<DiceUI>().DiceDescription.Init(numbers, type);
+            diceUI.GetComponent<DiceUI>().DiceDescription.Init(numbers, type,dice);
             _dicesUI.Add(diceUI.GetComponent<DiceUI>());
         }
 
