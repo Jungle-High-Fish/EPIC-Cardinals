@@ -700,5 +700,9 @@ MonoBehaviour:
   _cardReroll2: {fileID: 8300000, guid: 345b6edc68673ac4c833839ea3d02a26, type: 3}
   _cardReroll3: {fileID: 8300000, guid: 97f56b2e9d9eb4c43b04d262bca727c0, type: 3}
   _playerMove: {fileID: 8300000, guid: 5a05223448d9eec409d4654c5d481ff4, type: 3}
+  _normalBall1: {fileID: 8300000, guid: b82c60f41a011da4791b24221b999d68, type: 3}
+  _getDefense: {fileID: 8300000, guid: b42b74470fb041e49944390fc59be0b8, type: 3}
   _fireBall1: {fileID: 8300000, guid: edbf489bf5e4a9346af01529271220af, type: 3}
   _fireBall2: {fileID: 8300000, guid: 084ac1e465dc1e541a9b0e31865d9be9, type: 3}
+  _waterHeal: {fileID: 8300000, guid: 093b03fd5dbb31d42aa8090bc7e6c671, type: 3}
+  _earthDefense: {fileID: 8300000, guid: 44707a2f929f4f7418f6a5c93579919c, type: 3}

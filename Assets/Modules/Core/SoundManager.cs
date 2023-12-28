@@ -39,8 +39,12 @@ namespace Cardinals
         [SerializeField] private AudioClip _playerMove;
 
         [Header("TileEffect")]
+        [SerializeField] private AudioClip _normalBall1;
+        [SerializeField] private AudioClip _getDefense;
         [SerializeField] private AudioClip _fireBall1;
         [SerializeField] private AudioClip _fireBall2;
+        [SerializeField] private AudioClip _waterHeal;
+        [SerializeField] private AudioClip _earthDefense;
 
         private ComponentGetter<AudioSource> _effectAudioSource1
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 1");
@@ -185,6 +189,34 @@ namespace Cardinals
             if (_fireBall2 == null) return;
 
             _effectAudioClipQueue.Enqueue(_fireBall2);
+        }
+
+        public void BombNormalBall()
+        {
+            if (_normalBall1 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_normalBall1);
+        }
+
+        public void GetDefense()
+        {
+            if (_getDefense == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getDefense);
+        }
+
+        public void WaterHeal()
+        {
+            if (_waterHeal == null) return;
+
+            _effectAudioClipQueue.Enqueue(_waterHeal);
+        }
+
+        public void EarthDefense()
+        {
+            if (_earthDefense == null) return;
+
+            _effectAudioClipQueue.Enqueue(_earthDefense);
         }
         #endregion
 
