@@ -125,7 +125,7 @@ namespace Cardinals
             HitEvent += () =>
             {
                 Animator?.Play("Hit");
-                Bubble?.SetBubble(BubbleText.hit);
+                Bubble?.SetBubble(TMPUtils.LocalizedText(BubbleText.hit));
                 transform.DOShakeScale(0.5f, .1f, 2, 45f);
             };
         }
@@ -229,7 +229,7 @@ namespace Cardinals
         public virtual void Attack(BaseEntity target, int damage)
         {
             target.Hit(CalculDamage(damage));
-            Bubble?.SetBubble(BubbleText.attack);
+            Bubble?.SetBubble(TMPUtils.LocalizedText(BubbleText.attack));
             Animator?.Play("Attack");
         }
 

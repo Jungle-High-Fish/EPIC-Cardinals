@@ -73,7 +73,7 @@ namespace Cardinals.BoardEvent.Alchemy
             _evtData = ResourceLoader.LoadSO<AlchemyEventDataSO>(Constants.FilePath.Resources
                 .SO_BoardObject_AlchemyEventData + evt);
             _targetNumberTMP.text = idx.ToString();
-            _eventDescriptionTMP.text = _evtData.eventDescription;
+            _eventDescriptionTMP.SetLocalizedText(_evtData.eventDescription);
             
             // 버튼 입력 대기
             _isRolling = false;

@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Util;
 
 namespace Cardinals.BoardEvent.Card
 {
@@ -46,7 +47,7 @@ namespace Cardinals.BoardEvent.Card
             
             // 랜덤 이벤트 지정
             _curEvent = _eventData[Random.Range(0, _eventData.Length)];
-            _eventGuideTMP.text = _curEvent.description;
+            _eventGuideTMP.SetLocalizedText(_curEvent.description);
 
             Invoke(nameof(CheckDiceExist), 1f);
         }
@@ -91,7 +92,7 @@ namespace Cardinals.BoardEvent.Card
             _eventObj.SetActive(false);
             _curEvent = null;
             
-            _endTextTMP.text = text;
+            _endTextTMP.SetLocalizedText(text);
             _endObj.SetActive(true);
             _updator.Resizing();
             

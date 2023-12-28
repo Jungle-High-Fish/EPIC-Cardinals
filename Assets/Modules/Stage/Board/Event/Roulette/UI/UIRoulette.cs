@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Util;
 
 namespace Cardinals.BoardEvent.Roulette
 {
@@ -90,7 +91,7 @@ namespace Cardinals.BoardEvent.Roulette
                     throw new ArgumentOutOfRangeException();
             }
             _resultObj.SetActive(true);
-            _resultTMP.text = data.description;
+            _resultTMP.SetLocalizedText(data.description);
             StartCoroutine(Close());
         }
 

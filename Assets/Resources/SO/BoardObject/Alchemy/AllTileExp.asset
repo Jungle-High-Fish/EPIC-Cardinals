@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: AllTileExp
   m_EditorClassIdentifier: 
   type: 1
-  eventDescription: "\uC8FC\uC0AC\uC704\uB97C \uAD74\uB824 1\uC774 \uB098\uC628\uB2E4\uBA74,\n\uC804\uCCB4
-    \uD0C0\uC77C \uACBD\uD5D8\uCE58 +1"
+  eventDescription: EVENT_ALCHEMY_ALLTILE

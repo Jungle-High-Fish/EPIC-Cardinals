@@ -53,7 +53,7 @@ namespace Cardinals.UI.Description
                 } else
                 {
                     (transform as RectTransform).DOShakeAnchorPos(0.3f, 5f);
-                    GameManager.I.Player.Bubble.SetBubble("포션을 쓸 수 없어");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_POTION));
                 }
             }
             
