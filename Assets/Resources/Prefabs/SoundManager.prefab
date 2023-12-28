@@ -702,6 +702,7 @@ MonoBehaviour:
   _playerMove: {fileID: 8300000, guid: 4f6f83fef09c9564884cecbbbcc884fe, type: 3}
   _playerHit: {fileID: 8300000, guid: 5cd899dd0a2d19246bdb3b03b29df033, type: 3}
   _playerDefenseHit: {fileID: 8300000, guid: c09d627bb181ba44f8da88782ff1c140, type: 3}
+  _playerHeal: {fileID: 8300000, guid: 2feddd09adc525b42ada41340d1b7545, type: 3}
   _normalBall1: {fileID: 8300000, guid: b82c60f41a011da4791b24221b999d68, type: 3}
   _getDefense: {fileID: 8300000, guid: b42b74470fb041e49944390fc59be0b8, type: 3}
   _fireBall1: {fileID: 8300000, guid: edbf489bf5e4a9346af01529271220af, type: 3}

@@ -39,6 +39,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _playerMove;
         [SerializeField] private AudioClip _playerHit;
         [SerializeField] private AudioClip _playerDefenseHit;
+        [SerializeField] private AudioClip _playerHeal;
 
         [Header("TileEffect")]
         [SerializeField] private AudioClip _normalBall1;
@@ -134,6 +135,14 @@ namespace Cardinals
             if (_playerHit == null) return;
 
             _effectAudioClipQueue.Enqueue(_playerHit);
+
+        }
+
+        public void PlayerHeal()
+        {
+            if (_playerHeal == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerHeal);
 
         }
 
