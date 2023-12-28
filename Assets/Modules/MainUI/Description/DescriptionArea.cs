@@ -81,7 +81,11 @@ namespace Cardinals.UI
         {
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Description);
             var uiDescription = Instantiate(prefab, transform).GetComponent<UIDescription>();
-                        
+
+            if (description.Key.StartsWith("bless_"))
+            {
+                uiDescription.transform.SetSiblingIndex(0);
+            }
             uiDescription.Init(description);
             uiDescription.gameObject.SetActive(false);
             UIDescriptionsDict.Add(description.Key, uiDescription);
