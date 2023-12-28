@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d699eebe2430db24994c3a0e6b0cc7a9, type: 3}
   m_Name: BlessWater2
   m_EditorClassIdentifier: 
-  blessName: Flood
-  description: When healing on a water tile, if HP is full, deal damage to the enemy
-    equal to twice the excess healing amount.
+  blessName: BLESS_WATER2_NAME
+  description: BLESS_WATER2_EXPLAIN
   totemSprite: {fileID: 21300000, guid: 9711407b4c1b5264cbf74788f003cbb8, type: 3}
   patternSprite: {fileID: 21300000, guid: 5f2f4dc1685b7b1439c7de87f395cb89, type: 3}
   blessType: 4

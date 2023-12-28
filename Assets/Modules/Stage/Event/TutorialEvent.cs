@@ -38,13 +38,13 @@ namespace Cardinals.Tutorial
             StageController stage = GameManager.I.Stage;
             Board.Board board = GameManager.I.Stage.Board;
             DiceManager diceManager = GameManager.I.Stage.DiceManager;
-            List<BaseEnemy> enemies = new();
+            _enemies = new();
             EnemyGradeType enemyGradeType;
             
             // 몬스터 세팅
-            InitEnemy(enemies, CheckEnemyKillQuest);
-            GameManager.I.CurrentEnemies = enemies;
-            enemyGradeType = enemies.First().EnemyData.enemyGradeType;
+            InitEnemy(_enemies, CheckEnemyKillQuest);
+            GameManager.I.CurrentEnemies = _enemies;
+            enemyGradeType = _enemies.First().EnemyData.enemyGradeType;
 
             // 카드 매니저 세팅
             diceManager.OnBattle(isTutorial:true);
@@ -59,7 +59,7 @@ namespace Cardinals.Tutorial
             // 스팀 핸들러 연결
             GameManager.I.SteamHandler.SetBattleStateDisplay(
                 GameManager.I.Stage.Index,
-                enemies.Select(x => x.EnemyData.enemyType).ToList()
+                _enemies.Select(x => x.EnemyData.enemyType).ToList()
             );
 
             // 플레이어 이벤트 등록
@@ -92,7 +92,7 @@ namespace Cardinals.Tutorial
 
                 // 전투 업데이트
                 yield return player.StartTurn();
-                foreach (var enemy in enemies)
+                foreach (var enemy in _enemies)
                 {
                     yield return enemy.StartTurn();
                 }
@@ -119,19 +119,19 @@ namespace Cardinals.Tutorial
 
                 // 버프 처리
                 player.OnBuff();
-                for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].OnBuff();
+                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnBuff();
 
                 // 플레이어 PreEndTurn 처리
                 yield return player.PreEndTurn();
 
                 // 적 행동
-                foreach (var e in enemies)
+                foreach (var e in _enemies)
                 {
                     yield return e.OnPreTurn();
                 }
-                for (int i = enemies.Count - 1; i >= 0; i--)
+                for (int i = _enemies.Count - 1; i >= 0; i--)
                 {
-                    yield return enemies[i].OnTurn();
+                    yield return _enemies[i].OnTurn();
                 }
 
                 if (CheckEnemyWin) break;
@@ -144,9 +144,9 @@ namespace Cardinals.Tutorial
                 yield return player.EndTurn(); 
 
                 // 적 턴 종료 처리
-                for (int i = enemies.Count - 1; i >= 0; i--)
+                for (int i = _enemies.Count - 1; i >= 0; i--)
                 {
-                    yield return enemies[i].EndTurn();
+                    yield return _enemies[i].EndTurn();
                 }
 
                 // 튜토리얼 처리
@@ -173,6 +173,29 @@ namespace Cardinals.Tutorial
                 yield return WaitReward(enemyGradeType);
             }
         }
+
+        public override void Test_ChangeEnemy(EnemyType enemyType) {
+            if (GameManager.I.CurrentEnemies == null) return;
+            if (!GameManager.I.IsWaitingForNext) return;
+
+            var enemyData = EnemyDataSO.Data(enemyType);
+            List<BaseEnemy> originalEnemies = new();
+            foreach (var e in _enemies) {
+                originalEnemies.Add(e);
+            }
+            InitEnemy(_enemies, onEnemyDie:CheckEnemyKillQuest, enemyDataSOs: new EnemyDataSO[] {enemyData});
+            
+            foreach (var e in originalEnemies) {
+                e.DieEvent?.Invoke();
+            }
+
+            foreach (var e in _enemies) {
+                e.UpdatePatternEvent?.Invoke(e.CurPattern);
+            }
+
+            GameManager.I.CurrentEnemies = _enemies;
+        }
+
 
         public void CheckCardQuest(int cardNumber, MouseState howToUse) {
             if (_curQuestIndex == -1) {

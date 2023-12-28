@@ -56,7 +56,7 @@ namespace Cardinals.BoardEvent.Card
             if (GameManager.I.Stage.DiceManager.DiceUis.All(d => !d.gameObject.activeSelf))
             {
                 // 이벤트 생략
-                StartCoroutine(nameof(EndEvent), "이벤트를 수행하기 위한 주사위가 부족합니다.");
+                StartCoroutine(nameof(EndEvent), GameManager.I.Localization.Get(LocalizationEnum.EVENT_DICEEVENT_WARNING));
             }
         }
 

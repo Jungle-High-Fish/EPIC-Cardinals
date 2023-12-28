@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d699eebe2430db24994c3a0e6b0cc7a9, type: 3}
   m_Name: BlessWater1
   m_EditorClassIdentifier: 
-  blessName: Calm Surface
-  description: If no HP was lost during the enemy's turn and the object's turn, recover
-    3 HP.
+  blessName: BLESS_WATER1_NAME
+  description: BLESS_WATER1_EXPLAIN
   totemSprite: {fileID: 21300000, guid: 94a3f0e1c2c14bb4bbaef0b4353a6d63, type: 3}
   patternSprite: {fileID: 21300000, guid: 12c9314216206ef409ca3fb234c70cff, type: 3}
   blessType: 3

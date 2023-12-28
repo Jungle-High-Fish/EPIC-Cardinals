@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d699eebe2430db24994c3a0e6b0cc7a9, type: 3}
   m_Name: BlessEarth1
   m_EditorClassIdentifier: 
-  blessName: Rock Debris
-  description: After the enemy attacks, they take damage equal to the remaining defense.
+  blessName: BLESS_EARTH1_NAME
+  description: BLESS_EARTH1_EXPLAIN
   totemSprite: {fileID: 21300000, guid: 0b42347568b2430458efbb3d3b2ed52a, type: 3}
   patternSprite: {fileID: 21300000, guid: d1db4297a7f651747a53250143384db0, type: 3}
   blessType: 5

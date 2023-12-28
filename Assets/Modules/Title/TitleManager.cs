@@ -24,6 +24,8 @@ namespace Cardinals
         [SerializeField] private float _zoomInPosY;
         [SerializeField] private float _zoomInCameraSize;
         [SerializeField] private Transform _charactersTr;
+
+        [SerializeField] private TMP_Text _characterDiceSelecterText;
         private int curCharIdx = 0;
         
         private void Start()
@@ -54,6 +56,9 @@ namespace Cardinals
             _backBTN.onClick.AddListener(Title);
             _backBTN.GetComponentInChildren<TextMeshProUGUI>().text 
                 = GameManager.I.Localization[LocalizationEnum.UI_MAIN_BACK];
+
+            _characterDiceSelecterText.text 
+                = GameManager.I.Localization[LocalizationEnum.UI_INIT_DICE_SELECT];
 
             SetTileView(true);
         }

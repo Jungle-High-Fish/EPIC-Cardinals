@@ -15,6 +15,7 @@ using UnityEngine;
 using Util;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using Cardinals.Test;
 
 namespace Cardinals
 {
@@ -23,6 +24,8 @@ namespace Cardinals
         public GameSettingUI GameSettingUI => _gameSettingUI;
         public UIPausePanel UIPausePanel => _uiPausePanel;
         public SaveFileLoaderPanel SaveFileLoaderPanel => _saveFileLoaderPanel;
+        public UIPlayerInfo UIPlayerInfo => _uiPlayerInfo;
+        public UIDebugPanel UIDebugPanel => _uiDebugPanel;
 
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
@@ -53,6 +56,7 @@ namespace Cardinals
         private GameSettingUI _gameSettingUI;
         private UIPausePanel _uiPausePanel;
         private SaveFileLoaderPanel _saveFileLoaderPanel;
+        private UIDebugPanel _uiDebugPanel;
 
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
@@ -137,6 +141,8 @@ namespace Cardinals
             InstantiatePausePanelUI(_systemUICanvas);
             InstantiateGameSettingUI(_systemUICanvas);
             InstantiateSaveFileLoaderUI(_systemUICanvas);
+            // Debug
+            InstantiateDebugUI(_systemUICanvas);
             
             // StageInfo
             InstantiateStageInfoUI(_mainUICanvas);
@@ -297,6 +303,7 @@ namespace Cardinals
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerStatus);
             GameObject obj = Instantiate(prefab, _playerUICanvas.transform);
             obj.GetComponent<UIPlayerStatus>().Init(GameManager.I.Player);
+            obj.transform.SetSiblingIndex(1);
         }
 
         private void InstantiateCardSystemUI(Canvas canvas) {
@@ -433,6 +440,15 @@ namespace Cardinals
             _descriptionUICanvas.gameObject.SetActive(false);
             _mainUICanvas.gameObject.SetActive(false);
             _playerUICanvas.gameObject.SetActive(false);
+        }
+
+        // 디버깅 UI
+        private void InstantiateDebugUI(Canvas canvas) {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_DebugPanel);
+            GameObject debugUIObj = Instantiate(prefab, canvas.transform);
+            _uiDebugPanel = debugUIObj.GetComponent<UIDebugPanel>();
+            _uiDebugPanel.Init();
+            debugUIObj.SetActive(false);
         }
     }
 }

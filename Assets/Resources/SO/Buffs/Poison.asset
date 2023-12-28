@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   decreaseType: 1
-  buffName: Poison
-  description: At the end of the turn, take damage equal to the number of stacks.
+  buffName: 'BUFF_POISON_NAME '
+  description: 'BUFF_POISON_EXPLAIN '
   sprite: {fileID: 21300000, guid: 30c5be6c59b5346bb83a9c72f26359d5, type: 3}
   effectSprite: {fileID: 0}

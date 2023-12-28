@@ -190,6 +190,7 @@ namespace Cardinals.Board {
 		// 행동마다 해당 적에게 2/4/6 + 주사위 숫자의 데미지를 줍니다.
 		private void MagicActionFireMain(int value, BaseEntity target)
 		{
+            GameManager.I.Sound.FlyFireBall();
 			var targetPos = target.transform.position + new Vector3(0, -1, 0);
 			var obj = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_FireAttack));
 			obj.transform.position = transform.position;
@@ -197,7 +198,8 @@ namespace Cardinals.Board {
 			obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
 				.OnComplete(() =>
 				{
-					target.Hit(value + Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]); // 실제 데미지 입히는 영역
+                    GameManager.I.Sound.BombFireBall();
+                    target.Hit(value + Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]); // 실제 데미지 입히는 영역
 
 					var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
 					explosion.transform.position = targetPos;

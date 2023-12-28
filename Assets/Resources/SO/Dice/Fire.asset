@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be6aec5522a88a46b63c5b7642ab25e, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  title: "<element=Fire>  \uBD88 \uC8FC\uC0AC\uC704"
-  information: "\uBD88 \uD0C0\uC77C\uC5D0 \uC0AC\uC6A9 \uC2DC, \uC801\uC5D0\uAC8C
-    \uD574\uB2F9 \uC22B\uC790\uB9CC\uD07C <debuff = Burn> \uD654\uC0C1 \uB514\uBC84\uD504\uB97C
-    \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  title: DICE_FIRE_NAME
+  information: DICE_FIRE_DESCRIPTION
   diceType: 2
   elementColor: {r: 0.8078432, g: 0.32156864, b: 0.3647059, a: 1}

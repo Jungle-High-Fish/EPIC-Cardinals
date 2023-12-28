@@ -401,26 +401,9 @@ namespace Cardinals.Game {
             // Player.AddBuff(new Poison(5));
         }
         #endregion
-
-        // private int _boardEventIdx;
-        // [Button]
-        // public void GenerateBoardEvent()
-        // {
-        //     var tileAction = Board.GetCanSetEventTileEventAction();
-        //     if (tileAction != null)
-        //     {
-        //         // 이벤트 설정                
-        //         int enumLength = Enum.GetNames(typeof(BoardEventType)).Length;
-        //         _boardEventIdx = Math.Max(1, (++_boardEventIdx % enumLength));
-        //         var type = (BoardEventType)_boardEventIdx;
-        //         
-        //         tileAction.Set(type);
-        //     }
-        //     else Debug.Log("보드 내 이벤트 생성 가능한 코너 타일이 존재하지 않아, 이벤트가 생성되지 못했습니다.");
-        // }
         
         [Button]
-        public void GenerateNewBoardEvent()
+        public void GenerateNewBoardEvent(NewBoardEventType? eventType=null)
         {
             var tiles = Board.TileSequence
                 .Where(t => t != Player.OnTile && // 현재 플레이어가 서 있지 않은
@@ -432,10 +415,17 @@ namespace Cardinals.Game {
                 // 이벤트를 생성할 타일 설정
                 Tile tile = tiles[Random.Range(0, tiles.Count())];
                 
-                // 이벤트 설정                
-                int enumLength = Enum.GetNames(typeof(NewBoardEventType)).Length;
-                var evt = Random.Range(1, enumLength);
-                var evtType = (NewBoardEventType)evt;
+                // 이벤트 설정
+                NewBoardEventType evtType;
+                if (eventType == null)
+                {
+                    int enumLength = Enum.GetNames(typeof(NewBoardEventType)).Length;
+                    var evt = Random.Range(1, enumLength);
+                    evtType = (NewBoardEventType)evt;
+                }
+                else {
+                    evtType = eventType.Value;
+                }
                 
                 // 오브젝트 생성 및 컴프넌트 설정
                 var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_BoardEventObject);
@@ -569,6 +559,14 @@ namespace Cardinals.Game {
         public void Test_AddMoney(int num)
         {
             GameManager.I.Player.PlayerInfo.AddGold(num);
+        }
+
+        [Button]
+        public void Test_ChangeEnemy(EnemyType enemyType)
+        {
+            if (CurEvent is BattleEvent battleEvent) {
+                battleEvent.Test_ChangeEnemy(enemyType);
+            }
         }
         #endregion
     }

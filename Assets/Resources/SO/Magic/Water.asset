@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   magicType: 2
-  elementName: Water
+  elementName: TILE_MAGIC_WATER_NAME
   elementColor: {r: 0.36862746, g: 0.50980395, b: 0.9921569, a: 1}
   particleColor1: {r: 0.36862746, g: 0.50980395, b: 0.9921569, a: 1}
   particleColor2: {r: 0.30577865, g: 0.42288542, b: 0.823, a: 1}
@@ -24,9 +24,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2834f99f084fa4bd39eb7ef82f981789, type: 3}
   - {fileID: 21300000, guid: e48afaa1703324a3ca1924f9beabd6e1, type: 3}
   - {fileID: 21300000, guid: e06277cb5987d4111a13d36e100f46e2, type: 3}
-  mainMagicName: Clear Water
-  mainMagicDescription: With each action, regain <level=1,2,3> health. When taking
-    an action using a number greater than 3, inflict a <debuff=Weak> weak debuff
-    on the enemy.
+  mainMagicName: TILE_MAGIC_WATER_NAME
+  mainMagicDescription: TILE_MAGIC_WATER_EXPLAIN
   hasBuffEffect: 1
   buffType: 2

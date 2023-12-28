@@ -141,6 +141,7 @@ namespace Cardinals
 
         public void AddGold(int value)
         {
+            GameManager.I.Sound.GetCoin();
             Gold += value;
             UpdateGoldEvent?.Invoke(Gold);
         }

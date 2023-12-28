@@ -16,8 +16,8 @@ namespace Cardinals.UI.Description
             _data = data;
         }
 
-        public string Name => _data.eventName;
-        public string Description => _data.description;
+        public string Name => TMPUtils.LocalizedText(_data.eventName);
+        public string Description => TMPUtils.LocalizedText(_data.description);
         public Sprite IconSprite => null;
         public Color Color => default;
         public string Key => $"boardEvent_{_data.evtType}_{_data.objType}";

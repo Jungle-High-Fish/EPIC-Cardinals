@@ -13,8 +13,8 @@ namespace Cardinals.UI.Description
     public class BlessDescription : MonoBehaviour, IDescription
     {
         private BlessDataSO _data;
-        public string Name => _data.blessName;
-        public string Description => _data.description;
+        public string Name => TMPUtils.LocalizedText(_data.blessName);
+        public string Description => TMPUtils.CustomParse(_data.description,true) ;
         public Sprite IconSprite => null;
         public Color Color { get; set; }
 

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ThunderBolt
   m_EditorClassIdentifier: 
   curseType: 2
-  curseName: Thunderbolt
-  curseDescription: When the curse is activated, strike the user with lightning,
-    dealing 7 damage.
+  curseName: TILE_CURSE_THUNDERBOLT_NAME
+  curseDescription: TILE_CURSE_THUNDERBOLT_EXPLAIN
   sprite: {fileID: 21300000, guid: 585dd2ff0c06a7b4391c60df828172d5, type: 3}

@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evtType: 4
   objType: 0
-  eventName: Alchemy Rolling
-  description: "\uD134 \uB2F9 \uC2DC\uACC4\uBC29\uD5A5\uC73C\uB85C 2\uCE78\uC529
-    \uC774\uB3D9.\r\n\uC811\uCD09 \uC2DC, \uC5F0\uAE08\uC220 \uC774\uBCA4\uD2B8 \uC2E4\uD589"
+  eventName: OBJECT_ALCHEMY_NAME
+  description: OBJECT_ALCHEMY_EXPLAIN
   keepTurnCount: 3
   sprite: {fileID: 21300000, guid: 615e645c48cc07f4f89c3b364cc9b084, type: 3}
   onBoardType: 2
   executeType: 1
   moveCount: 2
+  spec_sprite_1: {fileID: 0}
+  spec_sprite_2: {fileID: 0}
+  spec_sprite_3: {fileID: 0}
