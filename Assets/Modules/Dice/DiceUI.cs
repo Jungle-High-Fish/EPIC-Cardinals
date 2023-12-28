@@ -39,7 +39,7 @@ namespace Cardinals
             set => _diceIndex = value;
         }
         public bool IsSelect
-        {
+        { 
             get => _isSelect;
             set => _isSelect = value;
         }
