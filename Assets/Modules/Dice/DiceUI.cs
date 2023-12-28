@@ -26,7 +26,6 @@ namespace Cardinals
         ComponentGetter<Image> _image
                 = new ComponentGetter<Image>(TypeOfGetter.This);
         [SerializeField] private Image _diceUIRenderer;
-        [SerializeField] private TextMeshProUGUI _numberText;
         [SerializeField] private DiceAnimation _diceAnimation;
         private DiceDescription _diceDescription;
         [SerializeField] private Animator _diceAnimator;
@@ -257,7 +256,7 @@ namespace Cardinals
             if (!_isDiscard && _isSelectable&&!_isSelect)
             {
                 _diceUIRenderer.GetComponent<RectTransform>().DOAnchorPosY(15f, 0.1f);
-                DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex);
+                DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex,_dice.DiceBuffType);
             }
 
         }

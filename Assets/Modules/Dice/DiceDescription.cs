@@ -12,10 +12,15 @@ namespace Cardinals
     {
         [SerializeField] private GameObject _diceDescription;
         [SerializeField] private GameObject _rerollPanel;
+
         [SerializeField] private Image _infoPanel;
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _info;
-        public void Init(List<int> numbers, DiceType type)
+
+        [SerializeField] private GameObject _buffInfoPanel;
+        [SerializeField] private TextMeshProUGUI _buffTitle;
+        [SerializeField] private TextMeshProUGUI _buffInfo;
+        public void Init(List<int> numbers, DiceType type,Dice dice)
         {
             for(int i = 0; i < numbers.Count; i++)
             {
@@ -31,6 +36,13 @@ namespace Cardinals
             _title.color = data.elementColor;
             _info.text = TMPUtils.CustomParse(data.information, true);
             _infoPanel.color = data.elementColor;
+
+            BuffDataSO buffData = BuffDataSO.Data(dice.DiceBuffType);
+            if (buffData == null) return;
+
+            string buffIcon = $"<debuff={dice.DiceBuffType.ToString()}> ";
+            _buffTitle.text = TMPUtils.CustomParse(buffIcon + buffData.buffName);
+            _buffInfo.text = TMPUtils.CustomParse(buffData.Description);
         }
 
         public void UpdateDiceDescription(Dice dice)
@@ -52,14 +64,22 @@ namespace Cardinals
             _info.text = TMPUtils.CustomParse(data.information,true);
             _infoPanel.color = data.elementColor;
 
+            BuffDataSO buffData = BuffDataSO.Data(dice.DiceBuffType);
+            string buffIcon = $"<debuff={dice.DiceBuffType.ToString()}> ";
+            _buffTitle.text = TMPUtils.CustomParse(buffIcon+ buffData.buffName);
+            _buffInfo.text = TMPUtils.CustomParse(buffData.Description);
         }
-        public void SetDescriptionUIHovered(int index)
+
+        public void SetDescriptionUIHovered(int index,BuffType buffType)
         {
             ResetOutline();
             _diceDescription.transform.GetChild(index).GetComponent<Outline>().enabled = true;
             _diceDescription.SetActive(true);
             _rerollPanel.SetActive(true);
             _infoPanel.gameObject.SetActive(true);
+
+            if (buffType == BuffType.Empty) return;
+            _buffInfoPanel.SetActive(true);
         }
 
         public void SetDescriptionUIRestored()
@@ -67,6 +87,7 @@ namespace Cardinals
             _diceDescription.SetActive(false);
             _rerollPanel.SetActive(false);
             _infoPanel.gameObject.SetActive(false);
+            _buffInfoPanel.SetActive(false);
         }
 
         private void ResetOutline()
