@@ -127,6 +127,7 @@ namespace Cardinals
 
         public IEnumerator RollDiceUI(int number, Action onCompleted=null)
         {
+            GameManager.I.Sound.CardReroll();
             _diceUIRenderer.color = new Color(1, 1, 1, 1);
             _diceAnimator.runtimeAnimatorController = ResourceLoader.LoadAnimatorController(_dice.DiceType.ToString() + "DiceAnimator");
             _diceAnimator.enabled = true;
@@ -163,6 +164,7 @@ namespace Cardinals
         private IEnumerator Reroll()
         {
             SetCardUIRestore();
+            //GameManager.I.Sound.CardReroll();
             IsSelectable = false;
             if (GameManager.I.Player.PlayerInfo.Gold <= 0)
             {
