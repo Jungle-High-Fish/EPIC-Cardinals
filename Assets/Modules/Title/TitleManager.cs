@@ -26,6 +26,7 @@ namespace Cardinals
         [SerializeField] private Transform _charactersTr;
 
         [SerializeField] private TMP_Text _characterDiceSelecterText;
+        [SerializeField] private Transform _diceSelecterTr;
         private int curCharIdx = 0;
         
         private void Start()
@@ -60,6 +61,19 @@ namespace Cardinals
             _characterDiceSelecterText.text 
                 = GameManager.I.Localization[LocalizationEnum.UI_INIT_DICE_SELECT];
 
+            Dice[] dices = new Dice[]
+              {
+                new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
+                new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
+                new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
+                new Dice(new List<int>(){ 3,3,4,4,5,5},Enums.DiceType.Normal),
+                new Dice(new List<int>(){ 3,3,4,4,5,5},Enums.DiceType.Normal),
+              };
+
+            for (int i = 0; i < _diceSelecterTr.childCount; i++)
+            {
+                _diceSelecterTr.GetChild(i).GetComponent<DiceTitleUI>().UpdateDiceUIinTitle(dices[i]);
+            }
             SetTileView(true);
         }
 
@@ -80,6 +94,8 @@ namespace Cardinals
             _titleTr.gameObject.SetActive(isTitleMode);
             CameraSetting(!isTitleMode);
             _characterSelecterTr.gameObject.SetActive(!isTitleMode);
+
+            
         }
 
         public void NextCharacter(bool right)
