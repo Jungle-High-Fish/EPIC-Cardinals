@@ -23,7 +23,7 @@ namespace Cardinals.UI {
 
             Clear();
 
-            _tutorialTitle.Get(gameObject).text = tutorialData.Title;
+            _tutorialTitle.Get(gameObject).SetLocalizedText(tutorialData.Title);
 
             Vector2 newSize = new Vector2(
                 (transform as RectTransform).sizeDelta.x,

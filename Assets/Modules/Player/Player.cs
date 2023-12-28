@@ -314,6 +314,7 @@ namespace Cardinals
             obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
+                    GameManager.I.Sound.BombNormalBall();
                     target.Hit(CalculDamage(damage));
                     // var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
                     // explosion.transform.position = targetPos;
@@ -323,6 +324,7 @@ namespace Cardinals
 
         public void Defense(int value)
         {
+            GameManager.I.Sound.BombNormalBall();
             AddDefenseCount(value);
             Animator.Play("Shield");
         }

@@ -7,8 +7,10 @@ using System.Linq;
 using Cardinals.Enemy;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
+using Cardinals.UI.Description;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -126,7 +128,16 @@ namespace Cardinals.UI
                 _patternCountTMP.text = $"{pattern.Value}";
             }
             
+            // 말풍선 크기 업데이트
             _patternTr.GetComponent<GridSizeUpdator>().Resizing();
+            
+            // 설명 추가
+            var existDesc = _patternTr.GetComponent<EnemyActionDescription>();
+            if (existDesc != null)
+            {
+                Destroy(existDesc);
+            }
+            _patternTr.AddComponent<EnemyActionDescription>().Init(pattern.Type);
         }
 
         private bool CheckSetWeakDamage(EnemyActionType type)

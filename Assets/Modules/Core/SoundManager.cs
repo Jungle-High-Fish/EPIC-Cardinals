@@ -37,10 +37,17 @@ namespace Cardinals
 
         [Header("Player")]
         [SerializeField] private AudioClip _playerMove;
+        [SerializeField] private AudioClip _playerHit;
+        [SerializeField] private AudioClip _playerDefenseHit;
+        [SerializeField] private AudioClip _playerHeal;
 
         [Header("TileEffect")]
+        [SerializeField] private AudioClip _normalBall1;
+        [SerializeField] private AudioClip _getDefense;
         [SerializeField] private AudioClip _fireBall1;
         [SerializeField] private AudioClip _fireBall2;
+        [SerializeField] private AudioClip _waterHeal;
+        [SerializeField] private AudioClip _earthDefense;
 
         private ComponentGetter<AudioSource> _effectAudioSource1
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 1");
@@ -123,6 +130,30 @@ namespace Cardinals
             _effectAudioClipQueue.Enqueue(_playerMove);
         }
 
+        public void PlayerHit()
+        {
+            if (_playerHit == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerHit);
+
+        }
+
+        public void PlayerHeal()
+        {
+            if (_playerHeal == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerHeal);
+
+        }
+
+        public void PlayerDefenseHit()
+        {
+            if (_playerDefenseHit == null) return;
+
+            _effectAudioClipQueue.Enqueue(_playerDefenseHit);
+
+        }
+
         public void PlayBGM()
         {
             if (_bgm == null) return;
@@ -185,6 +216,34 @@ namespace Cardinals
             if (_fireBall2 == null) return;
 
             _effectAudioClipQueue.Enqueue(_fireBall2);
+        }
+
+        public void BombNormalBall()
+        {
+            if (_normalBall1 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_normalBall1);
+        }
+
+        public void GetDefense()
+        {
+            if (_getDefense == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getDefense);
+        }
+
+        public void WaterHeal()
+        {
+            if (_waterHeal == null) return;
+
+            _effectAudioClipQueue.Enqueue(_waterHeal);
+        }
+
+        public void EarthDefense()
+        {
+            if (_earthDefense == null) return;
+
+            _effectAudioClipQueue.Enqueue(_earthDefense);
         }
         #endregion
 
