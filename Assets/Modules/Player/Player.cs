@@ -71,7 +71,7 @@ namespace Cardinals
                     if (_hp == 0)
                     {
                         Animator.SetTrigger("Die");
-                        Bubble.SetBubble(BubbleText.die);
+                        Bubble.SetBubble(TMPUtils.LocalizedText(BubbleText.die));
                         DieEvent?.Invoke();
                         GameManager.I.Next();
                      }
@@ -304,7 +304,7 @@ namespace Cardinals
 
         public override void Attack(BaseEntity target, int damage)
         {
-            Bubble?.SetBubble(BubbleText.attack);
+            Bubble?.SetBubble(TMPUtils.LocalizedText(BubbleText.attack));
             Animator?.Play("Attack");
 
             var targetPos = target.transform.position + new Vector3(0, -1, 0);
@@ -314,6 +314,7 @@ namespace Cardinals
             obj.transform.DOJump(targetPos, 3, 1, .8f).SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
+                    GameManager.I.Sound.BombNormalBall();
                     target.Hit(CalculDamage(damage));
                     // var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
                     // explosion.transform.position = targetPos;
@@ -323,6 +324,7 @@ namespace Cardinals
 
         public void Defense(int value)
         {
+            GameManager.I.Sound.BombNormalBall();
             AddDefenseCount(value);
             Animator.Play("Shield");
         }
@@ -342,7 +344,7 @@ namespace Cardinals
         public void Win()
         {   
             Animator.Play("Win");
-            Bubble.SetBubble(BubbleText.win);
+            Bubble.SetBubble(TMPUtils.LocalizedText(BubbleText.win));
             for (int i = Buffs.Count - 1; i >= 0; i--)
             {
                 Buffs[i].EndEvent();

@@ -13,21 +13,18 @@ MonoBehaviour:
   m_Name: MoveAct1
   m_EditorClassIdentifier: 
   TutorialName: MoveAct1
-  Title: "\uC774\uB3D9\uACFC \uD589\uB3D9 #1"
+  Title: TUOTORIAL_QUEST1_TITLE
   Quests:
-  - Title: "2\uCE78 \uC774\uB3D9\uD558\uC5EC, \uBC29\uC5B4 \uD0C0\uC77C\uC5D0 \uB3C4\uCC29\uD558\uC138\uC694."
-    Description: "\uC22B\uC790 \uCE74\uB4DC 2\uB97C \uBCF4\uB4DC \uC678\uAC01\uC5D0
-      \uB193\uC73C\uC138\uC694."
+  - Title: TUOTORIAL_QUEST1_DES1
+    Description: TUOTORIAL_QUEST1_DES2
     TargetQuests: 1
     QuestType: 0
     HasCardSequence: 1
     NeedCardSequence:
     - CardNumber: 2
       HowToUse: 1
-  - Title: "3\uC758 \uBC29\uC5B4\uB3C4\uB97C \uD68D\uB4DD\uD558\uC5EC \uC801\uC758
-      \uACF5\uACA9\uC744 \uB9C9\uC73C\uC138\uC694."
-    Description: "\uC22B\uC790 \uCE74\uB4DC 3\uC744 \uBCF4\uB4DC \uAC00\uC6B4\uB370\uC5D0
-      \uB193\uC73C\uC138\uC694."
+  - Title: TUOTORIAL_QUEST1_DES3
+    Description: TUOTORIAL_QUEST1_DES4
     TargetQuests: 1
     QuestType: 0
     HasCardSequence: 1

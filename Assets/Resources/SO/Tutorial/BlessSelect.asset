@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: BlessSelect
   m_EditorClassIdentifier: 
   TutorialName: RewardSelect
-  Title: "\uBCF4\uC0C1\uC774\uC5D0\uC694!"
+  Title: TUOTORIAL_QUEST5_TITLE
   Quests:
-  - Title: "\uBCF4\uC0C1 \uC120\uD0DD"
-    Description: "\uCD95\uD558\uD569\uB2C8\uB2E4! \uBCF4\uC0C1\uC744 \uBC1B\uACE0(\uC548
-      \uBC1B\uC544\uB3C4 \uB3FC\uC694!), \uC5EC\uC815\uC744 \uC774\uC5B4\uAC00\uC138\uC694!"
+  - Title: TUOTORIAL_QUEST5_DES1
+    Description: TUOTORIAL_QUEST5_DES2
     TargetQuests: 1
     QuestType: 5
     HasCardSequence: 0

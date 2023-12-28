@@ -215,6 +215,7 @@ namespace Cardinals.Board {
 
 		// 행동마다 플레이어의 체력을 최대 2/4/6 만큼 회복합니다.
 		private void MagicActionWaterMain(int value) {
+            GameManager.I.Sound.WaterHeal();
 			int left = GameManager.I.Stage.Player.Heal(
 				Mathf.Min(Constants.GameSetting.Tile.WaterMagicMainCure[_level - 1], value)
 			);
@@ -227,6 +228,7 @@ namespace Cardinals.Board {
 
 		// 행동마다 방어력을 2/4/6 + 주사위 숫자만큼 얻습니다.
 		private void MagicActionEarthMain(int value) {
+            GameManager.I.Sound.EarthDefense();
 			int defenseValue = Constants.GameSetting.Tile.EarthMagicMainDefense[_level - 1];
 			GameManager.I.Stage.Player.AddDefenseCount(defenseValue + value);
 		}

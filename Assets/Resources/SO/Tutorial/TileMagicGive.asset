@@ -13,22 +13,18 @@ MonoBehaviour:
   m_Name: TileMagicGive
   m_EditorClassIdentifier: 
   TutorialName: TileMagicGive
-  Title: "\uD0C0\uC77C \uB9C8\uBC95 \uBD80\uC5EC #3"
+  Title: TUOTORIAL_QUEST3_TITLE
   Quests:
-  - Title: "1\uCE78 \uC774\uB3D9\uD558\uC5EC, \uBC29\uC5B4 \uD0C0\uC77C\uC5D0 \uB3C4\uCC29\uD558\uC138\uC694."
-    Description: "\uC22B\uC790 \uCE74\uB4DC 1\uC744 \uBCF4\uB4DC \uC678\uACFD\uC5D0
-      \uB193\uC73C\uC138\uC694."
+  - Title: TUOTORIAL_QUEST3_DES1
+    Description: TUOTORIAL_QUEST3_DES2
     TargetQuests: 1
     QuestType: 0
     HasCardSequence: 1
     NeedCardSequence:
     - CardNumber: 1
       HowToUse: 1
-  - Title: "\uC11C \uC788\uB294 \uD0C0\uC77C\uC5D0 3\uC758 \uACBD\uD5D8\uCE58\uB97C
-      \uC81C\uACF5\uD558\uC138\uC694."
-    Description: "\uD589\uB3D9 \uD0C0\uC77C\uC5D0\uC11C \uC0AC\uC6A9\uD558\uB294
-      \uCE74\uB4DC 1\uC7A5 \uB2F9, \uD0C0\uC77C \uACBD\uD5D8\uCE58\uB97C 1\uC529
-      \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+  - Title: TUOTORIAL_QUEST3_DES3
+    Description: TUOTORIAL_QUEST3_DES4
     TargetQuests: 3
     QuestType: 0
     HasCardSequence: 1
@@ -39,9 +35,8 @@ MonoBehaviour:
       HowToUse: 0
     - CardNumber: 4
       HowToUse: 0
-  - Title: "\uBD80\uC5EC\uD560 \uB9C8\uBC95\uC744 \uC120\uD0DD\uD558\uC138\uC694."
-    Description: "\uC55E\uC73C\uB85C \uC774 \uD0C0\uC77C\uC5D0\uC11C \uCE74\uB4DC\uB97C
-      \uC0AC\uC6A9\uD558\uBA74 \uD574\uB2F9 \uB9C8\uBC95\uC774 \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
+  - Title: TUOTORIAL_QUEST3_DES5
+    Description: TUOTORIAL_QUEST3_DES6
     TargetQuests: 1
     QuestType: 1
     HasCardSequence: 0

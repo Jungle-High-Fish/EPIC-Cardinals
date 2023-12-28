@@ -27,7 +27,7 @@ namespace Cardinals.UI
             UpdateAction();
 
             _entity.Bubble = _bubble;
-            _bubble.SetBubble(_entity.BubbleText.start);
+            _bubble.SetBubble(TMPUtils.LocalizedText(_entity.BubbleText.start));
         }
 
 

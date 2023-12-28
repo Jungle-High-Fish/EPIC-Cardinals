@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using Cardinals.Enums;
 using Cardinals.Game;
@@ -36,7 +36,7 @@ namespace Cardinals.UI
                     var pType = (PotionType)baseReward.Value;
                     var potion = EnumHelper.GetPotion(pType);
                     sprite = potion.Sprite;
-                    text = potion.Name;
+                    text = TMPUtils.LocalizedText(potion.Name);
                     transform.AddComponent<PotionDescription>().Init(pType);
                     break;
                 case RewardType.Artifact:

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 7
   icon: {fileID: 21300000, guid: 80e601dec2efe804ca74ecec6990778c, type: 3}
-  description: "\uB79C\uB364 \uC8FC\uC0AC\uC704 \uD68D\uB4DD (\uB09C\uC774\uB3C4
-    \uC911 \uC8FC\uC0AC\uC704 \uBCF4\uC0C1)"
+  description: EVENT_ROULETTE_DICE
   chance: 100
   index: 5
   weight: 600
