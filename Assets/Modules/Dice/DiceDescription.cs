@@ -65,6 +65,8 @@ namespace Cardinals
             _infoPanel.color = data.elementColor;
 
             BuffDataSO buffData = BuffDataSO.Data(dice.DiceBuffType);
+            if (buffData == null) return;
+
             string buffIcon = $"<debuff={dice.DiceBuffType.ToString()}> ";
             _buffTitle.text = TMPUtils.CustomParse(buffData.buffName,true);
             _buffInfo.text = TMPUtils.CustomParse(buffData.Description,true);
