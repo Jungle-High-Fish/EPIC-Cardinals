@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7048143759726750528}
   - component: {fileID: 799571932390223216}
   - component: {fileID: 4358087770703223195}
+  - component: {fileID: 1760888236757748203}
   m_Layer: 0
   m_Name: PazizizicBerserkRenderer
   m_TagString: Untagged
@@ -68,7 +69,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37ce86a4dcbb0544087ca2fb411b147b, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,6 +145,22 @@ MonoBehaviour:
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 1
+--- !u!114 &1760888236757748203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048143759726750530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &8147078520519574331
 GameObject:
   m_ObjectHideFlags: 0

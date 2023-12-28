@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using Cardinals.Enums;
@@ -17,8 +18,13 @@ namespace Cardinals.Enemy
     {
         private BaseEnemy BaseEnemy { get; set; }
         
+        [SerializeField]private Material _material;
+
         private ComponentGetter<Transform> _renderer
             = new ComponentGetter<Transform>(TypeOfGetter.ChildByName, "Renderer");
+
+        private ComponentGetter<EnemySlicer> _slicer
+            = new ComponentGetter<EnemySlicer>(TypeOfGetter.This);
         
         private bool _hasBerserk = false;
 
@@ -36,6 +42,8 @@ namespace Cardinals.Enemy
         {
             BaseEnemy = enemy;
             BaseEnemy.DieEvent += Destroy;
+
+            _slicer.Get(gameObject).Init();
             
             InstantiateRenderPrefabs(enemy.EnemyData);
 
@@ -56,6 +64,7 @@ namespace Cardinals.Enemy
             GameObject normal = Instantiate(enemyData.prefab, _renderer.Get(gameObject).transform);
             normal.name = "Normal";
             _normalRenderer = normal;
+            _normalRenderer.GetComponent<SpriteRenderer>().material = new Material(_material);
             _normalRenderer.SetActive(true);
 
             if (enemyData.berserkPrefab == null) return;
@@ -63,6 +72,7 @@ namespace Cardinals.Enemy
             _hasBerserk = true;
             GameObject berserk = Instantiate(enemyData.berserkPrefab, _renderer.Get(gameObject).transform);
             berserk.name = "Berserk";
+            berserk.GetComponent<SpriteRenderer>().material = new Material(_material);
             berserk.SetActive(false);
             BaseEnemy.BerserkModeEvent += () =>
             {
@@ -73,7 +83,14 @@ namespace Cardinals.Enemy
         
         private void Destroy()
         {
+            BaseEnemy.enabled = false;
             BaseEnemy = null;
+            StartCoroutine(DestroyCoroutine());
+        }
+
+        private IEnumerator DestroyCoroutine()
+        {
+            yield return _slicer.Get(gameObject).Slice();
             Destroy(gameObject);
         }
     }

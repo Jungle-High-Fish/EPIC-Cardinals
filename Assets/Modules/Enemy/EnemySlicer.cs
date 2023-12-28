@@ -18,8 +18,12 @@ namespace Cardinals.Enemy {
         [SerializeField] Transform _sliceEffect;
         private SpriteRenderer _slicedRenderer;
 
+        public void Init() {
+            _sliceEffect.gameObject.SetActive(false);
+        }
+
         [Button]
-        private void Slice() {
+        public IEnumerator Slice() {
             GameObject slicedObj = Instantiate(
                 _renderer.Get(gameObject).gameObject, 
                 transform.position, 
@@ -32,7 +36,7 @@ namespace Cardinals.Enemy {
             _renderer.Get(gameObject).material.SetFloat("_ClipUvUp", _slicePos);
             _slicedRenderer.material.SetFloat("_ClipUvDown", 1 - _slicePos);
 
-            StartCoroutine(SliceCoroutine());
+            yield return SliceCoroutine();
         }
 
         IEnumerator SliceCoroutine() {
@@ -40,7 +44,7 @@ namespace Cardinals.Enemy {
                 _slicedRenderer.transform.position + new Vector3(0.3f, 1f, 0f),
                 0.5f
             ).SetEase(Ease.OutCubic);
-            _slicedRenderer.transform.DORotate(
+            _slicedRenderer.transform.DOLocalRotate(
                 new Vector3(0f, 0f, -20f),
                 0.5f
             ).SetEase(Ease.OutCubic);
@@ -62,14 +66,19 @@ namespace Cardinals.Enemy {
                 _sliceEffect.gameObject.SetActive(false);
             });
 
+            StartCoroutine(GameManager.I.CameraController.EnemyZoomIn(transform, 0.1f));
             yield return new WaitForSeconds(0.1f);
             Time.timeScale = 0.1f;
+           
             yield return new WaitForSeconds(0.1f);
             Time.timeScale = 1f;
-
+            
+            
             RendererFade(_slicedRenderer, 0.5f);
             yield return new WaitForSeconds(0.2f);
+            StartCoroutine(GameManager.I.CameraController.ZoomOut(0.5f));
             RendererFade(_renderer.Get(gameObject), 0.7f);
+            yield return new WaitForSeconds(0.7f);
         }
 
         private void RendererFade(SpriteRenderer target, float time) {

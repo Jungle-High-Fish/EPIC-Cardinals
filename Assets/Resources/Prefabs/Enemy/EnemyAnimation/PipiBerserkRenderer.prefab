@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 386309242999522134}
   - component: {fileID: 8040294442595517798}
   - component: {fileID: 4553577696743926879}
+  - component: {fileID: 8822615880957490409}
+  - component: {fileID: 4706398177192771588}
   m_Layer: 0
   m_Name: PipiBerserkRenderer
   m_TagString: Untagged
@@ -68,7 +70,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37ce86a4dcbb0544087ca2fb411b147b, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,6 +146,37 @@ MonoBehaviour:
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
+--- !u!114 &8822615880957490409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386309242999522132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a61c449814d4149b8b7c273217f464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slicePos: 0.5
+  _sliceLength: 3
+  _sliceEffect: {fileID: 0}
+--- !u!114 &4706398177192771588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386309242999522132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &3495638113807194695
 GameObject:
   m_ObjectHideFlags: 0
