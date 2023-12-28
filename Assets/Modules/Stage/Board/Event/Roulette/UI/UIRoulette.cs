@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Util;
 
 namespace Cardinals.BoardEvent.Roulette
 {
@@ -38,6 +39,8 @@ namespace Cardinals.BoardEvent.Roulette
 
         public void Init()
         {
+            _spinBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.UI_ROULETTE_SPIN];
             GameManager.I.UI.UIEndTurnButton.Deactivate();
             gameObject.SetActive(true);
             _resultObj.SetActive(false);
@@ -90,7 +93,7 @@ namespace Cardinals.BoardEvent.Roulette
                     throw new ArgumentOutOfRangeException();
             }
             _resultObj.SetActive(true);
-            _resultTMP.text = data.description;
+            _resultTMP.SetLocalizedText(data.description);
             StartCoroutine(Close());
         }
 

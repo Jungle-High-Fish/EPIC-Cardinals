@@ -28,8 +28,8 @@ namespace Cardinals.UI {
             _questData = questData;
             _currentCount = 0;
 
-            _questTitle.Get(gameObject).text = questData.Title;
-            _questDescription.Get(gameObject).text = questData.Description;
+            _questTitle.Get(gameObject).SetLocalizedText(questData.Title);
+            _questDescription.Get(gameObject).SetLocalizedText(questData.Description);
             _questCount.Get(gameObject).text = $"{_currentCount}/{questData.TargetQuests}";
         }
 

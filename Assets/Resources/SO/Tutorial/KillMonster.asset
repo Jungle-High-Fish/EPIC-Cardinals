@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: KillMonster
   m_EditorClassIdentifier: 
   TutorialName: KillMonster
-  Title: "\uC801 \uCC98\uCE58"
+  Title: TUOTORIAL_QUEST4_TITLE
   Quests:
-  - Title: "\uD544\uB4DC \uC704\uC758 \uC801\uC744 \uCC98\uCE58\uD558\uC138\uC694."
-    Description: "\uD328\uC5D0 \uB4E4\uC5B4\uC624\uB294 \uCE74\uB4DC\uB4E4\uC744
-      \uC804\uB7B5\uC801\uC73C\uB85C \uC870\uD569\uD558\uC138\uC694."
+  - Title: TUOTORIAL_QUEST4_DES1
+    Description: TUOTORIAL_QUEST4_DES2
     TargetQuests: 1
     QuestType: 2
     HasCardSequence: 0

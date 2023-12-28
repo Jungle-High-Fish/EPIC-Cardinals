@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: GetMoney
   m_EditorClassIdentifier: 
   type: 4
-  eventDescription: "\uC8FC\uC0AC\uC704\uB97C \uAD74\uB824 4\uAC00 \uB098\uC628\uB2E4\uBA74,\n\uB3C8
-    5\uC6D0 \uD68D\uB4DD"
+  eventDescription: EVENT_ALCHEMY_MONEY

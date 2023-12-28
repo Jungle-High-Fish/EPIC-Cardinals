@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: DamageAllEnemy
   m_EditorClassIdentifier: 
   type: 5
-  eventDescription: "\uC8FC\uC0AC\uC704\uB97C \uAD74\uB824 5\uAC00 \uB098\uC628\uB2E4\uBA74,\n\uC804\uCCB4
-    \uC801\uC5D0\uAC8C 10\uC758 \uB370\uBBF8\uC9C0"
+  eventDescription: EVENT_ALCHEMY_DAMAGE

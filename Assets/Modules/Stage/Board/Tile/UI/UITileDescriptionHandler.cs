@@ -38,10 +38,10 @@ namespace Cardinals.UI {
                 TileMagicDataSO data = TileMagic.Data(_tile.TileMagic.Type);
                 _descriptionPanels.Add(AddMagicDescription(data, _tile.TileMagic.Level));
 
-                if (data.hasBuffEffect) {
+                /*if (data.hasBuffEffect) {
                     BuffDataSO buffData = BuffDataSO.Data(data.buffType);
                     _descriptionPanels.Add(AddBuffDescription(buffData));
-                }
+                }*/
             }
 
             gameObject.SetActive(false);
@@ -157,8 +157,8 @@ namespace Cardinals.UI {
         }
 
         private UITileDescription AddBuffDescription(BuffDataSO data) {
-            string title = TMPUtils.LocalizedText(data.buffName);
-            string description = TMPUtils.LocalizedText(data.Description);
+            string title = TMPUtils.CustomParse(data.buffName,true);
+            string description = TMPUtils.CustomParse(data.Description, true);
             Sprite icon = data.sprite;
 
             UITileDescription panel = InstantiateDescriptionPanel();

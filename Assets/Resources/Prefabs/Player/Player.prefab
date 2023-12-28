@@ -104,7 +104,6 @@ MonoBehaviour:
   - {fileID: 1389953857664558228}
   _initHp: 40
   _onTile: {fileID: 0}
-  _landingMMF: {fileID: 496724860020366728}
 --- !u!114 &5650091141492861573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,11 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db664e5561e2704db67335e808d7829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: Let's Go!
-  hit: Ugh!!
-  attack: Take this!!
-  die: Ugh...
-  win: Yay~~!
+  start: PLAYER_SCRIPT_START
+  hit: PLAYER_SCRIPT_HIT
+  attack: PLAYER_SCRIPT_ATTACK
+  die: PLAYER_SCRIPT_GAMEOVER
+  win: PLAYER_SCRIPT_WIN
   spec1: 
   spec2: 
   spec3: 
@@ -331,18 +330,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bbcca1324efb534b964157dc0996c59, type: 3}
---- !u!114 &496724860020366728 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5781758332084937666, guid: 9bbcca1324efb534b964157dc0996c59,
-    type: 3}
-  m_PrefabInstance: {fileID: 6257846450844958282}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1389953857053541668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5013154659679943534, guid: 9bbcca1324efb534b964157dc0996c59,

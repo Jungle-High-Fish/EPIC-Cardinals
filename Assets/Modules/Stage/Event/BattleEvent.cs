@@ -70,6 +70,11 @@ namespace Cardinals.Game
             GameManager.I.StartCoroutine(stage.StartFlag.Show(_roundStartTile));
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
             GameManager.I.UI.UINewPlayerInfo.AddTurnNoti(EventNotiContent);
+
+            if (_enemies.First().EnemyData.enemyGradeType == EnemyGradeType.Boss)
+            {
+                yield return PlayBossAppearProduction();
+            }
             
             do // 전투 시작
             {
@@ -187,6 +192,30 @@ namespace Cardinals.Game
             }
         }
 
+        /// <summary>
+        /// 보스 출현 시, 이펙트
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator PlayBossAppearProduction()
+        {
+            // UI OFF
+            GameManager.I.UI.CanvasInactive(player:true);
+            GameManager.I.UI.UIPlayerStatus.gameObject.SetActive(false);
+            yield return GameManager.I.UI.UIStageEffect.CurtainON();
+            
+            // 이펙트
+            StageEffect effect = FindObjectOfType<StageEffect>();
+            effect.SetSpeedLine(true);
+            yield return GameManager.I.CameraController.EnemyZoomIn();
+            effect.SetSpeedLine(false);
+            yield return GameManager.I.CameraController.EnemyZoomOut();
+            yield return GameManager.I.UI.UIStageEffect.CurtainOFF();
+            
+            // UI ON
+            GameManager.I.UI.CanvasInactive(true, true, true, true, true);
+            GameManager.I.UI.UIPlayerStatus.gameObject.SetActive(true);
+        }
+
         public virtual void Test_ChangeEnemy(EnemyType enemyType) {
             if (GameManager.I.CurrentEnemies == null) return;
             if (!GameManager.I.IsWaitingForNext) return;
@@ -240,9 +269,9 @@ namespace Cardinals.Game
             int value = _turn % _boardEventInterval;
             if (value > 0)
             {
-                text = $"{_boardEventInterval - value} 턴 후 보드 이벤트가 생성됩니다.";
+                text = String.Format(GameManager.I.Localization.Get(LocalizationEnum.UI_TURN_AN1), _boardEventInterval - value);
             }
-            else text = "보드 이벤트가 생성되었습니다.";
+            else text = GameManager.I.Localization.Get(LocalizationEnum.UI_TURN_AN2);
 
             return text;
         }

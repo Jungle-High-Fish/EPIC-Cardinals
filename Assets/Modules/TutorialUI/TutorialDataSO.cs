@@ -41,8 +41,8 @@ namespace Cardinals.Tutorial {
 
         public static QuestData EndTurnQuest() {
             return new QuestData {
-                Title = "턴 종료",
-                Description = "턴을 종료하세요.",
+                Title = LocalizationEnum.TUOTORIAL_END1.ToString(),
+                Description = LocalizationEnum.TUOTORIAL_END2.ToString(),
                 TargetQuests = 1,
                 QuestType = TutorialQuestType.EndTurn,
                 HasCardSequence = false

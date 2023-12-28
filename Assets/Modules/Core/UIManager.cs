@@ -27,6 +27,8 @@ namespace Cardinals
         public UIPlayerInfo UIPlayerInfo => _uiPlayerInfo;
         public UIDebugPanel UIDebugPanel => _uiDebugPanel;
 
+        public UIPlayerStatus UIPlayerStatus => _uiPlayerStatus;
+
         public UIStage UIStage => _uiStage;
         public UIRewardPanel UIRewardPanel => _uiRewardPanel;
         public UICardSystem UICardSystem => _uiCardSystem;
@@ -39,6 +41,7 @@ namespace Cardinals
         public Bubble UISystemBubble => _uiSystemBubble;
         public UIPlayerResultPanel UIPlayerResultPanel => _uiPlayerResultPanel;
         public UIClearDemoGame UIClearDemoGame => _uiClearDemoGame;
+        public UIStageEffect UIStageEffect => _uiStageEffect;
         
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -58,6 +61,7 @@ namespace Cardinals
         private SaveFileLoaderPanel _saveFileLoaderPanel;
         private UIDebugPanel _uiDebugPanel;
 
+        private UIPlayerStatus _uiPlayerStatus;
         private UIStage _uiStage;
         private UIRewardPanel _uiRewardPanel;
         private UIMapButton _uiMapButton;
@@ -70,6 +74,7 @@ namespace Cardinals
         private UINewDicePanel _uiNewDicePanel;
         private UIPlayerResultPanel _uiPlayerResultPanel;
         private UIClearDemoGame _uiClearDemoGame;
+        private UIStageEffect _uiStageEffect;
         
         private Bubble _uiSystemBubble;
 
@@ -167,8 +172,9 @@ namespace Cardinals
             InstantiateBoardEventShopUI(_cardUICanvas);
             InstantiateBoardEventTileUI(_cardUICanvas);
             InstantiateAlchemyEventPanelUI(_cardUICanvas);
-
+            
             InstantiateNewPlayerUI(_playerUICanvas);
+            InstantiateUIStageEffect(_systemUICanvas);
         }
 
         void InitDescriptionCanvas()
@@ -298,11 +304,20 @@ namespace Cardinals
             playerUIObj.SetActive(false);
         }
 
+        private void InstantiateUIStageEffect(Canvas canvas) {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_StageEffect);
+            GameObject obj = Instantiate(prefab, canvas.transform);
+
+            _uiStageEffect = prefab.GetComponent<UIStageEffect>();
+        }
+        
         public void InstantiatePlayerStatusUI()
         {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UIPlayerStatus);
             GameObject obj = Instantiate(prefab, _playerUICanvas.transform);
-            obj.GetComponent<UIPlayerStatus>().Init(GameManager.I.Player);
+            
+            _uiPlayerStatus = obj.GetComponent<UIPlayerStatus>();
+            _uiPlayerStatus.Init(GameManager.I.Player);
             obj.transform.SetSiblingIndex(1);
         }
 
@@ -433,13 +448,13 @@ namespace Cardinals
             obj.SetActive(false);
         }
         
-        public void CanvasInactive()
+        public void CanvasInactive(bool card = false, bool enemy = false, bool desc = false, bool main = false, bool player = false)
         {
-            _cardUICanvas.gameObject.SetActive(false);
-            _enemyUICanvas.gameObject.SetActive(false);
-            _descriptionUICanvas.gameObject.SetActive(false);
-            _mainUICanvas.gameObject.SetActive(false);
-            _playerUICanvas.gameObject.SetActive(false);
+            _cardUICanvas.gameObject.SetActive(card);
+            _enemyUICanvas.gameObject.SetActive(enemy);
+            _descriptionUICanvas.gameObject.SetActive(desc);
+            _mainUICanvas.gameObject.SetActive(main);
+            _playerUICanvas.gameObject.SetActive(player);
         }
 
         // 디버깅 UI

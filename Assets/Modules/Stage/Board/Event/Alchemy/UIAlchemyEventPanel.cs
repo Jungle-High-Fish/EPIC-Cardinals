@@ -44,6 +44,10 @@ namespace Cardinals.BoardEvent.Alchemy
         
         void Start()
         {
+            _headerTMP.text = GameManager.I.Localization[LocalizationEnum.EVENT_ALCHEMY_TITLE];
+            _chooseDiceDescTMP.text = GameManager.I.Localization[LocalizationEnum.EVENT_ALCHEMY_DES];
+            _rollingBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.EVENT_ALCHEMY_ROLL];
             _rollingBTN.onClick.AddListener(B_Rolling);
             _cancelBTN.onClick.AddListener(B_Cancel);
         }
@@ -73,7 +77,7 @@ namespace Cardinals.BoardEvent.Alchemy
             _evtData = ResourceLoader.LoadSO<AlchemyEventDataSO>(Constants.FilePath.Resources
                 .SO_BoardObject_AlchemyEventData + evt);
             _targetNumberTMP.text = idx.ToString();
-            _eventDescriptionTMP.text = _evtData.eventDescription;
+            _eventDescriptionTMP.SetLocalizedText(_evtData.eventDescription);
             
             // 버튼 입력 대기
             _isRolling = false;

@@ -132,10 +132,13 @@ namespace Cardinals.UI
             _patternTr.GetComponent<GridSizeUpdator>().Resizing();
             
             // 설명 추가
-            var existDesc = _patternTr.GetComponent<EnemyActionDescription>();
-            if (existDesc != null)
+            var existDescs = _patternTr.GetComponents<EnemyActionDescription>();
+            if (existDescs != null)
             {
-                Destroy(existDesc);
+                for (int i = existDescs.Length - 1; i >= 0; i--)
+                {
+                    Destroy(existDescs[i]);   
+                }
             }
             _patternTr.AddComponent<EnemyActionDescription>().Init(pattern.Type);
         }

@@ -26,9 +26,9 @@ TILE_MAGIC_WATER_NAME,Clear Water,맑은 물
 TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=2,3,4>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=2,3,4>)."
 TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷
 TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6>defense.","행동 마다, <level=2,4,6>의 방어도를 얻습니다."
-BUFF_BURN_NAME,Burn,화상
+BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상
 BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 damage.","턴 종료 시, 2의 데미지를 입습니다."
-BUFF_WEAK_NAME,Weak,약화
+BUFF_WEAK_NAME,<debuff=Weak> Weak,<debuff=Weak> 약화
 BUFF_WEAK_EXPLAIN,The damage dealt is reduced by 50%.,주는 피해가 50% 감소합니다.
 BUFF_ELECTRICSHOCK_NAME,Electricshock,감전
 BUFF_ELECTRICSHOCK_EXPLAIN,You can use up to 2 dice in a row on a one tile.,한 타일에서 주사위를 연속으로 최대 2개까지 사용할 수 있습니다.
@@ -44,7 +44,7 @@ BUFF_DOLL_NAME,Doll,인형
 BUFF_DOLL_EXPLAIN,"If a doll is present on the board, all damage dealt is equal to 1.",보드에 인형이 있으면 모든 피해는 1이 됩니다.
 BUFF_ROTATIONRATE_NAME,Rotationrate,회전률
 BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다."
-BUFF_POWERLESS_NAME,Powerless,무력
+BUFF_POWERLESS_NAME,<debuff=Powerless> Powerless,<debuff=Powerless> 무력
 BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.
 BUFF_BERSERK_NAME,Berserk,광폭화
 BUFF_BERSERK_EXPLAIN,This enemy is angry.,적이 분노했습니다.
@@ -140,3 +140,62 @@ ENEMY_ACTION_CONFUSION_NAME,Confusion,[미사용]혼란
 ENEMY_ACTION_CONFUSION_EXPLAIN,-,이 적은 혼란스러워합니다.
 ENEMY_ACTION_NOACTION_NAME,No Action, [미사용]무행동
 ENEMY_ACTION_NOACTION_EXPLAIN,-,이 적은 가만히 있습니다.
+TUOTORIAL_QUEST1_TITLE,Movement and Action #1,이동과 행동 #1
+TUOTORIAL_QUEST1_DES1,"Move 2 spaces, reaching the defense tile.","2칸 이동하여, 방어 타일에 도착하세요."
+TUOTORIAL_QUEST1_DES2,Place a dice with a value of 2 on the outside of the board.,숫자2의 주사위를 보드 외각에 놓으세요.
+TUOTORIAL_QUEST1_DES3,Get a defense value of 3 to block enemy attacks.,3의 방어도를 획득하여 적의 공격을 막으세요.
+TUOTORIAL_QUEST1_DES4,Place the number 3 dice in the center of the board.,숫자3의 주사위를 보드 가운데에 놓으세요.
+TUOTORIAL_QUEST2_TITLE,Continuous Action #2,연속 행동 #2
+TUOTORIAL_QUEST2_DES1,Move 1 space to reach the attack tile.,"1칸 이동하여, 공격 타일에 도착하세요."
+TUOTORIAL_QUEST2_DES2,Place the number 1 dice on the outside of the board.,숫자1의 주사위를 보드 외곽에 놓으세요.
+TUOTORIAL_QUEST2_DES3,Use the die twice in a row.,주사위를 연속해서 두 번 사용하세요.
+TUOTORIAL_QUEST2_DES4,You can only play consecutive dice of ascending numbers on an action tile.,행동 타일에서 오름차순 숫자의 주사위만 연속해서 낼 수 있습니다.
+TUOTORIAL_QUEST3_TITLE,Enchant Tile #3,타일 마법 부여 #3
+TUOTORIAL_QUEST3_DES1,Move 1 space to reach the defense tile.,"1칸 이동하여, 방어 타일에 도착하세요."
+TUOTORIAL_QUEST3_DES2,Place the dice with the number 1 on the outside of the board.,숫자1의 주사위를 보드 외곽에 놓으세요.
+TUOTORIAL_QUEST3_DES3,Give 3 exp to the tile you are standing on.,서 있는 타일에 3의 경험치를 제공하세요.
+TUOTORIAL_QUEST3_DES4,"For every 1 dice you spend on an action tile, you gain 1 tile experience.","행동 타일에서 사용하는 주사위 1개 당, 타일 경험치를 1씩 획득합니다."
+TUOTORIAL_QUEST3_DES5,Choose the enchantment to grant.,부여할 마법을 선택하세요.
+TUOTORIAL_QUEST3_DES6,"The next time you spend a dice on this tile, that enchantment will be triggered.",앞으로 이 타일에서 주사위를 사용하면 해당 마법이 발동합니다.
+TUOTORIAL_QUEST4_TITLE,Kill an enemy #4,적 처치 #4
+TUOTORIAL_QUEST4_DES1,Defeat the enemies on the field.,필드 위의 적을 처치하세요.
+TUOTORIAL_QUEST4_DES2,Combine the dice in your hand strategically.,패의 주사위들을 전략적으로 조합하세요.
+TUOTORIAL_QUEST5_TITLE,Here's your reward!,보상이에요!
+TUOTORIAL_QUEST5_DES1,Choose your reward,보상 선택
+TUOTORIAL_QUEST5_DES2,"Congratulations, take your reward (or not!) and continue your journey!","축하합니다! 보상을 받고(안 받아도 돼요!), 여정을 이어가세요!"
+TUOTORIAL_END1,End Turn,턴 종료
+TUOTORIAL_END2,End the turn,턴을 종료하세요
+UI_INGAME_BLESS,Bless,축복
+UI_INGAME_POTION,Potion,포션
+UI_INGAME_CURRENTTILE,CurrentTile,현재 타일
+UI_INGAME_TURN,Turn,턴 수
+UI_INGAME_LAP,Laps,바퀴 수
+UI_INGAME_ENDTURN,End Turn,턴 종료
+UI_INGAME_NEXTEVENT,Next Event,다음 이벤트
+UI_TURN_AN1,A board event is generated after {0} turn.,{0} 턴 후 보드 이벤트가 생성됩니다.
+UI_TURN_AN2,A board event has been generated.,보드 이벤트가 생성되었습니다.
+UI_DICE_REROLL,Reroll,다시 돌리기
+EVENT_ALCHEMY_ALLTILE,"On a dice roll of 1,<br>Get 1 exp for the entire tile","주사위를 굴려 1이 나온다면,<br>전체 타일 경험치 +1"
+EVENT_ALCHEMY_DAMAGE,"On a dice roll of 2,<br>Deal 10 damage to all enemies.","주사위를 굴려 5가 나온다면,<br>전체 적에게 10의 데미지"
+EVENT_ALCHEMY_MONEY,"On a dice roll of 3,<br>Get 5 coin.","주사위를 굴려 4가 나온다면,<br>돈 5원 획득"
+EVENT_ALCHEMY_POTION,"On a dice roll of 4,<br>Get random potion","주사위를 굴려 2가 나온다면,<br>랜덤 포션 획득"
+EVENT_ALCHEMY_HP,"On a dice roll of 5,<br>Get 5 max hp.","주사위를 굴려 3이 나온다면,<br>최대 체력 5 증가"
+EVENT_DICE_MONEY,Raise the dice.<br>You get money equal to the num of eyes on the dice,올린 주사위 눈 만큼 돈을 획득합니다.<br>주사위를 올려주세요.
+EVENT_DICE_HEAL,Heals you for x2 the number of dice you raised.<br>Raise the dice.,올린 주사위 눈의 x2 만큼 체력을 회복합니다.<br>주사위를 올려주세요.
+EVENT_ROULETTE_DAM,Deal 10 damage to a random enemy.,랜덤한 적에게 10의 데미지를 줍니다.
+EVENT_ROULETTE_DICE,Get a random dice.,랜덤 주사위 획득합니다.
+EVENT_ROULETTE_MONEY,Get money.,돈을 얻습니다.
+EVENT_ROULETTE_POTION,Get a random potion.,랜덤한 포션를 얻습니다.
+EVENT_ROULETTE_TILE,Power up a random tile.,랜덤한 타일을 강화합니다.
+EVENT_ROULETTE_HP,Loses health.,체력이 깎입니다.
+EVENT_DICE_MONEY1,Get money.,돈을 획득했다.
+EVENT_DICE_HEAL2,Your health has been restored,체력이 회복되었다
+EVENT_ALCHEMY_TITLE,Alchemy Rolling,굴리는 연금술
+EVENT_ALCHEMY_DES,~ Please choose the dice to roll ~,~ 굴릴 주사위를 고르세요 ~
+EVENT_ALCHEMY_ROLL,ROLLING,굴리기
+GAMEOVER_NUM_ROUND,Number of laps,돈 바퀴 수
+GAMEOVER_NUM_DICE,Number of dice used,사용한 주사위 횟수
+GAMEOVER_NUM_MONSTER,Monsters killed,몬스터 처치 수
+GAMEOVER_NUM_PLAYTIME,Play time,플레이 타임
+GAMEOVER_BUTTON_RE,Retry,다시하기
+GAMEOVER_BUTTON_TITLE,Title,타이틀로

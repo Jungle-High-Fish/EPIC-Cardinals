@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: MaxHpUp
   m_EditorClassIdentifier: 
   type: 3
-  eventDescription: "\uC8FC\uC0AC\uC704\uB97C \uAD74\uB824 3\uC774 \uB098\uC628\uB2E4\uBA74,\n\uCD5C\uB300
-    \uCCB4\uB825 5 \uC99D\uAC00"
+  eventDescription: EVENT_ALCHEMY_HP

@@ -32,16 +32,20 @@ namespace Cardinals
         [SerializeField] private Button _retryBTN;
         public void Start()
         {
+            _titleBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.GAMEOVER_BUTTON_RE];
+            _retryBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.GAMEOVER_BUTTON_TITLE];
             _titleBTN.onClick.AddListener(GameManager.I.GoToTitle);
             _retryBTN.onClick.AddListener(GameManager.I.Retry);
         }
 
         public void Init()
         {
-            _turnCntHeaderText           = "돈 바퀴 수";
-            _diceRollingCountHeaderText  = "주사위 사용한 횟수";
-            _enemyExecuteCountHeaderText = "몬스터 처치 수";
-            _playTimeHeaderText          = "플레이 타임";
+            _turnCntHeaderText           = GameManager.I.Localization.Get(LocalizationEnum.GAMEOVER_NUM_ROUND);
+            _diceRollingCountHeaderText  = GameManager.I.Localization.Get(LocalizationEnum.GAMEOVER_NUM_DICE);
+            _enemyExecuteCountHeaderText = GameManager.I.Localization.Get(LocalizationEnum.GAMEOVER_NUM_MONSTER);
+            _playTimeHeaderText          = GameManager.I.Localization.Get(LocalizationEnum.GAMEOVER_NUM_PLAYTIME);
         }
         
         public IEnumerator Set(int turnCnt, int diceRollCnt, int enemyExecuteCnt, ulong playTimeBySecond)
