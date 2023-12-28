@@ -29,6 +29,8 @@ namespace Cardinals.Game
         protected bool CheckPlayerWin => !GameManager.I.CurrentEnemies.Any();
         protected bool CheckEnemyWin => GameManager.I.Player.Hp == 0;
 
+        protected List<BaseEnemy> _enemies;
+
         public override IEnumerator Flow(StageController stageController)
         {
             Debug.Log("전투 플로우 실행");
@@ -39,23 +41,23 @@ namespace Cardinals.Game
             Board.Board board = GameManager.I.Stage.Board;
             //CardManager cardManager = GameManager.I.Stage.CardManager;
             DiceManager diceManager = GameManager.I.Stage.DiceManager;
-            List<BaseEnemy> enemies = new();
+            _enemies = new();
             EnemyGradeType enemyGradeType;
 
             // 이벤트 시작 이벤트 호출
             stage.OnEventStartCall();
             
             // 몬스터 정보 초기화
-            InitEnemy(enemies);
-            GameManager.I.CurrentEnemies = enemies;
-            enemyGradeType = enemies.First().EnemyData.enemyGradeType;
+            InitEnemy(_enemies);
+            GameManager.I.CurrentEnemies = _enemies;
+            enemyGradeType = _enemies.First().EnemyData.enemyGradeType;
             
             //cardManager.OnBattle();
             diceManager.OnBattle();
 
             GameManager.I.SteamHandler.SetBattleStateDisplay(
                 GameManager.I.Stage.Index,
-                enemies.Select(x => x.EnemyData.enemyType).ToList()
+                _enemies.Select(x => x.EnemyData.enemyType).ToList()
             );
 
             // 플레이어 이벤트 등록
@@ -80,7 +82,7 @@ namespace Cardinals.Game
                 
                 // 전투 업데이트
                 yield return player.StartTurn();
-                foreach (var enemy in enemies)
+                foreach (var enemy in _enemies)
                 {
                     yield return enemy.StartTurn();
                 }
@@ -102,19 +104,19 @@ namespace Cardinals.Game
                 
                 // 버프 처리
                 player.OnBuff();
-                for (int i = enemies.Count - 1; i >= 0; i--) enemies[i].OnBuff();
+                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnBuff();
 
                 // 플레이어 PreEndTurn 처리
                 yield return player.PreEndTurn();
 
                 // 적 행동
-                foreach (var e in enemies)
+                foreach (var e in _enemies)
                 {
                     yield return e.OnPreTurn();
                 }
-                for (int i = enemies.Count - 1; i >= 0; i--)
+                for (int i = _enemies.Count - 1; i >= 0; i--)
                 {
-                    yield return enemies[i].OnTurn();
+                    yield return _enemies[i].OnTurn();
                 }
 
                 if (CheckEnemyWin) break;
@@ -127,9 +129,9 @@ namespace Cardinals.Game
                 yield return player.EndTurn();
 
                 // 적 턴 종료 처리
-                for (int i = enemies.Count - 1; i >= 0; i--)
+                for (int i = _enemies.Count - 1; i >= 0; i--)
                 {
-                    yield return enemies[i].EndTurn();
+                    yield return _enemies[i].EndTurn();
                 }
             } while (!(CheckPlayerWin || CheckEnemyWin));
 
@@ -155,13 +157,15 @@ namespace Cardinals.Game
         /// <summary>
         /// 몬스터 초기화
         /// </summary>
-        protected void InitEnemy(List<BaseEnemy> enemies, Action onEnemyDie=null)
+        protected void InitEnemy(List<BaseEnemy> enemies, Action onEnemyDie=null, EnemyDataSO[] enemyDataSOs=null)
         {
-            Vector3[] enemyPositions = GameManager.I.Stage.Board.SetEnemyNumber(_enemyList.Length);
+            EnemyDataSO[] targetEnemyList = enemyDataSOs ?? _enemyList;
+
+            Vector3[] enemyPositions = GameManager.I.Stage.Board.SetEnemyNumber(targetEnemyList.Length);
             
-            for (int i = 0, cnt = _enemyList.Length; i < cnt; i++)
+            for (int i = 0, cnt = targetEnemyList.Length; i < cnt; i++)
             {
-                var enemyData = _enemyList[i];
+                var enemyData = targetEnemyList[i];
                 var enemy = GameManager.I.Stage.InstantiateEnemy(enemyData, enemyPositions[i]);
                 
                 enemy.DieEvent += () =>
@@ -181,6 +185,28 @@ namespace Cardinals.Game
                 
                 enemies.Add(enemy);
             }
+        }
+
+        public virtual void Test_ChangeEnemy(EnemyType enemyType) {
+            if (GameManager.I.CurrentEnemies == null) return;
+            if (!GameManager.I.IsWaitingForNext) return;
+
+            var enemyData = EnemyDataSO.Data(enemyType);
+            List<BaseEnemy> originalEnemies = new();
+            foreach (var e in _enemies) {
+                originalEnemies.Add(e);
+            }
+            InitEnemy(_enemies, enemyDataSOs: new EnemyDataSO[] {enemyData});
+            
+            foreach (var e in originalEnemies) {
+                e.DieEvent?.Invoke();
+            }
+
+            foreach (var e in _enemies) {
+                e.UpdatePatternEvent?.Invoke(e.CurPattern);
+            }
+
+            GameManager.I.CurrentEnemies = _enemies;
         }
 
         protected void OnPlayerRound() {
