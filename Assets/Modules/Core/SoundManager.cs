@@ -16,13 +16,14 @@ using System.Linq;
 
 namespace Cardinals
 {
-    public class SoundManager: MonoBehaviour
-    {   
+    public class SoundManager : MonoBehaviour
+    {
         [Header("BGM")]
         [SerializeField] private AudioClip _bgm;
 
         [Header("Common UI")]
         [SerializeField] private AudioClip _buttonClick;
+        [SerializeField] private AudioClip _getCoin;
 
         [Header("Card")]
         [SerializeField] private AudioClip _cardClick;
@@ -32,6 +33,10 @@ namespace Cardinals
 
         [Header("Player")]
         [SerializeField] private AudioClip _playerMove;
+
+        [Header("TileEffect")]
+        [SerializeField] private AudioClip _fireBall1;
+        [SerializeField] private AudioClip _fireBall2;
 
         private ComponentGetter<AudioSource> _effectAudioSource1
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 1");
@@ -49,33 +54,45 @@ namespace Cardinals
         private List<AudioSource> _effectAudioSourceList = new List<AudioSource>();
 
         #region Common UI
-        public void ButtonClick() {
+        public void ButtonClick()
+        {
             if (_buttonClick == null) return;
 
             _effectAudioClipQueue.Enqueue(_buttonClick);
         }
+
+        public void GetCoin()
+        {
+            if (_getCoin == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getCoin);
+        }
         #endregion
 
         #region Card
-        public void CardClick() {
+        public void CardClick()
+        {
             if (_cardClick == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardClick);
         }
 
-        public void CardUse() {
+        public void CardUse()
+        {
             if (_cardUse == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardUse);
         }
 
-        public void CardDraw() {
+        public void CardDraw()
+        {
             if (_cardDraw == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardDraw);
         }
 
-        public void CardDiscard() {
+        public void CardDiscard()
+        {
             if (_cardDiscard == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardDiscard);
@@ -83,13 +100,15 @@ namespace Cardinals
         #endregion
 
         #region Player
-        public void PlayerMove() {
+        public void PlayerMove()
+        {
             if (_playerMove == null) return;
 
             _effectAudioClipQueue.Enqueue(_playerMove);
         }
 
-        public void PlayBGM() {
+        public void PlayBGM()
+        {
             if (_bgm == null) return;
 
             _bgmAudioSource.Get(gameObject).clip = _bgm;
@@ -98,36 +117,61 @@ namespace Cardinals
             _bgmAudioSource.Get(gameObject).Play();
         }
 
-        private void Awake() {
+        private void Awake()
+        {
             _effectAudioSourceList.Add(_effectAudioSource1.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource2.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource3.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource4.Get(gameObject));
-            
+
             GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
             GameManager.I.GameSetting.OnSoundSettingChanged += OnSoundSettingChange;
         }
 
-        private void Update() {
-            if (_effectAudioClipQueue.Count > 0) {
+        private void Update()
+        {
+            if (_effectAudioClipQueue.Count > 0)
+            {
                 var targetAudioSource = _effectAudioSourceList.FirstOrDefault(x => !x.isPlaying);
-                if (targetAudioSource != null) {
+                if (targetAudioSource != null)
+                {
                     targetAudioSource.volume = GameManager.I.GameSetting.SfxVolume / 100f;
                     targetAudioSource.PlayOneShot(_effectAudioClipQueue.Dequeue());
                 }
             }
         }
 
-        private void OnDisable() {
-            if (GameManager.I != null) {
+        private void OnDisable()
+        {
+            if (GameManager.I != null)
+            {
                 GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
             }
         }
 
-        private void OnSoundSettingChange() {
+        private void OnSoundSettingChange()
+        {
             _bgmAudioSource.Get(gameObject).volume = GameManager.I.GameSetting.BgmVolume / 100f;
             _effectAudioSourceList.ForEach(x => x.volume = GameManager.I.GameSetting.SfxVolume / 100f);
         }
         #endregion
+
+        #region TileMagic
+        public void FlyFireBall()
+        {
+            if (_fireBall1 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_fireBall1);
+        }
+
+        public void BombFireBall()
+        {
+            if (_fireBall2 == null) return;
+
+            _effectAudioClipQueue.Enqueue(_fireBall2);
+        }
+        #endregion
+
+
     }
 }
