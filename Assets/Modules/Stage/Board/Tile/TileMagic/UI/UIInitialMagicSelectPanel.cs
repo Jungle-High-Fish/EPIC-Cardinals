@@ -21,11 +21,12 @@ namespace Cardinals.UI {
             gameObject.SetActive(false);
         }
 
-        public void Set(List<TileMagicType> tileMagicTypes, Action<TileMagicType> onClickMagicSlot) {
+        public IEnumerator Set(List<TileMagicType> tileMagicTypes, Action<TileMagicType> onClickMagicSlot) {
             Clear();
 
             gameObject.SetActive(true);
 
+            yield return new WaitForSeconds(0.3f);
             foreach (var tileMagicType in tileMagicTypes) {
                 var magicSlot = ResourceLoader.LoadPrefab(
                     Constants.FilePath.Resources.Prefabs_UI_MagicSlot
@@ -38,6 +39,8 @@ namespace Cardinals.UI {
                     onClickMagicSlot(magicType);
                 });
                 _magicSlots.Add(magicSlotComp);
+
+                yield return new WaitForSeconds(0.2f);
             }
         }
 

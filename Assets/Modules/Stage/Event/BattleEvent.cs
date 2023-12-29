@@ -87,8 +87,7 @@ namespace Cardinals.Game
                 yield return GameManager.I.UI.UITurnAlert.Show(
                     ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_PlayerTurnAlert)
                 );
-                yield return new WaitForSeconds(1.3f);
-                yield return GameManager.I.UI.UITurnAlert.Hide();
+                yield return new WaitForSeconds(0.7f);
 
                 // 3턴마다 보드 이벤트 생성
                 if (_turn % _boardEventInterval == 0) GameManager.I.Stage.GenerateNewBoardEvent();
@@ -103,6 +102,8 @@ namespace Cardinals.Game
                 // 플레이어 행동
                 //yield return cardManager.OnTurn();
                 yield return diceManager.OnTurn();
+                yield return GameManager.I.UI.UITurnAlert.Hide();
+
                 yield return player.OnTurn();
                 if (CheckPlayerWin) break;
 

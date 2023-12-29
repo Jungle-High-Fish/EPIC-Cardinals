@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa79c692a61174d41b61c6848259641f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPositionY: 100
+  targetPositionY: 70
 --- !u!1 &7946762860038975978
 GameObject:
   m_ObjectHideFlags: 0

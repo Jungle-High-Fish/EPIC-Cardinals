@@ -8,6 +8,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace Cardinals.UI {
     public class UILevelUpMagicSlot: MonoBehaviour {
@@ -20,12 +22,21 @@ namespace Cardinals.UI {
         private ComponentGetter<MagicDescription> _magicDescription 
             = new ComponentGetter<MagicDescription>(TypeOfGetter.This);
 
+        [Button]
         public void Init(TileMagicType tileMagicType, Action<TileMagicType> onClick) {
             var tileMagicDataSO = TileMagic.Data(tileMagicType);
             _magicImage.Get(gameObject).sprite = tileMagicDataSO.sprite;
             _button.Get(gameObject).onClick.AddListener(() => onClick(tileMagicType));
 
             _magicDescription.Get(gameObject).Init(tileMagicType);
+
+            _button.Get(gameObject).interactable = false;
+
+            (transform as RectTransform).localScale = Vector3.zero;
+            (transform as RectTransform).DOScale(Vector3.one, 0.6f)
+            .SetEase(Ease.OutBack).OnComplete(() => {
+                _button.Get(gameObject).interactable = true;
+            });
         }
     }
 }
