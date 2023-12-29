@@ -93,6 +93,8 @@ namespace Cardinals
 
         public override IEnumerator OnTurn()
         {
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
+            
             _isDamagedThisTurn = false;
             IsPlayerTurn = true;
             IsPlayerMove = false;
@@ -111,6 +113,8 @@ namespace Cardinals
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
                 GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             }
+            
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
         }
 
         public IEnumerator PreEndTurn()

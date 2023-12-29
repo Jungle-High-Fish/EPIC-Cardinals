@@ -76,6 +76,8 @@ namespace Cardinals.Game
                 yield return PlayBossAppearProduction();
             }
             
+            
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
             do // 전투 시작
             {
                 _turn++;
@@ -159,6 +161,7 @@ namespace Cardinals.Game
             yield return stage.StartFlag.Hide();
 
             // 플레이어의 승리
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
             if (CheckPlayerWin)
             {
                 IsClear = true;
@@ -166,7 +169,7 @@ namespace Cardinals.Game
                 // 전투 종료 초기화
                 player.Win();
                 player.EndBattle();
-                board.ClearBoardAfterBattleEvent();
+                board.ClearBoardAfterBattleEvent(); 
                 RemoveSummons();
                 yield return WaitReward(enemyGradeType);
             }
@@ -213,6 +216,8 @@ namespace Cardinals.Game
         /// <returns></returns>
         IEnumerator PlayBossAppearProduction()
         {
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
+            
             // UI OFF
             GameManager.I.UI.CanvasInactive(player:true);
             GameManager.I.UI.UIPlayerStatus.gameObject.SetActive(false);
@@ -229,6 +234,8 @@ namespace Cardinals.Game
             // UI ON
             GameManager.I.UI.CanvasInactive(true, true, true, true, true);
             GameManager.I.UI.UIPlayerStatus.gameObject.SetActive(true);
+            
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
         }
 
         public virtual void Test_ChangeEnemy(EnemyType enemyType) {
