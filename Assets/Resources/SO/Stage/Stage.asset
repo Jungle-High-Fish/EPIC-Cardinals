@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8503cf78c9334056a663303e63bd3c8c, type: 3}
   m_Name: Stage
   m_EditorClassIdentifier: 
-  _name: STAGE_SUSPICIOUS_MEADOW
+  _name: Suspicious Meadow
   _eventPool: {fileID: 11400000, guid: 2d0c9d5e006da9744bd86c3258414309, type: 2}
-  _eventSequence: 0100000002000000020000000600000003000000030000000400000005000000
+  _eventSequence: 02000000060000000300000003000000030000000400000005000000
   _boardDataSO: {fileID: 11400000, guid: a215bdf472da542eabf20825bd5b77db, type: 2}
