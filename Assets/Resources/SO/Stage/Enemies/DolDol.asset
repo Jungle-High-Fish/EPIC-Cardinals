@@ -17,4 +17,4 @@ MonoBehaviour:
   enemyType: 10
   prefab: {fileID: 8525769555492493473, guid: 7066a02ae3844754e8ba886b5803372c, type: 3}
   berserkPrefab: {fileID: 0}
-  maxHP: 30
+  maxHP: 40

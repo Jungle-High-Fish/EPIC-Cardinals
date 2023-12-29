@@ -13,6 +13,7 @@ namespace Cardinals.UI.NewDice
         
         [Header("Info")]
         [SerializeField] private Image _mainImg;
+        [SerializeField] private UINewDiceInfo _diceInfo;
         [SerializeField] private TextMeshProUGUI _diceNameTMP;
         [SerializeField] private Transform _valuesTr;
         
@@ -30,6 +31,8 @@ namespace Cardinals.UI.NewDice
                 sprite = ResourceLoader.LoadSprite($"Dice/Dice_{dice.DiceType}_{dice.DiceNumbers[i]}");
                 _valuesTr.GetChild(i).GetComponent<Image>().sprite = sprite;
             }
+            if (transform.parent.gameObject.name == "CurrentDices") return;
+            _diceInfo.Init(dice);
         }
     }
 }

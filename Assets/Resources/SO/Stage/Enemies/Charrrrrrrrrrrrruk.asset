@@ -18,4 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 8525769555492493473, guid: c6b75564f06e3684b85fcd3313c35c3b, type: 3}
   berserkPrefab: {fileID: 8525769555492493473, guid: ddf422956ac5cda438dfd8e500ad01b3,
     type: 3}
-  maxHP: 80
+  maxHP: 60

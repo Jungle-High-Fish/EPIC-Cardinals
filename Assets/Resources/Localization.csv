@@ -27,7 +27,7 @@ TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of 
 TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷
 TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6>defense.","행동 마다, <level=2,4,6>의 방어도를 얻습니다."
 BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상
-BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 damage.","턴 종료 시, 2의 데미지를 입습니다."
+BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 <checkBless=BlessFire1> damage.","턴 종료 시, 2 <checkBless=BlessFire1> 의 데미지를 입습니다."
 BUFF_WEAK_NAME,<debuff=Weak> Weak,<debuff=Weak> 약화
 BUFF_WEAK_EXPLAIN,The damage dealt is reduced by 50%.,주는 피해가 50% 감소합니다.
 BUFF_ELECTRICSHOCK_NAME,Electricshock,감전
@@ -172,7 +172,7 @@ UI_INGAME_TURN,Turn,턴 수
 UI_INGAME_LAP,Laps,바퀴 수
 UI_INGAME_ENDTURN,End Turn,턴 종료
 UI_INGAME_NEXTEVENT,Next Event,다음 이벤트
-UI_TURN_AN1,A board event is generated after {0} turn.,{0} 턴 후 보드 이벤트가 생성됩니다.
+UI_TURN_AN1,A board event is generated after<br>{0} turn.,{0} 턴 후 보드 이벤트가 생성됩니다.
 UI_TURN_AN2,A board event has been generated.,보드 이벤트가 생성되었습니다.
 UI_DICE_REROLL,Reroll,다시 돌리기
 EVENT_ALCHEMY_ALLTILE,"On a dice roll of 1,<br>Get 1 exp for the entire tile","주사위를 굴려 1이 나온다면,<br>전체 타일 경험치 +1"
@@ -180,8 +180,8 @@ EVENT_ALCHEMY_DAMAGE,"On a dice roll of 2,<br>Deal 10 damage to all enemies.","�
 EVENT_ALCHEMY_MONEY,"On a dice roll of 3,<br>Get 5 coin.","주사위를 굴려 4가 나온다면,<br>돈 5원 획득"
 EVENT_ALCHEMY_POTION,"On a dice roll of 4,<br>Get random potion","주사위를 굴려 2가 나온다면,<br>랜덤 포션 획득"
 EVENT_ALCHEMY_HP,"On a dice roll of 5,<br>Get 5 max hp.","주사위를 굴려 3이 나온다면,<br>최대 체력 5 증가"
-EVENT_DICE_MONEY,Raise the dice.<br>You get money equal to the num of eyes on the dice,올린 주사위 눈 만큼 돈을 획득합니다.<br>주사위를 올려주세요.
-EVENT_DICE_HEAL,Heals you for x2 the number of dice you raised.<br>Raise the dice.,올린 주사위 눈의 x2 만큼 체력을 회복합니다.<br>주사위를 올려주세요.
+EVENT_DICE_MONEY,Raise the dice.<br>You get money equal to the dice number.,올린 주사위 눈 만큼 돈을 획득합니다.<br>주사위를 올려주세요.
+EVENT_DICE_HEAL,Heals you for the dice number x2 .<br>Raise the dice.,올린 주사위 눈의 x2 만큼 체력을 회복합니다.<br>주사위를 올려주세요.
 EVENT_ROULETTE_DAM,Deal 10 damage to a random enemy.,랜덤한 적에게 10의 데미지를 줍니다.
 EVENT_ROULETTE_DICE,Get a random dice.,랜덤 주사위 획득합니다.
 EVENT_ROULETTE_MONEY,Get money.,돈을 얻습니다.
@@ -199,3 +199,8 @@ GAMEOVER_NUM_MONSTER,Monsters killed,몬스터 처치 수
 GAMEOVER_NUM_PLAYTIME,Play time,플레이 타임
 GAMEOVER_BUTTON_RE,Retry,다시하기
 GAMEOVER_BUTTON_TITLE,Title,타이틀로
+MAGIC_LEVELUP_TITLE1,Enchantment!,마법 부여!
+MAGIC_LEVELUP_TITLE2,Enchant Evolve!,마법 진화!
+MAGIC_LEVELUP_BT1,Level Up,레벨 업
+MAGIC_LEVELUP_BT2,Change,마법 변경
+MAGIC_LEVELUP_BT3,Enchantment,마법 부여!

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PoPo
   m_EditorClassIdentifier: 
   enemyName: "\uBF40\uBF40"
-  enemyGrade: 1
+  enemyGradeType: 2
   enemyType: 4
   prefab: {fileID: 4835928436726365699, guid: a2347a273a233d74d92218aabf94340d, type: 3}
   berserkPrefab: {fileID: 7088941211725103883, guid: 58b146d849d56054fa1e208161185e5c,
     type: 3}
-  maxHP: 15
+  maxHP: 20

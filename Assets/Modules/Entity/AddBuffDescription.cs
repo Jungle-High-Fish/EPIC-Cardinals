@@ -15,11 +15,11 @@ public class AddBuffDescription : MonoBehaviour
     public void Init(BuffDataSO data)
     {
         _iconImg.sprite = data.sprite;
-        _TMP.SetLocalizedText(data.buffName);
+        _TMP.text = TMPUtils.CustomParse(data.buffName,true);
 
         GetComponent<GridSizeUpdator>().Resizing();
         
-        _TMP.SetLocalizedText(data.buffName);
+        _TMP.text = TMPUtils.CustomParse(data.buffName,true);
         transform.DOLocalMoveY(100, 1.5f)
             .OnComplete(() => Destroy(gameObject));
     }
