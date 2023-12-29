@@ -16,10 +16,10 @@ namespace Cardinals.UI.Description
             _data = ResourceLoader.LoadSO<BuffDataSO>(Constants.FilePath.Resources.SO_BuffData + type);
         }
 
-        public string Name => TMPUtils.LocalizedText(_data.buffName);
+        public string Name => TMPUtils.CustomParse(_data.buffName,true);
         public string Description => TMPUtils.LocalizedText(_data.Description);
 
-        public Sprite IconSprite => _data.sprite;
+        public Sprite IconSprite { get; }
         public Color Color { get; }
         public string Key => _data.type.ToString();
     }

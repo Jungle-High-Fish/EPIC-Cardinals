@@ -14,6 +14,12 @@ using Util;
 
 namespace Cardinals.UI {
     public class UIMagicLevelUpPanel: MonoBehaviour {
+
+        [Header("Text")]
+        [SerializeField] private Button _enchantBTN;
+        [SerializeField] private Button _levelupBTN;
+        [SerializeField] private Button _changeBTN;
+
         private ComponentGetter<UIInitialMagicSelectPanel> _initialMagicSelectPanel
             = new ComponentGetter<UIInitialMagicSelectPanel>(
                 TypeOfGetter.ChildByName,
@@ -31,7 +37,18 @@ namespace Cardinals.UI {
             "Title Panel/Title Text"
         );
 
+        private void Start()
+        {
+            _enchantBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT3];
+            _levelupBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT1];
+            _changeBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT2];
+        }
         public void Init() {
+
+
             gameObject.SetActive(false);
 
             _initialMagicSelectPanel.Get(gameObject).Init();
@@ -81,7 +98,7 @@ namespace Cardinals.UI {
             }
 
             IEnumerator Requester() {
-                _titleText.Get(gameObject).text = "Enchantment!";
+                _titleText.Get(gameObject).text = GameManager.I.Localization.Get(LocalizationEnum.MAGIC_LEVELUP_TITLE1);
                 TextAnimation(_titleText.Get(gameObject));
 
                 gameObject.SetActive(true);
@@ -119,7 +136,7 @@ namespace Cardinals.UI {
             }
 
             IEnumerator Requester() {
-                _titleText.Get(gameObject).text = "Enchant Evolve!";
+                _titleText.Get(gameObject).text = GameManager.I.Localization.Get(LocalizationEnum.MAGIC_LEVELUP_TITLE2);
                 TextAnimation(_titleText.Get(gameObject));
                 
                 gameObject.SetActive(true);
