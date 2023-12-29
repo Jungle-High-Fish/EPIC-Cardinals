@@ -207,9 +207,8 @@ namespace Cardinals
             
             if (damage > 0)
             {
-                
-                Hp -= damage;
                 HitEvent?.Invoke();
+                Hp -= damage;
                 
                 if (this is Player) {
                     GameManager.I.Sound.PlayerHit();

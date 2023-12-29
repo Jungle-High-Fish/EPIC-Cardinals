@@ -21,6 +21,8 @@ namespace Cardinals.Game {
         public GameObject berserkPrefab;
         public int maxHP;
 
+        public Sprite spec1Sprite;
+
         public static EnemyDataSO Data(EnemyType enemyType) {
             return ResourceLoader.LoadSO<EnemyDataSO>(Constants.FilePath.Resources.SO_EnemyData + enemyType.ToString());
         }
