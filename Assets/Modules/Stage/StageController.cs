@@ -201,12 +201,14 @@ namespace Cardinals.Game {
             
             // 화면에 표시
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
-            Instantiate(prefab, new Vector3(-1, 0.6f, -1), Quaternion.identity).GetComponent<BlessTotem>().Init(bless1);
-
-            yield return new WaitForSeconds(0.3f);
-
+            var totem1 = Instantiate(prefab, new Vector3(-1, 0.6f, -1), Quaternion.identity).GetComponent<BlessTotem>();
+            totem1.Init(bless1);
             prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
-            Instantiate(prefab, new Vector3(1, 0.6f, 1), Quaternion.identity).GetComponent<BlessTotem>().Init(bless2);
+            var totem2 = Instantiate(prefab, new Vector3(1, 0.6f, 1), Quaternion.identity).GetComponent<BlessTotem>();
+            totem2.Init(bless2);
+            totem1.SelectedEvent += totem2.SelectOtherTotem;
+            totem2.SelectedEvent += totem1.SelectOtherTotem;
+            
             
             // 사용자 선택 대기
             SelectedBless = default;

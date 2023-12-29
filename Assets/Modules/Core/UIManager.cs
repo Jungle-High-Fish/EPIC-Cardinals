@@ -45,6 +45,7 @@ namespace Cardinals
         public UITurnAlert UITurnAlert => _uiTurnAlert;
         
         public Canvas MainUICanvas => _mainUICanvas;
+        public GameObject UIAntiTouchPanel => _uiAntiTouchPanel;
         public DescriptionArea DescCanvasDescArea { get; private set; }
 
         private Canvas _mainUICanvas;
@@ -77,6 +78,7 @@ namespace Cardinals
         private UIClearDemoGame _uiClearDemoGame;
         private UIStageEffect _uiStageEffect;
         private UITurnAlert _uiTurnAlert;
+        private GameObject _uiAntiTouchPanel;
         
         private Bubble _uiSystemBubble;
 
@@ -179,6 +181,8 @@ namespace Cardinals
             
             InstantiateNewPlayerUI(_playerUICanvas);
             InstantiateUIStageEffect(_systemUICanvas);
+            
+            InstantiateUIAntiTouchPanel(_systemUICanvas);
         }
 
         void InitDescriptionCanvas()
@@ -467,6 +471,13 @@ namespace Cardinals
             _descriptionUICanvas.gameObject.SetActive(desc);
             _mainUICanvas.gameObject.SetActive(main);
             _playerUICanvas.gameObject.SetActive(player);
+        }
+
+        private void InstantiateUIAntiTouchPanel(Canvas canvas)
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_AntiTouchPanel);
+            _uiAntiTouchPanel = Instantiate(prefab, canvas.transform);
+            _uiAntiTouchPanel.SetActive(false);
         }
 
         // 디버깅 UI
