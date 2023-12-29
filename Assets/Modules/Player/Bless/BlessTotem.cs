@@ -19,6 +19,9 @@ namespace Cardinals.Board
         
         [Header("Component")]
         private SpriteRenderer _totemRenderer;
+
+        public Action SelectedEvent;
+        private bool _selectedComplete;
         
         public void Awake()
         {
@@ -65,6 +68,10 @@ namespace Cardinals.Board
 
         public void OnMouseDown()
         {
+            if (_selectedComplete) return;
+            SelectOtherTotem();
+            SelectedEvent?.Invoke();
+            
             GameManager.I.Stage.SelectedBless = _baseBless;
             if (GameManager.I.Stage.CurEvent is TutorialEvent tutorialEvent) {
                 tutorialEvent.CheckBlessSelectQuest();
@@ -75,6 +82,11 @@ namespace Cardinals.Board
         {
             transform.LookAt(target, Vector3.up);
             transform.Rotate(0, 180, 0);
+        }
+
+        public void SelectOtherTotem()
+        {
+            _selectedComplete = true;
         }
     }
 }

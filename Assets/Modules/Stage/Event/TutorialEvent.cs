@@ -137,9 +137,9 @@ namespace Cardinals.Tutorial
                 yield return GameManager.I.UI.UITurnAlert.Hide();
 
                 // 적 행동
-                foreach (var e in _enemies)
+                for (int i = _enemies.Count - 1; i >= 0; i--)
                 {
-                    yield return e.OnPreTurn();
+                    yield return _enemies[i].OnPreTurn();
                 }
                 for (int i = _enemies.Count - 1; i >= 0; i--)
                 {

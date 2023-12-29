@@ -89,9 +89,11 @@ namespace Cardinals.Enemy
         }
 
         private IEnumerator DestroyCoroutine()
-        {
+        { 
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
             yield return _slicer.Get(gameObject).Slice();
             Destroy(gameObject);
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
         }
     }
 }

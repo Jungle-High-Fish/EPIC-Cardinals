@@ -127,6 +127,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_DebugButton = "UI/Debug/Debug Button";
             public const string Prefabs_UI_DebugPanel = "UI/Debug/Debug Window";
             
+            public const string Prefabs_UI_AntiTouchPanel = "UI/UIAntiTouchPanel";
+            
             // Sprite
             public const string Sprites = "Sprites/";
             public const string Sprites_Potion = "Player/Potion/";
