@@ -6,7 +6,12 @@ namespace Cardinals.BoardObject.Event
     {
         protected override IEnumerator Execute()
         {
+            bool backup = GameManager.I.UI.UIAntiTouchPanel.activeSelf; 
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
+            
             yield return GameManager.I.UI.UIAlchemyEventPanel.Init();
+            
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(backup);
         }
     }
 
