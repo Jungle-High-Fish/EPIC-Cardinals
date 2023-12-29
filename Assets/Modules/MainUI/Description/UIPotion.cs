@@ -14,11 +14,18 @@ namespace Cardinals.UI.Description
         private Potion _curPotion;
         private Button _button;
         private int _index;
+
+        private DG.Tweening.Sequence _shakeSeq;
         
         void Start()
         {
             _button = transform.AddComponent<Button>();
             _button.onClick.AddListener(Use);
+
+            _shakeSeq = DOTween.Sequence();
+            _shakeSeq.Append(
+                (transform as RectTransform).DOShakeAnchorPos(0.3f, 5f)
+            ).SetAutoKill(false).Pause();
         }
 
         public void Init(int index)
@@ -48,11 +55,13 @@ namespace Cardinals.UI.Description
                     {
                         Destroy(descs[i]);
                     }
+                    _curPotion = null;
 
                     GetComponent<DescriptionConnector>().OffPanel();
                 } else
-                {
-                    (transform as RectTransform).DOShakeAnchorPos(0.3f, 5f);
+                {  
+                    if (_shakeSeq.IsPlaying()) _shakeSeq.Restart();
+                    else _shakeSeq.Play();
                     GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_POTION));
                 }
             }
