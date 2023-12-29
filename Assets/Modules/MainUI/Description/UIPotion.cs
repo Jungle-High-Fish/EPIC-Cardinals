@@ -22,7 +22,8 @@ namespace Cardinals.UI.Description
             _button = transform.AddComponent<Button>();
             _button.onClick.AddListener(Use);
 
-            _shakeSeq = DOTween.Sequence(
+            _shakeSeq = DOTween.Sequence();
+            _shakeSeq.Append(
                 (transform as RectTransform).DOShakeAnchorPos(0.3f, 5f)
             ).SetAutoKill(false).Pause();
         }
