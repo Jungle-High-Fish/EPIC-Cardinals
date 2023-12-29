@@ -69,7 +69,7 @@ namespace Cardinals
             {
                 string buffIcon = $"<debuff={dice.DiceBuffType.ToString()}> ";
                 _buffTitle.text = TMPUtils.CustomParse(buffData.buffName, true);
-                _buffInfo.text = TMPUtils.CustomParse(buffData.Description, true);
+                _buffInfo.text = buffData.Description;
             }
         }
     }
