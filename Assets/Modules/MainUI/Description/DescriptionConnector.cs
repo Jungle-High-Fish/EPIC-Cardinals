@@ -9,7 +9,7 @@ using Util;
 namespace Cardinals.UI
 {
     [Tooltip("마우스 호버 시, 설명 창을 출력")]
-    public class DescriptionConnector : MonoBehaviour
+    public class DescriptionConnector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private IDescription _description;
         private GameObject _instObject;
@@ -97,12 +97,22 @@ namespace Cardinals.UI
             };
         }
 
-        private void OnMouseEnter()
+        // private void OnMouseEnter()
+        // {
+        //     _mouseEnterAction?.Invoke(_anchor, GetIDescription());
+        // }
+        //
+        // private void OnMouseExit()
+        // {
+        //     _mouseExitAction?.Invoke();
+        // }
+
+        public void OnPointerEnter(PointerEventData eventData)
         {
             _mouseEnterAction?.Invoke(_anchor, GetIDescription());
         }
-        
-        private void OnMouseExit()
+
+        public void OnPointerExit(PointerEventData eventData)
         {
             _mouseExitAction?.Invoke();
         }
