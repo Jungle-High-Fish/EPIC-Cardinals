@@ -84,6 +84,9 @@ namespace Cardinals
 
         public bool UsePotion(int index)
         {
+            if (!GameManager.I.Player.IsPlayerTurn) return false;
+            if (GameManager.I.Player.IsPlayerMove) return false;
+
             var potion = _potions[index];
             if (potion != null)
             {
