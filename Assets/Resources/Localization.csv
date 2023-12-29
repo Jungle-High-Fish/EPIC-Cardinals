@@ -27,7 +27,7 @@ TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of 
 TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷
 TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6>defense.","행동 마다, <level=2,4,6>의 방어도를 얻습니다."
 BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상
-BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 damage.","턴 종료 시, 2의 데미지를 입습니다."
+BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 <checkBless=BlessFire1> damage.","턴 종료 시, 2 <checkBless=BlessFire1> 의 데미지를 입습니다."
 BUFF_WEAK_NAME,<debuff=Weak> Weak,<debuff=Weak> 약화
 BUFF_WEAK_EXPLAIN,The damage dealt is reduced by 50%.,주는 피해가 50% 감소합니다.
 BUFF_ELECTRICSHOCK_NAME,Electricshock,감전
