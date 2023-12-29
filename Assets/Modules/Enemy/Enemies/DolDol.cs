@@ -1,14 +1,23 @@
 ﻿using Cardinals.Enums;
 using Cardinals.Game;
 using Modules.Entity.Buff;
+using System;
 using UnityEngine;
+using Util;
 
 namespace Cardinals.Enemy
 {
     public class DolDol : BaseEnemy
     {
+        private Sprite _dieSprite;
         public override void Init(EnemyDataSO enemyData)
         {
+            DieEvent += () =>
+            {
+                Renderers[0].sprite = enemyData.spec1Sprite;
+                Renderers[1].gameObject.SetActive(false);
+            };
+            
             base.Init(enemyData);
 
             Patterns = new[]
@@ -22,6 +31,7 @@ namespace Cardinals.Enemy
             {
                 new(RewardType.Gold, 100)
             };
+
         }
 
         public override void PostInit()

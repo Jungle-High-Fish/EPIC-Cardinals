@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using TMPro;
 
 namespace Cardinals.UI {
     public class UIPausePanel : MonoBehaviour {
         public bool IsActive => _isActive;
+
+        [Header("Text")]
+        [SerializeField] private TextMeshProUGUI _titleTMP;
+        [SerializeField] private TextMeshProUGUI _continueTMP;
+        [SerializeField] private TextMeshProUGUI _settingTMP;
+        [SerializeField] private TextMeshProUGUI _mainmenuTMP;
+        [SerializeField] private TextMeshProUGUI _quitTMP;
+
+
 
         private ComponentGetter<Button> _continueButton
             = new ComponentGetter<Button>(TypeOfGetter.ChildByName, "Options Area/Continue Button");
@@ -19,6 +29,14 @@ namespace Cardinals.UI {
 
         private bool _isActive = false;
 
+        private void Start()
+        {
+            _titleTMP.text = GameManager.I.Localization[LocalizationEnum.OPTION_TITLE];
+            _continueTMP.text = GameManager.I.Localization[LocalizationEnum.OPTION_CONTINUE];
+            _settingTMP.text = GameManager.I.Localization[LocalizationEnum.OPTION_SETTING];
+            _mainmenuTMP.text = GameManager.I.Localization[LocalizationEnum.OPTION_MAINMENU];
+            _quitTMP.text = GameManager.I.Localization[LocalizationEnum.OPTION_QUIT];
+        }
         public void Init() {
             _continueButton.Get(gameObject).onClick.AddListener(OnContinueButtonClick);
             _settingsButton.Get(gameObject).onClick.AddListener(OnSettingsButtonClick);

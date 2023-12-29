@@ -24,6 +24,8 @@ namespace Cardinals.Game {
         public Sprite turnAlertSprite;
         public int maxHP;
 
+        public Sprite spec1Sprite;
+
         public static EnemyDataSO Data(EnemyType enemyType) {
             return ResourceLoader.LoadSO<EnemyDataSO>(Constants.FilePath.Resources.SO_EnemyData + enemyType.ToString());
         }

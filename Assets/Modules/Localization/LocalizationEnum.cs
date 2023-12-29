@@ -205,7 +205,12 @@ namespace Cardinals {
         MAGIC_LEVELUP_TITLE2,
         MAGIC_LEVELUP_BT1,
         MAGIC_LEVELUP_BT2,
-        MAGIC_LEVELUP_BT3
+        MAGIC_LEVELUP_BT3,
+        OPTION_TITLE,
+        OPTION_CONTINUE,
+        OPTION_SETTING,
+        OPTION_MAINMENU,
+        OPTION_QUIT
 
     }
 }

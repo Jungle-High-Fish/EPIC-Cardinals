@@ -1063,6 +1063,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b07ea4804395ea448ddb4a1200a5c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _titleTMP: {fileID: 4525944532994965042}
+  _continueTMP: {fileID: 4525944533820375234}
+  _settingTMP: {fileID: 4525944533222940234}
+  _mainmenuTMP: {fileID: 4525944532141927001}
+  _quitTMP: {fileID: 4525944532167175187}
 --- !u!1 &4525944533222940276
 GameObject:
   m_ObjectHideFlags: 0
