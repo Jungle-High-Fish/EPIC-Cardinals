@@ -29,15 +29,15 @@ namespace Cardinals
         [SerializeField] private TextMeshProUGUI _enemyExecuteCountTMP;
         [SerializeField] private TextMeshProUGUI _playTimeTMP;
         [SerializeField] private Button _titleBTN;
-        [SerializeField] private Button _retryBTN;
+        //[SerializeField] private Button _retryBTN;
         public void Start()
         {
             _titleBTN.GetComponentInChildren<TextMeshProUGUI>().text
-                = GameManager.I.Localization[LocalizationEnum.GAMEOVER_BUTTON_RE];
-            _retryBTN.GetComponentInChildren<TextMeshProUGUI>().text
                 = GameManager.I.Localization[LocalizationEnum.GAMEOVER_BUTTON_TITLE];
+            // _retryBTN.GetComponentInChildren<TextMeshProUGUI>().text
+            //     = GameManager.I.Localization[LocalizationEnum.GAMEOVER_BUTTON_RE];
             _titleBTN.onClick.AddListener(GameManager.I.GoToTitle);
-            _retryBTN.onClick.AddListener(GameManager.I.Retry);
+            //_retryBTN.onClick.AddListener(GameManager.I.Retry);
         }
 
         public void Init()
@@ -52,7 +52,7 @@ namespace Cardinals
         {
             // 초기화
             _titleBTN.gameObject.SetActive(false);
-            _retryBTN.gameObject.SetActive(false);
+            //_retryBTN.gameObject.SetActive(false);
 
             gameObject.SetActive(true);
             _turnCountHeaderTMP.text         = string.Empty;
@@ -82,7 +82,7 @@ namespace Cardinals
             
             yield return new WaitForSeconds(2f);
             _titleBTN.gameObject.SetActive(true);
-            _retryBTN.gameObject.SetActive(true);
+            //_retryBTN.gameObject.SetActive(true);
         }
     }
 }
