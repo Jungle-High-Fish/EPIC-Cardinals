@@ -124,7 +124,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_DebugDropdown = "UI/Debug/Debug Dropdown";
             public const string Prefabs_UI_DebugInputField = "UI/Debug/Debug InputField";
             public const string Prefabs_UI_DebugButton = "UI/Debug/Debug Button";
-            public const string Prefabs_UI_DebugPanel = "UI/Debug/Debug Panel";
+            public const string Prefabs_UI_DebugPanel = "UI/Debug/Debug Window";
             
             // Sprite
             public const string Sprites = "Sprites/";

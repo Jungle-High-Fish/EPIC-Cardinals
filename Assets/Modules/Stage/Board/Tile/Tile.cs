@@ -223,9 +223,9 @@ namespace Cardinals.Board {
                     _tileEffect.ArriveAction(boardPiece);
                     _tileCurse.ClearCurse();
                     if (_isSealed == false) {
-                        ChangeState(TileState.Normal);
+                        yield return WaitUntilChangeState(TileState.Normal);
                     } else {
-                        ChangeState(TileState.Seal);
+                        yield return WaitUntilChangeState(TileState.Seal);
                     }
                     break;
                 case TileState.Seal:
@@ -345,29 +345,42 @@ namespace Cardinals.Board {
             ApplyState(originalState);
         }
 
+        public IEnumerator WaitUntilChangeState(TileState state) {
+            TileState originalState = _tileState;
+            _tileState = state;
+            if (_tileState == TileState.Seal) {
+                _isSealed = true;
+            }
+            float time = ApplyState(originalState);
+
+            yield return new WaitForSeconds(time);
+        }
+
         public void ClearSealedState() {
             _isSealed = false;
         }
 
         // 타일 상태에 따라서 뒤집기. 필요한 경우 애니메이션 재생
-        private void ApplyState(TileState originalState) {
+        private float ApplyState(TileState originalState) {
             if (originalState == TileState.Normal) {
                 if (_tileState == TileState.Cursed) {
-                    _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
+                    return _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
                 }
             }
 
             if (originalState == TileState.Cursed) {
                 if (_tileState == TileState.Normal || _tileState == TileState.Seal) {
-                    _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
+                    return _tileAnimation.Get(gameObject).Play(TileAnimationType.FlipBack);
                 }
             }
             
             if (originalState == TileState.Seal) {
                 if (_tileState == TileState.Cursed) {
-                    _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
+                    return _tileAnimation.Get(gameObject).Play(TileAnimationType.Flip);
                 }
             }
+
+            return 0;
         }
 
         private void OnMouseDown() {

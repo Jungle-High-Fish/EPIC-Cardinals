@@ -8,6 +8,8 @@ using Cardinals.Board.Curse;
 using Cardinals.BoardObject.Event;
 using Cardinals.Enemy;
 using Cardinals.Game;
+using Cardinals.Buff;
+using Modules.Entity.Buff;
 
 namespace Cardinals.Enums {
 
@@ -168,6 +170,25 @@ namespace Cardinals.Enums {
                 _ => null
             };
 
+        }
+
+        public static BaseBuff GetBuffByType(BuffType type)
+        {
+            return type switch
+            {
+                BuffType.Burn => new Burn(1),
+                BuffType.Weak => new Weak(1),
+                BuffType.ElectricShock => new ElectricShock(),
+                BuffType.Poison => new Poison(1),
+                BuffType.Slow => new Slow(),
+                BuffType.Heal => new HealBuff(1),
+                BuffType.Confusion => new Confusion(),
+                BuffType.Doll => new Doll(),
+                BuffType.Stun => new Stun(),
+                BuffType.Powerless => new Powerless(1),
+                BuffType.Berserk => new Berserk(),
+                _ => null
+            };
         }
     }
 

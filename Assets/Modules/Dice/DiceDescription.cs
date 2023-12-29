@@ -24,7 +24,10 @@ namespace Cardinals
         [SerializeField] private TextMeshProUGUI _buffInfo;
 
         [SerializeField] private GridSizeUpdator _sizeUpdator;
-        public void Init(List<int> numbers, DiceType type,Dice dice)
+
+        private Dice _dice;
+
+        public void Init(List<int> numbers, DiceType type, Dice dice)
         {
             for(int i = 0; i < numbers.Count; i++)
             {
@@ -35,6 +38,8 @@ namespace Cardinals
                 surface.GetComponent<Image>().sprite = ResourceLoader.LoadSprite(path);
 
             }
+
+            _dice = dice;
 
             UpdateDiceInfo(type, dice);
         }
@@ -66,6 +71,8 @@ namespace Cardinals
             _diceDescription.SetActive(true);
             _rerollPanel.SetActive(true);
             _infoPanel.gameObject.SetActive(true);
+
+            UpdateDiceDescription(_dice);
 
             if (buffType != BuffType.Empty)
             {
@@ -104,7 +111,7 @@ namespace Cardinals
             {
                 string buffIcon = $"<debuff={dice.DiceBuffType.ToString()}> ";
                 _buffTitle.text = TMPUtils.CustomParse(buffData.buffName, true);
-                _buffInfo.text = TMPUtils.CustomParse(buffData.Description, true);
+                _buffInfo.text = buffData.Description;
             }
         }
     }
