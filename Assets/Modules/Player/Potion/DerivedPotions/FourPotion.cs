@@ -13,8 +13,7 @@ namespace Cardinals
 
         public override bool UsePotion()
         {
-            if(GameManager.I.Player.OnTile.Type==Enums.TileType.Attack||
-                GameManager.I.Player.OnTile.Type == Enums.TileType.Defence)
+            if(!GameManager.I.Player.OnTile.IsSealed)
             {
                 GameManager.I.Stage.DiceManager.PotionUseAction(4);
                 return true;
