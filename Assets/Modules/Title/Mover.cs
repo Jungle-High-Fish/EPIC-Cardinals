@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,23 +22,33 @@ namespace Cardinals.Title
 
         private void Update()
         {
-            transform.position -= new Vector3(_speed, 0, 0);
+            //transform.position -= new Vector3(_speed, 0, 0);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.name.Equals(_leftColliderTr.gameObject.name))
             {
-                var pos = transform.position;
+                transform.DOKill();
+                var value = 2 + (_backup - transform.position.x) + Random.Range(0, 1f);
+
+                var pos = transform.position + new Vector3(-value, 0, 0);
                 pos.x = _rightColliderTr.position.x;
                 transform.position = pos;
-                SetMover();
+                //SetMover();
             }
         }
 
         private void SetMover()
         {
             _speed = Random.Range(.005f, .01f);
+        }
+
+        private float _backup;
+        public void Move()
+        {
+            _backup = transform.position.x; 
+            transform.DOMoveX( -2, .5f).SetRelative();
         }
     }
 }
