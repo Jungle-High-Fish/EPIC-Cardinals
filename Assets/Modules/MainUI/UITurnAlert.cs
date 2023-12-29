@@ -9,7 +9,7 @@ using Sirenix.OdinInspector;
 namespace Cardinals.UI {
     public class UITurnAlert: MonoBehaviour {
         private ComponentGetter<Image> _image
-            = new ComponentGetter<Image>(TypeOfGetter.This);
+            = new ComponentGetter<Image>(TypeOfGetter.Child);
 
         [SerializeField] private float targetPositionY;
 
@@ -17,7 +17,7 @@ namespace Cardinals.UI {
             gameObject.SetActive(true);
             _image.Get(gameObject).sprite = sprite;
 
-            RectTransform rectTransform = transform as RectTransform;
+            RectTransform rectTransform = _image.Get(gameObject).transform as RectTransform;
             var initialPosition = new Vector2(0, 50);
             var targetPosition = new Vector2(0, -(rectTransform.rect.height + targetPositionY));
 

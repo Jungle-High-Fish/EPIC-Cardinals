@@ -54,6 +54,7 @@ namespace Cardinals.UI.Description
                     {
                         Destroy(descs[i]);
                     }
+                    _curPotion = null;
 
                     GetComponent<DescriptionConnector>().OffPanel();
                 } else
