@@ -1,3 +1,4 @@
+using Cardinals.Title;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,12 @@ namespace Cardinals
 
         [SerializeField] private TMP_Text _characterDiceSelecterText;
         [SerializeField] private Transform _diceSelecterTr;
+
+        [Header("New Title Info ")]
+        [SerializeField] private TileMaker _tileMaker;
+        [SerializeField] private PlayerControlInTitle _playerControlInTitle;
+        
+        
         private int curCharIdx = 0;
         
         private void Start()
@@ -75,6 +82,9 @@ namespace Cardinals
                 _diceSelecterTr.GetChild(i).GetComponent<DiceTitleUI>().UpdateDiceUIinTitle(dices[i]);
             }
             SetTileView(true);
+
+            _tileMaker.Init();
+            _playerControlInTitle.StartFlow();
         }
 
         void CameraSetting(bool zoomIn = false)
@@ -82,7 +92,7 @@ namespace Cardinals
             Camera.main.orthographicSize = zoomIn ? _zoomInCameraSize : 5;
             
             var curPos = Camera.main.transform.position;
-            curPos.y = zoomIn ? _zoomInPosY : 1;
+            curPos.y = zoomIn ? _zoomInPosY : 10;
             Camera.main.transform.position = curPos;
         }
         
@@ -97,6 +107,7 @@ namespace Cardinals
 
             
         }
+        
 
         public void NextCharacter(bool right)
         {

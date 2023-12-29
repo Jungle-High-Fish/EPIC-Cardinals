@@ -62,6 +62,11 @@ namespace Cardinals.Board {
 			_tile.Get(gameObject).UITile.SetMaterial();
 		}
 
+        public void SetLevel(int level)
+        {
+            _level = level;
+        }
+
 		public void OnAction(int value, BaseEntity target) {
 			GainExp(1);
 			MagicAction(value, target);

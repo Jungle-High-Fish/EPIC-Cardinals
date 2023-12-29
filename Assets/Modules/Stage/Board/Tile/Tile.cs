@@ -170,14 +170,16 @@ namespace Cardinals.Board {
             }
             _tileMagic.Init(initialMagicType);
 
-            if (GameManager.I.Stage.Board.IsBoardSquare) {
-                if (tileData.type == TileType.Attack || tileData.type == TileType.Defence) {
+            if (GameManager.I.Stage != null)
+            {
+                if (GameManager.I.Stage.Board.IsBoardSquare) {
+                    if (tileData.type == TileType.Attack || tileData.type == TileType.Defence) {
+                        _uiTile.Get(gameObject).Init(this);
+                    }
+                } else {
                     _uiTile.Get(gameObject).Init(this);
                 }
-            } else {
-                _uiTile.Get(gameObject).Init(this);
             }
-            
         }
 
         public void OnTurnEnd() {
@@ -424,7 +426,7 @@ namespace Cardinals.Board {
 
         private void OnCollisionEnter(Collision other) {
             if (other.gameObject.CompareTag("Ground")) {
-                GameManager.I.Sound.Tile();
+                //GameManager.I.Sound.Tile();
                 _hasTouchedGround = true;
             }
         }

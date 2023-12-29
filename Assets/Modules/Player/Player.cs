@@ -39,7 +39,8 @@ namespace Cardinals
         public PlayerActionType CurActionType { get; private set; }
 
         private Quaternion _defaultRotate;
-
+        private bool _isPlayerTurn;
+        private bool _isPlayerMove;
         public override void Init(int _ = default) {
             base.Init(_initHp);
             _playerInfo = new PlayerInfo();
@@ -78,11 +79,23 @@ namespace Cardinals
                 }
             }
         }
+        public bool IsPlayerTurn
+        {
+            get => _isPlayerTurn;
+            set => _isPlayerTurn = value;
+        }
+
+        public bool IsPlayerMove
+        {
+            get => _isPlayerMove;
+            set => _isPlayerMove = value;
+        }
 
         public override IEnumerator OnTurn()
         {
             _isDamagedThisTurn = false;
-            
+            IsPlayerTurn = true;
+            IsPlayerMove = false;
             if (CheckBuffExist(BuffType.Stun))
             {
                 // 행동 하지 않음... 스턴 효과 애니메이션 출력?
@@ -94,7 +107,7 @@ namespace Cardinals
                 }
 
                 yield return GameManager.I.WaitNext(); // 플레이어의 [턴 종료] 버튼 선택 대기
-
+                IsPlayerTurn = false;
                 GameManager.I.UI.UIEndTurnButton.Deactivate();
                 GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             }
@@ -113,6 +126,7 @@ namespace Cardinals
         
         public override IEnumerator EndTurn()
         {
+            
             yield return base.EndTurn(); // 버프/디버프 소모
             
             //yield return GameManager.I.Stage.CardManager.EndTurn();
@@ -176,8 +190,9 @@ namespace Cardinals
             yield return _onTile.Arrive(this, true);
         }
       
-        public IEnumerator MoveTo(int count,float time)
+        public IEnumerator MoveTo(int count,float time, Action onComplete=null)
         {
+            IsPlayerMove = true;
             _onTile?.Leave(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
@@ -216,10 +231,13 @@ namespace Cardinals
             yield return _onTile.Arrive(this);
 
             SetFlipTowardEnemy();
+            IsPlayerMove = false;
+            onComplete?.Invoke();
         }
         
-        public IEnumerator PrevMoveTo(int count, float time)
+        public IEnumerator PrevMoveTo(int count, float time, Action onComplete=null)
         {
+            IsPlayerMove = true;
             _onTile?.Leave(this);
             GameManager.I.UI.UINewPlayerInfo.TileInfo.Hide();
 
@@ -248,6 +266,8 @@ namespace Cardinals
             yield return _onTile.Arrive(this);
             
             SetFlipTowardEnemy();
+            IsPlayerMove = false;
+            onComplete?.Invoke();
         }
 
         private void CreateLandingParticle()
