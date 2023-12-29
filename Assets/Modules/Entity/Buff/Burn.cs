@@ -5,7 +5,7 @@ namespace Cardinals.Buff
 {
     public class Burn : BaseBuff
     {
-        public Burn(int count, int value = 1) : base(BuffType.Burn, count: count)
+        public Burn(int count, int value = 2) : base(BuffType.Burn, count: count)
         {
             Value = value;
         }

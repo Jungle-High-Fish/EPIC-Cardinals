@@ -17,7 +17,7 @@ namespace Cardinals.UI.Description
         }
 
         public string Name => TMPUtils.CustomParse(_data.buffName,true);
-        public string Description => TMPUtils.LocalizedText(_data.Description);
+        public string Description => _data.Description;
 
         public Sprite IconSprite { get; }
         public Color Color { get; }

@@ -42,6 +42,7 @@ namespace Cardinals
         public UIPlayerResultPanel UIPlayerResultPanel => _uiPlayerResultPanel;
         public UIClearDemoGame UIClearDemoGame => _uiClearDemoGame;
         public UIStageEffect UIStageEffect => _uiStageEffect;
+        public UITurnAlert UITurnAlert => _uiTurnAlert;
         
         public Canvas MainUICanvas => _mainUICanvas;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -75,6 +76,7 @@ namespace Cardinals
         private UIPlayerResultPanel _uiPlayerResultPanel;
         private UIClearDemoGame _uiClearDemoGame;
         private UIStageEffect _uiStageEffect;
+        private UITurnAlert _uiTurnAlert;
         
         private Bubble _uiSystemBubble;
 
@@ -141,6 +143,8 @@ namespace Cardinals
             InitDescriptionCanvas();
             
             InstantiateSystemBubbleUI(_systemUICanvas);
+            // Turn Alert
+            InstantiateTurnAlertUI(_systemUICanvas);
             InstantiatePlayResultUI(_systemUICanvas);
             InstantiateClearDemoGameUI(_systemUICanvas);
             InstantiatePausePanelUI(_systemUICanvas);
@@ -309,6 +313,14 @@ namespace Cardinals
             GameObject obj = Instantiate(prefab, canvas.transform);
 
             _uiStageEffect = prefab.GetComponent<UIStageEffect>();
+        }
+
+        private void InstantiateTurnAlertUI(Canvas canvas) {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TurnAlert);
+            GameObject obj = Instantiate(prefab, canvas.transform);
+
+            _uiTurnAlert = obj.GetComponent<UITurnAlert>();
+            obj.SetActive(false);
         }
         
         public void InstantiatePlayerStatusUI()

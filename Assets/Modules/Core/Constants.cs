@@ -49,6 +49,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_RewardPanel = "UI/Reward/UIRewardPanel";
             public const string Prefabs_UI_RewardItem = "UI/Reward/UIRewardItem";
             public const string Prefabs_UI_StageEffect = "UI/UIStageEffect";
+            public const string Prefabs_UI_TurnAlert = "UI/TurnAlertUI";
 
             public const string Prefabs_UI_Entity_AddBuffDescription = "UI/Entity/AddBuffDescription";
             public const string Prefabs_UI_Entity_ExecuteBuffPrefab = "UI/Entity/ExecuteBuffPrefab";
@@ -124,7 +125,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_DebugDropdown = "UI/Debug/Debug Dropdown";
             public const string Prefabs_UI_DebugInputField = "UI/Debug/Debug InputField";
             public const string Prefabs_UI_DebugButton = "UI/Debug/Debug Button";
-            public const string Prefabs_UI_DebugPanel = "UI/Debug/Debug Panel";
+            public const string Prefabs_UI_DebugPanel = "UI/Debug/Debug Window";
             
             // Sprite
             public const string Sprites = "Sprites/";
@@ -165,6 +166,7 @@ namespace Cardinals.Constants {
             public const string Sprites_MapIcons = "MapIcons/";
             
             public const string Sprites_UI_Ending_ClearIllust = "UI/Ending/ClearIllust";
+            public const string Sprites_UI_PlayerTurnAlert = "UI/TurnAlert/PlayerTurn";
 
             // Material
             public const string Materials = "Materials/";

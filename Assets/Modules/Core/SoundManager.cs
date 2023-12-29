@@ -33,6 +33,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _cardReroll1;
         [SerializeField] private AudioClip _cardReroll2;
         [SerializeField] private AudioClip _cardReroll3;
+        [SerializeField] private AudioClip _cardHover;
 
 
         [Header("Player")]
@@ -124,6 +125,13 @@ namespace Cardinals
             if (_cardDiscard == null) return;
 
             _effectAudioClipQueue.Enqueue(_cardDiscard);
+        }
+
+        public void DiceHover()
+        {
+            if (_cardHover == null) return;
+
+            _effectAudioClipQueue.Enqueue(_cardHover);
         }
 
         public void CardReroll()

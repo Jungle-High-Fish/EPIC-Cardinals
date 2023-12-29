@@ -19,6 +19,9 @@ namespace Cardinals.Game {
         [AssetSelector(Paths = "Assets/Resources/Prefabs/Enemy/EnemyAnimation")]
         [InlineEditor(InlineEditorModes.LargePreview)] 
         public GameObject berserkPrefab;
+        [AssetSelector(Paths = "Assets/Resources/Sprites/UI/TurnAlert")]
+        [InlineEditor(InlineEditorModes.LargePreview)] 
+        public Sprite turnAlertSprite;
         public int maxHP;
 
         public Sprite spec1Sprite;
