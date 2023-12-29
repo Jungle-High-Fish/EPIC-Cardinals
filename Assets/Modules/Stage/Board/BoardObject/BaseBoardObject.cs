@@ -64,6 +64,12 @@ namespace Cardinals.BoardObject
             else 
                 _turnCountObject.Get(gameObject).SetActive(false);
             GetComponent<GridSizeUpdator>().Resizing();
+            // 둘다 꺼져 있다면...
+            if (!_moveValueObject.Get(gameObject).activeSelf &&
+                !_turnCountObject.Get(gameObject).activeSelf)
+            {
+                _moveValueObject.Get(gameObject).transform.parent.gameObject.SetActive(false);
+            }
 
 
             // 설명창 설정
