@@ -1,6 +1,7 @@
 using Cardinals.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -54,6 +55,10 @@ namespace Cardinals.Test {
 
             AddInputField("데미지", (string s) => {
                 GameManager.I.Stage.Player.Hit(int.Parse(s));
+            });
+
+            AddInputField("적 데미지", (string s) => {
+                GameManager.I.Stage.Enemies.ForEach(e => e.Hit(int.Parse(s)));
             });
 
             Hide();

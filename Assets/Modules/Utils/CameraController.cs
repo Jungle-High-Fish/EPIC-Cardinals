@@ -16,6 +16,8 @@ namespace Cardinals.Util {
             = new ComponentGetter<CinemachineVirtualCamera>(TypeOfGetter.This);
 
         private CinemachineBasicMultiChannelPerlin _perlin;
+        private Vector3 _initPos;
+        private float _initOrthoSize = 5.3f;
 
         private void Awake()
         {
@@ -23,6 +25,8 @@ namespace Cardinals.Util {
 
             _perlin.m_AmplitudeGain = 0;
             _perlin.m_FrequencyGain = 0;
+
+            _initPos = transform.position;
         }
 
         public void ShakeCamera(float duration, float amplitudeGain, float frequencyGain)
@@ -59,6 +63,46 @@ namespace Cardinals.Util {
             
             yield return new WaitUntil(() => wait);
             yield return new WaitForSeconds(.5f);
+        }
+
+        public IEnumerator EnemyZoomIn(Transform enemyTr, float speed)
+        {
+            bool wait = false;
+            var destPos = enemyTr.position + new Vector3(2, 3, -2);
+            transform.DOMove(destPos, speed)
+                .OnComplete(() =>
+                {
+                    wait = true;
+                });
+
+            DOTween.To(
+                () => _virtualCamera.Get().m_Lens.OrthographicSize,
+                (x) => _virtualCamera.Get().m_Lens.OrthographicSize = x,
+                3.5f,
+                speed
+            ).SetEase(Ease.OutCubic);
+            
+            yield return new WaitUntil(() => wait);
+        }
+        
+        public IEnumerator ZoomOut(float speed)
+        {
+            bool wait = false;
+            var destPos = _initPos;
+            transform.DOMove(destPos, speed)
+                .OnComplete(() =>
+                {
+                    wait = true;
+                });
+
+            DOTween.To(
+                () => _virtualCamera.Get().m_Lens.OrthographicSize,
+                (x) => _virtualCamera.Get().m_Lens.OrthographicSize = x,
+                _initOrthoSize,
+                speed
+            ).SetEase(Ease.OutCubic);
+            
+            yield return new WaitUntil(() => wait);
         }
 
         public void LateUpdate()
