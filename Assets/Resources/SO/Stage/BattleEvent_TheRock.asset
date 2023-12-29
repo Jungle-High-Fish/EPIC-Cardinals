@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898ae7808d6e4ba2b97bf6a5c86b4536, type: 3}
   m_Name: BattleEvent_TheRock
   m_EditorClassIdentifier: 
-  _type: 3
+  _type: 2
   _enemyList:
   - {fileID: 11400000, guid: b3b241190e14a6946b14b44ce4f2d798, type: 2}

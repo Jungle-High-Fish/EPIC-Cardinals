@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TweTwe
   m_EditorClassIdentifier: 
   enemyName: "\uD264\uD264\uAE30"
-  enemyGrade: 1
+  enemyGradeType: 1
   enemyType: 2
   prefab: {fileID: 7391424474380831586, guid: 37d0a876ccd5d9d4fae0dd2067ad2170, type: 3}
   berserkPrefab: {fileID: 0}
-  maxHP: 20
+  maxHP: 25

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TheRock
   m_EditorClassIdentifier: 
   enemyName: 6
-  enemyGradeType: 2
+  enemyGradeType: 1
   enemyType: 8
   prefab: {fileID: 8525769555492493473, guid: 294319d1a5dd1124ea59b56f178e0625, type: 3}
   berserkPrefab: {fileID: 0}
-  maxHP: 35
+  maxHP: 28

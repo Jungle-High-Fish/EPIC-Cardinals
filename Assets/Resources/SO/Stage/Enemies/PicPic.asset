@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PicPic
   m_EditorClassIdentifier: 
   enemyName: "\uC092\uC092\uC774"
-  enemyGrade: 1
+  enemyGradeType: 2
   enemyType: 5
   prefab: {fileID: 323631921785163362, guid: 17131c198ee6c48469d661e47a278426, type: 3}
   berserkPrefab: {fileID: 0}
-  maxHP: 30
+  maxHP: 40

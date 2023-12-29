@@ -31,5 +31,9 @@ MonoBehaviour:
     EventData: {fileID: 11400000, guid: 9f7c4babc8d92304f95b34b1237f9a28, type: 2}
   - StageEventName: 7
     EventData: {fileID: 11400000, guid: f5e99c738e252f94380aca4eb28456e2, type: 2}
+  - StageEventName: 8
+    EventData: {fileID: 11400000, guid: 83eea04410b48ce45b694785a19156fb, type: 2}
+  - StageEventName: 10
+    EventData: {fileID: 11400000, guid: f662973f5af579047b91f852e978d95d, type: 2}
   - StageEventName: 13
     EventData: {fileID: 11400000, guid: d76fabba681c38c40aa4d633a71d401a, type: 2}

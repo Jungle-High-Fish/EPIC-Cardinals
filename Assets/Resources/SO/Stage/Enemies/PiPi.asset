@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PiPi
   m_EditorClassIdentifier: 
   enemyName: "\uC090\uC090"
-  enemyGrade: 1
+  enemyGradeType: 2
   enemyType: 3
   prefab: {fileID: 1532464485757914800, guid: 373ee33b5844f5341b510757c420aaa5, type: 3}
   berserkPrefab: {fileID: 386309242999522132, guid: 0266387b742b9fb41945cb3f97b02636,
     type: 3}
-  maxHP: 15
+  maxHP: 20
