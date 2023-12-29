@@ -26,7 +26,6 @@ namespace Cardinals
         private int _continuousUseCount;
         private int _DiceUsedForMoveCountOnThisTurn;
         private int _diceUsedCountOnThisTurn;
-        private bool _isPlayerMove;
         #region Tutorial
         public bool IsTutorial => _isTutorial;
         private bool _isTutorial;
@@ -117,7 +116,6 @@ namespace Cardinals
             _DiceUsedForMoveCountOnThisTurn = 0;
             _diceUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
-            _isPlayerMove = false;
             _state = CardState.Idle;
             UpdateDiceState(-1, true);
 
@@ -568,7 +566,7 @@ namespace Cardinals
         }
         public void UpdateMarkedNextTile(PlayerActionType type = PlayerActionType.None)
         {
-            if (_isPlayerMove)
+            if (GameManager.I.Player.IsPlayerMove)
                 return;
             if (type == PlayerActionType.Move)
             {
@@ -586,7 +584,6 @@ namespace Cardinals
         {
             _diceUsedCountOnThisTurn++;
             _DiceUsedForMoveCountOnThisTurn++;
-            _isPlayerMove = true;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
@@ -608,27 +605,32 @@ namespace Cardinals
             _lastDiceUsedForAction = false;
             DismissAllCards();
             SetDiceSelectable(true);
-            _isPlayerMove = false;
         }
 
-        public void PotionUseMove(int num)
+        public bool PotionUseMove(int num)
         {
-            StartCoroutine(GameManager.I.Player.MoveTo(num, 0.4f));
+            _DiceUsedForMoveCountOnThisTurn++;
+            SetDiceSelectable(false);
+            StartCoroutine(GameManager.I.Player.MoveTo(num, 0.4f, ()=> { SetDiceSelectable(true); }));
             _prevDiceNumber = -1;
             _continuousUseCount = 0;
             _canActionUse = true;
             _lastDiceUsedForAction = false;
             DismissAllCards();
+            return true;
         }
 
-        public void PotionUsePrevMove(int num)
+        public bool PotionUsePrevMove(int num)
         {
-            StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f));
+            _DiceUsedForMoveCountOnThisTurn++;
+            SetDiceSelectable(false);
+            StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f, () => { SetDiceSelectable(true); }));
             _prevDiceNumber = -1;
             _continuousUseCount = 0;
             _canActionUse = true;
             _lastDiceUsedForAction = false;
             DismissAllCards();
+            return true;
         }
 
         public void PotionUseAction(int num)

@@ -413,7 +413,7 @@ namespace Cardinals.Board {
 
         private void OnCollisionEnter(Collision other) {
             if (other.gameObject.CompareTag("Ground")) {
-                GameManager.I.Sound.Tile();
+                //GameManager.I.Sound.Tile();
                 _hasTouchedGround = true;
             }
         }
