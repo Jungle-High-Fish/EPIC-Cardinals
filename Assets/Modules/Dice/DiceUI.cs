@@ -255,6 +255,7 @@ namespace Cardinals
         {
             if (!_isDiscard && _isSelectable&&!_isSelect)
             {
+                GameManager.I.Sound.DiceHover();
                 _diceUIRenderer.GetComponent<RectTransform>().DOAnchorPosY(15f, 0.1f);
                 DiceDescription.SetDescriptionUIHovered(Dice.RollResultIndex,_dice.DiceBuffType);
             }
