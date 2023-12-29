@@ -11,13 +11,12 @@ namespace Cardinals.Title
     {
         private Transform _leftColliderTr;
         private Transform _rightColliderTr;
-        private float _speed = 0;
-        
+        [SerializeField] private float _speed = -2;
         public void Init(Transform left, Transform right)
         {
             _leftColliderTr = left;
             _rightColliderTr = right;
-            SetMover();
+            // SetMover();
         }
 
         private void Update()
@@ -48,7 +47,7 @@ namespace Cardinals.Title
         public void Move()
         {
             _backup = transform.position.x; 
-            transform.DOMoveX( -2, .5f).SetRelative();
+            transform.DOMoveX( _speed, .5f).SetRelative();
         }
     }
 }

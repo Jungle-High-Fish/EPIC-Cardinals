@@ -56,7 +56,7 @@ namespace Cardinals
                 image.sprite = ResourceLoader.LoadSprite(path);
 
             }
-
+            _dice = dice;
             UpdateDiceInfo(type, dice);
         }
 
