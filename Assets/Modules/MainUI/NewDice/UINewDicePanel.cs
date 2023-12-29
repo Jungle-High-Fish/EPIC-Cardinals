@@ -26,7 +26,7 @@ namespace Cardinals.UI.NewDice
 
         
         [Header("Info")]
-        [SerializeField] private UIDice _newUIDice;
+        [SerializeField] private UIDice _newUIDice; 
         [SerializeField] private Transform _curDiceParentTr;
 
         private Dice _newDice; 

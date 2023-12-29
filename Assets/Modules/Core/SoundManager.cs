@@ -48,6 +48,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _fireBall2;
         [SerializeField] private AudioClip _waterHeal;
         [SerializeField] private AudioClip _earthDefense;
+        [SerializeField] private AudioClip _tile;
 
         private ComponentGetter<AudioSource> _effectAudioSource1
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 1");
@@ -57,6 +58,22 @@ namespace Cardinals
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 3");
         private ComponentGetter<AudioSource> _effectAudioSource4
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 4");
+        private ComponentGetter<AudioSource> _effectAudioSource5
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 5");
+        private ComponentGetter<AudioSource> _effectAudioSource6
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 6");
+        private ComponentGetter<AudioSource> _effectAudioSource7
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 7");
+        private ComponentGetter<AudioSource> _effectAudioSource8
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 8");
+        private ComponentGetter<AudioSource> _effectAudioSource9
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 9");
+        private ComponentGetter<AudioSource> _effectAudioSource10
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 10");
+        private ComponentGetter<AudioSource> _effectAudioSource11
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 11");
+        private ComponentGetter<AudioSource> _effectAudioSource12
+            = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "Effect Sound Source 12");
 
         private ComponentGetter<AudioSource> _bgmAudioSource
             = new ComponentGetter<AudioSource>(TypeOfGetter.ChildByName, "BGM Sound Source 1");
@@ -170,6 +187,14 @@ namespace Cardinals
             _effectAudioSourceList.Add(_effectAudioSource2.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource3.Get(gameObject));
             _effectAudioSourceList.Add(_effectAudioSource4.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource5.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource6.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource7.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource8.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource9.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource10.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource11.Get(gameObject));
+            _effectAudioSourceList.Add(_effectAudioSource12.Get(gameObject));
 
             GameManager.I.GameSetting.OnSoundSettingChanged -= OnSoundSettingChange;
             GameManager.I.GameSetting.OnSoundSettingChanged += OnSoundSettingChange;
@@ -244,6 +269,13 @@ namespace Cardinals
             if (_earthDefense == null) return;
 
             _effectAudioClipQueue.Enqueue(_earthDefense);
+        }
+
+        public void Tile()
+        {
+            if (_tile == null) return;
+
+            _effectAudioClipQueue.Enqueue(_tile);
         }
         #endregion
 

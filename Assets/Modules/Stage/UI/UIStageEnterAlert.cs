@@ -12,7 +12,7 @@ namespace Cardinals.Game {
         public IEnumerator Init(Stage stage) {
             _stageNameText.Get(gameObject).SetText(string.Empty);
             gameObject.SetActive(true);
-            _stageNameText.Get(gameObject).SetText(stage.Name);
+            _stageNameText.Get(gameObject).SetLocalizedText(stage.Name);
             yield return new WaitForSeconds(1f);
             
 
