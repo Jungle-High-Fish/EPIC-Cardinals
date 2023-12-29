@@ -170,9 +170,11 @@ namespace Cardinals
                 {
                     case EnemyActionType.Attack :
                         Attack(GameManager.I.Player, value);
+                        yield return new WaitForSeconds(1f);
                         break;
                     case EnemyActionType.Defense :
                         AddDefenseCount(value);
+                        yield return new WaitForSeconds(.5f);
                         break;
                     case EnemyActionType.AreaAttack :
                     case EnemyActionType.TileDebuff :

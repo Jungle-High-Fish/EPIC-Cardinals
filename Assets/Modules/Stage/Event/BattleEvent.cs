@@ -82,6 +82,14 @@ namespace Cardinals.Game
                 // 턴 UI 업데이트
                 GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
                 GameManager.I.UI.UINewPlayerInfo.PrintTurnNoti();
+
+                // 플레이어 턴 알림
+                yield return GameManager.I.UI.UITurnAlert.Show(
+                    ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_PlayerTurnAlert)
+                );
+                yield return new WaitForSeconds(1.3f);
+                yield return GameManager.I.UI.UITurnAlert.Hide();
+
                 // 3턴마다 보드 이벤트 생성
                 if (_turn % _boardEventInterval == 0) GameManager.I.Stage.GenerateNewBoardEvent();
                 
@@ -114,6 +122,11 @@ namespace Cardinals.Game
                 // 플레이어 PreEndTurn 처리
                 yield return player.PreEndTurn();
 
+                // 적 턴 알림
+                yield return GameManager.I.UI.UITurnAlert.Show(_enemies.First().EnemyData.turnAlertSprite);
+                yield return new WaitForSeconds(1.3f);
+                yield return GameManager.I.UI.UITurnAlert.Hide();
+
                 // 적 행동
                 foreach (var e in _enemies)
                 {
@@ -138,6 +151,8 @@ namespace Cardinals.Game
                 {
                     yield return _enemies[i].EndTurn();
                 }
+
+                yield return new WaitForSeconds(1f);
             } while (!(CheckPlayerWin || CheckEnemyWin));
 
             yield return GameManager.I.Stage.DiceManager.EndBattle();
