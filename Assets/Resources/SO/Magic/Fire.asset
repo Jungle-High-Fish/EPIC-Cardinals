@@ -26,5 +26,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 42c4e8d04eb31480693cca2f8fe0193f, type: 3}
   mainMagicName: TILE_MAGIC_FIRE_NAME
   mainMagicDescription: TILE_MAGIC_FIRE_EXPLAIN
-  hasBuffEffect: 1
+  hasBuffEffect: 0
   buffType: 1

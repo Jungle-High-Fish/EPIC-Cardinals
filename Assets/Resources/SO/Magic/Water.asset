@@ -26,5 +26,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e06277cb5987d4111a13d36e100f46e2, type: 3}
   mainMagicName: TILE_MAGIC_WATER_NAME
   mainMagicDescription: TILE_MAGIC_WATER_EXPLAIN
-  hasBuffEffect: 1
+  hasBuffEffect: 0
   buffType: 2
