@@ -158,7 +158,7 @@ namespace Cardinals.UI {
 
         private UITileDescription AddBuffDescription(BuffDataSO data) {
             string title = TMPUtils.CustomParse(data.buffName,true);
-            string description = TMPUtils.CustomParse(data.Description, true);
+            string description = data.Description;
             Sprite icon = data.sprite;
 
             UITileDescription panel = InstantiateDescriptionPanel();

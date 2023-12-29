@@ -12,9 +12,9 @@ namespace Cardinals.Test {
         public bool IsShow => _isShow;
 
         private ComponentGetter<Button> _button 
-            = new(TypeOfGetter.ChildByName, "Close Button");
+            = new(TypeOfGetter.ChildByName, "Debug Panel/Close Button");
         private ComponentGetter<RectTransform> _debugComponentsParent 
-            = new(TypeOfGetter.ChildByName, "Scroll View/Viewport/Debug List");
+            = new(TypeOfGetter.ChildByName, "Debug Panel/Scroll View/Viewport/Debug List");
 
         private List<IDebugComponent> _debugComponents = new();
         private bool _isShow = false;
@@ -45,6 +45,18 @@ namespace Cardinals.Test {
                 GameManager.I.Stage.Player.PlayerInfo.GetBless((BlessType) e);
             });
 
+            AddDropdown("버프 추가", typeof(BuffType), (Enum e) => {
+                GameManager.I.Stage.Player.AddBuff(EnumHelper.GetBuffByType((BuffType) e));
+            });
+
+            AddDropdown("적 버프 추가", typeof(BuffType), (Enum e) => {
+                GameManager.I.Stage.Enemies.ForEach(en => en.AddBuff(EnumHelper.GetBuffByType((BuffType) e)));
+            });
+
+            AddInputField("이동", (string s) => {
+                GameManager.I.Stage.Player.MoveTo(int.Parse(s), 0.4f);
+            });
+
             AddInputField("돈 추가", (string s) => {
                 GameManager.I.Stage.Player.PlayerInfo.AddGold(int.Parse(s));
             });
@@ -59,6 +71,10 @@ namespace Cardinals.Test {
 
             AddInputField("적 데미지", (string s) => {
                 GameManager.I.Stage.Enemies.ForEach(e => e.Hit(int.Parse(s)));
+            });
+
+            AddInputField("적 힐", (string s) => {
+                GameManager.I.Stage.Enemies.ForEach(e => e.Heal(int.Parse(s)));
             });
 
             Hide();
