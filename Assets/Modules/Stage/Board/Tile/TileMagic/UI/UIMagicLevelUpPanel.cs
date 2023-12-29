@@ -105,7 +105,7 @@ namespace Cardinals.UI {
                 _initialMagicSelectPanel.Get(gameObject).gameObject.SetActive(true);
                 _postMagicSelectPanel.Get(gameObject).gameObject.SetActive(false);
 
-                _initialMagicSelectPanel.Get(gameObject).Set(targetMagicTypes, OnClickMagicSlot);
+                yield return _initialMagicSelectPanel.Get(gameObject).Set(targetMagicTypes, OnClickMagicSlot);
                 yield return new WaitUntil(() => requestHandled);
                 gameObject.SetActive(false);
             }
