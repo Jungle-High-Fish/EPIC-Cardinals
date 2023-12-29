@@ -199,3 +199,8 @@ GAMEOVER_NUM_MONSTER,Monsters killed,몬스터 처치 수
 GAMEOVER_NUM_PLAYTIME,Play time,플레이 타임
 GAMEOVER_BUTTON_RE,Retry,다시하기
 GAMEOVER_BUTTON_TITLE,Title,타이틀로
+MAGIC_LEVELUP_TITLE1,Enchantment!,마법 부여!
+MAGIC_LEVELUP_TITLE2,Enchant Evolve!,마법 진화!
+MAGIC_LEVELUP_BT1,Level Up,레벨 업
+MAGIC_LEVELUP_BT2,Change,마법 변경
+MAGIC_LEVELUP_BT3,Enchantment,마법 부여!
