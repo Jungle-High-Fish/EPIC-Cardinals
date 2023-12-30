@@ -50,6 +50,7 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_RewardItem = "UI/Reward/UIRewardItem";
             public const string Prefabs_UI_StageEffect = "UI/UIStageEffect";
             public const string Prefabs_UI_TurnAlert = "UI/TurnAlertUI";
+            public const string Prefabs_UI_NotiBoradEventByTurn = "UI/Player/UINotiBoradEventByTurn";
 
             public const string Prefabs_UI_Entity_AddBuffDescription = "UI/Entity/AddBuffDescription";
             public const string Prefabs_UI_Entity_ExecuteBuffPrefab = "UI/Entity/ExecuteBuffPrefab";

@@ -43,6 +43,7 @@ namespace Cardinals
         public UIClearDemoGame UIClearDemoGame => _uiClearDemoGame;
         public UIStageEffect UIStageEffect => _uiStageEffect;
         public UITurnAlert UITurnAlert => _uiTurnAlert;
+        public UINotiBoardEventByTurn UINotiBoardEventByTurn => _uiNotiBoardEventByTurn;
         
         public Canvas MainUICanvas => _mainUICanvas;
         public GameObject UIAntiTouchPanel => _uiAntiTouchPanel;
@@ -79,6 +80,7 @@ namespace Cardinals
         private UIStageEffect _uiStageEffect;
         private UITurnAlert _uiTurnAlert;
         private GameObject _uiAntiTouchPanel;
+        private UINotiBoardEventByTurn _uiNotiBoardEventByTurn;
         
         private Bubble _uiSystemBubble;
 
@@ -147,6 +149,7 @@ namespace Cardinals
             InstantiateSystemBubbleUI(_systemUICanvas);
             // Turn Alert
             InstantiateTurnAlertUI(_systemUICanvas);
+            InstantiateUITurnEventNoti(_systemUICanvas);
             InstantiatePlayResultUI(_systemUICanvas);
             InstantiateClearDemoGameUI(_systemUICanvas);
             InstantiatePausePanelUI(_systemUICanvas);
@@ -319,6 +322,15 @@ namespace Cardinals
             _uiStageEffect = prefab.GetComponent<UIStageEffect>();
         }
 
+        private void InstantiateUITurnEventNoti(Canvas canvas)
+        {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_NotiBoradEventByTurn);
+            GameObject obj = Instantiate(prefab, canvas.transform);
+
+            _uiNotiBoardEventByTurn = obj.GetComponent<UINotiBoardEventByTurn>();
+            _uiNotiBoardEventByTurn.Init();
+        }
+        
         private void InstantiateTurnAlertUI(Canvas canvas) {
             GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_TurnAlert);
             GameObject obj = Instantiate(prefab, canvas.transform);
@@ -334,7 +346,6 @@ namespace Cardinals
             
             _uiPlayerStatus = obj.GetComponent<UIPlayerStatus>();
             _uiPlayerStatus.Init(GameManager.I.Player);
-            obj.transform.SetSiblingIndex(1);
         }
 
         private void InstantiateCardSystemUI(Canvas canvas) {
