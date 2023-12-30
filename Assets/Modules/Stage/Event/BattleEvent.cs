@@ -69,7 +69,7 @@ namespace Cardinals.Game
             _roundStartTile = player.OnTile;
             GameManager.I.StartCoroutine(stage.StartFlag.Show(_roundStartTile));
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
-            GameManager.I.UI.UINewPlayerInfo.AddTurnNoti(EventNotiContent);
+            GameManager.I.UI.UINotiBoardEventByTurn.AddTurnNoti(EventNotiContent);
 
             if (_enemies.First().EnemyData.enemyGradeType == EnemyGradeType.Boss)
             {
@@ -83,7 +83,7 @@ namespace Cardinals.Game
                 _turn++;
                 // 턴 UI 업데이트
                 GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
-                GameManager.I.UI.UINewPlayerInfo.PrintTurnNoti();
+                GameManager.I.UI.UINotiBoardEventByTurn.PrintTurnNoti();
 
                 // 플레이어 턴 알림
                 yield return GameManager.I.UI.UITurnAlert.Show(

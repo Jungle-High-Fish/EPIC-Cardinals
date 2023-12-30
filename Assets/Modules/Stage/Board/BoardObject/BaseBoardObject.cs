@@ -47,7 +47,8 @@ namespace Cardinals.BoardObject
             GameManager.I.Stage.BoardObjects.Add(this);
             _onTile = tile;
             transform.position = GetPosition(_onTile.gameObject.transform.position);
-
+            transform.SetParent(tile.transform);
+            
             // 데이타 설정            
             _data = ResourceLoader.LoadSO<NewBoardObjectDataSO>(Constants.FilePath.Resources.SO_BoardObjectData + type);
             _lifeCount = _data.keepTurnCount;
@@ -100,6 +101,7 @@ namespace Cardinals.BoardObject
                 }
 
                 _onTile = tile;
+                transform.SetParent(tile.transform);
             }
 
             _lifeCount--;

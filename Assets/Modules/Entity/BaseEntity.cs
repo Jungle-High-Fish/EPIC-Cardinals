@@ -263,7 +263,8 @@ namespace Cardinals
         {
             GameManager.I.Sound.PlayerHeal();
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_HealParticle);
-            Instantiate(prefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+            var obj = Instantiate(prefab, Renderers.First().transform.parent);
+            //obj.transform.position = new Vector3(0, -1, -1);
             
             int _mathHeal = _hp + value;
             Hp += value;
