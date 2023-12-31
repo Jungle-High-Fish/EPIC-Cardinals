@@ -54,6 +54,11 @@ namespace Cardinals.Enemy
                 EnemyType.TweTwe => new Vector2(0, .5f) ,
                 EnemyType.PicPic => new Vector2(0, 0.83f),
                 EnemyType.Pazizizizic => new Vector2(0, .5f),
+                EnemyType.NulluNullu => new Vector2(0, .5f),
+                EnemyType.DolDol => new Vector2(0, .5f),
+                EnemyType.TheRock => new Vector2(0, .5f),
+                EnemyType.MuMu => new Vector2(0, .5f),
+                EnemyType.Charrrrrrrrrrrrruk => new Vector2(0, .5f),
                 _ => Vector2.zero
             };
 
