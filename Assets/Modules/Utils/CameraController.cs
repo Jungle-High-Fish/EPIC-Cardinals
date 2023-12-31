@@ -29,11 +29,18 @@ namespace Cardinals.Util {
             _initPos = transform.position;
         }
 
+        private IEnumerator _shakeFlow;
         public void ShakeCamera(float duration, float amplitudeGain, float frequencyGain)
         {
+            if (_shakeFlow != null)
+            {
+                StopCoroutine(_shakeFlow);
+            }
+            
+            _shakeFlow = ShakeCameraCoroutine(duration);
             _perlin.m_AmplitudeGain = amplitudeGain;
             _perlin.m_FrequencyGain = frequencyGain;
-            StartCoroutine(ShakeCameraCoroutine(duration));
+            StartCoroutine(_shakeFlow);
         }
 
         private IEnumerator ShakeCameraCoroutine(float duration)

@@ -62,6 +62,7 @@ namespace Cardinals.UI
                 {
                     EnemyType.Krol => new Vector3(0, -30),
                     EnemyType.PiPi or EnemyType.PoPo => new Vector3(0, -30),
+                    EnemyType.MuMu or EnemyType.DolDol or EnemyType.Charrrrrrrrrrrrruk => new Vector3(0, -25),
                     _ => Vector2.zero
                 };
             }
@@ -96,6 +97,7 @@ namespace Cardinals.UI
             {
                 EnemyType.Krol => new Vector3(0, -60),
                 EnemyType.PiPi or EnemyType.PoPo => new Vector3(0, -60),
+                EnemyType.MuMu => new Vector3(0, -60),
                 _ => Vector2.zero
             };
                 

@@ -216,12 +216,17 @@ namespace Cardinals
                 HitEvent?.Invoke();
                 Hp -= damage;
                 
-                if (this is Player) {
-                    GameManager.I.Sound.PlayerHit();
-                    GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
-                } else if (this is BaseEnemy) {
-                    GameManager.I.CameraController.ShakeCamera(0.3f, 1f, 1);
-                }
+                GameManager.I.Sound.PlayerHit();
+                var gain = Math.Clamp(damage / 2, 1, 5);
+                var duration = Math.Clamp(damage / 5f, .3f, .6f);
+                GameManager.I.CameraController.ShakeCamera(duration, gain, 1);
+                
+                // if (this is Player) {
+                //     GameManager.I.Sound.PlayerHit();
+                //     GameManager.I.CameraController.ShakeCamera(0.3f, 2, 1);
+                // } else if (this is BaseEnemy) {
+                //     GameManager.I.CameraController.ShakeCamera(0.3f, 1f, 1);
+                // }
             }
         }
 
