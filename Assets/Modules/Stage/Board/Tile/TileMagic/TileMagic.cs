@@ -204,7 +204,7 @@ namespace Cardinals.Board {
 				.OnComplete(() =>
 				{
                     GameManager.I.Sound.BombFireBall();
-                    target.Hit(value + Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1]); // 실제 데미지 입히는 영역
+                    target.Hit(value + Constants.GameSetting.Tile.FireMagicMainDamage[_level - 1], TileMagicType.Fire); // 실제 데미지 입히는 영역
 
 					var explosion = Instantiate(ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_Explosion));
 					explosion.transform.position = targetPos;

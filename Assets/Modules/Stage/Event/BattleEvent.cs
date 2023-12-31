@@ -303,7 +303,7 @@ namespace Cardinals.Game
         /// 플레이어 전리품 획득 대기
         /// </summary>
         /// <param name="rewards"></param>
-        protected IEnumerator WaitReward(EnemyGradeType grade)
+        protected virtual IEnumerator WaitReward(EnemyGradeType grade)
         {
             GameManager.I.UI.UIEndTurnButton.Activate(true);
             

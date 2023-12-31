@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Cardinals.Entity.UI;
 using Cardinals.Enums;
+using Cardinals.Game;
 using Cardinals.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
@@ -61,6 +62,7 @@ namespace Cardinals
         public Action<BaseBuff> ExecuteBuffEvent { get; set; }
         public Action SuccessDefenseEvent { get; set; }
         public Action BrokenDefenseEvent { get; set; }
+        public Action<int, Color> ValidChangedHPEvent { get; set; }
 
         private void OnBuffCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
@@ -185,7 +187,7 @@ namespace Cardinals
         /// 맞을 때 호출
         /// </summary>
         /// <param name="damage">입힐 데미지</param>
-        public virtual void Hit(int damage) 
+        public virtual void Hit(int damage, TileMagicType type = TileMagicType.Attack) 
         {
             if (DefenseCount > 0)
             {
@@ -207,6 +209,10 @@ namespace Cardinals
             
             if (damage > 0)
             {
+                // 데미지 표시기 
+                var color = type == TileMagicType.Attack ? Color.white :  EnumHelper.GetColorByMagic(type);
+                ValidChangedHPEvent?.Invoke(-damage, color);
+                
                 HitEvent?.Invoke();
                 Hp -= damage;
                 
@@ -265,11 +271,20 @@ namespace Cardinals
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Particle_HealParticle);
             var obj = Instantiate(prefab, Renderers.First().transform.parent);
             //obj.transform.position = new Vector3(0, -1, -1);
+
+            int realRecoveryHeal = Math.Min(MaxHp - Hp, value);
+            if (realRecoveryHeal > 0)
+            {
+                var color = EnumHelper.GetColorByMagic(TileMagicType.Water);
+                ValidChangedHPEvent(realRecoveryHeal, color);
+            }
             
             int _mathHeal = _hp + value;
             Hp += value;
+
+            int overHeal = _mathHeal - _hp;
             
-            return _mathHeal - _hp;
+            return overHeal;
         }
         /// <summary>
         /// 버프 추가 시, 호출

@@ -11,6 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using Random = UnityEngine.Random;
 
 namespace Cardinals.UI
 {
@@ -26,6 +27,8 @@ namespace Cardinals.UI
         [SerializeField] protected RectTransform _maxHPRect;
         [SerializeField] private RectTransform _orangeHPRect;
         [SerializeField] private RectTransform _curHPRect;
+        
+        [SerializeField] private TextMeshProUGUI _damageTextTMP;
 
         [Header("Defense")]
         [SerializeField] private GameObject _defenseObj;
@@ -47,7 +50,7 @@ namespace Cardinals.UI
             _entity.ExecuteBuffEvent += ExecuteBuff;
             _entity.SuccessDefenseEvent += SuccessDefense;
             _entity.BrokenDefenseEvent += BrokenDefense;
-            
+            _entity.ValidChangedHPEvent = PrintValueRelatedHp;
             
             UpdateHp(_entity.Hp, _entity.MaxHp);
         }
@@ -129,6 +132,21 @@ namespace Cardinals.UI
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_Entity_ExecuteBuffPrefab);
             var sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprite_UI_Entity_BrokenDefense);
             Instantiate(prefab, _addBuffDescriptionTr).GetComponent<ExecuteBuff>().Init(sprite);
+        }
+
+        public void PrintValueRelatedHp(int value, Color color)
+        {
+            var obj = Instantiate(_damageTextTMP.gameObject, _damageTextTMP.transform.parent as RectTransform);
+            var rect = obj.transform as RectTransform; 
+            rect.position += new Vector3(Random.Range(-50, 50f), Random.Range(-50, 20f));
+            obj.SetActive(true);
+            
+            var tmp = obj.GetComponent<TextMeshProUGUI>();
+            tmp.text = $"{(value > 0 ? "+" : "")}{value}";
+            tmp.color = color;
+
+            rect.DOMoveY(100, 1.5f).SetRelative()
+                .OnComplete(() => Destroy(tmp.gameObject));
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Cardinals.Enemy
             AddBuff(new RotationRate(this, 10));
         }
 
-        public override void Hit(int damage)
+        public override void Hit(int damage, TileMagicType type)
         {
             Debug.Log("디버프에 의해 무효화 됨 (해당 이펙트 출력)");
         }
