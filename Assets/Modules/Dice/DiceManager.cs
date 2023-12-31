@@ -557,7 +557,7 @@ namespace Cardinals
 
         private bool CheckUseDiceOnMove()
         {
-            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 2)
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 1)
             {
                 GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
                 return false;
