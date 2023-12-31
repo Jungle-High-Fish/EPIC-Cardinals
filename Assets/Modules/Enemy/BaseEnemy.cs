@@ -165,16 +165,18 @@ namespace Cardinals
                 PrevPattern = CurPattern;
                 Pattern curPat = CurPattern;
                 int value = curPat.Value ?? 0;
+
+                float execTime = 0f;
             
                 switch (curPat.Type)
                 {
                     case EnemyActionType.Attack :
                         Attack(GameManager.I.Player, value);
-                        yield return new WaitForSeconds(1f);
+                        execTime = 1f;
                         break;
                     case EnemyActionType.Defense :
                         AddDefenseCount(value);
-                        yield return new WaitForSeconds(.5f);
+                        execTime = .5f;
                         break;
                     case EnemyActionType.AreaAttack :
                     case EnemyActionType.TileDebuff :
@@ -182,6 +184,7 @@ namespace Cardinals
                     case EnemyActionType.TileCurse :
                     case EnemyActionType.Spawn :
                         curPat?.Action();
+                        execTime = .5f;
                         break;
                     case EnemyActionType.NoAction :
                     case EnemyActionType.Confusion :
@@ -190,6 +193,7 @@ namespace Cardinals
                     default: break;
                 }
                 OnTurnEvent?.Invoke();
+                yield return new WaitForSeconds(execTime);
             }
 
             // 초기화
