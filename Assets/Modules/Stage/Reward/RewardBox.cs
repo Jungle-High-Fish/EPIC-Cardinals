@@ -34,6 +34,11 @@ public class RewardBox : MonoBehaviour
     /// </summary>
     public void Set(IEnumerable<Reward> rewards)
     {
+        if (GameManager.I.Stage.CurEvent is TutorialEvent tutorial) {
+            GameManager.I.UI.UIEndTurnButton.Activate(true);
+            GameManager.I.UI.UIEndTurnButton.Deactivate();
+        }
+        
         ClearList();
         gameObject.SetActive(true);
         foreach (var r in rewards)
@@ -136,6 +141,7 @@ public class RewardBox : MonoBehaviour
     {
         if (GameManager.I.Stage.CurEvent is TutorialEvent tutorial) {
             tutorial.CheckRewardSelectQuest();
+            GameManager.I.UI.UIEndTurnButton.Activate(true);
         }
         GameManager.I.UI.UIRewardPanel.On();
     }
