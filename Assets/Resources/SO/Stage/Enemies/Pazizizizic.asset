@@ -18,5 +18,6 @@ MonoBehaviour:
   prefab: {fileID: 8586937502347207555, guid: 5493556b42a57c54299c9b497b86734a, type: 3}
   berserkPrefab: {fileID: 7048143759726750530, guid: 1acb2cac4109ef04aa29424a11a4e5ee,
     type: 3}
-  turnAlertSprite: {fileID: 21300000, guid: 5082d752f0fe6474d81eaa5c0dc6733c, type: 3}
+  turnAlertSprite: {fileID: 21300000, guid: 4c561d96964ffd14cb91bb101b8f14f1, type: 3}
   maxHP: 80
+  spec1Sprite: {fileID: 0}
