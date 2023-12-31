@@ -557,7 +557,7 @@ namespace Cardinals
 
         private bool CheckUseDiceOnMove()
         {
-            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 1)
+            if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 2)
             {
                 GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
                 return false;
@@ -609,6 +609,7 @@ namespace Cardinals
 
         public bool PotionUseMove(int num)
         {
+            if (!CheckUseDiceOnMove()) return false;
             _DiceUsedForMoveCountOnThisTurn++;
             SetDiceSelectable(false);
             StartCoroutine(GameManager.I.Player.MoveTo(num, 0.4f, ()=> { SetDiceSelectable(true); }));
@@ -622,6 +623,7 @@ namespace Cardinals
 
         public bool PotionUsePrevMove(int num)
         {
+            if (!CheckUseDiceOnMove()) return false;
             _DiceUsedForMoveCountOnThisTurn++;
             SetDiceSelectable(false);
             StartCoroutine(GameManager.I.Player.PrevMoveTo(num, 0.4f, () => { SetDiceSelectable(true); }));
