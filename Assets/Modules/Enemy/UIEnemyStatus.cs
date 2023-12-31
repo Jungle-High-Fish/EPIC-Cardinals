@@ -160,6 +160,12 @@ namespace Cardinals.UI
                 .OnComplete(()=> { _patternTr.gameObject.SetActive(false); });
         }
 
+        private void HideIcon()
+        {
+            _patternTr.DOScale(0, .3f).SetEase(Ease.OutBack)
+                .OnComplete(()=> { _patternTr.gameObject.SetActive(false); });
+        }
+
         private Dictionary<string, Sprite> EnemyPatternIconDict =>
             ResourceLoader.LoadSpritesInDirectory(Constants.FilePath.Resources.Enemy_Pattern);
 

@@ -173,10 +173,7 @@ namespace Cardinals
             //Buffs.ForEach(b => b.Execute(this));
             for (int i = Buffs.Count - 1; i >= 0; i--)
             {
-                if (Buffs[i].Count <= 0)
-                {
-                    Buffs[i].Execute(this);
-                }
+                Buffs[i].Execute(this);
             }
             return execTime;
         }
