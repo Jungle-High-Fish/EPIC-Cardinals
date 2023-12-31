@@ -169,6 +169,13 @@ namespace Cardinals
         }
 
         IEnumerator LoadMainGame(SaveFileData saveFileData=null) {
+            var titleManager = FindAnyObjectByType<TitleManager>();
+            UILoading loadingUI = null;
+            if (titleManager != null) {
+                loadingUI = titleManager.LoadingUI;
+            }
+            yield return loadingUI?.Show();
+
             var loading = SceneManager.LoadSceneAsync("StageTest");
 
             while (!loading.isDone) {
@@ -180,12 +187,15 @@ namespace Cardinals
             } else {
                 LoadFromSaveData(saveFileData);
             }
-            
-            StartCoroutine(MainGameFlow());
+
+            yield return new WaitForSeconds(1.5f);
+            StartCoroutine(MainGameFlow(loadingUI));
         }
 
-        private IEnumerator MainGameFlow()
+        private IEnumerator MainGameFlow(UILoading loadingUI)
         {
+            UILoading loading = loadingUI;
+
             // 업적 관련 구독
             timeRecordCoroutine = TimeRecord();
             StartCoroutine(timeRecordCoroutine);
@@ -193,16 +203,17 @@ namespace Cardinals
             for (int i = _currentStageIndex; i < _stageRuntimeList.Count; i++)
             {
                 _currentStageIndex = i;
-                yield return StageFlow(_stageRuntimeList[i]);
+                yield return StageFlow(_stageRuntimeList[i], loading);
+                loading = null;
             }
         }
 
-        private IEnumerator StageFlow(Stage stage)
+        private IEnumerator StageFlow(Stage stage, UILoading loadingUI)
         {   
             GenerateCoreObjects();
             _stage = LoadStageController();
 
-            yield return _stage.Load(stage);
+            yield return _stage.Load(stage, loadingUI);
             yield return _stage.Flow();
         }
     

@@ -155,7 +155,7 @@ namespace Cardinals.UI
 
         private void UseIcon()
         {
-            _patternTr.DOPunchScale(new Vector2(.7f, .7f), .3f, 1, 0)
+            _patternTr.DOPunchScale(new Vector2(.7f, .7f), .5f, 1, 0)
                 .SetEase(Ease.InOutElastic)
                 .OnComplete(()=> { _patternTr.gameObject.SetActive(false); });
         }

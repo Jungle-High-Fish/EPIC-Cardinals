@@ -119,16 +119,28 @@ namespace Cardinals.Game
                 // cardManager.SetCardSelectable(false);
                 
                 // 버프 처리
-                player.OnBuff();
-                for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnBuff();
+                float playerBuffTime = player.OnBuff();
+                yield return new WaitForSeconds(playerBuffTime);
+
+                // 적 턴 알림
+                if (_enemies.Count > 0) {
+                    yield return GameManager.I.UI.UITurnAlert.Show(_enemies.First().EnemyData.turnAlertSprite);
+                    yield return new WaitForSeconds(1.3f);
+                    yield return GameManager.I.UI.UITurnAlert.Hide();
+                    yield return new WaitForSeconds(0.3f);
+                }
+
+                // 적 버프 처리
+                float enemyBuffTime = 0f;
+                for (int i = _enemies.Count - 1; i >= 0; i--) {
+                    if (_enemies[i].OnBuff() > 0) {
+                        enemyBuffTime = 0.5f;
+                    }
+                }
+                yield return new WaitForSeconds(enemyBuffTime);
 
                 // 플레이어 PreEndTurn 처리
                 yield return player.PreEndTurn();
-
-                // 적 턴 알림
-                yield return GameManager.I.UI.UITurnAlert.Show(_enemies.First().EnemyData.turnAlertSprite);
-                yield return new WaitForSeconds(1.3f);
-                yield return GameManager.I.UI.UITurnAlert.Hide();
 
                 // 적 행동
                 for (int i = _enemies.Count - 1; i >= 0; i--)

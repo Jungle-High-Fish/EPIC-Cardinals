@@ -1,4 +1,5 @@
 using Cardinals.Title;
+using Cardinals.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Cardinals
 {
     public class TitleManager : MonoBehaviour
     {
+        public UILoading LoadingUI => _loadingUI;
+
         [Header("Title Button")] [SerializeField] private Transform _titleTr;
         [SerializeField] private Button _newGameBTN;
         [SerializeField] private Button _loadGameBTN;
@@ -32,6 +35,9 @@ namespace Cardinals
         [Header("New Title Info ")]
         [SerializeField] private TileMaker _tileMaker;
         [SerializeField] private PlayerControlInTitle _playerControlInTitle;
+
+        [Header("Loading UI")]
+        [SerializeField] private UILoading _loadingUI;
         
         
         private int curCharIdx = 0;

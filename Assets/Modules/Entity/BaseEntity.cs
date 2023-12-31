@@ -161,9 +161,17 @@ namespace Cardinals
             yield return null;
         }
 
-        public virtual void OnBuff()
-        {
+        public virtual float OnBuff()
+        {   
+            float execTime = 0;
+            foreach (var buff in Buffs)
+            {
+                if (buff.GetType().GetMethod("Execute").DeclaringType == typeof(BaseBuff)) {
+                    execTime = 0.5f;
+                }
+            }
             Buffs.ForEach(b => b.Execute(this));
+            return execTime;
         }
 
         public virtual IEnumerator EndTurn()

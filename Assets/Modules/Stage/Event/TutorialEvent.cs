@@ -126,15 +126,19 @@ namespace Cardinals.Tutorial
 
                 // 버프 처리
                 player.OnBuff();
+
+                // 적 턴 알림
+                if (_enemies.Count > 0) {
+                    yield return GameManager.I.UI.UITurnAlert.Show(_enemies.First().EnemyData.turnAlertSprite);
+                    yield return new WaitForSeconds(1.3f);
+                    yield return GameManager.I.UI.UITurnAlert.Hide();
+                }
+
+                // 적 버프 처리
                 for (int i = _enemies.Count - 1; i >= 0; i--) _enemies[i].OnBuff();
 
                 // 플레이어 PreEndTurn 처리
                 yield return player.PreEndTurn();
-
-                // 적 턴 알림
-                yield return GameManager.I.UI.UITurnAlert.Show(_enemies.First().EnemyData.turnAlertSprite);
-                yield return new WaitForSeconds(1.3f);
-                yield return GameManager.I.UI.UITurnAlert.Hide();
 
                 // 적 행동
                 for (int i = _enemies.Count - 1; i >= 0; i--)

@@ -123,9 +123,8 @@ namespace Cardinals
             {
                 AddDefenseCount(4);
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessEarth2]?.Invoke();
+                yield return new WaitForSeconds(0.7f);
             }
-
-            yield break;
         }
         
         public override IEnumerator EndTurn()

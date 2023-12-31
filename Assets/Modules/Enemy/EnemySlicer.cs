@@ -22,7 +22,6 @@ namespace Cardinals.Enemy {
             _sliceEffect.gameObject.SetActive(false);
         }
 
-        [Button]
         public IEnumerator Slice() {
             GameObject slicedObj = Instantiate(
                 _renderer.Get(gameObject).gameObject, 
@@ -50,19 +49,21 @@ namespace Cardinals.Enemy {
             ).SetEase(Ease.OutCubic);
 
             _sliceEffect.gameObject.SetActive(true);
-            var effectPos = _renderer.Get(gameObject).transform.position;
-            effectPos.x -= _renderer.Get(gameObject).bounds.size.x / 2f + _sliceLength / 2f;
-            effectPos.y -= _renderer.Get(gameObject).bounds.size.y / 2f;
-            effectPos.y += (1-_slicePos) * _renderer.Get(gameObject).bounds.size.y;
+            // var effectPos = _renderer.Get(gameObject).transform.position;
+            // effectPos.x -= _renderer.Get(gameObject).bounds.size.x / 2f + _sliceLength / 2f;
+            // effectPos.y -= _renderer.Get(gameObject).bounds.size.y / 2f;
+            // effectPos.y += (1-_slicePos) * _renderer.Get(gameObject).bounds.size.y;
+            var effectPos = new Vector3(-3f, _renderer.Get(gameObject).transform.parent.localPosition.y, 0f);
 
             var initialScale = Vector3.one;
-            initialScale.x = 0.3f;
-            float targetYScale = _renderer.Get(gameObject).bounds.size.y + _sliceLength;
+            initialScale.x = 0.15f;
+            //float targetYScale = _renderer.Get(gameObject).bounds.size.x + _sliceLength;
+            float targetYScale = 6f;
 
-            _sliceEffect.position = effectPos;
-            _sliceEffect.rotation = Quaternion.Euler(0f, 0f, -90f);
+            _sliceEffect.localPosition = effectPos + new Vector3(0f, -0.7f, 0f);
+            _sliceEffect.localRotation = Quaternion.Euler(0f, 0f, -90f);
             _sliceEffect.localScale = initialScale;
-            _sliceEffect.DOScaleY(targetYScale, 0.1f).SetEase(Ease.OutCubic).OnComplete(() => {
+            _sliceEffect.DOScaleY(targetYScale, 0.2f).SetEase(Ease.OutCubic).OnComplete(() => {
                 _sliceEffect.gameObject.SetActive(false);
             });
 
@@ -89,6 +90,11 @@ namespace Cardinals.Enemy {
                 1f, 
                 time
             ).SetEase(Ease.OutCubic);
+        }
+
+        [Button]
+        private void SliceTest() {
+            StartCoroutine(Slice());
         }
     }
 }
