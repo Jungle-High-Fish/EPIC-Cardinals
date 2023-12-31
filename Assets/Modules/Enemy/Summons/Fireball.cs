@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Numerics;
 using Cardinals.Board;
+using Cardinals.Enums;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
@@ -27,7 +28,7 @@ namespace Cardinals.BoardObject.Summon
         protected override IEnumerator Execute()
         {
             bool next = false;
-            GameManager.I.Player.Hit(5);
+            GameManager.I.Player.Hit(5, TileMagicType.Fire);
             transform.DOShakePosition(.5f, .5f).OnComplete(() => { next = true; });
             yield return new WaitUntil(() => next);
         }

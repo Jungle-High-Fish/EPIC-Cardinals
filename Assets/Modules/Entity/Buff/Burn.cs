@@ -16,12 +16,12 @@ namespace Cardinals.Buff
             if (entity as BaseEnemy &&
                 GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire1))
             {
-                entity.Hit(Value + (GameManager.I.Stage.CurEvent as BattleEvent).Round * 2);
+                entity.Hit(Value + (GameManager.I.Stage.CurEvent as BattleEvent).Round * 2, TileMagicType.Fire);
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessFire1]?.Invoke();
             }
             else
             {
-                entity.Hit(Value);
+                entity.Hit(Value, TileMagicType.Fire);
             }
             
             base.Execute(entity);

@@ -10,6 +10,7 @@ using Cardinals.Enemy;
 using Cardinals.Game;
 using Cardinals.Buff;
 using Modules.Entity.Buff;
+using Util;
 
 namespace Cardinals.Enums {
 
@@ -189,6 +190,12 @@ namespace Cardinals.Enums {
                 BuffType.Berserk => new Berserk(),
                 _ => null
             };
+        }
+
+        public static Color GetColorByMagic(TileMagicType type)
+        {
+            var so = ResourceLoader.LoadSO<TileMagicDataSO>(Constants.FilePath.Resources.SO_MagicData + type);
+            return so.elementColor;
         }
     }
 

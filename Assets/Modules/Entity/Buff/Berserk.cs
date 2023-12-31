@@ -5,7 +5,7 @@ namespace Cardinals.Buff
 {
     public class Berserk : BaseBuff
     {
-        public Berserk() : base(BuffType.Berserk)
+        public Berserk() : base(BuffType.Berserk, BuffCountDecreaseType.Event)
         {
         }
     }
