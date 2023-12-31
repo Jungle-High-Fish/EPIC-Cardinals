@@ -17,6 +17,8 @@ namespace Cardinals {
         UI_EXIT_GAME,
         UI_INIT_DICE_SELECT,
         UI_ROULETTE_SPIN,
+        UI_TILE_SEALED,
+        UI_TILE_SEALED_INFO,
         STAGE_SUSPICIOUS_MEADOW,
         TILE_MAGIC_ATTACK_NAME,
         TILE_MAGIC_ATTACK_EXPLAIN,

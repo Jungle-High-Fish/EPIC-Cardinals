@@ -112,8 +112,8 @@ namespace Cardinals.UI {
         }
 
         private UITileDescription AddSealedDescription() {
-            string title = "봉인된 타일";
-            string description = "봉인된 타일에서는 행동이 불가능합니다.";
+            string title = GameManager.I.Localization[LocalizationEnum.UI_TILE_SEALED];
+            string description = GameManager.I.Localization[LocalizationEnum.UI_TILE_SEALED_INFO];
             Sprite icon = null;
 
             UITileDescription panel = InstantiateDescriptionPanel();
