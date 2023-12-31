@@ -15,6 +15,7 @@ using Cardinals.Tutorial;
 using TMPro;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
+using Cardinals.UI;
 
 namespace Cardinals.Game {
     
@@ -80,13 +81,17 @@ namespace Cardinals.Game {
 
         public List<IMovingBoardObject> BoardObjects { get; set; } = new();
         
-        public IEnumerator Load(Stage stage) 
+        public IEnumerator Load(Stage stage, UILoading loadingUI=null) 
         {
             _stage = stage;
 
             InstantiateBaseObjs();
             
             InstantiateGround();
+
+            if (loadingUI != null) {
+                yield return loadingUI.Hide();
+            }
 
             yield return _board.SetBoard(stage.BoardData);
 
