@@ -718,7 +718,7 @@ namespace Cardinals
             if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind2)&& _continuousUseCount == 2)
             {
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWind2]?.Invoke();
-                target.Hit(3);
+                target.Hit(3, TileMagicType.Wind);
             }
 
             yield return GameManager.I.Player.CardAction(num, target);

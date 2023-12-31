@@ -169,7 +169,7 @@ namespace Cardinals
                 {
                     if (enemies[i].PrevPattern?.Type == EnemyActionType.Attack)
                     {
-                        enemies[i].Hit(DefenseCount);
+                        enemies[i].Hit(DefenseCount, TileMagicType.Earth);
                     }
                 }
             }
@@ -360,7 +360,7 @@ namespace Cardinals
             {
                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWater2]?.Invoke();
                 int damage = (MaxHp -Hp) < value ? (MaxHp - _hp) : value;
-                GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)].Hit(damage);
+                GameManager.I.Stage.Enemies[UnityEngine.Random.Range(0, GameManager.I.Stage.Enemies.Count)].Hit(damage, TileMagicType.Water);
             }
 
             return base.Heal(value);

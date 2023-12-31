@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using Cardinals;
+using Cardinals.Enums;
 using DG.Tweening;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ namespace Cardinals
             
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
-                    enemies[i].Hit(10);
+                    enemies[i].Hit(10, TileMagicType.Fire);
                 }
             }
 
