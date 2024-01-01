@@ -25,6 +25,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _buttonClick;
         [SerializeField] private AudioClip _getCoin;
         [SerializeField] private AudioClip _turnAlert;
+        [SerializeField] private AudioClip _blessDrop;
 
         [Header("Card")]
         [SerializeField] private AudioClip _cardClick;
@@ -35,6 +36,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _cardReroll2;
         [SerializeField] private AudioClip _cardReroll3;
         [SerializeField] private AudioClip _cardHover;
+        [SerializeField] private AudioClip _getDice;
 
 
         [Header("Player")]
@@ -104,6 +106,15 @@ namespace Cardinals
 
             _effectAudioClipQueue.Enqueue(_turnAlert);
         }
+
+        public void BlessDrop()
+        {
+            if (_blessDrop == null) return;
+
+            _effectAudioClipQueue.Enqueue(_blessDrop);
+        }
+
+
         #endregion
 
         #region Card
@@ -152,6 +163,13 @@ namespace Cardinals
             int randomIndex = UnityEngine.Random.Range(0, cardRerollOptions.Length);
 
             _effectAudioClipQueue.Enqueue(cardRerollOptions[randomIndex]);
+        }
+
+        public void GetDice()
+        {
+            if (_getDice == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getDice);
         }
         #endregion
 
