@@ -152,9 +152,7 @@ namespace Cardinals
             InstantiateUITurnEventNoti(_systemUICanvas);
             InstantiatePlayResultUI(_systemUICanvas);
             InstantiateClearDemoGameUI(_systemUICanvas);
-            InstantiatePausePanelUI(_systemUICanvas);
-            InstantiateGameSettingUI(_systemUICanvas);
-            InstantiateSaveFileLoaderUI(_systemUICanvas);
+            
             // Debug
             InstantiateDebugUI(_systemUICanvas);
             
@@ -186,6 +184,10 @@ namespace Cardinals
             InstantiateUIStageEffect(_systemUICanvas);
             
             InstantiateUIAntiTouchPanel(_systemUICanvas);
+            
+            InstantiatePausePanelUI(_systemUICanvas);
+            InstantiateGameSettingUI(_systemUICanvas);
+            InstantiateSaveFileLoaderUI(_systemUICanvas);
         }
 
         void InitDescriptionCanvas()
