@@ -81,7 +81,7 @@ namespace Cardinals.Game {
 
         public List<IMovingBoardObject> BoardObjects { get; set; } = new();
         
-        public IEnumerator Load(Stage stage, UILoading loadingUI=null) 
+        public IEnumerator Load(Stage stage, UILoading loadingUI=null, bool isInitialStage=true) 
         {
             _stage = stage;
 
@@ -95,21 +95,26 @@ namespace Cardinals.Game {
 
             yield return _board.SetBoard(stage.BoardData);
 
-            if (GameManager.I.SaveSystem.CurrentSaveFileData == null) {
+            if (isInitialStage) {
+                if (GameManager.I.SaveSystem.CurrentSaveFileData == null) {
+                    SetCardSystem();
+                    yield return PlacePlayer();
+                    
+                    var newSave = GameManager.I.SaveSystem.GenerateAutoSaveFile(
+                        GameManager.I.RuntimeStageList.ToArray(), 
+                        Player, 
+                        DiceManager
+                    );
+
+                    GameManager.I.SaveSystem.Save(newSave);
+                } else {
+                    SetCardSystem(GameManager.I.SaveSystem.CurrentSaveFileData.GetDiceList());
+                    yield return PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
+                    yield return LoadTileData(GameManager.I.SaveSystem.CurrentSaveFileData);
+                }
+            } else {
                 SetCardSystem();
                 yield return PlacePlayer();
-                
-                var newSave = GameManager.I.SaveSystem.GenerateAutoSaveFile(
-                    GameManager.I.RuntimeStageList.ToArray(), 
-                    Player, 
-                    DiceManager
-                );
-
-                GameManager.I.SaveSystem.Save(newSave);
-            } else {
-                SetCardSystem(GameManager.I.SaveSystem.CurrentSaveFileData.GetDiceList());
-                yield return PlacePlayer(GameManager.I.SaveSystem.CurrentSaveFileData);
-                yield return LoadTileData(GameManager.I.SaveSystem.CurrentSaveFileData);
             }
         }
         
@@ -264,6 +269,12 @@ namespace Cardinals.Game {
             
             enemyComp.PostInit();
             return enemyComp;
+        }
+
+        public void DestroyBaseObjs() {
+            Destroy(_enemyParentTransform.gameObject);
+            Destroy(_coreTransform.gameObject);
+            Destroy(_board.gameObject);
         }
 
         private void InstantiateGround() {

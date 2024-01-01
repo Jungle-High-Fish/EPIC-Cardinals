@@ -13,6 +13,13 @@ namespace Cardinals.Game
             List<Reward> rewards = new() { new Reward(RewardType.NextStageMap) };
             GameManager.I.Stage.RewardBox.Set(rewards);
 
+            // IsSelect = false;
+            // IsClear = true;
+            // GameManager.I.UI.UIEndTurnButton.Activate(true);
+            // yield return new WaitUntil(() => IsSelect);
+            // Destroy(GameManager.I.Stage.RewardBox.gameObject);
+
+            GameManager.I.UI.UIEndTurnButton.Activate(false);
             yield return new WaitUntil(() => false);
         }
     }

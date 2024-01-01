@@ -199,22 +199,26 @@ namespace Cardinals
             // 업적 관련 구독
             timeRecordCoroutine = TimeRecord();
             StartCoroutine(timeRecordCoroutine);
-            
+            GenerateCoreObjects();
+
+            bool isInitialStage = true;
             for (int i = _currentStageIndex; i < _stageRuntimeList.Count; i++)
             {
                 _currentStageIndex = i;
-                yield return StageFlow(_stageRuntimeList[i], loading);
+                yield return StageFlow(_stageRuntimeList[i], loading, isInitialStage);
                 loading = null;
+                isInitialStage = false;
             }
         }
 
-        private IEnumerator StageFlow(Stage stage, UILoading loadingUI)
+        private IEnumerator StageFlow(Stage stage, UILoading loadingUI, bool isInitialStage)
         {   
-            GenerateCoreObjects();
             _stage = LoadStageController();
 
-            yield return _stage.Load(stage, loadingUI);
+            yield return _stage.Load(stage, loadingUI, isInitialStage);
             yield return _stage.Flow();
+
+            DestoryStageController();
         }
     
         private StageController LoadStageController()
@@ -223,6 +227,12 @@ namespace Cardinals
             StageController stageController = stageControllerObj.AddComponent<StageController>();
 
             return stageController;
+        }
+
+        private void DestoryStageController()
+        {
+            _stage.DestroyBaseObjs();
+            Destroy(_stage.gameObject);
         }
 
         private void GenerateCoreObjects() {
