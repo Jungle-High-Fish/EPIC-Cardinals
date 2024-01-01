@@ -52,8 +52,9 @@ namespace Cardinals.UI.NewDice
             {
                 _newDice = newDice;
                 _newUIDice.Init(newDice);
-                
+
                 // 애니메이션 재생
+                GameManager.I.Sound.CardReroll();
                 _newDiceCoverObj.SetActive(true);
                 _newDiceCoverObj.transform.DOShakePosition(.6f, 10, 20);
                 _newDiceCoverIcon.DOPunchPosition(new Vector3(10, 10), .6f)
@@ -111,6 +112,7 @@ namespace Cardinals.UI.NewDice
                     break;
                 }
             }
+            GameManager.I.Sound.GetDice();
            GameManager.I.Stage.DiceManager.ChangeDice(idx, _newDice);
            _tradeEvent?.Invoke();
            B_Cancel();

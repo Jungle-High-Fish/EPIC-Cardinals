@@ -216,6 +216,7 @@ namespace Cardinals.Game {
 
             yield return new WaitForSeconds(0.5f);
             GameManager.I.CameraController.ShakeCamera(0.2f, 5, 1);
+            GameManager.I.Sound.BlessDrop();
             yield return _board.PlayTileAnimation(TileAnimationType.Shock);
             
             
