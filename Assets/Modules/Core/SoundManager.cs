@@ -24,6 +24,7 @@ namespace Cardinals
         [Header("Common UI")]
         [SerializeField] private AudioClip _buttonClick;
         [SerializeField] private AudioClip _getCoin;
+        [SerializeField] private AudioClip _turnAlert;
 
         [Header("Card")]
         [SerializeField] private AudioClip _cardClick;
@@ -95,6 +96,13 @@ namespace Cardinals
             if (_getCoin == null) return;
 
             _effectAudioClipQueue.Enqueue(_getCoin);
+        }
+
+        public void TurnAlert()
+        {
+            if (_turnAlert == null) return;
+
+            _effectAudioClipQueue.Enqueue(_turnAlert);
         }
         #endregion
 

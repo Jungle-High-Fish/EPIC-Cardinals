@@ -828,6 +828,7 @@ MonoBehaviour:
   _bgm: {fileID: 8300000, guid: 8cf3ff815d05a204fbae0bc55118b8f7, type: 3}
   _buttonClick: {fileID: 8300000, guid: f16f1b9cacd5ddc47be0625469639adf, type: 3}
   _getCoin: {fileID: 8300000, guid: aad98dcd068ff4640919c8358eb6a57f, type: 3}
+  _turnAlert: {fileID: 8300000, guid: d2715a67e599763429a3aa70c6fee847, type: 3}
   _cardClick: {fileID: 8300000, guid: 688281f34e94ba94e89619ac009650a3, type: 3}
   _cardDraw: {fileID: 0}
   _cardDiscard: {fileID: 0}

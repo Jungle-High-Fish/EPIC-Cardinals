@@ -27,6 +27,7 @@ namespace Cardinals.UI {
             rectTransform.DOAnchorPos(targetPosition, 0.5f).SetEase(Ease.OutBack);
             //rectTransform.DOPunchScale(Vector3.one * 0.2f, 0.5f, 1, 0f);
 
+            GameManager.I.Sound.TurnAlert();
             yield return new WaitForSeconds(0.5f);
         }
 

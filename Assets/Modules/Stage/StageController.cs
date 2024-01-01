@@ -213,6 +213,10 @@ namespace Cardinals.Game {
             totem2.Init(bless2);
             totem1.SelectedEvent += totem2.SelectOtherTotem;
             totem2.SelectedEvent += totem1.SelectOtherTotem;
+
+            yield return new WaitForSeconds(0.5f);
+            GameManager.I.CameraController.ShakeCamera(0.2f, 5, 1);
+            yield return _board.PlayTileAnimation(TileAnimationType.Shock);
             
             
             // 사용자 선택 대기

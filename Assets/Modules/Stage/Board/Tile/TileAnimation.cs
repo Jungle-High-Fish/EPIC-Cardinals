@@ -96,6 +96,8 @@ namespace Cardinals.Board {
 			InitHealAnimation();
 
 			InitRotate360Animation();
+
+			InitShockAnimation();
 		}
 
 		private Sequence InitShakeAnimation() {
@@ -234,6 +236,18 @@ namespace Cardinals.Board {
 			
 			_animationDict.Add(TileAnimationType.Rotate360, (rotate360Animation, 1.5f, 0));
 			return rotate360Animation;
+		}
+
+		private Sequence InitShockAnimation() {
+			Sequence shockAnimation = DOTween.Sequence();
+			shockAnimation.Append(
+				transform.DOPunchPosition(Vector3.up * 1.2f, .7f, 1, 0f)
+			).AppendInterval(0.1f)
+			.OnComplete(AnimationComplete(TileAnimationType.Shock))
+			.SetAutoKill(false).Pause();
+			
+			_animationDict.Add(TileAnimationType.Shock, (shockAnimation, 1f, 0));
+			return shockAnimation;
 		}
 
 		private TweenCallback AnimationComplete(TileAnimationType animationType) {
