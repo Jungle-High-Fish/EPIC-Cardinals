@@ -98,6 +98,7 @@ namespace Cardinals
             Camera.main.orthographicSize = zoomIn ? _zoomInCameraSize : 5;
             
             var curPos = Camera.main.transform.position;
+            curPos.x = zoomIn ? 4 : 0;
             curPos.y = zoomIn ? _zoomInPosY : 10;
             Camera.main.transform.position = curPos;
         }
