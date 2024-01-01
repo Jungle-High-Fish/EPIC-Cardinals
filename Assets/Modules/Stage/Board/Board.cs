@@ -288,6 +288,15 @@ namespace Cardinals.Board {
             return GameManager.I.UI.UIMagicLevelUpPanel.RequestTileLevelUp(originalMagicType, originalLevel);
         }
 
+        public IEnumerator PlayTileAnimation(TileAnimationType animationType, bool isLoop=false) {
+            float animTime = 0;
+            for (int i = 0; i < _tileSequence.Count; i++) {
+                animTime = Mathf.Max(animTime, _tileSequence[i].Animation.Play(animationType, isLoop));
+            }
+            
+            yield return new WaitForSeconds(animTime);
+        }
+
         private IEnumerator BoardLoadWithAnimation(BoardData boardDataSO) {
             yield return _boardBuilder.LoadWithAnimation(boardDataSO, 0.1f);
             MakeSequenceFromBoard();
