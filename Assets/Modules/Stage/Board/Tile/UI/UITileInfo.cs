@@ -58,6 +58,7 @@ namespace Cardinals.UI {
 
         private BoardEventType _prevEventType = BoardEventType.Empty;
         private TileMagicType _prevMagicType = TileMagicType.None;
+        int prevLevel = 0;
 
         private float _prevExp = 0;
         
@@ -179,10 +180,11 @@ namespace Cardinals.UI {
 
         private void ShowNormalTileInfo() {
             bool needUpdateDescription = false;
-            if (_prevMagicType != _tile.TileMagic.Type) {
+            if (_prevMagicType != _tile.TileMagic.Type || prevLevel != _tile.Level) {
                 needUpdateDescription = true;
             }
             _prevMagicType = _tile.TileMagic.Type;
+            prevLevel = _tile.Level;
 
             _header.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
             _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
