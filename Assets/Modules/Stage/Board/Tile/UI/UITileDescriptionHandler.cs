@@ -21,6 +21,8 @@ namespace Cardinals.UI {
             ClearDescriptionPanel();
 
             if (_tile.TileCurse.IsActive) {
+                TileCurseUIDataSO data = TileCurseData.Data(_tile.TileCurse.Data.CurseType);
+                _descriptionPanels.Add(AddAboutCurse(TMPUtils.LocalizedText(data.curseName)));
                 _descriptionPanels.Add(AddCurseDescription());
             }
 
@@ -103,6 +105,18 @@ namespace Cardinals.UI {
             string title = TMPUtils.LocalizedText(data.curseName);
             string description = TMPUtils.LocalizedText(data.curseDescription);
             Sprite icon = data.sprite;
+
+            UITileDescription panel = InstantiateDescriptionPanel();
+            (panel.transform as RectTransform).MatchWidthUpper(transform as RectTransform);
+            panel.SetDescription(title, description, icon, false);
+
+            return panel;
+        }
+
+        private UITileDescription AddAboutCurse(string localizedCurseName) {
+            string title = GameManager.I.Localization[LocalizationEnum.UI_TILE_CURSE];
+            string description = GameManager.I.Localization[LocalizationEnum.UI_TILE_CURSE_ABOUT].Replace("{Curse}", $"<b>{localizedCurseName}</b>");
+            Sprite icon = null;
 
             UITileDescription panel = InstantiateDescriptionPanel();
             (panel.transform as RectTransform).MatchWidthUpper(transform as RectTransform);

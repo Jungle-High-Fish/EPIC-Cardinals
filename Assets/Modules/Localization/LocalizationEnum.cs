@@ -19,6 +19,8 @@ namespace Cardinals {
         UI_ROULETTE_SPIN,
         UI_TILE_SEALED,
         UI_TILE_SEALED_INFO,
+        UI_TILE_CURSE,
+        UI_TILE_CURSE_ABOUT,
         STAGE_SUSPICIOUS_MEADOW,
         TILE_MAGIC_ATTACK_NAME,
         TILE_MAGIC_ATTACK_EXPLAIN,
