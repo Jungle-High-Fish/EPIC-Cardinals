@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Unity.VisualScripting;
 using UnityEngine;
 using Util;
 
@@ -28,12 +29,16 @@ namespace Cardinals.Enemy
         void SpawnRyuka()
         {
             var list = GameManager.I.Stage.Board.TileSequence
-                .Where(t => GameManager.I.Player.OnTile != t).ToList();
+                .Where(t => GameManager.I.Player.OnTile != t)
+                .Where(t => 
+                    !GameManager.I.Stage.BoardObjects.Where(obj => obj.Data.objType != default).Any(obj => obj.OnTile == t))
+                .ToList();
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 2 && i < list.Count; i++)
             {
                 var idx = Random.Range(0, list.Count);
-                var tile = list[idx]; 
+                var tile = list[idx];
+                list.Remove(tile);
            
                 var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_BoardEventObject);
                 var obj = Instantiate(prefab);

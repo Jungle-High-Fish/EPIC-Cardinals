@@ -9,6 +9,8 @@ namespace Cardinals.BoardEvent
     /// </summary>
     public interface IMovingBoardObject
     {
+        public NewBoardObjectDataSO Data { get; }
+        
         /// <summary>
         /// 현재 존재하는 타일 정보
         /// </summary>
