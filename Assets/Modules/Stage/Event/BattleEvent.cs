@@ -152,7 +152,7 @@ namespace Cardinals.Game
                     yield return _enemies[i].OnTurn();
                 }
 
-                if (CheckEnemyWin) break;
+                if (CheckEnemyWin || CheckPlayerWin) break;
                 
                 // 보드 관련 처리
                 yield return SummonsAction();
