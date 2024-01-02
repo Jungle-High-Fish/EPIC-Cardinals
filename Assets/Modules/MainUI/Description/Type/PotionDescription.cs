@@ -7,7 +7,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class PotionDescription : MonoBehaviour, IDescription
+    public class PotionDescription : BaseDescription, IDescription
     {
         private PotionDataSO _data;
         public void Init(PotionType type)

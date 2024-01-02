@@ -10,7 +10,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class BlessDescription : MonoBehaviour, IDescription
+    public class BlessDescription : BaseDescription, IDescription
     {
         private BlessDataSO _data;
         public string Name => TMPUtils.LocalizedText(_data.blessName);

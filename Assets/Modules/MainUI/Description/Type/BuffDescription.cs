@@ -8,7 +8,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class BuffDescription : MonoBehaviour, IDescription
+    public class BuffDescription : BaseDescription, IDescription
     {
         private BuffDataSO _data;
         public void Init(BuffType type)

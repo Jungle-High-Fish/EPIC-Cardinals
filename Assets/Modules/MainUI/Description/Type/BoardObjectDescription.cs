@@ -8,7 +8,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class BoardObjectDescription : MonoBehaviour, IDescription
+    public class BoardObjectDescription : BaseDescription, IDescription
     {
         private NewBoardObjectDataSO _data;
         public void Init(NewBoardObjectDataSO data)

@@ -5,7 +5,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class EnemyActionDescription: MonoBehaviour, IDescription
+    public class EnemyActionDescription: BaseDescription, IDescription
     {
         private EnemyActionType _type;
         
