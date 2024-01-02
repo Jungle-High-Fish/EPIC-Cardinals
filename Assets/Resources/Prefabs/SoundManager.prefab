@@ -840,7 +840,7 @@ MonoBehaviour:
   _cardReroll3: {fileID: 8300000, guid: 97f56b2e9d9eb4c43b04d262bca727c0, type: 3}
   _cardHover: {fileID: 8300000, guid: 9d28daadfc443934c86a5c67ffa5ff72, type: 3}
   _getDice: {fileID: 8300000, guid: 6cf1decfb3f50e7419d9e681434d09ae, type: 3}
-  _diceDeter: {fileID: 8300000, guid: a8464350a37dd584fb4cf0470a000371, type: 3}
+  _diceDeter: {fileID: 8300000, guid: b2634ea44c25e5148a238f3569f97bfd, type: 3}
   _diceMove: {fileID: 8300000, guid: 372467194d8b3ce459e2a0cd7d806f12, type: 3}
   _playerMove: {fileID: 8300000, guid: 5a05223448d9eec409d4654c5d481ff4, type: 3}
   _playerHit: {fileID: 8300000, guid: 5cd899dd0a2d19246bdb3b03b29df033, type: 3}
