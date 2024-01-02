@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be6aec5522a88a46b63c5b7642ab25e, type: 3}
+  m_Name: Earth
+  m_EditorClassIdentifier: 
+  title: DICE_EARTH_NAME
+  information: DICE_EARTH_DESCRIPTION
+  diceType: 4
+  elementColor: {r: 0.5803922, g: 0.40000004, b: 0.40000004, a: 1}

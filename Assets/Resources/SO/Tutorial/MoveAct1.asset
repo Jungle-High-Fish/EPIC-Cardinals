@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693be6403982f9b4da71d8c7b536352a, type: 3}
+  m_Name: MoveAct1
+  m_EditorClassIdentifier: 
+  TutorialName: MoveAct1
+  Title: TUOTORIAL_QUEST1_TITLE
+  Quests:
+  - Title: TUOTORIAL_QUEST1_DES1
+    Description: TUOTORIAL_QUEST1_DES2
+    TargetQuests: 1
+    QuestType: 0
+    HasCardSequence: 1
+    NeedCardSequence:
+    - CardNumber: 2
+      HowToUse: 1
+  - Title: TUOTORIAL_QUEST1_DES3
+    Description: TUOTORIAL_QUEST1_DES4
+    TargetQuests: 1
+    QuestType: 0
+    HasCardSequence: 1
+    NeedCardSequence:
+    - CardNumber: 3
+      HowToUse: 0
+  Cards: 0200000003000000

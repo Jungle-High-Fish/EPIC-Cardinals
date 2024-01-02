@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2835d0d6a009a5c4cbb2ec480e6f309e, type: 3}
+  m_Name: StageEventList
+  m_EditorClassIdentifier: 
+  StageEventBindDataList:
+  - StageEventName: 1
+    EventData: {fileID: 11400000, guid: 251c10cd133c72643811823264607240, type: 2}
+  - StageEventName: 3
+    EventData: {fileID: 11400000, guid: 76d6012f20facef4991df0780f23280f, type: 2}
+  - StageEventName: 4
+    EventData: {fileID: 11400000, guid: 7b0d59ecb6c0ee94ca7ecac51c0fbb5d, type: 2}
+  - StageEventName: 5
+    EventData: {fileID: 11400000, guid: a6b1ac23687303b488070dd09fb7a26f, type: 2}
+  - StageEventName: 6
+    EventData: {fileID: 11400000, guid: 9a0d472761aae7a41985435e9f220d27, type: 2}
+  - StageEventName: 12
+    EventData: {fileID: 11400000, guid: df4a26a25becd8c45af4413183d55a39, type: 2}
+  - StageEventName: 9
+    EventData: {fileID: 11400000, guid: 2a7d63b384af87b41bdeaa4179dc8c8e, type: 2}
+  - StageEventName: 11
+    EventData: {fileID: 11400000, guid: 9f7c4babc8d92304f95b34b1237f9a28, type: 2}
+  - StageEventName: 7
+    EventData: {fileID: 11400000, guid: f5e99c738e252f94380aca4eb28456e2, type: 2}
+  - StageEventName: 8
+    EventData: {fileID: 11400000, guid: 83eea04410b48ce45b694785a19156fb, type: 2}
+  - StageEventName: 10
+    EventData: {fileID: 11400000, guid: f662973f5af579047b91f852e978d95d, type: 2}
+  - StageEventName: 13
+    EventData: {fileID: 11400000, guid: d76fabba681c38c40aa4d633a71d401a, type: 2}

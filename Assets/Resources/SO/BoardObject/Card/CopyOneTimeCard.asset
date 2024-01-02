@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d620547d6ee80a449a6e82a84894ac15, type: 3}
+  m_Name: CopyOneTimeCard
+  m_EditorClassIdentifier: 
+  type: 2
+  description: "\uCE74\uB4DC\uB97C \uC77C\uD68C\uC131 \uCE74\uB4DC\uB85C 2\uC7A5
+    \uBCF5\uC81C\uD569\uB2C8\uB2E4.\n\uBCF5\uC81C\uD560 \uCE74\uB4DC\uB97C \uC62C\uB824\uC8FC\uC138\uC694."
+  endText: "\uCE74\uB4DC\uAC00 \uBCF5\uC81C\uB418\uC5C8\uB2E4"
