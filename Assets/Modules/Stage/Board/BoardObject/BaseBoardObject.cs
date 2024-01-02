@@ -18,6 +18,7 @@ namespace Cardinals.BoardObject
     public class BaseBoardObject : MonoBehaviour, IMovingBoardObject
     {
         protected NewBoardObjectDataSO _data;
+        public NewBoardObjectDataSO Data => _data;
         public Tile OnTile => _onTile;
         
         [Header("Information")]

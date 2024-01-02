@@ -419,7 +419,8 @@ namespace Cardinals.Game {
         {
             var tiles = Board.TileSequence
                 .Where(t => t != Player.OnTile && // 현재 플레이어가 서 있지 않은
-                            !BoardObjects.Any(o => o is BaseBoardObject && t == o.OnTile )) // 이벤트가 존재하지 않는 ..
+                            !BoardObjects.Where(o => o.Data.evtType != default)
+                                .Any(o => o is BaseBoardObject && t == o.OnTile )) // 이벤트가 존재하지 않는 ..
                 .ToList();
             
             if (tiles.Any())
