@@ -108,6 +108,7 @@ namespace Cardinals
 
         public void SortingDiceUI(int index, Vector2 diceUIPos)
         {
+            //[TODO] 주사위가 샥~ 하고 자기 자리로 이동하는 효과음 추가하기
             Index = index;
             (transform as RectTransform).SetUILeftBottom();
             (transform as RectTransform).DOAnchorPos(diceUIPos, 0.2f).SetEase(Ease.OutCubic);
@@ -132,12 +133,11 @@ namespace Cardinals
             _diceAnimator.enabled = true;
             _diceAnimator.Play("Roll");
             yield return new WaitForSeconds(_diceAnimator.GetCurrentAnimatorStateInfo(0).length-0.3f);
-            
-            //yield return null;
             _diceAnimator.enabled = false;
 
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
             _diceUIRenderer.sprite = ResourceLoader.LoadSprite(path);
+            //[TODO] 주사위 다 굴러지고 살짝 커졌다가 작아지는 시점, 효과음 추가하기
             _diceUIRenderer.transform.DOScale(1f, 0.3f).From(1.3f).SetEase(Ease.InBack);
             onCompleted?.Invoke();
         }
