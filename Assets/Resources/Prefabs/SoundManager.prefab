@@ -847,7 +847,7 @@ MonoBehaviour:
   _playerDefenseHit: {fileID: 8300000, guid: c09d627bb181ba44f8da88782ff1c140, type: 3}
   _playerHeal: {fileID: 8300000, guid: 2feddd09adc525b42ada41340d1b7545, type: 3}
   _normalBall1: {fileID: 8300000, guid: b82c60f41a011da4791b24221b999d68, type: 3}
-  _getDefense: {fileID: 8300000, guid: b42b74470fb041e49944390fc59be0b8, type: 3}
+  _getDefense: {fileID: 8300000, guid: 7e96e6d8e766c1148a0517b753ad9443, type: 3}
   _fireBall1: {fileID: 8300000, guid: edbf489bf5e4a9346af01529271220af, type: 3}
   _fireBall2: {fileID: 8300000, guid: 084ac1e465dc1e541a9b0e31865d9be9, type: 3}
   _waterHeal: {fileID: 8300000, guid: 093b03fd5dbb31d42aa8090bc7e6c671, type: 3}

@@ -347,7 +347,7 @@ namespace Cardinals
 
         public void Defense(int value)
         {
-            GameManager.I.Sound.BombNormalBall();
+            GameManager.I.Sound.GetDefense();
             AddDefenseCount(value);
             Animator.Play("Shield");
         }
