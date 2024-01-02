@@ -11,7 +11,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class MagicDescription : MonoBehaviour, IDescription
+    public class MagicDescription : BaseDescription, IDescription
     {
         private TileMagicDataSO _data;
         public string Name => TMPUtils.LocalizedText(_data.elementName);

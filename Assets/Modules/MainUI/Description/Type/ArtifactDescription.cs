@@ -7,7 +7,7 @@ using Util;
 
 namespace Cardinals.UI.Description
 {
-    public class ArtifactDescription : MonoBehaviour, IDescription
+    public class ArtifactDescription : BaseDescription, IDescription
     {
         private ArtifactDataSO _data;
         public void Init(ArtifactType type)
