@@ -75,6 +75,7 @@ namespace Cardinals.UI {
         }
 
         public void Hide() {
+            GameManager.I.Sound.TitleButtonClick();
             gameObject.Background().Hide();
             _isActive = false;
             gameObject.SetActive(false);
