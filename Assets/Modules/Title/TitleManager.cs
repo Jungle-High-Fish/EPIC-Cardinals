@@ -67,7 +67,11 @@ namespace Cardinals
             _optionBTN.GetComponentInChildren<TextMeshProUGUI>().text 
                 = GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_TITLE];
 
-            _backBTN.onClick.AddListener(Title);
+            _backBTN.onClick.AddListener(() => {
+                GameManager.I.Sound.TitleButtonClick();
+                Title();
+                });
+
             _backBTN.GetComponentInChildren<TextMeshProUGUI>().text 
                 = GameManager.I.Localization[LocalizationEnum.UI_MAIN_BACK];
 
@@ -109,6 +113,10 @@ namespace Cardinals
         void SetTileView(bool isTitleMode)
         {
             _titleTr.gameObject.SetActive(isTitleMode);
+            if (isTitleMode == false)
+            {
+                GameManager.I.Sound.TitleButtonClick();
+            }
             CameraSetting(!isTitleMode);
             _characterSelecterTr.gameObject.SetActive(!isTitleMode);
 
@@ -118,6 +126,7 @@ namespace Cardinals
 
         public void NextCharacter(bool right)
         {
+            GameManager.I.Sound.TitleButtonClick();
             _charactersTr.GetChild(curCharIdx).gameObject.SetActive(false);
             
             curCharIdx += right ? 1 : -1;
@@ -128,16 +137,19 @@ namespace Cardinals
 
         public void OpenOption()
         {
+            GameManager.I.Sound.TitleButtonClick();
             GameManager.I.UI.GameSettingUI.Show();
         }
 
         void NewGame()
         {
+            GameManager.I.Sound.TitleButtonClick();
             GameManager.I.GameStart();
         }
 
         void Exit()
         {
+            GameManager.I.Sound.TitleButtonClick();
             Application.Quit();
         }
     }

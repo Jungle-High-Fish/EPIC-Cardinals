@@ -16,6 +16,7 @@ namespace Cardinals.UI {
             _text.Get(gameObject).text = text;
             _toggle.Get(gameObject).isOn = defaultValue;
             _toggle.Get(gameObject).onValueChanged.AddListener((value) => {
+                GameManager.I.Sound.TitleButtonClick();
                 onValueChanged(value);
             });
         }

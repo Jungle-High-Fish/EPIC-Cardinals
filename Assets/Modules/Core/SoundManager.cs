@@ -23,6 +23,7 @@ namespace Cardinals
 
         [Header("Common UI")]
         [SerializeField] private AudioClip _buttonClick;
+        [SerializeField] private AudioClip _titlebuttonClick;
         [SerializeField] private AudioClip _getCoin;
         [SerializeField] private AudioClip _turnAlert;
         [SerializeField] private AudioClip _blessDrop;
@@ -37,6 +38,8 @@ namespace Cardinals
         [SerializeField] private AudioClip _cardReroll3;
         [SerializeField] private AudioClip _cardHover;
         [SerializeField] private AudioClip _getDice;
+        [SerializeField] private AudioClip _diceDeter;
+        [SerializeField] private AudioClip _diceMove;
 
 
         [Header("Player")]
@@ -91,6 +94,13 @@ namespace Cardinals
             if (_buttonClick == null) return;
 
             _effectAudioClipQueue.Enqueue(_buttonClick);
+        }
+
+        public void TitleButtonClick()
+        {
+            if (_titlebuttonClick == null) return;
+
+            _effectAudioClipQueue.Enqueue(_titlebuttonClick);
         }
 
         public void GetCoin()
@@ -153,6 +163,19 @@ namespace Cardinals
             _effectAudioClipQueue.Enqueue(_cardHover);
         }
 
+        public void DiceDetermine()
+        {
+            if (_diceDeter == null) return;
+
+            _effectAudioClipQueue.Enqueue(_diceDeter);
+        }
+
+        public void DiceMove()
+        {
+            if (_diceMove == null) return;
+
+            _effectAudioClipQueue.Enqueue(_diceMove);
+        }
         public void CardReroll()
         {
             if (_cardReroll1 == null) return;

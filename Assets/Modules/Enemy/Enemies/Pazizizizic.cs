@@ -18,7 +18,7 @@ namespace Cardinals.Enemy
             protected set
             {
                 base.Hp = value;
-                if (!BerserkMode && Hp < MaxHp / 2)
+                if (!BerserkMode && Hp <= MaxHp / 2)
                 {
                     BerserkMode = true;
                 }

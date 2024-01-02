@@ -68,9 +68,10 @@ namespace Cardinals
             get => _berserkMode;
             set
             {
-                _berserkMode = value;
-                if (_berserkMode)
+                if (!_berserkMode)
                 {
+                    _berserkMode = value;
+                    
                     // Effect
                     transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
                     var seq = DOTween.Sequence();

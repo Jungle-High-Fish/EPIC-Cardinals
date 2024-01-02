@@ -26,8 +26,14 @@ namespace Cardinals.UI {
 
             _cloudSaveImage.Get(gameObject).gameObject.SetActive(isCloudSave);
 
-            _loadButton.Get(gameObject).onClick.AddListener(() => loadAction());
-            _deleteButton.Get(gameObject).onClick.AddListener(() => deleteAction());
+            _loadButton.Get(gameObject).onClick.AddListener(() => {
+                GameManager.I.Sound.TitleButtonClick();
+                loadAction();
+            });
+            _deleteButton.Get(gameObject).onClick.AddListener(() => {
+                GameManager.I.Sound.TitleButtonClick();
+                deleteAction();
+                });
         }
     }
 }

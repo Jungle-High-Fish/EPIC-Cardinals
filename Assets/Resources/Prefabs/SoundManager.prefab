@@ -172,7 +172,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -300,7 +300,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -428,7 +428,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -556,7 +556,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -684,7 +684,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -827,6 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgm: {fileID: 8300000, guid: 8cf3ff815d05a204fbae0bc55118b8f7, type: 3}
   _buttonClick: {fileID: 8300000, guid: f16f1b9cacd5ddc47be0625469639adf, type: 3}
+  _titlebuttonClick: {fileID: 8300000, guid: b2634ea44c25e5148a238f3569f97bfd, type: 3}
   _getCoin: {fileID: 8300000, guid: aad98dcd068ff4640919c8358eb6a57f, type: 3}
   _turnAlert: {fileID: 8300000, guid: d2715a67e599763429a3aa70c6fee847, type: 3}
   _blessDrop: {fileID: 8300000, guid: 65c9193a8bc13ff40a1105b4482aaf80, type: 3}
@@ -839,6 +840,8 @@ MonoBehaviour:
   _cardReroll3: {fileID: 8300000, guid: 97f56b2e9d9eb4c43b04d262bca727c0, type: 3}
   _cardHover: {fileID: 8300000, guid: 9d28daadfc443934c86a5c67ffa5ff72, type: 3}
   _getDice: {fileID: 8300000, guid: 6cf1decfb3f50e7419d9e681434d09ae, type: 3}
+  _diceDeter: {fileID: 8300000, guid: b2634ea44c25e5148a238f3569f97bfd, type: 3}
+  _diceMove: {fileID: 8300000, guid: 372467194d8b3ce459e2a0cd7d806f12, type: 3}
   _playerMove: {fileID: 8300000, guid: 5a05223448d9eec409d4654c5d481ff4, type: 3}
   _playerHit: {fileID: 8300000, guid: 5cd899dd0a2d19246bdb3b03b29df033, type: 3}
   _playerDefenseHit: {fileID: 8300000, guid: c09d627bb181ba44f8da88782ff1c140, type: 3}
@@ -894,7 +897,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1022,7 +1025,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1150,7 +1153,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1278,7 +1281,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1406,7 +1409,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1534,7 +1537,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1662,7 +1665,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
