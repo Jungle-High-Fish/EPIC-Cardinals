@@ -146,6 +146,7 @@ namespace Cardinals.BoardEvent.Alchemy
         
         public void SelectedItem(UIDice dice)
         {
+            GameManager.I.Sound.DiceDetermine();
             if (!gameObject.activeSelf) return;
             
             // 기존 선택한 항목이 존재한다면 선택 취소 처리
@@ -161,6 +162,7 @@ namespace Cardinals.BoardEvent.Alchemy
         
         void B_Cancel()
         {
+            GameManager.I.Sound.DiceDetermine();
             _cancel = true;
             gameObject.SetActive(false);
         }

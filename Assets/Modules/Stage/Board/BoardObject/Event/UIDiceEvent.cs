@@ -57,7 +57,7 @@ namespace Cardinals.BoardEvent.Card
             if (GameManager.I.Stage.DiceManager.DiceUis.All(d => !d.gameObject.activeSelf))
             {
                 // 이벤트 생략
-                StartCoroutine(nameof(EndEvent), GameManager.I.Localization.Get(LocalizationEnum.EVENT_DICEEVENT_WARNING));
+                StartCoroutine(nameof(EndEvent), "EVENT_DICEEVENT_WARNING");
             }
         }
 
@@ -102,6 +102,7 @@ namespace Cardinals.BoardEvent.Card
 
         void Close()
         {
+            GameManager.I.Sound.DiceDetermine();
             gameObject.SetActive(false);
             GameManager.I.UI.UIEndTurnButton.Activate();
         }
