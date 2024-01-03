@@ -16,7 +16,7 @@ namespace Cardinals.UI {
     public class UIMagicLevelUpPanel: MonoBehaviour {
 
         [Header("Text")]
-        [SerializeField] private Button _enchantBTN;
+        [SerializeField] private Button _refreshBTN;
         [SerializeField] private Button _levelupBTN;
         [SerializeField] private Button _changeBTN;
 
@@ -39,7 +39,7 @@ namespace Cardinals.UI {
 
         private void Start()
         {
-            _enchantBTN.GetComponentInChildren<TextMeshProUGUI>().text
+            _refreshBTN.GetComponentInChildren<TextMeshProUGUI>().text
                 = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT3];
             _levelupBTN.GetComponentInChildren<TextMeshProUGUI>().text
                 = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT1];
@@ -47,8 +47,6 @@ namespace Cardinals.UI {
                 = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT2];
         }
         public void Init() {
-
-
             gameObject.SetActive(false);
 
             _initialMagicSelectPanel.Get(gameObject).Init();
@@ -88,6 +86,11 @@ namespace Cardinals.UI {
                 excludes   
             );
 
+            var rnd = new System.Random();
+            List<TileMagicType> initialTargetMagicTypes = targetMagicTypes.OrderBy(x => rnd.Next()).Take(2).ToList();
+            targetMagicTypes.Remove(initialTargetMagicTypes[0]);
+            List<TileMagicType> refreshTargetMagicTypes = targetMagicTypes;
+
             void OnClickMagicSlot(TileMagicType magicType) {
                 requestHandled = true;
                 resultMagicType = magicType;
@@ -95,6 +98,11 @@ namespace Cardinals.UI {
                 if (GameManager.I.Stage.CurEvent is TutorialEvent tutorialEvent) {
                     tutorialEvent.CheckMagicSelectQuest();
                 }
+            }
+
+            List<TileMagicType> OnClickRefresh() {
+                GameManager.I.Player.PlayerInfo.UseGold(2);
+                return refreshTargetMagicTypes;
             }
 
             IEnumerator Requester() {
@@ -105,7 +113,7 @@ namespace Cardinals.UI {
                 _initialMagicSelectPanel.Get(gameObject).gameObject.SetActive(true);
                 _postMagicSelectPanel.Get(gameObject).gameObject.SetActive(false);
 
-                yield return _initialMagicSelectPanel.Get(gameObject).Set(targetMagicTypes, OnClickMagicSlot);
+                yield return _initialMagicSelectPanel.Get(gameObject).Set(initialTargetMagicTypes, OnClickMagicSlot, OnClickRefresh);
                 yield return new WaitUntil(() => requestHandled);
                 gameObject.SetActive(false);
             }
