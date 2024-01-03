@@ -61,8 +61,9 @@ namespace Cardinals
             AddBlessEvent?.Invoke(blessType);
         }
        
-        public void AddPotion(PotionType potionType)
+        public bool AddPotion(PotionType potionType)
         {
+            bool get = false;
             for (int i = 0; i < Constants.GameSetting.Player.MaxPotionCapacity; i++)
             {
                 if(_potions[i] == null)
@@ -70,9 +71,13 @@ namespace Cardinals
                     Potion potion = EnumHelper.GetPotion(potionType);
                     _potions[i] = potion;
                     AddPotionEvent?.Invoke(i, potion);
+                    
+                    get = true;
                     break;
                 }
             }
+
+            return get;
         }
 
         public void DeletePotion(int index)
@@ -152,6 +157,10 @@ namespace Cardinals
         public void UseGold(int value)
         {
             Gold -= value;
+            if (Gold < 0)
+            {
+                Debug.Log("돈이 마이너스야...");
+            }
             UpdateGoldEvent?.Invoke(Gold);
         }
 

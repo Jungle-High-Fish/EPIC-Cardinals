@@ -18,7 +18,7 @@ namespace Cardinals.Game
         public virtual int Turn => _turn;
         public virtual int Round => _round;
         public Tile RoundStartTile => _roundStartTile;
-
+        public EnemyGradeType EnemyGrade { get; set; }
         [SerializeField, InlineEditor] protected EnemyDataSO[] _enemyList;
         protected int _turn = 1;
         protected int _round = 0;
@@ -43,7 +43,7 @@ namespace Cardinals.Game
             DiceManager diceManager = GameManager.I.Stage.DiceManager;
             _enemies = new();
             EnemyGradeType enemyGradeType;
-
+            
             // 이벤트 시작 이벤트 호출
             stage.OnEventStartCall();
             
@@ -51,7 +51,7 @@ namespace Cardinals.Game
             InitEnemy(_enemies);
             GameManager.I.CurrentEnemies = _enemies;
             enemyGradeType = _enemies.First().EnemyData.enemyGradeType;
-            
+            EnemyGrade = _enemies.First().EnemyData.enemyGradeType;
             //cardManager.OnBattle();
             diceManager.OnBattle();
 
@@ -107,7 +107,7 @@ namespace Cardinals.Game
                 yield return GameManager.I.UI.UITurnAlert.Hide();
 
                 yield return player.OnTurn();
-                if (CheckPlayerWin) break;
+                if (CheckEnemyWin || CheckPlayerWin) break;
 
                 // 아래 내용 플레이어 OnTurn으로 이동했습니다.
                 // // 턴 종료 버튼 활성화
