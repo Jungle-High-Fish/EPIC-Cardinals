@@ -21,6 +21,7 @@ namespace Cardinals.Board {
         public Tile this[int x, int y] => _boardBuilder is NormalBoardBuilder ? (_boardBuilder as NormalBoardBuilder)[x, y] : null;
         public List<Tile> TileSequence => _tileSequence;
         public bool IsBoardSquare => _boardBuilder is NormalBoardBuilder;
+        public bool IsTileDoingLevelUp => _tileSequence.Any(t => t.TileMagic.IsDoingLevelUp);
 
         public IBoardInputHandler BoardInputHandler => _boardInputHandler;
 
