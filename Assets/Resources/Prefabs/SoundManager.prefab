@@ -831,7 +831,7 @@ MonoBehaviour:
   _getCoin: {fileID: 8300000, guid: aad98dcd068ff4640919c8358eb6a57f, type: 3}
   _turnAlert: {fileID: 8300000, guid: d2715a67e599763429a3aa70c6fee847, type: 3}
   _blessDrop: {fileID: 8300000, guid: 65c9193a8bc13ff40a1105b4482aaf80, type: 3}
-  _cardClick: {fileID: 8300000, guid: 688281f34e94ba94e89619ac009650a3, type: 3}
+  _cardClick: {fileID: 8300000, guid: 5e500ebb6df59d34b985c8112196cafc, type: 3}
   _cardDraw: {fileID: 0}
   _cardDiscard: {fileID: 0}
   _cardUse: {fileID: 8300000, guid: 6957e622538c8084aa6ac5dc719486d8, type: 3}
