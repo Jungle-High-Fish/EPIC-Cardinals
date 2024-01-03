@@ -175,7 +175,7 @@ namespace Cardinals.Game {
 
                 if (!evt.IsClear)
                 {
-                    GameManager.I.GameOver();
+                    yield return GameManager.I.GameOver();
                     yield break;
                 }
 
