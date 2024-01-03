@@ -1,4 +1,5 @@
 using System;
+using Cardinals.Enums;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -121,6 +122,14 @@ namespace Cardinals.UI.NewDice
         void B_Cancel()
         {
             gameObject.SetActive(false);
+        }
+
+        void B_Reroll()
+        {
+            EnemyGradeType type = GameManager.I.Stage.Enemies[0].EnemyData.enemyGradeType;
+            Dice newDice=GameManager.I.Stage.GetRewardDice(type);
+            Init(newDice, null);
+
         }
     }
 }
