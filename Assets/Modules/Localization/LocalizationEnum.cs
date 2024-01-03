@@ -217,6 +217,9 @@ namespace Cardinals {
         OPTION_QUIT,
         UI_ITEM_USE,
         UI_ITEM_REMOVE,
-        UI_ITEM_NO_MORE_ITEM
+        UI_ITEM_NO_MORE_ITEM,
+        UI_GETDICE,
+        UI_DICE_TITLE,
+        UI_DICE_TRADE
     }
 }

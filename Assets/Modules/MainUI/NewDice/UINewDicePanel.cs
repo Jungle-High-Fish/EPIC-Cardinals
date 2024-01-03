@@ -42,8 +42,12 @@ namespace Cardinals.UI.NewDice
             _tradeBTN.onClick.AddListener(B_Trade);
             _rerollBTN.onClick.AddListener(B_Reroll);
             _cancelBTN.onClick.AddListener(B_Cancel);
-            //[TODO] 여기 "교체할 주사위를 선택해주세요" enum 추가해주세요~
-            //_changedDiceTMP.text = TMPUtils.CustomParse()
+            _changedDiceTMP.text = GameManager.I.Localization.Get(LocalizationEnum.UI_GETDICE);
+            _headerTMP.text = GameManager.I.Localization.Get(LocalizationEnum.UI_DICE_TITLE);
+            _tradeBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.UI_DICE_TRADE];
+            _rerollBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT3];
 
             _backupCoverPos = _newDiceCoverObj.transform.position;
             _backupIconPos = _newDiceCoverIcon.position;
