@@ -557,7 +557,7 @@ namespace Cardinals.Game {
                         GameManager.I.UI.UIShop.Init();
                         break;
                     case BoardEventType.Roulette:
-                        GameManager.I.UI.UIRoulette.Init();
+                        GameManager.I.UI.UIRoulette.Execute();
                         break;
                     case BoardEventType.Number:
                         GameManager.I.UI.UIDiceEvent.Init();

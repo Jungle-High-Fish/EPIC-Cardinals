@@ -118,7 +118,7 @@ namespace Cardinals.BoardEvent.Alchemy
                         GameManager.I.Stage.AddGold(_getMoneyValue);
                         break;
                     case BoardEventAlchemyType.GetRandomPotion:
-                        GameManager.I.Stage.AddRandomPotion();
+                        yield return GameManager.I.UI.UIRewardPanel.GetRandomPotionEvent();
                         break;
                     case BoardEventAlchemyType.AllTileExp:
                         foreach (var tile in GameManager.I.Stage.Board.TileSequence)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine.Events;
@@ -98,9 +99,9 @@ namespace Cardinals.BoardEvent.Roulette
 			return 0;
 		}
 
-		public void Spin(UnityAction<RoulettePieceDataSO> action = null)
+		public IEnumerator Spin(Func<RoulettePieceDataSO, IEnumerator> func = null)
 		{
-			if (_isSpinning == true) return;
+			if (_isSpinning == true) yield return null;
 
 			// 룰렛의 결과 값 선택
 			_selectedIndex = GetRandomIndex();
@@ -120,10 +121,10 @@ namespace Cardinals.BoardEvent.Roulette
 			// Debug.Log($"targetAngle:{targetAngle}");
 
 			_isSpinning = true;
-			StartCoroutine(OnSpin(targetAngle, action));
+            yield return OnSpin(targetAngle, func);
 		}
 
-		private IEnumerator OnSpin(float end, UnityAction<RoulettePieceDataSO> action)
+		private IEnumerator OnSpin(float end, Func<RoulettePieceDataSO, IEnumerator> func)
 		{
 			float current = 0;
 			float percent = 0;
@@ -141,7 +142,7 @@ namespace Cardinals.BoardEvent.Roulette
 
 			// _isSpinning = false; // Init()에서 초기화 해줄 것
 
-			if (action != null) action.Invoke(_roulettePieceDatas[_selectedIndex]);
+			if (func != null) yield return func?.Invoke(_roulettePieceDatas[_selectedIndex]);
 		}
 	}
 }
