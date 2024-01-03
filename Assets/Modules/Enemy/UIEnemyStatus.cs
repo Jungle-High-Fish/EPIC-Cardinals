@@ -123,11 +123,22 @@ namespace Cardinals.UI
                 {
                     float dam = (float) pattern.Value / 2;
                     _patternCountTMP.text = $"{(int) Math.Floor(dam)}";
+                    _patternCountTMP.color = EnumHelper.GetColorByMagic(TileMagicType.Fire);
+                }
+            }
+            else if (CheckSetPowerlessDefense(pattern.Type)) // 무력 시, 방어도 반절 적용
+            {
+                if (pattern.Value != null && pattern.Value != 0)
+                {
+                    float dam = (float)pattern.Value / 2;
+                    _patternCountTMP.text = $"{(int)Math.Floor(dam)}";
+                    _patternCountTMP.color = EnumHelper.GetColorByMagic(TileMagicType.Fire);
                 }
             }
             else
             {
                 _patternCountTMP.text = $"{pattern.Value}";
+                _patternCountTMP.color = Color.black;
             }
             
             // 말풍선 크기 업데이트
@@ -153,6 +164,12 @@ namespace Cardinals.UI
                     type == EnemyActionType.AreaAttack);
         }
 
+        private bool CheckSetPowerlessDefense(EnemyActionType type)
+        {
+            return _entity != null &&
+                   _entity.CheckBuffExist(BuffType.Powerless) &&
+                   type == EnemyActionType.Defense;
+        }
         private void UseIcon()
         {
             _patternTr.DOPunchScale(new Vector2(.7f, .7f), .5f, 1, 0)
