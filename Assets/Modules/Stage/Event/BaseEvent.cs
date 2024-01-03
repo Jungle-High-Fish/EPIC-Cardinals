@@ -9,7 +9,6 @@ namespace Cardinals.Game
     {   
         public UIEvent UIEvent { protected get; set; }
         public StageEventType Type => _type;
-
         [SerializeField] private StageEventType _type;
         
         private bool _isClear;
