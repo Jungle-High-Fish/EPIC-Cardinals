@@ -52,6 +52,8 @@ namespace Cardinals.Game {
         private RewardBox _rewardBox;
         private StartFlag _startFlag;
 
+        public bool IsPlayerTurn { get; set; }
+
         public RewardBox RewardBox
         {
             get

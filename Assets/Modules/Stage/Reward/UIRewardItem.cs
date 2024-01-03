@@ -74,8 +74,14 @@ namespace Cardinals.UI
                     Remove();
                     break;
                 case RewardType.Potion:
-                    GameManager.I.Stage.Player.PlayerInfo.AddPotion((PotionType) baseReward.Value);
-                    Remove();
+                    if (GameManager.I.Stage.Player.PlayerInfo.AddPotion((PotionType) baseReward.Value))
+                    {
+                        Remove();
+                    }
+                    else
+                    {
+                        GetComponentInParent<UIRewardPanel>().PrintMessage(GameManager.I.Localization[LocalizationEnum.UI_ITEM_NO_MORE_ITEM]);
+                    }
                     break;
                 case RewardType.Artifact:
                     GameManager.I.Stage.Player.PlayerInfo.AddArtifact((ArtifactType) baseReward.Value);
