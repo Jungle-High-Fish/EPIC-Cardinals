@@ -6,6 +6,7 @@ using DG.Tweening;
 using Util;
 using Cardinals.Enums;
 using System;
+using System.Linq;
 
 namespace Cardinals.Board {
 
@@ -68,7 +69,9 @@ namespace Cardinals.Board {
 				isLoop ? -1 : 1
 			);
 			
-			ResetTile();
+			if (!_animationDict.Any(x => x.Value.anim.IsPlaying())) {
+				ResetTile();
+			}
 			_animationDict[animationType].anim.Restart();
 
 			return _animationDict[animationType].time;

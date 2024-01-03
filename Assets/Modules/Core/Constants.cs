@@ -272,7 +272,7 @@ namespace Cardinals.Constants {
             public const int MaxArtifactCapacity = 12;
             public const int CardDrawCount = 5;
 
-            public const int InitialMagicPickNum = 2;
+            public const int InitialMagicPickNum = 3;
         }
     }
 }

@@ -143,6 +143,7 @@ namespace Cardinals.Game {
         {
             if (!_isAnimation)
             {
+                GameManager.I.Sound.DiceDetermine();
                 StartCoroutine(MapOnOff(!_onMap));
             }
         }
