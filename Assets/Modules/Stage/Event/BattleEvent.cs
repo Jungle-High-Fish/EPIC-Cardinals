@@ -107,7 +107,7 @@ namespace Cardinals.Game
                 yield return GameManager.I.UI.UITurnAlert.Hide();
 
                 yield return player.OnTurn();
-                if (CheckPlayerWin) break;
+                if (CheckEnemyWin || CheckPlayerWin) break;
 
                 // 아래 내용 플레이어 OnTurn으로 이동했습니다.
                 // // 턴 종료 버튼 활성화

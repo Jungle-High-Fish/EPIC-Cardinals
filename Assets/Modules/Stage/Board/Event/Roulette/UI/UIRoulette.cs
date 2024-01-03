@@ -80,7 +80,7 @@ namespace Cardinals.BoardEvent.Roulette
                     yield return GameManager.I.UI.UIRewardPanel.GetRandomPotionEvent(); 
                     break;
                 case BoardEventRoulette.RandomTileGradeUp:
-                    var tile = GameManager.I.Stage.Board.GetRandomTile(false);
+                    var tile = GameManager.I.Stage.Board.GetRandomTile(false, false);
                     tile.TileMagic.GainExpToNextLevel();
                     break;
                 case BoardEventRoulette.ReducedHp:
