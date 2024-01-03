@@ -277,7 +277,7 @@ namespace Cardinals
         {
             GameManager.I.Sound.GetDefense();
             if (CheckBuffExist(BuffType.Powerless))
-                value = (int)Math.Ceiling((float) value / 2);
+                value = (int)Math.Floor((float) value / 2);
 
             DefenseCount += value;
         }

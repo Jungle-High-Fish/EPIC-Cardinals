@@ -231,7 +231,7 @@ namespace Cardinals
                     }
                 }
             }
-            else if (buff.Type == BuffType.Weak)
+            else if (buff.Type == BuffType.Weak||buff.Type== BuffType.Powerless)
             {
                 UpdatePatternEvent?.Invoke(CurPattern);
             }
