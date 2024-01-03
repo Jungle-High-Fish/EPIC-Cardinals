@@ -152,6 +152,10 @@ namespace Cardinals
         public void UseGold(int value)
         {
             Gold -= value;
+            if (Gold < 0)
+            {
+                Debug.Log("돈이 마이너스야...");
+            }
             UpdateGoldEvent?.Invoke(Gold);
         }
 
