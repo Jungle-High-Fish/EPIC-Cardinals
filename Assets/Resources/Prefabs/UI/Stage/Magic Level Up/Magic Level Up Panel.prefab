@@ -292,7 +292,7 @@ PrefabInstance:
     - target: {fileID: 6033080497394604915, guid: 82a0c0bce7a1a174ab18467248ba5515,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8490212492880358703, guid: 82a0c0bce7a1a174ab18467248ba5515,
         type: 3}
@@ -337,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 8490212492880358703, guid: 82a0c0bce7a1a174ab18467248ba5515,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 470
+      value: 510
       objectReference: {fileID: 0}
     - target: {fileID: 8490212492880358703, guid: 82a0c0bce7a1a174ab18467248ba5515,
         type: 3}
@@ -442,6 +442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Initial Magic Select Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280043537644257648, guid: d77e78c7c28f36640951c5d4f6718017,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2280043537644257651, guid: d77e78c7c28f36640951c5d4f6718017,
         type: 3}

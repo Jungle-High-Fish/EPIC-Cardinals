@@ -1,4 +1,5 @@
 using Cardinals.Enums;
+using Cardinals.Game;
 using Cardinals.Tutorial;
 using DG.Tweening;
 using System;
@@ -194,6 +195,7 @@ namespace Cardinals
                 }
                 return;
             }
+            if (GameManager.I.Stage.Board.IsTileDoingLevelUp) return;
 
             if (eventData.button== PointerEventData.InputButton.Left)
             {

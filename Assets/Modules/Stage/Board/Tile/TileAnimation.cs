@@ -69,9 +69,7 @@ namespace Cardinals.Board {
 				isLoop ? -1 : 1
 			);
 			
-			if (!_animationDict.Any(x => x.Value.anim.IsPlaying())) {
-				ResetTile();
-			}
+			ResetTile();
 			_animationDict[animationType].anim.Restart();
 
 			return _animationDict[animationType].time;
@@ -237,7 +235,7 @@ namespace Cardinals.Board {
 			.OnComplete(AnimationComplete(TileAnimationType.Rotate360))
 			.SetAutoKill(false).Pause();
 			
-			_animationDict.Add(TileAnimationType.Rotate360, (rotate360Animation, 1.5f, 0));
+			_animationDict.Add(TileAnimationType.Rotate360, (rotate360Animation, 2f, 0));
 			return rotate360Animation;
 		}
 

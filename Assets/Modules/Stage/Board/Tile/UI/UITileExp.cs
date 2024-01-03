@@ -89,7 +89,7 @@ namespace Cardinals.UI {
         }
 
         private void ShowExpChangeAnimation() {
-            float expRatio = _tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level];
+            float expRatio = _tile.Level < Constants.GameSetting.Tile.MaxLevel ? (_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level]) : 1;
             float newScaleX = Mathf.Clamp(expRatio, 0, 1);
 
             (_expBar.Get(gameObject).transform as RectTransform).DOScaleX(newScaleX, 0.3f).SetEase(Ease.OutBack);
