@@ -59,11 +59,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 135
+    m_Right: 135
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 3
   m_Spacing: 130
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
@@ -111,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -125}
-  m_SizeDelta: {x: 1120, y: 430}
+  m_SizeDelta: {x: 700, y: 430}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2280043537644257653
 CanvasRenderer:
@@ -216,6 +216,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3786558613949220466}
     m_Modifications:
+    - target: {fileID: 3013076002757424891, guid: 0eb15b96793b7244db94f5020662d723,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208095626492806928, guid: 0eb15b96793b7244db94f5020662d723,
+        type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5315993449657513058, guid: 0eb15b96793b7244db94f5020662d723,
         type: 3}
       propertyPath: m_Name
