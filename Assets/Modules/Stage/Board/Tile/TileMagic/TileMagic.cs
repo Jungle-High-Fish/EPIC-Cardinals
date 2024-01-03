@@ -13,10 +13,13 @@ using DG.Tweening;
 namespace Cardinals.Board {
 
 	public class TileMagic: MonoBehaviour {
+		public bool IsDoingLevelUp => _isDoingLevelUp;
+
 		private TileMagicType _type;
 		private int _level;
 		private int _exp;
 		private bool _isLevelUp;
+		private bool _isDoingLevelUp = false;
 
 		private bool IsLevelUp
 		{
@@ -54,6 +57,8 @@ namespace Cardinals.Board {
 			_type = type;
 			_level = 0;
 			_exp = 0;
+
+			_isDoingLevelUp = false;
 		}
 
 		public void SetType(TileMagicType type)
@@ -73,6 +78,10 @@ namespace Cardinals.Board {
 		}
 
 		public void GainExp(int exp) {
+			if (_level == Constants.GameSetting.Tile.MaxLevel) {
+				return;
+			}
+			
 			_exp += exp;
 
 			if (_level < Constants.GameSetting.Tile.MaxLevel && 
@@ -123,11 +132,15 @@ namespace Cardinals.Board {
 		}
 
 		private IEnumerator LevelUpUI(int newExp) {
+			_isDoingLevelUp = true;
+
 			var levelUpRequest = GameManager.I.Stage.Board.RequestTileLevelUp(_type, _level);
 			yield return levelUpRequest.Requester();
 			var (newMagic, newLevel) = levelUpRequest.Result();
 
 			yield return MagicChangeApplyAnimation(newMagic, newLevel, newExp);
+
+			_isDoingLevelUp = false;
 		}
 
 		private IEnumerator MagicChangeApplyAnimation(TileMagicType newMagic, int newLevel, int newExp) {
