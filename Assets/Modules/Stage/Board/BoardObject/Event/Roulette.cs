@@ -6,8 +6,7 @@ namespace Cardinals.BoardObject.Event
     {
         protected override IEnumerator Execute()
         {
-            GameManager.I.UI.UIRoulette.Init();
-            yield return null;
+            yield return GameManager.I.UI.UIRoulette.Execute();
         }
     }
 }

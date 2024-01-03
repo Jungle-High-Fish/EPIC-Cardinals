@@ -213,3 +213,6 @@ OPTION_CONTINUE,Continue,이어하기
 OPTION_SETTING,Setting,게임 설정
 OPTION_MAINMENU,Main Menu,메인 메뉴
 OPTION_QUIT,Quit,게임 종료
+UI_ITEM_USE,Use,사용
+UI_ITEM_REMOVE,Remove,버리기
+UI_ITEM_NO_MORE_ITEM,No more items could be acquired.,더 이상 아이템을 획득할 수 없습니다.

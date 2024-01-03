@@ -214,7 +214,9 @@ namespace Cardinals {
         OPTION_CONTINUE,
         OPTION_SETTING,
         OPTION_MAINMENU,
-        OPTION_QUIT
-
+        OPTION_QUIT,
+        UI_ITEM_USE,
+        UI_ITEM_REMOVE,
+        UI_ITEM_NO_MORE_ITEM
     }
 }

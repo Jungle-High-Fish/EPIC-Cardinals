@@ -139,8 +139,9 @@ namespace Cardinals.UI
             if (trigger == null)
             {
                 trigger = gameObject.AddComponent<EventTrigger>();
-            
-                var entry = new EventTrigger.Entry();
+            }
+
+            var entry = new EventTrigger.Entry();
                 entry.eventID = EventTriggerType.PointerEnter;
                 entry.callback.AddListener( (eventData) => { OnPanel(); } );
                 trigger.triggers.Add(entry);
@@ -149,7 +150,6 @@ namespace Cardinals.UI
                 entry.eventID = EventTriggerType.PointerExit;
                 entry.callback.AddListener( (eventData) => { OffPanel(); } );
                 trigger.triggers.Add(entry);
-            }
         }
 
         public void OnPanel()

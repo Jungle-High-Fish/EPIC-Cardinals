@@ -94,6 +94,7 @@ namespace Cardinals
         public override IEnumerator OnTurn()
         {
             GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
+            GameManager.I.Stage.IsPlayerTurn = true;
             
             _isDamagedThisTurn = false;
             IsPlayerTurn = true;
@@ -114,6 +115,7 @@ namespace Cardinals
                 GameManager.I.Stage.DiceManager.SetDiceSelectable(false);
             }
             
+            GameManager.I.Stage.IsPlayerTurn = false;
             GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
         }
 
