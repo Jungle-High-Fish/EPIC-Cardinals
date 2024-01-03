@@ -30,23 +30,23 @@ BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상
 BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 <checkBless=BlessFire1> damage.","턴 종료 시, 2 <checkBless=BlessFire1> 의 데미지를 입습니다."
 BUFF_WEAK_NAME,<debuff=Weak> Weak,<debuff=Weak> 약화
 BUFF_WEAK_EXPLAIN,The damage dealt is reduced by 50%.,주는 피해가 50% 감소합니다.
-BUFF_ELECTRICSHOCK_NAME,Electricshock,감전
+BUFF_ELECTRICSHOCK_NAME,<debuff=Electric> Electricshock,<debuff=Electric> 감전
 BUFF_ELECTRICSHOCK_EXPLAIN,You can use up to 2 dice in a row on a one tile.,한 타일에서 주사위를 연속으로 최대 2개까지 사용할 수 있습니다.
 BUFF_POISON_NAME,Poison,독
 BUFF_POISON_EXPLAIN,"At the end of the turn, take damage equal to the number of stacks.",턴이 끝나면 중첩 수만큼 피해를 받습니다.
-BUFF_SLOW_NAME,Slow,둔화
+BUFF_SLOW_NAME,<debuff=Slow> Slow,<debuff=Slow> 둔화
 BUFF_SLOW_EXPLAIN,"Each turn, you are limited to 2 moves with the dice.","각 턴, 이동 가능 횟수가 2번으로 제한됩니다."
-BUFF_HEAL_NAME,Heal,회복
+BUFF_HEAL_NAME,<debuff=Heal> Heal,<debuff=Heal> 회복
 BUFF_HEAL_EXPLAIN,"At end of the turn, heal for 3 Health.","턴 종료 시, 3의 체력을 회복합니다."
-BUFF_CONFUSION_NAME,Confusion,혼란
+BUFF_CONFUSION_NAME,<debuff=MoveConfuse> Confusion,<debuff=MoveConfuse> 혼란
 BUFF_CONFUSION_EXPLAIN,"When using dice for movement, there's a 50% chance to move backwards.","주사위를 이동에 사용할 때, 50% 확률로 뒤로 이동합니다."
 BUFF_DOLL_NAME,Doll,인형
 BUFF_DOLL_EXPLAIN,"If a doll is present on the board, all damage dealt is equal to 1.",보드에 인형이 있으면 모든 피해는 1이 됩니다.
-BUFF_ROTATIONRATE_NAME,Rotationrate,회전률
+BUFF_ROTATIONRATE_NAME,<debuff=Cycle> Rotationrate,<debuff=Cycle> 회전률
 BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다."
 BUFF_POWERLESS_NAME,<debuff=Powerless> Powerless,<debuff=Powerless> 무력
 BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.
-BUFF_BERSERK_NAME,Berserk,광폭화
+BUFF_BERSERK_NAME,<debuff=Berserk> Berserk,<debuff=Berserk> 광폭화
 BUFF_BERSERK_EXPLAIN,This enemy is angry.,적이 분노했습니다.
 POTION_JUMP_NAME,Jump Potion,도약 포션
 POTION_JUMP_EXPLAIN,Move forward 3 tiles.,앞으로 3칸 이동합니다.
