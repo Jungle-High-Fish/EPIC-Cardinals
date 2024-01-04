@@ -4,16 +4,24 @@
 	{
 		"tokens"
 		{
-			"#StatusBattle"	    "%eventidx% Event: Battle - %enemies%"
+			"#StatusBattle"	    "%eventidx%{#Ordinal_%eventidxordinal%} Event: Battle - %enemies%"
 			"#StatusLobby"      "Waiting for board game!"
+			"#Ordinal_1"		"st"
+			"#Ordinal_2"		"nd"
+			"#Ordinal_3"		"rd"
+			"#Ordinal_4"		"th"
 		}
 	}
 	"koreana"
 	{
 		"tokens"
 		{
-			"#StatusBattle"	    "%eventidx% 이벤트: %enemies% 전투 중"
+			"#StatusBattle"	    "%eventidx%{#Ordinal_%eventidxordinal%} 이벤트: %enemies% 전투 중"
 			"#StatusLobby"      "보드 게임 대기 중!"
+			"#Ordinal_1"		"번째"
+			"#Ordinal_2"		"번째"
+			"#Ordinal_3"		"번째"
+			"#Ordinal_4"		"번째"
 		}
 	}
 }

@@ -75,17 +75,23 @@ namespace Cardinals {
             string GetOrdinalNumber(int n) {
                 switch (n % 10) {
                     case 1:
-                        return n + "st";
+                        return "1";
                     case 2:
-                        return n + "nd";
+                        return "2";
                     case 3:
-                        return n + "rd";
+                        return "3";
                     default:
-                        return n + "th";
+                        return "4";
                 }
             }
 
-            string eventIdxStr = GetOrdinalNumber(eventIdx + 1).ToString();
+            string eventIdxOrdinalStr = GetOrdinalNumber(eventIdx + 1);
+            SteamFriends.SetRichPresence(
+                "eventidxordinal", 
+                eventIdxOrdinalStr
+            );
+
+            string eventIdxStr = $"{eventIdx + 1}";
 
             string enemiesStr = "";
             for (int i = 0; i < enemyType.Count; i++) {
