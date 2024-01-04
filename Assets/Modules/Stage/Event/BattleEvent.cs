@@ -207,11 +207,10 @@ namespace Cardinals.Game
                 
                 enemy.DieEvent += () =>
                 {
-                    if (enemies[0].EnemyData.enemyType == EnemyType.TweTwe)
-                    {
-                        var ach = new Achievement("TweTwe_TakeDown");
-                        ach.Trigger();
-                    }
+                    string achieveName = enemyData.enemyType.ToString() + "_Takedown";
+                    var ach = new Achievement(achieveName);
+                    ach.Trigger();
+                    
                     enemies.Remove(enemy);
                     if (enemies.Count> 0)
                     {
