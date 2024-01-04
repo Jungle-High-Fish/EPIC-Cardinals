@@ -219,3 +219,4 @@ UI_ITEM_NO_MORE_ITEM,No more items could be acquired.,더 이상 아이템을 �
 UI_GETDICE,Select a dice to replace.,교체할 주사위를 선택해주세요.
 UI_DICE_TITLE,New Dice!!,신규 주사위!
 UI_DICE_TRADE,Trade,교체
+UI_TUTORIAL_SKIP,Run the tutorial?,튜토리얼을 포함할까요?

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using TMPro;
 
 namespace Cardinals.Title {
     public class TitleTutorialCheck : MonoBehaviour {
@@ -15,13 +16,15 @@ namespace Cardinals.Title {
             = new(TypeOfGetter.ChildByName, "Tutorial Check Panel/Button Area/Confirm Button");
         private ComponentGetter<UIButton> _denyButton
             = new(TypeOfGetter.ChildByName, "Tutorial Check Panel/Button Area/Deny Button");
+        private ComponentGetter<TextMeshProUGUI> _tutorialCheckTitleTMP
+            = new(TypeOfGetter.ChildByName, "Tutorial Check Panel/Title");
 
         private Action _onConfirm, _onDeny;
 
         public void Init() {
             _confirmButton.Get(gameObject).Init(OnConfirm, true);
             _denyButton.Get(gameObject).Init(OnDeny, true);
-
+            _tutorialCheckTitleTMP.Get(gameObject).text = GameManager.I.Localization[LocalizationEnum.UI_TUTORIAL_SKIP];
             gameObject.SetActive(false);
         }
 
