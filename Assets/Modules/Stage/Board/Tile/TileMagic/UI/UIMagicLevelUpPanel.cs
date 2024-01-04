@@ -82,7 +82,7 @@ namespace Cardinals.UI {
             }
 
             List<TileMagicType> targetMagicTypes = PickMagicTypes(
-                Constants.GameSetting.Player.InitialMagicPickNum, 
+                Constants.GameSetting.Player.InitialMagicPickNum - (excludeMagicType != TileMagicType.None ? 1 : 0), 
                 excludes   
             );
 
