@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Board;
 using Cardinals.Enums;
+using Cardinals.UI.Description;
 using DG.Tweening;
 using JetBrains.Annotations;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -86,6 +88,18 @@ namespace Cardinals.UI {
 
             _levelUpMagicTargetLevelText.Get(gameObject).text = $"Lv.{originalLevel + 1}";
             _originalLevelText.Get(gameObject).text = $"Lv.{originalLevel}";
+            
+            // 설명 창 추가
+            var tr = _levelUpMagicImage.Get(gameObject).transform;
+            
+            //기존 설명 제거
+            var descs = tr.GetComponents<BaseDescription>();
+            for (int i = descs.Length - 1; i >= 0; i--)
+            {
+                descs[i].Delete();
+            }
+            
+            tr.AddComponent<MagicDescription>().Init(originalMagicType);
         }
 
         public void TransitionAnimation() {

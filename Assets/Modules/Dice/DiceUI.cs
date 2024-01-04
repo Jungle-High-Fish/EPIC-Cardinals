@@ -1,4 +1,5 @@
 using Cardinals.Enums;
+using Cardinals.Game;
 using Cardinals.Tutorial;
 using DG.Tweening;
 using System;
@@ -108,6 +109,7 @@ namespace Cardinals
 
         public void SortingDiceUI(int index, Vector2 diceUIPos)
         {
+            GameManager.I.Sound.DiceMove();
             Index = index;
             (transform as RectTransform).SetUILeftBottom();
             (transform as RectTransform).DOAnchorPos(diceUIPos, 0.2f).SetEase(Ease.OutCubic);
@@ -132,12 +134,11 @@ namespace Cardinals
             _diceAnimator.enabled = true;
             _diceAnimator.Play("Roll");
             yield return new WaitForSeconds(_diceAnimator.GetCurrentAnimatorStateInfo(0).length-0.3f);
-            
-            //yield return null;
             _diceAnimator.enabled = false;
 
             string path = "Dice/Dice_" + _dice.DiceType.ToString() + "_" + number.ToString();
             _diceUIRenderer.sprite = ResourceLoader.LoadSprite(path);
+            GameManager.I.Sound.DiceDetermine();
             _diceUIRenderer.transform.DOScale(1f, 0.3f).From(1.3f).SetEase(Ease.InBack);
             onCompleted?.Invoke();
         }
@@ -194,6 +195,7 @@ namespace Cardinals
                 }
                 return;
             }
+            if (GameManager.I.Stage.Board.IsTileDoingLevelUp) return;
 
             if (eventData.button== PointerEventData.InputButton.Left)
             {

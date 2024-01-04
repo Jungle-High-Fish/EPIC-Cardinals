@@ -21,6 +21,7 @@ namespace Cardinals.Board {
         public Tile this[int x, int y] => _boardBuilder is NormalBoardBuilder ? (_boardBuilder as NormalBoardBuilder)[x, y] : null;
         public List<Tile> TileSequence => _tileSequence;
         public bool IsBoardSquare => _boardBuilder is NormalBoardBuilder;
+        public bool IsTileDoingLevelUp => _tileSequence.Any(t => t.TileMagic.IsDoingLevelUp);
 
         public IBoardInputHandler BoardInputHandler => _boardInputHandler;
 
@@ -154,7 +155,7 @@ namespace Cardinals.Board {
             return null;
         }
 
-        public Tile GetRandomTile(bool includeCorner = true)
+        public Tile GetRandomTile(bool includeCorner = true, bool includePlayer = true)
         {
             if (_boardBuilder is CircleBoardBuilder) {
                 includeCorner = true;
@@ -171,6 +172,11 @@ namespace Cardinals.Board {
                     list = _tileSequence.Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence).ToList();
                 } else {
                     list = _tileSequence;
+                }
+
+                if (!includePlayer)
+                {
+                    list = list.Where(t => t != GameManager.I.Player.OnTile).ToList();
                 }
                 var idx = Random.Range(0, list.Count());
                 return list[idx];

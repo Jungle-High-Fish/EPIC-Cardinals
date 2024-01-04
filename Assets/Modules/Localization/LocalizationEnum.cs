@@ -19,6 +19,8 @@ namespace Cardinals {
         UI_ROULETTE_SPIN,
         UI_TILE_SEALED,
         UI_TILE_SEALED_INFO,
+        UI_TILE_CURSE,
+        UI_TILE_CURSE_ABOUT,
         STAGE_SUSPICIOUS_MEADOW,
         TILE_MAGIC_ATTACK_NAME,
         TILE_MAGIC_ATTACK_EXPLAIN,
@@ -212,7 +214,12 @@ namespace Cardinals {
         OPTION_CONTINUE,
         OPTION_SETTING,
         OPTION_MAINMENU,
-        OPTION_QUIT
-
+        OPTION_QUIT,
+        UI_ITEM_USE,
+        UI_ITEM_REMOVE,
+        UI_ITEM_NO_MORE_ITEM,
+        UI_GETDICE,
+        UI_DICE_TITLE,
+        UI_DICE_TRADE
     }
 }

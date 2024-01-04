@@ -17,11 +17,13 @@ namespace Cardinals.UI {
 
         public void Init() {
             _closeButton.Get(gameObject).onClick.AddListener(() => {
+                GameManager.I.Sound.TitleButtonClick();
                 gameObject.SetActive(false);
             });
         }
 
         public void Show(List<(string, DateTime)> localSaveFileList, List<(string, DateTime)> cloudSaveFileList) {
+            GameManager.I.Sound.TitleButtonClick();
             Clear();
             gameObject.SetActive(true);
             localSaveFileList.Sort((a, b) => b.Item2.CompareTo(a.Item2));

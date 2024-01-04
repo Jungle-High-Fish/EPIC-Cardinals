@@ -58,6 +58,7 @@ namespace Cardinals.UI {
 
         private BoardEventType _prevEventType = BoardEventType.Empty;
         private TileMagicType _prevMagicType = TileMagicType.None;
+        int prevLevel = 0;
 
         private float _prevExp = 0;
         
@@ -179,10 +180,11 @@ namespace Cardinals.UI {
 
         private void ShowNormalTileInfo() {
             bool needUpdateDescription = false;
-            if (_prevMagicType != _tile.TileMagic.Type) {
+            if (_prevMagicType != _tile.TileMagic.Type || prevLevel != _tile.Level) {
                 needUpdateDescription = true;
             }
             _prevMagicType = _tile.TileMagic.Type;
+            prevLevel = _tile.Level;
 
             _header.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
             _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
@@ -193,11 +195,18 @@ namespace Cardinals.UI {
             }
             _prevExp = _tile.Exp;
 
-            _levelText.Get(gameObject).text = $"Lv. {_tile.Level}";
-            _expText.Get(gameObject).text = $"{_tile.Exp}/{Constants.GameSetting.Tile.LevelUpExp[_tile.Level]}";
+            _levelText.Get(gameObject).text = $"Lv. {(_tile.Level < Constants.GameSetting.Tile.MaxLevel ? _tile.Level : "MAX")}";
+            
+            if (_tile.Level < Constants.GameSetting.Tile.MaxLevel) {
+                _expText.Get(gameObject).text = $"{_tile.Exp}/{Constants.GameSetting.Tile.LevelUpExp[_tile.Level]}";
+            } else {
+                _expText.Get(gameObject).text = $"-/-";
+            }
 
             _expBar.Get(gameObject).transform.localScale = new Vector3(
-                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1f), 
+                _tile.Level < Constants.GameSetting.Tile.MaxLevel ?
+                Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1f) :
+                1f, 
                 1f, 
                 1f
             );
@@ -214,8 +223,15 @@ namespace Cardinals.UI {
         }
 
         private void UpdateExp() {
+            float expRatio;
+            if (_tile.Level < Constants.GameSetting.Tile.MaxLevel) {
+                expRatio = Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1);
+            } else {
+                expRatio = 1;
+            }
+
             _expBar.Get(gameObject).transform
-                .DOScaleX(Mathf.Clamp(_tile.Exp / (float)Constants.GameSetting.Tile.LevelUpExp[_tile.Level], 0, 1f), 0.4f)
+                .DOScaleX(expRatio, 0.4f)
                 .SetEase(Ease.OutCubic);
             _levelGuage.Get(gameObject).transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 3, 0);
         }

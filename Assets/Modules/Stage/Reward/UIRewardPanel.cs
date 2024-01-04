@@ -1,8 +1,10 @@
+using Cardinals.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using Cardinals.Game;
 using Cardinals.UI;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using Util;
 
@@ -12,6 +14,8 @@ namespace Cardinals.UI
     {
         [Header("Component")]
         [SerializeField] private Transform _rewardsTr;
+        [SerializeField] private GameObject _rewardMsgObj;
+        [SerializeField] private TextMeshProUGUI _rewardMsgTMP;
         
         private GameObject _rewardItemPrefab;
     
@@ -34,12 +38,13 @@ namespace Cardinals.UI
             foreach (var reward in rewards)
             {
                 var obj = Instantiate(RewardItemPrefab, _rewardsTr);
-                obj.GetComponent<Cardinals.UI.UIRewardItem>().Init(reward);
+                obj.GetComponent<UIRewardItem>().Init(reward);
             }
         }
 
         public void On()
         {
+            _rewardMsgObj.SetActive(false);
             if (!gameObject.activeSelf)
             {
                 gameObject.SetActive(true);
@@ -50,11 +55,72 @@ namespace Cardinals.UI
             }
         }
 
+        private bool _selectedCancel;
+        public IEnumerator ActivePanelWaitCancel(IEnumerable<Reward> rewards)
+        {
+            ClearItem();
+            Set(rewards);
+            yield return new WaitForSeconds(.05f);
+            On();
+
+            _selectedCancel = false;
+            yield return new WaitUntil(() => _selectedCancel || _rewardsTr.childCount == 0);
+            
+            gameObject.SetActive(false);
+            ClearItem();
+        }
+
+        private void ClearItem()
+        {
+            for (int i = _rewardsTr.childCount - 1; i >= 0; i--)
+            {
+                Destroy(_rewardsTr.GetChild(i).gameObject);
+            }
+        }
+
+        public void Off()
+        {
+            _selectedCancel = true;
+        }
+
         public void UpdateSize()
         {
             GetComponent<GridSizeUpdator>().Resizing();
         }
-    
+
+
+        public IEnumerator GetRandomPotionEvent()
+        {
+            var potion =  GameManager.I.Stage.GetRandomPotion();
+            var reward = new Reward(type: RewardType.Potion, value: (int)potion);
+            yield return GameManager.I.UI.UIRewardPanel.ActivePanelWaitCancel(new List<Reward>(){reward});
+        }
+
+        private float timer = 0;
+        public void PrintMessage(string msg)
+        {
+            _rewardMsgObj.SetActive(true);
+            _rewardMsgTMP.text = msg;
+            _rewardMsgObj.GetComponent<GridSizeUpdator>().Resizing();
+            
+            StartCoroutine(OffMsgObj());
+        }
+
+        IEnumerator OffMsgObj()
+        {
+            timer = 1.5f;
+            while (timer > 0)
+            {
+                yield return new WaitForSeconds(.1f);
+                timer-= .1f;
+            }
+            _rewardMsgObj.SetActive(false);
+        }
+
+        public void OffMsgPanel()
+        {
+            timer = 0;
+        }
         
     }
 

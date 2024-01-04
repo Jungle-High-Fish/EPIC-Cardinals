@@ -6,6 +6,7 @@ using DG.Tweening;
 using Util;
 using Cardinals.Enums;
 using System;
+using System.Linq;
 
 namespace Cardinals.Board {
 
@@ -234,7 +235,7 @@ namespace Cardinals.Board {
 			.OnComplete(AnimationComplete(TileAnimationType.Rotate360))
 			.SetAutoKill(false).Pause();
 			
-			_animationDict.Add(TileAnimationType.Rotate360, (rotate360Animation, 1.5f, 0));
+			_animationDict.Add(TileAnimationType.Rotate360, (rotate360Animation, 2f, 0));
 			return rotate360Animation;
 		}
 

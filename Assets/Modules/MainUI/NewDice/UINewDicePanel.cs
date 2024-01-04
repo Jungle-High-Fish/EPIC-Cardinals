@@ -1,4 +1,6 @@
 using System;
+using Cardinals.Enums;
+using Cardinals.Game;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -14,9 +16,11 @@ namespace Cardinals.UI.NewDice
     {
         [Header("Component")] 
         [SerializeField] private TextMeshProUGUI _headerTMP;
+        [SerializeField] private TextMeshProUGUI _changedDiceTMP;
         [SerializeField] Button _tradeBTN;
+        [SerializeField] Button _rerollBTN;
         [SerializeField] Button _cancelBTN;
-        
+
         [Header("Effect")]
         [SerializeField] private GameObject _newDiceCoverObj;
         [SerializeField] private Transform _newDiceCoverIcon;
@@ -36,7 +40,14 @@ namespace Cardinals.UI.NewDice
         void Start()
         {
             _tradeBTN.onClick.AddListener(B_Trade);
+            _rerollBTN.onClick.AddListener(B_Reroll);
             _cancelBTN.onClick.AddListener(B_Cancel);
+            _changedDiceTMP.text = GameManager.I.Localization.Get(LocalizationEnum.UI_GETDICE);
+            _headerTMP.text = GameManager.I.Localization.Get(LocalizationEnum.UI_DICE_TITLE);
+            _tradeBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.UI_DICE_TRADE];
+            _rerollBTN.GetComponentInChildren<TextMeshProUGUI>().text
+                = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT3];
 
             _backupCoverPos = _newDiceCoverObj.transform.position;
             _backupIconPos = _newDiceCoverIcon.position;
@@ -47,7 +58,8 @@ namespace Cardinals.UI.NewDice
         {
             gameObject.SetActive(true);
             _tradeEvent = tradeAction;
-            
+            _rerollBTN.interactable = false;
+
             if (_newDice != newDice)
             {
                 _newDice = newDice;
@@ -60,6 +72,7 @@ namespace Cardinals.UI.NewDice
                 _newDiceCoverIcon.DOPunchPosition(new Vector3(10, 10), .6f)
                     .OnComplete(() =>
                     {
+                        _rerollBTN.interactable = true;
                         _newDiceInfoTr.transform.localScale = Vector3.zero;
                         _newDiceCoverObj.SetActive(false);
                         _newDiceInfoTr.transform.DOScale(1, 0.1f).SetEase(Ease.InQuad)
@@ -99,6 +112,7 @@ namespace Cardinals.UI.NewDice
 
             _selectedUIDice = dice;
             _tradeBTN.interactable = _selectedUIDice is not null;
+            
         }
         
         void B_Trade()
@@ -121,6 +135,20 @@ namespace Cardinals.UI.NewDice
         void B_Cancel()
         {
             gameObject.SetActive(false);
+        }
+
+        void B_Reroll()
+        {
+            if (GameManager.I.Player.PlayerInfo.Gold < 2)
+            {
+                _rerollBTN.transform.DOShakePosition(0.6f);
+                return;
+            }
+            GameManager.I.Player.PlayerInfo.UseGold(2);
+            EnemyGradeType type = (GameManager.I.Stage.CurEvent as BattleEvent).EnemyGrade;
+            Dice newDice=GameManager.I.Stage.GetRewardDice(type);
+            Init(newDice, _tradeEvent);
+
         }
     }
 }

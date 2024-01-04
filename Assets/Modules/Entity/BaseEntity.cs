@@ -275,9 +275,9 @@ namespace Cardinals
         protected void ResetDefenseCount(int resetValue = 0) => DefenseCount = resetValue;
         public void AddDefenseCount(int value)
         {
-            GameManager.I.Sound.BombNormalBall();
-            if(CheckBuffExist(BuffType.Powerless))
-                value = (int)Math.Ceiling((float) value / 2);
+            GameManager.I.Sound.GetDefense();
+            if (CheckBuffExist(BuffType.Powerless))
+                value = (int)Math.Floor((float) value / 2);
 
             DefenseCount += value;
         }

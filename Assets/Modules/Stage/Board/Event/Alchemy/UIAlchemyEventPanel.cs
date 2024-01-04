@@ -118,7 +118,7 @@ namespace Cardinals.BoardEvent.Alchemy
                         GameManager.I.Stage.AddGold(_getMoneyValue);
                         break;
                     case BoardEventAlchemyType.GetRandomPotion:
-                        GameManager.I.Stage.AddRandomPotion();
+                        yield return GameManager.I.UI.UIRewardPanel.GetRandomPotionEvent();
                         break;
                     case BoardEventAlchemyType.AllTileExp:
                         foreach (var tile in GameManager.I.Stage.Board.TileSequence)
@@ -146,6 +146,7 @@ namespace Cardinals.BoardEvent.Alchemy
         
         public void SelectedItem(UIDice dice)
         {
+            GameManager.I.Sound.DiceDetermine();
             if (!gameObject.activeSelf) return;
             
             // 기존 선택한 항목이 존재한다면 선택 취소 처리
@@ -161,6 +162,7 @@ namespace Cardinals.BoardEvent.Alchemy
         
         void B_Cancel()
         {
+            GameManager.I.Sound.DiceDetermine();
             _cancel = true;
             gameObject.SetActive(false);
         }

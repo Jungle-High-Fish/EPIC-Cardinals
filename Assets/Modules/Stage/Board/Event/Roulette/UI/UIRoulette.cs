@@ -37,7 +37,7 @@ namespace Cardinals.BoardEvent.Roulette
             _spinBTN.onClick.AddListener(B_Spin);
         }
 
-        public void Init()
+        public IEnumerator Execute()
         {
             _spinBTN.GetComponentInChildren<TextMeshProUGUI>().text
                 = GameManager.I.Localization[LocalizationEnum.UI_ROULETTE_SPIN];
@@ -45,14 +45,20 @@ namespace Cardinals.BoardEvent.Roulette
             gameObject.SetActive(true);
             _resultObj.SetActive(false);
             Roulette.Init();
+
+            _waitSpinButton = false;
+            yield return new WaitUntil(() => _waitSpinButton);
+            yield return Roulette.Spin(Get);
         }
+
+        private bool _waitSpinButton;
 
         private void B_Spin()
         {
-            Roulette.Spin(Get);
+            _waitSpinButton = true;
         }
 
-        private void Get(RoulettePieceDataSO data)
+        private IEnumerator Get(RoulettePieceDataSO data)
         {
             Debug.Log(data.type);
             switch (data.type)
@@ -71,10 +77,10 @@ namespace Cardinals.BoardEvent.Roulette
                 //     GameManager.I.Stage.GetCardRange(1, 4);
                 //     break;
                 case BoardEventRoulette.RandomPotion:
-                    GameManager.I.Stage.AddRandomPotion();
+                    yield return GameManager.I.UI.UIRewardPanel.GetRandomPotionEvent(); 
                     break;
                 case BoardEventRoulette.RandomTileGradeUp:
-                    var tile = GameManager.I.Stage.Board.GetRandomTile(false);
+                    var tile = GameManager.I.Stage.Board.GetRandomTile(false, false);
                     tile.TileMagic.GainExpToNextLevel();
                     break;
                 case BoardEventRoulette.ReducedHp:
@@ -93,15 +99,29 @@ namespace Cardinals.BoardEvent.Roulette
                     throw new ArgumentOutOfRangeException();
             }
             _resultObj.SetActive(true);
-            _resultTMP.SetLocalizedText(data.description);
-            StartCoroutine(Close());
+
+            float waitTime = 0;
+            switch (data.type)
+            {
+                case BoardEventRoulette.RandomPotion:
+                case BoardEventRoulette.GetRandomDice:
+                    break;
+                default:
+                    _resultTMP.gameObject.SetActive(true);
+                    _resultTMP.SetLocalizedText(data.description);
+                    waitTime = 2f;
+                    break;
+            }
+            
+            StartCoroutine(Close(waitTime));
         }
 
-        IEnumerator Close()
+        IEnumerator Close(float waitTime)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(waitTime);
             GameManager.I.UI.UIEndTurnButton.Activate();
             gameObject.SetActive(false);
+            _resultTMP.gameObject.SetActive( false);
         }
     }
 }

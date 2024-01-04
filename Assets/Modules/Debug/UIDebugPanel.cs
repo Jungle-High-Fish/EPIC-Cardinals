@@ -77,6 +77,10 @@ namespace Cardinals.Test {
                 GameManager.I.Stage.Enemies.ForEach(e => e.Heal(int.Parse(s)));
             });
 
+            AddInputField("경험치 1", (string s) => {
+                GameManager.I.Stage.Board[int.Parse(s)].TileMagic.GainExp(1);
+            });
+
             Hide();
         }
 

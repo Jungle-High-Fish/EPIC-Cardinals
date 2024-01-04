@@ -52,6 +52,8 @@ namespace Cardinals.Game {
         private RewardBox _rewardBox;
         private StartFlag _startFlag;
 
+        public bool IsPlayerTurn { get; set; }
+
         public RewardBox RewardBox
         {
             get
@@ -173,7 +175,7 @@ namespace Cardinals.Game {
 
                 if (!evt.IsClear)
                 {
-                    GameManager.I.GameOver();
+                    yield return GameManager.I.GameOver();
                     yield break;
                 }
 
@@ -557,7 +559,7 @@ namespace Cardinals.Game {
                         GameManager.I.UI.UIShop.Init();
                         break;
                     case BoardEventType.Roulette:
-                        GameManager.I.UI.UIRoulette.Init();
+                        GameManager.I.UI.UIRoulette.Execute();
                         break;
                     case BoardEventType.Number:
                         GameManager.I.UI.UIDiceEvent.Init();

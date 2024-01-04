@@ -265,10 +265,10 @@ namespace Cardinals
             GameEnd();
         }
 
-        public void GameOver()
+        public IEnumerator GameOver()
         {
-            StartCoroutine(GameOverFlow());
             GameEnd();
+            yield return GameOverFlow();
         }
 
         IEnumerator GameOverFlow()
@@ -278,6 +278,7 @@ namespace Cardinals
             UI.CanvasInactive(); // UI 닫기
             CurrentEnemies.FirstOrDefault()?.gameObject.SetActive(false); // 몬스터 disable
             Player.SetGameOver(); // 플레이어 처리
+            Player.transform.SetParent(GameObject.Find("MapObject").transform);
             
             // 카메라 줌인
             yield return CameraController.PlayerZoomIn();

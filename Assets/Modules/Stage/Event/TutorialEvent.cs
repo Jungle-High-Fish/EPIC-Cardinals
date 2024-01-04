@@ -45,7 +45,7 @@ namespace Cardinals.Tutorial
             InitEnemy(_enemies, CheckEnemyKillQuest);
             GameManager.I.CurrentEnemies = _enemies;
             enemyGradeType = _enemies.First().EnemyData.enemyGradeType;
-
+            EnemyGrade = _enemies.First().EnemyData.enemyGradeType;
             // 카드 매니저 세팅
             diceManager.OnBattle(isTutorial:true);
 
