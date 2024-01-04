@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
   m_Name: PoPo
   m_EditorClassIdentifier: 
-  enemyName: "\uBF40\uBF40"
+  enemyName: MONSTER_POPO
   enemyGradeType: 2
   enemyType: 4
   prefab: {fileID: 4835928436726365699, guid: a2347a273a233d74d92218aabf94340d, type: 3}

@@ -95,7 +95,9 @@ namespace Cardinals {
 
             string enemiesStr = "";
             for (int i = 0; i < enemyType.Count; i++) {
-                enemiesStr += $"{EnemyDataSO.Data(enemyType[i]).enemyName}";
+                enemiesStr += GameManager.I.Localization.Get(
+                    (LocalizationEnum)Enum.Parse(typeof(LocalizationEnum), EnemyDataSO.Data(enemyType[i]).enemyName)
+                );
                 if (i != enemyType.Count - 1) {
                     enemiesStr += "/";
                 }
