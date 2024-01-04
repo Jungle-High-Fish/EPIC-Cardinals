@@ -11,14 +11,16 @@ namespace Cardinals.Title
         private TileMaker _tile;
         private Animator _animator;
         private EnvController _env;
-        
+
+        private IEnumerator _flow;
         [Button]
         public void StartFlow()
         {
             _tile = FindObjectOfType<TileMaker>();
             _animator = GetComponentInChildren<Animator>();
             _env = FindObjectOfType<EnvController>();
-            StartCoroutine(Flow());
+            _flow = Flow();
+            StartCoroutine(_flow);
         }
         
         public IEnumerator Flow()
@@ -34,6 +36,12 @@ namespace Cardinals.Title
                 yield return _tile.MoveFlow(interval);
                 yield return new WaitForSeconds(interval);
             }
+        }
+
+        public void CreditMode()
+        {
+            StopCoroutine(_flow);
+            _animator.Play("InfinityWin");
         }
     }
 
