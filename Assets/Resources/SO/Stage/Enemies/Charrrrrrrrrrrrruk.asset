@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
   m_Name: Charrrrrrrrrrrrruk
   m_EditorClassIdentifier: 
-  enemyName: 9
+  enemyName: MONSTER_CHARRRRRRRRRRRRRUK
   enemyGradeType: 3
   enemyType: 11
   prefab: {fileID: 8525769555492493473, guid: c6b75564f06e3684b85fcd3313c35c3b, type: 3}

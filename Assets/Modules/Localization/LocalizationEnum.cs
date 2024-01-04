@@ -221,6 +221,17 @@ namespace Cardinals {
         UI_GETDICE,
         UI_DICE_TITLE,
         UI_DICE_TRADE,
-        UI_TUTORIAL_SKIP
+        UI_TUTORIAL_SKIP,
+        MONSTER_THEROCK,
+        MONSTER_POPO,
+        MONSTER_PIPI,
+        MONSTER_DOLDOL,
+        MONSTER_CHARRRRRRRRRRRRRUK,
+        MONSTER_NULLUNULLU,
+        MONSTER_TWETWE,
+        MONSTER_MUMU,
+        MONSTER_PAZIZIZIZIC,
+        MONSTER_KROL,
+        MONSTER_PICPIC,
     }
 }

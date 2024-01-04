@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
   m_Name: PiPi
   m_EditorClassIdentifier: 
-  enemyName: "\uC090\uC090"
+  enemyName: MONSTER_PIPI
   enemyGradeType: 2
   enemyType: 3
   prefab: {fileID: 1532464485757914800, guid: 373ee33b5844f5341b510757c420aaa5, type: 3}
