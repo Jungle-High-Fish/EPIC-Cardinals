@@ -9,6 +9,7 @@ using Util;
 using Sirenix.OdinInspector;
 using Cardinals.Board;
 using System;
+using Steamworks.Data;
 
 namespace Cardinals.Game
 {
@@ -206,6 +207,11 @@ namespace Cardinals.Game
                 
                 enemy.DieEvent += () =>
                 {
+                    if (enemies[0].EnemyData.enemyType == EnemyType.TweTwe)
+                    {
+                        var ach = new Achievement("TweTwe_TakeDown");
+                        ach.Trigger();
+                    }
                     enemies.Remove(enemy);
                     if (enemies.Count> 0)
                     {

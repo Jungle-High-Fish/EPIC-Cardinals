@@ -1,4 +1,5 @@
 using Cardinals.Enums;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,10 @@ namespace Cardinals.Test {
 
             AddInputField("경험치 1", (string s) => {
                 GameManager.I.Stage.Board[int.Parse(s)].TileMagic.GainExp(1);
+            });
+
+            AddButton("도전과제 초기화", () => {
+                SteamUserStats.ResetAll(true);
             });
 
             Hide();
