@@ -25,6 +25,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _buttonClick;
         [SerializeField] private AudioClip _titlebuttonClick;
         [SerializeField] private AudioClip _getCoin;
+        [SerializeField] private AudioClip _getPotion;
         [SerializeField] private AudioClip _turnAlert;
         [SerializeField] private AudioClip _blessDrop;
 
@@ -124,6 +125,12 @@ namespace Cardinals
             _effectAudioClipQueue.Enqueue(_blessDrop);
         }
 
+        public void GetPotion()
+        {
+            if (_getPotion == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getPotion);
+        }
 
         #endregion
 
