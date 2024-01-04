@@ -1,5 +1,6 @@
 using Cardinals.Title;
 using Cardinals.UI;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace Cardinals
         [Header("New Title Info ")]
         [SerializeField] private TileMaker _tileMaker;
         [SerializeField] private PlayerControlInTitle _playerControlInTitle;
+        public PlayerControlInTitle PlayerControlInTitle => _playerControlInTitle;
 
         [Header("Loading UI")]
         [SerializeField] private UILoading _loadingUI;
@@ -151,6 +153,12 @@ namespace Cardinals
         {
             GameManager.I.Sound.TitleButtonClick();
             Application.Quit();
+        }
+
+        [Button]
+        public void OnCredit()
+        {
+            GetComponent<CreditController>().ShowCredit();
         }
     }
 }
