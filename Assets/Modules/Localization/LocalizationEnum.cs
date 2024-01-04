@@ -220,6 +220,7 @@ namespace Cardinals {
         UI_ITEM_NO_MORE_ITEM,
         UI_GETDICE,
         UI_DICE_TITLE,
-        UI_DICE_TRADE
+        UI_DICE_TRADE,
+        UI_TUTORIAL_SKIP
     }
 }
