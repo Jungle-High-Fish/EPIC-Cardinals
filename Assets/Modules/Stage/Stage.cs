@@ -31,11 +31,11 @@ namespace Cardinals.Game
         
         public int Index { get; private set; }
 
-        public void Init(int index, StageEventList[] events=null) {
+        public void Init(int index, StageEventList[] events=null, bool skipTutorial=false) {
             if (events != null) {
                 _events = events.ToList().ConvertAll((e) => _eventPool.StageEventBindDataList.Find((d) => d.StageEventName == e).EventData).ToArray();
             } else {
-                GenerateEventsFromSequence();
+                GenerateEventsFromSequence(skipTutorial);
             }
 
             for (int i = 0; i < _events.Length; i++)
@@ -73,7 +73,7 @@ namespace Cardinals.Game
             }
         }
 
-        public void GenerateEventsFromSequence()
+        public void GenerateEventsFromSequence(bool skipTutorial)
         {
             int t = 0, c = 0, e = 0, b = 0, en = 0, bless = 0;
 
@@ -84,11 +84,20 @@ namespace Cardinals.Game
             var endingList = GetEventListFromPool(StageEventType.DemoClearEnding);
             var blessList = GetEventListFromPool(StageEventType.Bless);
 
-            _events = new BaseEvent[_eventSequence.Length];
-            _eventNames = new StageEventList[_eventSequence.Length];
-            for (int i = 0; i < _eventSequence.Length; i++)
+            StageEventType[] eventSequence;
+            if (skipTutorial)
             {
-                switch (_eventSequence[i])
+                eventSequence = _eventSequence.Where((e) => e != StageEventType.Tutorial).ToArray();
+            } else {
+                eventSequence = _eventSequence.Where((e) => true).ToArray();
+            }
+
+            _events = new BaseEvent[eventSequence.Length];
+            _eventNames = new StageEventList[eventSequence.Length];
+
+            for (int i = 0; i < eventSequence.Length; i++)
+            {
+                switch (eventSequence[i])
                 {
                     case StageEventType.Tutorial:
                         _events[i] = tutorialList[t].EventData;
