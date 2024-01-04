@@ -33,7 +33,7 @@ namespace Cardinals.Title {
             _tutorialCheckPanelTr.Get(gameObject).localScale = Vector3.zero;
             _tutorialCheckPanelTr.Get(gameObject).gameObject.SetActive(true);
 
-            _tutorialCheckPanelTr.Get(gameObject).DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
+            _tutorialCheckPanelTr.Get(gameObject).DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
         }
 
         private void OnConfirm() {
