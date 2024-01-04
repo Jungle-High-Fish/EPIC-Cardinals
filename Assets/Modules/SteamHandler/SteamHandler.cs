@@ -49,6 +49,7 @@ namespace Cardinals {
                     }
 
                     if (friend.Name == "ytw0113") {
+                        friend.SendMessage("발더스를해야만해..");
                         friend.SendMessage("와 샌즈!");
                     }
                 }
