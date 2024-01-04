@@ -13,6 +13,7 @@ using Cardinals.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Resources = Cardinals.Constants.FilePath.Resources;
+using Cardinals.Log;
 
 namespace Cardinals
 {
@@ -31,6 +32,7 @@ namespace Cardinals
         
         private GameSetting _gameSetting;
         private Localization _localization;
+        private LogManager _logManager;
         private SteamHandler _steamHandler;
         private SaveSystem _saveSystem;
 
@@ -65,9 +67,9 @@ namespace Cardinals
         }
 
         [Button]
-        public void GameStart(SaveFileData saveFileData=null)
+        public void GameStart(SaveFileData saveFileData=null, bool skipTutorial=false)
         {
-            StartCoroutine(LoadMainGame(saveFileData));
+            StartCoroutine(LoadMainGame(saveFileData, skipTutorial));
         }
 
         public void GoToTitle() {
@@ -78,6 +80,7 @@ namespace Cardinals
         private void Start() {
             SteamHandlerInit();
             SaveSystemInit();
+            LogManagerInit();
 
             LoadGameSetting();
             GenerateCoreObjects();
@@ -128,6 +131,11 @@ namespace Cardinals
             _saveSystem = new SaveSystem();
         }
 
+        private void LogManagerInit() {
+            _logManager = new LogManager();
+            _logManager.Init();
+        }
+
         private void LoadGameSetting() {
             _localization = new Localization();
 
@@ -155,20 +163,20 @@ namespace Cardinals
             PlayTime = saveFileData.PlayTime;
         }
 
-        private void MakeNewGameData() {
+        private void MakeNewGameData(bool skipTutorial) {
             _saveSystem.ClearCurrentSaveFileData();
 
             _stageRuntimeList = new List<Stage>();
             for (int i = 0; i < _stageList.Count; i++) {
                 var stage = _stageList[i];
-                stage.Init(-1);
+                stage.Init(-1, skipTutorial: skipTutorial);
                 _stageRuntimeList.Add(stage);
             }
 
             _currentStageIndex = 0;
         }
 
-        IEnumerator LoadMainGame(SaveFileData saveFileData=null) {
+        IEnumerator LoadMainGame(SaveFileData saveFileData=null, bool skipTutorial=false) {
             var titleManager = FindAnyObjectByType<TitleManager>();
             UILoading loadingUI = null;
             if (titleManager != null) {
@@ -183,7 +191,7 @@ namespace Cardinals
             }
 
             if (saveFileData == null) {
-                MakeNewGameData();
+                MakeNewGameData(skipTutorial);
             } else {
                 LoadFromSaveData(saveFileData);
             }

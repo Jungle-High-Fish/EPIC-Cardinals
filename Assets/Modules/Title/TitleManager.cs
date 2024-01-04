@@ -32,6 +32,8 @@ namespace Cardinals
         [SerializeField] private TMP_Text _characterDiceSelecterText;
         [SerializeField] private Transform _diceSelecterTr;
 
+        [SerializeField] private TitleTutorialCheck _titleTutorialCheck;
+
         [Header("New Title Info ")]
         [SerializeField] private TileMaker _tileMaker;
         [SerializeField] private PlayerControlInTitle _playerControlInTitle;
@@ -78,14 +80,16 @@ namespace Cardinals
             _characterDiceSelecterText.text 
                 = GameManager.I.Localization[LocalizationEnum.UI_INIT_DICE_SELECT];
 
+            _titleTutorialCheck.Init();
+
             Dice[] dices = new Dice[]
-              {
-                new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
-                new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
-                new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
-                new Dice(new List<int>(){ 3,3,4,4,5,5},Enums.DiceType.Normal),
-                new Dice(new List<int>(){ 3,3,4,4,5,5},Enums.DiceType.Normal),
-              };
+            {
+            new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
+            new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
+            new Dice(new List<int>(){ 1,1,2,2,3,3},Enums.DiceType.Normal),
+            new Dice(new List<int>(){ 3,3,4,4,5,5},Enums.DiceType.Normal),
+            new Dice(new List<int>(){ 3,3,4,4,5,5},Enums.DiceType.Normal),
+            };
 
             for (int i = 0; i < _diceSelecterTr.childCount; i++)
             {
@@ -122,7 +126,6 @@ namespace Cardinals
 
             
         }
-        
 
         public void NextCharacter(bool right)
         {
@@ -144,7 +147,13 @@ namespace Cardinals
         void NewGame()
         {
             GameManager.I.Sound.TitleButtonClick();
-            GameManager.I.GameStart();
+            _titleTutorialCheck.Show(() => {
+                GameManager.I.Sound.TitleButtonClick();
+                GameManager.I.GameStart(skipTutorial: false);
+            }, () => {
+                GameManager.I.Sound.TitleButtonClick();
+                GameManager.I.GameStart(skipTutorial: true);
+            });
         }
 
         void Exit()

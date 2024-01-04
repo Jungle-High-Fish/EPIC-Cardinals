@@ -885,10 +885,80 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1144595422953364743, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348903835755572933, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348903835755572933, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348903835755572933, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2314275703896700446, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2314275703896700446, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420718248033727632, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420718248033727632, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448367310839302416, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448367310839302416, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448367310839302416, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2939687205313514458, guid: 2fbab40e406d3c44fbf5c3255f3af489,
         type: 3}
       propertyPath: m_Name
       value: Debug Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314244829451315463, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181859445614783446, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_Size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181859445614783446, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7594017338458121868, guid: 2fbab40e406d3c44fbf5c3255f3af489,
         type: 3}
@@ -993,6 +1063,26 @@ PrefabInstance:
     - target: {fileID: 7594017338458121868, guid: 2fbab40e406d3c44fbf5c3255f3af489,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034701610285238219, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034701610285238219, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034701610285238219, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034701610285238219, guid: 2fbab40e406d3c44fbf5c3255f3af489,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
