@@ -122,7 +122,7 @@ namespace Cardinals.Tutorial
                 yield return GameManager.I.Player.OnTurn();
                 CheckTurnEndQuest();
 
-                if (CheckPlayerWin) break;
+                if (CheckEnemyWin || CheckPlayerWin) break;
 
                 // 버프 처리
                 player.OnBuff();
@@ -150,7 +150,7 @@ namespace Cardinals.Tutorial
                     yield return _enemies[i].OnTurn();
                 }
 
-                if (CheckEnemyWin) break;
+                if (CheckEnemyWin||CheckPlayerWin) break;
                 
                 // 보드 관련 처리
                 yield return SummonsAction();
@@ -177,6 +177,7 @@ namespace Cardinals.Tutorial
 
             yield return GameManager.I.Stage.DiceManager.EndBattle();
             yield return stage.StartFlag.Hide();
+            GameManager.I.UI.UIAntiTouchPanel.SetActive(false);
 
             if (CheckPlayerWin)
             {
