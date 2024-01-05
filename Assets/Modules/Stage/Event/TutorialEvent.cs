@@ -12,6 +12,7 @@ using System;
 using Cardinals.Tutorial;
 using Cardinals.Game;
 using TMPro;
+using Steamworks.Data;
 
 namespace Cardinals.Tutorial
 {
@@ -182,7 +183,13 @@ namespace Cardinals.Tutorial
             if (CheckPlayerWin)
             {
                 IsClear = true;
-                
+
+                if (player.Hp == 1)
+                {
+                    var ach = new Achievement("Barely_Barely");
+                    ach.Trigger();
+                }
+
                 // 전투 종료 초기화
                 player.Win();
                 player.EndBattle();
