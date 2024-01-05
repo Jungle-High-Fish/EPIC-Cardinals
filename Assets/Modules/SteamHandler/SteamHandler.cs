@@ -7,6 +7,7 @@ using Steamworks;
 using UnityEngine;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Steamworks.Data;
 
 namespace Cardinals {
     public class SteamHandler {
@@ -117,6 +118,18 @@ namespace Cardinals {
                 "steam_display", 
                 "#StatusBattle"
             );
+        }
+
+        public bool TriggerAchievement(string key) {
+            if (!_isSteamAvailable) {
+                return false;
+            }
+
+            string achieveName = key;
+            var ach = new Achievement(achieveName);
+            ach.Trigger();
+
+            return true;
         }
 
         public bool IsCloudSaveAvailable() {

@@ -55,7 +55,7 @@ namespace Cardinals.Test {
             });
 
             AddInputField("이동", (string s) => {
-                GameManager.I.Stage.Player.MoveTo(int.Parse(s), 0.4f);
+                StartCoroutine(GameManager.I.Stage.Player.MoveTo(int.Parse(s), 0.4f));
             });
 
             AddInputField("돈 추가", (string s) => {
