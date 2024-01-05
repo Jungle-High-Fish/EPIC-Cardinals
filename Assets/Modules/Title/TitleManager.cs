@@ -45,17 +45,21 @@ namespace Cardinals
         
         
         private int curCharIdx = 0;
-        
+
         private void Start()
         {
             _newGameBTN.onClick.AddListener(ChoiceCharacter);
-            _newGameBTN.GetComponentInChildren<TextMeshProUGUI>().text 
+            _newGameBTN.GetComponentInChildren<TextMeshProUGUI>().text
                 = GameManager.I.Localization[LocalizationEnum.UI_MAIN_NEW_START];
 
-            _loadGameBTN.onClick.AddListener(() => GameManager.I.UI.SaveFileLoaderPanel.Show(
-                GameManager.I.SaveSystem.GetLocalSaveFileList(),
-                GameManager.I.SaveSystem.GetCloudSaveFileList()
-            ));
+            _loadGameBTN.onClick.AddListener(() =>
+            {
+                GameManager.I.Sound.TitleButtonClick();
+                GameManager.I.UI.SaveFileLoaderPanel.Show(
+                    GameManager.I.SaveSystem.GetLocalSaveFileList(),
+                    GameManager.I.SaveSystem.GetCloudSaveFileList()
+                    );
+            });
             _loadGameBTN.GetComponentInChildren<TextMeshProUGUI>().text 
                 = GameManager.I.Localization[LocalizationEnum.UI_MAIN_CONTINUE];
 
