@@ -8,6 +8,7 @@ using Cardinals.Enemy;
 using Cardinals.Enums;
 using Cardinals.Game;
 using DG.Tweening;
+using Steamworks.Data;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -216,10 +217,10 @@ namespace Cardinals
             
             if (buff.Type == BuffType.Burn)
             {
+                var burnBuff = Buffs.FirstOrDefault(x => x.Type == BuffType.Burn);
                 // [축복] 메테오: 적의 화상 중첩이 10이 되면, 중첩을 0으로 만들고 강력한 메테오를 소환합니다. (20 데미지)
                 if (GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessFire2))
                 {
-                    var burnBuff = Buffs.FirstOrDefault(x => x.Type == BuffType.Burn);
                     if (burnBuff != null)
                     {
                         if (burnBuff.Count >= 5)
@@ -229,6 +230,12 @@ namespace Cardinals
                             GameManager.I.Stage.Meteor();
                         }
                     }
+                }
+
+                if (burnBuff.Count >= 10)
+                {
+                    var ach = new Achievement("Burn_10");
+                    ach.Trigger();
                 }
             }
             else if (buff.Type == BuffType.Weak||buff.Type== BuffType.Powerless)

@@ -10,6 +10,7 @@ using Cardinals.Buff;
 using UnityEngine.UI;
 using Util;
 using System.Linq;
+using Steamworks.Data;
 
 namespace Cardinals
 {
@@ -24,6 +25,7 @@ namespace Cardinals
         private bool _lastDiceUsedForAction;
         private bool _isMouseOnDiceDeck;
         private int _continuousUseCount;
+        private int _continuousConfusionCount;
         private int _DiceUsedForMoveCountOnThisTurn;
         private int _diceUsedCountOnThisTurn;
         #region Tutorial
@@ -114,6 +116,7 @@ namespace Cardinals
                 _canActionUse = true;
             }
             _DiceUsedForMoveCountOnThisTurn = 0;
+            _continuousConfusionCount = 0;
             _diceUsedCountOnThisTurn = 0;
             _continuousUseCount = 0;
             _state = CardState.Idle;
@@ -586,13 +589,22 @@ namespace Cardinals
             _DiceUsedForMoveCountOnThisTurn++;
             SetDiceSelectable(false);
             StartCoroutine(Discard(_selectDiceIndex, DiceAnimationType.UseMove, () => { }));
+
+            //디버프 혼란
             if (GameManager.I.Player.CheckBuffExist(BuffType.Confusion)&&UnityEngine.Random.Range(0,2)==1)
             {
+                _continuousConfusionCount++;
+                if (_continuousConfusionCount >= 3)
+                {
+                    var ach = new Achievement("ConFused_Confused");
+                    ach.Trigger();
+                }
                 GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_CONFUSE));
                 yield return GameManager.I.Player.PrevMoveTo(num, 0.4f);
             }
             else
             {
+                _continuousConfusionCount = 0;
                 yield return GameManager.I.Player.MoveTo(num, 0.4f);
             }
 

@@ -16,6 +16,7 @@ using TMPro;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 using Cardinals.UI;
+using Steamworks.Data;
 
 namespace Cardinals.Game {
     
@@ -363,6 +364,9 @@ namespace Cardinals.Game {
         [Button]
         public void Meteor()
         {
+            var ach = new Achievement("Meteor");
+            ach.Trigger();
+
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player_Skill_Meteor);
             Instantiate(prefab);
         }
