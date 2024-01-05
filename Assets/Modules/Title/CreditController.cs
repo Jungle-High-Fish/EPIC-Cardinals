@@ -3,13 +3,15 @@ using Febucci.UI;
 using Febucci.UI.Core;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using Steamworks.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using Color = UnityEngine.Color;
+using Image = UnityEngine.UI.Image;
 
 namespace Cardinals.Title
 {
@@ -81,10 +83,14 @@ namespace Cardinals.Title
             yield return EffectSpecialThanks();
             
             _tk.SetActive(true);
+            
+            var ach = new Achievement("Thank_You");
+            ach.Trigger();
+            
             yield return new WaitForSeconds(5f);
             _tk.GetComponentsInChildren<TypewriterByCharacter>().ForEach(tw => tw.StartDisappearingText());
             yield return new WaitForSeconds(2f);
-            _tk.SetActive(false);
+            _tk.SetActive(false); 
             
             //_panel.transform.DOScale(Vector3.zero, 1f).SetEase(Ease.InElastic).OnComplete(() => { next = true; _panel.SetActive(false);});
             // next = false;
