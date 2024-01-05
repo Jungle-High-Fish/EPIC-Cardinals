@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cardinals.Game;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using Util;
@@ -16,6 +17,9 @@ namespace Cardinals.Enemy.Summon
             transform.DOMoveY(0, Random.Range(0.3f, 0.6f))
                                .SetEase(Ease.InOutElastic)
                                .OnComplete(Execute);
+
+            var evt = GameManager.I.Stage.CurEvent as BattleEvent;
+            if (evt != null) evt.ThunderCntByTurn++;
         }
 
         void Execute()
