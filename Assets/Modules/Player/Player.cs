@@ -47,7 +47,9 @@ namespace Cardinals
             _playerInfo = new PlayerInfo();
             
             _defaultRotate = Renderers.First().transform.rotation;
-            HomeReturnEvent += () => { GameManager.I.TurnCount++; };
+            HomeReturnEvent += () => { 
+                GameManager.I.TurnCount++;
+            };
         }
 
         public void SetData(PotionType[] potionList, BlessType[] blessList, int coin, int maxHp, int hp)

@@ -31,7 +31,6 @@ namespace Cardinals.UI {
                 loadAction();
             });
             _deleteButton.Get(gameObject).onClick.AddListener(() => {
-                GameManager.I.Sound.TitleButtonClick();
                 deleteAction();
                 });
         }

@@ -211,6 +211,10 @@ namespace Cardinals.Game
                     string achieveName = enemyData.enemyType.ToString() + "_Takedown";
                     var ach = new Achievement(achieveName);
                     ach.Trigger();
+
+                    if (_turn <= 1) {
+                        GameManager.I.SteamHandler.TriggerAchievement("ONE_TURN_KILL");
+                    }
                     
                     enemies.Remove(enemy);
                     if (enemies.Count> 0)
@@ -282,6 +286,10 @@ namespace Cardinals.Game
         protected void OnPlayerRound() {
             _round++;
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
+
+            if (_round >= 10) {
+                GameManager.I.SteamHandler.TriggerAchievement("DIZZY");
+            }
         }
         
         protected IEnumerator SummonsAction()

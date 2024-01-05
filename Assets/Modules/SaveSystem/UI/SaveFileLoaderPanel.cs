@@ -23,7 +23,7 @@ namespace Cardinals.UI {
         }
 
         public void Show(List<(string, DateTime)> localSaveFileList, List<(string, DateTime)> cloudSaveFileList) {
-            GameManager.I.Sound.TitleButtonClick();
+            //
             Clear();
             gameObject.SetActive(true);
             localSaveFileList.Sort((a, b) => b.Item2.CompareTo(a.Item2));
@@ -46,6 +46,7 @@ namespace Cardinals.UI {
                     () => {
                         bool result = GameManager.I.SaveSystem.Delete(Path.GetFileNameWithoutExtension(fileName), false);
                         if (result) {
+                            //
                             Show(GameManager.I.SaveSystem.GetLocalSaveFileList(), GameManager.I.SaveSystem.GetCloudSaveFileList());
                         }
                     }
@@ -78,6 +79,7 @@ namespace Cardinals.UI {
                     () => {
                         bool result = GameManager.I.SaveSystem.Delete(Path.GetFileNameWithoutExtension(fileName), true);
                         if (result) {
+                            //
                             Show(GameManager.I.SaveSystem.GetLocalSaveFileList(), GameManager.I.SaveSystem.GetCloudSaveFileList());
                         }
                     }
