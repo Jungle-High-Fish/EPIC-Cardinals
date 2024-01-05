@@ -829,8 +829,14 @@ MonoBehaviour:
   _buttonClick: {fileID: 8300000, guid: f16f1b9cacd5ddc47be0625469639adf, type: 3}
   _titlebuttonClick: {fileID: 8300000, guid: a8464350a37dd584fb4cf0470a000371, type: 3}
   _getCoin: {fileID: 8300000, guid: aad98dcd068ff4640919c8358eb6a57f, type: 3}
+  _getPotion: {fileID: 8300000, guid: f19e7f159e8f8fe4da5775c01a176033, type: 3}
   _turnAlert: {fileID: 8300000, guid: d2715a67e599763429a3aa70c6fee847, type: 3}
   _blessDrop: {fileID: 8300000, guid: 65c9193a8bc13ff40a1105b4482aaf80, type: 3}
+  _thunderBolt: {fileID: 8300000, guid: 64dd57f3fafeaf34081cc23cd2d2e380, type: 3}
+  _meteorDrop: {fileID: 8300000, guid: 701bff7573254ed4f85bc7a08e859993, type: 3}
+  _meteorBomb: {fileID: 8300000, guid: dff78f70fe786a642b0de53614274907, type: 3}
+  _tutorialClear: {fileID: 8300000, guid: fa0332c561add9e4082ec5e40b509d1c, type: 3}
+  _grassDrop: {fileID: 8300000, guid: 7c2ed55eb2bd85b418c2f471453f0712, type: 3}
   _cardClick: {fileID: 8300000, guid: 5e500ebb6df59d34b985c8112196cafc, type: 3}
   _cardDraw: {fileID: 0}
   _cardDiscard: {fileID: 0}

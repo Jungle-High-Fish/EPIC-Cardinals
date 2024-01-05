@@ -69,6 +69,7 @@ namespace Cardinals
             {
                 if(_potions[i] == null)
                 {
+                    GameManager.I.Sound.GetPotion();
                     Potion potion = EnumHelper.GetPotion(potionType);
                     _potions[i] = potion;
                     AddPotionEvent?.Invoke(i, potion);
@@ -98,6 +99,7 @@ namespace Cardinals
             {
                 if (potion.UsePotion())
                 {
+                    GameManager.I.Sound.GetPotion();
                     DeletePotion(index);
                     return true;
                 }

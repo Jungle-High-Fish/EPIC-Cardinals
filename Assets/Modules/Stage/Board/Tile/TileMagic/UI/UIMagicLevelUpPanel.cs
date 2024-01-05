@@ -86,6 +86,8 @@ namespace Cardinals.UI {
                 excludes   
             );
 
+            bool isTargetHasOnlyTwo = targetMagicTypes.Count == 2;
+
             var rnd = new System.Random();
             List<TileMagicType> initialTargetMagicTypes = targetMagicTypes.OrderBy(x => rnd.Next()).Take(2).ToList();
             targetMagicTypes.Remove(initialTargetMagicTypes[0]);
@@ -113,7 +115,12 @@ namespace Cardinals.UI {
                 _initialMagicSelectPanel.Get(gameObject).gameObject.SetActive(true);
                 _postMagicSelectPanel.Get(gameObject).gameObject.SetActive(false);
 
-                yield return _initialMagicSelectPanel.Get(gameObject).Set(initialTargetMagicTypes, OnClickMagicSlot, OnClickRefresh);
+                yield return _initialMagicSelectPanel.Get(gameObject).Set(
+                    initialTargetMagicTypes, 
+                    OnClickMagicSlot, 
+                    OnClickRefresh,
+                    isTargetHasOnlyTwo ? false : true
+                );
                 yield return new WaitUntil(() => requestHandled);
                 gameObject.SetActive(false);
             }

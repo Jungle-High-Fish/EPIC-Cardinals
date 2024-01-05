@@ -20,6 +20,7 @@ namespace Cardinals
 
         private IEnumerator MeteorCoroutine()
         {
+            GameManager.I.Sound.MeteorDrop();
             GameManager.I.LightController.SetLightNight();
             yield return new WaitForSeconds(1f);
             transform.DOMove(new Vector3(1.5f, 2, -1.5f), 2f)
@@ -37,6 +38,7 @@ namespace Cardinals
             
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
+                    GameManager.I.Sound.MeteorBomb();
                     enemies[i].Hit(10, TileMagicType.Fire);
                 }
             }

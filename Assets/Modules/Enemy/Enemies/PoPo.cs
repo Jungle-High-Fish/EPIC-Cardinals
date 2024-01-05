@@ -29,6 +29,9 @@ namespace Cardinals.Enemy
 
             DieEvent += () =>
             {
+                var evt = GameManager.I.Stage.CurEvent as BattleEvent;
+                if(evt != null) evt.KillPoPo = true;
+                
                 var pair = GameManager.I.CurrentEnemies.FirstOrDefault(e => e.GetType() == typeof(PiPi));
                 if(pair != null) 
                     pair.BerserkMode = true;

@@ -25,8 +25,15 @@ namespace Cardinals
         [SerializeField] private AudioClip _buttonClick;
         [SerializeField] private AudioClip _titlebuttonClick;
         [SerializeField] private AudioClip _getCoin;
+        [SerializeField] private AudioClip _getPotion;
         [SerializeField] private AudioClip _turnAlert;
         [SerializeField] private AudioClip _blessDrop;
+        [SerializeField] private AudioClip _thunderBolt;
+        [SerializeField] private AudioClip _meteorDrop;
+        [SerializeField] private AudioClip _meteorBomb;
+        [SerializeField] private AudioClip _tutorialClear;
+        [SerializeField] private AudioClip _grassDrop;
+
 
         [Header("Card")]
         [SerializeField] private AudioClip _cardClick;
@@ -124,6 +131,48 @@ namespace Cardinals
             _effectAudioClipQueue.Enqueue(_blessDrop);
         }
 
+        public void GetPotion()
+        {
+            if (_getPotion == null) return;
+
+            _effectAudioClipQueue.Enqueue(_getPotion);
+        }
+
+        public void ThunderBolt()
+        {
+            if (_thunderBolt == null) return;
+
+            _effectAudioClipQueue.Enqueue(_thunderBolt);
+        }
+
+
+        public void MeteorDrop()
+        {
+            if (_meteorDrop == null) return;
+
+            _effectAudioClipQueue.Enqueue(_meteorDrop);
+        }
+
+        public void MeteorBomb()
+        {
+            if (_meteorBomb == null) return;
+
+            _effectAudioClipQueue.Enqueue(_meteorBomb);
+        }
+
+        public void TutorialClear()
+        {
+            if (_tutorialClear == null) return;
+
+            _effectAudioClipQueue.Enqueue(_tutorialClear);
+        }
+
+        public void GrassDrop()
+        {
+            if (_grassDrop == null) return;
+
+            _effectAudioClipQueue.Enqueue(_grassDrop);
+        }
 
         #endregion
 

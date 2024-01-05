@@ -34,10 +34,12 @@ namespace Cardinals.UI {
         }
 
         public bool Achieve(int count) {
+            
             _currentCount += count;
             _questCount.Get(gameObject).text = $"{_currentCount}/{_questData.TargetQuests}";
 
             if (_currentCount >= _questData.TargetQuests) {
+                GameManager.I.Sound.TutorialClear();
                 _currentCount = _questData.TargetQuests;
 
                 _questTitle.Get(gameObject).color = Color.gray;

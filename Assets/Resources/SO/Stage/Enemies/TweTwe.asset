@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
   m_Name: TweTwe
   m_EditorClassIdentifier: 
-  enemyName: "\uD264\uD264\uAE30"
+  enemyName: MONSTER_TWETWE
   enemyGradeType: 1
   enemyType: 2
   prefab: {fileID: 7391424474380831586, guid: 37d0a876ccd5d9d4fae0dd2067ad2170, type: 3}
   berserkPrefab: {fileID: 0}
   turnAlertSprite: {fileID: 21300000, guid: 5082d752f0fe6474d81eaa5c0dc6733c, type: 3}
   maxHP: 25
+  spec1Sprite: {fileID: 0}

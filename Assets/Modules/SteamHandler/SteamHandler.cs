@@ -7,6 +7,7 @@ using Steamworks;
 using UnityEngine;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Steamworks.Data;
 
 namespace Cardinals {
     public class SteamHandler {
@@ -75,21 +76,29 @@ namespace Cardinals {
             string GetOrdinalNumber(int n) {
                 switch (n % 10) {
                     case 1:
-                        return n + "st";
+                        return "1";
                     case 2:
-                        return n + "nd";
+                        return "2";
                     case 3:
-                        return n + "rd";
+                        return "3";
                     default:
-                        return n + "th";
+                        return "4";
                 }
             }
 
-            string eventIdxStr = GetOrdinalNumber(eventIdx + 1).ToString();
+            string eventIdxOrdinalStr = GetOrdinalNumber(eventIdx + 1);
+            SteamFriends.SetRichPresence(
+                "eventidxordinal", 
+                eventIdxOrdinalStr
+            );
+
+            string eventIdxStr = $"{eventIdx + 1}";
 
             string enemiesStr = "";
             for (int i = 0; i < enemyType.Count; i++) {
-                enemiesStr += $"{EnemyDataSO.Data(enemyType[i]).enemyName}";
+                enemiesStr += GameManager.I.Localization.Get(
+                    (LocalizationEnum)Enum.Parse(typeof(LocalizationEnum), EnemyDataSO.Data(enemyType[i]).enemyName)
+                );
                 if (i != enemyType.Count - 1) {
                     enemiesStr += "/";
                 }
@@ -109,6 +118,18 @@ namespace Cardinals {
                 "steam_display", 
                 "#StatusBattle"
             );
+        }
+
+        public bool TriggerAchievement(string key) {
+            if (!_isSteamAvailable) {
+                return false;
+            }
+
+            string achieveName = key;
+            var ach = new Achievement(achieveName);
+            ach.Trigger();
+
+            return true;
         }
 
         public bool IsCloudSaveAvailable() {

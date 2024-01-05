@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1698d667dfd0c2d47bbc63a35c49e765, type: 3}
   m_Name: Krol
   m_EditorClassIdentifier: 
-  enemyName: "\uD06C\uB864"
+  enemyName: MONSTER_KROL
   enemyGradeType: 1
   enemyType: 1
   prefab: {fileID: 8525769555492493473, guid: 24876d21c49c26e4a86f6c4911fc7ff3, type: 3}

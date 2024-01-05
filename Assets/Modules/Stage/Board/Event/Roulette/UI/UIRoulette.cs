@@ -55,6 +55,7 @@ namespace Cardinals.BoardEvent.Roulette
 
         private void B_Spin()
         {
+            GameManager.I.Sound.DiceDetermine();
             _waitSpinButton = true;
         }
 
@@ -118,6 +119,7 @@ namespace Cardinals.BoardEvent.Roulette
 
         IEnumerator Close(float waitTime)
         {
+            
             yield return new WaitForSeconds(waitTime);
             GameManager.I.UI.UIEndTurnButton.Activate();
             gameObject.SetActive(false);

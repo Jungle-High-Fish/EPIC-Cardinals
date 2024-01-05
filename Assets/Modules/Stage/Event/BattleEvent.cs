@@ -81,6 +81,7 @@ namespace Cardinals.Game
             GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
             do // 전투 시작
             {
+                ResetTurnAchievement();
                 _turn++;
                 // 턴 UI 업데이트
                 GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
@@ -216,6 +217,10 @@ namespace Cardinals.Game
                     string achieveName = enemyData.enemyType.ToString() + "_Takedown";
                     var ach = new Achievement(achieveName);
                     ach.Trigger();
+
+                    if (_turn <= 1) {
+                        GameManager.I.SteamHandler.TriggerAchievement("ONE_TURN_KILL");
+                    }
                     
                     enemies.Remove(enemy);
                     if (enemies.Count> 0)
@@ -287,6 +292,10 @@ namespace Cardinals.Game
         protected void OnPlayerRound() {
             _round++;
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
+
+            if (_round >= 10) {
+                GameManager.I.SteamHandler.TriggerAchievement("DIZZY");
+            }
         }
         
         protected IEnumerator SummonsAction()
@@ -371,5 +380,58 @@ namespace Cardinals.Game
                 }
             }
         }
+
+        
+        #region Achievement
+        private void ResetTurnAchievement()
+        {
+            ThunderCntByTurn = 0;
+            KillPiPi = false;
+            KillPoPo = false;
+        }
+
+        private int _thunderCntByTurn;
+
+        public int ThunderCntByTurn
+        {
+            get => _thunderCntByTurn;
+            set
+            {
+                _thunderCntByTurn = value;
+                if (_thunderCntByTurn == 3)
+                {
+                    var ach = new Achievement("Tingling");
+                    ach.Trigger();
+                }
+            }
+        }
+
+        private bool _killPiPi;
+        public bool KillPiPi
+        {
+            get => _killPiPi;
+            set
+            {
+                _killPiPi = value;
+                if (_killPiPi && _killPoPo) AchievementKillPiPiPoPo();
+            }
+        }
+        
+        private bool _killPoPo;
+        public bool KillPoPo {
+            get => _killPoPo;
+            set
+            {
+                _killPoPo = value;  
+                if (_killPiPi && _killPoPo) AchievementKillPiPiPoPo();
+            }
+        }
+
+        private void AchievementKillPiPiPoPo()
+        {
+            var ach = new Achievement("PiPi_PoPo_Takedown_Together");
+            ach.Trigger();
+        }
+        #endregion
     }
 }

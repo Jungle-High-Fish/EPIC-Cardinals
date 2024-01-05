@@ -88,7 +88,7 @@ namespace Cardinals.Board {
             _edgeCount = boardDataSO.edgeCount;
 
             _tileCountPerEdge = _tileCount / _edgeCount;
-
+            GameManager.I.Sound.GrassDrop();
             for (int i = 0; i < _tileCount; i++) {
                 TileData tileData = new TileData() {
                     type = i % 2 == 0 ? TileType.Defence : TileType.Attack, // 짝 수 타일은 방어, 홀 수 타일은 공격

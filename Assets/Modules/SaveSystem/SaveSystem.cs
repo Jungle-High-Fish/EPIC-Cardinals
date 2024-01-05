@@ -130,6 +130,7 @@ namespace Cardinals {
         }
 
         public bool Delete(string fileName, bool isCloudSave) {
+            GameManager.I.Sound.TitleButtonClick();
             if (isCloudSave) {
                 if (!_isCloudAvailable) {
                     return false;
