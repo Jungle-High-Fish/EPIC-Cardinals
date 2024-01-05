@@ -31,6 +31,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _thunderBolt;
         [SerializeField] private AudioClip _meteorDrop;
         [SerializeField] private AudioClip _meteorBomb;
+        [SerializeField] private AudioClip _tutorialClear;
 
 
         [Header("Card")]
@@ -156,6 +157,13 @@ namespace Cardinals
             if (_meteorBomb == null) return;
 
             _effectAudioClipQueue.Enqueue(_meteorBomb);
+        }
+
+        public void TutorialClear()
+        {
+            if (_tutorialClear == null) return;
+
+            _effectAudioClipQueue.Enqueue(_tutorialClear);
         }
 
         #endregion
