@@ -32,6 +32,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _meteorDrop;
         [SerializeField] private AudioClip _meteorBomb;
         [SerializeField] private AudioClip _tutorialClear;
+        [SerializeField] private AudioClip _grassDrop;
 
 
         [Header("Card")]
@@ -164,6 +165,13 @@ namespace Cardinals
             if (_tutorialClear == null) return;
 
             _effectAudioClipQueue.Enqueue(_tutorialClear);
+        }
+
+        public void GrassDrop()
+        {
+            if (_grassDrop == null) return;
+
+            _effectAudioClipQueue.Enqueue(_grassDrop);
         }
 
         #endregion
