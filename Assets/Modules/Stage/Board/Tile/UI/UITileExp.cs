@@ -55,6 +55,10 @@ namespace Cardinals.UI {
                 if (_prevExp != _tile.Exp) {
                     ShowExpChangeAnimation();
                 }
+                if (_tile.Level == Constants.GameSetting.Tile.MaxLevel) {
+                    _expBar.Get(gameObject).transform.localScale = new Vector3(1, 1, 1);
+                }
+                
                 _prevExp = _tile.Exp;
 
                 _expBar.Get(gameObject).color = TileMagic.Data(_tile.TileMagic.Type).elementColor;
