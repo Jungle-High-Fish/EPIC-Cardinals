@@ -15,6 +15,7 @@ using Modules.Entity.Buff;
 using MoreMountains.Feedbacks;
 using Util;
 using Cardinals.Tutorial;
+using Steamworks.Data;
 
 namespace Cardinals
 {
@@ -373,6 +374,20 @@ namespace Cardinals
             {
                 Buffs[i].EndEvent();
             }
+
+            _checkReadingAchievement = CheckReading();
+            StartCoroutine(_checkReadingAchievement);
+        }
+
+        private IEnumerator _checkReadingAchievement;
+        IEnumerator CheckReading()
+        {
+            for (int i = 0; i < 65; i++)
+            {
+                yield return new WaitForSeconds(1f);
+            }
+            var ach = new Achievement("Complete_Reading");
+            ach.Trigger();
         }
 
         public void UpdateAction(PlayerActionType type)
@@ -417,6 +432,8 @@ namespace Cardinals
 
         public void MotionIdle()
         {
+            if(_checkReadingAchievement != null) StopCoroutine(_checkReadingAchievement); // 다독왕 과제 중지
+            
             Animator.Play("Idle");
         }
         

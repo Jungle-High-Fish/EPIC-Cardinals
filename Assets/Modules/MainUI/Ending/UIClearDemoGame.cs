@@ -1,3 +1,4 @@
+using Steamworks.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using Image = UnityEngine.UI.Image;
 
 namespace Cardinals
 {
@@ -22,14 +24,16 @@ namespace Cardinals
 
         public void Init()
         {
-            _greetingsTMP.text = "안녕하세요~ 하이피쉬입니다. 앞으로 저희의 행보를 잘 지켜봐 달라규~";
+            _greetingsTMP.text = "안녕하세요~ 하이피쉬입니다.\n앞으로 저희의 행보를 잘 지켜봐 달라규~";
             _illustImg.sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Ending_ClearIllust);
         }
 
         public void On()
         {
             gameObject.SetActive(true);
+            
+            var ach = new Achievement("First_Clear");
+            ach.Trigger();
         }
     }
-
 }

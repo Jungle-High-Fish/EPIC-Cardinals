@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Steamworks.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 using Util;
@@ -43,6 +44,12 @@ namespace Cardinals.Enemy
                 var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_BoardEventObject);
                 var obj = Instantiate(prefab);
                 obj.AddComponent<BoardObject.Summon.Ryuka>().Init(tile, NewBoardObjectType.Ryuka.ToString());
+            }
+
+            if (list.Count == 0)
+            {
+                var ach = new Achievement("Cryukabouche");
+                ach.Trigger();
             }
         }
     }
