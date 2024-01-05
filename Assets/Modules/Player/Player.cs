@@ -57,6 +57,7 @@ namespace Cardinals
             potionList.ForEach(p => _playerInfo.AddPotion(p));
             blessList.ForEach(b => _playerInfo.GetBless(b));
             _playerInfo.SetGold(coin);
+            MaxHp = maxHp;
             Hp = hp;
         }
 
