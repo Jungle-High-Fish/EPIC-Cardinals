@@ -28,6 +28,10 @@ namespace Cardinals
         [SerializeField] private AudioClip _getPotion;
         [SerializeField] private AudioClip _turnAlert;
         [SerializeField] private AudioClip _blessDrop;
+        [SerializeField] private AudioClip _thunderBolt;
+        [SerializeField] private AudioClip _meteorDrop;
+        [SerializeField] private AudioClip _meteorBomb;
+
 
         [Header("Card")]
         [SerializeField] private AudioClip _cardClick;
@@ -130,6 +134,28 @@ namespace Cardinals
             if (_getPotion == null) return;
 
             _effectAudioClipQueue.Enqueue(_getPotion);
+        }
+
+        public void ThunderBolt()
+        {
+            if (_thunderBolt == null) return;
+
+            _effectAudioClipQueue.Enqueue(_thunderBolt);
+        }
+
+
+        public void MeteorDrop()
+        {
+            if (_meteorDrop == null) return;
+
+            _effectAudioClipQueue.Enqueue(_meteorDrop);
+        }
+
+        public void MeteorBomb()
+        {
+            if (_meteorBomb == null) return;
+
+            _effectAudioClipQueue.Enqueue(_meteorBomb);
         }
 
         #endregion
