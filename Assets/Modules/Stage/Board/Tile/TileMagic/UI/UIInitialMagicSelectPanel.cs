@@ -35,22 +35,23 @@ namespace Cardinals.UI {
         public IEnumerator Set(
             List<TileMagicType> tileMagicTypes, 
             Action<TileMagicType> onClickMagicSlot,
-            Func<List<TileMagicType>> onClickRefresh
+            Func<List<TileMagicType>> onClickRefresh,
+            bool isShowRefreshButton=true
         ) {
             Clear();
             _hasRefreshed = false;
 
             gameObject.SetActive(true);
             _refreshButton.Get(gameObject).onClick.RemoveAllListeners();
-            SetRefreshButton(false);
+            SetRefreshButton(false, isShowRefreshButton);
 
             yield return new WaitForSeconds(0.3f);
             yield return InitMagicSlots(tileMagicTypes, onClickMagicSlot);
 
             if (GameManager.I.Stage.Player.PlayerInfo.Gold < 2) {
-                SetRefreshButton(false);
+                SetRefreshButton(false, isShowRefreshButton);
             } else {
-                SetRefreshButton(true);
+                SetRefreshButton(true, isShowRefreshButton);
             }
             _refreshButton.Get(gameObject).onClick.AddListener(() => {
                 if (_hasRefreshed) return;
@@ -88,7 +89,12 @@ namespace Cardinals.UI {
             }
         }
 
-        private void SetRefreshButton(bool interactable) {
+        private void SetRefreshButton(bool interactable, bool isShow=true) {
+            if (!isShow) {
+                _refreshButton.Get(gameObject).gameObject.SetActive(false);
+                return;
+            }
+            _refreshButton.Get(gameObject).gameObject.SetActive(true);
             _refreshButton.Get(gameObject).interactable = interactable;
 
             Color color = _refreshButtonImage.Get(gameObject).color;
