@@ -7,6 +7,7 @@ using Util;
 using Cardinals.Enums;
 using Sirenix.OdinInspector;
 using Cardinals.Game;
+using Steamworks.Data;
 
 namespace Cardinals
 {
@@ -153,6 +154,11 @@ namespace Cardinals
         {
             GameManager.I.Sound.GetCoin();
             Gold += value;
+            if (Gold >= 10)
+            {
+                var ach = new Achievement("mElon_Musk");
+                ach.Trigger();
+            }
             UpdateGoldEvent?.Invoke(Gold);
         }
 
