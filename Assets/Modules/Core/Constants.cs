@@ -114,7 +114,8 @@ namespace Cardinals.Constants {
             public const string Prefabs_UI_Ending_SystemBubble = "UI/Ending/SystemBubble";
             public const string Prefabs_UI_Ending_PlayerResultPanel = "UI/Ending/UIPlayerResultPanel";
             public const string Prefabs_UI_Ending_ClearDemoGamePanel = "UI/Ending/UIClearDemoGamePanel";
-            
+            public const string Prefabs_UI_FadePanel = "UI/Ending/UIFadePanel";
+
             // Particle
             public const string Prefabs_Particle_Attack = "Particle/Trail";
             public const string Prefabs_Particle_FireAttack = "Particle/FireTrail";
