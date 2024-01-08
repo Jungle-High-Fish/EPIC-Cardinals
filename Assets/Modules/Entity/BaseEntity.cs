@@ -262,7 +262,7 @@ namespace Cardinals
         /// </summary>
         /// <param name="originDamage"></param>
         /// <returns></returns>
-        protected int CalculDamage(int originDamage)
+        public int CalculDamage(int originDamage)
         {
             float damage = originDamage;
 
