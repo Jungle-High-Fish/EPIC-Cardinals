@@ -3,6 +3,8 @@ using Cardinals;
 using Cardinals.Enums;
 using Cardinals.Game;
 using UnityEngine;
+using Cardinals.Board;
+using Cardinals.Buff;
 using UnityEngine.ProBuilder;
 
 namespace Cardinals.Enemy
@@ -17,7 +19,10 @@ namespace Cardinals.Enemy
             {
                 new Pattern(EnemyActionType.TileCurse, action: SpawnFireball),
                 new Pattern(EnemyActionType.Attack, 10),
+                new Pattern(EnemyActionType.UserDebuff, action: Weak),
                 new Pattern(EnemyActionType.Defense, 7),
+                new Pattern(EnemyActionType.Attack, 10),
+                new Pattern(EnemyActionType.Attack, 8),
             };
             
             
@@ -39,6 +44,11 @@ namespace Cardinals.Enemy
                 
                 tile.SetCurse(TileCurseType.Fireball, 2);
             }
+        }
+
+        void Weak()
+        {
+            GameManager.I.Player.AddBuff(new Weak(3));
         }
     }
 }
