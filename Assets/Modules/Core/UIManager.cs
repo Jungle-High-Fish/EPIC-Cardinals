@@ -44,7 +44,6 @@ namespace Cardinals
         public UIStageEffect UIStageEffect => _uiStageEffect;
         public UITurnAlert UITurnAlert => _uiTurnAlert;
         public UINotiBoardEventByTurn UINotiBoardEventByTurn => _uiNotiBoardEventByTurn;
-        
         public Canvas MainUICanvas => _mainUICanvas;
         public GameObject UIAntiTouchPanel => _uiAntiTouchPanel;
         public DescriptionArea DescCanvasDescArea { get; private set; }
@@ -80,6 +79,7 @@ namespace Cardinals
         private UIStageEffect _uiStageEffect;
         private UITurnAlert _uiTurnAlert;
         private GameObject _uiAntiTouchPanel;
+        private GameObject _uiFadePanel;
         private UINotiBoardEventByTurn _uiNotiBoardEventByTurn;
         
         private Bubble _uiSystemBubble;
@@ -184,7 +184,7 @@ namespace Cardinals
             InstantiateUIStageEffect(_systemUICanvas);
             
             InstantiateUIAntiTouchPanel(_systemUICanvas);
-            
+
             InstantiatePausePanelUI(_systemUICanvas);
             InstantiateGameSettingUI(_systemUICanvas);
             InstantiateSaveFileLoaderUI(_systemUICanvas);
