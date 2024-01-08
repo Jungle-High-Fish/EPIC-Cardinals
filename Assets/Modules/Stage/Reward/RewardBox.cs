@@ -87,7 +87,7 @@ public class RewardBox : MonoBehaviour
                 rewards.Add(new (RewardType.RandomDice, (int)grade));
                 break;
             case EnemyGradeType.Elite :
-                rewards.Add(new (RewardType.Gold, 5));
+                rewards.Add(new (RewardType.Gold, 3));
                 rewards.Add(new (RewardType.Potion));
                 rewards.Add(new (RewardType.RandomDice, (int)grade));
                 break;

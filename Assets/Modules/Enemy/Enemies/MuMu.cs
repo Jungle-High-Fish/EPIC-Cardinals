@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
 using Steamworks.Data;
@@ -18,7 +18,7 @@ namespace Cardinals.Enemy
             {
                 new Pattern(EnemyActionType.Spawn, action: SpawnRyuka),
                 new Pattern(EnemyActionType.Attack, 10),
-                new Pattern(EnemyActionType.Defense, 10)
+                new Pattern(EnemyActionType.Defense, 7)
             };
             
             Rewards = new Reward[]

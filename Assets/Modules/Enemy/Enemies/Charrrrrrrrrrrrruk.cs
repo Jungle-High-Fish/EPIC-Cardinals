@@ -1,7 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using Cardinals.Enums;
 using Cardinals.Game;
+using Cardinals.Board;
+using Cardinals.Buff;
 using UnityEngine;
 
 namespace Cardinals.Enemy
@@ -20,7 +22,8 @@ namespace Cardinals.Enemy
             {
                 new Pattern(EnemyActionType.Attack, 15),
                 new Pattern(EnemyActionType.Attack, 10),
-                new Pattern(EnemyActionType.Defense, 8),
+                new Pattern(EnemyActionType.UserDebuff, action: Powerless),
+                new Pattern(EnemyActionType.Attack, 10),
             };
             
             Rewards = new Reward[]
@@ -53,6 +56,11 @@ namespace Cardinals.Enemy
             {
                 tile.SetCurse(TileCurseType.Seal, 2);
             }
+        }
+
+        void Powerless()
+        {
+            GameManager.I.Player.AddBuff(new Powerless(3));
         }
     }
 }
