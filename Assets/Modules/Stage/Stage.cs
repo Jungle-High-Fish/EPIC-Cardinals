@@ -78,7 +78,7 @@ namespace Cardinals.Game
             int t = 0, c = 0, e = 0, b = 0, en = 0, bless = 0;
 
             var tutorialList = GetEventListFromPool(StageEventType.Tutorial);
-            var commonList = GetEventListFromPool(StageEventType.BattleCommon);
+            var commonList = GetEventListFromPool(StageEventType.BattleCommon, skipTutorial);
             var eliteList = GetEventListFromPool(StageEventType.BattleElite);
             var bossList = GetEventListFromPool(StageEventType.BattleBoss);
             var endingList = GetEventListFromPool(StageEventType.DemoClearEnding);
@@ -87,7 +87,9 @@ namespace Cardinals.Game
             StageEventType[] eventSequence;
             if (skipTutorial)
             {
-                eventSequence = _eventSequence.Where((e) => e != StageEventType.Tutorial).ToArray();
+                eventSequence 
+                    = _eventSequence.Where((e) => true).ToList()
+                    .Select((e) => e == StageEventType.Tutorial ? StageEventType.BattleCommon : e).ToArray();
             } else {
                 eventSequence = _eventSequence.Where((e) => true).ToArray();
             }
@@ -129,11 +131,15 @@ namespace Cardinals.Game
             }
         }
 
-        public List<StageEventListSO.StageEventBindData> GetEventListFromPool(StageEventType eventType) {
+        public List<StageEventListSO.StageEventBindData> GetEventListFromPool(StageEventType eventType, bool skipTutorial=false) {
             var entireList = _eventPool.StageEventBindDataList;
 
             var targetList = entireList.FindAll((e) => e.EventData.Type == eventType);
             var needCount = _eventSequence.Count((e) => e == eventType);
+
+            if (skipTutorial && eventType == StageEventType.BattleCommon) {
+                needCount += _eventSequence.Count((e) => e == StageEventType.Tutorial);
+            }
             
             Unity.Mathematics.Random random = new Unity.Mathematics.Random();
             random.InitState((uint)((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds());

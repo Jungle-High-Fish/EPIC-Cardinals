@@ -131,7 +131,7 @@ namespace Cardinals
         private void OnApplicationQuit() {
             Steamworks.SteamClient.Shutdown();
         }
-
+        
         private void SteamHandlerInit() {
             _steamHandler = new SteamHandler();
             _steamHandler.Init();
