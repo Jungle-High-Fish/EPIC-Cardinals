@@ -121,6 +121,8 @@ namespace Cardinals {
         }
 
         public bool TriggerAchievement(string key) {
+            Debug.Log($"Achievement: <{key}> Triggered");
+
             if (!_isSteamAvailable) {
                 return false;
             }

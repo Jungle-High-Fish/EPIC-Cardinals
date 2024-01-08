@@ -26,6 +26,7 @@ namespace Cardinals
         public SteamHandler SteamHandler => _steamHandler;
         public SaveSystem SaveSystem => _saveSystem;
         public SoundManager Sound => _soundManager;
+        public LogManager LogManager => _logManager;
 
         public int CurrentStageIndex => _currentStageIndex;
         public List<Stage> RuntimeStageList => _stageRuntimeList;
