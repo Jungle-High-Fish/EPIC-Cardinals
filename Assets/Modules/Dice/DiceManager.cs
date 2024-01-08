@@ -596,8 +596,7 @@ namespace Cardinals
                 _continuousConfusionCount++;
                 if (_continuousConfusionCount >= 3)
                 {
-                    var ach = new Achievement("ConFused_Confused");
-                    ach.Trigger();
+                    GameManager.I.SteamHandler.TriggerAchievement("ConFused_Confused");
                 }
                 GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_CONFUSE));
                 yield return GameManager.I.Player.PrevMoveTo(num, 0.4f);

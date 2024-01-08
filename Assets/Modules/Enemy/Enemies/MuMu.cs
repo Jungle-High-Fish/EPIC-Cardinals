@@ -48,8 +48,7 @@ namespace Cardinals.Enemy
 
             if (list.Count == 0)
             {
-                var ach = new Achievement("Cryukabouche");
-                ach.Trigger();
+                GameManager.I.SteamHandler.TriggerAchievement("Cryukabouche");
             }
         }
     }

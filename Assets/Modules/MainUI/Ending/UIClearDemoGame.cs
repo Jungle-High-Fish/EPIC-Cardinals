@@ -32,8 +32,7 @@ namespace Cardinals
         {
             gameObject.SetActive(true);
             
-            var ach = new Achievement("First_Clear");
-            ach.Trigger();
+            GameManager.I.SteamHandler.TriggerAchievement("First_Clear");
         }
     }
 }
