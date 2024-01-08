@@ -78,6 +78,12 @@ namespace Cardinals
             sceneChanger.AddComponent<SceneChanger>().ChangeScene("Title", this);
         }
 
+        public void GoToCredit()
+        {
+            GameObject sceneChanger = new GameObject("@SceneChanger");
+            sceneChanger.AddComponent<SceneChanger>().ChangeSceneCredit("Title", this);
+        }
+
         private void Start() {
             SteamHandlerInit();
             SaveSystemInit();

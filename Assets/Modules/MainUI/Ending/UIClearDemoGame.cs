@@ -30,9 +30,8 @@ namespace Cardinals
 
         public void On()
         {
-            gameObject.SetActive(true);
-            
             GameManager.I.SteamHandler.TriggerAchievement("First_Clear");
+            GameManager.I.GoToCredit();
         }
     }
 }
