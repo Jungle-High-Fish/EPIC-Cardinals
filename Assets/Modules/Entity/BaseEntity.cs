@@ -1,3 +1,4 @@
+using Cardinals.Buff;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -354,6 +355,15 @@ namespace Cardinals
                         });
                 }
             }
+        }
+
+        public Growth GetGrowthBuff()
+        {
+            if (CheckBuffExist(BuffType.Growth))
+            {
+                return Buffs.First(b => b.Type == BuffType.Growth) as Growth;
+            }
+            else return null;
         }
     }
 }

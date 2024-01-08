@@ -134,13 +134,28 @@ namespace Cardinals
 
         private void ExecutePreActionByPattern(Pattern pattern)
         {
-            switch (pattern?.Type)
+            // switch (pattern?.Type)
+            // {
+            //     case EnemyActionType.AreaAttack :
+            //         AreaAttackTiles.Clear();
+            //         pattern.PreAction(); // [TODO] Action을 통해서 공격 범위를 설정함
+            //         // [TODO] Board에서 범위 공격 범위 표시 필요
+            //         break;
+            // }
+            
+            // 현재 성장 값 적용하여 패턴 재설정
+            var growth = GetGrowthBuff();
+            if (growth != null)
             {
-                case EnemyActionType.AreaAttack :
-                    AreaAttackTiles.Clear();
-                    pattern.PreAction(); // [TODO] Action을 통해서 공격 범위를 설정함
-                    // [TODO] Board에서 범위 공격 범위 표시 필요
-                    break;
+                switch (pattern.Type)
+                {
+                    case EnemyActionType.Attack:
+                    case EnemyActionType.AreaAttack:
+                    case EnemyActionType.Defense:
+                        pattern.CalculValue = (int)(pattern.Value + growth.IncreaseValue);
+                        break;
+                    default: break;
+                }
             }
         }
 
@@ -242,5 +257,6 @@ namespace Cardinals
                 UpdatePatternEvent?.Invoke(CurPattern);
             }
         }
+        
     }
 }
