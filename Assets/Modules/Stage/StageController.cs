@@ -190,7 +190,7 @@ namespace Cardinals.Game {
             OnEventStart?.Invoke();
         }
 
-        public BlessType SelectedBless { private get; set; }
+        public BlessType SelectedBless { get; set; }
         /// <summary>
         /// 랜덤한 축복을 제공하는 플로우 입니다.
         /// </summary>
@@ -219,8 +219,6 @@ namespace Cardinals.Game {
             prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
             var totem2 = Instantiate(prefab, new Vector3(1, 0.6f, 1), Quaternion.identity).GetComponent<BlessTotem>();
             totem2.Init(bless2);
-            totem1.SelectedEvent += totem2.SelectOtherTotem;
-            totem2.SelectedEvent += totem1.SelectOtherTotem;
 
             yield return new WaitForSeconds(0.5f);
             GameManager.I.CameraController.ShakeCamera(0.2f, 5, 1);

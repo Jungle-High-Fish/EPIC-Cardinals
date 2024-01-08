@@ -22,7 +22,6 @@ namespace Cardinals.Board
         [SerializeField] private ParticleSystem _particleSystem;
 
         public Action SelectedEvent;
-        private bool _selectedComplete;
         
         public void Awake()
         {
@@ -36,9 +35,7 @@ namespace Cardinals.Board
             Vector3 pos = transform.position + transform.up * 0.8f;
             transform.position = pos + transform.up * 10f;
             transform.localScale = Vector3.zero;
-            transform.DOMove(pos, 0.5f).SetEase(Ease.InQuint).OnComplete(() => {
-                //_particleSystem.Play();
-            });
+            transform.DOMove(pos, 0.5f).SetEase(Ease.InQuint);
             transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutCubic);
 
             _baseBless = bless;
@@ -71,8 +68,7 @@ namespace Cardinals.Board
 
         public void OnMouseDown()
         {
-            if (_selectedComplete) return;
-            SelectOtherTotem();
+            if (GameManager.I.Stage.SelectedBless != default) return;
             SelectedEvent?.Invoke();
             
             GameManager.I.Stage.SelectedBless = _baseBless;
@@ -85,11 +81,6 @@ namespace Cardinals.Board
         {
             transform.LookAt(target, Vector3.up);
             transform.Rotate(0, 180, 0);
-        }
-
-        public void SelectOtherTotem()
-        {
-            _selectedComplete = true;
         }
     }
 }
