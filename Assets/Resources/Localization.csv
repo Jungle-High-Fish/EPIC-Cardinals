@@ -44,6 +44,9 @@ BUFF_DOLL_NAME,Doll,인형
 BUFF_DOLL_EXPLAIN,"If a doll is present on the board, all damage dealt is equal to 1.",보드에 인형이 있으면 모든 피해는 1이 됩니다.
 BUFF_ROTATIONRATE_NAME,<debuff=Cycle> Rotationrate,<debuff=Cycle> 회전률
 BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다."
+BUFF_GROWTH_NAME,Growth,성장
+BUFF_GROWTH_EXPLAIN,Increases attack/defense figures by 4 for every 5 turns.,5턴마다 공격/방어 수치가 4씩 증가합니다.
+BUFF_GROWTH_EXPLAIN2,It's currently up by $1., 현재 $1만큼 상승했습니다.
 BUFF_POWERLESS_NAME,<debuff=Broken> Broken,<debuff=Broken> 무력
 BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.
 BUFF_BERSERK_NAME,<debuff=Berserk> Berserk,<debuff=Berserk> 광폭화

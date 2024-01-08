@@ -116,28 +116,28 @@ namespace Cardinals.UI
             // 설정
             var key = Constants.FilePath.Resources.Enemy_Pattern + pattern.Type.ToString();
             _patternIconImg.sprite = EnemyPatternIconDict[key];
-
+            
             if (CheckSetWeakDamage(pattern.Type)) // 약화 시, 데미지 반절 적용
             {
-                if (pattern.Value != null && pattern.Value != 0)
+                if (pattern.Value != null && pattern.CalculValue != 0)
                 {
-                    float dam = (float) pattern.Value / 2;
+                    float dam = (float) pattern.CalculValue / 2;
                     _patternCountTMP.text = $"{(int) Math.Floor(dam)}";
                     _patternCountTMP.color = EnumHelper.GetColorByMagic(TileMagicType.Fire);
                 }
             }
             else if (CheckSetPowerlessDefense(pattern.Type)) // 무력 시, 방어도 반절 적용
             {
-                if (pattern.Value != null && pattern.Value != 0)
+                if (pattern.Value != null && pattern.CalculValue != 0)
                 {
-                    float dam = (float)pattern.Value / 2;
+                    float dam = (float)pattern.CalculValue / 2;
                     _patternCountTMP.text = $"{(int)Math.Floor(dam)}";
                     _patternCountTMP.color = EnumHelper.GetColorByMagic(TileMagicType.Fire);
                 }
             }
             else
             {
-                _patternCountTMP.text = $"{pattern.Value}";
+                _patternCountTMP.text = $"{(pattern.Value == null ? string.Empty : pattern.CalculValue)}";
                 _patternCountTMP.color = Color.black;
             }
             

@@ -1,3 +1,4 @@
+using Cardinals.Buff;
 using Cardinals.UI;
 using Cardinals.UI.Description;
 using DG.Tweening;
@@ -26,8 +27,15 @@ namespace Cardinals
             
             BaseBuff.RemoveEvent += Destroy;
             BaseBuff.UpdateBuffCountEvent += UpdateBuffCount;
-            
-            transform.AddComponent<BuffDescription>().Init(BaseBuff.Type);
+
+            if (baseBuff is Growth)
+            {
+                transform.AddComponent<BuffDescription>().Init(BaseBuff.Type, (Growth)baseBuff);
+            }
+            else
+            {
+                transform.AddComponent<BuffDescription>().Init(BaseBuff.Type);
+            }
         }
 
         private void UpdateBuffCount(int buffCount)

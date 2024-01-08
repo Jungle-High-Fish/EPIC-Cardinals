@@ -8,6 +8,8 @@ namespace Cardinals.Enemy
         public EnemyActionType Type { get; }
         public int? Value { get; }
         
+        public int CalculValue { get; set; }
+        
         public Action Action { get; }
         
         public Action PreAction { get; }

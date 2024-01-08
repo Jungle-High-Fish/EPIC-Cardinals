@@ -14,7 +14,8 @@ public class UIMouseHint : MonoBehaviour
     private ComponentGetter<Image> _image 
         = new ComponentGetter<Image>(TypeOfGetter.This);
 
-    public void Show() {
+    public void Show()
+    {
         gameObject.SetActive(true);
         _image.Get(gameObject).sprite = sprite1;
     }

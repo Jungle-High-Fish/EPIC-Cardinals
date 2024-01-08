@@ -413,6 +413,8 @@ namespace Cardinals.Board {
         }
 
         private void OnMouseOver() {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Title") return;
+            
             if (Input.GetMouseButtonDown(1)) {
                 GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
             }

@@ -367,6 +367,7 @@ namespace Cardinals.Enums {
         Stun,
         Powerless,
         Berserk,
+        Growth
     }
 
     public enum BuffCountDecreaseType : int
