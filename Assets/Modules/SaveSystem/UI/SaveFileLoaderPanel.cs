@@ -40,8 +40,8 @@ namespace Cardinals.UI {
             gameObject.SetActive(true);
             _isActive = true;
 
-            _titleText.Get(gameObject).text = "불러오기";
-            _closeButton.Get(gameObject).GetComponentInChildren<TMP_Text>().text = "닫기";
+            _titleText.Get(gameObject).text = GameManager.I.Localization.Get(LocalizationEnum.UI_LOAD_TITLE);
+            _closeButton.Get(gameObject).GetComponentInChildren<TMP_Text>().text = GameManager.I.Localization.Get(LocalizationEnum.UI_CLOSE);
 
             if (showAnimation) {
                 _mainPanelTransform.Get(gameObject).localScale = Vector3.zero;

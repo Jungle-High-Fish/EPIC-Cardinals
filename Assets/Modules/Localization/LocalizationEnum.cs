@@ -236,5 +236,7 @@ namespace Cardinals {
         MONSTER_PAZIZIZIZIC,
         MONSTER_KROL,
         MONSTER_PICPIC,
+        UI_LOAD_TITLE,
+        UI_LOAD_LOAD,
     }
 }

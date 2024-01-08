@@ -234,3 +234,5 @@ MONSTER_MUMU,MuMu,무무
 MONSTER_PAZIZIZIZIC,Pazizizizic,파지지지직이
 MONSTER_KROL,Krol,크롤
 MONSTER_PICPIC,PicPic,삒삒이
+UI_LOAD_TITLE,Save Data,불러오기
+UI_LOAD_LOAD,Load,로드

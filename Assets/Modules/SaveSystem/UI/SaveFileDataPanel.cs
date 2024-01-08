@@ -27,7 +27,7 @@ namespace Cardinals.UI {
             _cloudSaveImage.Get(gameObject).gameObject.SetActive(isCloudSave);
 
             _loadButton.Get(gameObject).GetComponentInChildren<TMP_Text>().text
-                = "로드";
+                = GameManager.I.Localization.Get(LocalizationEnum.UI_LOAD_LOAD);
 
             _loadButton.Get(gameObject).onClick.AddListener(() => {
                 GameManager.I.Sound.TitleButtonClick();
