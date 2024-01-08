@@ -21,7 +21,6 @@ namespace Cardinals.Enemy
                 new Pattern(EnemyActionType.Attack, 10),
                 new Pattern(EnemyActionType.UserDebuff, action: Weak),
                 new Pattern(EnemyActionType.Defense, 7),
-                new Pattern(EnemyActionType.Attack, 10),
                 new Pattern(EnemyActionType.Attack, 8),
             };
             
