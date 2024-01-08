@@ -183,8 +183,7 @@ namespace Cardinals.Game
 
                 if (player.Hp == 1)
                 {
-                    var ach = new Achievement("Barely_Barely");
-                    ach.Trigger();
+                    GameManager.I.SteamHandler.TriggerAchievement("Barely_Barely");
                 }
 
                 // 전투 종료 초기화
@@ -215,8 +214,7 @@ namespace Cardinals.Game
                 enemy.DieEvent += () =>
                 {
                     string achieveName = enemyData.enemyType.ToString() + "_Takedown";
-                    var ach = new Achievement(achieveName);
-                    ach.Trigger();
+                    GameManager.I.SteamHandler.TriggerAchievement(achieveName);
 
                     if (_turn <= 1) {
                         GameManager.I.SteamHandler.TriggerAchievement("ONE_TURN_KILL");
@@ -400,8 +398,7 @@ namespace Cardinals.Game
                 _thunderCntByTurn = value;
                 if (_thunderCntByTurn == 3)
                 {
-                    var ach = new Achievement("Tingling");
-                    ach.Trigger();
+                    GameManager.I.SteamHandler.TriggerAchievement("Tingling");
                 }
             }
         }
@@ -429,8 +426,7 @@ namespace Cardinals.Game
 
         private void AchievementKillPiPiPoPo()
         {
-            var ach = new Achievement("PiPi_PoPo_Takedown_Together");
-            ach.Trigger();
+            GameManager.I.SteamHandler.TriggerAchievement("PiPi_PoPo_Takedown_Together");
         }
         #endregion
     }

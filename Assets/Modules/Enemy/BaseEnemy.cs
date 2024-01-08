@@ -234,8 +234,7 @@ namespace Cardinals
 
                 if (burnBuff.Count >= 10)
                 {
-                    var ach = new Achievement("Burn_10");
-                    ach.Trigger();
+                    GameManager.I.SteamHandler.TriggerAchievement("Burn_10");
                 }
             }
             else if (buff.Type == BuffType.Weak||buff.Type== BuffType.Powerless)

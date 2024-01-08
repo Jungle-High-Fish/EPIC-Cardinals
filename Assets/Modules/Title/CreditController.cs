@@ -84,8 +84,7 @@ namespace Cardinals.Title
             
             _tk.SetActive(true);
             
-            var ach = new Achievement("Thank_You");
-            ach.Trigger();
+            GameManager.I.SteamHandler.TriggerAchievement("Thank_You");
             
             yield return new WaitForSeconds(5f);
             _tk.GetComponentsInChildren<TypewriterByCharacter>().ForEach(tw => tw.StartDisappearingText());

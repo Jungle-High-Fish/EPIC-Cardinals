@@ -186,8 +186,7 @@ namespace Cardinals.Tutorial
 
                 if (player.Hp == 1)
                 {
-                    var ach = new Achievement("Barely_Barely");
-                    ach.Trigger();
+                    GameManager.I.SteamHandler.TriggerAchievement("Barely_Barely");
                 }
 
                 // 전투 종료 초기화
