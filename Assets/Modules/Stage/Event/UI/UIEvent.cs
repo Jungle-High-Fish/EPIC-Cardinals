@@ -38,6 +38,7 @@ namespace Cardinals.Game
         
         public IEnumerator Clear()
         {
+            GameManager.I.Sound.TutorialClear();
             bool completeDO = false;
             _clearObj.SetActive(true);
             _clearObj.transform.localScale = Vector3.one;
