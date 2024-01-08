@@ -58,7 +58,7 @@ namespace Cardinals
                 GameManager.I.UI.SaveFileLoaderPanel.Show(
                     GameManager.I.SaveSystem.GetLocalSaveFileList(),
                     GameManager.I.SaveSystem.GetCloudSaveFileList()
-                    );
+                );
             });
             _loadGameBTN.GetComponentInChildren<TextMeshProUGUI>().text 
                 = GameManager.I.Localization[LocalizationEnum.UI_MAIN_CONTINUE];
