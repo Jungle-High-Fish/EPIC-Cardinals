@@ -10,6 +10,9 @@ namespace Cardinals.Log {
             public string message;
         }
 
+        public List<LogData> Logs => _logs;
+        public int LogCount => _logs.Count;
+
         private List<LogData> _logs = new List<LogData>();
 
         public void Init() {

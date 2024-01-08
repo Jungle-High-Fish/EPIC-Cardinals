@@ -16,6 +16,8 @@ namespace Cardinals.Test {
             = new(TypeOfGetter.ChildByName, "Debug Panel/Close Button");
         private ComponentGetter<RectTransform> _debugComponentsParent 
             = new(TypeOfGetter.ChildByName, "Debug Panel/Scroll View/Viewport/Debug List");
+        private ComponentGetter<UIDebugConsole> _debugConsole 
+            = new(TypeOfGetter.ChildByName, "Debug Console Panel");
 
         private List<IDebugComponent> _debugComponents = new();
         private bool _isShow = false;
@@ -25,6 +27,8 @@ namespace Cardinals.Test {
             _button.Get(gameObject).onClick.AddListener(() => {
                 Hide();
             });
+
+            _debugConsole.Get(gameObject).Init();
 
             AddButton("메테오", () => {
                 GameManager.I.Stage.Meteor();
