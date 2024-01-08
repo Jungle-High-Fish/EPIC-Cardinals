@@ -26,6 +26,7 @@ namespace Cardinals
         public SteamHandler SteamHandler => _steamHandler;
         public SaveSystem SaveSystem => _saveSystem;
         public SoundManager Sound => _soundManager;
+        public LogManager LogManager => _logManager;
 
         public int CurrentStageIndex => _currentStageIndex;
         public List<Stage> RuntimeStageList => _stageRuntimeList;
@@ -90,9 +91,12 @@ namespace Cardinals
 
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Escape)) {
-                if (FindAnyObjectByType<TitleManager>() != null) {
-                    if (_ui.GameSettingUI.IsActive) {
-                    _ui.GameSettingUI.Hide();
+                TitleManager titleManager = FindAnyObjectByType<TitleManager>();
+                if (titleManager != null) {
+                    if (GameManager.I.UI.SaveFileLoaderPanel.IsActive) {
+                        GameManager.I.UI.SaveFileLoaderPanel.Hide();
+                    } else if (_ui.GameSettingUI.IsActive) {
+                        _ui.GameSettingUI.Hide();
                     } else {
                         _ui.GameSettingUI.Show();
                     }

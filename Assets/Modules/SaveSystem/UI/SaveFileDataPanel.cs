@@ -26,13 +26,16 @@ namespace Cardinals.UI {
 
             _cloudSaveImage.Get(gameObject).gameObject.SetActive(isCloudSave);
 
+            _loadButton.Get(gameObject).GetComponentInChildren<TMP_Text>().text
+                = "로드";
+
             _loadButton.Get(gameObject).onClick.AddListener(() => {
                 GameManager.I.Sound.TitleButtonClick();
                 loadAction();
             });
             _deleteButton.Get(gameObject).onClick.AddListener(() => {
                 deleteAction();
-                });
+            });
         }
     }
 }

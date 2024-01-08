@@ -202,6 +202,7 @@ namespace Cardinals
         /// <param name="damage">입힐 데미지</param>
         public virtual void Hit(int damage, TileMagicType type = TileMagicType.Attack) 
         {
+
             if (DefenseCount > 0)
             {
                 var calculDamage = Math.Max(0, damage - DefenseCount);
@@ -267,6 +268,10 @@ namespace Cardinals
 
             if (CheckBuffExist(BuffType.Weak))
             {
+                if (damage == 1)
+                {
+                    return (int)damage;
+                }
                 damage *= .5f;
             }
             
@@ -278,7 +283,14 @@ namespace Cardinals
         {
             GameManager.I.Sound.GetDefense();
             if (CheckBuffExist(BuffType.Powerless))
-                value = (int)Math.Floor((float) value / 2);
+                if (value == 1)
+                {
+                    value = 1;
+                }
+                else
+                {
+                    value = (int)Math.Floor((float)value / 2);
+                }
 
             DefenseCount += value;
         }
