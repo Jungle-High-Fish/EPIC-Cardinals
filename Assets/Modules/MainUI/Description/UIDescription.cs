@@ -28,6 +28,7 @@ namespace Cardinals.UI
         [SerializeField] private Image _borderObjImg;
 
         private bool _hasInit = false;
+        private bool _updateOpt = false;
 
         public void Init(IDescription description)
         {
@@ -50,12 +51,20 @@ namespace Cardinals.UI
             transform.AddComponent<GridSizeUpdator>().Resizing();
 
             _hasInit = true;
+
+
+            if (description is BlessDescription ||
+                description is MagicDescription)
+                _updateOpt = true;
         }
 
         private void Update() {
             if (!_hasInit) return;
-
-            _descriptionTMP.text = _baseDescription.Description;
+            
+            if (_updateOpt)
+            {
+                _descriptionTMP.text = _baseDescription.Description;
+            }
         }
     }
 }
