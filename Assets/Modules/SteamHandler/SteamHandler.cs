@@ -208,6 +208,7 @@ namespace Cardinals {
                     continue;
                 }
                 var fileTime = SteamRemoteStorage.FileTime(GetUserSteamCloudSavePath(fileName));
+                fileTime = fileTime.ToLocalTime();
 
                 modifiedTimeList.Add(fileTime);
             }
