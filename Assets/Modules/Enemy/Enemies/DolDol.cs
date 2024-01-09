@@ -36,6 +36,7 @@ namespace Cardinals.Enemy
 
         public override void PostInit()
         {
+            base.PostInit();
             // 버프 생성자에서 플레이어 한 바퀴 돌 때 마다, 피격 받도록 이벤트 추가 및 죽음시 해지하도록 설정
             AddBuff(new RotationRate(this, 10));
         }

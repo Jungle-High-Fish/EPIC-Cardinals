@@ -269,7 +269,6 @@ namespace Cardinals.Game {
             GameManager.I.UI.SetEnemyUI(enemyComp);
             
             enemyComp.PostInit();
-            enemyComp.AddBuff(new Growth());
             return enemyComp;
         }
 

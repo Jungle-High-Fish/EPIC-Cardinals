@@ -135,7 +135,7 @@ namespace Cardinals
 
         public virtual void PostInit()
         {
-            
+            AddBuff(new Growth());
         }
 
         /// <summary>
