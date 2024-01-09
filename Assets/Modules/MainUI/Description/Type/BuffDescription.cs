@@ -49,7 +49,6 @@ namespace Cardinals.UI.Description
                 if (_growth != null)
                 {
                     var key = $"{_data.type}_{_growth.IncreaseValue}";
-                    Debug.Log(key);
                     return key;
                 }
                 else
