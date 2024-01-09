@@ -12,7 +12,7 @@ namespace Cardinals.Buff
         
         public Growth() : base(BuffType.Growth, BuffCountDecreaseType.Event)
         {
-            Value = 5;
+            Value = 10;
         }
 
         public override void Execute(BaseEntity entity)
@@ -21,7 +21,7 @@ namespace Cardinals.Buff
             if (evt != null)
             {
                 var backup = IncreaseValue; 
-                IncreaseValue = 4 *((evt.Turn + 1) / 5);
+                IncreaseValue = 10 *((evt.Turn + 1) / 10);
 
                 if (backup != IncreaseValue)
                 {                    
