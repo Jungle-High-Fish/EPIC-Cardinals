@@ -58,10 +58,11 @@ namespace Cardinals.UI.NewDice
         {
             gameObject.SetActive(true);
             _tradeEvent = tradeAction;
-            _rerollBTN.interactable = false;
+            
 
             if (_newDice != newDice)
             {
+                _rerollBTN.interactable = false;
                 _newDice = newDice;
                 _newUIDice.Init(newDice);
 
