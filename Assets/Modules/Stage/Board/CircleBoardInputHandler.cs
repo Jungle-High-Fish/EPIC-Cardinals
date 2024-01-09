@@ -136,7 +136,7 @@ namespace Cardinals.Board {
 
 						// TODO: 마법에 따라 설정 필요
 						// 플레이어 행동 설정
-						if (GameManager.I.Stage.DiceManager.CheckUseDiceOnAction())
+						if (CheckDiceUsed())
 						{
 							if (GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Attack ||
 							    GameManager.I.Player.OnTile.TileMagic.Type == TileMagicType.Fire )
@@ -172,6 +172,12 @@ namespace Cardinals.Board {
 				{
 					playerActionType = PlayerActionType.Move;
 				}
+
+                if (playerActionType == PlayerActionType.Move &&
+                    !GameManager.I.Stage.DiceManager.CheckUseDiceOnMove(false) )
+                {
+                    playerActionType = PlayerActionType.CantUsed;
+                }
 				
 				GameManager.I.Player.UpdateAction(playerActionType);
 
@@ -213,6 +219,18 @@ namespace Cardinals.Board {
 			}
 			_isMouseHoverUI = isMouseHoverUI;
 		}
+
+        private bool CheckDiceUsed()
+        {
+            if (!GameManager.I.Stage.DiceManager.CheckUseDiceOnAction(false) ||
+                GameManager.I.Stage.DiceManager.IsWind1BlessUsable() ||
+                GameManager.I.Stage.DiceManager.IsNumberSequence())
+            {
+                return false;
+            }
+
+            return true;
+        }
 
 		private bool IsSelectState()
 		{
