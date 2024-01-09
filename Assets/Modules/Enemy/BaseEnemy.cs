@@ -181,7 +181,7 @@ namespace Cardinals
             {
                 PrevPattern = CurPattern;
                 Pattern curPat = CurPattern;
-                int value = curPat.Value ?? 0;
+                int value = curPat.Value == null ? 0 : curPat.CalculValue;
 
                 float execTime = 0f;
             
