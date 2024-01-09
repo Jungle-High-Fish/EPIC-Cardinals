@@ -79,8 +79,8 @@ namespace Cardinals.Tutorial
             do // 전투 시작
             {
                 // 턴 UI 업데이트
-                GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
                 if (_curTutorialIndex == 3) _turn++;
+                GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetTurn(_turn);
 
                 // 플레이어 턴 알림
                 yield return GameManager.I.UI.UITurnAlert.Show(
