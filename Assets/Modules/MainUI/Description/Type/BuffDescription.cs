@@ -48,7 +48,7 @@ namespace Cardinals.UI.Description
             {
                 if (_growth != null)
                 {
-                    return $"{_data.type}_{_growth}";
+                    return $"{_data.type}_{_growth.IncreaseValue}";
                 }
                 else
                 {
