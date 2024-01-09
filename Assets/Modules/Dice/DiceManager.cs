@@ -457,15 +457,14 @@ namespace Cardinals
                                 break;
                             }
 
-                            if(GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind1)
-                                && useNumber==1 && (_prevDiceNumber == 5 || _prevDiceNumber == 6))
+                            if(IsWind1BlessUsable())
                             {
                                 GameManager.I.Player.PlayerInfo.BlessEventDict[BlessType.BlessWind1]?.Invoke();
                                 StartCoroutine(DiceUseAction(useNumber, _dices[_selectDiceIndex].DiceType, target));
                                 yield break;
                             }
 
-                            if (_prevDiceNumber != -1 && _prevDiceNumber + 1 != useNumber)
+                            if (IsNumberSequence())
                             {
                                 break;
                             }
@@ -666,6 +665,27 @@ namespace Cardinals
             _canActionUse = true;
             _lastDiceUsedForAction = false;
             DismissAllCards();
+        }
+
+        public bool IsWind1BlessUsable()
+        {
+            if(GameManager.I.Player.PlayerInfo.CheckBlessExist(BlessType.BlessWind1)
+                                && _dices[_selectDiceIndex].RollResultNumber == 1 && (_prevDiceNumber == 5 || _prevDiceNumber == 6))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsNumberSequence()
+        {
+            if(_prevDiceNumber != -1 && _prevDiceNumber + 1 != _dices[_selectDiceIndex].RollResultNumber)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public bool CheckUseDiceOnAction()
