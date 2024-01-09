@@ -557,11 +557,14 @@ namespace Cardinals
             }
         }
 
-        private bool CheckUseDiceOnMove()
+        public bool CheckUseDiceOnMove(bool printMsg = true)
         {
             if (GameManager.I.Player.CheckBuffExist(BuffType.Slow) && _DiceUsedForMoveCountOnThisTurn >= 2)
             {
-                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
+                if (printMsg)
+                {
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_SLOW));
+                }
                 return false;
             }
             return true;
@@ -688,7 +691,7 @@ namespace Cardinals
             return false;
         }
 
-        public bool CheckUseDiceOnAction()
+        public bool CheckUseDiceOnAction(bool printMsg = true)
         {
             bool result = true;
 
@@ -700,7 +703,6 @@ namespace Cardinals
                 }
             }
             
-
             if (!_canActionUse)
             {
                 result = false;
@@ -709,14 +711,20 @@ namespace Cardinals
             // [�����] ����
             if (GameManager.I.Player.CheckBuffExist(BuffType.ElectricShock) && _continuousUseCount >= 2)
             {
-                Debug.Log("뭐지? 감전당했나?");
-                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_ELECTRICSHOCK));
+                if (printMsg)
+                {
+                    Debug.Log("뭐지? 감전당했나?");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_ELECTRICSHOCK));
+                }
                 result = false;
             }
 
             if (GameManager.I.Player.OnTile.IsSealed) {
-                Debug.Log("뭐지? 봉인당했나?");
-                GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_LOCK));
+                if (printMsg)
+                {
+                    Debug.Log("뭐지? 봉인당했나?");
+                    GameManager.I.Player.Bubble.SetBubble(GameManager.I.Localization.Get(LocalizationEnum.PLAYER_SCRIPT_LOCK));
+                }
                 result = false;
             }
 
