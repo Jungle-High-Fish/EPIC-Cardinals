@@ -44,6 +44,7 @@ namespace Cardinals.UI
 
         public void On()
         {
+
             _rewardMsgObj.SetActive(false);
             if (!gameObject.activeSelf)
             {
