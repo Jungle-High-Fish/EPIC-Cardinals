@@ -33,6 +33,7 @@ namespace Cardinals
         [SerializeField] private AudioClip _meteorBomb;
         [SerializeField] private AudioClip _tutorialClear;
         [SerializeField] private AudioClip _grassDrop;
+        [SerializeField] private AudioClip _boxOpen;
 
 
         [Header("Card")]
@@ -143,6 +144,13 @@ namespace Cardinals
             if (_thunderBolt == null) return;
 
             _effectAudioClipQueue.Enqueue(_thunderBolt);
+        }
+
+        public void BoxOpen()
+        {
+            if (_boxOpen == null) return;
+
+            _effectAudioClipQueue.Enqueue(_boxOpen);
         }
 
 

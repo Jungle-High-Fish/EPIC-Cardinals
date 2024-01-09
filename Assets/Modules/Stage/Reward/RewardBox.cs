@@ -143,6 +143,7 @@ public class RewardBox : MonoBehaviour
             tutorial.CheckRewardSelectQuest();
             GameManager.I.UI.UIEndTurnButton.Activate(true);
         }
+        GameManager.I.Sound.BoxOpen();
         GameManager.I.UI.UIRewardPanel.On();
     }
     
