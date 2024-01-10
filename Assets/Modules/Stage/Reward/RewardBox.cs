@@ -20,6 +20,15 @@ public class RewardBox : MonoBehaviour
         Disable();
     }
 
+    public void ClearBox()
+    {
+        // 기존 항목들 제거
+        for (int i = _rewards.Count - 1; i >= 0; i--)
+        {
+            RemoveItem(_rewards[i]);
+        }
+    }
+
     /// <summary>
     /// 전투 종료 시, 구체화된 보상을 설정
     /// </summary>
@@ -29,13 +38,8 @@ public class RewardBox : MonoBehaviour
             GameManager.I.UI.UIEndTurnButton.Activate(true);
             GameManager.I.UI.UIEndTurnButton.Deactivate();
         }
-        
-        // 기존 항목들 제거
-        for (int i = _rewards.Count - 1; i >= 0; i--)
-        {
-            RemoveItem(_rewards[i]);
-        }
-        
+
+        ClearBox();
         gameObject.SetActive(true);
         foreach (var r in rewards)
         {
@@ -65,8 +69,11 @@ public class RewardBox : MonoBehaviour
 
     public void RemoveItem(Reward reward)
     {
-        reward.UI?.Remove();
-        _rewards.Remove(reward);
+        reward.Remove();
+        if (_rewards.Contains(reward))
+        {
+            _rewards.Remove(reward);
+        }
         GameManager.I.UI.UIRewardPanel.UpdateSize();
         
         // 패널 닫기

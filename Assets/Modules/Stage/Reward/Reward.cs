@@ -31,5 +31,10 @@ namespace Cardinals.Game
             Count = count;
             Data = data;
         }
+
+        public void Remove()
+        {
+            UI.Remove();
+        }
     }
 }

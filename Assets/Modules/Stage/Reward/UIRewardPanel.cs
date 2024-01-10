@@ -44,7 +44,6 @@ namespace Cardinals.UI
 
         public void On()
         {
-
             _rewardMsgObj.SetActive(false);
             if (!gameObject.activeSelf)
             {
@@ -57,25 +56,30 @@ namespace Cardinals.UI
         }
 
         private bool _selectedCancel;
+        
         public IEnumerator ActivePanelWaitCancel(IEnumerable<Reward> rewards)
         {
+            // 초기화
+            GameManager.I.Stage.RewardBox.ClearBox();
             ClearItem();
+            
+            // 설정
             Set(rewards);
             yield return new WaitForSeconds(.05f);
             On();
 
             _selectedCancel = false;
             yield return new WaitUntil(() => _selectedCancel || _rewardsTr.childCount == 0);
-            
-            gameObject.SetActive(false);
+
             ClearItem();
+            gameObject.SetActive(false);
         }
 
-        private void ClearItem()
+        public void ClearItem()
         {
             for (int i = _rewardsTr.childCount - 1; i >= 0; i--)
             {
-                Destroy(_rewardsTr.GetChild(i).gameObject);
+                _rewardsTr.GetChild(i).GetComponent<UIRewardItem>().Remove();
             }
         }
 
