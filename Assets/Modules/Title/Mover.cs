@@ -24,7 +24,7 @@ namespace Cardinals.Title
             //transform.position -= new Vector3(_speed, 0, 0);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.name.Equals(_leftColliderTr.gameObject.name))
             {
