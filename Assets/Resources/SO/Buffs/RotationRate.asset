@@ -17,4 +17,4 @@ MonoBehaviour:
   buffName: 'BUFF_ROTATIONRATE_NAME '
   description: 'BUFF_ROTATIONRATE_EXPLAIN '
   sprite: {fileID: 21300000, guid: b2ab11f773b04984da21dc6451e3d538, type: 3}
-  effectSprite: {fileID: 0}
+  effectSprite: {fileID: 21300000, guid: b2ab11f773b04984da21dc6451e3d538, type: 3}
