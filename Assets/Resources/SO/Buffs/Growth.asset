@@ -16,5 +16,5 @@ MonoBehaviour:
   decreaseType: 2
   buffName: 'BUFF_GROWTH_NAME '
   description: 'BUFF_GROWTH_EXPLAIN '
-  sprite: {fileID: 21300000, guid: aad3f0c0265ab48268da2df9a846776a, type: 3}
+  sprite: {fileID: -716439012, guid: 663f98826bbfd7f42ae1a84ce1d46ace, type: 3}
   effectSprite: {fileID: 0}
