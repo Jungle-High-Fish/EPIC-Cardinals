@@ -34,5 +34,15 @@ namespace Modules.Entity.Buff
                 (_target as DolDol).EffectiveHit(_damage);
             }
         }
+
+        public override void Execute(BaseEntity entity)
+        {
+            // nothing
+        }
+
+        public void PrintEffect()
+        {
+            base.Execute(_target);
+        }
     }
 }
