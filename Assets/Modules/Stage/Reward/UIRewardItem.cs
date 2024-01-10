@@ -52,7 +52,7 @@ namespace Cardinals.UI
                     break;
                 case RewardType.NextStageMap:
                     sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Icon_Map); 
-                    text = $"Next Stage Map";
+                    text = $"Clear?";
                     break;
             }
             
