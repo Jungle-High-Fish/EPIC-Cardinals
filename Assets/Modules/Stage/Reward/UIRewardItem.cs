@@ -60,7 +60,7 @@ namespace Cardinals.UI
             _nameTMP.text = text;
 
 
-            baseReward.DeleteEvent += () => { Destroy(gameObject); };
+            baseReward.UI = this;
             
             GetComponent<Button>().onClick.AddListener(Get);
         }
@@ -71,12 +71,12 @@ namespace Cardinals.UI
             {
                 case RewardType.Gold:
                     GameManager.I.Stage.AddGold(baseReward.Value);
-                    Remove();
+                    PostGet();
                     break;
                 case RewardType.Potion:
                     if (GameManager.I.Stage.Player.PlayerInfo.AddPotion((PotionType) baseReward.Value))
                     {
-                        Remove();
+                        PostGet();
                     }
                     else
                     {
@@ -85,10 +85,10 @@ namespace Cardinals.UI
                     break;
                 case RewardType.Artifact:
                     GameManager.I.Stage.Player.PlayerInfo.AddArtifact((ArtifactType) baseReward.Value);
-                    Remove();
+                    PostGet();
                     break;
                 case RewardType.RandomDice:
-                    GameManager.I.UI.UINewDicePanel.Init((Dice)baseReward.Data, Remove);
+                    GameManager.I.UI.UINewDicePanel.Init((Dice)baseReward.Data, PostGet);
                     break;
                 case RewardType.NextStageMap:
                     GameManager.I.UI.UIClearDemoGame.On();
@@ -98,12 +98,15 @@ namespace Cardinals.UI
             }
         }
 
-        void Remove()
+        public void PostGet()
+        {
+            GameManager.I.Stage.RewardBox.RemoveItem(baseReward);
+        }
+
+        public void Remove()
         {
             gameObject.SetActive(false);
-            baseReward.Remove();
-            baseReward = null;
-            GameManager.I.UI.UIRewardPanel.UpdateSize();
+            Destroy(gameObject);
         }
     }
 }

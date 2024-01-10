@@ -13,22 +13,13 @@ using Random = UnityEngine.Random;
 
 public class RewardBox : MonoBehaviour
 {
-    private readonly List<Reward> _rewards = new();
+    private List<Reward> _rewards = new();
 
     public void Init()
     {
         Disable();
     }
 
-    void ClearList()
-    {
-        // 기존 항목들 제거
-        for (int i = _rewards.Count - 1; i >= 0; i--)
-        {
-            _rewards[i].Remove();
-        }
-    }
-    
     /// <summary>
     /// 전투 종료 시, 구체화된 보상을 설정
     /// </summary>
@@ -39,7 +30,12 @@ public class RewardBox : MonoBehaviour
             GameManager.I.UI.UIEndTurnButton.Deactivate();
         }
         
-        ClearList();
+        // 기존 항목들 제거
+        for (int i = _rewards.Count - 1; i >= 0; i--)
+        {
+            RemoveItem(_rewards[i]);
+        }
+        
         gameObject.SetActive(true);
         foreach (var r in rewards)
         {
@@ -58,12 +54,6 @@ public class RewardBox : MonoBehaviour
             }
             
             _rewards.Add(r);
-
-            r.DeleteEvent += () =>
-            {
-                _rewards.Remove(r);
-                CheckEmpty();
-            };
         }
         
         GameManager.I.UI.UIRewardPanel.Set(_rewards);
@@ -73,6 +63,21 @@ public class RewardBox : MonoBehaviour
             .SetEase(Ease.OutElastic);
     }
 
+    public void RemoveItem(Reward reward)
+    {
+        reward.UI?.Remove();
+        _rewards.Remove(reward);
+        GameManager.I.UI.UIRewardPanel.UpdateSize();
+        
+        // 패널 닫기
+        if (_rewards.Count == 0)
+        {
+            var panel = GameManager.I.UI.UIRewardPanel.gameObject;
+            if(panel.activeSelf) panel.SetActive(false);
+            Disable();
+        }
+    }
+    
     /// <summary>
     /// 몬스터 등급별로 보상이 고정되어 사용
     /// </summary>
@@ -101,9 +106,6 @@ public class RewardBox : MonoBehaviour
         Set(rewards);
     }
 
-    /// <summary>
-    /// 보상을 선택 완료하여 화면에서 보상 상자 치우기
-    /// </summary>
     public void Disable()
     {
         gameObject.SetActive(false);
@@ -114,27 +116,9 @@ public class RewardBox : MonoBehaviour
         return 0;
     }
     
-    // int[] GetRandomArtifact(int count)
-    // {
-    //     return new[]{0};
-    // }
-    
     int GetRandomArtifact()
     {
         return Random.Range(1, Enum.GetNames(typeof(ArtifactType)).Length);
-    }
-
-    /// <summary>
-    /// 모든 보상을 수령하는 경우 수행
-    /// - 패널 닫기, 보물상자 제거
-    /// </summary>
-    void CheckEmpty()
-    {
-        if (_rewards.Count == 0)
-        {
-            GameManager.I.UI.UIRewardPanel.gameObject.SetActive(false);
-            Disable();
-        }
     }
     
     void OnMouseDown()

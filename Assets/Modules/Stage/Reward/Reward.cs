@@ -1,5 +1,6 @@
 ﻿using System;
 using Cardinals.Enums;
+using Cardinals.UI;
 
 namespace Cardinals.Game
 {
@@ -21,7 +22,7 @@ namespace Cardinals.Game
         
         public object Data { get; set; }
         
-        public Action DeleteEvent { get; set; }
+        public UIRewardItem UI { get; set; }
 
         public Reward(RewardType type, int value = 0, int count = 0, object data = null)
         {
@@ -29,11 +30,6 @@ namespace Cardinals.Game
             Value = value;
             Count = count;
             Data = data;
-        }
-
-        public void Remove()
-        {
-            DeleteEvent?.Invoke();
         }
     }
 }
