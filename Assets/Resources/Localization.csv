@@ -23,7 +23,7 @@ TILE_MAGIC_DEFENSE_EXPLAIN,Gain defense equal to the number on the Dice.,주사�
 TILE_MAGIC_FIRE_NAME,Fire Ball,파이어 볼
 TILE_MAGIC_FIRE_EXPLAIN,"Each action, fire a fireball at that enemy for <level=2,4,6>damage.","행동 마다, 해당 적에게 파이어볼을 날려 <level=2,4,6>의 데미지를 줍니다"
 TILE_MAGIC_WATER_NAME,Clear Water,맑은 물
-TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=2,3,4>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=2,3,4>)."
+TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=4,5,6>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=4,5,6>)."
 TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷
 TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6>defense.","행동 마다, <level=2,4,6>의 방어도를 얻습니다."
 BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상
