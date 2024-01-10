@@ -1,4 +1,5 @@
 using Cardinals.Enums;
+using System.Collections;
 using UnityEngine;
 using Util;
 
@@ -8,15 +9,16 @@ namespace Cardinals.Board.Curse
     {
         public ThunderBolt() : base(TileCurseType.ThunderBolt)
         {
-            Action = SpawnThunderBolt;
+            Action = SpawnThunderBolt();
         }
 
-        void SpawnThunderBolt()
+        IEnumerator SpawnThunderBolt()
         {
             GameManager.I.Sound.ThunderBolt();
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Enemy_Spawn_ThunderBolt);
             var tb = GameObject.Instantiate(prefab).GetComponent<Enemy.Summon.ThunderBolt>();
-            tb.Init();
+           
+            yield return tb.Init();
         }
     }
 }

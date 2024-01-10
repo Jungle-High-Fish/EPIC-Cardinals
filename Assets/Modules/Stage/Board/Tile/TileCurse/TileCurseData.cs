@@ -18,7 +18,7 @@ namespace Cardinals.Board {
 			protected set => _targetTurn = value;
 		}
 
-		public Action Action
+		public IEnumerator Action
 		{
 			get => _curseAction;
 			protected set => _curseAction = value;
@@ -28,9 +28,9 @@ namespace Cardinals.Board {
 
 		private TileCurseType _curseType;
 		private int _targetTurn;
-		private Action _curseAction;
+		private IEnumerator _curseAction;
 		
-		protected TileCurseData(TileCurseType curseType, int targetTurn = 0, Action curseAction = null) {
+		protected TileCurseData(TileCurseType curseType, int targetTurn = 0, IEnumerator curseAction = null) {
 			_curseType = curseType;
 
 			_targetTurn = targetTurn;

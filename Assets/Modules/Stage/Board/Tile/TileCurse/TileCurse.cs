@@ -22,20 +22,28 @@ namespace Cardinals.Board {
 			_passedTurn = 0;
 		}
 
-		public bool OnTurnEnd() {
-			if (_data == null) {
-				return true;
-			}
+        private bool _turnEndResult;
+        public bool TurnEndResult => _turnEndResult;
+		public IEnumerator OnTurnEnd()
+        {
+            _turnEndResult = false;
+			if (_data == null)
+            {
+                _turnEndResult = true;
+            }
+            else
+            {
+                _passedTurn++;
+                if (_passedTurn >= _data.TargetTurn) {
+                    yield return _data.Action;
+                
+                    _data = null;
+                    _turnEndResult = true;
+                }
+            }
 
-			_passedTurn++;
-			if (_passedTurn >= _data.TargetTurn) {
-				_data.Action();
-				_data = null;
-				return true;
-			}
-
-			return false;
-		}
+            yield return null;
+        }
 
 		public void ClearCurse() {
 			_data = null;
