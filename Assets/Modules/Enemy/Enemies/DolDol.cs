@@ -47,8 +47,13 @@ namespace Cardinals.Enemy
             var b = Buffs.FirstOrDefault(b => b.Type == BuffType.RotationRate);
             if (b != null)
             {
-                b.Execute(this);
+                var rr = b as RotationRate;
+                if (rr != null)
+                {
+                    rr.PrintEffect();
+                }
             }
+            
             Debug.Log("디버프에 의해 무효화 됨 (해당 이펙트 출력)");
         }
 
