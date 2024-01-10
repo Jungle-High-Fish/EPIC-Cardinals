@@ -23,7 +23,7 @@ TILE_MAGIC_DEFENSE_EXPLAIN,Gain defense equal to the number on the Dice.,주사�
 TILE_MAGIC_FIRE_NAME,Fire Ball,파이어 볼
 TILE_MAGIC_FIRE_EXPLAIN,"Each action, fire a fireball at that enemy for <level=2,4,6>damage.","행동 마다, 해당 적에게 파이어볼을 날려 <level=2,4,6>의 데미지를 줍니다"
 TILE_MAGIC_WATER_NAME,Clear Water,맑은 물
-TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=2,3,4>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=2,3,4>)."
+TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=4,5,6>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=4,5,6>)."
 TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷
 TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6>defense.","행동 마다, <level=2,4,6>의 방어도를 얻습니다."
 BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상
@@ -44,8 +44,8 @@ BUFF_DOLL_NAME,Doll,인형
 BUFF_DOLL_EXPLAIN,"If a doll is present on the board, all damage dealt is equal to 1.",보드에 인형이 있으면 모든 피해는 1이 됩니다.
 BUFF_ROTATIONRATE_NAME,<debuff=Cycle> Rotationrate,<debuff=Cycle> 회전률
 BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다."
-BUFF_GROWTH_NAME,Growth,성장
-BUFF_GROWTH_EXPLAIN,Increases attack/defense figures by 10 for every 10 turns.,10턴마다 공격/방어 수치가 10씩 증가합니다.
+BUFF_GROWTH_NAME,<debuff=Growth> Adaptation,<debuff=Growth> 적응
+BUFF_GROWTH_EXPLAIN,"Gradually adapts to the human world. Every 10 turns, attack and defense values increase by 10.",점차 인간 세계에 적응합니다. 10턴 마다 공격/방어 수치가 10씩 증가합니다.
 BUFF_GROWTH_EXPLAIN2,It's currently up by $1., 현재 $1만큼 상승했습니다.
 BUFF_POWERLESS_NAME,<debuff=Broken> Broken,<debuff=Broken> 무력
 BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.

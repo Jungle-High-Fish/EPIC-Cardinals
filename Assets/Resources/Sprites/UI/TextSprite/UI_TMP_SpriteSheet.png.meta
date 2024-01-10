@@ -1028,6 +1028,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_Buff_Growth
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec73640a048aa94b9341a6d2326ada1
+      internalID: -716439012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1057,6 +1078,7 @@ TextureImporter:
       UI_Buff_Cycle: -360810310
       UI_Buff_Doll: 1240383838
       UI_Buff_Electric: 45510755
+      UI_Buff_Growth: -716439012
       UI_Buff_Heal: -41334409
       UI_Buff_MoveConfuse: 95813059
       UI_Buff_Posion: 1350782696
