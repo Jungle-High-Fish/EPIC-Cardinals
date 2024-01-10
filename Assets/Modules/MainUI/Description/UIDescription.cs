@@ -1,3 +1,4 @@
+using Cardinals.Enums;
 using System;
 using System.Linq;
 using Cardinals.UI.Description;
@@ -54,8 +55,11 @@ namespace Cardinals.UI
 
 
             if (description is BlessDescription ||
-                description is MagicDescription)
+                description is MagicDescription ||
+                (description is BuffDescription && description.Key.Contains(BuffType.Burn.ToString())))
+            {
                 _updateOpt = true;
+            }
         }
 
         private void Update() {
