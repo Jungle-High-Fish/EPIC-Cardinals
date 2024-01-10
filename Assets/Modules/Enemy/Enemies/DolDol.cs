@@ -2,6 +2,7 @@
 using Cardinals.Game;
 using Modules.Entity.Buff;
 using System;
+using System.Linq;
 using UnityEngine;
 using Util;
 
@@ -43,6 +44,16 @@ namespace Cardinals.Enemy
 
         public override void Hit(int damage, TileMagicType type)
         {
+            var b = Buffs.FirstOrDefault(b => b.Type == BuffType.RotationRate);
+            if (b != null)
+            {
+                var rr = b as RotationRate;
+                if (rr != null)
+                {
+                    rr.PrintEffect();
+                }
+            }
+            
             Debug.Log("디버프에 의해 무효화 됨 (해당 이펙트 출력)");
         }
 

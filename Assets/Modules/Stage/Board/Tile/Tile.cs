@@ -182,10 +182,12 @@ namespace Cardinals.Board {
             }
         }
 
-        public void OnTurnEnd() {
+        public IEnumerator OnTurnEnd() {
             _tileEffect.OnTurnEnd();
 
-            bool _hasCurseTerminated = _tileCurse.OnTurnEnd();
+            yield return _tileCurse.OnTurnEnd();
+            bool _hasCurseTerminated = _tileCurse.TurnEndResult;
+            
             if (_hasCurseTerminated) {
                 if (_tileState == TileState.Cursed) {
                     ChangeState(TileState.Normal);

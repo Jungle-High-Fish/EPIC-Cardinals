@@ -38,23 +38,23 @@ namespace Cardinals {
                 SteamClient.RunCallbacks();
             }
 
-            if (Input.GetKeyDown(KeyCode.F1)) {
-                foreach ( var friend in SteamFriends.GetFriends() )
-                {
-                    if (friend.Name == "Mintti") {
-                        friend.SendMessage("와 샌즈!");
-                    }
+            // if (Input.GetKeyDown(KeyCode.F1)) {
+            //     foreach ( var friend in SteamFriends.GetFriends() )
+            //     {
+            //         if (friend.Name == "Mintti") {
+            //             friend.SendMessage("와 샌즈!");
+            //         }
 
-                    if (friend.Name == "a55208806") {
-                        friend.SendMessage("와 샌즈!");
-                    }
+            //         if (friend.Name == "a55208806") {
+            //             friend.SendMessage("와 샌즈!");
+            //         }
 
-                    if (friend.Name == "ytw0113") {
-                        friend.SendMessage("발더스를해야만해..");
-                        friend.SendMessage("와 샌즈!");
-                    }
-                }
-            }
+            //         if (friend.Name == "ytw0113") {
+            //             friend.SendMessage("발더스를해야만해..");
+            //             friend.SendMessage("와 샌즈!");
+            //         }
+            //     }
+            // }
         }
 
         public void SetLobbyStateDisplay() {

@@ -117,13 +117,13 @@ namespace Cardinals
                 }
             }
 
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F3)) {
-                if (_ui.UIDebugPanel.IsShow) {
-                    _ui.UIDebugPanel.Hide();
-                } else {
-                    _ui.UIDebugPanel.Show();
-                }
-            }
+            // if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F3)) {
+            //     if (_ui.UIDebugPanel.IsShow) {
+            //         _ui.UIDebugPanel.Hide();
+            //     } else {
+            //         _ui.UIDebugPanel.Show();
+            //     }
+            // }
 
             _steamHandler.EveryFrame();
         }
