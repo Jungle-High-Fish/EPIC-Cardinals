@@ -33,11 +33,6 @@ namespace Cardinals.Enemy
             };
         }
 
-        public override void PostInit()
-        {
-            // Growth 버프를 잠에서 깨어난 이후 획득할 것
-        }
-
         public override IEnumerator StartTurn()
         {
             if (_sleepCount > 0)
@@ -48,7 +43,6 @@ namespace Cardinals.Enemy
             else
             {
                 BerserkMode = true;
-                AddBuff(new Growth());
             }
 
             return base.StartTurn();
