@@ -135,8 +135,11 @@ namespace Cardinals.BoardObject
 
         public void Destroy()
         {
-            GameManager.I.Stage.BoardObjects.Remove(this);
-            Destroy(gameObject);
+            if (GameManager.I.Stage.BoardObjects.Contains(this))
+            {
+                GameManager.I.Stage.BoardObjects.Remove(this);
+            }
+            if(gameObject != null) Destroy(gameObject);
         }
 
         protected virtual IEnumerator Execute()
