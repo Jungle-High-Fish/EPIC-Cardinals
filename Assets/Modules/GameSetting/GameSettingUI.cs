@@ -72,6 +72,24 @@ namespace Cardinals.UI {
                 = GameManager.I.Localization[LocalizationEnum.UI_GAMESETTING_LANGUAGE_WARN];
             _languageWarnCloseButtonText.Get(gameObject).text 
                 = GameManager.I.Localization[LocalizationEnum.UI_CLOSE];
+
+            if (GameManager.I.Localization.IsJapanese) {
+                _languageWarnText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+
+                _languageWarnCloseButtonText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+            } else {
+                _languageWarnText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_SOYOMapleBold
+                );
+
+                _languageWarnCloseButtonText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_SOYOMapleBold
+                );
+            }
         }
 
         public void Hide() {
