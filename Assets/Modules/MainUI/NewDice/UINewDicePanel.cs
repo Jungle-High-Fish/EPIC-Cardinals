@@ -36,6 +36,11 @@ namespace Cardinals.UI.NewDice
         private Dice _newDice; 
         private UIDice _selectedUIDice;
         private Action _tradeEvent;
+        private bool _hasRerolled;
+        public bool HasRerolled
+        {
+            set => _hasRerolled = value;
+        }
         
         void Start()
         {
@@ -53,6 +58,7 @@ namespace Cardinals.UI.NewDice
             _backupIconPos = _newDiceCoverIcon.position;
         }
 
+        
         [Button]
         public void Init(Dice newDice, Action tradeAction)
         {
@@ -60,7 +66,7 @@ namespace Cardinals.UI.NewDice
             _tradeEvent = tradeAction;
             
 
-            if (_newDice != newDice)
+            if (_newDice != newDice && !_hasRerolled)
             {
                 _rerollBTN.interactable = false;
                 _newDice = newDice;
@@ -88,6 +94,48 @@ namespace Cardinals.UI.NewDice
             }
             
             
+            // 초기화 기존 선택 전체 취소 및 초기화
+            for (int i = 0, cnt = _curDiceParentTr.childCount; i < cnt; i++)
+            {
+                var dice = GameManager.I.Stage.DiceManager.Dices[i];
+                _curDiceParentTr.GetChild(i).GetComponent<UIDice>().Init(dice);
+                _curDiceParentTr.GetChild(i).GetComponent<SelectedEffect>().IsSelected = false;
+            }
+
+            _selectedUIDice = null;
+            _tradeBTN.interactable = _selectedUIDice is not null;
+        }
+
+        public void RerollRewardDice(Dice newDice, Action tradeAction)
+        {
+            gameObject.SetActive(true);
+            _tradeEvent = tradeAction;
+
+            _rerollBTN.interactable = false;
+            _newDice = newDice;
+            _newUIDice.Init(newDice);
+
+            // 애니메이션 재생
+            GameManager.I.Sound.CardReroll();
+            _newDiceCoverObj.SetActive(true);
+            _newDiceCoverObj.transform.DOShakePosition(.6f, 10, 20);
+            _newDiceCoverIcon.DOPunchPosition(new Vector3(10, 10), .6f)
+                .OnComplete(() =>
+                {
+                    _rerollBTN.interactable = true;
+                    _newDiceInfoTr.transform.localScale = Vector3.zero;
+                    _newDiceCoverObj.SetActive(false);
+                    _newDiceInfoTr.transform.DOScale(1, 0.1f).SetEase(Ease.InQuad)
+                        .OnComplete(() =>
+                        {
+                            _newDiceCoverObj.transform.localScale = Vector3.one;
+                            _newDiceCoverObj.transform.position = _backupCoverPos;
+                            _newDiceCoverIcon.localScale = Vector3.one;
+                            _newDiceCoverIcon.position = _backupIconPos;
+                        });
+                });
+
+
             // 초기화 기존 선택 전체 취소 및 초기화
             for (int i = 0, cnt = _curDiceParentTr.childCount; i < cnt; i++)
             {
@@ -131,11 +179,13 @@ namespace Cardinals.UI.NewDice
            GameManager.I.Stage.DiceManager.ChangeDice(idx, _newDice);
            _tradeEvent?.Invoke();
            B_Cancel();
+           _hasRerolled = false;
         }
 
         void B_Cancel()
         {
             gameObject.SetActive(false);
+            
         }
 
         void B_Reroll()
@@ -148,7 +198,8 @@ namespace Cardinals.UI.NewDice
             GameManager.I.Player.PlayerInfo.UseGold(2);
             EnemyGradeType type = (GameManager.I.Stage.CurEvent as BattleEvent).EnemyGrade;
             Dice newDice=GameManager.I.Stage.GetRewardDice(type);
-            Init(newDice, _tradeEvent);
+            RerollRewardDice(newDice, _tradeEvent);
+            _hasRerolled = true;
 
         }
     }
