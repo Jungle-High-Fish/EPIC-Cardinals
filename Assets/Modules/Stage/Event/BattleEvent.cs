@@ -76,7 +76,8 @@ namespace Cardinals.Game
             {
                 yield return PlayBossAppearProduction();
             }
-            
+            // 보상 관련 초기화
+            GameManager.I.UI.UINewDicePanel.HasRerolled = false;
             
             GameManager.I.UI.UIAntiTouchPanel.SetActive(true);
             do // 전투 시작
