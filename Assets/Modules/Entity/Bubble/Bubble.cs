@@ -5,6 +5,7 @@ using Febucci.UI;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using Util;
 
 namespace Cardinals.Entity.UI
 {
@@ -24,6 +25,11 @@ namespace Cardinals.Entity.UI
             {
                 _typewriter.onTextShowed.AddListener(TextEnd);
                 _isInit = true;
+                
+                // 폰트 설정
+                if (GameManager.I.Localization.IsJapanese) {
+                    _textTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
+                }
             }
         }
 

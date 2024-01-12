@@ -176,6 +176,10 @@ namespace Cardinals.Constants {
             public const string Materials = "Materials/";
             public const string Materials_BoardInputHandler = "Board/BoardInputHandler/BoardInputHandlerTexture";
 
+            // Font
+            public const string Fonts = "Fonts/";
+            public const string Fonts_ShipporiGothicB2 = "ShipporiGothicB2-Bold SDF";
+
             // Scriptable Object
             public const string SO = "SO/";
             public const string SO_BoardData = "Stage/BoardData/";

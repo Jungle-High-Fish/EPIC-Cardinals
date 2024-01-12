@@ -16,6 +16,7 @@ using Util;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using Cardinals.Test;
+using TMPro;
 
 namespace Cardinals
 {
@@ -188,6 +189,17 @@ namespace Cardinals
             InstantiatePausePanelUI(_systemUICanvas);
             InstantiateGameSettingUI(_systemUICanvas);
             InstantiateSaveFileLoaderUI(_systemUICanvas);
+
+            if (GameManager.I.Localization.IsJapanese) {
+                // get all TMP_Text
+                var texts = FindObjectsOfType<TextMeshProUGUI>(true);
+                foreach (var text in texts)
+                {   
+                    text.font = ResourceLoader.LoadFont(
+                        Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                    );
+                }
+            }
         }
 
         void InitDescriptionCanvas()
@@ -297,7 +309,7 @@ namespace Cardinals
             GameObject rewardUIObj = Instantiate(prefab, canvas.transform);
 
             _uiRewardPanel = rewardUIObj.GetComponent<UIRewardPanel>();
-            rewardUIObj.SetActive(false);
+            _uiRewardPanel.Init();
         }
 
         private void InstantiatePlayerUI(Canvas canvas) {

@@ -3149,14 +3149,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1181728908}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 55d7b3d2b6e985b4fb91cd9e6064257f,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 45
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -3166,14 +3165,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1181728908}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 40
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5260,14 +5258,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1075301452}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 55d7b3d2b6e985b4fb91cd9e6064257f,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 45
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5277,14 +5274,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1075301452}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 40
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -6315,14 +6311,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1562920553}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 55d7b3d2b6e985b4fb91cd9e6064257f,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 45
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -6332,14 +6327,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1562920553}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 40
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -11359,14 +11353,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 289916708}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 55d7b3d2b6e985b4fb91cd9e6064257f,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 45
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -11376,14 +11369,13 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 289916708}
           m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_font
-          m_Mode: 2
+          m_MethodName: set_fontSize
+          m_Mode: 4
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 0d08dcc69bddcb0458bd0a79944003b2,
-              type: 2}
-            m_ObjectArgumentAssemblyTypeName: TMPro.TMP_FontAsset, Unity.TextMeshPro
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 40
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -12957,7 +12949,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 250, y: 80}
+  m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1354227953
 MonoBehaviour:

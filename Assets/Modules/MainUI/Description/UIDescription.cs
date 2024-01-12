@@ -35,6 +35,16 @@ namespace Cardinals.UI
         {
             _baseDescription = description; 
             
+            // 폰트 설정
+            if (GameManager.I.Localization.IsJapanese) {
+                _nameTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
+                _descriptionTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
+
+                // _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * 0.7f;
+
+                
+            }
+            
             // 이름 및 설명 설정
             _nameTMP.text = description.Name;
             _descriptionTMP.text = description.Description;
@@ -52,8 +62,8 @@ namespace Cardinals.UI
             transform.AddComponent<GridSizeUpdator>().Resizing();
 
             _hasInit = true;
-
-
+            
+        
             if (description is BlessDescription ||
                 description is MagicDescription ||
                 (description is BuffDescription && description.Key.Contains(BuffType.Burn.ToString())))
