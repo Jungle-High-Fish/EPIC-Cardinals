@@ -16,6 +16,7 @@ namespace Cardinals.UI
         [SerializeField] private Transform _rewardsTr;
         [SerializeField] private GameObject _rewardMsgObj;
         [SerializeField] private TextMeshProUGUI _rewardMsgTMP;
+        [SerializeField] private TextMeshProUGUI _cancelBTNTMP;
         
         private GameObject _rewardItemPrefab;
     
@@ -30,6 +31,14 @@ namespace Cardinals.UI
 
         public void Init()
         {
+            _cancelBTNTMP.text = GameManager.I.Localization.Get(LocalizationEnum.UI_CLOSE);
+            
+            if (GameManager.I.Localization.IsJapanese) {
+                _rewardMsgTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
+                _cancelBTNTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
+                _rewardMsgTMP.fontSize *= 0.7f;
+            }
+            
             gameObject.SetActive(false);
         }
         
