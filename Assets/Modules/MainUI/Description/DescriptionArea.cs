@@ -11,6 +11,7 @@ namespace Cardinals.UI
 {
     public class DescriptionArea : MonoBehaviour
     {
+        private DescriptionConnector _curConnector;
         private IDescription[] _descriptions;
         private Dictionary<string, UIDescription> UIDescriptionsDict = new();
         
@@ -94,8 +95,14 @@ namespace Cardinals.UI
             UIDescriptionsDict.Add(description.Key, uiDescription);
         }
         
-        public void OnPanel(Anchor anchor = Anchor.Right, params IDescription[] descriptions)
+        public void OnPanel(DescriptionConnector connector, Anchor anchor = Anchor.Right, params IDescription[] descriptions)
         {
+            if (_curConnector != null)
+            {
+                _curConnector.IsOpen = false;
+                OffPanel();
+            }
+            _curConnector = connector;
             _curAnchor = anchor;
             // if (_canvasMode)
             // {
