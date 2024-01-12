@@ -309,7 +309,7 @@ namespace Cardinals
             GameObject rewardUIObj = Instantiate(prefab, canvas.transform);
 
             _uiRewardPanel = rewardUIObj.GetComponent<UIRewardPanel>();
-            rewardUIObj.SetActive(false);
+            _uiRewardPanel.Init();
         }
 
         private void InstantiatePlayerUI(Canvas canvas) {
