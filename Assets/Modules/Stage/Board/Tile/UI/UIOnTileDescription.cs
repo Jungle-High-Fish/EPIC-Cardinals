@@ -57,6 +57,18 @@ namespace Cardinals.UI {
             _description = description;
             _descriptionText.Get(gameObject).text = "";
 
+            if (GameManager.I.Localization.IsJapanese) {
+                _titleText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+
+                _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * 0.7f;
+                
+                _descriptionText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+            }
+
             gameObject.SetActive(false);
             
             _targetHeight = _descriptionText.Get(gameObject).GetStringHeight(_description);

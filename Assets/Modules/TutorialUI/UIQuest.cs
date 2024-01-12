@@ -31,6 +31,22 @@ namespace Cardinals.UI {
             _questTitle.Get(gameObject).SetLocalizedText(questData.Title);
             _questDescription.Get(gameObject).SetLocalizedText(questData.Description);
             _questCount.Get(gameObject).text = $"{_currentCount}/{questData.TargetQuests}";
+
+            if (GameManager.I.Localization.IsJapanese) {
+                // get all TMP_Text
+                var texts = new List<TMP_Text>() {
+                    _questTitle.Get(gameObject),
+                    _questDescription.Get(gameObject),
+                    _questCount.Get(gameObject)
+                };
+                
+                foreach (var text in texts)
+                {   
+                    text.font = ResourceLoader.LoadFont(
+                        Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                    );
+                }
+            }
         }
 
         public bool Achieve(int count) {
