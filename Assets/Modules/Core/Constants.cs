@@ -179,6 +179,7 @@ namespace Cardinals.Constants {
             // Font
             public const string Fonts = "Fonts/";
             public const string Fonts_ShipporiGothicB2 = "ShipporiGothicB2-Bold SDF";
+            public const string Fonts_SOYOMapleBold = "SOYO Maple Bold SDF";
 
             // Scriptable Object
             public const string SO = "SO/";
