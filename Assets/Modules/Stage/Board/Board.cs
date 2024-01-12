@@ -155,31 +155,46 @@ namespace Cardinals.Board {
             return null;
         }
 
-        public Tile GetRandomTile(bool includeCorner = true, bool includePlayer = true)
+        public Tile GetRandomTile(bool includeCorner = true, bool includePlayer = true, bool includeMaxLevel = true)
         {
+            List<Tile> list;
+            
             if (_boardBuilder is CircleBoardBuilder) {
                 includeCorner = true;
             }
 
             if (includeCorner)
             {
-                return _tileSequence[UnityEngine.Random.Range(0, _tileSequence.Count)];
+                list = _tileSequence;
             }
             else
             {
-                List<Tile> list;
                 if (_boardBuilder is NormalBoardBuilder) {
                     list = _tileSequence.Where(t => t.Type == TileType.Attack || t.Type == TileType.Defence).ToList();
                 } else {
                     list = _tileSequence;
                 }
+            }
 
-                if (!includePlayer)
-                {
-                    list = list.Where(t => t != GameManager.I.Player.OnTile).ToList();
-                }
+            if (!includePlayer)
+            {
+                list = list.Where(t => t != GameManager.I.Player.OnTile).ToList();
+            }
+
+            if (!includeMaxLevel)
+            {
+                list = list.Where(t => t == t.TileMagic.Level < Constants.GameSetting.Tile.MaxLevel).ToList();
+
+            }
+            
+            if (list.Count > 0)
+            {
                 var idx = Random.Range(0, list.Count());
                 return list[idx];
+            }
+            else
+            {
+                return null;
             }
         }
 
