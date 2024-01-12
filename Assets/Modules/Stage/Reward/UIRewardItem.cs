@@ -58,7 +58,11 @@ namespace Cardinals.UI
             
             _iconImg.sprite = sprite;
             _nameTMP.text = text;
-
+            
+            if (GameManager.I.Localization.IsJapanese) {
+                _nameTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
+                _nameTMP.fontSize *= 0.7f;
+            }
 
             baseReward.UI = this;
             

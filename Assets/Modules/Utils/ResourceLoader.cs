@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace Util {
@@ -13,6 +14,7 @@ namespace Util {
 		
 		private static Dictionary<string, Sprite> _spriteList = new Dictionary<string, Sprite>();
 		private static Dictionary<string, ScriptableObject> _SOList = new ();
+		private static Dictionary<string, TMP_FontAsset> _fontList = new Dictionary<string, TMP_FontAsset>();
 		private static HashSet<string> _loadedSpriteDirectory = new HashSet<string>();
 
 		private static Dictionary<string, RuntimeAnimatorController> _animatorControllerList = new Dictionary<string, RuntimeAnimatorController>();
@@ -52,6 +54,18 @@ namespace Util {
 			}
 			_materialList.Add(materialName, Resources.Load<Material>(targetPath));
 			return _materialList[materialName];
+		}
+
+		public static TMP_FontAsset LoadFont(string fontName)
+		{
+			string targetPath = Cardinals.Constants.FilePath.Resources.Fonts + fontName;
+
+			if (_fontList.ContainsKey(fontName))
+			{
+				return _fontList[fontName];
+			}
+			_fontList.Add(fontName, Resources.Load<TMP_FontAsset>(targetPath));
+			return _fontList[fontName];
 		}
 
 		public static T LoadSO<T>(string soName) where T : ScriptableObject

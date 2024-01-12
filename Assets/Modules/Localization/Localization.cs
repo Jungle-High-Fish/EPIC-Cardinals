@@ -8,6 +8,7 @@ namespace Cardinals {
         public string this[LocalizationEnum localizationEnum] => Get(localizationEnum);
         public List<string> LanguageList => _languageList;
         public List<string> LanguageNameList => _languageNameList;
+        public bool IsJapanese => PlayerPrefs.GetString("Language").Split("-")[0] == "JP";
 
         private Dictionary<LocalizationEnum, string> _localizationData;
         private List<string> _languageList;

@@ -24,4 +24,16 @@
 			"#Ordinal_4"		"번째"
 		}
 	}
+	"japanese"
+	{
+		"tokens"
+		{
+			"#StatusBattle"	    "%eventidx%{#Ordinal_%eventidxordinal%} イベント: %enemies% 戦闘中"
+			"#StatusLobby"      "ボードゲーム待機中!"
+			"#Ordinal_1"		"回目"
+			"#Ordinal_2"		"回目"
+			"#Ordinal_3"		"回目"
+			"#Ordinal_4"		"回目"
+		}
+	}
 }

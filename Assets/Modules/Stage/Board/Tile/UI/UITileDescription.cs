@@ -105,6 +105,18 @@ namespace Cardinals.UI {
             TextMeshProUGUI tmp = _descriptionText.Get(gameObject);
             tmp.text = description;
 
+            if (GameManager.I.Localization.IsJapanese) {
+                _titleText.Get(gameObject).font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+
+                _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * 0.7f;
+
+                tmp.font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+            }
+
             if (icon != null) {
                 _icon.Get(gameObject).gameObject.SetActive(true);
                 _icon.Get(gameObject).sprite = icon;
