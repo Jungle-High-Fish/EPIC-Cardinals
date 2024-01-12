@@ -57,12 +57,6 @@ namespace Cardinals.Tutorial
             _curQuestIndex = 0;
             _curSequenceIndex = 0;
 
-            // 스팀 핸들러 연결
-            GameManager.I.SteamHandler.SetBattleStateDisplay(
-                GameManager.I.Stage.Index,
-                _enemies.Select(x => x.EnemyData.enemyType).ToList()
-            );
-
             // 플레이어 이벤트 등록
             player.HomeReturnEvent += OnPlayerRound;
 
@@ -184,11 +178,6 @@ namespace Cardinals.Tutorial
             if (CheckPlayerWin)
             {
                 IsClear = true;
-
-                if (player.Hp == 1)
-                {
-                    GameManager.I.SteamHandler.TriggerAchievement("Barely_Barely");
-                }
 
                 // 전투 종료 초기화
                 player.Win();

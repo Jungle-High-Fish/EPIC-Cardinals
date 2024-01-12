@@ -156,7 +156,7 @@ namespace Cardinals
             Gold += value;
             if (Gold >= 10)
             {
-                GameManager.I.SteamHandler.TriggerAchievement("mElon_Musk");
+                //GameManager.I.SteamHandler.TriggerAchievement("mElon_Musk");
             }
             UpdateGoldEvent?.Invoke(Gold);
         }

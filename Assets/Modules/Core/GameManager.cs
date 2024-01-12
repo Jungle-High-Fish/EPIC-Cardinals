@@ -23,7 +23,7 @@ namespace Cardinals
         public StageController Stage => _stage;
         public GameSetting GameSetting => _gameSetting;
         public Localization Localization => _localization;
-        public SteamHandler SteamHandler => _steamHandler;
+        //public SteamHandler SteamHandler => _steamHandler;
         public SaveSystem SaveSystem => _saveSystem;
         public SoundManager Sound => _soundManager;
         public LogManager LogManager => _logManager;
@@ -34,7 +34,7 @@ namespace Cardinals
         private GameSetting _gameSetting;
         private Localization _localization;
         private LogManager _logManager;
-        private SteamHandler _steamHandler;
+        //private SteamHandler _steamHandler;
         private SaveSystem _saveSystem;
 
         private static UIManager _ui;
@@ -92,7 +92,7 @@ namespace Cardinals
             LoadGameSetting();
             GenerateCoreObjects();
 
-            _steamHandler.SetLobbyStateDisplay();
+            //_steamHandler.SetLobbyStateDisplay();
         }
 
         private void Update() {
@@ -125,16 +125,16 @@ namespace Cardinals
             //     }
             // }
 
-            _steamHandler.EveryFrame();
+            //_steamHandler.EveryFrame();
         }
 
         private void OnApplicationQuit() {
-            Steamworks.SteamClient.Shutdown();
+            //Steamworks.SteamClient.Shutdown();
         }
         
         private void SteamHandlerInit() {
-            _steamHandler = new SteamHandler();
-            _steamHandler.Init();
+            //_steamHandler = new SteamHandler();
+            //_steamHandler.Init();
         }
 
         private void SaveSystemInit() {

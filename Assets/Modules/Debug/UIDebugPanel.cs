@@ -87,7 +87,7 @@ namespace Cardinals.Test {
             });
 
             AddButton("도전과제 초기화", () => {
-                SteamUserStats.ResetAll(true);
+                //SteamUserStats.ResetAll(true);
             });
 
             Hide();

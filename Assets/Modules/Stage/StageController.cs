@@ -362,7 +362,7 @@ namespace Cardinals.Game {
         [Button]
         public void Meteor()
         {
-            GameManager.I.SteamHandler.TriggerAchievement("Meteor");
+            //GameManager.I.SteamHandler.TriggerAchievement("Meteor");
 
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Player_Skill_Meteor);
             Instantiate(prefab);

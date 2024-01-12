@@ -56,10 +56,10 @@ namespace Cardinals.Game
             //cardManager.OnBattle();
             diceManager.OnBattle();
 
-            GameManager.I.SteamHandler.SetBattleStateDisplay(
-                GameManager.I.Stage.Index,
-                _enemies.Select(x => x.EnemyData.enemyType).ToList()
-            );
+            // GameManager.I.SteamHandler.SetBattleStateDisplay(
+            //     GameManager.I.Stage.Index,
+            //     _enemies.Select(x => x.EnemyData.enemyType).ToList()
+            // );
 
             // 플레이어 이벤트 등록
             player.HomeReturnEvent += OnPlayerRound;
@@ -183,7 +183,7 @@ namespace Cardinals.Game
 
                 if (player.Hp == 1)
                 {
-                    GameManager.I.SteamHandler.TriggerAchievement("Barely_Barely");
+                    //GameManager.I.SteamHandler.TriggerAchievement("Barely_Barely");
                 }
 
                 // 전투 종료 초기화
@@ -214,10 +214,10 @@ namespace Cardinals.Game
                 enemy.DieEvent += () =>
                 {
                     string achieveName = enemyData.enemyType.ToString() + "_Takedown";
-                    GameManager.I.SteamHandler.TriggerAchievement(achieveName);
+                    //GameManager.I.SteamHandler.TriggerAchievement(achieveName);
 
                     if (_turn <= 1) {
-                        GameManager.I.SteamHandler.TriggerAchievement("ONE_TURN_KILL");
+                        //GameManager.I.SteamHandler.TriggerAchievement("ONE_TURN_KILL");
                     }
                     
                     enemies.Remove(enemy);
@@ -292,7 +292,7 @@ namespace Cardinals.Game
             GameManager.I.UI.UINewPlayerInfo.TurnRoundStatus.SetRound(_round);
 
             if (_round >= 10) {
-                GameManager.I.SteamHandler.TriggerAchievement("DIZZY");
+                //GameManager.I.SteamHandler.TriggerAchievement("DIZZY");
             }
         }
         
@@ -398,7 +398,7 @@ namespace Cardinals.Game
                 _thunderCntByTurn = value;
                 if (_thunderCntByTurn == 3)
                 {
-                    GameManager.I.SteamHandler.TriggerAchievement("Tingling");
+                    //GameManager.I.SteamHandler.TriggerAchievement("Tingling");
                 }
             }
         }
@@ -426,7 +426,7 @@ namespace Cardinals.Game
 
         private void AchievementKillPiPiPoPo()
         {
-            GameManager.I.SteamHandler.TriggerAchievement("PiPi_PoPo_Takedown_Together");
+            //GameManager.I.SteamHandler.TriggerAchievement("PiPi_PoPo_Takedown_Together");
         }
         #endregion
     }

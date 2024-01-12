@@ -389,7 +389,7 @@ namespace Cardinals
             {
                 yield return new WaitForSeconds(1f);
             }
-            GameManager.I.SteamHandler.TriggerAchievement("Complete_Reading");
+            //GameManager.I.SteamHandler.TriggerAchievement("Complete_Reading");
         }
 
         public void UpdateAction(PlayerActionType type)
