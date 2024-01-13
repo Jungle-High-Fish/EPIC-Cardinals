@@ -52,6 +52,7 @@ namespace Cardinals.UI
             }
         }
         [SerializeField] private DescriptionArea _descriptionArea;
+        public DescriptionArea DescriptionArea => _descriptionArea;
         [SerializeField] private HoverRenderType _hoverRenderType;
         [SerializeField] private CountType _countType;
         [SerializeField] private Anchor _anchor;

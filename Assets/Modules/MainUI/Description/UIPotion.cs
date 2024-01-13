@@ -20,36 +20,24 @@ namespace Cardinals.UI.Description
 
         private DG.Tweening.Sequence _shakeSeq;
 
-        private ObjectGetter _usePanel = new ObjectGetter(TypeOfGetter.ChildByName, "Canvas");
-        //private ComponentGetter<RectTransform> _mouseArea = new (TypeOfGetter.ChildByName, "Canvas/CanDeletePanel/MouseArea");
-        private ComponentGetter<Button> _useBTN = new (TypeOfGetter.ChildByName, "Canvas/CanDeletePanel/UseBTN");
-        private ComponentGetter<Button> _deleteBTN = new (TypeOfGetter.ChildByName, "Canvas/CanDeletePanel/DeleteBTN");
-        
         void Start()
         {
             // 버튼 상호 작용
             _button = transform.AddComponent<Button>();
             _button.onClick.AddListener(Click);
-            _useBTN.Get(gameObject).onClick.AddListener(Use);
-            _deleteBTN.Get(gameObject).onClick.AddListener(Delete);
-            _usePanel.Get(gameObject).SetActive(false);
-
-            _useBTN.Get(gameObject).GetComponentInChildren<TextMeshProUGUI>().text
-                = GameManager.I.Localization[LocalizationEnum.UI_ITEM_USE];
-            _deleteBTN.Get(gameObject).GetComponentInChildren<TextMeshProUGUI>().text 
-                = GameManager.I.Localization[LocalizationEnum.UI_ITEM_REMOVE];
+            
             
             // Use Panel 마우스 이벤트 설정
-            var trigger = transform.GetComponent<EventTrigger>();
-            if (trigger == null)
-            {
-                transform.AddComponent<EventTrigger>();
-            }
+            // var trigger = transform.GetComponent<EventTrigger>();
+            // if (trigger == null)
+            // {
+            //     transform.AddComponent<EventTrigger>();
+            // }
             
-            var entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerExit;
-            entry.callback.AddListener( (eventData) => { SetUsePanelActive(false); } );
-            trigger.triggers.Add(entry);
+            // var entry = new EventTrigger.Entry();
+            // entry.eventID = EventTriggerType.PointerExit;
+            // entry.callback.AddListener( (eventData) => { SetUsePanelActive(false); } );
+            // trigger.triggers.Add(entry);
 
             // skakeSeq
             _shakeSeq = DOTween.Sequence();
@@ -76,12 +64,12 @@ namespace Cardinals.UI.Description
         {
             if (_curPotion != null)
             {
-                GetComponent<DescriptionConnector>().OffPanel();
+                // GetComponent<DescriptionConnector>().OffPanel();
                 SetUsePanelActive(true);
             }
         }
         
-        void Use()
+        public void Use()
         {
             if (_curPotion != null)
             {
@@ -109,7 +97,7 @@ namespace Cardinals.UI.Description
             }
         }
 
-        void Delete()
+        public void Delete()
         {
             if (_curPotion != null)
             {
@@ -122,13 +110,14 @@ namespace Cardinals.UI.Description
                 }
                 
                 _curPotion = null;
+                GetComponent<DescriptionConnector>().OffPanel();
                 SetUsePanelActive(false);
             }
         }
 
         void SetUsePanelActive(bool state)
         {
-            _usePanel.Get(gameObject).SetActive(state);
+            GameManager.I.UI.CanDeletePanel.SetPanelState(state, state ? this : default);
         }
     }
 }

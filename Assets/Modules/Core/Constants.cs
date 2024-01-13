@@ -16,6 +16,7 @@ namespace Cardinals.Constants {
             
             public const string Prefabs_UI_Background = "UI/UIBackground";
             public const string Prefabs_UI_GlobalDescriptionCover = "UI/Global Description Cover";
+            public const string Prefabs_UI_PlayerPanel_CanDeletePanel = "UI/Player/CanDeletePanel";
             
 
             public const string Prefabs_Tile = "Board/Tiles/TileUV2";

@@ -47,6 +47,7 @@ namespace Cardinals
         public UINotiBoardEventByTurn UINotiBoardEventByTurn => _uiNotiBoardEventByTurn;
         public Canvas MainUICanvas => _mainUICanvas;
         public GameObject UIAntiTouchPanel => _uiAntiTouchPanel;
+        public CanDeletePanel CanDeletePanel => _canDeletePanel; 
         public DescriptionArea DescCanvasDescArea { get; private set; }
 
         private Canvas _mainUICanvas;
@@ -82,7 +83,8 @@ namespace Cardinals
         private GameObject _uiAntiTouchPanel;
         private GameObject _uiFadePanel;
         private UINotiBoardEventByTurn _uiNotiBoardEventByTurn;
-        
+        private CanDeletePanel _canDeletePanel; 
+
         private Bubble _uiSystemBubble;
 
         #region Board-Event 
@@ -146,6 +148,7 @@ namespace Cardinals
                 out _systemUICanvas
             );
             InitDescriptionCanvas();
+            InstantiatePotionUsePanel(_descriptionUICanvas);
             
             InstantiateSystemBubbleUI(_systemUICanvas);
             // Turn Alert
@@ -216,6 +219,15 @@ namespace Cardinals
             DescCanvasDescArea = obj.AddComponent<DescriptionArea>();
             DescCanvasDescArea.InitCanvas();
         }
+        
+        private void InstantiatePotionUsePanel(Canvas canvas) {
+            GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_PlayerPanel_CanDeletePanel);
+            GameObject obj = Instantiate(prefab, canvas.transform);
+
+            _canDeletePanel = obj.GetComponent<CanDeletePanel>();
+            _canDeletePanel.Init();
+        }
+        
 
         public void InitPlayerUI() {
             _uiPlayerInfo.gameObject.SetActive(true);
