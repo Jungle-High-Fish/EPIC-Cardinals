@@ -20,7 +20,20 @@ namespace Cardinals.UI
 
         private bool _isActive;
         private Anchor _curAnchor;
+        private GameObject _closeBlocker;
 
+        public void Start()
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_GlobalDescriptionCover);
+            _closeBlocker = Instantiate(prefab, transform.parent.transform);
+            _closeBlocker.gameObject.SetActive(false);
+            var btn = _closeBlocker.GetComponent<Button>();
+            btn.onClick.AddListener(() =>
+            {
+                OffPanel();
+                btn.gameObject.SetActive(false);
+            });
+        }
 
         public void Update()
         {
@@ -102,6 +115,7 @@ namespace Cardinals.UI
                 _curConnector.IsOpen = false;
                 OffPanel();
             }
+            _closeBlocker.SetActive(true);
             _curConnector = connector;
             _curAnchor = anchor;
             // if (_canvasMode)
