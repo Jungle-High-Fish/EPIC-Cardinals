@@ -395,37 +395,50 @@ namespace Cardinals.Board {
             _onClicked?.Invoke(this);
         }
 
-        private void OnMouseEnter() {
-            _isMouseHovered = true;
+        // private void OnMouseEnter() {
+        //     _isMouseHovered = true;
 
-            if (_isPlayerOn == false && _isSelected == false) {
+        //     if (_isPlayerOn == false && _isSelected == false) {
                 
-            }
-            //GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
-        }
+        //     }
+        //     //GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
+        // }
 
-        private void OnMouseExit() {
-            _isMouseHovered = false;
+        // private void OnMouseExit() {
+        //     _isMouseHovered = false;
 
-            if (_isPlayerOn == false && _isSelected == false) {
-                GameManager.I.UI.UIHoveredTileInfo.Hide(false);
-            }
-            //GameManager.I.UI.UIHoveredTileInfo.Hide(false);
-            GameManager.I.UI.UIMouseHint.Hide();
-        }
+        //     if (_isPlayerOn == false && _isSelected == false) {
+        //         GameManager.I.UI.UIHoveredTileInfo.Hide(false);
+        //     }
+        // }
 
-        private void OnMouseOver() {
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Title") return;
+        // private void OnMouseOver() {
+        //     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Title") return;
             
-            if (Input.GetMouseButtonDown(1)) {
-                GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
+        //     if (Input.GetMouseButtonDown(0)) {
+        //         GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
+        //     }
+
+        //     if (Input.GetMouseButtonUp(0)) {
+        //         GameManager.I.UI.UIHoveredTileInfo.Hide(false);
+        //     }
+        // }
+
+        private void Update() {
+            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) {
+                Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit)) {
+                    if (hit.transform.gameObject == this.gameObject) {
+                        GameManager.I.UI.UIHoveredTileInfo.Show(this, false, false);
+                    }
+                }
             }
 
-            if (Input.GetMouseButtonUp(1)) {
+            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Ended) {
                 GameManager.I.UI.UIHoveredTileInfo.Hide(false);
             }
-
-            GameManager.I.UI.UIMouseHint.Show();
         }
 
         private void OnCollisionEnter(Collision other) {
