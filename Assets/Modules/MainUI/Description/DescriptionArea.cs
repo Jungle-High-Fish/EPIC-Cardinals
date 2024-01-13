@@ -4,6 +4,7 @@ using Modules.Utils;
 using Sirenix.Utilities;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Util;
 
@@ -11,6 +12,7 @@ namespace Cardinals.UI
 {
     public class DescriptionArea : MonoBehaviour
     {
+        private DescriptionConnector _curConnector;
         private IDescription[] _descriptions;
         private Dictionary<string, UIDescription> UIDescriptionsDict = new();
         
@@ -19,11 +21,27 @@ namespace Cardinals.UI
 
         private bool _isActive;
         private Anchor _curAnchor;
+        private GameObject _closeBlocker;
+        public Action CloseAction { get; set; }
 
+        public void Start()
+        {
+            var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_UI_GlobalDescriptionCover);
+            _closeBlocker = Instantiate(prefab, transform.parent.transform);
+            _closeBlocker.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1); // 설명창보다 위에 
+            _closeBlocker.gameObject.SetActive(false);
+            
+            var btn = _closeBlocker.GetComponent<Button>();
+            btn.onClick.AddListener(() => CloseAction?.Invoke());
+            
+            CloseAction += OffPanel;
+            CloseAction += () => { btn.gameObject.SetActive(false); };
+
+        }
 
         public void Update()
         {
-            TraceCursor();
+            // TraceCursor();
         }
         
         #region Canvas Setting
@@ -94,14 +112,21 @@ namespace Cardinals.UI
             UIDescriptionsDict.Add(description.Key, uiDescription);
         }
         
-        public void OnPanel(Anchor anchor = Anchor.Right, params IDescription[] descriptions)
+        public void OnPanel(DescriptionConnector connector, Anchor anchor = Anchor.Right, params IDescription[] descriptions)
         {
+            if (_curConnector != null)
+            {
+                _curConnector.IsOpen = false;
+                OffPanel();
+            }
+            _closeBlocker.SetActive(true);
+            _curConnector = connector;
             _curAnchor = anchor;
-            // if (_canvasMode)
-            // {
-            //     Vector2 mousePos = Input.mousePosition;
-            //     transform.position = mousePos + (anchor is Anchor.Right ? new Vector3(50, 0, 0) : Vector2.zero);
-            // }
+            if (_canvasMode)
+            {
+                Vector2 mousePos = Input.mousePosition;
+                transform.position = mousePos + (anchor is Anchor.Right ? new Vector3(50, 0, 0) : Vector2.zero);
+            }
 
             if (descriptions != null)
             {

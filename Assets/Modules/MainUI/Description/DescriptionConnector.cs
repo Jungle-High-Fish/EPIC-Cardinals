@@ -9,8 +9,14 @@ using Util;
 namespace Cardinals.UI
 {
     [Tooltip("마우스 호버 시, 설명 창을 출력")]
-    public class DescriptionConnector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class DescriptionConnector : MonoBehaviour, IPointerClickHandler
     {
+        private bool _isOpen;
+        public bool IsOpen 
+        { 
+            get => _isOpen;
+            set => _isOpen = false; 
+        }
         private IDescription _description;
         private GameObject _instObject;
         
@@ -46,6 +52,7 @@ namespace Cardinals.UI
             }
         }
         [SerializeField] private DescriptionArea _descriptionArea;
+        public DescriptionArea DescriptionArea => _descriptionArea;
         [SerializeField] private HoverRenderType _hoverRenderType;
         [SerializeField] private CountType _countType;
         [SerializeField] private Anchor _anchor;
@@ -83,8 +90,8 @@ namespace Cardinals.UI
         {
             var items = _itemAreaTr.GetComponents<IDescription>();
             
-            _mouseEnterAction += _descriptionArea.OnPanel;
-            _mouseExitAction += _descriptionArea.OffPanel;
+            // _mouseEnterAction += _descriptionArea.OnPanel;
+            // _mouseExitAction += _descriptionArea.OffPanel;
         }
 
         IDescription[] GetIDescription()
@@ -107,14 +114,33 @@ namespace Cardinals.UI
         //     _mouseExitAction?.Invoke();
         // }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            _mouseEnterAction?.Invoke(_anchor, GetIDescription());
-        }
+        // public void OnPointerEnter(PointerEventData eventData)
+        // {
+        //     _mouseEnterAction?.Invoke(_anchor, GetIDescription());
+        // }
+        //
+        // public void OnPointerExit(PointerEventData eventData)
+        // {
+        //     _mouseExitAction?.Invoke();
+        // }
 
-        public void OnPointerExit(PointerEventData eventData)
+        /// <summary>
+        /// 모바일용 설명창 출력
+        /// </summary>
+        /// <param name="eventData"></param>
+        public void OnPointerClick(PointerEventData eventData)
         {
-            _mouseExitAction?.Invoke();
+            if (!_isOpen)
+            {
+                _descriptionArea.OnPanel(this, _anchor, GetIDescription());
+                // _mouseEnterAction?.Invoke(_anchor, GetIDescription());
+            }
+            else
+            {
+                _mouseExitAction?.Invoke();
+            }
+
+            _isOpen = !_isOpen;
         }
 
         private void OnDisable() {
@@ -142,19 +168,33 @@ namespace Cardinals.UI
             }
 
             var entry = new EventTrigger.Entry();
-                entry.eventID = EventTriggerType.PointerEnter;
-                entry.callback.AddListener( (eventData) => { OnPanel(); } );
+                entry.eventID = EventTriggerType.PointerClick;
+                entry.callback.AddListener((eventData) =>
+                {
+                    //OnPanel();
+                    if (!_isOpen)
+                                {
+                                    _descriptionArea.OnPanel(this, _anchor, GetIDescription());
+                                    // _mouseEnterAction?.Invoke(_anchor, GetIDescription());
+                                }
+                                else
+                                {
+                                    _mouseExitAction?.Invoke();
+                                }
+                    
+                                _isOpen = !_isOpen;
+                } );
                 trigger.triggers.Add(entry);
                 
-                entry = new EventTrigger.Entry();
-                entry.eventID = EventTriggerType.PointerExit;
-                entry.callback.AddListener( (eventData) => { OffPanel(); } );
-                trigger.triggers.Add(entry);
+                // entry = new EventTrigger.Entry();
+                // entry.eventID = EventTriggerType.PointerExit;
+                // entry.callback.AddListener( (eventData) => { OffPanel(); } );
+                // trigger.triggers.Add(entry);
         }
 
         public void OnPanel()
         {
-            _descriptionArea.OnPanel(_anchor, GetIDescription());
+            _descriptionArea.OnPanel(this, _anchor, GetIDescription());
         }
 
         public void OffPanel()
@@ -166,7 +206,7 @@ namespace Cardinals.UI
         public void RequestOnDescription(IDescription description)
         {
             _descriptionArea.UpdatePanel(_anchor, description);
-            _descriptionArea.OnPanel();
+            _descriptionArea.OnPanel(this);
         }
 
         public void OnTransformChildrenChanged()
