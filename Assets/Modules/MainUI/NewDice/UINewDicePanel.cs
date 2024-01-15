@@ -54,6 +54,11 @@ namespace Cardinals.UI.NewDice
             _rerollBTN.GetComponentInChildren<TextMeshProUGUI>().text
                 = GameManager.I.Localization[LocalizationEnum.MAGIC_LEVELUP_BT3];
 
+            if (GameManager.I.Localization.IsJapanese)
+            {
+                _rerollBTN.GetComponentInChildren<TextMeshProUGUI>().fontSize *= .7f;
+            }
+
             _backupCoverPos = _newDiceCoverObj.transform.position;
             _backupIconPos = _newDiceCoverIcon.position;
         }

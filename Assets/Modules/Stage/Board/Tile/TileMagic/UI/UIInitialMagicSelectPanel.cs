@@ -28,6 +28,11 @@ namespace Cardinals.UI {
 
         public void Init() {
             gameObject.SetActive(false);
+
+            if (GameManager.I.Localization.IsJapanese)
+            {
+                _refreshButton.Get(gameObject).GetComponentInChildren<TextMeshProUGUI>().fontSize *= .7f;
+            }
         }
         
         bool _hasRefreshed = false;
