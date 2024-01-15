@@ -35,7 +35,7 @@ namespace Cardinals.Enemy
                     !GameManager.I.Stage.BoardObjects.Where(obj => obj.Data.objType != default).Any(obj => obj.OnTile == t))
                 .ToList();
 
-            for (int i = 0; i < 2 && i < list.Count; i++)
+            for (int i = 0; i < 2 && 0 < list.Count; i++)
             {
                 var idx = Random.Range(0, list.Count);
                 var tile = list[idx];
