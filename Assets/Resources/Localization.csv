@@ -236,3 +236,6 @@ MONSTER_KROL,Krol,크롤,クロル,庫洛魯
 MONSTER_PICPIC,PicPic,삒삒이,ピチュンキ,皮克皮克
 UI_LOAD_TITLE,Save Data,불러오기,ロードデータ,存檔
 UI_LOAD_LOAD,Load,로드,ロード,載入
+REWARD_GOLD,Gold,원,ゴールド,金幣
+REWARD_DICE,Dice,주사위,サイコロ,骰子
+REWARD_CLEAR,Clear?,클리어?,クリア？,結束？

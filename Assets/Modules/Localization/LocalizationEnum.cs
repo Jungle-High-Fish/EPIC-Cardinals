@@ -238,5 +238,9 @@ namespace Cardinals {
         MONSTER_PICPIC,
         UI_LOAD_TITLE,
         UI_LOAD_LOAD,
+        REWARD_GOLD,
+        REWARD_DICE,
+        REWARD_CLEAR,
+
     }
 }
