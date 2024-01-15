@@ -178,7 +178,12 @@ namespace Cardinals.Constants {
 
             // Font
             public const string Fonts = "Fonts/";
+            public const string Fonts_Soft_Default = "Yeongdeok Sea SDF";
+            public const string Fonts_Sytem_Default = "SOYO Maple Bold SDF";
+            public const string Fonts_Soft_JP = "FUTENE SDF";
+            public const string Fonts_System_JP = "ShipporiGothicB2-Bold SDF";
             public const string Fonts_ShipporiGothicB2 = "ShipporiGothicB2-Bold SDF";
+            public const string Fonts_FUTENE = "FUTENE SDF";
             public const string Fonts_SOYOMapleBold = "SOYO Maple Bold SDF";
 
             // Scriptable Object
