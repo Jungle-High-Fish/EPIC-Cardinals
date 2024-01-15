@@ -100,6 +100,22 @@ namespace Cardinals.UI.Description
             _tileInfo.Get(gameObject).InitOnTile();
 
             _turnRoundStatus.Get(gameObject).Set(0, 0);
+            
+            
+            // 폰트 설정
+            TMP_FontAsset font;
+            if (GameManager.I.Localization.IsJapanese)
+            {
+                font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_Soft_JP);
+            }
+            else
+            {
+                font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_Soft_Default);
+            }
+
+            _blessTMP.font = font;
+            _potionTMP.font = font;
+            _currenttileTMP.font =font;
         }
 
         void UpdateMoneyUI(int value)
