@@ -30,7 +30,7 @@ namespace Cardinals.UI
             {
                 case RewardType.Gold:
                     sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Coin); 
-                    text = $"{baseReward.Value} Gold";
+                    text = $"{baseReward.Value} {GameManager.I.Localization.Get(LocalizationEnum.REWARD_GOLD)}";
                     break;
                 case RewardType.Potion:
                     var pType = (PotionType)baseReward.Value;
@@ -48,18 +48,18 @@ namespace Cardinals.UI
                     break;
                 case RewardType.RandomDice:
                     sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Dice); 
-                    text = $"Dice";
+                    text = GameManager.I.Localization.Get(LocalizationEnum.REWARD_DICE);
                     break;
                 case RewardType.NextStageMap:
                     sprite = ResourceLoader.LoadSprite(Constants.FilePath.Resources.Sprites_UI_Icon_Map); 
-                    text = $"Clear?";
+                    text = GameManager.I.Localization.Get(LocalizationEnum.REWARD_CLEAR);
                     break;
             }
             
             _iconImg.sprite = sprite;
             _nameTMP.text = text;
             
-            if (GameManager.I.Localization.IsJapanese) {
+            if (GameManager.I.Localization.IsJapanese || GameManager.I.Localization.IsChinese) {
                 _nameTMP.font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_ShipporiGothicB2);
                 _nameTMP.fontSize *= 0.7f;
             }
