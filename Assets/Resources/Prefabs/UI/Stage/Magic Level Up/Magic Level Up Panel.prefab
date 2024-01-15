@@ -590,8 +590,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6960718399678872089, guid: d77e78c7c28f36640951c5d4f6718017,
         type: 3}
-      propertyPath: m_fontSize
-      value: 50
+      propertyPath: m_fontSizeMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960718399678872089, guid: d77e78c7c28f36640951c5d4f6718017,
+        type: 3}
+      propertyPath: m_fontSizeMin
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6960718399678872089, guid: d77e78c7c28f36640951c5d4f6718017,
         type: 3}
