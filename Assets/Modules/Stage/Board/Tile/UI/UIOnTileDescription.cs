@@ -62,7 +62,13 @@ namespace Cardinals.UI {
                     Constants.FilePath.Resources.Fonts_ShipporiGothicB2
                 );
 
-                _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * 0.7f;
+                if (_titleText.Get(gameObject).text.Length > 6) {
+                    _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * 0.5f;
+                } else if (_titleText.Get(gameObject).text.Length > 4) {
+                    _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * 0.7f;
+                } else {
+                    _titleText.Get(gameObject).fontSize = _titleText.Get(gameObject).fontSize * .8f;
+                }
                 
                 _descriptionText.Get(gameObject).font = ResourceLoader.LoadFont(
                     Constants.FilePath.Resources.Fonts_ShipporiGothicB2
