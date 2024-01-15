@@ -20,24 +20,13 @@ namespace Cardinals.UI
         }
         public IEnumerator CurtainON()
         {
-            bool wait = false;
-            _topCurtainTr.DOLocalMoveY(-100, .5f).SetEase(Ease.Linear);
-            _bottomCurtainTr.DOLocalMoveY(100, .5f).SetEase(Ease.Linear)
-                .OnComplete(() => wait = true);
-            yield return new WaitUntil(() => wait);
-
-            yield return new WaitForSeconds(1f);
-            yield return CurtainOFF();
+            yield return new WaitForSeconds(2f);
+            //yield return CurtainOFF();
         }
         
         public IEnumerator CurtainOFF()
         {
-            bool wait = false;
-            
-            _topCurtainTr.DOLocalMoveY(100, .5f).SetEase(Ease.Linear);
-            _bottomCurtainTr.DOLocalMoveY(-100, .5f).SetEase(Ease.Linear)
-                .OnComplete(() => wait = true);
-            yield return new WaitUntil(() => wait);
+            yield return new WaitForSeconds(.5f);
         }
     }
 }

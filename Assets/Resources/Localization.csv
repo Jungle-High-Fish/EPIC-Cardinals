@@ -1,238 +1,241 @@
-﻿ID,EN-English,KO-한국어,JP-日本語
-UI_MAIN_CONTINUE,Continue,이어하기,続行する
-UI_MAIN_NEW_START,New,새로하기,新たに始める
-UI_MAIN_START,START,게임 시작,ゲームスタート
-UI_MAIN_BACK,BACK,뒤로,戻る
-UI_MAIN_DICE_SELECT,Dice Select,사용 주사위,使用するダイス
-UI_GAMESETTING_TITLE,Option,게임 설정,ゲーム設定
-UI_GAMESETTING_FULLSCREEN,Full Screen,전체화면,フルスクリーン
-UI_GAMESETTING_RESOLUTION,Resolution,해상도,解像度
-UI_GAMESETTING_BGM,BGM,배경 음악,背景音楽
-UI_GAMESETTING_LANGUAGE_WARN,"To make the changes effective, please restart the client.",변경사항을 적용하려면<br>클라이언트를 재시작하십시오.,変更を適用するには<br>クライアントを再起動してください。
-UI_GAMESETTING_LANGUAGE,Language,언어,言語
-UI_GAMESETTING_SFX,SFX,효과음,効果音
-UI_CLOSE,Close,닫기,閉じる
-UI_EXIT_GAME,Quit,게임 종료,ゲーム終了
-UI_INIT_DICE_SELECT,Use Dice,사용 주사위,使用するダイス
-UI_ROULETTE_SPIN,SPIN!,스핀!,スピン！
-STAGE_SUSPICIOUS_MEADOW,Suspicious Meadow,수상한 초원,怪しい草原
-TILE_MAGIC_ATTACK_NAME,Attack,공격,攻撃
-TILE_MAGIC_ATTACK_EXPLAIN,Attack damage equal to the number on the Dice.,주사위 눈금 수만큼 적을 공격합니다.,ダイスの目の数だけ敵を攻撃します。
-TILE_MAGIC_DEFENSE_NAME,Defense,방어,防御
-TILE_MAGIC_DEFENSE_EXPLAIN,Gain defense equal to the number on the Dice.,주사위 눈금 수만큼 방어력을 얻습니다.,ダイスの目の数だけ防御力を得ます。
-TILE_MAGIC_FIRE_NAME,Fire Ball,파이어 볼,ファイアボール
-TILE_MAGIC_FIRE_EXPLAIN,"Each action, fire a fireball at that enemy for <level=2,4,6> additional damage.","행동 마다, 해당 적에게 파이어볼을 날려 <level=2,4,6>의 추가 데미지를 줍니다","行動ごとに、その敵にファイアボールを放ち、<level=2,4,6>の追加ダメージを与えます。"
-TILE_MAGIC_WATER_NAME,Clear Water,맑은 물,澄んだ水
-TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=4,5,6>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=4,5,6>).","行動ごとに、ダイスの目の数だけ体力を回復します(最大<level=4,5,6>)。"
-TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷,岩の鎧
-TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6> additional defense.","행동 마다, <level=2,4,6>의 추가 방어도를 얻습니다.","行動ごとに、<level=2,4,6>の追加防御力を獲得します。"
-BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상,<debuff = Burn> 火傷
-BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 <checkBless=BlessFire1> damage.","턴 종료 시, 2 <checkBless=BlessFire1> 의 데미지를 입습니다.",ターン終了時に、2 <checkBless=BlessFire1> のダメージを受けます。
-BUFF_WEAK_NAME,<debuff=Weak> Weak,<debuff=Weak> 약화,<debuff=Weak> 弱体化
-BUFF_WEAK_EXPLAIN,The damage dealt is reduced by 50%.,주는 피해가 50% 감소합니다.,与えるダメージが50%減少します。
-BUFF_ELECTRICSHOCK_NAME,<debuff=Electric> Electricshock,<debuff=Electric> 감전,<debuff=Electric>感電
-BUFF_ELECTRICSHOCK_EXPLAIN,You can use up to 2 dice in a row on a one tile.,한 타일에서 주사위를 연속으로 최대 2개까지 사용할 수 있습니다.,一つのタイルでサイコロを連続して最大2個まで使用することができます。
-BUFF_POISON_NAME,Poison,독,毒
-BUFF_POISON_EXPLAIN,"At the end of the turn, take damage equal to the number of stacks.",턴이 끝나면 중첩 수만큼 피해를 받습니다.,ターン終了時に重複数だけダメージを受けます。
-BUFF_SLOW_NAME,<debuff=Slow> Slow,<debuff=Slow> 둔화,<debuff=Slow>スロウ
-BUFF_SLOW_EXPLAIN,"Each turn, you are limited to 2 moves with the dice.","각 턴, 이동 가능 횟수가 2번으로 제한됩니다.",各ターン、移動可能回数が2回に制限されます。
-BUFF_HEAL_NAME,<debuff=Heal> Heal,<debuff=Heal> 회복,<debuff=Heal>回復
-BUFF_HEAL_EXPLAIN,"At end of the turn, heal for 3 Health.","턴 종료 시, 3의 체력을 회복합니다.",ターン終了時、3体力を回復します。
-BUFF_CONFUSION_NAME,<debuff=MoveConfuse> Confusion,<debuff=MoveConfuse> 혼란,<debuff=MoveConfuse> 混乱する
-BUFF_CONFUSION_EXPLAIN,"When using dice for movement, there's a 50% chance to move backwards.","주사위를 이동에 사용할 때, 50% 확률로 뒤로 이동합니다.",サイコロを移動に使用すると、50%の確率で後ろに移動します。
-BUFF_DOLL_NAME,Doll,인형,人形
-BUFF_DOLL_EXPLAIN,"If a doll is present on the board, all damage dealt is equal to 1.",보드에 인형이 있으면 모든 피해는 1이 됩니다.,ボードに人形がある場合、すべてのダメージは1になります。
-BUFF_ROTATIONRATE_NAME,<debuff=Cycle> Rotationrate,<debuff=Cycle> 회전률,<debuff=Cycle>回転率
-BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다.",ユーザーの行動でダメージを受けません。 ユーザーがボードを一周した時、10のダメージを受けます。
-BUFF_GROWTH_NAME,<debuff=Growth> Adaptation,<debuff=Growth> 적응,<debuff=Growth>適応
-BUFF_GROWTH_EXPLAIN,"Gradually adapts to the human world. Every 10 turns, attack and defense values increase by 10.",점차 인간 세계에 적응합니다. 10턴 마다 공격/방어 수치가 10씩 증가합니다.,徐々に人間の世界に適応します。10ターンごとに攻撃/防御の数値が10ずつ増加します。
-BUFF_GROWTH_EXPLAIN2,It's currently up by $1., 현재 $1만큼 상승했습니다.,現在$1ほど上昇しています。
-BUFF_POWERLESS_NAME,<debuff=Broken> Broken,<debuff=Broken> 무력,<debuff=Broken>無力化
-BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.,獲得する防御力が50%減少します。
-BUFF_BERSERK_NAME,<debuff=Berserk> Berserk,<debuff=Berserk> 광폭화,<debuff=Berserk>狂暴化
-BUFF_BERSERK_EXPLAIN,This enemy is angry.,적이 분노했습니다.,敵は激怒しました。
-POTION_JUMP_NAME,Jump Potion,도약 포션,跳躍のポーション
-POTION_JUMP_EXPLAIN,Move forward 3 tiles.,앞으로 3칸 이동합니다.,前に3マス移動します。
-POTION_BACK_NAME,Reverse Potion,후진 포션,リバースポーション
-POTION_BACK_EXPLAIN,Move back 3 tiles.,뒤로 3칸 이동합니다.,後ろに3マス移動します。
-POTION_NUM4_NAME,4 Potion,4 포션,4 ポーション
-POTION_NUM4_EXPLAIN,It has the effect of a normal Dice number of 4.,일반 주사위 눈금 4의 행동 효과를 갖습니다.,通常のサイコロ目盛り4の行動効果を持ちます。
-POTION_NUM3_NAME,3 Potion,3 포션,3 ポーション
-POTION_NUM3_EXPLAIN,It has the effect of a normal Dice number of 3.,일반 주사위 눈금 3의 행동 효과를 갖습니다.,通常のサイコロ目盛り3の行動効果を持ちます。
-POTION_NUM2_NAME,2 Potion,2 포션,2 ポーション
-POTION_NUM2_EXPLAIN,It has the effect of a normal Dice number of 2.,일반 주사위 눈금 2의 행동 효과를 갖습니다.,通常のサイコロ目盛り2の行動効果を持ちます。
-POTION_NUM1_NAME,1 Potion,1 포션,1 ポーション
-POTION_NUM1_EXPLAIN,It has the effect of a normal Dice number of 1.,일반 주사위 눈금 1의 행동 효과를 갖습니다.,通常のサイコロ目盛り1の行動効果を持ちます。
-POTION_HEAL_NAME,Heal Potion ,힐 포션,ヒールポーション
-POTION_HEAL_EXPLAIN,Gain a healing buff for 3 turns.,3턴 동안 회복 버프를 획득합니다.,3ターンの間、回復バフを獲得します。
-POTION_GROWTH_NAME,Growth Potion,성장 포션,成長ポーション
-POTION_GROWTH_EXPLAIN,Increases the level of the tile you are currently stepping on by one level,현재 밟고 있는 타일의 레벨이 한 단계 증가합니다.,現在踏んでいるタイルのレベルが1段階上がります。
-OBJECT_POTIONGOBLIN_NAME,Potion Goblin,포션 고블린,ポーションゴブリン
-OBJECT_POTIONGOBLIN_EXPLAIN,"On contact, get 1 random potion.","접촉 시, 랜덤 포션 1개를 획득합니다.",接触すると、ランダムポーション1個を獲得します。
-OBJECT_DICEEVENT_NAME,"Dice Event	",주사위 이벤트,サイコロイベント
-OBJECT_DICEEVENT_EXPLAIN,"On arrival, active a dice event.","도착 시, 주사위 이벤트를 실행합니다.",到着時に、サイコロイベントを実行します。
-OBJECT_ROULETTE_NAME,Roulette,랜덤 돌림판,ランダム回転盤
-OBJECT_ROULETTE_EXPLAIN,"Upon arrival, active a roulette event.","도착 시, 룰렛 이벤트를 실행합니다.",到着時に、ルーレットイベントを実行します。
-OBJECT_RYUKA_NAME,Ryuka,류카,リュウカ
-OBJECT_RYUKA_EXPLAIN,"Heals an enemy for 2 Health per Object Turn. <br>On contact, Ryuka disappears.","오브젝트턴 마다 적에게 2의 체력을 회복시켜줍니다. <br>접촉 시, 류카가 사라집니다.",オブジェクトターンごとに敵に体力を2回復させます。 <br> 接触すると、リュウカが消えます。
-OBJECT_FIREBALL_NAME,Ember,불씨,残り火
-OBJECT_FIREBALL_EXPLAIN,Contact with the ember inflicts 5 damage.,"접촉 시, 유저에게 5의 데미지를 입히고 사라집니다.",接触時、ユーザーに5のダメージを与えて消えます。
-OBJECT_ALCHEMY_NAME,Alchemy,연금술,錬金術
-OBJECT_ALCHEMY_EXPLAIN,On contact active a Alchemy event.,연금술 이벤트를 실행합니다.,錬金術イベントを実行します。
-DICE_NORMAL_NAME,Normal Dice,일반 주사위,普通のサイコロ
-DICE_NORMAL_DESCRIPTION,It's just dice.,그냥 주사위입니다.,ただのサイコロです。
-DICE_FIRE_NAME,<element=Fire>  Fire Dice,<element=Fire>  불 주사위,<element=Fire> 火のサイコロ
-DICE_FIRE_DESCRIPTION,"When used on a fire tile, adds a <debuff = Burn> Burn debuff on an enemy equal to number of dice.","불 타일에 사용 시, 적에게 해당 숫자만큼 <debuff = Burn> 화상 디버프를 부여합니다.",火タイルに使用すると、敵にその数だけ<debuff = Burn>火傷デバフを付与します。
-DICE_WATER_NAME,<element=Water>  Water Dice,<element=Water>  물 주사위,<element=Water> 水サイコロ
-DICE_WATER_DESCRIPTION,"When used on a water tile, adds a <debuff=Weak> Weak debuff on an enemy equal to number of dice","물 타일에 사용 시, 적에게 해당 숫자만큼 <debuff=Weak> 약화 디버프를 부여합니다.",水タイルに使用すると、敵にその数だけ<debuff=Weak> 弱体化デバフを付与します。
-DICE_EARTH_NAME,<element=Earth>  Earth Dice,<element=Earth>  땅 주사위,<element=Earth> 地サイコロ
-DICE_EARTH_DESCRIPTION,"When used on a rock tile, adds a <debuff=Broken> Powerless debuff on an enemy equal to number of dice","바위 타일에 사용 시, 해당 숫자만큼 <debuff=Broken> 무력 디버프를 부여합니다.",岩石タイルに使用すると、その数だけ<debuff=Broken> 武力デバフを付与します。
-TILE_CURSE_THUNDERBOLT_NAME,Thunderbolt,벼락,落雷
-TILE_CURSE_THUNDERBOLT_EXPLAIN,"When the curse is activated, it strikes the user with a thunderbolt for 7 damage.","저주가 활성화되면, 유저에게 벼락을 내려쳐 7의 데미지를 줍니다.",呪いが発動すると、ユーザーに雷を落として7のダメージを与えます。
-TILE_CURSE_LOCK_NAME,Lock,잠김,ロック
-TILE_CURSE_LOCK_EXPLAIN,"When the curse is activated, lock this tile. (Unusable) This effect lasts for the duration of the battle.",저주가 활성화되면 타일을 잠급니다. (사용 불가)<br>이 효과는 전투가 진행되는 동안 지속됩니다.,呪いが発動すると、タイルをロックします。 (使用不可)<br>この効果は戦闘中ずっと続きます。
-TILE_CURSE_EMBER_NAME,Ember,불씨,残り火
-TILE_CURSE_EMBER_EXPLAIN,"When the curse is activated, an ember that moves 2 tiles each turn is summoned on this tile. Contact with the ember inflicts 5 damage.","저주가 활성화되면, 이 타일에 매 턴 2타일을 이동하는 불씨가 소환됩니다.<br>불씨와 접촉하면 5의 피해를 입습니다.",呪いが発動すると、このタイルに毎ターン2タイル移動する残り火が召喚されます。残り火と接触すると5ダメージを受けます。
-BLESS_EARTH1_NAME,Rock Debris,바위 잔해,岩の破片
-BLESS_EARTH1_EXPLAIN,"After the enemy attacks, they take damage equal to the remaining defense.",적의 공격이 끝나면 남은 방어력만큼 적에게 피해를 줍니다.,敵の攻撃が終わると、残りの防御力分だけ敵にダメージを与えます。
-BLESS_EARTH2_NAME,Unbreakable Rock,깨지지 않는 바위,割れない岩
-BLESS_EARTH2_EXPLAIN,"If you have no defense at the end of your turn, you immediately gain 4 defense.","턴이 끝날 때 방어력이 없다면, 즉시 방어력 4를 얻습니다.",ターン終了時に防御力が無ければ、即座に防御力4を得る。
-BLESS_FIRE1_NAME,Scorched Wound,그을린 상처,焦げた傷
-BLESS_FIRE1_EXPLAIN,"Each time you circle the board, your <debuff=Burn>burn debuff damage goes up by 2 for that battle.","보드를 한 바퀴 돌 때마다, 해당 전투에서 <debuff=Burn>화상 디버프 데미지가 2 씩 올라갑니다.",ボードを1周するごとに、その戦闘で<debuff=Burn>火傷デバフダメージが2ずつアップします。
-BLESS_FIRE2_NAME,Meteor,메테오,メテオ
-BLESS_FIRE2_EXPLAIN,"When the enemy's burn buff stacks reach 5, reset the stacks to 0 and summon a powerful meteor. (10 damage)      ","적의 화상 버프 중첩이 5이 되면, 중첩을 0으로 만들고 강력한 메테오를 소환합니다. (10 데미지)",敵の火傷バフの重複が5になると、重複を0にして強力なメテオを召喚します。 (10ダメージ)
-BLESS_WATER1_NAME,Calm Surface,잔잔한 수면,穏やかな睡眠
-BLESS_WATER1_EXPLAIN,"Each time you circle the board, you heal for the number of laps you've circled in that battle.",보드를 돌 때마다 해당 전투에서 돌았던 바퀴 수만큼 체력을 회복합니다.,ボードを一周するたびに、その戦闘で回った周回数だけ体力を回復します。
-BLESS_WATER2_NAME,Flood,범람,氾濫
-BLESS_WATER2_EXPLAIN,"When healed, attack 1 random enemy with a number equal to your healing.","회복 시, 회복된 수치만큼 무작위 적 1마리를 공격합니다.",回復時、回復した数値だけランダムな敵1体を攻撃します。
-BLESS_WIND1_NAME,Tailwind,순풍,順風
-BLESS_WIND1_EXPLAIN,"When acting on a tile, you can use a Dice number 1 after of 5 and 6.","타일에서 행동할 때, 주사위 눈금 5와 6 다음에 1을 사용할 수 있습니다.",タイルで行動するとき、サイコロ目盛りの5と6の次に1を使うことができます。
-BLESS_WIND2_NAME,Typhoon,태풍,台風
-BLESS_WIND2_EXPLAIN,"For every third action on the tile, you attack an additional 3 damage to the enemy.",타일에서 세 번째 행동을 할 때마다 적에게 추가로 3의 피해를 줍니다.,タイルで3回目の行動を行うたびに、敵に追加で3ダメージを与えます。
-EVENT_DICEEVENT_WARNING,Insufficient dice to active the event.,이벤트를 수행하기 위한 주사위가 부족합니다.,イベントを行うためのサイコロが不足しています。
-PLAYER_SCRIPT_START,Let's Go~~!,가보자구~~!,行きましょう～～～!
-PLAYER_SCRIPT_ATTACK,Take this!,받아랏!,私の攻撃を受けろ!
-PLAYER_SCRIPT_HIT,Ugh!,으악!,うわっ!
-PLAYER_SCRIPT_WIN,Yah!,아싸!,わくわくする!
-PLAYER_SCRIPT_SLOW,I'm slowed and can't move anymore.,둔화에 걸려서 더 이상 움직이지 못해..,減速に引っかかって、もう動けなくなり...。
-PLAYER_SCRIPT_ELECTRICSHOCK,I'm electrocuted and can't roll more than 3 dice in a row.,감전되서 주사위를 연속해서 3개 이상 낼 수 없어..,感電して、サイコロを3つ以上連続して出せない。
-PLAYER_SCRIPT_LOCK,It's sealed and not available…,봉인되어서 사용할 수 없어..,封印されていて使えない。
-PLAYER_SCRIPT_GAMEOVER,I can't give up here…,여기서 무너질 수 없어…,ここで倒れるわけにはいかない...。
-PLAYER_SCRIPT_TUTORIAL,"For now, just follow the tutorial and use it...!",지금은 튜토리얼을 따라서 사용해 줘..!,今はチュートリアルの通りに使ってくれ...!
-PLAYER_SCRIPT_REROLL,I don't have the money to roll the dice.,주사위를 돌릴 돈이 없어..,サイコロを回すお金がない。
-PLAYER_SCRIPT_TUTORIAL1,I can't reroll the dice in the tutorial.,튜토리얼에서는 주사위를 돌릴 수 없어..,チュートリアルではサイコロを回せない。
-PLAYER_SCRIPT_CONFUSE,I'm confused...,혼란하다 혼란해..,混乱する、混乱する。
-PLAYER_SCRIPT_POTION,I can't use potion..,포션을 쓸 수 없어..,ポーションが使えない。
-ENEMY_ACTION_ATTACK_NAME,Attack,공격,攻撃
-ENEMY_ACTION_ATTACK_EXPLAIN,This enemy is trying to attack you.,이 적은 당신을 공격하려고 합니다.,この敵はあなたを攻撃しようとしています。
-ENEMY_ACTION_DEFENSE_NAME,Defense,방어,防衛
-ENEMY_ACTION_DEFENSE_EXPLAIN,This enemy is trying to defend itself.,이 적은 방어하려고 합니다.,この敵は防御しようとします。
-ENEMY_ACTION_TILECURSE_NAME,Tile Curse, 타일 저주,タイルの呪い
-ENEMY_ACTION_TILECURSE_EXPLAIN,This enemy is trying to curse the tiles.,이 적은 타일에 저주를 걸려고 합니다.,この敵はタイルに呪いをかけようとします。
-ENEMY_ACTION_TILEDEBUFF_NAME,Tile Debuff, 타일 디버프,タイルデバフ
-ENEMY_ACTION_TILEDEBUFF_EXPLAIN,This enemy is trying to debuff the tiles.,이 적은 타일에 디버프를 걸려고 합니다.,この敵はタイルにデバフをかけようとします。
-ENEMY_ACTION_USERDEBUFF_NAME,User Debuff,디버프,デバフ
-ENEMY_ACTION_USERDEBUFF_EXPLAIN,This enemy is trying to debuff you,이 적은 당신에게 디버프를 걸려고 합니다.,この敵はあなたにデバフをかけようとしています。
-ENEMY_ACTION_SLEEP_NAME,Sleep,수면,睡眠
-ENEMY_ACTION_SLEEP_EXPLAIN,This enemy is asleep.,이 적은 잠들어 있습니다.,この敵は眠っています。
-ENEMY_ACTION_SPAWN_NAME,Spawn,소환,召喚
-ENEMY_ACTION_SPAWN_EXPLAIN,This enemy is trying to summon something.,이 적은 무언가를 소환하려고 합니다.,この敵は何かを召喚しようとしています。
-ENEMY_ACTION_AREAATTACK_NAME,Area Attack,[미사용]범위 공격,[未使用]範囲攻撃
-ENEMY_ACTION_AREAATTACK_EXPLAIN,-,이 적은 범위 공격을 하려고 합니다.,この敵は範囲攻撃をしようとします。
-ENEMY_ACTION_CONFUSION_NAME,Confusion,[미사용]혼란,[未使用]混乱
-ENEMY_ACTION_CONFUSION_EXPLAIN,-,이 적은 혼란스러워합니다.,この敵は混乱します。
-ENEMY_ACTION_NOACTION_NAME,No Action, [미사용]무행동,[未使用]無動作
-ENEMY_ACTION_NOACTION_EXPLAIN,-,이 적은 가만히 있습니다.,この敵はじっとしています。
-TUOTORIAL_QUEST1_TITLE,Movement and Action #1,이동과 행동 #1,移動と行動 #1
-TUOTORIAL_QUEST1_DES1,"Move 2 spaces, reaching the defense tile.","2칸 이동하여, 방어 타일에 도착하세요.",2マス移動して、防御タイルに到着します。
-TUOTORIAL_QUEST1_DES2,Place a dice with a value of 2 on the outside of the board.,숫자2의 주사위를 보드 외곽에 놓으세요.,2番のサイコロをボードの外側に置きます。
-TUOTORIAL_QUEST1_DES3,Get a defense value of 3 to block enemy attacks.,3의 방어도를 획득하여 적의 공격을 막으세요.,3の防御力を獲得して敵の攻撃を防いでください。
-TUOTORIAL_QUEST1_DES4,Place the number 3 dice in the center of the board.,숫자3의 주사위를 보드 가운데에 놓으세요.,3番のサイコロをボードの中央に置きます。
-TUOTORIAL_QUEST2_TITLE,Continuous Action #2,연속 행동 #2,連続行動 #2
-TUOTORIAL_QUEST2_DES1,Move 1 space to reach the attack tile.,"1칸 이동하여, 공격 타일에 도착하세요.",1マス移動して、攻撃タイルに到着します。
-TUOTORIAL_QUEST2_DES2,Place the number 1 dice on the outside of the board.,숫자1의 주사위를 보드 외곽에 놓으세요.,数字1のサイコロをボードの外側に置きます。
-TUOTORIAL_QUEST2_DES3,Use the die twice in a row.,주사위를 연속해서 두 번 사용하세요.,サイコロを連続して2回使用します。
-TUOTORIAL_QUEST2_DES4,You can only play consecutive dice of ascending numbers on an action tile.,행동 타일에서는 오름차순의 연속된 숫자로만 연속해서 낼 수 있습니다.,行動タイルでは、昇順の連続した数字のみ連続して出すことができます。
-TUOTORIAL_QUEST3_TITLE,Enchant Tile #3,타일 마법 부여 #3,タイル魔法付与 #3
-TUOTORIAL_QUEST3_DES1,Move 1 space to reach the defense tile.,"1칸 이동하여, 방어 타일에 도착하세요.",1マス移動して、防御タイルに到着します。
-TUOTORIAL_QUEST3_DES2,Place the dice with the number 1 on the outside of the board.,숫자1의 주사위를 보드 외곽에 놓으세요.,数字1のサイコロをボードの外側に置きます。
-TUOTORIAL_QUEST3_DES3,Give 3 exp to the tile you are standing on.,서 있는 타일에 주사위를 3회 사용하여 3의 경험치를 제공하세요.,立っているタイルにサイコロを3回使って3個の経験値を与えます。
-TUOTORIAL_QUEST3_DES4,"For every 1 dice you spend on an action tile, you gain 1 tile experience.","행동 타일에서 사용하는 주사위 1개 당, 타일 경험치를 1씩 획득합니다.",行動タイルで使用するサイコロ1個につきタイル経験値を1ずつ獲得します。
-TUOTORIAL_QUEST3_DES5,Choose the enchantment to grant.,부여할 마법을 선택하세요.,付与する魔法を選択してください。
-TUOTORIAL_QUEST3_DES6,"The next time you spend a dice on this tile, that enchantment will be triggered.",앞으로 이 타일에서 주사위를 사용하면 해당 마법이 발동합니다.,今後このタイルでサイコロを使うと、その魔法が発動します。
-TUOTORIAL_QUEST4_TITLE,Kill an enemy #4,적 처치 #4,敵討伐 #4
-TUOTORIAL_QUEST4_DES1,Defeat the enemies on the field.,필드 위의 적을 처치하세요.,フィールド上の敵を倒してください。
-TUOTORIAL_QUEST4_DES2,Combine the dice in your hand strategically.,패의 주사위들을 전략적으로 조합하세요.,手札のサイコロを戦略的に組み合わせてください。
-TUOTORIAL_QUEST5_TITLE,Here's your reward!,보상이에요!,報酬です!
-TUOTORIAL_QUEST5_DES1,Choose your reward,보상 선택,報酬の選択
-TUOTORIAL_QUEST5_DES2,"Congratulations, take your reward (or not!) and continue your journey!","축하합니다! 보상을 받고(안 받아도 돼요!), 여정을 이어가세요!",おめでとうございます！報酬を受け取り（受けなくても大丈夫です！）、旅を続けてください！
-TUOTORIAL_END1,End Turn,턴 종료,ターン終了
-TUOTORIAL_END2,End the turn,턴을 종료하세요,ターンを終了してください
-UI_INGAME_BLESS,Bless,축복,祝福
-UI_INGAME_POTION,Potion,포션,ポーション
-UI_INGAME_CURRENTTILE,CurrentTile,현재 타일,現在のタイル
-UI_INGAME_TURN,Turn,턴 수,ターン数
-UI_INGAME_LAP,Laps,바퀴 수,回転数
-UI_INGAME_ENDTURN,End Turn,턴 종료,ターン終了
-UI_INGAME_NEXTEVENT,Next Event,다음 이벤트,次のイベント
-UI_TURN_AN1,A board event is generated after<br>{0} turn.,{0} 턴 후 보드 이벤트가 생성됩니다.,{0}ターン後にボードイベントが生成されます。
-UI_TURN_AN2,A board event has been generated.,보드 이벤트가 생성되었습니다.,ボードイベントが作成されました。
-UI_TILE_SEALED,Sealed Tile,봉인된 타일,封印されたタイル
-UI_TILE_SEALED_INFO,Sealed Tile cannot be activated or used,봉인된 타일에서는 행동이 불가능합니다.,封印されたタイルでは行動ができません。
-UI_DICE_REROLL,Reroll,다시 돌리기,リロールする
-UI_TILE_CURSE,Cursed Tile,저주받은 타일,呪われたタイル
-UI_TILE_CURSE_ABOUT,This tile has been cursed with {Curse}. It will be dispelled when the player arrives.,이 타일은 {Curse} 저주를 받았습니다. 플레이어가 시간 내에 도착하면 해제됩니다.,このタイルは {Curse}の呪いをかけられています。 プレイヤーが時間内に到着すると解除されます。
-EVENT_ALCHEMY_ALLTILE,"On a dice roll of 1,<br>Get 1 exp for the entire tile","주사위를 굴려 1이 나온다면,<br>전체 타일 경험치 +1",サイコロを振って1が出たら、<br>タイル全体の経験値+1
-EVENT_ALCHEMY_DAMAGE,"On a dice roll of 5,<br>Deal 10 damage to all enemies.","주사위를 굴려 5가 나온다면,<br>전체 적에게 10의 데미지",サイコロを振って5が出たら、<br>敵全体に10のダメージを与える。
-EVENT_ALCHEMY_MONEY,"On a dice roll of 4,<br>Get 5 coin.","주사위를 굴려 4가 나온다면,<br>돈 5원 획득",サイコロを振って4が出たら、<br>お金5円獲得
-EVENT_ALCHEMY_POTION,"On a dice roll of 2,<br>Get random potion","주사위를 굴려 2가 나온다면,<br>랜덤 포션 획득",サイコロを振って2が出たら、<br>ランダムポーションを獲得できます。
-EVENT_ALCHEMY_HP,"On a dice roll of 3,<br>Get 5 max hp.","주사위를 굴려 3이 나온다면,<br>최대 체력 5 증가",サイコロを振って3が出たら、<br>最大体力5アップ
-EVENT_DICE_MONEY,Raise the dice.<br>You get money equal to the dice number.,올린 주사위 눈 만큼 돈을 획득합니다.<br>주사위를 올려주세요.,上げたサイコロの目の数だけお金を獲得します<br>サイコロを上げてください。
-EVENT_DICE_HEAL,Heals you for the dice number x2 .<br>Raise the dice.,올린 주사위 눈의 x2 만큼 체력을 회복합니다.<br>주사위를 올려주세요.,上げたサイコロ目のx2分だけ体力を回復します<br>サイコロを上げてください。
-EVENT_ROULETTE_DAM,Deal 10 damage to a random enemy.,랜덤한 적에게 10의 데미지를 줍니다.,ランダムな敵に10のダメージを与えます。
-EVENT_ROULETTE_DICE,Get a random dice.,랜덤 주사위 획득합니다.,ランダムサイコロを獲得します。
-EVENT_ROULETTE_MONEY,Get money.,돈을 얻습니다.,お金を得ます。
-EVENT_ROULETTE_POTION,Get a random potion.,랜덤한 포션를 얻습니다.,ランダムなポーションを入手します。
-EVENT_ROULETTE_TILE,Power up a random tile.,랜덤한 타일을 강화합니다.,ランダムなタイルを強化します。
-EVENT_ROULETTE_HP,Loses health.,체력이 깎입니다.,体力が削られます。
-EVENT_DICE_MONEY1,Get money.,돈을 획득했다.,お金を獲得した。
-EVENT_DICE_HEAL2,Your health has been restored,체력이 회복되었다,体力が回復した
-EVENT_ALCHEMY_TITLE,Alchemy Rolling,굴리는 연금술,転がる錬金術
-EVENT_ALCHEMY_DES,~ Please choose the dice to roll ~,~ 굴릴 주사위를 고르세요 ~,～転がすサイコロを選んでください～
-EVENT_ALCHEMY_ROLL,ROLLING,굴리기,転がす
-GAMEOVER_NUM_ROUND,Number of laps,바퀴 수,回転数
-GAMEOVER_NUM_DICE,Number of dice used,사용한 주사위 횟수,使用したサイコロ数
-GAMEOVER_NUM_MONSTER,Monsters killed,몬스터 처치 수,モンスター討伐数
-GAMEOVER_NUM_PLAYTIME,Play time,플레이 타임,プレイタイム
-GAMEOVER_BUTTON_RE,Retry,다시하기,やり直し
-GAMEOVER_BUTTON_TITLE,Title,타이틀로,タイトル
-MAGIC_LEVELUP_TITLE1,Enchantment!,마법 부여!,魔法をかけよう
-MAGIC_LEVELUP_TITLE2,Enchant Evolve!,마법 진화!,魔法の進化!
-MAGIC_LEVELUP_BT1,Level Up,레벨 업,レベルアップ
-MAGIC_LEVELUP_BT2,Change,마법 변경,魔法変更
-MAGIC_LEVELUP_BT3,Refresh,새로고침,リフレッシュ
-OPTION_TITLE,Options,옵션,オプション
-OPTION_CONTINUE,Continue,이어하기,続行する
-OPTION_SETTING,Setting,게임 설정,ゲーム設定
-OPTION_MAINMENU,Main Menu,메인 메뉴,メインメニュー
-OPTION_QUIT,Quit,게임 종료,ゲーム終了
-UI_ITEM_USE,Use,사용,使用
-UI_ITEM_REMOVE,Remove,버리기,捨てる
-UI_ITEM_NO_MORE_ITEM,No more items could be acquired.,더 이상 아이템을 획득할 수 없습니다.,もうアイテムを獲得することはできません。
-UI_GETDICE,Select a dice to replace.,교체할 주사위를 선택해주세요.,交換するサイコロを選択してください。
-UI_DICE_TITLE,New Dice!!,신규 주사위!,新しいサイコロ!
-UI_DICE_TRADE,Trade,교체,交換
-UI_TUTORIAL_SKIP,Run the tutorial?,튜토리얼을 포함할까요?,チュートリアルを含めますか？
-MONSTER_THEROCK,The Rock,봉봉이,ボンボン
-MONSTER_POPO,PoPo,뽀뽀,ポポー
-MONSTER_PIPI,PiPi,삐삐,ピピ
-MONSTER_DOLDOL,DolDol,돌돌이,ころころん
-MONSTER_CHARRRRRRRRRRRRRUK,Charrrrrrrrrrrrruk,차르르르르르르르륵이,ジャラリン
-MONSTER_NULLUNULLU,NulluNullu,널루널루,ネルネル
-MONSTER_TWETWE,TweTwe,퉤퉤기,チュチュキ
-MONSTER_MUMU,MuMu,무무,モリモリ
-MONSTER_PAZIZIZIZIC,Pazizizizic,파지지지직이,ビリジジキ
-MONSTER_KROL,Krol,크롤,クロル
-MONSTER_PICPIC,PicPic,삒삒이,ピチュンキ
-UI_LOAD_TITLE,Save Data,불러오기,読み込み
-UI_LOAD_LOAD,Load,로드,ロード
+﻿ID,EN-English,KO-한국어,JP-日本語,CHT-繁體中文
+UI_MAIN_CONTINUE,Continue,이어하기,つづきから,繼續
+UI_MAIN_NEW_START,New,새로하기,さいしょから,新遊戲
+UI_MAIN_START,START,게임 시작,ゲームスタート,開始
+UI_MAIN_BACK,BACK,뒤로,もどる,返回
+UI_MAIN_DICE_SELECT,Dice Select,사용 주사위,ダイス選択,選擇骰子
+UI_GAMESETTING_TITLE,Option,게임 설정,オプション,選項
+UI_GAMESETTING_FULLSCREEN,Full Screen,전체화면,フルスクリーン,全螢幕
+UI_GAMESETTING_RESOLUTION,Resolution,해상도,解像度,解析度
+UI_GAMESETTING_BGM,BGM,배경 음악,BGM,音樂
+UI_GAMESETTING_LANGUAGE_WARN,"To make the changes effective, please restart the client.",변경사항을 적용하려면<br>클라이언트를 재시작하십시오.,変更を適用するため、ゲームを再起動してください,設定將在重新啟動本遊戲後生效。
+UI_GAMESETTING_LANGUAGE,Language,언어,言語,語言
+UI_GAMESETTING_SFX,SFX,효과음,効果音,效果音
+UI_CLOSE,Close,닫기,とじる,關閉
+UI_EXIT_GAME,Quit,게임 종료,ゲーム終了,離開
+UI_INIT_DICE_SELECT,Use Dice,사용 주사위,さいしょのダイス,使用骰子
+UI_ROULETTE_SPIN,SPIN!,스핀!,まわせ！,轉動！
+STAGE_SUSPICIOUS_MEADOW,Suspicious Meadow,수상한 초원,あやしい草原,可疑的草原
+TILE_MAGIC_ATTACK_NAME,Attack,공격,攻撃,攻擊
+TILE_MAGIC_ATTACK_EXPLAIN,Attack damage equal to the number on the Dice.,주사위 눈금 수만큼 적을 공격합니다.,ダイスの出目だけ敵を攻撃します,對敵人造成等同於骰子點數的傷害。
+TILE_MAGIC_DEFENSE_NAME,Defense,방어,防御,防禦
+TILE_MAGIC_DEFENSE_EXPLAIN,Gain defense equal to the number on the Dice.,주사위 눈금 수만큼 방어력을 얻습니다.,ダイスの出目だけシールドを獲得します,獲得等同於骰子點數的防禦。
+TILE_MAGIC_FIRE_NAME,Fire Ball,파이어 볼,ファイアボール,火球
+TILE_MAGIC_FIRE_EXPLAIN,"Each action, fire a fireball at that enemy for <level=2,4,6> additional damage.","행동 마다, 해당 적에게 파이어볼을 날려 <level=2,4,6>의 추가 데미지를 줍니다","ファイアボールを放ち、通常の攻撃と<level=2,4,6>の追加ダメージを与えます","朝敵人發射一顆火球，造成骰子點數加上額外 <level=2,4,6> 點傷害。"
+TILE_MAGIC_WATER_NAME,Clear Water,맑은 물,きれいな水,淨水
+TILE_MAGIC_WATER_EXPLAIN,"Each action, you regain health equal to the number of Dice (Max <level=4,5,6>).","행동 마다, 주사위 수만큼 체력을 회복합니다(최대 <level=4,5,6>).","ダイスの出目だけ体力を回復します(最大<level=4,5,6>)","恢復等同於骰子點數的生命值 (最多 <level=4,5,6>)。"
+TILE_MAGIC_EARTH_NAME,Rock Armor,바위 갑옷,ストーンシールド,岩甲
+TILE_MAGIC_EARTH_EXPLAIN,"Each action, gain <level=2,4,6> additional defense.","행동 마다, <level=2,4,6>의 추가 방어도를 얻습니다.","大地の力を得て、通常の防御と<level=2,4,6>の追加シールドを獲得します","獲得等同於骰子點數加上額外 <level=2,4,6> 點防禦。"
+BUFF_BURN_NAME,<debuff = Burn> Burn,<debuff = Burn> 화상,<debuff = Burn> 火傷,<debuff = Burn> 燃燒
+BUFF_BURN_EXPLAIN,"At the end of the turn, take 2 <checkBless=BlessFire1> damage.","턴 종료 시, 2 <checkBless=BlessFire1> 의 데미지를 입습니다.",ターン終了時に、2 <checkBless=BlessFire1> ダメージを受けます,回合結束時，受到 2 <checkBless=BlessFire1> 點傷害。
+BUFF_WEAK_NAME,<debuff=Weak> Weak,<debuff=Weak> 약화,<debuff=Weak> 弱体化,<debuff=Weak> 虛弱
+BUFF_WEAK_EXPLAIN,The damage dealt is reduced by 50%.,주는 피해가 50% 감소합니다.,与えるダメージが50%減少します,造成的傷害減少 50%。
+BUFF_ELECTRICSHOCK_NAME,<debuff=Electric> Electricshock,<debuff=Electric> 감전,<debuff=Electric>感電,<debuff=Electric> 麻痺
+BUFF_ELECTRICSHOCK_EXPLAIN,You can use up to 2 dice in a row on a one tile.,한 타일에서 주사위를 연속으로 최대 2개까지 사용할 수 있습니다.,1タイルでサイコロを連続使用する際は2個までに制限されます,在同一個板塊上最多只能連續使用 2 個骰子。
+BUFF_POISON_NAME,Poison,독,毒,毒
+BUFF_POISON_EXPLAIN,"At the end of the turn, take damage equal to the number of stacks.",턴이 끝나면 중첩 수만큼 피해를 받습니다.,ターン終了時に数値分のダメージを受けます,回合結束時，受到等同於層數的傷害。
+BUFF_SLOW_NAME,<debuff=Slow> Slow,<debuff=Slow> 둔화,<debuff=Slow>スロー,<debuff=Slow> 緩速
+BUFF_SLOW_EXPLAIN,"Each turn, you are limited to 2 moves with the dice.","각 턴, 이동 가능 횟수가 2번으로 제한됩니다.",1ターンの移動可能回数が2回までに制限されます,每回合最多只能使用骰子移動 2 次。
+BUFF_HEAL_NAME,<debuff=Heal> Heal,<debuff=Heal> 회복,<debuff=Heal>回復,<debuff=Heal> 治療
+BUFF_HEAL_EXPLAIN,"At end of the turn, heal for 3 Health.","턴 종료 시, 3의 체력을 회복합니다.",ターン終了時、体力を3回復します,回合結束時，恢復 3 點生命值。
+BUFF_CONFUSION_NAME,<debuff=MoveConfuse> Confusion,<debuff=MoveConfuse> 혼란,<debuff=MoveConfuse> 混乱,<debuff=MoveConfuse> 混亂
+BUFF_CONFUSION_EXPLAIN,"When using dice for movement, there's a 50% chance to move backwards.","주사위를 이동에 사용할 때, 50% 확률로 뒤로 이동합니다.",サイコロを移動に使用すると、50%の確率で後ろへ移動します,使用骰子進行移動時，有 50% 機率變成朝反方向移動。
+BUFF_DOLL_NAME,Doll,인형,人形,人偶
+BUFF_DOLL_EXPLAIN,"If a doll is present on the board, all damage dealt is equal to 1.",보드에 인형이 있으면 모든 피해는 1이 됩니다.,ボードに人形がある場合、すべてのダメージが1になります,當人偶位於場上時，所有傷害都變成 1。
+BUFF_ROTATIONRATE_NAME,<debuff=Cycle> Rotationrate,<debuff=Cycle> 회전률,<debuff=Cycle>回転率,<debuff=Cycle> 迴轉率
+BUFF_ROTATIONRATE_EXPLAIN,"Don't take damage from your actions. When you move around the board, take 10 damage.","유저의 행동으로 피해를 받지 않습니다. 유저가 보드를 한바퀴 돌았을 때, 10의 데미지를 입습니다.",プレイヤーの行動でダメージを与えることができません。その代わり、ボードを1周するごとに10ダメージを受けます,你的行動無法造成傷害。每當你繞地圖板塊一圈時，受到 10 點傷害。
+BUFF_GROWTH_NAME,<debuff=Growth> Adaptation,<debuff=Growth> 적응,<debuff=Growth>適応,<debuff=Growth> 適應環境
+BUFF_GROWTH_EXPLAIN,"Gradually adapts to the human world. Every 10 turns, attack and defense values increase by 10.",점차 인간 세계에 적응합니다. 10턴 마다 공격/방어 수치가 10씩 증가합니다.,徐々に人間の世界に適応し、10ターンごとに攻撃/防御の数値が10ずつ増加します,逐漸變得適應人類世界。每 10 個回合，攻擊與防禦都會增加 10。
+BUFF_GROWTH_EXPLAIN2,It's currently up by $1., 현재 $1만큼 상승했습니다.,現在$1増加しています,目前增加 $1。
+BUFF_POWERLESS_NAME,<debuff=Broken> Broken,<debuff=Broken> 무력,<debuff=Broken>無力化,<debuff=Broken> 無力化
+BUFF_POWERLESS_EXPLAIN,Reduces defense gained by 50%.,획득하는 방어력이 50% 감소합니다.,獲得するシールドが50%減少します。,獲得的防禦減少 50%。
+BUFF_BERSERK_NAME,<debuff=Berserk> Berserk,<debuff=Berserk> 광폭화,<debuff=Berserk>狂暴化,狂暴
+BUFF_BERSERK_EXPLAIN,This enemy is angry.,적이 분노했습니다.,敵がめちゃ怒ってます,這個敵人生氣了。
+POTION_JUMP_NAME,Jump Potion,도약 포션,ジャンプポーション,跳躍藥水
+POTION_JUMP_EXPLAIN,Move forward 3 tiles.,앞으로 3칸 이동합니다.,前に3マス移動します,向前移動 3 格。
+POTION_BACK_NAME,Reverse Potion,후진 포션,リバースポーション,反向藥水
+POTION_BACK_EXPLAIN,Move back 3 tiles.,뒤로 3칸 이동합니다.,後に3マス移動します,向後移動 3 格。
+POTION_NUM4_NAME,4 Potion,4 포션,4 ポーション,4 之藥水
+POTION_NUM4_EXPLAIN,It has the effect of a normal Dice number of 4.,일반 주사위 눈금 4의 행동 효과를 갖습니다.,普通のサイコロの出目4の効果を発動します,使用後視為執行骰子結果為 4 的行動。
+POTION_NUM3_NAME,3 Potion,3 포션,3 ポーション,3 之藥水
+POTION_NUM3_EXPLAIN,It has the effect of a normal Dice number of 3.,일반 주사위 눈금 3의 행동 효과를 갖습니다.,普通のサイコロの出目3の効果を発動します,使用後視為執行骰子結果為 3 的行動。
+POTION_NUM2_NAME,2 Potion,2 포션,2 ポーション,2 之藥水
+POTION_NUM2_EXPLAIN,It has the effect of a normal Dice number of 2.,일반 주사위 눈금 2의 행동 효과를 갖습니다.,普通のサイコロの出目2の効果を発動します,使用後視為執行骰子結果為 2 的行動。
+POTION_NUM1_NAME,1 Potion,1 포션,1 ポーション,1 之藥水
+POTION_NUM1_EXPLAIN,It has the effect of a normal Dice number of 1.,일반 주사위 눈금 1의 행동 효과를 갖습니다.,普通のサイコロの出目1の効果を発動します,使用後視為執行骰子結果為 1 的行動。
+POTION_HEAL_NAME,Heal Potion ,힐 포션,ヒールポーション,治療藥水
+POTION_HEAL_EXPLAIN,Gain a healing buff for 3 turns.,3턴 동안 회복 버프를 획득합니다.,3ターンの間、回復バフを獲得します,獲得治療狀態，持續 3 回合。
+POTION_GROWTH_NAME,Growth Potion,성장 포션,成長ポーション,成長藥水
+POTION_GROWTH_EXPLAIN,Increases the level of the tile you are currently stepping on by one level,현재 밟고 있는 타일의 레벨이 한 단계 증가합니다.,現在いるタイルのレベルが1段階上がります,直接提升當前板塊等級 1 等。
+OBJECT_POTIONGOBLIN_NAME,Potion Goblin,포션 고블린,ポーションゴブリン,藥水哥布林
+OBJECT_POTIONGOBLIN_EXPLAIN,"On contact, get 1 random potion.","접촉 시, 랜덤 포션 1개를 획득합니다.",接触時に何らかのポーションを獲得します,碰觸時，獲得 1 個隨機藥水。
+OBJECT_DICEEVENT_NAME,"Dice Event	",주사위 이벤트,サイコロイベント,骰子事件
+OBJECT_DICEEVENT_EXPLAIN,"On arrival, active a dice event.","도착 시, 주사위 이벤트를 실행합니다.",ちょうど止まった時にサイコロイベントを行います,停留在此格時，觸發骰子事件。
+OBJECT_ROULETTE_NAME,Roulette,랜덤 돌림판,ランダムルーレット,幸運輪盤
+OBJECT_ROULETTE_EXPLAIN,"Upon arrival, active a roulette event.","도착 시, 룰렛 이벤트를 실행합니다.",ちょうど止まった時にルーレットイベントを行います,停留在此格時，觸發幸運轉盤事件。
+OBJECT_RYUKA_NAME,Ryuka,류카,リュウカ,嚕卡
+OBJECT_RYUKA_EXPLAIN,"Heals an enemy for 2 Health per Object Turn. <br>On contact, Ryuka disappears.","오브젝트턴 마다 적에게 2의 체력을 회복시켜줍니다. <br>접촉 시, 류카가 사라집니다.",ターンごとに敵体力を2回復させます。<br>接触すると、リュウカは帰ります,每回合恢復一名敵人 2 點生命值。碰觸時，嚕卡消失。
+OBJECT_FIREBALL_NAME,Ember,불씨,残り火,餘燼
+OBJECT_FIREBALL_EXPLAIN,Contact with the ember inflicts 5 damage.,"접촉 시, 유저에게 5의 데미지를 입히고 사라집니다.",接触時にプレイヤーに5ダメージを与えます,碰觸餘燼將造成 5 點傷害。
+OBJECT_ALCHEMY_NAME,Alchemy,연금술,錬金術,煉金術
+OBJECT_ALCHEMY_EXPLAIN,On contact active a Alchemy event.,연금술 이벤트를 실행합니다.,接触時に錬金術イベントを実行します,碰觸時，觸發煉金術事件。
+DICE_NORMAL_NAME,Normal Dice,일반 주사위,普通のサイコロ,普通骰
+DICE_NORMAL_DESCRIPTION,It's just dice.,그냥 주사위입니다.,ただのサイコロです,他就是個骰子。
+DICE_FIRE_NAME,<element=Fire>  Fire Dice,<element=Fire>  불 주사위,<element=Fire> 火のサイコロ,<element=Fire> 火骰
+DICE_FIRE_DESCRIPTION,"When used on a fire tile, adds a <debuff = Burn> Burn debuff on an enemy equal to number of dice.","불 타일에 사용 시, 적에게 해당 숫자만큼 <debuff = Burn> 화상 디버프를 부여합니다.",火タイルで使用すると、敵に出目の数<debuff = Burn>火傷デバフを付与します,當使用於火球板塊時，額外對一名敵人附加等同於骰子點數層 <debuff=Burn> 燃燒狀態。
+DICE_WATER_NAME,<element=Water>  Water Dice,<element=Water>  물 주사위,<element=Water> 水のサイコロ,<element=Water> 水骰
+DICE_WATER_DESCRIPTION,"When used on a water tile, adds a <debuff=Weak> Weak debuff on an enemy equal to number of dice","물 타일에 사용 시, 적에게 해당 숫자만큼 <debuff=Weak> 약화 디버프를 부여합니다.",水タイルで使用すると、敵に出目の数<debuff=Weak> 弱体化デバフを付与します,當使用於淨水板塊時，額外對一名敵人附加等同於骰子點數層 <debuff=Weak> 虛弱狀態。
+DICE_EARTH_NAME,<element=Earth>  Earth Dice,<element=Earth>  땅 주사위,<element=Earth> 地のサイコロ,<element=Earth> 地骰
+DICE_EARTH_DESCRIPTION,"When used on a rock tile, adds a <debuff=Broken> Powerless debuff on an enemy equal to number of dice","바위 타일에 사용 시, 해당 숫자만큼 <debuff=Broken> 무력 디버프를 부여합니다.",岩タイルで使用すると、敵に出目の数<debuff=Broken> 無力化デバフを付与します,當使用於岩甲板塊時，額外對一名敵人附加等同於骰子點數層 <debuff=Broken> 無力化狀態。
+TILE_CURSE_THUNDERBOLT_NAME,Thunderbolt,벼락,落雷,閃電
+TILE_CURSE_THUNDERBOLT_EXPLAIN,"When the curse is activated, it strikes the user with a thunderbolt for 7 damage.","저주가 활성화되면, 유저에게 벼락을 내려쳐 7의 데미지를 줍니다.",呪いが発動すると、プレイヤーに落雷が落ちて7ダメージを与えます,當詛咒啟動時，對玩家釋放一道閃電並造成 7 點傷害。
+TILE_CURSE_LOCK_NAME,Lock,잠김,封印,封印
+TILE_CURSE_LOCK_EXPLAIN,"When the curse is activated, lock this tile. (Unusable) This effect lasts for the duration of the battle.",저주가 활성화되면 타일을 잠급니다. (사용 불가)<br>이 효과는 전투가 진행되는 동안 지속됩니다.,呪いが発動すると、タイルが封印され使用できなくなります。<br>効果はこの敵との戦闘中続きます,當詛咒啟動時，封印此板塊。此板塊在本次戰鬥中無法再執行其行動。
+TILE_CURSE_EMBER_NAME,Ember,불씨,残り火,餘燼
+TILE_CURSE_EMBER_EXPLAIN,"When the curse is activated, an ember that moves 2 tiles each turn is summoned on this tile. Contact with the ember inflicts 5 damage.","저주가 활성화되면, 이 타일에 매 턴 2타일을 이동하는 불씨가 소환됩니다.<br>불씨와 접촉하면 5의 피해를 입습니다.",呪いが発動すると、タイルに毎ターン2タイル移動する残り火が召喚されます。残り火と接触すると5ダメージを受けます,當詛咒啟動時，召喚 1 個每回合移動 2 格的餘燼於此板塊上。碰觸餘燼將造成 5 點傷害。
+BLESS_EARTH1_NAME,Rock Debris,바위 잔해,岩のカケラ,碎石
+BLESS_EARTH1_EXPLAIN,"After the enemy attacks, they take damage equal to the remaining defense.",적의 공격이 끝나면 남은 방어력만큼 적에게 피해를 줍니다.,敵の攻撃後に、シールドの残量だけ敵にダメージを与えます,敵人攻擊完後，受到等同於你剩餘防禦點數的傷害。
+BLESS_EARTH2_NAME,Unbreakable Rock,깨지지 않는 바위,砕けぬ岩,磐石
+BLESS_EARTH2_EXPLAIN,"If you have no defense at the end of your turn, you immediately gain 4 defense.","턴이 끝날 때 방어력이 없다면, 즉시 방어력 4를 얻습니다.",ターン終了時にシールドがなければ、即座に4シールドを獲得する,你的回合結束時，若你沒有任何防禦，獲得 4 點防禦。
+BLESS_FIRE1_NAME,Scorched Wound,그을린 상처,癒えぬ火傷,焦痕
+BLESS_FIRE1_EXPLAIN,"Each time you circle the board, your <debuff=Burn>burn debuff damage goes up by 2 for that battle.","보드를 한 바퀴 돌 때마다, 해당 전투에서 <debuff=Burn>화상 디버프 데미지가 2 씩 올라갑니다.",ボードを1周するごとに、その戦闘で与える<debuff=Burn>火傷デバフダメージが2ずつ上昇する,在本次戰鬥中，每當你繞地圖板塊一圈時，你的 <debuff=Burn>燃燒 狀態造成的傷害就永久增加 2 點。
+BLESS_FIRE2_NAME,Meteor,메테오,メテオ,流星
+BLESS_FIRE2_EXPLAIN,"When the enemy's burn buff stacks reach 5, reset the stacks to 0 and summon a powerful meteor. (10 damage)      ","적의 화상 버프 중첩이 5이 되면, 중첩을 0으로 만들고 강력한 메테오를 소환합니다. (10 데미지)",敵の火傷デバフが5重複すると、火傷デバフを0にして強力なメテオを召喚する(10ダメージ),當敵人的燃燒層數疊加至 5 層時，將燃燒層數重置為 0 並召喚一個強大的流星，造成 10 點傷害。
+BLESS_WATER1_NAME,Calm Surface,잔잔한 수면,安眠志向,寧靜
+BLESS_WATER1_EXPLAIN,"Each time you circle the board, you heal for the number of laps you've circled in that battle.",보드를 돌 때마다 해당 전투에서 돌았던 바퀴 수만큼 체력을 회복합니다.,ボードを1周するごとに、その戦闘の周回数だけ体力が回復する,每當你繞地圖板塊一圈時，你恢復等同於本次戰鬥中你已繞行圈數的生命值。
+BLESS_WATER2_NAME,Flood,범람,氾濫,洪水
+BLESS_WATER2_EXPLAIN,"When healed, attack 1 random enemy with a number equal to your healing.","회복 시, 회복된 수치만큼 무작위 적 1마리를 공격합니다.",体力回復時、回復した体力だけランダムな敵を攻撃する,恢復生命值時，對一名隨機敵人造成等同於恢復量的傷害。
+BLESS_WIND1_NAME,Tailwind,순풍,順風,順風
+BLESS_WIND1_EXPLAIN,"When acting on a tile, you can use a Dice number 1 after of 5 and 6.","타일에서 행동할 때, 주사위 눈금 5와 6 다음에 1을 사용할 수 있습니다.",タイルで行動する際、出目5、6のダイスを使用したら連続して1の出目のダイスを使用できる,連續執行行動時，你可以使用 1 點的骰子來接續 5 或 6 點的骰子。
+BLESS_WIND2_NAME,Typhoon,태풍,台風,颱風
+BLESS_WIND2_EXPLAIN,"For every third action on the tile, you attack an additional 3 damage to the enemy.",타일에서 세 번째 행동을 할 때마다 적에게 추가로 3의 피해를 줍니다.,タイルでのアクション3回ごとに敵に3ダメージを与える,每當你在同個板塊上連續執行 3 次行動時，對一名敵人造成 3 點傷害。
+EVENT_DICEEVENT_WARNING,Insufficient dice to active the event.,이벤트를 수행하기 위한 주사위가 부족합니다.,イベント実行に必要なサイコロが不足しています,沒有適合的骰子來執行事件。
+PLAYER_SCRIPT_START,Let's Go~~!,가보자구~~!,行ってみよ～～！,出發吧~~！
+PLAYER_SCRIPT_ATTACK,Take this!,받아랏!,くらえ！,看招！
+PLAYER_SCRIPT_HIT,Ugh!,으악!,うわっ！,嗚哇！
+PLAYER_SCRIPT_WIN,Yah!,아싸!,やった！,耶！
+PLAYER_SCRIPT_SLOW,I'm slowed and can't move anymore.,둔화에 걸려서 더 이상 움직이지 못해..,スローのせいで動けない……,我被緩速，走不動了...
+PLAYER_SCRIPT_ELECTRICSHOCK,I'm electrocuted and can't roll more than 3 dice in a row.,감전되서 주사위를 연속해서 3개 이상 낼 수 없어..,感電してるからサイコロは3個も使えないよ,我被麻痺了，沒辦法連續使用 3 個骰子...
+PLAYER_SCRIPT_LOCK,It's sealed and not available…,봉인되어서 사용할 수 없어..,封印されてて使えないよ,板塊被封印了不能用...
+PLAYER_SCRIPT_GAMEOVER,I can't give up here…,여기서 무너질 수 없어…,ここで倒れるわけには…,我不能在這裡放棄...
+PLAYER_SCRIPT_TUTORIAL,"For now, just follow the tutorial and use it...!",지금은 튜토리얼을 따라서 사용해 줘..!,今はチュートリアルの通りやろう…！,現在就先暫時跟著教學所說的去做吧...！
+PLAYER_SCRIPT_REROLL,I don't have the money to roll the dice.,주사위를 돌릴 돈이 없어..,リロールするお金が足りないよ,我沒有足夠的金幣來重擲骰子。
+PLAYER_SCRIPT_TUTORIAL1,I can't reroll the dice in the tutorial.,튜토리얼에서는 주사위를 돌릴 수 없어..,チュートリアルではリロールできないよ,我不能在教學裡面重擲骰子。
+PLAYER_SCRIPT_CONFUSE,I'm confused...,혼란하다 혼란해..,ぐるぐるするよー,我一時混亂，走錯邊了...
+PLAYER_SCRIPT_POTION,I can't use potion..,포션을 쓸 수 없어..,ポーションは使えないみたい,我不能使用藥水...
+ENEMY_ACTION_ATTACK_NAME,Attack,공격,攻撃,攻擊
+ENEMY_ACTION_ATTACK_EXPLAIN,This enemy is trying to attack you.,이 적은 당신을 공격하려고 합니다.,この敵は攻撃しようとしている,這個敵人試圖攻擊你。
+ENEMY_ACTION_DEFENSE_NAME,Defense,방어,防御,防禦
+ENEMY_ACTION_DEFENSE_EXPLAIN,This enemy is trying to defend itself.,이 적은 방어하려고 합니다.,この敵はシールドで防御しようとしている,這個敵人試圖防禦自己。
+ENEMY_ACTION_TILECURSE_NAME,Tile Curse, 타일 저주,タイルの呪い,板塊詛咒
+ENEMY_ACTION_TILECURSE_EXPLAIN,This enemy is trying to curse the tiles.,이 적은 타일에 저주를 걸려고 합니다.,この敵はタイルに呪いをかけようとしている,這個敵人試圖詛咒板塊。
+ENEMY_ACTION_TILEDEBUFF_NAME,Tile Debuff, 타일 디버프,タイルデバフ,板塊狀態
+ENEMY_ACTION_TILEDEBUFF_EXPLAIN,This enemy is trying to debuff the tiles.,이 적은 타일에 디버프를 걸려고 합니다.,この敵はタイルにデバフをかけようとしている,這個敵人試圖在板塊上施加狀態。
+ENEMY_ACTION_USERDEBUFF_NAME,User Debuff,디버프,デバフ,負面狀態
+ENEMY_ACTION_USERDEBUFF_EXPLAIN,This enemy is trying to debuff you,이 적은 당신에게 디버프를 걸려고 합니다.,この敵はあなたにデバフをかけようとしている,這個敵人試圖在你身上施加負面狀態。
+ENEMY_ACTION_SLEEP_NAME,Sleep,수면,熟睡,睡覺
+ENEMY_ACTION_SLEEP_EXPLAIN,This enemy is asleep.,이 적은 잠들어 있습니다.,この敵は眠っている,這個敵人睡著了。
+ENEMY_ACTION_SPAWN_NAME,Spawn,소환,召喚,召喚
+ENEMY_ACTION_SPAWN_EXPLAIN,This enemy is trying to summon something.,이 적은 무언가를 소환하려고 합니다.,この敵は何か召喚しようとしている,這個敵人試圖召喚些什麼。
+ENEMY_ACTION_AREAATTACK_NAME,Area Attack,[미사용]범위 공격,[未使用]範囲攻撃,.
+ENEMY_ACTION_AREAATTACK_EXPLAIN,-,이 적은 범위 공격을 하려고 합니다.,この敵は範囲攻撃をしようとしている,.
+ENEMY_ACTION_CONFUSION_NAME,Confusion,[미사용]혼란,[未使用]混乱,.
+ENEMY_ACTION_CONFUSION_EXPLAIN,-,이 적은 혼란스러워합니다.,この敵は混乱している,.
+ENEMY_ACTION_NOACTION_NAME,No Action, [미사용]무행동,[未使用]無動作,.
+ENEMY_ACTION_NOACTION_EXPLAIN,-,이 적은 가만히 있습니다.,この敵はじっとしている,.
+TUOTORIAL_QUEST1_TITLE,Movement and Action #1,이동과 행동 #1,移動と行動 #1,移動與行動 #1
+TUOTORIAL_QUEST1_DES1,"Move 2 spaces, reaching the defense tile.","2칸 이동하여, 방어 타일에 도착하세요.",2マス移動して、防御タイルに移動しましょう,移動 2 格來抵達防禦板塊。
+TUOTORIAL_QUEST1_DES2,Place a dice with a value of 2 on the outside of the board.,숫자2의 주사위를 보드 외곽에 놓으세요.,出目2のサイコロをボードの外側へドラッグ＆ドロップしてください,使用滑鼠，將一個結果為 2 的骰子放置於地圖的外圈來進行移動。
+TUOTORIAL_QUEST1_DES3,Get a defense value of 3 to block enemy attacks.,3의 방어도를 획득하여 적의 공격을 막으세요.,シールドを3獲得して敵の攻撃を防ぎましょう,獲得 3 點防禦以阻擋敵人的攻擊。
+TUOTORIAL_QUEST1_DES4,Place the number 3 dice in the center of the board.,숫자3의 주사위를 보드 가운데에 놓으세요.,出目3のサイコロをボードの中央へドラッグ＆ドロップしてください,使用滑鼠，將一個結果為 3 的骰子放置於地圖的中央來執行行動。
+TUOTORIAL_QUEST2_TITLE,Continuous Action #2,연속 행동 #2,連続行動 #2,連續行動 #2
+TUOTORIAL_QUEST2_DES1,Move 1 space to reach the attack tile.,"1칸 이동하여, 공격 타일에 도착하세요.",1マス移動して攻撃タイルに移動しましょう,移動 1 格來抵達攻擊板塊。
+TUOTORIAL_QUEST2_DES2,Place the number 1 dice on the outside of the board.,숫자1의 주사위를 보드 외곽에 놓으세요.,出目1のサイコロをボードの外側へドラッグ＆ドロップしてください,將一個結果為 1 的骰子放置於地圖的外圈。
+TUOTORIAL_QUEST2_DES3,Use the die twice in a row.,주사위를 연속해서 두 번 사용하세요.,サイコロを連続して2回使用してください,連續使用 2 個骰子來行動。
+TUOTORIAL_QUEST2_DES4,You can only play consecutive dice of ascending numbers on an action tile.,행동 타일에서는 오름차순의 연속된 숫자로만 연속해서 낼 수 있습니다.,行動タイルではサイコロが連続する昇順(小さい順)なら何個でも使用できます,由小到大，連續放置漸增的連號骰子來進行連續行動。
+TUOTORIAL_QUEST3_TITLE,Enchant Tile #3,타일 마법 부여 #3,タイル魔法付与 #3,板塊附魔 #3
+TUOTORIAL_QUEST3_DES1,Move 1 space to reach the defense tile.,"1칸 이동하여, 방어 타일에 도착하세요.",1マス移動して防御タイルに移動しましょう,移動 1 格來抵達防禦板塊。
+TUOTORIAL_QUEST3_DES2,Place the dice with the number 1 on the outside of the board.,숫자1의 주사위를 보드 외곽에 놓으세요.,出目1のサイコロをボードの外側へドラッグ＆ドロップしてください,將一個結果為 1 的骰子放置於地圖的外圈。
+TUOTORIAL_QUEST3_DES3,Give 3 exp to the tile you are standing on.,서 있는 타일에 주사위를 3회 사용하여 3의 경험치를 제공하세요.,移動先のタイルでサイコロを3個使用して、経験値を3回獲得してください,為目前站立的板塊獲得 3 點經驗值。
+TUOTORIAL_QUEST3_DES4,"For every 1 dice you spend on an action tile, you gain 1 tile experience.","행동 타일에서 사용하는 주사위 1개 당, 타일 경험치를 1씩 획득합니다.",タイルでダイスを行動に使用するたび、経験値を1ずつ獲得します,每一個作為行動使用的骰子都會給予目前的行動板塊 1 點經驗值。
+TUOTORIAL_QUEST3_DES5,Choose the enchantment to grant.,부여할 마법을 선택하세요.,付与する魔法を選択してください,選擇要賦予的附魔。
+TUOTORIAL_QUEST3_DES6,"The next time you spend a dice on this tile, that enchantment will be triggered.",앞으로 이 타일에서 주사위를 사용하면 해당 마법이 발동합니다.,今後このタイルでサイコロを使用すると、魔法の効果が適用されます,下次在此板塊上使用骰子執行行動時，就會觸發此板塊的附魔效果。
+TUOTORIAL_QUEST4_TITLE,Kill an enemy #4,적 처치 #4,敵の討伐 #4,打倒敵人 #4
+TUOTORIAL_QUEST4_DES1,Defeat the enemies on the field.,필드 위의 적을 처치하세요.,敵を倒してみましょう,打倒地圖中央的敵人。
+TUOTORIAL_QUEST4_DES2,Combine the dice in your hand strategically.,패의 주사위들을 전략적으로 조합하세요.,サイコロを戦略的に活用しましょう,策略性的使用手中的骰子吧。
+TUOTORIAL_QUEST5_TITLE,Here's your reward!,보상이에요!,お宝です！,獲得獎勵！
+TUOTORIAL_QUEST5_DES1,Choose your reward,보상 선택,お宝の選択,帶走你的獎勵。
+TUOTORIAL_QUEST5_DES2,"Congratulations, take your reward (or not!) and continue your journey!","축하합니다! 보상을 받고(안 받아도 돼요!), 여정을 이어가세요!",おめでとうございます！報酬を受け取り(無視もできます)、冒険の旅を続けましょう！,恭喜！點擊寶箱來領取你的獎勵 (也可以不要) 並繼續你的旅程吧！
+TUOTORIAL_END1,End Turn,턴 종료,ターン終了,結束回合
+TUOTORIAL_END2,End the turn,턴을 종료하세요,ターンを終了してください,按下右下角的「結束回合」按鈕來結束回合。
+UI_INGAME_BLESS,Bless,축복,祝福,祝福
+UI_INGAME_POTION,Potion,포션,ポーション,藥水
+UI_INGAME_CURRENTTILE,CurrentTile,현재 타일,現在のタイル,當前板塊
+UI_INGAME_TURN,Turn,턴 수,ターン,回合
+UI_INGAME_LAP,Laps,바퀴 수,周回数,圈數
+UI_INGAME_ENDTURN,End Turn,턴 종료,ターン終了,結束回合
+UI_INGAME_NEXTEVENT,Next Event,다음 이벤트,次のイベントへ,下個事件
+UI_TURN_AN1,A board event is generated after<br>{0} turn.,{0} 턴 후 보드 이벤트가 생성됩니다.,{0}ターン後にボードイベントが発生します,下一個板塊事件將在 {0} 回合後發生。
+UI_TURN_AN2,A board event has been generated.,보드 이벤트가 생성되었습니다.,ボードイベントが発生しました,板塊事件已發生。
+UI_TILE_SEALED,Sealed Tile,봉인된 타일,封印タイル,被封印的板塊
+UI_TILE_SEALED_INFO,Sealed Tile cannot be activated or used,봉인된 타일에서는 행동이 불가능합니다.,封印されたタイルでは行動ができません,被封印的板塊無法執行其行動。
+UI_DICE_REROLL,Reroll,다시 돌리기,リロール,重骰
+UI_TILE_CURSE,Cursed Tile,저주받은 타일,呪われたタイル,被詛咒的板塊
+UI_TILE_CURSE_ABOUT,This tile has been cursed with {Curse}. It will be dispelled when the player arrives.,이 타일은 {Curse} 저주를 받았습니다. 플레이어가 시간 내에 도착하면 해제됩니다.,このタイルは {Curse}の呪いを受けました。プレイヤーが時間内にちょうど止まると解除されます。,這個板塊被附上了 {Curse} 詛咒。當玩家停留在此板塊時詛咒將被驅散。
+EVENT_ALCHEMY_ALLTILE,"On a dice roll of 1,<br>Get 1 exp for the entire tile","주사위를 굴려 1이 나온다면,<br>전체 타일 경험치 +1",サイコロを振って1が出たら、<br>全タイルの経験値+1,骰子點數為 1 時，<br>所有板塊獲得 1 點經驗值。
+EVENT_ALCHEMY_DAMAGE,"On a dice roll of 5,<br>Deal 10 damage to all enemies.","주사위를 굴려 5가 나온다면,<br>전체 적에게 10의 데미지",サイコロを振って5が出たら、<br>敵全体に10のダメージ,骰子點數為 5 時，<br>對所有敵人造成 10 點傷害。
+EVENT_ALCHEMY_MONEY,"On a dice roll of 4,<br>Get 5 coin.","주사위를 굴려 4가 나온다면,<br>돈 5원 획득",サイコロを振って4が出たら、<br>5ゴールド獲得,骰子點數為 4 時，<br>獲得 5 金幣。
+EVENT_ALCHEMY_POTION,"On a dice roll of 2,<br>Get random potion","주사위를 굴려 2가 나온다면,<br>랜덤 포션 획득",サイコロを振って2が出たら、<br>ランダムなポーション獲得,骰子點數為 2 時，<br>獲得隨機藥水。
+EVENT_ALCHEMY_HP,"On a dice roll of 3,<br>Get 5 max hp.","주사위를 굴려 3이 나온다면,<br>최대 체력 5 증가",サイコロを振って3が出たら、<br>最大体力5上昇,骰子點數為 3 時，<br>增加 5 點最大HP。
+EVENT_DICE_MONEY,Raise the dice.<br>You get money equal to the dice number.,올린 주사위 눈 만큼 돈을 획득합니다.<br>주사위를 올려주세요.,サイコロの出目だけゴールドを獲得します<br>サイコロを差し出してください,放入骰子。<br>你獲得等同於骰子點數的金幣。
+EVENT_DICE_HEAL,Heals you for the dice number x2 .<br>Raise the dice.,올린 주사위 눈의 x2 만큼 체력을 회복합니다.<br>주사위를 올려주세요.,サイコロの出目x2だけ体力を回復します<br>サイコロを差し出してください,放入骰子。<br>你恢復等同於骰子點數 x2 的生命值。
+EVENT_ROULETTE_DAM,Deal 10 damage to a random enemy.,랜덤한 적에게 10의 데미지를 줍니다.,ランダムな敵に10ダメージを与えます,對一名隨機敵人造成 10 點傷害。
+EVENT_ROULETTE_DICE,Get a random dice.,랜덤 주사위 획득합니다.,ランダムなサイコロを獲得します,獲得一個隨機骰子。
+EVENT_ROULETTE_MONEY,Get money.,돈을 얻습니다.,ゴールドを獲得します,獲得金幣。
+EVENT_ROULETTE_POTION,Get a random potion.,랜덤한 포션를 얻습니다.,ランダムなポーションを獲得します,獲得隨機藥水。
+EVENT_ROULETTE_TILE,Power up a random tile.,랜덤한 타일을 강화합니다.,ランダムなタイルを強化します,強化一個隨機板塊。
+EVENT_ROULETTE_HP,Loses health.,체력이 깎입니다.,ダメージを受けます,失去生命值。
+EVENT_DICE_MONEY1,Get money.,돈을 획득했다.,ゴールドを獲得します,獲得金幣。
+EVENT_DICE_HEAL2,Your health has been restored,체력이 회복되었다,体力が回復します,生命值回復了！
+EVENT_ALCHEMY_TITLE,Alchemy Rolling,굴리는 연금술,転がる錬金術,擲骰煉金術
+EVENT_ALCHEMY_DES,~ Please choose the dice to roll ~,~ 굴릴 주사위를 고르세요 ~,～ダイスを選んでください～,~ 請選擇用來投擲的骰子 ~
+EVENT_ALCHEMY_ROLL,ROLLING,굴리기,ダイスロール！,擲骰
+GAMEOVER_NUM_ROUND,Number of laps,바퀴 수,周回数,圈數
+GAMEOVER_NUM_DICE,Number of dice used,사용한 주사위 횟수,使用したサイコロの数,使用的骰子數
+GAMEOVER_NUM_MONSTER,Monsters killed,몬스터 처치 수,モンスター討伐数,打倒的敵人數
+GAMEOVER_NUM_PLAYTIME,Play time,플레이 타임,プレイ時間,遊玩時間
+GAMEOVER_BUTTON_RE,Retry,다시하기,リトライ,重玩
+GAMEOVER_BUTTON_TITLE,Title,타이틀로,タイトル,標題畫面
+MAGIC_LEVELUP_TITLE1,Enchantment!,마법 부여!,魔法をかけよう,附魔！
+MAGIC_LEVELUP_TITLE2,Enchant Evolve!,마법 진화!,魔法強化！,附魔進化！
+MAGIC_LEVELUP_BT1,Level Up,레벨 업,Lv UP,升級
+MAGIC_LEVELUP_BT2,Change,마법 변경,魔法変換,變換附魔
+MAGIC_LEVELUP_BT3,Refresh,새로고침,リフレッシュ,刷新
+OPTION_TITLE,Options,옵션,オプション,選項
+OPTION_CONTINUE,Continue,이어하기,つづける,繼續
+OPTION_SETTING,Setting,게임 설정,ゲーム設定,設定
+OPTION_MAINMENU,Main Menu,메인 메뉴,メインメニュー,標題畫面
+OPTION_QUIT,Quit,게임 종료,ゲーム終了,結束遊戲
+UI_ITEM_USE,Use,사용,使用,使用
+UI_ITEM_REMOVE,Remove,버리기,捨てる,丟棄
+UI_ITEM_NO_MORE_ITEM,No more items could be acquired.,더 이상 아이템을 획득할 수 없습니다.,これ以上アイテムを獲得できません,無法取得更多物品。
+UI_GETDICE,Select a dice to replace.,교체할 주사위를 선택해주세요.,交換するサイコロを選んでください,選擇 1 個要替換掉的骰子。
+UI_DICE_TITLE,New Dice!!,신규 주사위!,新しいサイコロだ！,新骰子！
+UI_DICE_TRADE,Trade,교체,交換,交換
+UI_TUTORIAL_SKIP,Run the tutorial?,튜토리얼을 포함할까요?,チュートリアルを受けますか？,是否進行教學？
+MONSTER_THEROCK,The Rock,봉봉이,ボンボン,蹦蹦
+MONSTER_POPO,PoPo,뽀뽀,ポポ,波波
+MONSTER_PIPI,PiPi,삐삐,ピピ,皮皮
+MONSTER_DOLDOL,DolDol,돌돌이,ころころん,豆豆
+MONSTER_CHARRRRRRRRRRRRRUK,Charrrrrrrrrrrrruk,차르르르르르르르륵이,ジャラリン,查魯魯魯魯魯魯魯克
+MONSTER_NULLUNULLU,NulluNullu,널루널루,ネルネル,諾魯諾魯
+MONSTER_TWETWE,TweTwe,퉤퉤기,チュチュキ,推推
+MONSTER_MUMU,MuMu,무무,モリモリ,沐沐
+MONSTER_PAZIZIZIZIC,Pazizizizic,파지지지직이,ビリジジキ,帕滋滋啾吉
+MONSTER_KROL,Krol,크롤,クロル,庫洛魯
+MONSTER_PICPIC,PicPic,삒삒이,ピチュンキ,皮克皮克
+UI_LOAD_TITLE,Save Data,불러오기,ロードデータ,存檔
+UI_LOAD_LOAD,Load,로드,ロード,載入
+REWARD_GOLD,Gold,원,ゴールド,金幣
+REWARD_DICE,Dice,주사위,サイコロ,骰子
+REWARD_CLEAR,Clear?,클리어?,クリア？,結束？

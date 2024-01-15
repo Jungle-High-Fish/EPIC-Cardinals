@@ -97,24 +97,7 @@ namespace Cardinals
 
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Escape)) {
-                TitleManager titleManager = FindAnyObjectByType<TitleManager>();
-                if (titleManager != null) {
-                    if (GameManager.I.UI.SaveFileLoaderPanel.IsActive) {
-                        GameManager.I.UI.SaveFileLoaderPanel.Hide();
-                    } else if (_ui.GameSettingUI.IsActive) {
-                        _ui.GameSettingUI.Hide();
-                    } else {
-                        _ui.GameSettingUI.Show();
-                    }
-                } else {
-                    if (_ui.GameSettingUI.IsActive) {
-                        _ui.GameSettingUI.Hide();
-                    } else if (_ui.UIPausePanel.IsActive) {
-                        _ui.UIPausePanel.Hide();
-                    } else {
-                        _ui.UIPausePanel.Show();
-                    }
-                }
+                OnSettingButton();
             }
 
             // if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F3)) {
@@ -126,6 +109,41 @@ namespace Cardinals
             //  }
 
             //_steamHandler.EveryFrame();
+        }
+
+        public void OnSettingButton()
+        {
+            TitleManager titleManager = FindAnyObjectByType<TitleManager>();
+            if (titleManager != null)
+            {
+                if (GameManager.I.UI.SaveFileLoaderPanel.IsActive)
+                {
+                    GameManager.I.UI.SaveFileLoaderPanel.Hide();
+                }
+                else if (_ui.GameSettingUI.IsActive)
+                {
+                    _ui.GameSettingUI.Hide();
+                }
+                else
+                {
+                    _ui.GameSettingUI.Show();
+                }
+            }
+            else
+            {
+                if (_ui.GameSettingUI.IsActive)
+                {
+                    _ui.GameSettingUI.Hide();
+                }
+                else if (_ui.UIPausePanel.IsActive)
+                {
+                    _ui.UIPausePanel.Hide();
+                }
+                else
+                {
+                    _ui.UIPausePanel.Show();
+                }
+            }
         }
 
         private void OnApplicationQuit() {

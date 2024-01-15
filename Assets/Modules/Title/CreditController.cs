@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using Util;
 using Color = UnityEngine.Color;
 using Image = UnityEngine.UI.Image;
 
@@ -40,6 +41,19 @@ namespace Cardinals.Title
         public void ShowCredit()
         {
             StartCoroutine(CreditFlow());
+        }
+
+        private void SetFont(GameObject obj)
+        {
+            var TMPs = obj.GetComponentsInChildren<TextMeshProUGUI>();
+            TMP_FontAsset font;
+            // 폰트 설정
+            // if (GameManager.I.Localization.IsJapanese) {
+            //     font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_Soft_JP);
+            // }
+            // else
+                font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_Soft_Default);
+            TMPs.ForEach(tmp => tmp.font = font);
         }
 
         IEnumerator CreditFlow()
@@ -83,8 +97,7 @@ namespace Cardinals.Title
             yield return EffectSpecialThanks();
             
             _tk.SetActive(true);
-            
-            //GameManager.I.SteamHandler.TriggerAchievement("Thank_You");
+            SetFont(_tk);
             
             yield return new WaitForSeconds(5f);
             _tk.GetComponentsInChildren<TypewriterByCharacter>().ForEach(tw => tw.StartDisappearingText());
@@ -112,6 +125,7 @@ namespace Cardinals.Title
             alpha0.a = 0;
             img.color = alpha0;
             var tmp = img.GetComponentInChildren<TextMeshProUGUI>();
+            SetFont(obj);
             
             if (tmp != null)
             {
@@ -144,12 +158,14 @@ namespace Cardinals.Title
 
             _specialThanks.SetActive(true);
             header.gameObject.SetActive(true);
+            SetFont(header.gameObject);
 
             yield return new WaitForSeconds(3f);
             header.GetComponent<TypewriterByCharacter>().StartDisappearingText();
             yield return new WaitForSeconds(2f);
 
 
+            bool fontInit = false;
             for (int i = 0; i < _specialThanksNames.Length; )
             {
                 _nameTMPs.ForEach(tmp => tmp.text = string.Empty);
@@ -159,6 +175,14 @@ namespace Cardinals.Title
                     _nameTMPs[pivot].text = _specialThanksNames[i];
                     _nameTMPs[pivot].gameObject.SetActive(true);
                 }
+
+                if (!fontInit)
+                {
+                    SetFont(_nameTMPs[0].transform.parent.gameObject);  
+                    SetFont(_nameTMPs[1].transform.parent.gameObject);
+                    fontInit = true;
+                }
+                
                 yield return new WaitForSeconds(5f);
                 _nameTMPs.ForEach(tmp => tmp.GetComponent<TypewriterByCharacter>().StartDisappearingText());
                 yield return new WaitForSeconds(2f);

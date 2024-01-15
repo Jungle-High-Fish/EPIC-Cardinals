@@ -113,6 +113,24 @@ namespace Cardinals
                 _buffTitle.text = TMPUtils.CustomParse(buffData.buffName, true);
                 _buffInfo.text = buffData.Description;
             }
+
+            if (GameManager.I.Localization.IsJapanese) {
+                _title.font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+
+                _info.font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+
+                _buffTitle.font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+
+                _buffInfo.font = ResourceLoader.LoadFont(
+                    Constants.FilePath.Resources.Fonts_ShipporiGothicB2
+                );
+            }
         }
     }
 }

@@ -37,6 +37,7 @@ namespace Cardinals.UI.Description
         [SerializeField] private TextMeshProUGUI _potionTMP;
         [SerializeField] private TextMeshProUGUI _currenttileTMP;
 
+
         private GameObject IconPrefab => ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Sprites_UI_IconPrefab);
         
         private ComponentGetter<UIEndTurnButton> _endTurnButton 
@@ -50,6 +51,8 @@ namespace Cardinals.UI.Description
         private ComponentGetter<UIMapButton> _mapButton 
             = new ComponentGetter<UIMapButton>(TypeOfGetter.Child);
 
+        [SerializeField] private Button _settingButton;
+
         private void Start()
         {
             _turnTMP.text = GameManager.I.Localization[LocalizationEnum.UI_INGAME_TURN];
@@ -62,6 +65,7 @@ namespace Cardinals.UI.Description
         public void Init() {
             _tileInfo.Get(gameObject).gameObject.SetActive(false);
             _endTurnButton.Get(gameObject).Deactivate();
+            _settingButton.onClick.AddListener(() => GameManager.I.OnSettingButton());
             // _mapButton.Get(gameObject).Init();
             // _mapButton.Get(gameObject).Deactivate();
         }
@@ -96,6 +100,22 @@ namespace Cardinals.UI.Description
             _tileInfo.Get(gameObject).InitOnTile();
 
             _turnRoundStatus.Get(gameObject).Set(0, 0);
+            
+            
+            // 폰트 설정
+            TMP_FontAsset font;
+            if (GameManager.I.Localization.IsJapanese)
+            {
+                font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_Soft_JP);
+            }
+            else
+            {
+                font = ResourceLoader.LoadFont(Constants.FilePath.Resources.Fonts_Soft_Default);
+            }
+
+            _blessTMP.font = font;
+            _potionTMP.font = font;
+            _currenttileTMP.font =font;
         }
 
         void UpdateMoneyUI(int value)
