@@ -9,6 +9,7 @@ namespace Cardinals {
         public List<string> LanguageList => _languageList;
         public List<string> LanguageNameList => _languageNameList;
         public bool IsJapanese => PlayerPrefs.GetString("Language").Split("-")[0] == "JP";
+        public bool IsChinese => PlayerPrefs.GetString("Language").Split("-")[0] == "CHT";
 
         private Dictionary<LocalizationEnum, string> _localizationData;
         private List<string> _languageList;
