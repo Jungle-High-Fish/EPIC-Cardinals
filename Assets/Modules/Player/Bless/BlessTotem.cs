@@ -10,6 +10,7 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using Cardinals.Tutorial;
+using IDescription = Cardinals.UI.IDescription;
 
 namespace Cardinals.Board
 {
@@ -20,6 +21,8 @@ namespace Cardinals.Board
         [Header("Component")]
         private SpriteRenderer _totemRenderer;
         [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private DescriptionArea _descriptionAreaL;
+        [SerializeField] private DescriptionArea _descriptionAreaR;
 
         public Action SelectedEvent;
         
@@ -28,7 +31,7 @@ namespace Cardinals.Board
             _totemRenderer = GetComponentInChildren<SpriteRenderer>();
         } 
 
-        public void Init(BlessType bless)
+        public void Init(BlessType bless, bool isLeft)
         {   
             LookAtCamera(Camera.main.transform.position);
 
@@ -44,10 +47,23 @@ namespace Cardinals.Board
             _totemRenderer.sprite = data.totemSprite;
 
             transform.AddComponent<BlessDescription>().Init(bless);
-            GetComponent<DescriptionConnector>().Init();
+            // var dc = GetComponent<DescriptionConnector>();
+            var descs = GetComponents<IDescription>();
+
+            if (isLeft)
+            {
+                _descriptionAreaL.OnPanelFix(Anchor.Left , descriptions: descs);
+            }
+            else
+            {
+                _descriptionAreaR.OnPanelFix(Anchor.Right , descriptions: descs);
+            }
         }
 
         public IEnumerator Dismiss(BlessType bless, int idx, Action<int> onDismissed) {
+            _descriptionAreaL.OffPanel();
+            _descriptionAreaR.OffPanel();
+            
             if (_baseBless != bless) {
                 _totemRenderer.DOFade(0f, 0.3f).SetEase(Ease.InQuint);
                 yield return new WaitForSeconds(0.3f);
@@ -81,6 +97,18 @@ namespace Cardinals.Board
         {
             transform.LookAt(target, Vector3.up);
             transform.Rotate(0, 180, 0);
+        }
+
+        public void SetDescription(bool state)
+        {
+            if (state)
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
     }
 }

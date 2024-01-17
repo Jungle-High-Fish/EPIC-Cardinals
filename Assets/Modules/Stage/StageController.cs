@@ -215,10 +215,10 @@ namespace Cardinals.Game {
             // 화면에 표시
             var prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
             var totem1 = Instantiate(prefab, new Vector3(-1, 0.6f, -1), Quaternion.identity).GetComponent<BlessTotem>();
-            totem1.Init(bless1);
+            totem1.Init(bless1, true);
             prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_Totem);
             var totem2 = Instantiate(prefab, new Vector3(1, 0.6f, 1), Quaternion.identity).GetComponent<BlessTotem>();
-            totem2.Init(bless2);
+            totem2.Init(bless2, false);
 
             yield return new WaitForSeconds(0.5f);
             GameManager.I.CameraController.ShakeCamera(0.2f, 5, 1);

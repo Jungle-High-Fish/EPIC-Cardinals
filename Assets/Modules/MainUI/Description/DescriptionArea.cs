@@ -150,6 +150,36 @@ namespace Cardinals.UI
 
             UIUpdate(anchor);
         }
+        
+        public void OnPanelFix(Anchor anchor = Anchor.Right, params IDescription[] descriptions)
+        {
+            _curAnchor = anchor;
+            if (_canvasMode)
+            {
+                Vector2 mousePos = Input.mousePosition;
+                transform.position = mousePos + (anchor is Anchor.Right ? new Vector3(50, 0, 0) : Vector2.zero);
+            }
+
+            if (descriptions != null)
+            {
+                _descriptions = descriptions;
+            }
+            
+            if (_descriptions != null)
+            {
+                foreach (var desc in _descriptions)
+                {
+                    if (!UIDescriptionsDict.ContainsKey(desc.Key))
+                    {
+                        InstantiateItem(desc);
+                    }
+                    UIDescriptionsDict[desc.Key].gameObject.SetActive(true);
+                }
+            }
+
+            _isActive = true;
+            gameObject.SetActive(true);
+        }
 
         void UIUpdate(Anchor anchor)
         {
