@@ -20,25 +20,9 @@ using Steamworks.Data;
 
 namespace Cardinals.Game {
     
-    public class StageController : MonoBehaviour {
-        public int Index => _stage.Index;
-        public Board.Board Board => _board;
-        public Player Player => _player;
-        public CardManager CardManager => _cardManager;
-        public DiceManager DiceManager => _diceManager;
-        public BaseEvent CurEvent => _curEvent;
-        public List<BaseEnemy> Enemies {
-            get {
-                if (_curEvent == null) return null;
-                
-                if (_curEvent is BattleEvent battleEvent)
-                    return GameManager.I.CurrentEnemies.ToList();
-                else return null;
-            }
-        }
+    public class InfinityController : StageController {
+        public override event Action OnEventStart;
 
-        public virtual event Action OnEventStart;
-        
         private Stage _stage;
     
         private Transform _enemyParentTransform;
@@ -52,35 +36,6 @@ namespace Cardinals.Game {
 
         private RewardBox _rewardBox;
         private StartFlag _startFlag;
-
-        public bool IsPlayerTurn { get; set; }
-
-        public RewardBox RewardBox
-        {
-            get
-            {
-                if (_rewardBox == null)
-                {
-                    GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_RewardBox);
-                    _rewardBox = Instantiate(prefab).GetComponent<RewardBox>();
-                    _rewardBox.Init();
-                }
-                
-                return _rewardBox;
-            }
-        }
-
-        public StartFlag StartFlag {
-            get {
-                if (_startFlag == null) {
-                    GameObject prefab = ResourceLoader.LoadPrefab(Constants.FilePath.Resources.Prefabs_Stage_StartFlag);
-                    _startFlag = Instantiate(prefab).GetComponent<StartFlag>();
-                    _startFlag.Init();
-                }
-
-                return _startFlag;
-            }
-        }
 
         public List<IMovingBoardObject> BoardObjects { get; set; } = new();
         
